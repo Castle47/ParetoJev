@@ -31,9 +31,14 @@ Verified locally on **2026-10-08**:
 | Unified trainable-baseline harness | Registered EMER-like / CMR-like / ParetoJev comparison | [`docs/BASELINE_HARNESS.md`](docs/BASELINE_HARNESS.md) |
 | Unit/integration tests | Current verified results in execution log | [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md) |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
+| Registered six-objective baseline comparison | 3 seeds × 3 methods; exact resume verified | [`reports/synthetic-baseline-2026-10-08/README.md`](reports/synthetic-baseline-2026-10-08/README.md) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). No real benchmark is claimed.
+
+The registered synthetic comparison did **not** show ParetoJev superiority:
+hypervolume was below both trainable baselines, despite better cold-NDCG. The real
+research gates remain `not_evaluable`; see the report for all results and limitations.
 
 ## Research hypothesis
 

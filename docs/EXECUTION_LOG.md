@@ -25,7 +25,34 @@ Validation of the implementation: **179 passed in 7.64 seconds**, no warnings;
 source compilation, shell-script syntax checks and `git diff --check` passed.
 The pinned dependency snapshot is `requirements-lock.txt` (local Python 3.12).
 Model implementation commit: `2dbfb62`; protocol/runner/evaluator/gates: `de8ab72`.
-Final frozen-source experiment details are appended in the next entry.
+Final frozen-source experiment details follow.
+
+### Registered synthetic comparison and replay
+
+- Frozen clean code commit: `5202bc35f1641a01b7aa4221fbcc67950bdfede2`.
+- Generator seed 123, train/validation/test slates 192/96/96, K=12, M=6, F=10.
+- Model seeds 7/17/29, four epochs, 30 fixed preference vectors, top-k=5,
+  100,000 shared hypervolume integration samples and 200 user-bootstrap replicates.
+- All nine independent checkpoints trained and passed exact prediction reload.
+- Mean synthetic hypervolume: EMER-like 0.036373; CMR-like 0.045207;
+  ParetoJev 0.034407. ParetoJev mean relative gains: −5.39% / −23.75%.
+- Cold-NDCG relative gains: +6.17% / +10.40%; regrets: 0.02940 / 0.05280;
+  mean controllability −0.14948. No method/config was selected from test results.
+- Engineering run exited 0. All seven real research targets were `not_evaluable`;
+  the explicit target-check command exited 3, as required for synthetic evidence.
+- Resume preserved exact SHA-256 hashes of all nine checkpoints, all three
+  evaluation reports and the summary. Regenerating all three input NPZs also
+  produced identical file hashes.
+- Source compilation, shell syntax and Git whitespace checks passed. There was
+  no real dataset/API call, GPU serving benchmark or statistical-win claim.
+
+Full configuration, registered source/environment/input hashes, seed-level results
+and verification evidence are saved in
+[`reports/synthetic-baseline-2026-10-08`](../reports/synthetic-baseline-2026-10-08/README.md).
+The original integration probe is retained locally under `artifacts/comparison-trial/`;
+it used the same fixed data/budgets and produced identical metric values. Checkpoint
+and prediction tensors are local ignored artifacts; clean source plus registered
+commands reproduce them.
 
 ## 2026-10-08 — Phase 0 bootstrap
 

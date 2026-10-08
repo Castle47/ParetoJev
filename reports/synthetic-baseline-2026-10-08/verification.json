@@ -1,0 +1,35 @@
+{
+  "restored_baseline_tests": 49,
+  "final_tests": 179,
+  "test_duration_seconds": 7.64,
+  "all_tests_passed": true,
+  "compileall_passed": true,
+  "shell_syntax_passed": true,
+  "diff_check_passed": true,
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "independent_checkpoints": 9,
+  "resume_reports_and_checkpoints_identical": true,
+  "verified_resume_file_hashes": {
+    "artifacts/comparison-verified/summary.json": "1bbfa525277fe8b2dbc1a2cbbc39baedb8172a4b13a8b59c0657b30b55d89f1c",
+    "artifacts/comparison-verified/seed-7/evaluation.json": "88b3240f682d843dc013c0a687c3ca5a338bc3c435240be5bbce5900a93c902e",
+    "artifacts/comparison-verified/seed-17/evaluation.json": "8f2e2b6da73893c257fd4e7cb1dcf9cc2f51c6b5ef8f6d25d8eeac73e3464858",
+    "artifacts/comparison-verified/seed-29/evaluation.json": "8b4631c3bc4f1232b9f9706edc7ad9942c7a3c6e965f8a0ebaa3d594a36764a4",
+    "artifacts/comparison-verified/seed-29/emer_like.pt": "adba769bba09c78a3638cbbd6a0bc7e99b8271633608964ebb0b31bd20ee4909",
+    "artifacts/comparison-verified/seed-29/paretojev.pt": "e4ef8ebdb32836ba3fe1fefdac4a6d17db4956f10fce0fcf010ad1e4a9267ec6",
+    "artifacts/comparison-verified/seed-29/cmr_like.pt": "06cb67ea642c3883fb85bf769064cf61573d491a2b5d19281862c14a0a6f0793",
+    "artifacts/comparison-verified/seed-17/emer_like.pt": "5f41c6a5d043fb6624e93889e852428e47c55dcfc2f3aec888be96079f5333de",
+    "artifacts/comparison-verified/seed-17/paretojev.pt": "425620fe0de7e13eaf0d7c6c4e06eaa59af02f60f0579bbc14d85ae70ead9db6",
+    "artifacts/comparison-verified/seed-17/cmr_like.pt": "01c1b1485f8be4291a7b8e847d6416853b840a585e708d50abf0e8cb1ac04aa6",
+    "artifacts/comparison-verified/seed-7/emer_like.pt": "8c7138fcbae5b04a05eeb7acbab91bcab123536211d417301c0a42fd78f29a96",
+    "artifacts/comparison-verified/seed-7/paretojev.pt": "62fe7e01a23e7182834c6e93fb3271012ed4e33b0d7f2eff4ada8e25507818ed",
+    "artifacts/comparison-verified/seed-7/cmr_like.pt": "656fd688f520bb803f9e397b2e75e6fbcceb283eb7994db4b42afc0df3a83369"
+  },
+  "synthetic_research_gate_exit_code": 3,
+  "synthetic_research_gate_status": "not_evaluable",
+  "real_benchmark_performed": false,
+  "synthetic_regenerated_split_hashes_identical": true
+}

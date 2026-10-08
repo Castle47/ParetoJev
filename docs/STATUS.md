@@ -40,9 +40,10 @@
 ## Current research boundary
 
 The baseline harness engineering phase is complete. The final registered synthetic
-comparison and replay evidence are recorded in the execution log. These exercise
+comparison and replay evidence are in the [experiment report](../reports/synthetic-baseline-2026-10-08/README.md)
+and execution log. These exercise
 training, evaluation and provenance; they do not establish a ParetoJev research win.
-An initial three-seed synthetic run showed weaker ParetoJev hypervolume and
+The three-seed synthetic run showed weaker ParetoJev hypervolume and
 controllability despite improved cold-NDCG, so no superiority claim is made and no
 configuration is selected or changed based on those test results.
 

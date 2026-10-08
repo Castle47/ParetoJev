@@ -1,0 +1,167 @@
+{
+  "schema_version": "baseline-harness-v1",
+  "run_id": "6ed09711e40e1fac3c7a6b81ab5b9740c3cf02835eb0ddb2e541dd5d512ef59c",
+  "status": "complete",
+  "evidence": {
+    "data_kind": "synthetic",
+    "real_data": false,
+    "dataset": "synthetic",
+    "protocol_version": "baseline-harness-v1",
+    "comparison_baseline": "emer_like",
+    "provenance_basis": "validated input manifest; upstream evidence remains auditable"
+  },
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "methods": {
+    "emer_like": {
+      "hypervolume_mean": 0.036373333333333334,
+      "hypervolume_per_seed": [
+        0.03726,
+        0.03546,
+        0.0364
+      ],
+      "parameters": 26215
+    },
+    "cmr_like": {
+      "hypervolume_mean": 0.045206666666666666,
+      "hypervolume_per_seed": [
+        0.04355,
+        0.04766,
+        0.04441
+      ],
+      "parameters": 26166
+    },
+    "paretojev": {
+      "hypervolume_mean": 0.03440666666666667,
+      "hypervolume_per_seed": [
+        0.03505,
+        0.03408,
+        0.03409
+      ],
+      "parameters": 26529
+    }
+  },
+  "kuairand": {
+    "paretojev": {
+      "hypervolume": 0.03440666666666667,
+      "hypervolume_relative_gain": -0.05389718808819329,
+      "cold_item_ndcg_relative_gain": 0.06172624153183407,
+      "worst_objective_regret": 0.029397258523688945,
+      "controllability_spearman_mean": -0.14947849625118217
+    },
+    "paretojev_vs_cmr": {
+      "hypervolume": 0.03440666666666667,
+      "hypervolume_relative_gain": -0.23749766896105795,
+      "cold_item_ndcg_relative_gain": 0.10398489513755292,
+      "worst_objective_regret": 0.05279902419053595,
+      "controllability_spearman_mean": -0.14947849625118217
+    }
+  },
+  "checks": {
+    "all_models_trained": true,
+    "all_checkpoint_reload_equal": true
+  },
+  "limitations": [
+    "EMER-like/CMR-like are documented project variants, not paper reproductions.",
+    "Equal training budget does not imply equal parameter count or FLOPs.",
+    "Hypervolume uses Monte Carlo integration; near-threshold gains require higher precision and paired uncertainty analysis.",
+    "Mean seed metrics are descriptive point estimates, not proof of a statistically significant win."
+  ],
+  "target_report": {
+    "passed": false,
+    "status": "not_evaluable",
+    "reason": "",
+    "required_passed": 0,
+    "required_total": 7,
+    "required_not_evaluable": 7,
+    "targets": [
+      {
+        "name": "hypervolume_gain_vs_cmr",
+        "metric": "kuairand.paretojev_vs_cmr.hypervolume_relative_gain",
+        "operator": ">=",
+        "threshold": 0.02,
+        "actual": -0.23749766896105795,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "cold_ndcg_gain_vs_cmr",
+        "metric": "kuairand.paretojev_vs_cmr.cold_item_ndcg_relative_gain",
+        "operator": ">=",
+        "threshold": 0.03,
+        "actual": 0.10398489513755292,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "worst_objective_regret_vs_cmr",
+        "metric": "kuairand.paretojev_vs_cmr.worst_objective_regret",
+        "operator": "<=",
+        "threshold": 0.005,
+        "actual": 0.05279902419053595,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "hypervolume_gain_vs_emer",
+        "metric": "kuairand.paretojev.hypervolume_relative_gain",
+        "operator": ">=",
+        "threshold": 0.02,
+        "actual": -0.05389718808819329,
+        "required": true,
+        "passed": false,
+        "detail": "ParetoJev should improve hypervolume by at least 2% over the EMER-like baseline on the same held-out slates and preference grid.",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "cold_ndcg_gain_vs_emer",
+        "metric": "kuairand.paretojev.cold_item_ndcg_relative_gain",
+        "operator": ">=",
+        "threshold": 0.03,
+        "actual": 0.06172624153183407,
+        "required": true,
+        "passed": false,
+        "detail": "Cold-item positive-objective NDCG should improve at least 3% over EMER-like; absent cold relevance support is not evaluable.",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "worst_objective_regret",
+        "metric": "kuairand.paretojev.worst_objective_regret",
+        "operator": "<=",
+        "threshold": 0.005,
+        "actual": 0.029397258523688945,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      },
+      {
+        "name": "controllability",
+        "metric": "kuairand.paretojev.controllability_spearman_mean",
+        "operator": ">=",
+        "threshold": 0.6,
+        "actual": -0.14947849625118217,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+      }
+    ]
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "passed": false,
+  "status": "not_evaluable",
+  "reason": "",
+  "required_passed": 0,
+  "required_total": 7,
+  "required_not_evaluable": 7,
+  "targets": [
+    {
+      "name": "hypervolume_gain_vs_cmr",
+      "metric": "kuairand.paretojev_vs_cmr.hypervolume_relative_gain",
+      "operator": ">=",
+      "threshold": 0.02,
+      "actual": -0.23749766896105795,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "cold_ndcg_gain_vs_cmr",
+      "metric": "kuairand.paretojev_vs_cmr.cold_item_ndcg_relative_gain",
+      "operator": ">=",
+      "threshold": 0.03,
+      "actual": 0.10398489513755292,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "worst_objective_regret_vs_cmr",
+      "metric": "kuairand.paretojev_vs_cmr.worst_objective_regret",
+      "operator": "<=",
+      "threshold": 0.005,
+      "actual": 0.05279902419053595,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "hypervolume_gain_vs_emer",
+      "metric": "kuairand.paretojev.hypervolume_relative_gain",
+      "operator": ">=",
+      "threshold": 0.02,
+      "actual": -0.05389718808819329,
+      "required": true,
+      "passed": false,
+      "detail": "ParetoJev should improve hypervolume by at least 2% over the EMER-like baseline on the same held-out slates and preference grid.",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "cold_ndcg_gain_vs_emer",
+      "metric": "kuairand.paretojev.cold_item_ndcg_relative_gain",
+      "operator": ">=",
+      "threshold": 0.03,
+      "actual": 0.06172624153183407,
+      "required": true,
+      "passed": false,
+      "detail": "Cold-item positive-objective NDCG should improve at least 3% over EMER-like; absent cold relevance support is not evaluable.",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "worst_objective_regret",
+      "metric": "kuairand.paretojev.worst_objective_regret",
+      "operator": "<=",
+      "threshold": 0.005,
+      "actual": 0.029397258523688945,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    },
+    {
+      "name": "controllability",
+      "metric": "kuairand.paretojev.controllability_spearman_mean",
+      "operator": ">=",
+      "threshold": 0.6,
+      "actual": -0.14947849625118217,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "evidence evidence.real_data must equal True; got False; evidence evidence.data_kind must equal 'real'; got 'synthetic'; evidence evidence.dataset must equal 'kuairand'; got 'synthetic'"
+    }
+  ]
+}

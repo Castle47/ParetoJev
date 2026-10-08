@@ -1,0 +1,328 @@
+{
+  "run_id": "6ed09711e40e1fac3c7a6b81ab5b9740c3cf02835eb0ddb2e541dd5d512ef59c",
+  "registration": {
+    "protocol_version": "baseline-harness-v1",
+    "data": {
+      "manifest": {
+        "protocol_version": "baseline-harness-v1",
+        "dataset": "synthetic",
+        "data_kind": "synthetic",
+        "splits": {
+          "train": {
+            "path": "train.npz",
+            "sha256": "ee674e07a4cafb6598ac9f3a1b0b288e53241552d1390e0e5f3be59a3155a94f",
+            "generator": {
+              "n_slates": 192,
+              "slate_size": 12,
+              "n_objectives": 6,
+              "feature_dim": 10,
+              "seed": 123,
+              "hate_objective": 5
+            }
+          },
+          "validation": {
+            "path": "validation.npz",
+            "sha256": "6e8d1dff16709f413105e8378e66b111bd033a25d26a1348f8b9c2fa021b6fd3",
+            "generator": {
+              "n_slates": 96,
+              "slate_size": 12,
+              "n_objectives": 6,
+              "feature_dim": 10,
+              "seed": 10123,
+              "hate_objective": 5
+            }
+          },
+          "test": {
+            "path": "test.npz",
+            "sha256": "e893a2be17618dca27ed999e17285dfdebf8fe7407ffdcf67161a8a807913667",
+            "generator": {
+              "n_slates": 96,
+              "slate_size": 12,
+              "n_objectives": 6,
+              "feature_dim": 10,
+              "seed": 20123,
+              "hate_objective": 5
+            }
+          }
+        },
+        "generator": {
+          "seed": 123,
+          "sizes": [
+            192,
+            96,
+            96
+          ],
+          "slate_size": 12,
+          "n_objectives": 6,
+          "feature_dim": 10
+        }
+      },
+      "manifest_sha256": "679f81bfd4e8a8ffb9862e4310fa0620afcfec58363afdde95157867e1091cdd",
+      "splits": {
+        "train": {
+          "path": "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/artifacts/comparison-data/train.npz",
+          "sha256": "ee674e07a4cafb6598ac9f3a1b0b288e53241552d1390e0e5f3be59a3155a94f",
+          "slates": 192
+        },
+        "validation": {
+          "path": "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/artifacts/comparison-data/validation.npz",
+          "sha256": "6e8d1dff16709f413105e8378e66b111bd033a25d26a1348f8b9c2fa021b6fd3",
+          "slates": 96
+        },
+        "test": {
+          "path": "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/artifacts/comparison-data/test.npz",
+          "sha256": "e893a2be17618dca27ed999e17285dfdebf8fe7407ffdcf67161a8a807913667",
+          "slates": 96
+        }
+      }
+    },
+    "training": {
+      "seed": 0,
+      "batch_size": 24,
+      "epochs": 4,
+      "learning_rate": 0.002,
+      "weight_decay": 0.0001,
+      "hidden_dim": 48,
+      "n_heads": 4,
+      "n_layers": 1,
+      "ff_dim": 96,
+      "dropout": 0.05,
+      "fusion_hidden_dim": 24,
+      "device": "cpu"
+    },
+    "evaluation": {
+      "top_k": 5,
+      "random_preferences": 8,
+      "include_pairwise_preferences": true,
+      "dirichlet_alpha": 0.7,
+      "hypervolume_samples": 100000,
+      "cold_quantile": 0.25,
+      "seed": 20261008
+    },
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "methods": [
+      "emer_like",
+      "cmr_like",
+      "paretojev"
+    ],
+    "model_config": {
+      "candidate_feature_dim": 10,
+      "n_objectives": 6,
+      "hidden_dim": 48,
+      "n_heads": 4,
+      "n_layers": 1,
+      "ff_dim": 96,
+      "dropout": 0.05,
+      "fusion_hidden_dim": 24,
+      "predict_uncertainty": true
+    },
+    "loss_weights": {
+      "preference_ranking": 1.0,
+      "calibration": 0.25,
+      "emer_advantage_ranking": 1.0,
+      "cmr_objective_ranking": 1.0,
+      "pareto_pairwise": 1.0,
+      "tchebycheff": 1.0,
+      "uncertainty": 0.25,
+      "jev_distillation": 0.35,
+      "fusion_calibration": 0.5
+    },
+    "selection": "maximum validation preference-weighted utility; earliest tie; includes epoch zero",
+    "budget": "equal epochs, data order, AdamW settings and clipping; no hyperparameter search",
+    "deterministic_algorithms": "required; unsupported nondeterministic kernels fail",
+    "comparison_baseline": "emer_like",
+    "cold_popularity_threshold_from_train": 0.23691269755363464,
+    "required_comparators": [
+      "emer_like",
+      "cmr_like"
+    ],
+    "bootstrap_samples": 200,
+    "cpu_threads": 1,
+    "source_sha256": "460507a895f1522a1fbfe68c0f1a7512767e81cb96972cfe7cc5cf1679fc48b6",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "targets": {
+      "evidence_requirements": {
+        "evidence.real_data": true,
+        "evidence.data_kind": "real",
+        "evidence.dataset": "kuairand",
+        "evidence.protocol_version": "baseline-harness-v1",
+        "evidence.comparison_baseline": "emer_like"
+      },
+      "required_methods": [
+        "emer_like",
+        "cmr_like",
+        "paretojev"
+      ],
+      "targets": {
+        "hypervolume_gain_vs_cmr": {
+          "metric": "kuairand.paretojev_vs_cmr.hypervolume_relative_gain",
+          "op": ">=",
+          "threshold": 0.02,
+          "required": true
+        },
+        "cold_ndcg_gain_vs_cmr": {
+          "metric": "kuairand.paretojev_vs_cmr.cold_item_ndcg_relative_gain",
+          "op": ">=",
+          "threshold": 0.03,
+          "required": true
+        },
+        "worst_objective_regret_vs_cmr": {
+          "metric": "kuairand.paretojev_vs_cmr.worst_objective_regret",
+          "op": "<=",
+          "threshold": 0.005,
+          "required": true
+        },
+        "hypervolume_gain_vs_emer": {
+          "metric": "kuairand.paretojev.hypervolume_relative_gain",
+          "op": ">=",
+          "threshold": 0.02,
+          "required": true,
+          "description": "ParetoJev should improve hypervolume by at least 2% over the EMER-like baseline on the same held-out slates and preference grid."
+        },
+        "cold_ndcg_gain_vs_emer": {
+          "metric": "kuairand.paretojev.cold_item_ndcg_relative_gain",
+          "op": ">=",
+          "threshold": 0.03,
+          "required": true,
+          "description": "Cold-item positive-objective NDCG should improve at least 3% over EMER-like; absent cold relevance support is not evaluable."
+        },
+        "worst_objective_regret": {
+          "metric": "kuairand.paretojev.worst_objective_regret",
+          "op": "<=",
+          "threshold": 0.005,
+          "required": true
+        },
+        "controllability": {
+          "metric": "kuairand.paretojev.controllability_spearman_mean",
+          "op": ">=",
+          "threshold": 0.6,
+          "required": true
+        }
+      }
+    },
+    "aggregation": "arithmetic mean across all preregistered seeds; missing stays null"
+  },
+  "provenance": {
+    "created_at_utc": "2026-10-08T07:40:36.481726+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "5202bc35f1641a01b7aa4221fbcc67950bdfede2",
+    "inputs": []
+  },
+  "source": {
+    "source_sha256": "460507a895f1522a1fbfe68c0f1a7512767e81cb96972cfe7cc5cf1679fc48b6",
+    "files": {
+      "__init__.py": "49ab25d41a7427416c193e118ebef51766ba2fb012cf1750580201ae7712b14d",
+      "__main__.py": "c3ba587921f5cd612cdcad1ed72c2cee4452f9be283b4e6f5347188f68d0d3cb",
+      "cli.py": "da6339a5b83b733b3cef3dd986901b08bdce0e9d02f86640cdc6309164954646",
+      "config.py": "721a37550dd8064ccac39727038fae6553ed6514544740d81af2219c41ca4e5b",
+      "data/__init__.py": "14d81e31d4dd0280cfe9e74cae4ebe92c0f6c2b35146bf2c6b5402a24eee5abe",
+      "data/behavior_prior.py": "c573987c5ad11e56134109b6139b38bdcf7eb5b7ea7ad2254950ea8dd1bfdec2",
+      "data/behavior_sequences.py": "68058a37e3ce2b8fedd523a7c0e0e9a733288963625261478606862fcf0ed75b",
+      "data/comparison.py": "f309576c2c1628417969115c4899033ec4a8e1076b91159ec5f4f6d5ef8446da",
+      "data/kuairand.py": "f766ad8edfcc92586650878548e79c68d6ce352f83cac4e306e4b2ba66473b46",
+      "data/materialize.py": "8c2d3992cca71783cac0cbcea563cf79c4f4c58518a059c2db8458e5c5ab5126",
+      "data/microlens.py": "d8e4c09cb45c5a89c2424abf63d1d9424bbd8486120f662307d939eb743ab01d",
+      "data/precomputed.py": "07e59eb9370e0ab4847fd7d47a37eeb49a224989f51502d2a63385eaf35c55eb",
+      "data/schema.py": "e724b90b63f9e70ab37125bf330b145f612bed604288af85e59606f99aabda31",
+      "data/synthetic.py": "080871460a30d4846c2ab3e3b9596203a3f043a328e52f675226e2f2a282a442",
+      "evaluation/__init__.py": "6fbaf941d3ad1d5f7ac80bd35c756407e0d088c43cee9bff28e25bd985ab85d3",
+      "evaluation/comparison.py": "cb3174ac242a216b8a4b0a6e19a463cc4a7eb87df6713903e5f1ade256dac5e8",
+      "evaluation/pareto.py": "0fb0fc75fb30f92b62d6cb074dce609b990d35cb05aae2c2a0c706ac20789ea1",
+      "experiments/__init__.py": "0a48b2cea8f20d58da4f499cc811a85debf855ceba55e9497b624c6904611f73",
+      "experiments/comparison.py": "206b2589871186337e82041267cb3199549f8b24fbe50c297959ccf4113f9bbb",
+      "experiments/merge.py": "7d603d81eb84dc21ccfda98688f517207e178f24eaa4318f1be40d33a788b0c1",
+      "experiments/microlens.py": "8a9be562431b232ca71083c6f53a6e353ec055936c1fefcbcc04cce3328b4b8e",
+      "jev/__init__.py": "9ac8ea2cba4e76c6a504a6f6ecab7c69ec21245da4130ac0a90a01401d8918f3",
+      "jev/cache.py": "b43b48c399026a23ade9f02ca00175eb7ece7410bb30282cdc9e6dfcd8fcbe5f",
+      "jev/client.py": "f739a0d9df1bf9481b004ef4153f9ca783d579562c67421efe6cc3abb32ec44b",
+      "jev/prompts.py": "ca3b89820ea6419e69573580258121bfa5cea82c4274985b9745712fbf9aa6fa",
+      "jev/runner.py": "a7f9431446d0a097ee06f414ec9ebca4dfbf5bcc3f8bb9fdcc17d1abbde79b7c",
+      "jev/scoring.py": "993d0f8d5d59576bc91906858b166aad15caa35cc956ad80a3c6078c9e5be06b",
+      "losses/__init__.py": "3660afed3a0d68e0316cd1a3689c27e8fd49c12a3b78e8105094b5ed4bbd6438",
+      "losses/pareto.py": "337ad272c8f26edb47af70cf6db3bf9f8a1af4aa127200951eb593a9695b754b",
+      "metrics/__init__.py": "3333418863edbc56aaa8514bc4d7c5fc10be73b46af7f80d7333f27ffc20013b",
+      "metrics/calibration.py": "25e3ffaa3b5599a8bd7e8bd0857b702a294a5c1f46033266295fdcd7286a7618",
+      "metrics/pareto.py": "387a0968e9e87ff544929a4fc141594cd8c261993a925c592492bc4cb12964e6",
+      "metrics/ranking.py": "059ef1b8abc828529c320962ae9c823bf9ec3e3082537820ac314c277e016db3",
+      "models/__init__.py": "030049a59c463ee137c9e6fca4899187618fe5535921ffa209432409e3c02340",
+      "models/baseline.py": "76ab42766783f39ccbde96a793364f02f60513bdc0ce9b827d0434a6010709ca",
+      "models/behavior.py": "5603925a05fb4db1b1ff0a74db2c912f5a0dbe19de9e821612f06c1f2c2f759e",
+      "models/comparison.py": "1bb748be0baee564a4dd32215bbf7843063f69a3f97f3780d146a8180f9dad67",
+      "models/fusion.py": "90c6cdbac146a0d868aaf58bfdb053c09a3be223ff183a31225a4cb2c026e3b3",
+      "models/pareto_reranker.py": "2be1b38f119d021199dec4d7c2768a9cd47841c3ce391a3f7069ecca0b28864a",
+      "training/__init__.py": "29e6bd5c1bd2c85ade1b90b3b44074a8757a2f571adcc38a41256133b3d258c9",
+      "training/behavior.py": "a9c211912f68a57513267ccf7c8bde0fe5b70e697e2f245ce00eeac777c916fb",
+      "training/engine.py": "dee42bcc6fe8fa10f2c324a0b2d39a3b62a796aab1920e0e9493794daf0d9b41",
+      "training/targets.py": "ae520b45a2a66ef689fc774fb1cdc4719071a1b7edf090f60626b208eeb330b4",
+      "utils/__init__.py": "3f4a31a4670395d1594863fc856298802e86037a91c3befabb1b19d044ef0d09",
+      "utils/io.py": "cfa1770e33abebc116861651da5232dedfaf84c770dc39a4ac04a4e6b8679595",
+      "utils/provenance.py": "5ef8d828e14b2fbb6988706f993f6d44ef97bf4fe7611f8923b48f099ef348dc",
+      "utils/seed.py": "68eb4c47dfe1d5003ae45fedda86e701f95fc002972a1caf675c3c942c9f02b6"
+    },
+    "git_dirty": false
+  },
+  "created_at": "2026-10-08T07:40:36.571916+00:00",
+  "status": "complete",
+  "completed": {
+    "7/emer_like": {
+      "checkpoint_sha256": "8c7138fcbae5b04a05eeb7acbab91bcab123536211d417301c0a42fd78f29a96",
+      "metrics_sha256": "936a7a0b30347c21a0fde9fd81b292e62ce863c489a8bf64e2b9cdc0e0a21b0d"
+    },
+    "7/cmr_like": {
+      "checkpoint_sha256": "656fd688f520bb803f9e397b2e75e6fbcceb283eb7994db4b42afc0df3a83369",
+      "metrics_sha256": "3cd68f7904ea412c36019a35acf673237ffd7393ea9aba35c0ff588c6ef04967"
+    },
+    "7/paretojev": {
+      "checkpoint_sha256": "62fe7e01a23e7182834c6e93fb3271012ed4e33b0d7f2eff4ada8e25507818ed",
+      "metrics_sha256": "d66cc3d6ca28d67e24f559ef0e84b4762c3d41c83422c4c29ece7119df484804"
+    },
+    "17/emer_like": {
+      "checkpoint_sha256": "5f41c6a5d043fb6624e93889e852428e47c55dcfc2f3aec888be96079f5333de",
+      "metrics_sha256": "d94bd8a2931120ba2116aa74fea7f740618cc79e97f09ca3c46f809778130b82"
+    },
+    "17/cmr_like": {
+      "checkpoint_sha256": "01c1b1485f8be4291a7b8e847d6416853b840a585e708d50abf0e8cb1ac04aa6",
+      "metrics_sha256": "7ed79fd2df98fcea6a0facc73c7e48bc08027bc6b21381549a168b97b821ff50"
+    },
+    "17/paretojev": {
+      "checkpoint_sha256": "425620fe0de7e13eaf0d7c6c4e06eaa59af02f60f0579bbc14d85ae70ead9db6",
+      "metrics_sha256": "d229d3e2a690ebe73af3ca6088b8aeffb9d0b4232be0aac958cb0fc0517fc88f"
+    },
+    "29/emer_like": {
+      "checkpoint_sha256": "adba769bba09c78a3638cbbd6a0bc7e99b8271633608964ebb0b31bd20ee4909",
+      "metrics_sha256": "34bf3a6179cdd130065f55639b4c8fef99f6903728a1a9bee170d238414fa3c8"
+    },
+    "29/cmr_like": {
+      "checkpoint_sha256": "06cb67ea642c3883fb85bf769064cf61573d491a2b5d19281862c14a0a6f0793",
+      "metrics_sha256": "f7b1b150183292f9cafa6480f633da84abe92b09c3897d62c34af64e6f146e0a"
+    },
+    "29/paretojev": {
+      "checkpoint_sha256": "e4ef8ebdb32836ba3fe1fefdac4a6d17db4956f10fce0fcf010ad1e4a9267ec6",
+      "metrics_sha256": "1c3aa09f05136abf6f83966d1e681cf85e45dc5510b09099bfab6793a240c2e6"
+    }
+  },
+  "updated_at": "2026-10-08T07:41:29.897337+00:00",
+  "summary_sha256": "1bbfa525277fe8b2dbc1a2cbbc39baedb8172a4b13a8b59c0657b30b55d89f1c"
+}
