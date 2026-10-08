@@ -38,6 +38,8 @@
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
+- extension to all original 200 users / 4,000 real decisions, with exact pilot reuse
+- full primary and fresh-180-user evaluation, raw-response audit and tie-sensitivity diagnosis
 - zero-HTTP scoring replay and identical raw-input regeneration
 
 ## Current research boundary
@@ -50,11 +52,13 @@ The three-seed synthetic run showed weaker ParetoJev hypervolume and
 controllability despite improved cold-NDCG, so no superiority claim is made and no
 configuration is selected or changed based on those test results.
 
-The [first real MicroLens pilot](../reports/microlens-real-2026-10-08/README.md) now
-establishes real Jev input acquisition. It does not establish stable fusion uplift:
-fixed fusion AUC improves on 20 users, its interval crosses zero, and NDCG decreases.
-Next research work is to expand evaluation under a frozen protocol and inspect
-signal complementarity before training a complex real-data reranker. The legacy
+The [full real MicroLens run](../reports/microlens-real-200-2026-10-08/README.md)
+supports an AUC increment for CV small-weight fusion; its paired interval is
+positive under both primary jitter and post-hoc conventional half-credit AUC.
+Main targets pass 2/4: AUC 0.7274 and HR@5 0.570 remain below thresholds. HR/NDCG
+improvement intervals still cross zero. Gains concentrate in behavior-score ties.
+Next research work should validate that specific hypothesis on new independent
+users before increasing model complexity; do not keep tuning on these 200 users. The legacy
 smoke targets remain engineering probes with privileged
 simulator probabilities; the comparison harness deliberately forbids those targets.
 
@@ -78,8 +82,9 @@ uses AutoTrust's public demo endpoint with pinned deployment revision, one concu
 request and a 400-decision cap. No user API key or paid compute was needed. The
 local 8GB M1 cannot run the planned unquantized 27B deployment; no weights were downloaded.
 
-The 200-user Jev evaluation is still pending; the public demo is only an established
-route for this bounded pilot, not a guaranteed bulk service. A larger controlled
+The 200-user Jev evaluation is complete: 400 pilot decisions reused, 3,600 new calls,
+0 failed slates, approximately 60.3 minutes at the registered one-request-per-second
+start limit. The public demo is not a guaranteed bulk service. A larger controlled
 experiment can use a suitable endpoint, cached real scores, or dedicated model
 deployment. Native cover-image scoring needs the actual VL pipeline. Serving
 targets need a declared target device; no GPU latency benchmark is claimed.

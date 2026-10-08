@@ -1,0 +1,94 @@
+{
+  "passed": false,
+  "status": "failed",
+  "reason": "",
+  "required_passed": 2,
+  "required_total": 4,
+  "required_not_evaluable": 0,
+  "targets": [
+    {
+      "name": "hybrid_auc",
+      "metric": "microlens.hybrid_cv.auc",
+      "operator": ">=",
+      "threshold": 0.735,
+      "actual": 0.7273684210526317,
+      "required": true,
+      "passed": false,
+      "detail": "Cross-validated CF + decision-score hybrid clears the published single-system reference band.",
+      "status": "failed",
+      "reason": ""
+    },
+    {
+      "name": "hybrid_hr5",
+      "metric": "microlens.hybrid_cv.hr@5",
+      "operator": ">=",
+      "threshold": 0.6,
+      "actual": 0.57,
+      "required": true,
+      "passed": false,
+      "detail": "",
+      "status": "failed",
+      "reason": ""
+    },
+    {
+      "name": "hybrid_ndcg10",
+      "metric": "microlens.hybrid_cv.ndcg@10",
+      "operator": ">=",
+      "threshold": 0.51,
+      "actual": 0.5187626544610403,
+      "required": true,
+      "passed": true,
+      "detail": "",
+      "status": "passed",
+      "reason": ""
+    },
+    {
+      "name": "hybrid_auc_ci_vs_itemcf",
+      "metric": "pairwise_vs_reference.hybrid_cv.auc.low",
+      "operator": ">",
+      "threshold": 0.0,
+      "actual": 0.006052631578947366,
+      "required": true,
+      "passed": true,
+      "detail": "The paired user-bootstrap confidence interval must exclude zero versus the reproduced item-CF baseline.",
+      "status": "passed",
+      "reason": ""
+    },
+    {
+      "name": "stack_auc",
+      "metric": "microlens.stack_cv.auc",
+      "operator": ">=",
+      "threshold": 0.735,
+      "actual": null,
+      "required": false,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "missing metric microlens.stack_cv.auc"
+    },
+    {
+      "name": "stack_hr5",
+      "metric": "microlens.stack_cv.hr@5",
+      "operator": ">=",
+      "threshold": 0.6,
+      "actual": null,
+      "required": false,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "missing metric microlens.stack_cv.hr@5"
+    },
+    {
+      "name": "stack_ndcg10",
+      "metric": "microlens.stack_cv.ndcg@10",
+      "operator": ">=",
+      "threshold": 0.51,
+      "actual": null,
+      "required": false,
+      "passed": false,
+      "detail": "",
+      "status": "not_evaluable",
+      "reason": "missing metric microlens.stack_cv.ndcg@10"
+    }
+  ]
+}

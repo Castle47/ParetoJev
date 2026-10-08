@@ -1,0 +1,15 @@
+{
+  "users": 200,
+  "decisions": 4000,
+  "unique_request_response_pairs": 4000,
+  "cached_responses": 4000,
+  "all_scores_equal_raw_responses": true,
+  "all_candidate_ids_and_order_verified": true,
+  "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+  "model": "autotrust/JEV-27B",
+  "score_sha256": "95ed49639f13fc5961e4942e2013c8398aa10bb755fddd41b63258ca04075ddb",
+  "cache_sha256": "df63034796d3114200f855edf421433bc376b611b12496c7b489b1e5c0881486",
+  "input_sha256": "40f98a06a6902a0dd6f7da63ac4b35b16a00836cdca82e93099063bf38233fcb",
+  "backend_reported_inference_seconds_sum": 522.9805343605112,
+  "new_api_calls": 0
+}

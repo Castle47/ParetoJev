@@ -1,0 +1,50 @@
+{
+  "diagnostic_only": true,
+  "posthoc_reason": "Post-hoc tie sensitivity audit; does not replace registered primary metrics.\n\nThe reason for this diagnostic is the material change in Item-CF AUC after the\npredeclared per-user candidate permutation, despite identical users/items/scores.",
+  "itemcf_scores_and_labels_identical_by_user_item": true,
+  "auc_definition": "one credit when positive > negative; half credit for exact ties; no jitter",
+  "auc_half_credit": {
+    "itemcf": 0.6955263157894737,
+    "jev_click": 0.6475,
+    "hybrid_fixed_05": 0.708421052631579,
+    "hybrid_cv": 0.7272368421052632
+  },
+  "itemcf_original_order_auc_half_credit": 0.6955263157894737,
+  "positive_itemcf_tie_count": 131,
+  "positive_itemcf_tied_negative_pairs": 1604,
+  "positive_itemcf_zero_count": 98,
+  "paired_half_credit_auc_vs_itemcf": {
+    "jev_click": {
+      "difference": -0.0480263157894737,
+      "low": -0.09842105263157894,
+      "high": 0.000924342105263105
+    },
+    "hybrid_fixed_05": {
+      "difference": 0.012894736842105257,
+      "low": -0.01829276315789472,
+      "high": 0.044608552631578896
+    },
+    "hybrid_cv": {
+      "difference": 0.03171052631578947,
+      "low": 0.006842105263157889,
+      "high": 0.05723684210526315
+    }
+  },
+  "tie_groups": {
+    "with_positive_itemcf_ties": {
+      "users": 131,
+      "itemcf_auc_half_credit": 0.5391723583768581,
+      "hybrid_cv_auc_half_credit": 0.5891924467657693
+    },
+    "without_positive_itemcf_ties": {
+      "users": 69,
+      "itemcf_auc_half_credit": 0.992372234935164,
+      "hybrid_cv_auc_half_credit": 0.9893211289092297
+    },
+    "positive_itemcf_zero": {
+      "users": 98,
+      "itemcf_auc_half_credit": 0.4143394199785177,
+      "hybrid_cv_auc_half_credit": 0.47986036519871106
+    }
+  }
+}

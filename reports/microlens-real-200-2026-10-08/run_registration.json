@@ -1,0 +1,36 @@
+{
+  "identity": {
+    "registration_sha256": "4f0103c3ce90fae673b2186a60dc5c906ef34ae1ad3742e03225bbfbbbf66959",
+    "input_sha256": "40f98a06a6902a0dd6f7da63ac4b35b16a00836cdca82e93099063bf38233fcb",
+    "model": "autotrust/JEV-27B@7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide"
+  },
+  "provenance": {
+    "created_at_utc": "2026-10-08T09:39:46.195869+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "0e571836065b7e56b8d9f33989d3f46a93aec6cf",
+    "inputs": [
+      {
+        "path": "data/processed/microlens-real-200/jev_input.jsonl",
+        "type": "file",
+        "bytes": 617477,
+        "sha256": "40f98a06a6902a0dd6f7da63ac4b35b16a00836cdca82e93099063bf38233fcb"
+      },
+      {
+        "path": "reports/microlens-real-200-2026-10-08/registration.json",
+        "type": "file",
+        "bytes": 8206,
+        "sha256": "4f0103c3ce90fae673b2186a60dc5c906ef34ae1ad3742e03225bbfbbbf66959"
+      }
+    ]
+  }
+}

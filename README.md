@@ -32,19 +32,21 @@ Verified locally on **2026-10-08**:
 | Unit/integration tests | Current verified results in execution log | [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md) |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Registered six-objective baseline comparison | 3 seeds × 3 methods; exact resume verified | [`reports/synthetic-baseline-2026-10-08/README.md`](reports/synthetic-baseline-2026-10-08/README.md) |
-| Real MicroLens / AutoTrust JEV-27B | 200-user CF baseline + 20-user / 400-decision real pilot completed | [`reports/microlens-real-2026-10-08/README.md`](reports/microlens-real-2026-10-08/README.md) |
+| Real MicroLens / AutoTrust JEV-27B | 200 users / 4,000 verified decisions; main targets 2/4 passed | [`reports/microlens-real-200-2026-10-08/README.md`](reports/microlens-real-200-2026-10-08/README.md) |
 | Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
 
-Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). A first real MicroLens pilot is now available, with no established fusion win.
+Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
 
 The registered synthetic comparison did **not** show ParetoJev superiority:
-hypervolume was below both trainable baselines, despite better cold-NDCG. The real
-research gates remain `not_evaluable`; see the report for all results and limitations.
+hypervolume was below both trainable baselines, despite better cold-NDCG. Those
+synthetic results cannot satisfy real research gates; see the report for all results and limitations.
 
-The real text-only pilot used the author's public JEV-27B endpoint, verified each
-deployment revision, and required no user API key. Fixed fusion improved AUC on 20
-users but reduced NDCG, with the AUC difference interval crossing zero. This pilot
-cannot satisfy the main 200-user targets and is not a cover-image VL reproduction.
+The full real text-only run used the author's public JEV-27B endpoint, verified each
+deployment revision, and required no user API key. CV fusion reached AUC 0.7274,
+HR@5 0.570 and NDCG@10 0.5188; AUC gains remain positive under the conventional
+half-credit tie diagnostic. This is a simple fusion result, not evidence for the
+neural ParetoJev architecture or a cover-image VL reproduction. The report explains
+why the earlier positive-first upstream baseline AUC is not the same comparison.
 
 ## Research hypothesis
 

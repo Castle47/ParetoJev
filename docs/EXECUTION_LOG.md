@@ -1,5 +1,36 @@
 # Execution Log
 
+## 2026-10-08 — Complete 200-user real JEV evaluation
+
+- Extended the frozen pilot to the original 200 users, keeping model revision,
+  prompt, candidate membership/permutation, fusion rules, grids and seeds unchanged.
+  Verified exact request equality for all 20 reused users before scoring.
+- Registered `0e57183`, 4,000 decisions total, 400 reused responses, 3,600 new calls,
+  single concurrency and at least one second between request starts.
+- Completed all 180 new users in 3,619.43 seconds, with 0 failed slates. All 4,000
+  final scores match exact input requests and validated raw cached responses.
+- Primary CV fusion: AUC 0.727368, HR@5 0.570, NDCG@10 0.518763 versus item-CF
+  0.687632 / 0.540 / 0.493369 under the frozen shuffled-candidate protocol.
+  Paired AUC gain: +0.039737, 95% CI [+0.006053,+0.074217].
+- Fresh 180-user subgroup: CV AUC gain +0.038304, CI [+0.002339,+0.075146].
+  These are the same OOF predictions, not separately retuned subgroup models.
+- Required targets: **2/4 passed**, overall `failed`. AUC and HR@5 miss their
+  thresholds; NDCG@10 and the paired AUC lower-bound gate pass. HR/NDCG gain
+  intervals still cross zero. No real neural ParetoJev training is claimed.
+- Post-hoc tie audit: original versus shuffled item-CF scores/labels are identical.
+  Conventional half-credit AUC is 0.695526 in either order; CV is 0.727237, gain
+  +0.031711 with CI [+0.006842,+0.057237]. The earlier positive-first upstream
+  reproduction AUC 0.727632 is affected by fixed position-wise tie jitter.
+  Primary registered metrics/targets were not replaced with this diagnostic.
+- Gains concentrate in the 131 users whose positive item-CF score is tied; four
+  folds select 5% Jev weight and one selects 20%. This motivates independent
+  validation of conservative tie-breaking, not tuning further on these users.
+- Fixed evaluated-CSV list serialization so histories can be reloaded. All primary
+  metrics, intervals, weights and fresh-subgroup values remained exactly unchanged.
+- **195 tests passed in 5.89s**; compilation, shell syntax and whitespace checks
+  passed. A full replay made zero HTTP calls and preserved score/cache bytes.
+- Evidence: [`reports/microlens-real-200-2026-10-08`](../reports/microlens-real-200-2026-10-08/README.md).
+
 ## 2026-10-08 — First real MicroLens and public JEV-27B pilot
 
 - Downloaded official MicroLens pairs (18,940,682 bytes) and English titles

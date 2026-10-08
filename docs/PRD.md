@@ -1,7 +1,7 @@
 # ParetoJev 需求文档（PRD）
 
-**版本：** 0.5
-**状态：** 已完成首轮真实 MicroLens / AutoTrust JEV-27B 小样本试验；正式多目标研究指标待验证
+**版本：** 0.6
+**状态：** 已完成真实 MicroLens 200 用户评价，主目标通过 2/4；正式多目标研究指标待验证
 **更新时间：** 2026-10-08
 
 ## 1. 项目目标
@@ -195,10 +195,10 @@ Gate 特征至少包括：
 - 测试证据见 [EXECUTION_LOG.md](EXECUTION_LOG.md)，区分恢复基线和本轮验证；
 - synthetic smoke target 与 synthetic CLI integration 通过。
 
-已获得官方 MicroLens 数据并复现 200 用户行为基线；已通过作者公开端点完成 20 用户、
-400 个候选的真实 AutoTrust JEV-27B 打分。小样本没有建立稳定融合收益，不能通过正式
-200 用户目标。记录见 [真实试验报告](../reports/microlens-real-2026-10-08/README.md)。
-尚未完成完整 Phase A Jev 评价、KuaiRand Phase B 真实训练和学生部署。正式
+已获得官方 MicroLens 数据，完成 200 用户、4,000 个候选的真实 AutoTrust JEV-27B
+评价。CV 小权重融合显示 AUC 增量，但预设 AUC 与 HR@5 阈值未达，主目标通过 2/4。
+记录与并列分数诊断见 [真实评价报告](../reports/microlens-real-200-2026-10-08/README.md)。
+尚未完成 Phase A 全部门槛、KuaiRand Phase B 真实训练和学生部署。正式
 SASRec+MMoE behavior baseline 已具备 chronological train/validation、显式 OOV、
 严格 pre-exposure history 与 slate scoring；PLE 仍属于第二轮 baseline。仓库中的
 historical-Bayes signal 只用于 CPU bootstrap 和互补性 probe。

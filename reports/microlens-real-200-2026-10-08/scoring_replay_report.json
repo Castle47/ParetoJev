@@ -1,0 +1,86 @@
+{
+  "status": "completed",
+  "input": "data/processed/microlens-real-200/jev_input.jsonl",
+  "output": "artifacts/microlens-real-public-200/scores.jsonl",
+  "errors": "artifacts/microlens-real-public-200/errors.jsonl",
+  "signature": {
+    "schema_version": 2,
+    "provider": "autotrust-public-demo",
+    "mode": "noul",
+    "noul_scope": "pointwise",
+    "objective_names": [
+      "click"
+    ],
+    "requested_model": "autotrust/JEV-27B@7ce153d6f7933769527939bcb92ec3f3d8292884"
+  },
+  "config": {
+    "provider": "autotrust-public-demo",
+    "mode": "noul",
+    "objective_names": [
+      "click"
+    ],
+    "noul_scope": "pointwise",
+    "resume": true,
+    "overwrite": false,
+    "continue_on_error": false,
+    "durable_every": 1,
+    "start_index": 0,
+    "max_new_rows": null
+  },
+  "examined_input_rows": 200,
+  "newly_scored_rows": 0,
+  "skipped_completed_rows": 200,
+  "skipped_before_start": 0,
+  "failed_rows": 0,
+  "completed_rows_total": 200,
+  "elapsed_seconds": 0.0042743749800138175,
+  "latency": {
+    "count": 0,
+    "mean_ms": null,
+    "p50_ms": null,
+    "p95_ms": null,
+    "max_ms": null
+  },
+  "usage_totals": {},
+  "client_stats": {
+    "requests": 0,
+    "http_calls": 0,
+    "cache_hits": 0
+  },
+  "cache_entries": 4000,
+  "provenance": {
+    "created_at_utc": "2026-10-08T10:43:35.267239+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "0e571836065b7e56b8d9f33989d3f46a93aec6cf",
+    "inputs": [
+      {
+        "path": "data/processed/microlens-real-200/jev_input.jsonl",
+        "type": "file",
+        "bytes": 617477,
+        "sha256": "40f98a06a6902a0dd6f7da63ac4b35b16a00836cdca82e93099063bf38233fcb"
+      }
+    ],
+    "config_hash": "b01db2bdb56e9f8c7eecbc6b9f18304294868d2015f68966bb89d0a922d1cb34"
+  },
+  "evidence": {
+    "real_data": true,
+    "dataset": "microlens",
+    "data_kind": "real",
+    "scope": "full_200_user_protocol",
+    "users": 200,
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+    "resolved_model": "autotrust/JEV-27B",
+    "resolved_revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "registration_sha256": "4f0103c3ce90fae673b2186a60dc5c906ef34ae1ad3742e03225bbfbbbf66959",
+    "raw_response_cache_sha256": "df63034796d3114200f855edf421433bc376b611b12496c7b489b1e5c0881486"
+  }
+}
