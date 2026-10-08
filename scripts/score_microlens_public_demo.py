@@ -26,7 +26,8 @@ def main() -> None:
     registration = read_json(args.registration)
     if registration.get("data_kind") != "real" or registration.get("dataset") != "microlens":
         raise ValueError("This runner requires the registered real MicroLens probe")
-    pilot = registration["pilot"]
+    pilot = registration.get("cohort", registration.get("pilot"))
+    scope = registration.get("evaluation_scope", "20_user_pilot")
     if sha256_file(args.input) != pilot["jev_input_sha256"]:
         raise ValueError("Frozen pilot input hash mismatch")
     rows = read_jsonl(args.input)
@@ -34,14 +35,17 @@ def main() -> None:
     if len(expected) != len(rows) or set(expected) != set(map(str, pilot["users"])):
         raise ValueError("Pilot user selection differs from registration")
     decisions = sum(len(row["candidates"]) for row in rows)
-    if decisions != pilot["planned_model_requests"] or decisions > 400:
-        raise ValueError("Public demo pilot is limited to 400 pointwise decisions")
+    cap = 4000 if scope == "full_200_user_protocol" else 400
+    if scope == "full_200_user_protocol" and len(rows) != 200:
+        raise ValueError("Full registered protocol requires exactly 200 users")
+    if decisions != pilot["planned_model_requests"] or decisions > cap:
+        raise ValueError(f"This registered run is limited to {cap} pointwise decisions")
     out = Path(args.output_dir)
     out.mkdir(parents=True, exist_ok=True)
     service = registration["decision_service"]
     cache = DecisionCache(out / "requests.sqlite3")
     client = PublicDemoJevClient(revision=service["expected_revision"], cache=cache,
-                               max_http_calls=decisions, minimum_interval=1.0)
+                               max_http_calls=pilot.get("max_new_http_calls", decisions), minimum_interval=1.0)
     if service["endpoint"] != client.endpoint:
         raise ValueError("Registered endpoint differs from public client")
     # Reuse the one recorded connectivity canary, after the same strict checks.
@@ -79,7 +83,7 @@ def main() -> None:
         if row["resolved_model_revision"] != client.revision:
             raise ValueError("Scored slate revision mismatch")
     result["evidence"] = {"real_data": True, "dataset": "microlens", "data_kind": "real",
-                          "scope": "20-user pilot", "endpoint": client.endpoint,
+                          "scope": scope, "users": len(rows), "endpoint": client.endpoint,
                           "resolved_model": service["model"], "resolved_revision": client.revision,
                           "registration_sha256": registration_hash,
                           "raw_response_cache_sha256": sha256_file(cache.path)}

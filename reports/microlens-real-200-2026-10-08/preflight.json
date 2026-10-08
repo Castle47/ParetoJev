@@ -1,0 +1,10 @@
+{
+  "requests": 4000,
+  "validated_reusable_responses": 400,
+  "new_requests": 3600,
+  "maximum_state_characters": 1129,
+  "maximum_question_characters": 409,
+  "labels_sent": false,
+  "max_concurrency": 1,
+  "minimum_start_interval_seconds": 1.0
+}
