@@ -7,6 +7,7 @@ from paretojev.data.kuairand import KuaiRandSlateConfig, build_session_slates, r
 from paretojev.data.microlens import (
     MicroLensProtocol,
     cross_validated_hybrid,
+    load_pairs,
     prepare_microlens_candidates,
 )
 
@@ -49,6 +50,25 @@ def test_kuairand_session_slates(tmp_path: Path) -> None:
     assert len(slates.user_ids) == 4
     assert slates.mask.sum() == 14
 
+
+
+def test_microlens_official_header_aliases_and_second_timestamps(tmp_path: Path) -> None:
+    pd.DataFrame(
+        [
+            {"userID": 2, "videoID": 20, "timestamp": 1_700_000_002},
+            {"userID": 1, "videoID": 11, "timestamp": 1_700_000_001},
+            {"userID": 1, "videoID": 10, "timestamp": 1_700_000_000},
+        ]
+    ).to_csv(tmp_path / "MicroLens-100k_pairs.csv", index=False)
+
+    frame = load_pairs(tmp_path)
+    assert list(frame.columns) == ["user", "item", "timestamp"]
+    assert frame[["user", "item"]].values.tolist() == [[1, 10], [1, 11], [2, 20]]
+    assert frame["timestamp"].tolist() == [
+        1_700_000_000_000,
+        1_700_000_001_000,
+        1_700_000_002_000,
+    ]
 
 def test_microlens_protocol_and_hybrid(tmp_path: Path) -> None:
     pairs = []

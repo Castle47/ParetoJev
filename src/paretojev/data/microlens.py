@@ -100,16 +100,72 @@ def load_titles(directory: str | Path) -> dict[int, str]:
     return {int(row.item): str(row.title) for row in frame.itertuples(index=False)}
 
 
+def _normalize_timestamp_milliseconds(values: pd.Series) -> pd.Series:
+    """Normalize common Unix timestamp units to milliseconds.
+
+    MicroLens mirrors have appeared with the same logical timestamp column but
+    not always the same documented unit.  Candidate-window construction uses
+    milliseconds internally, so detect seconds/milliseconds/microseconds/
+    nanoseconds from the magnitude of epoch-like values.  Non-epoch ordinal
+    values are left unchanged rather than guessed.
+    """
+
+    numeric = pd.to_numeric(values, errors="raise").astype("int64")
+    non_zero = numeric[numeric != 0].abs()
+    if non_zero.empty:
+        return numeric
+
+    magnitude = float(non_zero.median())
+    if 1e8 <= magnitude < 1e11:  # Unix seconds
+        return numeric * 1_000
+    if 1e11 <= magnitude < 1e14:  # Unix milliseconds
+        return numeric
+    if 1e14 <= magnitude < 1e17:  # Unix microseconds
+        return numeric // 1_000
+    if magnitude >= 1e17:  # Unix nanoseconds
+        return numeric // 1_000_000
+    return numeric
+
+
 def load_pairs(directory: str | Path) -> pd.DataFrame:
+    """Load MicroLens interactions and normalize known schema variants.
+
+    The official/legacy files use ``userID`` and ``videoID`` in some releases,
+    while downstream projects often rename them to ``user`` and ``item``.
+    Accept both forms so the documented public file works without a manual
+    preprocessing step.
+    """
+
     path = Path(directory) / "MicroLens-100k_pairs.csv"
     frame = pd.read_csv(path)
+    frame.columns = [str(column).lstrip("\ufeff").strip() for column in frame.columns]
+
+    aliases = {
+        "userID": "user",
+        "user_id": "user",
+        "uid": "user",
+        "videoID": "item",
+        "video_id": "item",
+        "item_id": "item",
+        "time": "timestamp",
+        "ts": "timestamp",
+    }
+    rename = {column: aliases[column] for column in frame.columns if column in aliases}
+    frame = frame.rename(columns=rename)
+
     required = {"user", "item", "timestamp"}
     missing = required - set(frame.columns)
     if missing:
-        raise ValueError(f"MicroLens pairs file is missing columns: {sorted(missing)}")
-    return frame.loc[:, ["user", "item", "timestamp"]].sort_values(
-        ["user", "timestamp"], kind="stable"
-    )
+        raise ValueError(
+            "MicroLens pairs file is missing canonical columns "
+            f"{sorted(missing)}; observed columns: {sorted(frame.columns)}"
+        )
+
+    result = frame.loc[:, ["user", "item", "timestamp"]].copy()
+    result["user"] = pd.to_numeric(result["user"], errors="raise").astype("int64")
+    result["item"] = pd.to_numeric(result["item"], errors="raise").astype("int64")
+    result["timestamp"] = _normalize_timestamp_milliseconds(result["timestamp"])
+    return result.sort_values(["user", "timestamp"], kind="stable").reset_index(drop=True)
 
 
 def prepare_microlens_candidates(
