@@ -1,0 +1,81 @@
+{
+  "status": "passed",
+  "config": {
+    "seed": 7,
+    "n_train_slates": 192,
+    "n_eval_slates": 96,
+    "slate_size": 12,
+    "n_objectives": 6,
+    "feature_dim": 10,
+    "batch_size": 24,
+    "epochs": 4,
+    "learning_rate": 0.002,
+    "weight_decay": 0.0001,
+    "device": "cpu"
+  },
+  "loss_config": {
+    "pareto_pairwise": 1.0,
+    "tchebycheff": 1.0,
+    "uncertainty": 0.25,
+    "jev_distillation": 0.35,
+    "calibration": 0.25,
+    "fusion_calibration": 0.5,
+    "tchebycheff_rho": 0.05,
+    "distillation_temperature": 1.0
+  },
+  "directions": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "training": {
+    "initial_eval_loss": 1.066369652748108,
+    "final_eval_loss": 0.9697806686162949,
+    "loss_reduction_fraction": 0.0905773939486149,
+    "elapsed_seconds": 0.4458276620000561,
+    "history": [
+      {
+        "epoch": 1.0,
+        "train_loss": 1.0506487339735031,
+        "eval_loss": 0.9978799372911453
+      },
+      {
+        "epoch": 2.0,
+        "train_loss": 1.0102352425456047,
+        "eval_loss": 0.9744792282581329
+      },
+      {
+        "epoch": 3.0,
+        "train_loss": 0.9860635921359062,
+        "eval_loss": 0.9697035253047943
+      },
+      {
+        "epoch": 4.0,
+        "train_loss": 0.9698773846030235,
+        "eval_loss": 0.9697806686162949
+      }
+    ]
+  },
+  "fusion": {
+    "behavior_brier": 0.03794810175895691,
+    "jev_brier": 0.016650157049298286,
+    "fused_brier": 0.011563627980649471,
+    "cold_behavior_brier": 0.0623166486620903,
+    "cold_jev_brier": 0.005891615524888039,
+    "cold_fused_brier": 0.009650349617004395,
+    "warm_behavior_brier": 0.013617516495287418,
+    "warm_jev_brier": 0.03081134520471096,
+    "warm_fused_brier": 0.015076274052262306,
+    "cold_mean_jev_gate": 0.6594856381416321,
+    "warm_mean_jev_gate": 0.6561099886894226
+  },
+  "checks": {
+    "finite_loss": true,
+    "loss_decreased": true,
+    "fused_beats_average_source": true,
+    "jev_gate_higher_on_cold": true
+  }
+}

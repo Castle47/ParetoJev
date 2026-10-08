@@ -1,0 +1,25 @@
+targets:
+  finite_final_loss:
+    metric: training.final_eval_loss
+    op: ">"
+    threshold: 0.0
+    required: true
+    description: Final loss must be finite and positive.
+  loss_reduction:
+    metric: training.loss_reduction_fraction
+    op: ">="
+    threshold: 0.05
+    required: true
+    description: End-to-end smoke training should reduce held-out loss by at least 5%.
+  fused_brier:
+    metric: fusion.fused_brier
+    op: "<="
+    threshold: 0.02
+    required: true
+    description: Learned fusion should reach a low synthetic probability error.
+  cold_gate:
+    metric: fusion.cold_mean_jev_gate
+    op: ">="
+    threshold: 0.55
+    required: true
+    description: Gate should rely materially on the Jev-like signal for cold items.

@@ -1,0 +1,23 @@
+behavior:
+  architecture: sasrec_mmoe
+  embedding_dim: 128
+  n_heads: 4
+  n_layers: 2
+  n_experts: 4
+  expert_dim: 128
+reranker:
+  hidden_dim: 128
+  n_heads: 4
+  n_layers: 2
+  ff_dim: 256
+  dropout: 0.1
+  preference_conditioning: film
+  predict_uncertainty: true
+loss:
+  pareto_pairwise: 1.0
+  tchebycheff: 1.0
+  uncertainty: 0.25
+  jev_distillation: 0.35
+  calibration: 0.25
+  fusion_calibration: 0.5
+  tchebycheff_rho: 0.05

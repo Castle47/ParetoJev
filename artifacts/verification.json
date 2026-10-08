@@ -1,0 +1,30 @@
+{
+  "verified_at": "2026-10-08",
+  "python": "3.13.5",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.41",
+  "packages": {
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scikit_learn": "1.8.0",
+    "pyyaml": "6.0.3",
+    "requests": "2.32.5"
+  },
+  "checks": {
+    "compileall": true,
+    "pytest_passed": 14,
+    "pytest_failed": 0,
+    "synthetic_smoke_status": "passed",
+    "target_report_passed": true,
+    "required_targets_passed": 4,
+    "required_targets_total": 4
+  },
+  "smoke_summary": {
+    "initial_eval_loss": 1.066369652748108,
+    "final_eval_loss": 0.9697806686162949,
+    "loss_reduction_fraction": 0.0905773939486149,
+    "fused_brier": 0.011563627980649471
+  },
+  "real_data_experiments_run": false,
+  "real_data_blocker": "No datasets, API credentials, reachable open-JEV endpoint, or GPU were present in the execution environment; direct MicroLens file download was unavailable."
+}

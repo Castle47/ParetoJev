@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "required_passed": 4,
+  "required_total": 4,
+  "targets": [
+    {
+      "name": "finite_final_loss",
+      "metric": "training.final_eval_loss",
+      "operator": ">",
+      "threshold": 0.0,
+      "actual": 0.9697806686162949,
+      "required": true,
+      "passed": true,
+      "detail": "Final loss must be finite and positive."
+    },
+    {
+      "name": "loss_reduction",
+      "metric": "training.loss_reduction_fraction",
+      "operator": ">=",
+      "threshold": 0.05,
+      "actual": 0.0905773939486149,
+      "required": true,
+      "passed": true,
+      "detail": "End-to-end smoke training should reduce held-out loss by at least 5%."
+    },
+    {
+      "name": "fused_brier",
+      "metric": "fusion.fused_brier",
+      "operator": "<=",
+      "threshold": 0.02,
+      "actual": 0.011563627980649471,
+      "required": true,
+      "passed": true,
+      "detail": "Learned fusion should reach a low synthetic probability error."
+    },
+    {
+      "name": "cold_gate",
+      "metric": "fusion.cold_mean_jev_gate",
+      "operator": ">=",
+      "threshold": 0.55,
+      "actual": 0.6594856381416321,
+      "required": true,
+      "passed": true,
+      "detail": "Gate should rely materially on the Jev-like signal for cold items."
+    }
+  ]
+}

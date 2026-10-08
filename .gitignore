@@ -1,0 +1,21 @@
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
+*.egg-info/
+dist/
+build/
+.env
+.DS_Store
+
+# Datasets and heavy/generated artifacts
+data/raw/**
+data/processed/**
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+artifacts/*.pt
+artifacts/*.sqlite3
+artifacts/*.jsonl
+artifacts/*.csv

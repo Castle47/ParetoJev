@@ -1,0 +1,20 @@
+protocol:
+  n_users: 200
+  n_negatives: 19
+  history_length: 5
+  time_window_days: 3
+  seed: 0
+hybrid:
+  score_columns: [itemcf, jev_click]
+  folds: 5
+  weight_step: 0.05
+  objective: balanced
+published_reference_only:
+  jev_images:
+    auc: 0.727
+    hr@5: 0.590
+    ndcg@10: 0.498
+  itemcf:
+    auc: 0.728
+    hr@5: 0.490
+    ndcg@10: 0.503
