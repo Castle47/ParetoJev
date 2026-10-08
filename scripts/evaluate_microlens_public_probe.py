@@ -112,7 +112,11 @@ def main() -> None:
     json.dumps(report, allow_nan=False)
     filename = "evaluation.json" if scope == "full_200_user_protocol" else "pilot_evaluation.json"
     atomic_write_json(output / filename, report)
-    frame.to_csv(raw / "evaluated_candidates.csv", index=False)
+    serializable = frame.copy()
+    for key in ("hist_items", "hist_titles"):
+        if key in serializable:
+            serializable[key] = serializable[key].map(json.dumps)
+    serializable.to_csv(raw / "evaluated_candidates.csv", index=False)
     print(json.dumps({"metrics": metrics, "target_status": report["target_report"]["status"]}, indent=2))
 
 
