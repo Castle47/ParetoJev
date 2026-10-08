@@ -28,7 +28,7 @@ Verified locally on **2026-10-08**:
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **26 passed** | `pytest` |
+| Unit/integration tests | **39 passed** | `pytest` |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
@@ -290,6 +290,70 @@ paretojev prepare-kuairand \
 
 The command rejects overlapping prefix/current timestamps, preventing an accidental
 future-contaminated cold-start count.
+
+### Score the selected slates
+
+After generating `train_jev_sample.jsonl`, score only that balanced subset. For a
+first text-only probe:
+
+```bash
+export TYPESAFE_API_KEY="..."
+paretojev score-jsonl \
+  data/processed/kuairand/train_jev_sample.jsonl \
+  artifacts/kuairand_train_jev.jsonl \
+  --provider typesafe \
+  --mode noul \
+  --objectives click long_view like follow deep_engagement negative_feedback \
+  --model jev-1.13.0 \
+  --report artifacts/kuairand_train_jev.report.json \
+  --errors artifacts/kuairand_train_jev.errors.jsonl
+```
+
+The scorer's prompt objective names are explicitly mapped back to KuaiRand labels
+(`click → is_click`, `like → is_like`, `negative_feedback → is_hate`) during
+materialization. Candidate IDs, candidate order and objective order are validated;
+a mismatch fails instead of silently permuting tensors.
+
+### Materialize a trainable NPZ
+
+Until the neural behavior branch has been trained, the repository can produce a
+strictly pre-slate empirical-Bayes behavior signal. It uses only unique outcomes
+represented in earlier prepared pseudo-slates, never an outcome from the current
+slate. This is a CPU bootstrap and **not** the final SASRec+MMoE baseline.
+
+```bash
+scripts/materialize_kuairand_probe.sh \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/jev_sample_manifest.csv \
+  artifacts/kuairand_train_jev.jsonl \
+  data/processed/kuairand/train_features.npz \
+  data/processed/kuairand/candidate_feature_spec.json \
+  train
+```
+
+For a later validation period, reuse the train-fitted feature contract and seed the
+historical prior with earlier prepared slates:
+
+```bash
+scripts/materialize_kuairand_probe.sh \
+  data/processed/kuairand/validation_slates.npz \
+  data/processed/kuairand/validation_jev_sample_manifest.csv \
+  artifacts/kuairand_validation_jev.jsonl \
+  data/processed/kuairand/validation_features.npz \
+  data/processed/kuairand/candidate_feature_spec.json \
+  eval \
+  data/processed/kuairand/train_slates.npz
+```
+
+The train feature specification is fitted once and reused unchanged. By default,
+candidate features exclude the position inside the constructed pseudo-slate because
+that position can encode logged production order and break set invariance. The
+`--include-sequence-position` switch exists only for an explicit ablation.
+
+The materializer writes and immediately reloads the final artifact through the
+`PrecomputedSlateDataset` contract, so malformed dimensions are rejected before a
+long training run begins. The upstream behavior-score interchange format and final
+training NPZ are documented in [`docs/NPZ_CONTRACT.md`](docs/NPZ_CONTRACT.md).
 
 ## Core model and losses
 

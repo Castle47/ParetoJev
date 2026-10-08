@@ -100,7 +100,27 @@ prior count 和 user history count；`sample-kuairand-jev` 负责生成可审计
 默认 first probe 为 5k，joint cell 上限 250，单用户最多 2 个 slate；如果某些
 cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并破坏平衡。
 
-### 2.4 Baselines
+### 2.4 物料化与 leakage gate
+
+当前状态：已实现并测试。
+
+1. `score-jsonl` 只对抽样 manifest 中的 slate 生成 Jev 输出；
+2. `score-kuairand-behavior-prior` 提供严格 pre-slate 的 CPU bootstrap signal；
+3. `materialize-kuairand` 对 slate/candidate/objective 做强一致性校验；
+4. candidate feature transform 只在训练 split 拟合，后续 split 必须复用；
+5. 默认排除 pseudo-slate sequence position，避免直接编码 logged production order；
+6. validation bootstrap 可通过更早的 prepared slates 初始化，但 prefix 必须严格早于当前 split；
+7. 最终报告必须用 SASRec+MMoE/PLE 替换或对比 bootstrap prior，不能将其冒充主 behavior baseline。
+
+首个真实物料 gate：
+
+- Jev JSONL 行数与 manifest 一致；
+- 0 个 candidate-order/objective-order mismatch；
+- final NPZ 可被 `PrecomputedSlateDataset` 重载；
+- 训练与验证 feature spec hash 一致；
+- 全部 feature 都是 exposure 前可用或静态字段。
+
+### 2.5 Baselines
 
 - SASRec；
 - SASRec + MMoE；
@@ -114,7 +134,7 @@ cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并�
 - behavior + Jev linear；
 - full ParetoJev。
 
-### 2.5 Ablations
+### 2.6 Ablations
 
 - no Jev；
 - no behavior；

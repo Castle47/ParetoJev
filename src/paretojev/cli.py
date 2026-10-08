@@ -12,6 +12,10 @@ import torch
 from torch.utils.data import DataLoader
 
 from paretojev.config import load_yaml
+from paretojev.data.behavior_prior import (
+    HistoricalBayesConfig,
+    score_and_save_historical_bayes,
+)
 from paretojev.data.kuairand import (
     KuaiRandSamplingConfig,
     KuaiRandSlateConfig,
@@ -23,6 +27,13 @@ from paretojev.data.kuairand import (
     load_content_metadata,
     read_kuairand_log,
     stratified_sample_slates,
+)
+from paretojev.data.materialize import (
+    KuaiRandFeatureSpec,
+    SlateScoreTensor,
+    fit_kuairand_feature_spec,
+    materialize_kuairand_precomputed,
+    selected_slate_ids_from_manifest,
 )
 from paretojev.data.microlens import (
     MicroLensProtocol,
@@ -622,6 +633,104 @@ def _command_sample_kuairand_jev(args: argparse.Namespace) -> int:
     return 0
 
 
+def _command_score_kuairand_behavior_prior(args: argparse.Namespace) -> int:
+    config = HistoricalBayesConfig(
+        alpha=args.alpha,
+        beta=args.beta,
+        user_strength=args.user_strength,
+        item_strength=args.item_strength,
+    )
+    report_path = args.report or f"{args.output}.report.json"
+    report = score_and_save_historical_bayes(
+        args.slates,
+        args.output,
+        prefix_slates_path=args.prefix_slates,
+        config=config,
+    )
+    report["provenance"] = runtime_provenance(
+        input_paths=[
+            args.slates,
+            *([args.prefix_slates] if args.prefix_slates else []),
+        ],
+        config=asdict(config),
+    )
+    atomic_write_json(report_path, report)
+    _print_json(report)
+    return 0
+
+
+def _command_materialize_kuairand(args: argparse.Namespace) -> int:
+    slates_path = Path(args.slates)
+    decision_path = Path(args.decision_scores)
+    behavior_path = Path(args.behavior_scores)
+    feature_spec_path = Path(args.feature_spec)
+    for path in (slates_path, decision_path, behavior_path):
+        if not path.is_file():
+            raise FileNotFoundError(path)
+
+    slates = PreparedKuaiRandSlates.load(slates_path)
+    decision_rows = read_jsonl(decision_path)
+    if args.manifest:
+        slate_ids = selected_slate_ids_from_manifest(args.manifest)
+    else:
+        slate_ids = [int(row["slate_id"]) for row in decision_rows]
+    if args.fit_feature_spec:
+        spec = fit_kuairand_feature_spec(
+            slates,
+            slate_ids,
+            max_tab_values=args.max_tab_values,
+            include_sequence_position=args.include_sequence_position,
+        )
+        spec.save(feature_spec_path)
+    else:
+        if not feature_spec_path.is_file():
+            raise FileNotFoundError(
+                f"Feature spec not found: {feature_spec_path}; use --fit-feature-spec on training data"
+            )
+        spec = KuaiRandFeatureSpec.load(feature_spec_path)
+
+    behavior = SlateScoreTensor.load(behavior_path)
+    report = materialize_kuairand_precomputed(
+        slates,
+        slate_ids,
+        behavior_scores=behavior,
+        decision_rows=decision_rows,
+        feature_spec=spec,
+        output_path=args.output,
+    )
+    # Load once through the training contract so a malformed artifact fails here,
+    # not after a long training job has started.
+    verified = PrecomputedSlateDataset(args.output, seed=args.seed)
+    report["contract_validation"] = {
+        "slates": len(verified),
+        "feature_dim": verified.feature_dim,
+        "n_objectives": verified.n_objectives,
+        "slate_size": verified.slate_size,
+    }
+    report["feature_spec"] = {
+        "path": str(feature_spec_path),
+        "fit_on_this_run": bool(args.fit_feature_spec),
+        **asdict(spec),
+    }
+    report["provenance"] = runtime_provenance(
+        input_paths=[
+            slates_path,
+            decision_path,
+            behavior_path,
+            *([args.manifest] if args.manifest else []),
+        ],
+        config={
+            "slate_ids": [int(value) for value in slate_ids],
+            "feature_spec": asdict(spec),
+            "fit_feature_spec": bool(args.fit_feature_spec),
+        },
+    )
+    report_path = args.report or f"{args.output}.report.json"
+    atomic_write_json(report_path, report)
+    _print_json(report)
+    return 0
+
+
 def _command_score_jsonl(args: argparse.Namespace) -> int:
     cache = DecisionCache(args.cache)
     objectives = select_objectives(args.objectives)
@@ -890,6 +999,58 @@ def build_parser() -> argparse.ArgumentParser:
     sample_kuai.add_argument("--nrows", type=int)
     sample_kuai.add_argument("--report")
     sample_kuai.set_defaults(func=_command_sample_kuairand_jev)
+
+    behavior_prior = subparsers.add_parser(
+        "score-kuairand-behavior-prior",
+        help="Create a strict pre-slate historical Bayes behavior-score tensor",
+    )
+    behavior_prior.add_argument("slates", help="PreparedKuaiRandSlates NPZ")
+    behavior_prior.add_argument("output", help="SlateScoreTensor NPZ")
+    behavior_prior.add_argument(
+        "--prefix-slates",
+        help="Earlier prepared slates used only to initialize historical outcomes",
+    )
+    behavior_prior.add_argument("--alpha", type=float, default=1.0)
+    behavior_prior.add_argument("--beta", type=float, default=1.0)
+    behavior_prior.add_argument("--user-strength", type=float, default=20.0)
+    behavior_prior.add_argument("--item-strength", type=float, default=20.0)
+    behavior_prior.add_argument("--report")
+    behavior_prior.set_defaults(func=_command_score_kuairand_behavior_prior)
+
+    materialize_kuai = subparsers.add_parser(
+        "materialize-kuairand",
+        help="Align behavior/Jev scores and create a feature-complete training NPZ",
+    )
+    materialize_kuai.add_argument("slates", help="PreparedKuaiRandSlates NPZ")
+    materialize_kuai.add_argument("decision_scores", help="score-jsonl output")
+    materialize_kuai.add_argument("behavior_scores", help="SlateScoreTensor NPZ")
+    materialize_kuai.add_argument("output", help="Feature-complete ParetoJev NPZ")
+    materialize_kuai.add_argument(
+        "--manifest",
+        help="Optional sampled slate CSV; otherwise decision-score row order is used",
+    )
+    materialize_kuai.add_argument(
+        "--feature-spec",
+        required=True,
+        help="Train-fitted candidate-feature JSON shared by train/validation/test",
+    )
+    materialize_kuai.add_argument(
+        "--fit-feature-spec",
+        action="store_true",
+        help="Fit and overwrite --feature-spec from these slates (training only)",
+    )
+    materialize_kuai.add_argument("--max-tab-values", type=int, default=16)
+    materialize_kuai.add_argument(
+        "--include-sequence-position",
+        action="store_true",
+        help=(
+            "Include position inside the constructed pseudo-slate. Disabled by "
+            "default because it can encode the logged production order."
+        ),
+    )
+    materialize_kuai.add_argument("--seed", type=int, default=0)
+    materialize_kuai.add_argument("--report")
+    materialize_kuai.set_defaults(func=_command_materialize_kuairand)
 
     score = subparsers.add_parser(
         "score-jsonl", help="Score JSONL recommendation slates with official or open Jev"

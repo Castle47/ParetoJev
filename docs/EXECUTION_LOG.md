@@ -128,3 +128,30 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - `pytest -q`: **31 passed**.
 - A synthetic checkpoint + NPZ CLI integration test writes a provenance-stamped
   Pareto report; these synthetic values are not research outcomes.
+
+
+## 2026-10-08 — KuaiRand score materialization pipeline
+
+- Added a versioned `SlateScoreTensor` interchange contract for behavior-model
+  probabilities, independent of the final reranker NPZ.
+- Added a strict historical-Bayes CPU bootstrap. Every candidate in a pseudo-slate
+  is scored from the same history strictly before the slate start; current-slate
+  outcomes are queued until a later slate and overlapping windows are de-duplicated
+  by `(user, item, timestamp)`.
+- Added optional earlier-period prepared slates for initialization, with strict
+  non-overlap validation.
+- Added explicit Jev-to-KuaiRand objective aliases and hard failures for missing,
+  duplicate or permuted slate/candidate/objective rows.
+- Added train-fitted numeric candidate features and immediate reload through the
+  `PrecomputedSlateDataset` contract.
+- Changed the default feature contract to exclude pseudo-slate sequence position;
+  the legacy v1 contract remains replayable and position is available only as an
+  explicit ablation.
+- Added `scripts/materialize_kuairand_probe.sh` for train/eval materialization with a
+  shared feature specification.
+- Added prequential Brier diagnostics with explicit warnings that they are neither
+  independent held-out metrics nor a substitute for SASRec+MMoE.
+- `python -m compileall -q src tests`: passed.
+- `pytest -q`: **39 passed**.
+- No real-data metric is claimed; all new integration checks use small synthetic
+  prepared slates and fake decision rows.

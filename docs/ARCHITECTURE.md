@@ -81,3 +81,31 @@ preference vectors and candidate slates. Hypervolume is estimated inside a commo
 `[0,1]^M` box with identical random samples for every method. This makes the
 intermediate comparison reproducible, while final claims still require separately
 trained EMER-like and CMR-like baselines evaluated by the same contract.
+
+## Pre-slate behavior bootstrap and materialization
+
+Real Jev annotations can now be materialized before the final neural behavior branch
+is available. The bootstrap scorer maintains global, user and item empirical-Bayes
+states and scores every candidate from history strictly earlier than the pseudo-slate
+start. Outcomes inside one pseudo-slate are queued and applied only before a later
+slate, so an early candidate label cannot leak into a later candidate in the same
+constructed set. Overlapping windows are de-duplicated by `(user, item, timestamp)`.
+
+This path exists to unblock pipeline and complementarity probes:
+
+```text
+Prepared slates
+  ├─ strict historical Bayes scores ─┐
+  ├─ Jev score JSONL ────────────────┼─ strict ID/objective alignment
+  └─ train-fitted candidate features ┘
+                                      ↓
+                         feature-complete training NPZ
+```
+
+The bootstrap signal is deliberately reported separately from SASRec+MMoE. Its Brier
+value is a prequential diagnostic on represented pseudo-slate events, not an
+independent held-out result.
+
+Candidate feature transforms are train-fitted. The default contract excludes
+pseudo-slate sequence position, preserving set semantics and avoiding direct use of
+the logged production order. Position can be enabled only for a named ablation.

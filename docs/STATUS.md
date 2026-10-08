@@ -19,12 +19,15 @@
 - KuaiRand pseudo-slate/content manifest pipeline
 - leakage-safe prior item/user counts for cold-start and history buckets
 - balanced KuaiRand Jev sampler across popularity, history, exposure and feedback-density cells
+- strict pre-slate historical-Bayes bootstrap with overlap de-duplication and prefix-period initialization
+- behavior-score interchange contract plus strict Jev/behavior/candidate/objective alignment
+- train-fitted KuaiRand candidate feature specification and feature-complete NPZ materialization
 - SASRec + MMoE behavior branch
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - checkpoint-level runtime-preference sweep with shared-box Pareto hypervolume, controllability, cold-item and regret diagnostics
 - precomputed real-data training contract
-- **31 passing tests** plus successful synthetic MicroLens, KuaiRand and checkpoint-evaluation CLI integration runs
+- **39 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
 - passing synthetic model smoke and target report
 
 ## Active next phase
@@ -50,5 +53,6 @@ validate code and report structure.
 3. Verify probability calibration and measure CF/Jev error complementarity.
 4. Run RRF, outer-CV simplex fusion and nested-CV stacking.
 5. Require both absolute Phase A targets and paired-bootstrap evidence versus reproduced item-CF.
-6. Only after a real uplift, use the implemented stratified KuaiRand subset runner.
-7. Only after teacher uplift survives robust evaluation, train the low-latency student.
+6. Run the implemented stratified KuaiRand subset scorer and strict materializer; treat the historical-Bayes branch only as a bootstrap.
+7. Train and replace/compare the bootstrap with the formal SASRec+MMoE/PLE behavior baseline.
+8. Only after teacher uplift survives robust evaluation, train the low-latency student.

@@ -52,3 +52,54 @@ All objective coordinates in the report are maximize-oriented utilities in `[0,1
 positive objectives use conditional NDCG@K, while negative objectives use one minus
 the selected top-K negative-feedback rate. Hypervolume methods share the same unit
 hypercube and the same Monte Carlo seed, avoiding method-specific integration boxes.
+
+## Upstream behavior-score interchange contract
+
+Before building the final training NPZ, `materialize-kuairand` consumes a separate
+`SlateScoreTensor` NPZ. This keeps behavior-model training and scoring independent
+from Jev annotation and final reranker training.
+
+| Key | Shape | Meaning |
+|---|---|---|
+| `slate_ids` | `[N]` | row IDs in the source `PreparedKuaiRandSlates` file |
+| `candidate_ids` | `[N,K]` | exact candidate IDs in source order |
+| `probabilities` | `[N,K,M]` | raw behavior-risk probabilities |
+| `mask` | `[N,K]` | valid candidate mask |
+| `objective_names` | `[M]` | source objective names |
+
+The materializer validates all of the following before copying a row:
+
+- every requested `slate_id` occurs exactly once;
+- the valid mask matches the prepared slate;
+- valid candidate IDs and their order match exactly;
+- each target objective has exactly one source objective or declared alias;
+- valid probabilities are finite and in `[0,1]`.
+
+The CPU command below creates a leakage-safe bootstrap tensor:
+
+```bash
+paretojev score-kuairand-behavior-prior \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/train_behavior_prior.npz
+```
+
+It is an empirical-Bayes prequential prior, not the final behavior baseline. Final
+research tables must replace or compare it with a trained SASRec+MMoE/PLE branch.
+
+## KuaiRand materialization
+
+```bash
+paretojev materialize-kuairand \
+  data/processed/kuairand/train_slates.npz \
+  artifacts/kuairand_train_jev.jsonl \
+  data/processed/kuairand/train_behavior_prior.npz \
+  data/processed/kuairand/train_features.npz \
+  --manifest data/processed/kuairand/jev_sample_manifest.csv \
+  --feature-spec data/processed/kuairand/candidate_feature_spec.json \
+  --fit-feature-spec
+```
+
+The feature specification is fitted on training slates only and reused for later
+splits. Its default features are strict prior item count, duration and tab indicators.
+Pseudo-slate sequence position is excluded by default because it can carry the logged
+production order; include it only as a declared ablation.

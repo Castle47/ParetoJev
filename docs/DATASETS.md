@@ -63,15 +63,30 @@ data/raw/kuairand/
 从而让第一条 validation 曝光的 prior count 继承训练期历史。工具要求 prefix 的
 最大时间戳严格小于当前日志的最小时间戳；若两段时间重叠会直接失败。
 
-首轮 decision annotation 推荐输出：
+首轮 decision annotation 与训练物料推荐输出：
 
 ```text
 data/processed/kuairand/
 ├── train_slates.npz
 ├── jev_sample_manifest.csv
 ├── jev_sample_report.json
-└── train_jev_sample.jsonl
+├── train_jev_sample.jsonl
+├── train_behavior_prior.npz
+├── candidate_feature_spec.json
+├── train_features.npz
+└── train_features.materialize.report.json
 ```
+
+其中：
+
+- `train_behavior_prior.npz` 是 `SlateScoreTensor` 中间协议，可替换为神经行为模型输出；
+- `candidate_feature_spec.json` 只在训练 split 拟合一次，validation/test 必须复用；
+- `train_features.npz` 是 `train-precomputed` 的完整输入；
+- materialization 会严格核验 slate ID、candidate ID/顺序、mask 和 objective alias；
+- 默认不加入 pseudo-slate 内的 sequence position，避免将日志中的原排序当成内容特征。
+
+历史 Bayes scorer 只看当前 slate 首次曝光之前、且出现在已准备 pseudo-slate 中的
+去重事件。它用于先跑通真实 Jev 物料链路，不应替代最终 SASRec+MMoE baseline。
 
 ## ID 和时间规则
 

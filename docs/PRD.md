@@ -1,7 +1,7 @@
 # ParetoJev 需求文档（PRD）
 
-**版本：** 0.1  
-**状态：** 已进入执行；Phase 0 工程底座完成  
+**版本：** 0.2
+**状态：** 已进入执行；Phase 0 与真实数据物料链路完成
 **更新时间：** 2026-10-08
 
 ## 1. 项目目标
@@ -79,7 +79,8 @@
 - preference-conditioned set reranker；
 - Pareto dominance loss、Tchebycheff、uncertainty、distillation；
 - AUC/HR/NDCG/MRR、calibration、hypervolume、regret、controllability；
-- target checker、测试、README、执行日志。
+- target checker、测试、README、执行日志；
+- KuaiRand balanced annotation、严格 pre-slate behavior bootstrap、score alignment 与 final NPZ materialization。
 
 ### 第二阶段实现
 
@@ -174,10 +175,13 @@ Gate 特征至少包括：
 ## 9. 当前已完成
 
 - 工程结构与 package；
-- MicroLens/KuaiRand 数据处理代码；
+- MicroLens/KuaiRand 数据处理与严格时间前缀规则；
+- balanced Jev annotation sampler 与可恢复 scoring runner；
 - Jev client、prompt、parser、cache；
 - behavior/fusion/reranker/loss/metrics；
-- 14 项测试全部通过；
-- synthetic smoke target 通过。
+- KuaiRand behavior-score 中间协议、pre-slate bootstrap、feature spec 与 final NPZ materializer；
+- checkpoint preference sweep、Pareto hypervolume、regret 与 controllability evaluator；
+- **39 项测试全部通过**；
+- synthetic smoke target 与 synthetic CLI integration 通过。
 
-尚未完成的核心工作是获取真实数据、配置 decision endpoint、跑 Phase A/B 实验并基于失败模式迭代。
+尚未完成的核心工作是获取真实数据、配置 decision endpoint、跑 Phase A/B 真实实验，训练正式 SASRec+MMoE/PLE behavior baseline，并基于失败模式迭代。仓库中的 historical-Bayes signal 只用于在此之前跑通物料和互补性 probe。
