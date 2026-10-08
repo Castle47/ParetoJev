@@ -12,12 +12,15 @@
   },
   "checks": {
     "compileall": true,
-    "pytest_passed": 14,
+    "pytest_passed": 46,
     "pytest_failed": 0,
     "synthetic_smoke_status": "passed",
     "target_report_passed": true,
     "required_targets_passed": 4,
-    "required_targets_total": 4
+    "required_targets_total": 4,
+    "shell_syntax": true,
+    "kuairand_temporal_split_cli": true,
+    "kuairand_neural_behavior_train_score_cli": true
   },
   "smoke_summary": {
     "initial_eval_loss": 1.066369652748108,
@@ -26,5 +29,17 @@
     "fused_brier": 0.011563627980649471
   },
   "real_data_experiments_run": false,
-  "real_data_blocker": "No datasets, API credentials, reachable open-JEV endpoint, or GPU were present in the execution environment; direct MicroLens file download was unavailable."
+  "real_data_blocker": "No datasets, API credentials, reachable open-JEV endpoint, or GPU were present in the execution environment; direct MicroLens file download was unavailable.",
+  "behavior_pipeline_summary": {
+    "status": "synthetic integration passed",
+    "score_tensor_shape": [
+      8,
+      3,
+      6
+    ],
+    "strict_equal_timestamp_history": true,
+    "explicit_item_oov": true,
+    "out_of_period_reranker_scoring": true,
+    "research_metric_claimed": false
+  }
 }

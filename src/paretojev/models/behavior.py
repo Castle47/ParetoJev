@@ -75,8 +75,12 @@ class SASRecEncoder(nn.Module):
             mask=causal_mask,
             src_key_padding_mask=padding_mask,
         )
-        lengths = (~padding_mask).sum(dim=1).clamp_min(1)
-        last_index = lengths - 1
+        valid_positions = torch.where(
+            ~padding_mask,
+            positions,
+            torch.full_like(positions, -1),
+        )
+        last_index = valid_positions.max(dim=1).values.clamp_min(0)
         user = encoded[torch.arange(batch, device=encoded.device), last_index]
         all_padding = padding_mask.all(dim=1)
         return user.masked_fill(all_padding[:, None], 0.0)

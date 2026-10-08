@@ -63,6 +63,23 @@ data/raw/kuairand/
 从而让第一条 validation 曝光的 prior count 继承训练期历史。工具要求 prefix 的
 最大时间戳严格小于当前日志的最小时间戳；若两段时间重叠会直接失败。
 
+推荐先把 4/08–4/21 日志按完整时间戳组切成：
+
+```text
+data/processed/kuairand/splits/
+├── behavior_train.csv
+├── behavior_validation.csv
+├── reranker_train.csv
+├── prefix_before_behavior_validation.csv
+├── prefix_before_reranker_train.csv
+└── temporal_split_report.json
+```
+
+`prefix_before_*` 只包含目标 split 之前的完整时间段，用于严格初始化 history
+和 popularity。边界要求前一段最大时间戳严格小于后一段最小时间戳。正式 behavior
+checkpoint 只在 `behavior_train` 拟合，并在 `behavior_validation` early-stop；用于
+下游 reranker 的 pXTR 必须来自更晚的 `reranker_train` 或后续 split。
+
 首轮 decision annotation 与训练物料推荐输出：
 
 ```text
@@ -71,7 +88,9 @@ data/processed/kuairand/
 ├── jev_sample_manifest.csv
 ├── jev_sample_report.json
 ├── train_jev_sample.jsonl
-├── train_behavior_prior.npz
+├── kuairand_behavior.pt
+├── train_behavior_scores.npz
+├── train_behavior_prior.npz        # bootstrap-only fallback
 ├── candidate_feature_spec.json
 ├── train_features.npz
 └── train_features.materialize.report.json
@@ -79,7 +98,8 @@ data/processed/kuairand/
 
 其中：
 
-- `train_behavior_prior.npz` 是 `SlateScoreTensor` 中间协议，可替换为神经行为模型输出；
+- `train_behavior_scores.npz` 是正式 SASRec+MMoE 输出的 `SlateScoreTensor`；
+- `train_behavior_prior.npz` 使用同一协议，但仅是 bootstrap-only fallback；
 - `candidate_feature_spec.json` 只在训练 split 拟合一次，validation/test 必须复用；
 - `train_features.npz` 是 `train-precomputed` 的完整输入；
 - materialization 会严格核验 slate ID、candidate ID/顺序、mask 和 objective alias；

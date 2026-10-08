@@ -22,6 +22,18 @@ Target Mode 的核心不是“设一个很高的最终指标”，而是将研�
 
 未通过时先排查数据版本、候选顺序、tie-breaking、test-user leakage。
 
+### T1.5：Behavior baseline 可审计性
+
+在 KuaiRand 消耗 Jev annotation 预算前，必须完成：
+
+- behavior-train、behavior-validation、reranker-train 严格按时间互斥；
+- 等时间戳事件不互相进入 history 或 popularity；
+- validation/reranker item OOV 比例、macro AUC/AP、Brier 与 prevalence 可审计；
+- slate scorer 的 candidate order、objective order 和 checkpoint vocabulary 一致；
+- downstream reranker 不使用 behavior model 对自身训练事件的 in-sample 预测。
+
+若正式 behavior branch 尚未跑通，只允许把 historical-Bayes signal 标为 bootstrap，不得作为主 baseline。
+
 ### T2：低风险胜点
 
 目标：MicroLens CV hybrid 同时改善至少两项核心指标，且没有显著伤害第三项。

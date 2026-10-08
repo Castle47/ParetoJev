@@ -1,7 +1,7 @@
 # ParetoJev 需求文档（PRD）
 
-**版本：** 0.2
-**状态：** 已进入执行；Phase 0 与真实数据物料链路完成
+**版本：** 0.3
+**状态：** 已进入执行；Phase 0、真实数据物料链路与正式 behavior 分支完成
 **更新时间：** 2026-10-08
 
 ## 1. 项目目标
@@ -80,7 +80,8 @@
 - Pareto dominance loss、Tchebycheff、uncertainty、distillation；
 - AUC/HR/NDCG/MRR、calibration、hypervolume、regret、controllability；
 - target checker、测试、README、执行日志；
-- KuaiRand balanced annotation、严格 pre-slate behavior bootstrap、score alignment 与 final NPZ materialization。
+- KuaiRand balanced annotation、严格 pre-slate behavior bootstrap、score alignment 与 final NPZ materialization；
+- KuaiRand chronological split、正式 SASRec+MMoE 训练、checkpoint 与 leakage-safe slate scoring。
 
 ### 第二阶段实现
 
@@ -159,6 +160,7 @@ Gate 特征至少包括：
 - 所有概率在下游数据上重新校准；
 - prompt、翻译、校准器和融合权重只能在 train/validation 上开发；
 - 关键结果至少 3 个 seed 或 user bootstrap；
+- behavior checkpoint 的训练期、early-stop validation 与下游 reranker 训练期必须按时间互斥；不得把 behavior model 在自身训练事件上的输出作为下游 pXTR 特征；
 - 负目标（hate）必须在数据、utility transformation 和指标中保持一致方向。
 
 ## 8. 交付物
@@ -181,7 +183,7 @@ Gate 特征至少包括：
 - behavior/fusion/reranker/loss/metrics；
 - KuaiRand behavior-score 中间协议、pre-slate bootstrap、feature spec 与 final NPZ materializer；
 - checkpoint preference sweep、Pareto hypervolume、regret 与 controllability evaluator；
-- **39 项测试全部通过**；
+- **46 项测试全部通过**；
 - synthetic smoke target 与 synthetic CLI integration 通过。
 
-尚未完成的核心工作是获取真实数据、配置 decision endpoint、跑 Phase A/B 真实实验，训练正式 SASRec+MMoE/PLE behavior baseline，并基于失败模式迭代。仓库中的 historical-Bayes signal 只用于在此之前跑通物料和互补性 probe。
+尚未完成的核心工作是获取真实数据、配置 decision endpoint、跑 Phase A/B 真实实验，并基于失败模式迭代。正式 SASRec+MMoE behavior baseline 已具备 chronological train/validation、显式 OOV、严格 pre-exposure history 与 slate scoring；PLE 仍属于第二轮 baseline。仓库中的 historical-Bayes signal 只用于 CPU bootstrap 和互补性 probe。

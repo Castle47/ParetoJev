@@ -155,3 +155,33 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - `pytest -q`: **39 passed**.
 - No real-data metric is claimed; all new integration checks use small synthetic
   prepared slates and fake decision rows.
+
+## 2026-10-08 — Leakage-safe neural behavior branch
+
+- Added `split-kuairand-log`, which creates chronological CSV partitions without
+  dividing equal-timestamp groups and can emit cumulative `prefix_before_*` files.
+- Added a train-fitted item vocabulary with explicit padding/OOV indices and a
+  train-fitted pre-exposure context transform.
+- Added strict event histories: every target sees only timestamps `< target_time`;
+  simultaneous events neither enter one another's SASRec history nor prior counts.
+- Added formal SASRec + MMoE training with chronological validation, early stopping,
+  unweighted BCE, per-objective AUC/AP/Brier, macro diagnostics and provenance.
+- Added checkpoint-based slate scoring into the versioned `SlateScoreTensor` contract,
+  including candidate/history OOV fractions, Brier diagnostics, throughput and p50/p95
+  batch latency.
+- Changed SASRec histories to left padding and made the encoder select the actual last
+  non-padding position, preserving recency alignment.
+- Reworked `scripts/prepare_kuairand.sh` to reserve disjoint behavior-train,
+  behavior-validation and reranker-train periods, preventing in-sample pXTR leakage
+  into the downstream Pareto reranker.
+
+### Verification
+
+- `python -m compileall -q src tests`: passed.
+- `bash -n scripts/*.sh`: passed.
+- `pytest -q`: **46 passed**.
+- A synthetic CLI chain completed:
+  `split-kuairand-log → train-kuairand-behavior → prepare-kuairand →
+  score-kuairand-behavior`, producing an aligned `[8,3,6]` score tensor.
+- Synthetic quality and latency values are integration diagnostics only; no real-data
+  recommendation metric is claimed.

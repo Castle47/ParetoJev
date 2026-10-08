@@ -107,6 +107,8 @@ class SlateScoreTensor:
             raise ValueError("candidate_ids and slate_ids disagree on N")
         if self.mask.shape != self.candidate_ids.shape:
             raise ValueError("mask shape mismatch")
+        if n and not self.mask.any(axis=1).all():
+            raise ValueError("every score row must contain at least one valid candidate")
         if self.probabilities.shape[:2] != self.candidate_ids.shape:
             raise ValueError("probabilities must have shape [N,K,M]")
         if self.probabilities.shape[2] != len(self.objective_names):

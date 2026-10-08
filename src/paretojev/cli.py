@@ -27,6 +27,7 @@ from paretojev.data.kuairand import (
     load_content_metadata,
     read_kuairand_log,
     stratified_sample_slates,
+    temporal_split_log,
 )
 from paretojev.data.materialize import (
     KuaiRandFeatureSpec,
@@ -72,11 +73,14 @@ from paretojev.jev import (
 )
 from paretojev.models.pareto_reranker import ParetoJevConfig, ParetoJevReranker
 from paretojev.training import (
+    BehaviorTrainingConfig,
     PrecomputedTrainingConfig,
     SyntheticSmokeConfig,
     check_target_files,
+    run_kuairand_behavior_training,
     run_precomputed_training,
     run_synthetic_smoke,
+    score_kuairand_behavior_slates,
 )
 from paretojev.utils.io import atomic_write_json, read_jsonl
 from paretojev.utils.provenance import runtime_provenance
@@ -533,6 +537,50 @@ def _command_evaluate_microlens(args: argparse.Namespace) -> int:
     return 0
 
 
+def _command_split_kuairand_log(args: argparse.Namespace) -> int:
+    fractions = tuple(float(value.strip()) for value in args.fractions.split(","))
+    names = tuple(value.strip() for value in args.names.split(",") if value.strip())
+    allowed_name_characters = set(
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-"
+    )
+    if any(
+        not name or any(character not in allowed_name_characters for character in name)
+        for name in names
+    ):
+        raise ValueError("Split names may contain only letters, numbers, '_' and '-'")
+    frame = read_kuairand_log(args.log, nrows=args.nrows)
+    splits, report = temporal_split_log(frame, fractions, names=names)
+    output_directory = Path(args.output_directory)
+    output_directory.mkdir(parents=True, exist_ok=True)
+    outputs: dict[str, str] = {}
+    prefix_outputs: dict[str, str] = {}
+    previous_parts: list[pd.DataFrame] = []
+    for name, split in splits.items():
+        path = output_directory / f"{name}.csv"
+        split.to_csv(path, index=False)
+        outputs[name] = str(path)
+        if args.write_prefixes and previous_parts:
+            prefix_path = output_directory / f"prefix_before_{name}.csv"
+            pd.concat(previous_parts, ignore_index=True).to_csv(prefix_path, index=False)
+            prefix_outputs[name] = str(prefix_path)
+        previous_parts.append(split)
+    report["outputs"] = outputs
+    report["prefix_outputs"] = prefix_outputs
+    report["provenance"] = runtime_provenance(
+        input_paths=[args.log],
+        config={
+            "fractions": fractions,
+            "names": names,
+            "nrows": args.nrows,
+            "write_prefixes": bool(args.write_prefixes),
+        },
+    )
+    report_path = args.report or output_directory / "temporal_split_report.json"
+    atomic_write_json(report_path, report)
+    _print_json(report)
+    return 0
+
+
 def _command_prepare_kuairand(args: argparse.Namespace) -> int:
     frame = read_kuairand_log(args.log, nrows=args.nrows)
     prefix = read_kuairand_log(args.prefix_log) if args.prefix_log else None
@@ -629,6 +677,65 @@ def _command_sample_kuairand_jev(args: argparse.Namespace) -> int:
     )
     if args.report:
         atomic_write_json(args.report, report)
+    _print_json(report)
+    return 0
+
+
+def _command_train_kuairand_behavior(args: argparse.Namespace) -> int:
+    raw = load_yaml(args.config) if args.config else {}
+    training_raw = dict(raw.get("behavior_training", raw))
+    for key in (
+        "device",
+        "epochs",
+        "batch_size",
+        "max_train_examples",
+        "max_validation_examples",
+    ):
+        value = getattr(args, key)
+        if value is not None:
+            training_raw[key] = value
+    config = BehaviorTrainingConfig(**training_raw)
+    report = run_kuairand_behavior_training(
+        args.train_log,
+        args.validation_log,
+        config=config,
+        checkpoint_path=args.checkpoint,
+    )
+    provenance = runtime_provenance(
+        input_paths=[args.train_log, args.validation_log],
+        config=asdict(config),
+    )
+    report["provenance"] = provenance
+    checkpoint = torch.load(args.checkpoint, map_location="cpu", weights_only=False)
+    checkpoint["provenance"] = provenance
+    torch.save(checkpoint, args.checkpoint)
+    report_path = args.output or f"{args.checkpoint}.report.json"
+    atomic_write_json(report_path, report)
+    _print_json(report)
+    return 0
+
+
+def _command_score_kuairand_behavior(args: argparse.Namespace) -> int:
+    report = score_kuairand_behavior_slates(
+        args.checkpoint,
+        args.slates,
+        args.log,
+        args.output,
+        prefix_log_path=args.prefix_log,
+        batch_size=args.batch_size,
+        device_name=args.device,
+    )
+    report["provenance"] = runtime_provenance(
+        input_paths=[
+            args.checkpoint,
+            args.slates,
+            args.log,
+            *([args.prefix_log] if args.prefix_log else []),
+        ],
+        config={"batch_size": args.batch_size, "device": args.device},
+    )
+    report_path = args.report or f"{args.output}.report.json"
+    atomic_write_json(report_path, report)
     _print_json(report)
     return 0
 
@@ -952,6 +1059,31 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate_micro.add_argument("--output-scores")
     evaluate_micro.set_defaults(func=_command_evaluate_microlens)
 
+    split_kuai = subparsers.add_parser(
+        "split-kuairand-log",
+        help="Create strict chronological, equal-timestamp-safe KuaiRand CSV splits",
+    )
+    split_kuai.add_argument("log")
+    split_kuai.add_argument("output_directory")
+    split_kuai.add_argument(
+        "--fractions",
+        default="0.6,0.2,0.2",
+        help="Comma-separated positive fractions summing to one",
+    )
+    split_kuai.add_argument(
+        "--names",
+        default="behavior_train,behavior_validation,reranker_train",
+        help="Comma-separated output stems matching --fractions",
+    )
+    split_kuai.add_argument("--nrows", type=int)
+    split_kuai.add_argument(
+        "--write-prefixes",
+        action="store_true",
+        help="Also write cumulative strictly earlier CSVs for later splits",
+    )
+    split_kuai.add_argument("--report")
+    split_kuai.set_defaults(func=_command_split_kuairand_log)
+
     prepare_kuai = subparsers.add_parser(
         "prepare-kuairand", help="Build fixed-width exposed-session pseudo-slates"
     )
@@ -999,6 +1131,39 @@ def build_parser() -> argparse.ArgumentParser:
     sample_kuai.add_argument("--nrows", type=int)
     sample_kuai.add_argument("--report")
     sample_kuai.set_defaults(func=_command_sample_kuairand_jev)
+
+    train_behavior = subparsers.add_parser(
+        "train-kuairand-behavior",
+        help="Train the chronological SASRec+MMoE behavior branch",
+    )
+    train_behavior.add_argument("train_log")
+    train_behavior.add_argument("validation_log")
+    train_behavior.add_argument("checkpoint")
+    train_behavior.add_argument("--config", default="configs/train_behavior.yaml")
+    train_behavior.add_argument("--device")
+    train_behavior.add_argument("--epochs", type=int)
+    train_behavior.add_argument("--batch-size", type=int)
+    train_behavior.add_argument("--max-train-examples", type=int)
+    train_behavior.add_argument("--max-validation-examples", type=int)
+    train_behavior.add_argument("--output")
+    train_behavior.set_defaults(func=_command_train_kuairand_behavior)
+
+    score_behavior = subparsers.add_parser(
+        "score-kuairand-behavior",
+        help="Score prepared slates with a trained SASRec+MMoE checkpoint",
+    )
+    score_behavior.add_argument("checkpoint")
+    score_behavior.add_argument("slates")
+    score_behavior.add_argument("log")
+    score_behavior.add_argument("output", help="SlateScoreTensor NPZ")
+    score_behavior.add_argument(
+        "--prefix-log",
+        help="Earlier raw log included in strict user histories",
+    )
+    score_behavior.add_argument("--batch-size", type=int, default=256)
+    score_behavior.add_argument("--device", default="cpu")
+    score_behavior.add_argument("--report")
+    score_behavior.set_defaults(func=_command_score_kuairand_behavior)
 
     behavior_prior = subparsers.add_parser(
         "score-kuairand-behavior-prior",

@@ -82,6 +82,34 @@ preference vectors and candidate slates. Hypervolume is estimated inside a commo
 intermediate comparison reproducible, while final claims still require separately
 trained EMER-like and CMR-like baselines evaluated by the same contract.
 
+
+## Formal behavior branch and temporal contract
+
+The production-comparable behavior path is a SASRec user encoder with shared candidate
+embeddings and MMoE objective heads. Its input contract is deliberately stricter than
+a random event split:
+
+```text
+behavior_train ── train weights/vocabulary/context transform
+       ↓ strictly later
+behavior_validation ── early stopping and diagnostics
+       ↓ strictly later
+reranker_train ── out-of-period pXTR features for ParetoJev
+```
+
+Histories are left padded so the most recent item remains at the final sequence
+position. Every history lookup uses a strict `< current_timestamp` boundary; events
+sharing a timestamp cannot see one another. Item popularity and user-history counts
+use the same rule. The item vocabulary is fit only on behavior-train, reserving index
+0 for padding and index 1 for unseen items. Validation and downstream candidate/history
+OOV fractions are reported rather than silently expanding the embedding table.
+
+The scorer emits a versioned `SlateScoreTensor` and validates objective order against
+the prepared slate file. Unweighted BCE is used for the first formal baseline so its
+sigmoid is interpretable as a probability estimate; no post-hoc calibrator is fit on
+the early-stopping labels. Class reweighting/focal variants require a separate,
+chronologically later calibration split.
+
 ## Pre-slate behavior bootstrap and materialization
 
 Real Jev annotations can now be materialized before the final neural behavior branch

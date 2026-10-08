@@ -70,11 +70,18 @@ bootstrap、top-k error complementarity 和每次运行的 provenance。
 
 ### 2.1 数据切分
 
-- train：4/08–4/21 standard；
-- validation/test：4/22–5/08 standard 按时间再切；
-- random test：4/22–5/08 random；
-- metadata：captions/categories；
-- 禁止使用跨测试期聚合统计作为训练特征。
+4/08–4/21 standard 先按完整时间戳组切成三个互斥区间：
+
+1. `behavior_train`：训练 SASRec+MMoE；
+2. `behavior_validation`：early stopping 与 behavior diagnostics；
+3. `reranker_train`：生成下游 reranker 的 out-of-period pXTR、Jev annotation 与 labels。
+
+4/22–5/08 standard 再按时间切成 reranker validation/test；4/22–5/08 random 作为独立 random-exposure test。metadata 使用 captions/categories。禁止：
+
+- 把同一时间戳拆到两个 split；
+- 用 behavior model 对其自身训练事件的 in-sample 输出训练 reranker；
+- 使用跨测试期聚合统计作为训练特征；
+- 用 reranker validation/test label 拟合 behavior calibrator。
 
 ### 2.2 三类 protocol
 
@@ -104,13 +111,15 @@ cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并�
 
 当前状态：已实现并测试。
 
-1. `score-jsonl` 只对抽样 manifest 中的 slate 生成 Jev 输出；
-2. `score-kuairand-behavior-prior` 提供严格 pre-slate 的 CPU bootstrap signal；
-3. `materialize-kuairand` 对 slate/candidate/objective 做强一致性校验；
-4. candidate feature transform 只在训练 split 拟合，后续 split 必须复用；
-5. 默认排除 pseudo-slate sequence position，避免直接编码 logged production order；
-6. validation bootstrap 可通过更早的 prepared slates 初始化，但 prefix 必须严格早于当前 split；
-7. 最终报告必须用 SASRec+MMoE/PLE 替换或对比 bootstrap prior，不能将其冒充主 behavior baseline。
+1. `split-kuairand-log --write-prefixes` 产生 strict chronological CSV 和 cumulative prefix；
+2. `train-kuairand-behavior` 在 `behavior_train` 上训练、在后续 `behavior_validation` 上 early-stop；
+3. `score-kuairand-behavior` 对未参与 behavior fitting 的 reranker slates 生成正式 `SlateScoreTensor`；
+4. `score-jsonl` 只对抽样 manifest 中的 slate 生成 Jev 输出；
+5. `score-kuairand-behavior-prior` 仅提供严格 pre-slate 的 CPU bootstrap signal；
+6. `materialize-kuairand` 对 slate/candidate/objective 做强一致性校验；
+7. candidate feature transform 只在训练 split 拟合，后续 split 必须复用；
+8. 默认排除 pseudo-slate sequence position，避免直接编码 logged production order；
+9. validation bootstrap 可通过更早的 prepared slates 初始化，但 prefix 必须严格早于当前 split。
 
 首个真实物料 gate：
 
@@ -119,6 +128,7 @@ cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并�
 - final NPZ 可被 `PrecomputedSlateDataset` 重载；
 - 训练与验证 feature spec hash 一致；
 - 全部 feature 都是 exposure 前可用或静态字段。
+- behavior checkpoint 与 scoring report 记录 item/history OOV、Brier、macro AUC/AP、throughput 和版本 provenance。
 
 ### 2.5 Baselines
 

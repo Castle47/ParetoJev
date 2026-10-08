@@ -75,6 +75,23 @@ The materializer validates all of the following before copying a row:
 - each target objective has exactly one source objective or declared alias;
 - valid probabilities are finite and in `[0,1]`.
 
+
+Preferred producer for the main experiment:
+
+```bash
+paretojev score-kuairand-behavior \
+  artifacts/kuairand_behavior.pt \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/splits/reranker_train.csv \
+  data/processed/kuairand/train_behavior_scores.npz \
+  --prefix-log data/processed/kuairand/splits/prefix_before_reranker_train.csv
+```
+
+The checkpoint vocabulary and context transform are fit only on the earlier behavior
+training period. Histories and popularity are cut strictly before each slate start,
+and OOV rates are recorded. The reranker-training period must not be part of behavior
+model fitting.
+
 The CPU command below creates a leakage-safe bootstrap tensor:
 
 ```bash
@@ -92,7 +109,7 @@ research tables must replace or compare it with a trained SASRec+MMoE/PLE branch
 paretojev materialize-kuairand \
   data/processed/kuairand/train_slates.npz \
   artifacts/kuairand_train_jev.jsonl \
-  data/processed/kuairand/train_behavior_prior.npz \
+  data/processed/kuairand/train_behavior_scores.npz \
   data/processed/kuairand/train_features.npz \
   --manifest data/processed/kuairand/jev_sample_manifest.csv \
   --feature-spec data/processed/kuairand/candidate_feature_spec.json \

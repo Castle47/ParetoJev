@@ -28,7 +28,7 @@ Verified locally on **2026-10-08**:
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **39 passed** | `pytest` |
+| Unit/integration tests | **46 passed** | `pytest` |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
@@ -240,12 +240,49 @@ kuairand_video_captions.csv
 kuairand_video_categories.csv
 ```
 
-Build exposed-session pseudo-slates:
+### 1. Reserve disjoint periods for behavior training and reranker training
+
+Do not train the behavior model on the same events whose pXTR values will become
+features for the downstream reranker. Split the early standard log chronologically:
+
+```bash
+paretojev split-kuairand-log \
+  data/raw/kuairand/log_standard_4_08_to_4_21_pure.csv \
+  data/processed/kuairand/splits \
+  --fractions 0.6,0.2,0.2 \
+  --names behavior_train,behavior_validation,reranker_train \
+  --write-prefixes
+```
+
+Boundaries never divide rows sharing the same timestamp. `--write-prefixes` also
+creates `prefix_before_behavior_validation.csv` and
+`prefix_before_reranker_train.csv`, which are used to initialize strictly earlier
+histories and popularity counts.
+
+Train the formal behavior branch only on the first period and early-stop on the
+second:
+
+```bash
+scripts/train_kuairand_behavior.sh \
+  data/processed/kuairand/splits/behavior_train.csv \
+  data/processed/kuairand/splits/behavior_validation.csv \
+  artifacts/kuairand_behavior.pt \
+  artifacts/kuairand_behavior_metrics.json \
+  cuda
+```
+
+The implementation uses a left-padded SASRec history encoder, shared item embeddings,
+MMoE objective heads and pre-exposure context. New validation/test items map to an
+explicit OOV index. Probabilities are trained with unweighted BCE; the command does
+not fit a post-hoc calibrator on the validation labels and records this limitation.
+
+### 2. Build reranker pseudo-slates from an unseen later period
 
 ```bash
 paretojev prepare-kuairand \
-  data/raw/kuairand/log_standard_4_08_to_4_21_pure.csv \
+  data/processed/kuairand/splits/reranker_train.csv \
   data/processed/kuairand/train_slates.npz \
+  --prefix-log data/processed/kuairand/splits/prefix_before_reranker_train.csv \
   --slate-size 20 \
   --min-slate-size 5 \
   --session-gap-minutes 30 \
@@ -253,9 +290,9 @@ paretojev prepare-kuairand \
   --report data/processed/kuairand/train_prepare_report.json
 ```
 
-Slate construction records strictly prior item exposure counts and user-history lengths.
-Use them to select a balanced first annotation batch rather than sending every slate
-to an API:
+Slate construction records item exposure counts and user-history lengths using only
+strictly earlier timestamps. Simultaneous events do not count one another as history.
+Select a balanced first annotation batch instead of sending every slate to an API:
 
 ```bash
 paretojev sample-kuairand-jev \
@@ -264,7 +301,7 @@ paretojev sample-kuairand-jev \
   --max-slates 5000 \
   --per-cell 250 \
   --max-per-user 2 \
-  --log data/raw/kuairand/log_standard_4_08_to_4_21_pure.csv \
+  --log data/processed/kuairand/splits/reranker_train.csv \
   --content-directory data/raw/kuairand \
   --jev-input data/processed/kuairand/train_jev_sample.jsonl \
   --report data/processed/kuairand/jev_sample_report.json
@@ -272,13 +309,12 @@ paretojev sample-kuairand-jev \
 
 The sampler balances joint cells over cold/mid/warm item history, short/medium/long
 user history, standard/random exposure and no/sparse/rich positive-feedback density.
-Its popularity signal is based only on exposures preceding each candidate, rather
-than a future-contaminated full-period count. `scripts/prepare_kuairand.sh` runs both
-the slate and sampling stages.
+`scripts/prepare_kuairand.sh` runs the chronological split, pseudo-slate and sampling
+stages. The initial 5k slate budget is a cost-controlled probe; expansion depends on
+measured complementarity and bucket-level uplift.
 
-The main experiment sequence is specified in [`docs/EXPERIMENT_PLAN.md`](docs/EXPERIMENT_PLAN.md). The initial 5k slate budget is a cost-controlled probe; expansion depends on measured complementarity and bucket-level uplift.
-
-When preparing a later time split, initialize prior counts from the earlier split:
+When preparing a later 4/22–5/08 split, initialize counts from the complete earlier
+standard log:
 
 ```bash
 paretojev prepare-kuairand \
@@ -288,10 +324,10 @@ paretojev prepare-kuairand \
   --report data/processed/kuairand/validation_prepare_report.json
 ```
 
-The command rejects overlapping prefix/current timestamps, preventing an accidental
-future-contaminated cold-start count.
+The command rejects overlapping prefix/current timestamps, preventing accidental
+future-contaminated histories.
 
-### Score the selected slates
+### 3. Score the selected slates
 
 After generating `train_jev_sample.jsonl`, score only that balanced subset. For a
 first text-only probe:
@@ -314,9 +350,43 @@ The scorer's prompt objective names are explicitly mapped back to KuaiRand label
 materialization. Candidate IDs, candidate order and objective order are validated;
 a mismatch fails instead of silently permuting tensors.
 
-### Materialize a trainable NPZ
+### 4. Score the same sampled slates with the out-of-period behavior model
 
-Until the neural behavior branch has been trained, the repository can produce a
+```bash
+paretojev score-kuairand-behavior \
+  artifacts/kuairand_behavior.pt \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/splits/reranker_train.csv \
+  data/processed/kuairand/train_behavior_scores.npz \
+  --prefix-log data/processed/kuairand/splits/prefix_before_reranker_train.csv \
+  --device cuda \
+  --report artifacts/kuairand_train_behavior.report.json
+```
+
+Histories are cut with `searchsorted(..., side="left")`, so neither the current
+candidate nor any simultaneous exposure enters the user state. Candidate/context
+OOV rates, Brier diagnostics and batch latency are written to the report.
+
+### 5. Materialize a trainable NPZ
+
+For the main experiment, pass `train_behavior_scores.npz` directly to
+`materialize-kuairand`:
+
+```bash
+paretojev materialize-kuairand \
+  data/processed/kuairand/train_slates.npz \
+  artifacts/kuairand_train_jev.jsonl \
+  data/processed/kuairand/train_behavior_scores.npz \
+  data/processed/kuairand/train_features.npz \
+  --manifest data/processed/kuairand/jev_sample_manifest.csv \
+  --feature-spec data/processed/kuairand/candidate_feature_spec.json \
+  --fit-feature-spec \
+  --report artifacts/kuairand_train_materialize.report.json
+```
+
+### Bootstrap-only fallback
+
+If no neural checkpoint is available yet, the repository can produce a
 strictly pre-slate empirical-Bayes behavior signal. It uses only unique outcomes
 represented in earlier prepared pseudo-slates, never an outcome from the current
 slate. This is a CPU bootstrap and **not** the final SASRec+MMoE baseline.

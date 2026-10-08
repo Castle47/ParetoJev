@@ -1,9 +1,12 @@
+import json
 import random
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import pytest
 
+from paretojev.cli import main
 from paretojev.data.kuairand import (
     KUAI_OBJECTIVES,
     KuaiRandSamplingConfig,
@@ -295,3 +298,137 @@ def test_microlens_upstream_candidate_conformance(tmp_path: Path) -> None:
         for user, group in actual.groupby("user", sort=False)
     }
     assert observed == expected
+
+
+def test_kuairand_prior_counts_exclude_all_same_timestamp_exposures() -> None:
+    def row(user: int, video: int, timestamp: int) -> dict[str, int]:
+        return {
+            "user_id": user,
+            "video_id": video,
+            "time_ms": timestamp,
+            "is_click": 0,
+            "is_like": 0,
+            "is_follow": 0,
+            "is_comment": 0,
+            "is_forward": 0,
+            "is_hate": 0,
+            "long_view": 0,
+            "play_time_ms": 0,
+            "duration_ms": 10_000,
+            "is_rand": 0,
+            "tab": 1,
+        }
+
+    current = pd.DataFrame(
+        [
+            row(1, 10, 1_000),
+            row(1, 10, 1_000),
+            row(1, 11, 1_000),
+            row(1, 10, 2_000),
+        ]
+    )
+    slates = build_session_slates(
+        current,
+        KuaiRandSlateConfig(slate_size=4, min_slate_size=2, stride=4),
+    )
+    assert slates.item_prior_count is not None
+    assert slates.user_history_count is not None
+    # The first three rows are simultaneous: none may count another as history.
+    assert slates.item_prior_count[0, :3].tolist() == [0, 0, 0]
+    assert slates.user_history_count[0] == 0
+    # The later repeat sees both earlier item-10 exposures.
+    assert slates.item_prior_count[0, 3] == 2
+
+
+def test_kuairand_temporal_split_preserves_equal_timestamp_groups() -> None:
+    from paretojev.data.kuairand import temporal_split_log
+
+    frame = pd.DataFrame(
+        {
+            "time_ms": [100, 100, 200, 300, 300, 400, 500, 600],
+            "value": np.arange(8),
+        }
+    )
+    splits, report = temporal_split_log(
+        frame,
+        (0.5, 0.25, 0.25),
+        names=("behavior_train", "behavior_validation", "reranker_train"),
+    )
+    assert sum(len(part) for part in splits.values()) == len(frame)
+    assert set(splits["behavior_train"]["time_ms"]).isdisjoint(
+        set(splits["behavior_validation"]["time_ms"])
+    )
+    assert set(splits["behavior_validation"]["time_ms"]).isdisjoint(
+        set(splits["reranker_train"]["time_ms"])
+    )
+    assert (
+        splits["behavior_train"]["time_ms"].max()
+        < splits["behavior_validation"]["time_ms"].min()
+        < splits["reranker_train"]["time_ms"].min()
+    )
+    assert report["rows"] == len(frame)
+
+
+
+def test_split_kuairand_cli_writes_strict_prefixes(tmp_path: Path, capsys) -> None:
+    rows: list[dict[str, int]] = []
+    timestamps = [100, 100, 200, 300, 300, 400, 500, 600, 700, 700, 800, 900]
+    for index, timestamp in enumerate(timestamps):
+        rows.append(
+            {
+                "user_id": 1 + index % 3,
+                "video_id": 10 + index % 5,
+                "time_ms": timestamp,
+                "is_click": index % 2,
+                "is_like": int(index % 4 == 0),
+                "is_follow": int(index % 7 == 0),
+                "is_comment": int(index % 5 == 0),
+                "is_forward": int(index % 6 == 0),
+                "is_hate": int(index % 11 == 0),
+                "long_view": int(index % 3 == 0),
+                "play_time_ms": 5_000,
+                "duration_ms": 10_000,
+                "is_rand": 0,
+                "tab": 1,
+            }
+        )
+    source = tmp_path / "all.csv"
+    output = tmp_path / "splits"
+    report = tmp_path / "split_report.json"
+    pd.DataFrame(rows).to_csv(source, index=False)
+
+    with pytest.raises(SystemExit) as exit_info:
+        main(
+            [
+                "split-kuairand-log",
+                str(source),
+                str(output),
+                "--fractions",
+                "0.5,0.25,0.25",
+                "--names",
+                "behavior_train,behavior_validation,reranker_train",
+                "--write-prefixes",
+                "--report",
+                str(report),
+            ]
+        )
+    assert exit_info.value.code == 0
+    capsys.readouterr()
+
+    train = read_kuairand_log(output / "behavior_train.csv")
+    validation = read_kuairand_log(output / "behavior_validation.csv")
+    reranker = read_kuairand_log(output / "reranker_train.csv")
+    validation_prefix = read_kuairand_log(
+        output / "prefix_before_behavior_validation.csv"
+    )
+    reranker_prefix = read_kuairand_log(output / "prefix_before_reranker_train.csv")
+    assert train["time_ms"].max() < validation["time_ms"].min()
+    assert validation["time_ms"].max() < reranker["time_ms"].min()
+    assert len(validation_prefix) == len(train)
+    assert len(reranker_prefix) == len(train) + len(validation)
+    payload = json.loads(report.read_text())
+    assert payload["rows"] == len(rows)
+    assert set(payload["prefix_outputs"]) == {
+        "behavior_validation",
+        "reranker_train",
+    }

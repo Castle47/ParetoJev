@@ -1,4 +1,14 @@
 from .schema import SlateBatch
+from .behavior_sequences import (
+    BehaviorContextSpec,
+    BehaviorEventTable,
+    ItemVocabulary,
+    KuaiRandBehaviorDataset,
+    UserHistoryIndex,
+    behavior_context_for_slates,
+    build_behavior_event_table,
+    fit_behavior_context_spec,
+)
 from .behavior_prior import (
     HistoricalBayesConfig,
     historical_bayes_behavior_scores,
@@ -24,10 +34,19 @@ from .kuairand import (
     build_sampling_frame,
     build_session_slates,
     stratified_sample_slates,
+    temporal_split_log,
 )
 
 __all__ = [
     "SlateBatch",
+    "BehaviorContextSpec",
+    "BehaviorEventTable",
+    "ItemVocabulary",
+    "KuaiRandBehaviorDataset",
+    "UserHistoryIndex",
+    "behavior_context_for_slates",
+    "build_behavior_event_table",
+    "fit_behavior_context_spec",
     "HistoricalBayesConfig",
     "historical_bayes_behavior_scores",
     "score_and_save_historical_bayes",
@@ -51,4 +70,5 @@ __all__ = [
     "build_sampling_frame",
     "build_session_slates",
     "stratified_sample_slates",
+    "temporal_split_log",
 ]

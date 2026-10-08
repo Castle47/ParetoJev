@@ -22,12 +22,13 @@
 - strict pre-slate historical-Bayes bootstrap with overlap de-duplication and prefix-period initialization
 - behavior-score interchange contract plus strict Jev/behavior/candidate/objective alignment
 - train-fitted KuaiRand candidate feature specification and feature-complete NPZ materialization
-- SASRec + MMoE behavior branch
+- chronological equal-timestamp-safe KuaiRand split utility with cumulative prefix files
+- formal SASRec + MMoE behavior training, early stopping, OOV-aware checkpoint and strict slate scorer
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - checkpoint-level runtime-preference sweep with shared-box Pareto hypervolume, controllability, cold-item and regret diagnostics
 - precomputed real-data training contract
-- **39 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
+- **46 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
 - passing synthetic model smoke and target report
 
 ## Active next phase
@@ -53,6 +54,6 @@ validate code and report structure.
 3. Verify probability calibration and measure CF/Jev error complementarity.
 4. Run RRF, outer-CV simplex fusion and nested-CV stacking.
 5. Require both absolute Phase A targets and paired-bootstrap evidence versus reproduced item-CF.
-6. Run the implemented stratified KuaiRand subset scorer and strict materializer; treat the historical-Bayes branch only as a bootstrap.
-7. Train and replace/compare the bootstrap with the formal SASRec+MMoE/PLE behavior baseline.
+6. Run the implemented strict temporal split, formal SASRec+MMoE trainer/scorer, stratified KuaiRand subset scorer and materializer.
+7. Compare the formal neural branch with the historical-Bayes bootstrap and add PLE only if the first baseline is stable.
 8. Only after teacher uplift survives robust evaluation, train the low-latency student.

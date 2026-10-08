@@ -156,6 +156,89 @@ class KuaiRandSamplingConfig:
             raise ValueError("positive_rich_threshold must be at least 2")
 
 
+
+def temporal_split_log(
+    frame: pd.DataFrame,
+    fractions: Sequence[float],
+    *,
+    names: Sequence[str] | None = None,
+) -> tuple[dict[str, pd.DataFrame], dict[str, object]]:
+    """Split a log chronologically without separating equal timestamps.
+
+    The split is based on row-count targets but every boundary is moved to the
+    first row of a new timestamp. This prevents one nominal instant from leaking
+    across behavior-train/validation/reranker periods.
+    """
+
+    if "time_ms" not in frame:
+        raise ValueError("KuaiRand log must contain time_ms")
+    values = tuple(float(value) for value in fractions)
+    if len(values) < 2 or any(value <= 0.0 for value in values):
+        raise ValueError("fractions must contain at least two positive values")
+    total = sum(values)
+    if not np.isclose(total, 1.0, atol=1e-8):
+        raise ValueError(f"fractions must sum to 1, got {total}")
+    resolved_names = (
+        tuple(str(value) for value in names)
+        if names is not None
+        else tuple(f"split_{index}" for index in range(len(values)))
+    )
+    if len(resolved_names) != len(values):
+        raise ValueError("names and fractions must have the same length")
+    if len(set(resolved_names)) != len(resolved_names):
+        raise ValueError("split names must be unique")
+    ordered = frame.sort_values("time_ms", kind="stable").reset_index(drop=True)
+    if len(ordered) < len(values):
+        raise ValueError("log has fewer rows than requested splits")
+    timestamps = ordered["time_ms"].to_numpy(dtype=np.int64)
+    boundaries = [0]
+    cumulative = 0.0
+    for fraction in values[:-1]:
+        cumulative += fraction
+        target = min(max(int(round(cumulative * len(ordered))), 1), len(ordered) - 1)
+        boundary_time = timestamps[target]
+        boundary = int(np.searchsorted(timestamps, boundary_time, side="left"))
+        boundary = max(boundary, boundaries[-1] + 1)
+        if boundary >= len(ordered):
+            raise ValueError("timestamp distribution cannot produce non-empty splits")
+        # If the forced non-empty adjustment lands inside an equal-time group,
+        # move to the first strictly later timestamp.
+        if timestamps[boundary - 1] == timestamps[boundary]:
+            boundary = int(np.searchsorted(timestamps, timestamps[boundary], side="right"))
+        if boundary >= len(ordered):
+            raise ValueError("timestamp distribution cannot produce non-empty splits")
+        boundaries.append(boundary)
+    boundaries.append(len(ordered))
+    if any(right <= left for left, right in zip(boundaries, boundaries[1:])):
+        raise ValueError("timestamp distribution produced an empty split")
+
+    splits: dict[str, pd.DataFrame] = {}
+    split_report: dict[str, object] = {}
+    for name, left, right in zip(
+        resolved_names, boundaries[:-1], boundaries[1:], strict=True
+    ):
+        part = ordered.iloc[left:right].copy().reset_index(drop=True)
+        splits[name] = part
+        split_report[name] = {
+            "rows": int(len(part)),
+            "min_time_ms": int(part["time_ms"].min()),
+            "max_time_ms": int(part["time_ms"].max()),
+            "fraction_actual": float(len(part) / len(ordered)),
+        }
+    for earlier, later in zip(resolved_names, resolved_names[1:]):
+        if int(splits[earlier]["time_ms"].max()) >= int(
+            splits[later]["time_ms"].min()
+        ):
+            raise AssertionError("temporal split boundary is not strict")
+    report: dict[str, object] = {
+        "rows": int(len(ordered)),
+        "requested_fractions": {
+            name: fraction for name, fraction in zip(resolved_names, values, strict=True)
+        },
+        "splits": split_report,
+    }
+    return splits, report
+
 def find_kuairand_file(directory: str | Path, stem: str, variant: str = "pure") -> Path:
     directory = Path(directory)
     candidates = [
@@ -250,13 +333,23 @@ def build_session_slates(
     # to user/session order. They are safe cold-start/history descriptors because
     # they exclude the current exposure and every future exposure.
     frame = log.copy().sort_values("time_ms", kind="stable")
-    frame["_item_prior_count"] = frame.groupby("video_id", sort=False).cumcount()
+    # Cumcount alone would treat an arbitrary row at the same timestamp as
+    # historical information. Subtract the within-(item,timestamp) rank so every
+    # exposure sharing the current timestamp receives the same strictly-earlier
+    # count.
+    frame["_item_prior_count"] = (
+        frame.groupby("video_id", sort=False).cumcount()
+        - frame.groupby(["video_id", "time_ms"], sort=False).cumcount()
+    )
     if item_base is not None:
         frame["_item_prior_count"] += (
             frame["video_id"].map(item_base).fillna(0).astype(np.int64)
         )
     frame = frame.sort_values(["user_id", "time_ms"], kind="stable")
-    frame["_user_prior_count"] = frame.groupby("user_id", sort=False).cumcount()
+    frame["_user_prior_count"] = (
+        frame.groupby("user_id", sort=False).cumcount()
+        - frame.groupby(["user_id", "time_ms"], sort=False).cumcount()
+    )
     if user_base is not None:
         frame["_user_prior_count"] += (
             frame["user_id"].map(user_base).fillna(0).astype(np.int64)
