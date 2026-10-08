@@ -50,3 +50,44 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - CLI help and all registered commands loaded successfully.
 - Final test count after adding the precomputed-data training path: **14 passed**.
 - A direct attempt to download the official MicroLens pairs file from this container failed because outbound file download was unavailable; the repository therefore records no fabricated real-data result.
+
+## 2026-10-08 — Phase A reproducibility hardening
+
+### Protocol audit and corrections
+
+- Matched the public MicroLens demo's occurrence-weighted negative sampler instead of
+  silently sampling uniformly from deduplicated items.
+- Matched the public demo's right-open time-window boundary.
+- Added an explicit `upstream_jitter` tie policy and retained `stable` and
+  independently randomized alternatives.
+- Made pointwise Noul genuinely pointwise by hiding competing candidates from state;
+  candidate content is carried in the individual question.
+
+### Scoring reliability
+
+- Added durable JSONL append, run signatures, resume, overwrite protection, error logs,
+  latency/usage aggregation and provenance fingerprints.
+- Resuming an output now rejects provider/model/mode/objective/scope mismatches.
+- Added objective sub-selection so MicroLens Phase A can request only `click` instead
+  of paying for unrelated multi-objective questions.
+
+### Research-grade Phase A evaluator
+
+- Added reciprocal-rank fusion as a label-free baseline.
+- Added nested user-CV logistic stacking with raw score, within-slate rank, margin,
+  and pair interactions. Raw interactions allow slate-level Jev confidence/entropy
+  to modulate candidate-level Jev evidence.
+- Added out-of-fold Choice temperature scaling and Noul Platt calibration.
+- Added Brier/ECE/NLL diagnostics and reliability curves.
+- Added user-bootstrap confidence intervals, paired differences versus a declared
+  reference and model-complementarity/oracle diagnostics.
+- Added `configs/targets_microlens.yaml` and a complete Phase A shell workflow.
+
+### Verification
+
+- `python -m compileall -q src tests`: passed.
+- `pytest -q`: **24 passed**.
+- Synthetic 30-user/20-candidate CLI run completed through calibration, RRF, outer-CV
+  hybrid, nested-CV stacker, bootstrap, pairwise comparison, complementarity and
+  provenance output.
+- Synthetic values are deliberately not committed as research outcomes.

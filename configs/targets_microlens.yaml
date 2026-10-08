@@ -1,0 +1,39 @@
+# Phase A gates only. These are targets, not achieved results.
+targets:
+  hybrid_auc:
+    metric: microlens.hybrid_cv.auc
+    op: ">="
+    threshold: 0.735
+    required: true
+    description: Cross-validated CF + decision-score hybrid clears the published single-system reference band.
+  hybrid_hr5:
+    metric: microlens.hybrid_cv.hr@5
+    op: ">="
+    threshold: 0.600
+    required: true
+  hybrid_ndcg10:
+    metric: microlens.hybrid_cv.ndcg@10
+    op: ">="
+    threshold: 0.510
+    required: true
+  hybrid_auc_ci_vs_itemcf:
+    metric: pairwise_vs_reference.hybrid_cv.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true
+    description: The paired user-bootstrap confidence interval must exclude zero versus the reproduced item-CF baseline.
+  stack_auc:
+    metric: microlens.stack_cv.auc
+    op: ">="
+    threshold: 0.735
+    required: false
+  stack_hr5:
+    metric: microlens.stack_cv.hr@5
+    op: ">="
+    threshold: 0.600
+    required: false
+  stack_ndcg10:
+    metric: microlens.stack_cv.ndcg@10
+    op: ">="
+    threshold: 0.510
+    required: false

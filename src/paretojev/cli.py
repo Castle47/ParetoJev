@@ -28,7 +28,17 @@ from paretojev.data.microlens import (
     prepare_microlens_candidates,
     save_microlens_protocol,
 )
-from paretojev.experiments import merge_decision_scores
+from paretojev.experiments import (
+    add_reciprocal_rank_fusion,
+    bootstrap_metric_intervals,
+    complementarity_report,
+    cross_validated_choice_temperature,
+    cross_validated_logistic_stacking,
+    cross_validated_platt_calibration,
+    merge_decision_scores,
+    pairwise_metric_differences,
+    probability_diagnostics,
+)
 from paretojev.jev import (
     DecisionCache,
     OpenJevClient,
@@ -49,6 +59,7 @@ from paretojev.training import (
     run_synthetic_smoke,
 )
 from paretojev.utils.io import atomic_write_json, read_jsonl
+from paretojev.utils.provenance import runtime_provenance
 
 
 def _print_json(payload: Any) -> None:
@@ -127,28 +138,84 @@ def _command_prepare_microlens(args: argparse.Namespace) -> int:
 
 
 def _command_evaluate_microlens(args: argparse.Namespace) -> int:
+    if args.bootstrap_samples < 0:
+        raise ValueError("--bootstrap-samples cannot be negative")
+    if not 0.0 < args.confidence < 1.0:
+        raise ValueError("--confidence must lie strictly between 0 and 1")
+    if args.reference and args.bootstrap_samples == 0:
+        raise ValueError("--reference requires --bootstrap-samples > 0")
+
     frame = load_prepared_candidates(args.input)
-    score_columns = args.scores or [
+    excluded = {
+        "user",
+        "item",
+        "position",
+        "y",
+        "target_timestamp",
+        "hist_items",
+        "hist_titles",
+        "title",
+    }
+    base_score_columns = args.scores or [
         column
         for column in frame.columns
-        if column not in {"user", "item", "position", "y", "target_timestamp", "hist_items", "hist_titles", "title"}
-        and pd.api.types.is_numeric_dtype(frame[column])
+        if column not in excluded and pd.api.types.is_numeric_dtype(frame[column])
     ]
-    missing = set(score_columns) - set(frame.columns)
+    missing = set(base_score_columns) - set(frame.columns)
     if missing:
         raise ValueError(f"Missing score columns: {sorted(missing)}")
-    report: dict[str, Any] = {
-        "users": int(frame["user"].nunique()),
-        "candidate_count": int(frame.groupby("user").size().iloc[0]),
-        "metrics": {
-            column: evaluate_score_column(
-                frame, column, tie_policy=args.tie_policy, tie_seed=args.tie_seed
-            )
-            for column in score_columns
-        },
-        "tie_policy": args.tie_policy,
-        "tie_seed": args.tie_seed,
-    }
+    generated_columns: list[str] = []
+    method_reports: dict[str, Any] = {}
+    choice_probability_columns: set[str] = set()
+    pointwise_probability_columns: set[str] = set()
+
+    for column in args.choice_temperature or []:
+        output_column = f"{column}_temp_cv"
+        frame, folds = cross_validated_choice_temperature(
+            frame,
+            column,
+            folds=args.folds,
+            temperatures=args.temperature_grid,
+            seed=args.seed,
+            output_column=output_column,
+        )
+        generated_columns.append(output_column)
+        choice_probability_columns.update((column, output_column))
+        method_reports.setdefault("choice_temperature", {})[column] = {
+            "output_column": output_column,
+            "folds": folds,
+        }
+
+    for column in args.platt:
+        output_column = f"{column}_platt_cv"
+        frame, folds = cross_validated_platt_calibration(
+            frame,
+            column,
+            folds=args.folds,
+            seed=args.seed,
+            output_column=output_column,
+        )
+        generated_columns.append(output_column)
+        pointwise_probability_columns.update((column, output_column))
+        method_reports.setdefault("platt", {})[column] = {
+            "output_column": output_column,
+            "folds": folds,
+        }
+
+    if args.rrf:
+        frame = add_reciprocal_rank_fusion(
+            frame,
+            args.rrf,
+            rank_constant=args.rank_constant,
+            output_column=args.rrf_output_column,
+        )
+        generated_columns.append(args.rrf_output_column)
+        method_reports["rrf"] = {
+            "columns": args.rrf,
+            "rank_constant": args.rank_constant,
+            "output_column": args.rrf_output_column,
+        }
+
     if args.hybrid:
         frame, folds = cross_validated_hybrid(
             frame,
@@ -161,14 +228,157 @@ def _command_evaluate_microlens(args: argparse.Namespace) -> int:
             tie_policy=args.tie_policy,
             tie_seed=args.tie_seed,
         )
-        report["metrics"][args.hybrid_output_column] = evaluate_score_column(
+        generated_columns.append(args.hybrid_output_column)
+        method_reports["hybrid"] = {
+            "columns": args.hybrid,
+            "output_column": args.hybrid_output_column,
+            "folds": folds,
+        }
+
+    if args.stack:
+        frame, stack_folds = cross_validated_logistic_stacking(
             frame,
-            args.hybrid_output_column,
+            args.stack,
+            folds=args.folds,
+            inner_folds=args.inner_folds,
+            c_values=args.stack_c_values,
+            objective=args.objective,
+            seed=args.seed,
+            output_column=args.stack_output_column,
             tie_policy=args.tie_policy,
             tie_seed=args.tie_seed,
         )
-        report["hybrid"] = {"columns": args.hybrid, "folds": folds}
-        output_scores = Path(args.output_scores or Path(args.input).with_name("evaluated_scores.csv"))
+        generated_columns.append(args.stack_output_column)
+        method_reports["stacking"] = {
+            "columns": args.stack,
+            "output_column": args.stack_output_column,
+            "folds": stack_folds,
+        }
+
+    score_columns = list(dict.fromkeys([*base_score_columns, *generated_columns]))
+    metrics = {
+        column: evaluate_score_column(
+            frame, column, tie_policy=args.tie_policy, tie_seed=args.tie_seed
+        )
+        for column in score_columns
+    }
+    slate_sizes = frame.groupby("user", sort=False).size()
+    if slate_sizes.nunique() != 1:
+        raise ValueError(
+            f"Candidate slate sizes are inconsistent: {sorted(slate_sizes.unique())}"
+        )
+    report: dict[str, Any] = {
+        "users": int(frame["user"].nunique()),
+        "candidate_count": int(slate_sizes.iloc[0]),
+        "metrics": metrics,
+        # Namespace alias consumed directly by configs/targets_research.yaml.
+        "microlens": metrics,
+        "tie_policy": args.tie_policy,
+        "tie_seed": args.tie_seed,
+        "methods": method_reports,
+    }
+
+    diagnostic_columns = list(
+        dict.fromkeys(
+            [
+                *(args.probability_diagnostics or []),
+                *sorted(choice_probability_columns),
+                *sorted(pointwise_probability_columns),
+            ]
+        )
+    )
+    if diagnostic_columns:
+        missing_diagnostics = set(diagnostic_columns) - set(frame.columns)
+        if missing_diagnostics:
+            raise ValueError(
+                f"Missing probability diagnostic columns: {sorted(missing_diagnostics)}"
+            )
+        report["calibration"] = {
+            column: probability_diagnostics(
+                frame,
+                column,
+                n_bins=args.calibration_bins,
+                normalize_as_choice=column in choice_probability_columns,
+            )
+            for column in diagnostic_columns
+        }
+
+    if args.bootstrap_samples > 0:
+        report["confidence_intervals"] = {
+            column: bootstrap_metric_intervals(
+                frame,
+                column,
+                n_bootstrap=args.bootstrap_samples,
+                confidence=args.confidence,
+                seed=args.seed,
+                tie_policy=args.tie_policy,
+                tie_seed=args.tie_seed,
+            )
+            for column in score_columns
+        }
+
+    if args.reference:
+        if args.reference not in score_columns:
+            raise ValueError(
+                f"Reference score {args.reference!r} is not among evaluated columns {score_columns}"
+            )
+        report["pairwise_vs_reference"] = {
+            column: pairwise_metric_differences(
+                frame,
+                column,
+                args.reference,
+                n_bootstrap=args.bootstrap_samples,
+                confidence=args.confidence,
+                seed=args.seed,
+                tie_policy=args.tie_policy,
+                tie_seed=args.tie_seed,
+            )
+            for column in score_columns
+            if column != args.reference
+        }
+
+    complementarity_columns = args.complementarity
+    if not complementarity_columns:
+        complementarity_columns = args.hybrid or args.stack or args.rrf
+    if complementarity_columns and len(complementarity_columns) >= 2:
+        report["complementarity"] = complementarity_report(
+            frame,
+            complementarity_columns,
+            tie_policy=args.tie_policy,
+            tie_seed=args.tie_seed,
+        )
+
+    report["provenance"] = runtime_provenance(
+        input_paths=[args.input],
+        config={
+            "scores": score_columns,
+            "choice_temperature": args.choice_temperature,
+            "temperature_grid": args.temperature_grid,
+            "platt": args.platt,
+            "probability_diagnostics": diagnostic_columns,
+            "calibration_bins": args.calibration_bins,
+            "hybrid": args.hybrid,
+            "stack": args.stack,
+            "rrf": args.rrf,
+            "folds": args.folds,
+            "inner_folds": args.inner_folds,
+            "stack_c_values": args.stack_c_values,
+            "weight_step": args.weight_step,
+            "rank_constant": args.rank_constant,
+            "objective": args.objective,
+            "tie_policy": args.tie_policy,
+            "tie_seed": args.tie_seed,
+            "bootstrap_samples": args.bootstrap_samples,
+            "confidence": args.confidence,
+            "reference": args.reference,
+            "complementarity": complementarity_columns,
+        },
+    )
+
+    if generated_columns or args.output_scores:
+        output_scores = Path(
+            args.output_scores or Path(args.input).with_name("evaluated_scores.csv")
+        )
         serializable = frame.copy()
         if "hist_items" in serializable:
             serializable["hist_items"] = serializable["hist_items"].map(json.dumps)
@@ -355,11 +565,47 @@ def build_parser() -> argparse.ArgumentParser:
     )
     evaluate_micro.add_argument("input")
     evaluate_micro.add_argument("--scores", nargs="+")
+    evaluate_micro.add_argument(
+        "--choice-temperature",
+        nargs="+",
+        help="Choice probability columns to calibrate with user-CV temperature scaling",
+    )
+    evaluate_micro.add_argument(
+        "--temperature-grid",
+        nargs="+",
+        type=float,
+        default=[0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0],
+    )
+    evaluate_micro.add_argument(
+        "--platt",
+        nargs="+",
+        default=[],
+        help="Pointwise Noul/binary probability columns to calibrate with user-CV Platt scaling",
+    )
+    evaluate_micro.add_argument(
+        "--probability-diagnostics",
+        nargs="+",
+        help="Additional probability columns for Brier/ECE/NLL reporting",
+    )
+    evaluate_micro.add_argument("--calibration-bins", type=int, default=15)
     evaluate_micro.add_argument("--hybrid", nargs="+")
     evaluate_micro.add_argument("--hybrid-output-column", default="hybrid_cv")
+    evaluate_micro.add_argument("--stack", nargs="+")
+    evaluate_micro.add_argument("--stack-output-column", default="stack_cv")
+    evaluate_micro.add_argument(
+        "--stack-c-values", nargs="+", type=float, default=[0.01, 0.1, 1.0, 10.0]
+    )
+    evaluate_micro.add_argument("--inner-folds", type=int, default=4)
+    evaluate_micro.add_argument("--rrf", nargs="+")
+    evaluate_micro.add_argument("--rrf-output-column", default="rrf")
+    evaluate_micro.add_argument("--rank-constant", type=float, default=60.0)
     evaluate_micro.add_argument("--folds", type=int, default=5)
     evaluate_micro.add_argument("--weight-step", type=float, default=0.05)
     evaluate_micro.add_argument("--objective", choices=["auc", "ndcg@10", "balanced"], default="balanced")
+    evaluate_micro.add_argument("--reference")
+    evaluate_micro.add_argument("--complementarity", nargs="+")
+    evaluate_micro.add_argument("--bootstrap-samples", type=int, default=5000)
+    evaluate_micro.add_argument("--confidence", type=float, default=0.95)
     evaluate_micro.add_argument("--seed", type=int, default=0)
     evaluate_micro.add_argument(
         "--tie-policy",

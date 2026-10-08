@@ -11,10 +11,14 @@
 
 ## Stage 1：MicroLens 可比较 Demo
 
+当前代码状态：协议、决策打分 runner、校准、融合、统计检验和 target gate
+均已实现；尚缺真实数据与 Jev 推理结果。
+
 ### 1.1 数据与复现
 
 1. 下载 pairs/title；
-2. 构造 200 用户、5 history、1 positive + 19 time-local negatives；
+2. 构造 200 用户、5 history、1 positive + 19 time-local negatives；默认严格使用
+   occurrence-weighted upstream sampler，同时另存 uniform-unique 研究变体；
 3. 验证每个用户恰好一个 positive；
 4. 运行 popularity、TF-IDF title similarity、item-CF；
 5. 对比公开 Demo 指标差异。
@@ -40,13 +44,27 @@
 
 顺序：
 
-1. rank-normalized linear blend；
-2. 5-fold user CV alpha/simplex；
-3. logistic/calibrated blend；
-4. confidence gate；
-5. oracle per-user upper bound。
+1. RRF（不使用标签）；
+2. rank-normalized 5-fold user-CV simplex；
+3. Choice temperature / Noul Platt 的外层 user-CV 概率校准；
+4. nested user-CV logistic stacker；
+5. confidence-aware neural gate；
+6. oracle per-user upper bound。
 
-输出：AUC、HR@1、HR@5、NDCG@10、MRR 和配对 bootstrap。
+输出：AUC、HR@1、HR@5、NDCG@10、MRR、Brier、ECE、NLL、配对
+bootstrap、top-k error complementarity 和每次运行的 provenance。
+
+### 1.4 Phase A target
+
+必须同时满足：
+
+- hybrid AUC ≥ 0.735；
+- HR@5 ≥ 0.600；
+- NDCG@10 ≥ 0.510；
+- 相比本仓库复现 item-CF 的 AUC paired-bootstrap 95% CI 下界 > 0。
+
+若只达到公开数字但未超过本地复现 baseline，不能标记为 win；若 point estimate
+提升但 CI 跨 0，标记为 inconclusive，而不是成功。
 
 ## Stage 2：KuaiRand 主实验
 

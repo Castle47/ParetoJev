@@ -5,37 +5,47 @@
 ## Completed
 
 - Phase 0 requirements, architecture and target gates
-- Installable Python package and CLI
-- MicroLens deterministic protocol + hybrid evaluation
+- installable Python package and CLI
+- MicroLens official/legacy schema aliases and timestamp-unit normalization
+- MicroLens upstream-compatible occurrence-weighted candidate sampler
+- explicit tie policies, including upstream deterministic jitter and stable research mode
+- durable/resumable TypeSafe/open-JEV scoring with signature validation, cache and run reports
+- Choice, pointwise Noul and slate-conditioned Noul protocols
+- MicroLens baselines, reciprocal-rank fusion and cross-validated simplex hybrid
+- nested user-CV logistic stacker with raw/rank/margin and confidence interactions
+- out-of-fold Choice temperature scaling and Noul Platt calibration
+- user-bootstrap intervals, paired reference tests and model-complementarity diagnostics
+- Phase A target file and one-command local execution scripts
 - KuaiRand pseudo-slate/content manifest pipeline
-- Official TypeSafe and open JEV clients with SQLite caching
 - SASRec + MMoE behavior branch
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - precomputed real-data training contract
-- 15 passing tests
-- MicroLens official/legacy schema aliases and timestamp-unit normalization
-- passing synthetic smoke and target report
+- **24 passing tests** plus a successful synthetic Phase A CLI integration run
+- passing synthetic model smoke and target report
 
 ## Active next phase
 
 **Phase A — MicroLens reproduction and hybrid win**
 
-Required external inputs for real benchmark numbers:
+The code path is now ready for a real, reproducible run. Required external inputs for
+real benchmark numbers are:
 
 1. official MicroLens pairs/title files;
 2. official Jev API key or a reachable self-hosted JEV endpoint;
 3. optional GPU endpoint for the JEV-27B-VL cover track.
 
-Work that does not depend on those inputs continues in parallel: protocol hardening,
-baseline correctness, resumable runners, test coverage and experiment reporting. The
-current execution environment has no outbound binary dataset download path, so Phase A
-real metrics have not yet been run.
+The current execution environment cannot fetch the binary dataset and has no Jev
+credential or GPU endpoint. Therefore no real MicroLens, KuaiRand or Jev benchmark
+number is recorded in this repository. Synthetic integration output is used only to
+validate code and report structure.
 
 ## Go/no-go sequence
 
-1. Reproduce item-CF/title metrics.
-2. Score official Jev Choice and Noul.
-3. Measure complementarity and cross-validated hybrid.
-4. Only if there is real uplift, expand to KuaiRand sampling.
-5. Only if teacher uplift survives robust evaluation, train the student.
+1. Reproduce item-CF, popularity and title-similarity baselines under the exact public protocol.
+2. Score official Jev Choice(click) and pointwise Noul(click), with full cost/latency provenance.
+3. Verify probability calibration and measure CF/Jev error complementarity.
+4. Run RRF, outer-CV simplex fusion and nested-CV stacking.
+5. Require both absolute Phase A targets and paired-bootstrap evidence versus reproduced item-CF.
+6. Only after a real uplift, expand decision scoring to a stratified KuaiRand subset.
+7. Only after teacher uplift survives robust evaluation, train the low-latency student.

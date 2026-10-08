@@ -21,13 +21,14 @@ Verified locally on **2026-10-08**:
 |---|---|---|
 | Product/research requirements | Complete | [`docs/PRD.md`](docs/PRD.md) |
 | Target-mode gates | Complete | [`docs/TARGET_MODE.md`](docs/TARGET_MODE.md), [`configs/targets_research.yaml`](configs/targets_research.yaml) |
-| MicroLens deterministic protocol | Implemented | `paretojev.data.microlens` |
+| MicroLens upstream-compatible protocol | Implemented and conformance-tested | `paretojev.data.microlens` |
 | KuaiRand pseudo-slate builder | Implemented | `paretojev.data.kuairand` |
-| Official TypeSafe Jev + open JEV clients | Implemented | `paretojev.jev` |
+| Official TypeSafe Jev + open JEV clients | Implemented, cached and resumable | `paretojev.jev` |
+| MicroLens research evaluator | Nested user-CV, calibration, bootstrap and complementarity | `paretojev.experiments.microlens` |
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **14 passed** | `pytest` |
+| Unit/integration tests | **24 passed** | `pytest` |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
@@ -72,7 +73,16 @@ behavior pXTRs         semantic probabilities
 
 ### MicroLens-100K: fast, directly comparable demo
 
-The public JEV-27B-VL recommendation demo evaluates 200 users, the five most recent videos as history, and 20 candidates consisting of one hidden next item plus 19 time-local negatives. This repository reproduces that candidate construction and adds leakage-safe cross-validated hybrid weight selection.
+The public JEV-27B-VL recommendation demo evaluates 200 users, the five most recent videos as history, and 20 candidates consisting of one hidden next item plus 19 time-local negatives. This repository reproduces the less-obvious details as well: occurrence-weighted negative sampling from the time window and the demo's deterministic position-wise tie jitter. A cleaner uniform-unique sampler and stable tie policy remain available as explicitly named research variants.
+
+The evaluator now provides four fusion levels:
+
+1. reciprocal-rank fusion without labels;
+2. transparent simplex-weighted fusion with outer user folds;
+3. nested user-CV logistic stacking with raw/rank/margin and confidence interactions;
+4. a later learned confidence gate in the main ParetoJev model.
+
+It also reports user-bootstrap confidence intervals, paired differences against a declared reference and error-complementarity diagnostics. Jev Choice probabilities can be temperature-calibrated out of fold; pointwise Noul probabilities can be Platt-calibrated out of fold.
 
 The public demo reports JEV-27B-VL cover-only AUC `0.727`, HR@5 `0.590`, NDCG@10 `0.498`, and item-CF AUC `0.728`, HR@5 `0.490`, NDCG@10 `0.503`. These are **upstream self-reported reference values**, not results produced by this repository.
 
@@ -130,7 +140,9 @@ Add `--covers --extract-covers` only for the multimodal JEV-27B-VL track; the co
 ```bash
 paretojev prepare-microlens \
   data/raw/microlens \
-  data/processed/microlens
+  data/processed/microlens \
+  --negative-sampling upstream_occurrence \
+  --tie-policy upstream_jitter
 ```
 
 Outputs:
@@ -149,7 +161,10 @@ paretojev score-jsonl \
   artifacts/microlens_jev_choice.jsonl \
   --provider typesafe \
   --mode choice \
-  --model jev-1.13.0
+  --objectives click \
+  --model jev-1.13.0 \
+  --report artifacts/microlens_jev_choice.report.json \
+  --errors artifacts/microlens_jev_choice.errors.jsonl
 ```
 
 Or point the same command at a self-hosted open JEV server:
@@ -163,7 +178,7 @@ paretojev score-jsonl \
   --base-url http://localhost:8000
 ```
 
-Every request is cached in SQLite, so interrupted or repeated runs do not repay identical calls.
+Every request is cached in SQLite and every successful slate is appended durably to the output JSONL. A compatible rerun resumes from completed slate IDs; it refuses to mix a different provider, model, mode, objective set or Noul scope into an existing output.
 
 ### 4. Merge scores and evaluate a leakage-safe hybrid
 
@@ -178,14 +193,40 @@ paretojev merge-decision-scores \
 paretojev evaluate-microlens \
   data/processed/microlens/candidates_with_jev.csv \
   --scores itemcf title_sim jev_click \
+  --choice-temperature jev_click \
+  --probability-diagnostics jev_click \
+  --rrf itemcf jev_click \
   --hybrid itemcf jev_click \
+  --stack itemcf title_sim jev_click jev_click_confidence jev_click_entropy \
   --folds 5 \
+  --inner-folds 4 \
   --weight-step 0.05 \
   --objective balanced \
-  --output artifacts/microlens_metrics.json
+  --reference itemcf \
+  --complementarity itemcf jev_click \
+  --bootstrap-samples 5000 \
+  --output artifacts/microlens_metrics.json \
+  --output-scores data/processed/microlens/evaluated_scores.csv
 ```
 
-Weights are selected on K-1 user folds and applied only to the held-out fold. This avoids selecting a blend on the same 200 users used for reporting.
+Weights are selected on K-1 user folds and applied only to the held-out fold. The stacker additionally selects regularization by inner user folds. This avoids fitting the reported 200 users and then scoring those same users with the fitted fusion.
+
+Run the Phase A gate separately:
+
+```bash
+paretojev check-targets \
+  artifacts/microlens_metrics.json \
+  configs/targets_microlens.yaml \
+  --output artifacts/microlens_target_report.json
+```
+
+Or execute the full local sequence after setting `TYPESAFE_API_KEY`:
+
+```bash
+scripts/run_microlens_phase_a.sh
+```
+
+The script exits non-zero when a required research target is missed. That is an experiment result, not a pipeline error; inspect the generated metrics and target report before changing the method.
 
 ## KuaiRand workflow
 
@@ -247,7 +288,7 @@ The exact array contract is documented in [`docs/NPZ_CONTRACT.md`](docs/NPZ_CONT
 
 ## Target mode
 
-The top-level gates are maintained in [`configs/targets_research.yaml`](configs/targets_research.yaml):
+The isolated Phase A gates live in [`configs/targets_microlens.yaml`](configs/targets_microlens.yaml), while the full-project gates are maintained in [`configs/targets_research.yaml`](configs/targets_research.yaml):
 
 - MicroLens hybrid AUC ≥ `0.735`, HR@5 ≥ `0.600`, NDCG@10 ≥ `0.510`;
 - KuaiRand Pareto hypervolume relative gain ≥ `2%` over the strongest EMER-like baseline;

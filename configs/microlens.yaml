@@ -4,11 +4,26 @@ protocol:
   history_length: 5
   time_window_days: 3
   seed: 0
+  negative_sampling: upstream_occurrence
+  tie_policy: upstream_jitter
+  tie_seed: 1
 hybrid:
   score_columns: [itemcf, jev_click]
   folds: 5
   weight_step: 0.05
   objective: balanced
+stacking:
+  score_columns: [itemcf, title_sim, jev_click, jev_click_confidence, jev_click_entropy]
+  outer_folds: 5
+  inner_folds: 4
+  c_values: [0.01, 0.1, 1.0, 10.0]
+calibration:
+  choice_temperature_columns: [jev_click]
+  temperature_grid: [0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0, 4.0]
+evaluation:
+  bootstrap_samples: 5000
+  confidence: 0.95
+  reference: itemcf
 published_reference_only:
   jev_images:
     auc: 0.727
