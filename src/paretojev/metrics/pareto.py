@@ -63,21 +63,42 @@ def hypervolume_monte_carlo(
     directions: np.ndarray | None = None,
     n_samples: int = 200_000,
     seed: int = 0,
+    upper: np.ndarray | None = None,
 ) -> float:
-    """Approximate M-dimensional dominated hypervolume for maximization."""
+    """Approximate M-dimensional dominated hypervolume for maximization.
+
+    Passing a shared ``upper`` bound is important when comparing methods: every
+    method is then evaluated with the same Monte Carlo samples and integration
+    box. When omitted, the component-wise maximum of the eligible points is used
+    for backward compatibility.
+    """
+    if n_samples <= 0:
+        raise ValueError("n_samples must be positive")
     adjusted = _apply_directions(points, directions)
     reference = np.asarray(reference, dtype=np.float64)
     if directions is not None:
-        reference = reference * np.asarray(directions, dtype=np.float64)
+        direction_array = np.asarray(directions, dtype=np.float64)
+        reference = reference * direction_array
+        if upper is not None:
+            upper = np.asarray(upper, dtype=np.float64) * direction_array
     if reference.shape != (adjusted.shape[1],):
         raise ValueError("reference shape mismatch")
     eligible = adjusted[np.all(adjusted >= reference, axis=1)]
     if len(eligible) == 0:
         return 0.0
-    upper = eligible.max(axis=0)
-    span = upper - reference
+    if upper is None:
+        upper_array = eligible.max(axis=0)
+    else:
+        upper_array = np.asarray(upper, dtype=np.float64)
+        if upper_array.shape != reference.shape:
+            raise ValueError("upper shape mismatch")
+        if np.any(eligible > upper_array + 1e-12):
+            raise ValueError("points exceed the supplied upper bound")
+    span = upper_array - reference
     if np.any(span <= 0):
-        return 0.0
+        if upper is None:
+            return 0.0
+        raise ValueError("upper must be strictly greater than reference")
     rng = np.random.default_rng(seed)
     samples = reference + rng.random((n_samples, adjusted.shape[1])) * span
     dominated = np.zeros(n_samples, dtype=bool)
@@ -123,9 +144,18 @@ def controllability_spearman(weights: np.ndarray, achieved: np.ndarray) -> dict[
         raise ValueError("weights and achieved must have identical [N,M] shapes")
 
     def ranks(x: np.ndarray) -> np.ndarray:
+        """Average ranks for ties, matching the standard Spearman definition."""
         order = np.argsort(x, kind="stable")
-        out = np.empty_like(order, dtype=np.float64)
-        out[order] = np.arange(len(x), dtype=np.float64)
+        sorted_x = x[order]
+        out = np.empty(len(x), dtype=np.float64)
+        start = 0
+        while start < len(x):
+            end = start + 1
+            while end < len(x) and sorted_x[end] == sorted_x[start]:
+                end += 1
+            average_rank = 0.5 * (start + end - 1)
+            out[order[start:end]] = average_rank
+            start = end
         return out
 
     result: dict[str, float] = {}

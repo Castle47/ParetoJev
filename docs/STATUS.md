@@ -22,8 +22,9 @@
 - SASRec + MMoE behavior branch
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
+- checkpoint-level runtime-preference sweep with shared-box Pareto hypervolume, controllability, cold-item and regret diagnostics
 - precomputed real-data training contract
-- **26 passing tests** plus successful synthetic MicroLens and KuaiRand CLI integration runs
+- **31 passing tests** plus successful synthetic MicroLens, KuaiRand and checkpoint-evaluation CLI integration runs
 - passing synthetic model smoke and target report
 
 ## Active next phase

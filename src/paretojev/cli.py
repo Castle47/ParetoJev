@@ -8,6 +8,8 @@ from pathlib import Path
 from typing import Any
 
 import pandas as pd
+import torch
+from torch.utils.data import DataLoader
 
 from paretojev.config import load_yaml
 from paretojev.data.kuairand import (
@@ -31,6 +33,9 @@ from paretojev.data.microlens import (
     prepare_microlens_candidates,
     save_microlens_protocol,
 )
+from paretojev.data.precomputed import PrecomputedSlateDataset
+from paretojev.data.synthetic import collate_slates
+from paretojev.evaluation import ParetoEvaluationConfig, evaluate_pareto_model
 from paretojev.experiments import (
     add_reciprocal_rank_fusion,
     bootstrap_metric_intervals,
@@ -54,6 +59,7 @@ from paretojev.jev import (
     run_score_jsonl,
     select_objectives,
 )
+from paretojev.models.pareto_reranker import ParetoJevConfig, ParetoJevReranker
 from paretojev.training import (
     PrecomputedTrainingConfig,
     SyntheticSmokeConfig,
@@ -87,15 +93,135 @@ def _command_train_precomputed(args: argparse.Namespace) -> int:
     training_raw = raw.get("training", raw)
     config = PrecomputedTrainingConfig(**training_raw)
     directions = [int(value) for value in args.directions.split(",")]
+    objective_names = (
+        [value.strip() for value in args.objective_names.split(",") if value.strip()]
+        if args.objective_names
+        else None
+    )
     result = run_precomputed_training(
         args.train,
         args.validation,
         directions=directions,
+        objective_names=objective_names,
         config=config,
         output_path=args.output,
         checkpoint_path=args.checkpoint,
     )
     _print_json(result)
+    return 0
+
+
+def _command_evaluate_pareto(args: argparse.Namespace) -> int:
+    checkpoint_path = Path(args.checkpoint)
+    if not checkpoint_path.is_file():
+        raise FileNotFoundError(f"Checkpoint not found: {checkpoint_path}")
+    validation_path = Path(args.validation)
+    if not validation_path.is_file():
+        raise FileNotFoundError(f"Validation NPZ not found: {validation_path}")
+    if args.batch_size <= 0:
+        raise ValueError("--batch-size must be positive")
+
+    checkpoint = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    if not isinstance(checkpoint, dict):
+        raise ValueError("Checkpoint must contain a mapping payload")
+    missing = {"model_state_dict", "model_config"} - set(checkpoint)
+    if missing:
+        raise ValueError(f"Checkpoint is missing keys: {sorted(missing)}")
+
+    model_config = ParetoJevConfig(**checkpoint["model_config"])
+    model = ParetoJevReranker(model_config)
+    model.load_state_dict(checkpoint["model_state_dict"], strict=True)
+    device = torch.device(args.device)
+    model.to(device)
+
+    dataset = PrecomputedSlateDataset(validation_path, seed=args.seed)
+    if dataset.feature_dim != model_config.candidate_feature_dim:
+        raise ValueError(
+            "Validation feature dimension does not match checkpoint: "
+            f"{dataset.feature_dim} != {model_config.candidate_feature_dim}"
+        )
+    if dataset.n_objectives != model_config.n_objectives:
+        raise ValueError(
+            "Validation objective count does not match checkpoint: "
+            f"{dataset.n_objectives} != {model_config.n_objectives}"
+        )
+
+    raw_directions = args.directions
+    if raw_directions is None:
+        raw_directions = checkpoint.get("directions")
+    if raw_directions is None:
+        raise ValueError(
+            "Directions are absent from the checkpoint; provide --directions"
+        )
+    if isinstance(raw_directions, str):
+        directions = tuple(int(value.strip()) for value in raw_directions.split(","))
+    else:
+        directions = tuple(int(value) for value in raw_directions)
+    if len(directions) != model_config.n_objectives:
+        raise ValueError("Directions count must equal the checkpoint objective count")
+    if any(value not in (-1, 1) for value in directions):
+        raise ValueError("Directions must contain only +1 and -1")
+
+    if args.objective_names:
+        objective_names = [
+            value.strip()
+            for value in args.objective_names.split(",")
+            if value.strip()
+        ]
+    else:
+        checkpoint_names = checkpoint.get("objective_names")
+        objective_names = (
+            list(checkpoint_names)
+            if checkpoint_names is not None
+            else [f"objective_{index}" for index in range(model_config.n_objectives)]
+        )
+    if len(objective_names) != model_config.n_objectives:
+        raise ValueError("Objective-name count must equal the objective count")
+
+    loader = DataLoader(
+        dataset,
+        batch_size=args.batch_size,
+        shuffle=False,
+        collate_fn=collate_slates,
+    )
+    evaluation_config = ParetoEvaluationConfig(
+        top_k=args.top_k,
+        random_preferences=args.random_preferences,
+        include_pairwise_preferences=args.include_pairwise_preferences,
+        dirichlet_alpha=args.dirichlet_alpha,
+        hypervolume_samples=args.hypervolume_samples,
+        cold_quantile=args.cold_quantile,
+        seed=args.seed,
+    )
+    report = evaluate_pareto_model(
+        model,
+        loader,
+        directions=directions,
+        config=evaluation_config,
+        objective_names=objective_names,
+        device=device,
+    )
+    report["checkpoint"] = {
+        "path": str(checkpoint_path),
+        "model_config": checkpoint["model_config"],
+        "directions_source": (
+            "command_line" if args.directions is not None else "checkpoint"
+        ),
+    }
+    report["validation_path"] = str(validation_path)
+    report["provenance"] = runtime_provenance(
+        input_paths=[checkpoint_path, validation_path],
+        config={
+            "evaluation": asdict(evaluation_config),
+            "directions": list(directions),
+            "objective_names": objective_names,
+            "device": str(device),
+            "batch_size": args.batch_size,
+        },
+    )
+    if args.output:
+        atomic_write_json(args.output, report)
+    _print_json(report)
     return 0
 
 
@@ -590,10 +716,44 @@ def build_parser() -> argparse.ArgumentParser:
     train.add_argument("train")
     train.add_argument("validation")
     train.add_argument("--directions", required=True, help="Comma-separated +1/-1, e.g. 1,1,1,1,1,-1")
+    train.add_argument(
+        "--objective-names",
+        help="Comma-separated names persisted in the checkpoint",
+    )
     train.add_argument("--config")
     train.add_argument("--output", default="artifacts/train_metrics.json")
     train.add_argument("--checkpoint", default="artifacts/paretojev.pt")
     train.set_defaults(func=_command_train_precomputed)
+
+    evaluate_pareto = subparsers.add_parser(
+        "evaluate-pareto",
+        help="Sweep runtime preferences for a checkpoint on a precomputed NPZ",
+    )
+    evaluate_pareto.add_argument("checkpoint")
+    evaluate_pareto.add_argument("validation")
+    evaluate_pareto.add_argument(
+        "--directions",
+        help="Comma-separated +1/-1; defaults to checkpoint metadata",
+    )
+    evaluate_pareto.add_argument(
+        "--objective-names",
+        help="Comma-separated names in objective order",
+    )
+    evaluate_pareto.add_argument("--batch-size", type=int, default=128)
+    evaluate_pareto.add_argument("--device", default="cpu")
+    evaluate_pareto.add_argument("--top-k", type=int, default=10)
+    evaluate_pareto.add_argument("--random-preferences", type=int, default=32)
+    evaluate_pareto.add_argument(
+        "--include-pairwise-preferences", action="store_true"
+    )
+    evaluate_pareto.add_argument("--dirichlet-alpha", type=float, default=0.7)
+    evaluate_pareto.add_argument("--hypervolume-samples", type=int, default=100000)
+    evaluate_pareto.add_argument("--cold-quantile", type=float, default=0.25)
+    evaluate_pareto.add_argument("--seed", type=int, default=0)
+    evaluate_pareto.add_argument(
+        "--output", default="artifacts/pareto_metrics.json"
+    )
+    evaluate_pareto.set_defaults(func=_command_evaluate_pareto)
 
     download = subparsers.add_parser("download-microlens", help="Download official MicroLens-100K files")
     download.add_argument("directory")

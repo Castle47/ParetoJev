@@ -393,6 +393,7 @@ def run_precomputed_training(
     validation_path: str | Path,
     *,
     directions: Iterable[int],
+    objective_names: Iterable[str] | None = None,
     config: PrecomputedTrainingConfig = PrecomputedTrainingConfig(),
     loss_config: TrainingLossConfig = TrainingLossConfig(),
     output_path: str | Path | None = None,
@@ -412,6 +413,18 @@ def run_precomputed_training(
     directions = tuple(int(value) for value in directions)
     if len(directions) != train_dataset.n_objectives:
         raise ValueError("directions count must equal objective count")
+    if any(value not in (-1, 1) for value in directions):
+        raise ValueError("directions must contain only +1 and -1")
+    if objective_names is None:
+        resolved_objective_names = tuple(
+            f"objective_{index}" for index in range(train_dataset.n_objectives)
+        )
+    else:
+        resolved_objective_names = tuple(str(value) for value in objective_names)
+    if len(resolved_objective_names) != train_dataset.n_objectives:
+        raise ValueError("objective_names count must equal objective count")
+    if len(set(resolved_objective_names)) != len(resolved_objective_names):
+        raise ValueError("objective_names must be unique")
 
     device = torch.device(config.device)
     train_loader = DataLoader(
@@ -484,6 +497,7 @@ def run_precomputed_training(
         "config": asdict(config),
         "loss_config": asdict(loss_config),
         "directions": list(directions),
+        "objective_names": list(resolved_objective_names),
         "data": {
             "train_slates": len(train_dataset),
             "validation_slates": len(validation_dataset),
@@ -511,6 +525,7 @@ def run_precomputed_training(
                 "model_config": asdict(model.config),
                 "training_config": asdict(config),
                 "directions": directions,
+                "objective_names": resolved_objective_names,
                 "metrics": result,
             },
             checkpoint,

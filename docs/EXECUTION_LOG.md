@@ -111,3 +111,20 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Current test count: **26 passed**.
 - Added `--prefix-log` for later KuaiRand time splits so prior item/user counts begin
   with the earlier training history; overlapping timestamps are rejected.
+
+## 2026-10-08 — Preference-sweep Pareto evaluator
+
+- Added checkpoint-level `evaluate-pareto` execution over precomputed validation slates.
+- Added deterministic uniform, one-hot, pairwise and Dirichlet preference sweeps.
+- Added maximize-oriented objective utilities, shared-unit-box Monte Carlo
+  hypervolume, Monte Carlo standard error, front size, controllability, cold-item
+  positive NDCG, per-objective regret and paired dominance diagnostics.
+- Fixed Spearman tie handling to use average ranks; this matters because one-hot
+  preference sweeps contain many repeated zero weights.
+- Added stable objective names to real-data training checkpoints.
+- Added a strict train → evaluate → interim-target script and documented that its
+  static signal baselines do not substitute for trained EMER-like/CMR-like baselines.
+- `python -m compileall -q src tests`: passed.
+- `pytest -q`: **31 passed**.
+- A synthetic checkpoint + NPZ CLI integration test writes a provenance-stamped
+  Pareto report; these synthetic values are not research outcomes.

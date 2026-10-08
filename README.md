@@ -313,9 +313,34 @@ paretojev train-precomputed \
   data/processed/kuairand/train_features.npz \
   data/processed/kuairand/validation_features.npz \
   --directions 1,1,1,1,1,-1 \
+  --objective-names is_click,long_view,is_like,is_follow,deep_engagement,is_hate \
   --config configs/train_precomputed.yaml \
   --output artifacts/train_metrics.json \
   --checkpoint artifacts/paretojev.pt
+
+paretojev evaluate-pareto \
+  artifacts/paretojev.pt \
+  data/processed/kuairand/validation_features.npz \
+  --top-k 10 \
+  --random-preferences 32 \
+  --include-pairwise-preferences \
+  --hypervolume-samples 100000 \
+  --output artifacts/pareto_metrics.json
+```
+
+`evaluate-pareto` sweeps uniform, one-hot, optional pairwise and Dirichlet runtime
+preferences. It reports a shared-unit-box Monte Carlo hypervolume, objective-level
+controllability, worst-objective regret, cold-item NDCG, dominance rates, and the
+exact target namespace consumed by target mode. The in-report baselines are static
+behavior/Jev/fusion scalarizations; separately trained EMER-like and CMR-like
+checkpoints remain required for the final paper comparison.
+
+For the strict train → evaluate → target-gate workflow:
+
+```bash
+scripts/train_precomputed.sh \
+  data/processed/kuairand/train_features.npz \
+  data/processed/kuairand/validation_features.npz
 ```
 
 The exact array contract is documented in [`docs/NPZ_CONTRACT.md`](docs/NPZ_CONTRACT.md).
@@ -325,7 +350,8 @@ The exact array contract is documented in [`docs/NPZ_CONTRACT.md`](docs/NPZ_CONT
 The isolated Phase A gates live in [`configs/targets_microlens.yaml`](configs/targets_microlens.yaml), while the full-project gates are maintained in [`configs/targets_research.yaml`](configs/targets_research.yaml):
 
 - MicroLens hybrid AUC ≥ `0.735`, HR@5 ≥ `0.600`, NDCG@10 ≥ `0.510`;
-- KuaiRand Pareto hypervolume relative gain ≥ `2%` over the strongest EMER-like baseline;
+- interim KuaiRand Pareto hypervolume relative gain ≥ `2%` over the strongest available static signal baseline;
+- final KuaiRand comparison must separately clear the strongest trained EMER-like/CMR-like baseline;
 - cold-item NDCG relative gain ≥ `3%`;
 - worst-objective regret ≤ `0.5 percentage points`;
 - preference controllability Spearman mean ≥ `0.60`;

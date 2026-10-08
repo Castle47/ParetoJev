@@ -4,6 +4,7 @@ from paretojev.metrics.calibration import brier_score, expected_calibration_erro
 from paretojev.metrics.pareto import (
     controllability_spearman,
     hypervolume_2d,
+    hypervolume_monte_carlo,
     pareto_front_mask,
 )
 from paretojev.metrics.ranking import single_positive_metrics
@@ -34,3 +35,19 @@ def test_calibration_and_controllability() -> None:
     achieved = weights.copy()
     result = controllability_spearman(weights, achieved)
     assert np.isclose(result["mean"], 1.0)
+
+
+def test_spearman_uses_average_tie_ranks_and_shared_hypervolume_box() -> None:
+    weights = np.array([[1.0, 0.0], [0.0, 1.0], [0.0, 1.0], [1.0, 0.0]])
+    result = controllability_spearman(weights, weights.copy())
+    assert np.isclose(result["mean"], 1.0)
+
+    points = np.array([[0.5, 0.5], [0.8, 0.2]])
+    first = hypervolume_monte_carlo(
+        points, np.zeros(2), upper=np.ones(2), n_samples=10_000, seed=11
+    )
+    second = hypervolume_monte_carlo(
+        points, np.zeros(2), upper=np.ones(2), n_samples=10_000, seed=11
+    )
+    assert first == second
+    assert 0.25 < first < 0.35

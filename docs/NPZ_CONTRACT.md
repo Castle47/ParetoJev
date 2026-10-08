@@ -25,3 +25,30 @@ paretojev train-precomputed train.npz validation.npz \
 ```
 
 Do not place post-outcome fields such as watch time into `candidate_features` for a pre-ranking experiment.
+
+## Checkpoint evaluation
+
+Training can persist stable objective names:
+
+```bash
+paretojev train-precomputed train.npz validation.npz \
+  --directions 1,1,1,1,1,-1 \
+  --objective-names is_click,long_view,is_like,is_follow,deep_engagement,is_hate \
+  --checkpoint artifacts/paretojev.pt
+```
+
+The checkpoint stores the model architecture, objective directions and names. A
+runtime-preference sweep can then be reproduced without repeating those fields:
+
+```bash
+paretojev evaluate-pareto artifacts/paretojev.pt validation.npz \
+  --top-k 10 \
+  --random-preferences 32 \
+  --include-pairwise-preferences \
+  --output artifacts/pareto_metrics.json
+```
+
+All objective coordinates in the report are maximize-oriented utilities in `[0,1]`:
+positive objectives use conditional NDCG@K, while negative objectives use one minus
+the selected top-K negative-feedback rate. Hypervolume methods share the same unit
+hypercube and the same Monte Carlo seed, avoiding method-specific integration boxes.

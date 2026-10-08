@@ -67,3 +67,17 @@ Reranker 输出 `mean` 与 `log variance`。候选 pair 的胜出概率由高斯
 ## 7. Distillation
 
 Teacher 概率先按优化方向变成 utility probability；再将每个目标的候选分布蒸馏到 student objective head。负反馈目标使用 `1 - p(hate)`，避免方向冲突。
+
+## Preference-sweep evaluation layer
+
+A saved reranker is evaluated at a deterministic set of runtime preference vectors:
+uniform, each one-hot objective, optional pairwise trade-offs, and seeded Dirichlet
+samples. Every preference produces one objective-utility point. Positive objectives
+are measured with conditional NDCG@K; negative feedback is converted to
+`1 - top-K risk`, so the complete point set is maximize-oriented.
+
+Behavior-only, Jev-only and confidence-fused probability scalarizations use the same
+preference vectors and candidate slates. Hypervolume is estimated inside a common
+`[0,1]^M` box with identical random samples for every method. This makes the
+intermediate comparison reproducible, while final claims still require separately
+trained EMER-like and CMR-like baselines evaluated by the same contract.

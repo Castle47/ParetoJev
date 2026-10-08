@@ -1,0 +1,27 @@
+# Interim Phase B gates for the implemented checkpoint evaluator.
+# These compare ParetoJev against static scalarizations of behavior, Jev and
+# learned fusion probabilities. They do NOT replace the final EMER-like and
+# CMR-like trainable-baseline comparison required for a paper claim.
+targets:
+  hypervolume_gain_vs_static:
+    metric: kuairand.paretojev.hypervolume_relative_gain
+    op: ">="
+    threshold: 0.02
+    required: true
+    description: Runtime preference conditioning should beat the strongest available static signal scalarization by at least 2% hypervolume.
+  cold_ndcg_gain_vs_static:
+    metric: kuairand.paretojev.cold_item_ndcg_relative_gain
+    op: ">="
+    threshold: 0.03
+    required: true
+    description: Cold-item positive-objective NDCG should improve at least 3% over the strongest static cold baseline.
+  worst_objective_regret:
+    metric: kuairand.paretojev.worst_objective_regret
+    op: "<="
+    threshold: 0.005
+    required: true
+  controllability:
+    metric: kuairand.paretojev.controllability_spearman_mean
+    op: ">="
+    threshold: 0.60
+    required: true
