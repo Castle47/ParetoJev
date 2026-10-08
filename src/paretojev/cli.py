@@ -91,6 +91,39 @@ def _print_json(payload: Any) -> None:
     print(json.dumps(payload, ensure_ascii=False, indent=2))
 
 
+def _command_comparison_synthetic_data(args: argparse.Namespace) -> int:
+    from paretojev.data.comparison import write_synthetic_comparison_data
+    manifest = write_synthetic_comparison_data(
+        args.output, seed=args.seed,
+        sizes=(args.train_slates, args.validation_slates, args.test_slates),
+        slate_size=args.slate_size, n_objectives=args.objectives, feature_dim=args.feature_dim,
+    )
+    _print_json({"manifest": str(manifest), "data_kind": "synthetic"})
+    return 0
+
+
+def _command_compare_baselines(args: argparse.Namespace) -> int:
+    from paretojev.experiments.comparison import run_comparison
+    raw = load_yaml(args.config) if args.config else {}
+    unknown = set(raw) - {"training", "evaluation", "seeds", "bootstrap_samples", "cpu_threads"}
+    if unknown:
+        raise ValueError(f"Unknown comparison config keys: {sorted(unknown)}")
+    if "seed" in raw.get("training", {}):
+        raise ValueError("Use comparison seeds list, not training.seed")
+    result = run_comparison(
+        args.manifest, args.output,
+        training=PrecomputedTrainingConfig(**raw.get("training", {})),
+        evaluation=ParetoEvaluationConfig(**raw.get("evaluation", {})),
+        seeds=tuple(raw.get("seeds", (7, 17, 29))),
+        bootstrap_samples=raw.get("bootstrap_samples", 200),
+        cpu_threads=raw.get("cpu_threads", 1), target_config_path=args.targets, resume=args.resume,
+    )
+    _print_json(result)
+    # Completion and scientific target success are separate. check-targets is
+    # the explicit process gate; synthetic comparisons should complete normally.
+    return 0
+
+
 def _command_synthetic_smoke(args: argparse.Namespace) -> int:
     raw = load_yaml(args.config) if args.config else {}
     smoke_raw = raw.get("smoke", raw)
@@ -860,6 +893,7 @@ def _command_materialize_kuairand(args: argparse.Namespace) -> int:
         decision_rows=decision_rows,
         feature_spec=spec,
         output_path=args.output,
+        data_kind=args.data_kind,
     )
     # Load once through the training contract so a malformed artifact fails here,
     # not after a long training job has started.
@@ -977,6 +1011,25 @@ def build_parser() -> argparse.ArgumentParser:
         description="Decision-model-assisted multi-objective recommendation reranking",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    fixture = subparsers.add_parser("comparison-synthetic-data", help="Create explicitly synthetic comparison protocol fixtures")
+    fixture.add_argument("output")
+    fixture.add_argument("--seed", type=int, default=123)
+    fixture.add_argument("--train-slates", type=int, default=96)
+    fixture.add_argument("--validation-slates", type=int, default=48)
+    fixture.add_argument("--test-slates", type=int, default=48)
+    fixture.add_argument("--slate-size", type=int, default=8)
+    fixture.add_argument("--objectives", type=int, default=3)
+    fixture.add_argument("--feature-dim", type=int, default=6)
+    fixture.set_defaults(func=_command_comparison_synthetic_data)
+
+    compare = subparsers.add_parser("compare-baselines", help="Train and evaluate registered EMER-like, CMR-like and ParetoJev comparisons")
+    compare.add_argument("manifest")
+    compare.add_argument("--output", required=True)
+    compare.add_argument("--config")
+    compare.add_argument("--targets", help="Research gates; synthetic evidence cannot pass")
+    compare.add_argument("--resume", action="store_true", help="Reuse verified completed method checkpoints only")
+    compare.set_defaults(func=_command_compare_baselines)
 
     smoke = subparsers.add_parser("synthetic-smoke", help="Run the end-to-end CPU smoke experiment")
     smoke.add_argument("--config")
@@ -1285,6 +1338,8 @@ def build_parser() -> argparse.ArgumentParser:
         ),
     )
     materialize_kuai.add_argument("--seed", type=int, default=0)
+    materialize_kuai.add_argument("--data-kind", choices=["unverified", "synthetic", "real"], default="unverified",
+                                 help="Explicit input-origin declaration; real still requires upstream provenance for comparison")
     materialize_kuai.add_argument("--report")
     materialize_kuai.set_defaults(func=_command_materialize_kuairand)
 

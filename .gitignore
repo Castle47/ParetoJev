@@ -19,3 +19,6 @@ artifacts/*.pt
 artifacts/*.sqlite3
 artifacts/*.jsonl
 artifacts/*.csv
+# Reproducible comparison runs contain checkpoints, prediction tensors and logs.
+artifacts/comparison*/
+artifacts/.comparison*.lock

@@ -1,0 +1,48 @@
+# KuaiRand trainable-baseline research gates. Targets are not achieved results.
+# Run the same baseline-harness-v1 data protocol and evaluator for all methods.
+# Synthetic runs exercise the harness but are always not_evaluable here.
+evidence_requirements:
+  evidence.real_data: true
+  evidence.data_kind: real
+  evidence.dataset: kuairand
+  evidence.protocol_version: baseline-harness-v1
+  evidence.comparison_baseline: emer_like
+required_methods: [emer_like, cmr_like, paretojev]
+targets:
+  hypervolume_gain_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.hypervolume_relative_gain
+    op: ">="
+    threshold: 0.02
+    required: true
+  cold_ndcg_gain_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.cold_item_ndcg_relative_gain
+    op: ">="
+    threshold: 0.03
+    required: true
+  worst_objective_regret_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.worst_objective_regret
+    op: "<="
+    threshold: 0.005
+    required: true
+  hypervolume_gain_vs_emer:
+    metric: kuairand.paretojev.hypervolume_relative_gain
+    op: ">="
+    threshold: 0.02
+    required: true
+    description: ParetoJev should improve hypervolume by at least 2% over the EMER-like baseline on the same held-out slates and preference grid.
+  cold_ndcg_gain_vs_emer:
+    metric: kuairand.paretojev.cold_item_ndcg_relative_gain
+    op: ">="
+    threshold: 0.03
+    required: true
+    description: Cold-item positive-objective NDCG should improve at least 3% over EMER-like; absent cold relevance support is not evaluable.
+  worst_objective_regret:
+    metric: kuairand.paretojev.worst_objective_regret
+    op: "<="
+    threshold: 0.005
+    required: true
+  controllability:
+    metric: kuairand.paretojev.controllability_spearman_mean
+    op: ">="
+    threshold: 0.60
+    required: true

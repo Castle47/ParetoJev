@@ -1,0 +1,24 @@
+# Fixed budget registered before any validation/test observation.
+seeds: [7, 17, 29]
+cpu_threads: 1
+bootstrap_samples: 200
+training:
+  batch_size: 24
+  epochs: 4
+  learning_rate: 0.002
+  weight_decay: 0.0001
+  hidden_dim: 48
+  n_heads: 4
+  n_layers: 1
+  ff_dim: 96
+  dropout: 0.05
+  fusion_hidden_dim: 24
+  device: cpu
+evaluation:
+  top_k: 5
+  random_preferences: 8
+  include_pairwise_preferences: true
+  dirichlet_alpha: 0.7
+  hypervolume_samples: 100000
+  cold_quantile: 0.25
+  seed: 20261008

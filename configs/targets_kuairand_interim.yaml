@@ -2,6 +2,8 @@
 # These compare ParetoJev against static scalarizations of behavior, Jev and
 # learned fusion probabilities. They do NOT replace the final EMER-like and
 # CMR-like trainable-baseline comparison required for a paper claim.
+# Numeric diagnostic gates only: passing does not establish real-data evidence.
+# Use targets_comparison.yaml for the real-data trainable-baseline research gate.
 targets:
   hypervolume_gain_vs_static:
     metric: kuairand.paretojev.hypervolume_relative_gain

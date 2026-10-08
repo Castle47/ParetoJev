@@ -1,5 +1,30 @@
 # Aspirational project gates. These are targets, not achieved results.
+# Required provenance for the KuaiRand comparison portion of the combined plan.
+# Reports without verified real-data evidence, including all synthetic runs and
+# the static checkpoint evaluator, are not_evaluable even if scores clear gates.
+evidence_requirements:
+  evidence.real_data: true
+  evidence.data_kind: real
+  evidence.dataset: kuairand
+  evidence.protocol_version: baseline-harness-v1
+  evidence.comparison_baseline: emer_like
+required_methods: [emer_like, cmr_like, paretojev]
 targets:
+  kuairand_hypervolume_gain_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.hypervolume_relative_gain
+    op: ">="
+    threshold: 0.02
+    required: true
+  kuairand_cold_ndcg_gain_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.cold_item_ndcg_relative_gain
+    op: ">="
+    threshold: 0.03
+    required: true
+  kuairand_worst_regret_vs_cmr:
+    metric: kuairand.paretojev_vs_cmr.worst_objective_regret
+    op: "<="
+    threshold: 0.005
+    required: true
   microlens_auc:
     metric: microlens.hybrid_cv.auc
     op: ">="

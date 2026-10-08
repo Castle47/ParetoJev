@@ -1,4 +1,10 @@
 # Phase A gates only. These are targets, not achieved results.
+# Input origin must be explicitly established; file paths alone are not proof.
+# Older evaluate-microlens reports lack this evidence and remain not_evaluable.
+evidence_requirements:
+  evidence.real_data: true
+  evidence.data_kind: real
+  evidence.dataset: microlens
 targets:
   hybrid_auc:
     metric: microlens.hybrid_cv.auc

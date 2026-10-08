@@ -362,7 +362,7 @@ class KuaiRandBehaviorDataset(Dataset[dict[str, torch.Tensor]]):
                 int(self.mapped_items[position]), dtype=torch.long
             ),
             "candidate_context": torch.from_numpy(self.context[index]),
-            "labels": torch.from_numpy(self.table.target_labels[index]),
+            "labels": torch.from_numpy(self.table.target_labels[index].copy()),
         }
 
 

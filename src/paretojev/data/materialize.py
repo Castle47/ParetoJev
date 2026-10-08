@@ -8,8 +8,9 @@ from typing import Any, Iterable, Sequence
 import numpy as np
 import pandas as pd
 
-from paretojev.data.kuairand import PreparedKuaiRandSlates
+from paretojev.data.kuairand import KUAI_DIRECTIONS, KUAI_OBJECTIVES, PreparedKuaiRandSlates
 from paretojev.utils.io import atomic_write_json
+from paretojev.utils.provenance import canonical_hash
 
 
 # Jev prompt names intentionally differ from the source KuaiRand label names.
@@ -395,10 +396,16 @@ def materialize_kuairand_precomputed(
     decision_rows: Sequence[dict[str, Any]],
     feature_spec: KuaiRandFeatureSpec,
     output_path: str | Path,
+    data_kind: str = "unverified",
 ) -> dict[str, Any]:
     """Create the feature-complete ParetoJev NPZ for selected KuaiRand slates."""
 
     slates.validate()
+    if data_kind not in ("unverified", "synthetic", "real"):
+        raise ValueError("data_kind must be unverified, synthetic or real")
+    direction_by_name = dict(zip(KUAI_OBJECTIVES, KUAI_DIRECTIONS, strict=True))
+    if any(name not in direction_by_name for name in slates.objective_names):
+        raise ValueError("Unknown KuaiRand objective direction")
     ids = _normalize_slate_ids(slates, slate_ids)
     if slates.item_prior_count is None or slates.user_history_count is None:
         raise ValueError(
@@ -427,11 +434,17 @@ def materialize_kuairand_precomputed(
         history_length=slates.user_history_count[ids].astype(np.float32),
         slate_ids=ids,
         candidate_ids=slates.item_ids[ids],
+        user_ids=slates.user_ids[ids],
+        timestamps=slates.timestamps[ids],
         objective_names=np.asarray(slates.objective_names, dtype="U64"),
+        directions=np.asarray([direction_by_name[name] for name in slates.objective_names]),
         feature_names=np.asarray(feature_spec.feature_names, dtype="U96"),
+        feature_spec_hash=np.asarray(canonical_hash(asdict(feature_spec))),
+        data_kind=np.asarray(data_kind),
     )
     return {
         "output": str(output_path),
+        "data_kind": data_kind,
         "slates": int(len(ids)),
         "valid_candidates": int(mask.sum()),
         "slate_width": int(mask.shape[1]),
