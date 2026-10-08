@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "status": "passed",
+  "reason": "",
+  "required_passed": 2,
+  "required_total": 2,
+  "required_not_evaluable": 0,
+  "targets": [
+    {
+      "name": "jev_ties_improve_cf",
+      "metric": "primary_comparisons.jev_ties_vs_itemcf.auc.low",
+      "operator": ">",
+      "threshold": 0.0,
+      "actual": 0.02078947368421052,
+      "required": true,
+      "passed": true,
+      "detail": "",
+      "status": "passed",
+      "reason": ""
+    },
+    {
+      "name": "jev_ties_improve_cheap_title",
+      "metric": "primary_comparisons.jev_ties_vs_title_ties.auc.low",
+      "operator": ">",
+      "threshold": 0.0,
+      "actual": 0.0021052631578947346,
+      "required": true,
+      "passed": true,
+      "detail": "",
+      "status": "passed",
+      "reason": ""
+    }
+  ]
+}

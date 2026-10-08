@@ -1,0 +1,22 @@
+{
+  "users": 200,
+  "previous_evaluation_overlap": 0,
+  "raw_real_responses": 4000,
+  "new_http_calls": 4000,
+  "failed_slates": 0,
+  "all_scores_match_raw_responses": true,
+  "replay_http_calls": 0,
+  "score_and_cache_replay_byte_identical": true,
+  "tests_passed": 200,
+  "independent_primary_targets_passed": 2,
+  "independent_primary_targets_total": 2,
+  "original_project_all_targets_achieved": false,
+  "actual_cost_savings_experiment_performed": false,
+  "tie_only_request_plan_savings_fraction": 0.0545,
+  "input_regeneration_all_three_hashes_identical": true,
+  "offline_metrics_intervals_targets_costs_identical": true,
+  "tests_duration_seconds": 6.3,
+  "compileall_passed": true,
+  "shell_syntax_passed": true,
+  "diff_check_passed": true
+}

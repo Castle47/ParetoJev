@@ -82,6 +82,7 @@ MicroLens 的正式 gate 还要求 `evidence.scope=full_200_user_protocol` 和
 | `targets_kuairand_interim.yaml` | 静态 scalarization 的数值诊断；不证明真实研究胜点 |
 | `targets_comparison.yaml` | 真实 KuaiRand 统一 harness 的双固定 baseline gate |
 | `targets_microlens.yaml` | 真实 MicroLens 的 CV 与配对区间 gate |
+| `targets_independent_ties.yaml` | 新评价用户上的两项预登记 AUC 增量检验；不是原项目总体验收 |
 | `targets_research.yaml` | 合并的 MicroLens、KuaiRand、serving 计划；未做阶段保持不可评估 |
 
 比较 harness 保留主 namespace `kuairand.paretojev`（EMER-like），第二个固定比较为

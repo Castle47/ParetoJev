@@ -33,6 +33,7 @@ Verified locally on **2026-10-08**:
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Registered six-objective baseline comparison | 3 seeds × 3 methods; exact resume verified | [`reports/synthetic-baseline-2026-10-08/README.md`](reports/synthetic-baseline-2026-10-08/README.md) |
 | Real MicroLens / AutoTrust JEV-27B | 200 users / 4,000 verified decisions; main targets 2/4 passed | [`reports/microlens-real-200-2026-10-08/README.md`](reports/microlens-real-200-2026-10-08/README.md) |
+| New-user tie-breaking validation | 200 disjoint evaluation users; 2/2 predeclared AUC comparisons pass; request savings only 5.45% | [`reports/microlens-independent-2026-10-08/README.md`](reports/microlens-independent-2026-10-08/README.md) |
 | Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -47,6 +48,13 @@ HR@5 0.570 and NDCG@10 0.5188; AUC gains remain positive under the conventional
 half-credit tie diagnostic. This is a simple fusion result, not evidence for the
 neural ParetoJev architecture or a cover-image VL reproduction. The report explains
 why the earlier positive-first upstream baseline AUC is not the same comparison.
+
+On a fresh evaluation cohort, frozen Jev tie-breaking reached AUC 0.7176 versus
+0.6650 for CF and 0.6738 for TF-IDF tie-breaking; both predeclared 97.5% paired AUC
+intervals exclude zero. This supports a narrow incremental-signal hypothesis, not
+completion of the original project targets. The tie-only call plan saves just
+5.45% of pointwise requests; the experiment actually collected all 4,000 scores
+for the matched fixed-weight comparison. No new-user outcomes tuned any weights.
 
 ## Research hypothesis
 

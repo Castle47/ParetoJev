@@ -1,7 +1,7 @@
 # ParetoJev 需求文档（PRD）
 
-**版本：** 0.6
-**状态：** 已完成真实 MicroLens 200 用户评价，主目标通过 2/4；正式多目标研究指标待验证
+**版本：** 0.7
+**状态：** 新评价用户上的 Jev 增量验证通过；原总体门槛未全达标，调用成本仍待解决
 **更新时间：** 2026-10-08
 
 ## 1. 项目目标
@@ -198,6 +198,10 @@ Gate 特征至少包括：
 已获得官方 MicroLens 数据，完成 200 用户、4,000 个候选的真实 AutoTrust JEV-27B
 评价。CV 小权重融合显示 AUC 增量，但预设 AUC 与 HR@5 阈值未达，主目标通过 2/4。
 记录与并列分数诊断见 [真实评价报告](../reports/microlens-real-200-2026-10-08/README.md)。
+另取 200 名未参加上述评价的用户，重新拟合 CF 并排除两组共 400 人，固定同分策略和
+5% 权重、不在新用户上调参。Jev 同分策略相对 CF 与 TF-IDF 对照的两项预登记 AUC
+检验通过；仅同分时请求的候选仍占 94.55%，并未明显降本。此机制验证不替代原总体
+目标；见 [新用户验证](../reports/microlens-independent-2026-10-08/README.md)。
 尚未完成 Phase A 全部门槛、KuaiRand Phase B 真实训练和学生部署。正式
 SASRec+MMoE behavior baseline 已具备 chronological train/validation、显式 OOV、
 严格 pre-exposure history 与 slate scoring；PLE 仍属于第二轮 baseline。仓库中的

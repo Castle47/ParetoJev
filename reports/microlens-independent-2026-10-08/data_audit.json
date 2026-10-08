@@ -1,0 +1,13 @@
+{
+  "users": 200,
+  "rows": 4000,
+  "overlap_previous_evaluation_users": 0,
+  "itemcf_excluded_users_count": 400,
+  "strict_history_violations": [],
+  "blank_candidate_titles": 16,
+  "identical_full_weak_order_users_ties_vs_05": {
+    "jev": 200,
+    "title": 200
+  },
+  "note": "Weak-order equivalence is a post-evaluation mechanism diagnostic, not an additional success test."
+}

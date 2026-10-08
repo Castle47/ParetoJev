@@ -34,12 +34,14 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **195 passing tests** on the local Python 3.12 environment
+- **200 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
 - extension to all original 200 users / 4,000 real decisions, with exact pilot reuse
 - full primary and fresh-180-user evaluation, raw-response audit and tie-sensitivity diagnosis
+- new 200-user evaluation disjoint from the earlier cohort; CF refitted excluding all 400 users
+- frozen Jev tie-breaking versus CF and TF-IDF control passes both predeclared AUC tests
 - zero-HTTP scoring replay and identical raw-input regeneration
 
 ## Current research boundary
@@ -57,8 +59,13 @@ supports an AUC increment for CV small-weight fusion; its paired interval is
 positive under both primary jitter and post-hoc conventional half-credit AUC.
 Main targets pass 2/4: AUC 0.7274 and HR@5 0.570 remain below thresholds. HR/NDCG
 improvement intervals still cross zero. Gains concentrate in behavior-score ties.
-Next research work should validate that specific hypothesis on new independent
-users before increasing model complexity; do not keep tuning on these 200 users. The legacy
+The [new-user validation](../reports/microlens-independent-2026-10-08/README.md)
+has now tested that hypothesis without new-user tuning: Jev tie AUC 0.7176 versus
+CF 0.6650 and title tie AUC 0.6738, both predeclared 97.5% gain intervals positive.
+The call plan saves only 5.45%, and the 5% fusion and tie rule have identical weak
+orders on these users. Next work should investigate a stronger cheap semantic
+control or behavior baseline and cost reduction, rather than crediting untested
+neural ParetoJev complexity. The original full project gates are not all achieved. The legacy
 smoke targets remain engineering probes with privileged
 simulator probabilities; the comparison harness deliberately forbids those targets.
 

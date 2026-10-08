@@ -1,0 +1,6 @@
+{
+  "status": "verified",
+  "users": 200,
+  "decisions": 4000,
+  "all_three_input_hashes_identical": true
+}

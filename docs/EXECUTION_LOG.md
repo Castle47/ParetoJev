@@ -1,5 +1,37 @@
 # Execution Log
 
+## 2026-10-08 — New-user confirmation of Jev tie-breaking
+
+- Pre-registered `94c5744`: 200 new evaluation users, seed 20261009, zero overlap
+  with the earlier cohort; CF refitted excluding all 400 evaluation users. Strict
+  per-user history boundaries were required before selection. The same retrospective
+  dataset is used; this is not a new-platform or global time-holdout experiment.
+- Froze seven policies, with no weight fitting on new users: CF, title-only,
+  Jev-only, CF ties resolved by title/Jev, and fixed 95/5 rank fusions. Added exact
+  half-credit AUC and expected tie-aware HR/NDCG/MRR; integer fusion keys prevent
+  floating-point artifacts. No candidate-position jitter is used in this study.
+- Collected 4,000 new real responses in 4,034.10 seconds, one request at a time,
+  minimum one-second start spacing, zero failed slates. Model/revision stayed fixed.
+- AUC: CF 0.665000; title ties 0.673816; Jev ties 0.717632. Predeclared paired
+  97.5% AUC intervals: Jev-CF [+0.020789,+0.084211], Jev-title [+0.002105,+0.085263].
+  Both mechanism gates pass. This does not mark the original project gates complete.
+- Expected HR@5 / NDCG@10: CF 0.516100 / 0.431302; title ties 0.554000 / 0.446698;
+  Jev ties 0.577500 / 0.481703. Secondary HR gain versus title still has an interval
+  crossing zero; no blanket superiority across all measures is claimed.
+- Post-evaluation relation audit: ties and 5% fusion produce identical full weak
+  orders on all 200 users, for both title and Jev. The observed gain does not require
+  the more complex neural ParetoJev framework.
+- Cost plan was frozen from CF scores alone before Jev results: ties need 3,782/4,000
+  candidate decisions, only 5.45% fewer. All 4,000 were actually collected to evaluate
+  the matched 5% policy. No separate deployment latency or monetary savings claimed.
+- All scores match exact raw responses. Scoring replay performs zero HTTP requests
+  and preserves score/cache bytes. Offline metrics, intervals, targets and original
+  collection cost are unchanged on replay. Rebuilt input, candidate and request-plan
+  files have identical SHA-256. Original collection cost is preserved separately from
+  replay timing, preventing a zero-call replay from erasing the measured cost.
+- **200 tests passed in 6.30s**; compilation, shell syntax and whitespace checks passed.
+- Full report: [`reports/microlens-independent-2026-10-08`](../reports/microlens-independent-2026-10-08/README.md).
+
 ## 2026-10-08 — Complete 200-user real JEV evaluation
 
 - Extended the frozen pilot to the original 200 users, keeping model revision,
