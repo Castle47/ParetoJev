@@ -1,5 +1,32 @@
 # Execution Log
 
+## 2026-10-08 — Local restoration and unified baseline harness
+
+- Restored the user-provided Git Bundle with complete history. Verified upstream
+  HEAD `26ff82c5f6fa14825745e7a229a6b8cdb8c68cc0`; the original **49 tests passed**
+  locally before new implementation. The recovered original author history is preserved.
+- Added separately trained project EMER-like/CMR-like variants and a full ParetoJev
+  harness loss with explicit preference-sensitive shared-score supervision. These
+  are documented variants, not claims of original-paper reproduction.
+- Registered strict NPZ identities, source/data/environment/config hashes, seed
+  lists, equal optimizer budget, train-fitted cold threshold, and validation-only
+  selection. Added both fixed EMER-like and CMR-like research comparisons.
+- Added one shared evaluator, per-slate prediction/identity archives, conditional
+  metric coverage, common-box Monte Carlo hypervolume and paired user bootstrap.
+- Added finite-only Target Mode statuses and evidence requirements; real gates
+  cannot pass on a synthetic or missing-provenance report.
+- Fixed a checkpoint serialization failure found by integration tests, rejected
+  simultaneous output writers/source drift, normalized byte-string metadata, and
+  copied read-only behavior-label arrays before tensor conversion.
+- Independent review tested same-seed tensor/history equivalence and unchanged
+  selected checkpoints after flipping only test labels. No test labels guide tuning.
+
+Validation of the implementation: **179 passed in 7.64 seconds**, no warnings;
+source compilation, shell-script syntax checks and `git diff --check` passed.
+The pinned dependency snapshot is `requirements-lock.txt` (local Python 3.12).
+Model implementation commit: `2dbfb62`; protocol/runner/evaluator/gates: `de8ab72`.
+Final frozen-source experiment details are appended in the next entry.
+
 ## 2026-10-08 — Phase 0 bootstrap
 
 ### Environment observed

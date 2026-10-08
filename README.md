@@ -28,11 +28,12 @@ Verified locally on **2026-10-08**:
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **49 passed** | `pytest` |
+| Unified trainable-baseline harness | Registered EMER-like / CMR-like / ParetoJev comparison | [`docs/BASELINE_HARNESS.md`](docs/BASELINE_HARNESS.md) |
+| Unit/integration tests | Current verified results in execution log | [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md) |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
-The smoke experiment reduced held-out composite loss by about **9.1%** and learned a fusion whose Brier error was lower than either synthetic source alone. Those values only validate the code path; they are **not recommendation research results**.
+Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). No real benchmark is claimed.
 
 ## Research hypothesis
 
@@ -124,6 +125,39 @@ paretojev check-targets \
 ```
 
 The smoke target report is expected to pass. The research target file is intentionally aspirational and should not pass until real experiments are run.
+
+## Compare independently trained baselines
+
+```bash
+paretojev comparison-synthetic-data data/processed/comparison_synthetic \
+  --seed 123 --train-slates 96 --validation-slates 48 --test-slates 48 \
+  --slate-size 8 --objectives 3 --feature-dim 6
+
+paretojev compare-baselines data/processed/comparison_synthetic/manifest.json \
+  --output artifacts/comparison_synthetic \
+  --config configs/comparison_smoke.yaml \
+  --targets configs/targets_comparison.yaml
+```
+
+Use empty output directories. This runs separately trained `emer_like`, `cmr_like`
+and `paretojev` on identical inputs, training budgets and held-out evaluation.
+EMER-like and CMR-like are documented project variants, not paper reproductions.
+Parameter counts are reported; equal epochs do not imply equal model size or FLOPs.
+Checkpoints are selected only on validation, including epoch zero. Cold thresholds
+come from training, and both comparator identities are fixed before test evaluation.
+
+The run writes its registration, checkpoints, training histories, prediction audit
+arrays, per-seed evaluations and descriptive seed-mean summary. Reuse the same
+command with `--resume` to validate and reload completed methods; changed inputs,
+source, environment or settings require a new directory. Experiment completion
+returns exit code `0`; it does not assert that research targets passed.
+
+Synthetic evidence always makes real research targets `not_evaluable`, even with
+large synthetic gains. `paretojev check-targets ...` returns `3` for failed or
+not-evaluable required gates. See [`docs/BASELINE_HARNESS.md`](docs/BASELINE_HARNESS.md)
+for exact algorithms, metrics, uncertainty, configuration and the real-data manifest.
+Prepared, aligned score artifacts are sufficient for a real run; no live API is
+needed when scores are already supplied.
 
 ## MicroLens workflow
 
@@ -226,7 +260,7 @@ Or execute the full local sequence after setting `TYPESAFE_API_KEY`:
 scripts/run_microlens_phase_a.sh
 ```
 
-The script exits non-zero when a required research target is missed. That is an experiment result, not a pipeline error; inspect the generated metrics and target report before changing the method.
+The script exits non-zero when a required target fails or cannot be evaluated. Phase A research gates also require explicit real MicroLens evidence. Existing `evaluate-microlens` reports do not establish that origin automatically and therefore remain `not_evaluable` until reviewed evidence is supplied; a high metric alone is insufficient.
 
 ## KuaiRand workflow
 
@@ -445,7 +479,7 @@ Implemented components include:
 - **Reranker:** a set-aware Transformer with FiLM conditioning on runtime objective weights.
 - **P-RAS:** pairwise supervision only when one item Pareto-dominates another across observed outcomes.
 - **Augmented Tchebycheff:** covers trade-offs that a simple weighted sum may miss.
-- **Advantage evaluator:** EMER-inspired metric feedback that corrects lagging objectives without replacing the external preference vector.
+- **EMER-like feedback:** training-only detached objective-loss/EMA reweighting in the comparison variant; it is not a reproduction of the paper’s evaluator. See the harness specification for each method’s exact losses.
 - **Uncertainty loss:** Gaussian pairwise probability based on mean and variance outputs.
 - **Distillation:** candidate-distribution KL from Jev-derived utility distributions into objective heads.
 
@@ -477,8 +511,9 @@ paretojev evaluate-pareto \
 preferences. It reports a shared-unit-box Monte Carlo hypervolume, objective-level
 controllability, worst-objective regret, cold-item NDCG, dominance rates, and the
 exact target namespace consumed by target mode. The in-report baselines are static
-behavior/Jev/fusion scalarizations; separately trained EMER-like and CMR-like
-checkpoints remain required for the final paper comparison.
+behavior/Jev/fusion scalarizations. This is an interim diagnostic evaluator; use
+`compare-baselines` for the registered trainable-baseline comparison. Neither a
+static evaluation nor a synthetic harness run can satisfy real research gates.
 
 For the strict train → evaluate → target-gate workflow:
 
@@ -492,18 +527,29 @@ The exact array contract is documented in [`docs/NPZ_CONTRACT.md`](docs/NPZ_CONT
 
 ## Target mode
 
-The isolated Phase A gates live in [`configs/targets_microlens.yaml`](configs/targets_microlens.yaml), while the full-project gates are maintained in [`configs/targets_research.yaml`](configs/targets_research.yaml):
+Use the target file for the evidence being evaluated:
 
-- MicroLens hybrid AUC ≥ `0.735`, HR@5 ≥ `0.600`, NDCG@10 ≥ `0.510`;
-- interim KuaiRand Pareto hypervolume relative gain ≥ `2%` over the strongest available static signal baseline;
-- final KuaiRand comparison must separately clear the strongest trained EMER-like/CMR-like baseline;
-- cold-item NDCG relative gain ≥ `3%`;
-- worst-objective regret ≤ `0.5 percentage points`;
-- preference controllability Spearman mean ≥ `0.60`;
-- distilled student retains ≥ `90%` of uplift;
-- student p95 latency at K=50 ≤ `30 ms` on the declared benchmark hardware.
+| Target file | Scope |
+|---|---|
+| `targets_smoke.yaml` | Synthetic engineering checks |
+| `targets_kuairand_interim.yaml` | Numeric diagnostics against static signal scalarizations; no research claim |
+| `targets_comparison.yaml` | Real KuaiRand comparison against both predeclared trainable variants |
+| `targets_microlens.yaml` | Real MicroLens cross-validated hybrid and paired AUC interval |
+| `targets_research.yaml` | Combined MicroLens, KuaiRand and serving plan; absent phases remain not evaluable |
 
-These are **stop/go criteria**, not claimed outcomes. See [`docs/TARGET_MODE.md`](docs/TARGET_MODE.md) for escalation rules when a target is missed.
+The KuaiRand comparison targets require hypervolume gain ≥ `2%`, cold-item NDCG
+gain ≥ `3%` and worst-objective regret ≤ `0.005` against **each** registered
+EMER-like/CMR-like comparator, plus ParetoJev controllability ≥ `0.60`. The primary
+reported comparison remains EMER-like; the second is fixed independently, with no
+best-on-test selection. MicroLens targets remain AUC ≥ `0.735`, HR@5 ≥ `0.600`,
+NDCG@10 ≥ `0.510`; serving targets remain ≥ `90%` uplift retention and p95 ≤ `30 ms`
+at K=50 on declared hardware.
+
+Statuses are `passed`, `failed` and `not_evaluable`. Missing/null/nonfinite metrics,
+missing provenance and empty required target sets cannot pass. Real comparison
+requires a real KuaiRand manifest, `baseline-harness-v1` and all three method
+reports. A passing seed mean is descriptive, not proof of statistical significance.
+See [`docs/TARGET_MODE.md`](docs/TARGET_MODE.md) for the exact gate semantics.
 
 ## Reproducibility rules
 

@@ -29,10 +29,40 @@
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - checkpoint-level runtime-preference sweep with shared-box Pareto hypervolume, controllability, cold-item and regret diagnostics
 - precomputed real-data training contract
-- **49 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
+- independently trained EMER-like, CMR-like and full ParetoJev harness variants on one strict data protocol
+- preregistered seeds/budgets, validation-only selection and both fixed baseline comparisons
+- shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
+- method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
+- real-data evidence requirements which synthetic results cannot satisfy
+- **179 passing tests** on the restored local Python 3.12 environment
 - passing synthetic model smoke and target report
 
-## Active next phase
+## Current research boundary
+
+The baseline harness engineering phase is complete. The final registered synthetic
+comparison and replay evidence are recorded in the execution log. These exercise
+training, evaluation and provenance; they do not establish a ParetoJev research win.
+An initial three-seed synthetic run showed weaker ParetoJev hypervolume and
+controllability despite improved cold-NDCG, so no superiority claim is made and no
+configuration is selected or changed based on those test results.
+
+Next research work is to inspect validation-only preference response and loss
+balance, preregister any new variant on a fresh held-out protocol, and obtain real
+inputs. The legacy smoke targets remain engineering probes with privileged
+simulator probabilities; the comparison harness deliberately forbids those targets.
+
+## External inputs for real experiments
+
+**Phase B — fixed KuaiRand baseline comparison**
+
+Smallest ready-to-run handoff: chronological train/validation/test feature NPZs,
+their manifest and the four provenance documents described in
+[BASELINE_HARNESS.md](BASELINE_HARNESS.md#real-data-handoff-minimum-inputs).
+This route needs no live API or new behavior checkpoint. Alternatively provide the
+raw KuaiRand logs/metadata plus a reachable Jev endpoint or aligned cached decision
+scores; the behavior model can be trained locally. Credentials belong in environment
+variables, never in Git or chat. Formal random-exposure-track consistency and
+statistical evidence remain prerequisites for a broad research claim.
 
 **Phase A — MicroLens reproduction and hybrid win**
 
@@ -43,10 +73,11 @@ real benchmark numbers are:
 2. official Jev API key or a reachable self-hosted JEV endpoint;
 3. optional GPU endpoint for the JEV-27B-VL cover track.
 
-The current execution environment cannot fetch the binary dataset and has no Jev
-credential or GPU endpoint. Therefore no real MicroLens, KuaiRand or Jev benchmark
-number is recorded in this repository. Synthetic integration output is used only to
-validate code and report structure.
+Real datasets and an authorized Jev endpoint have not been supplied in this local
+handoff. No real MicroLens, KuaiRand or Jev benchmark was run. The earlier sandbox's
+download limitation is historical and was not reasserted as a local network failure.
+Serving targets additionally need a declared target device and benchmark protocol;
+no GPU latency result is claimed.
 
 ## Go/no-go sequence
 

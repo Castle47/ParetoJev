@@ -50,7 +50,9 @@ h' = gamma(w) * h + beta(w)
 i Pareto-dominates j
 ```
 
-只对这种无歧义 pair 施加 shared-score pairwise loss。互不支配 pair 交给 preference-conditioned objective loss，而不是强行按“正反馈数量”排序。
+P-RAS 只对这种无歧义 pair 施加 dominance loss。统一 comparison harness 另外用
+每个请求的偏好加权 utility 对 shared score 施加 pairwise supervision，因此互不支配
+pair 也参与学习；这不是按“正反馈数量”固定排序。
 
 ## 5. Augmented Tchebycheff
 
@@ -156,3 +158,37 @@ independent held-out result.
 Candidate feature transforms are train-fitted. The default contract excludes
 pseudo-slate sequence position, preserving set semantics and avoiding direct use of
 the logged production order. Position can be enabled only for a named ablation.
+
+## Unified trainable-baseline layer
+
+`data/comparison.py` enforces `baseline-harness-v1`: three hashed chronological
+splits, common objective/feature ordering, train-fitted feature identity, user/item
+identities and declared origin. Optional simulator oracle targets are forbidden.
+`experiments/comparison.py` registers source/data/config/environment before training;
+`models/comparison.py` supplies independently trainable variants;
+`evaluation/comparison.py` evaluates the selected checkpoints on the same test rows.
+
+The raw input signals are common to all methods. CMR-like uses FiLM-conditioned
+set encoding and a preference-weighted sum of objective logits. EMER-like adds a
+shared score head and training-only detached current-loss/preceding-EMA feedback,
+with clipped, renormalized preference multipliers. These are explicit project
+variants, not reproductions of the named papers.
+
+Full ParetoJev retains confidence fusion, FiLM, its set encoder and uncertainty
+head. In this harness all methods train their served score using request-weighted
+observed-utility pairs, including incomparable trade-off pairs. The full model also
+uses dominance, **per-request shared-score** Tchebycheff, uncertainty, Jev utility
+KL and fusion calibration. This comparison loss differs from the legacy smoke and
+`train-precomputed` training path; their training numbers are not interchangeable.
+Exact loss coefficients and variant definitions are in
+[BASELINE_HARNESS.md](BASELINE_HARNESS.md).
+
+All methods have equal data/order, epochs and optimizer settings, with parameter
+counts reported separately. Validation chooses maximum fixed-grid weighted utility;
+epoch zero is eligible and ties retain the earliest checkpoint. Test outcomes do
+not select checkpoints or settings. The cold cutoff is frozen from training.
+Both EMER-like and CMR-like comparison identities are fixed before evaluation;
+EMER-like remains the primary report namespace, and no test-selected winner changes
+the denominator. Undefined metrics remain null and coverage is explicit. Registered
+seed means are descriptive; user-bootstrap intervals condition on fitted models,
+and hypervolume integration error is not a data confidence interval.

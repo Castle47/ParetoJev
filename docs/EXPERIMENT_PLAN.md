@@ -148,13 +148,52 @@ cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并�
 - SASRec + MMoE；
 - PLE（第二轮）；
 - fixed weighted sum；
-- EMER-like RAS + Set Transformer + Advantage Evaluator；
-- CMR-like preference-conditioned reranker；
+- EMER-like project variant：raw-signal Set Transformer + FiLM + shared score + training-only loss/EMA feedback；
+- CMR-like project variant：raw-signal Set Transformer + FiLM + preference-weighted objective heads；
 - Jev Single Choice；
 - Jev MultiChoice；
 - Jev MultiNoul；
 - behavior + Jev linear；
 - full ParetoJev。
+
+### 2.5.1 已实现的统一 baseline harness
+
+`compare-baselines` 在 `baseline-harness-v1` 上独立训练 `emer_like`、
+`cmr_like`、`paretojev`。这两个 `-like` 名称代表项目变体，不能写成原论文复现。
+精确定义、loss 系数、manifest 与命令见 [BASELINE_HARNESS.md](BASELINE_HARNESS.md)。
+
+注册先于训练：固定三个 chronological NPZ 的 hash、上游 evidence、方法、seeds、
+模型/优化器预算、preference grid、target 配置、source hash 与环境。每种方法使用
+相同原始信号、数据顺序、epochs、batch 和优化器设置；参数量及耗时分别报告，
+不宣称参数量或 FLOPs 相同。所有方法只用 observed labels，不用合成 oracle。
+
+checkpoint 由 validation 的固定 preference grid 平均加权 utility 选择，允许
+选择 epoch zero，相等时取最早者；配置 epochs 仍全部执行。test 不参与选择。
+冷 item cutoff 只从 train popularity 拟合。两个比较对象预先固定为 EMER-like 和
+CMR-like，主 namespace 保留 EMER-like；不得用 test 选择“最佳 baseline”或修改阈值。
+
+执行顺序：
+
+1. 合成 fixture 验证数据协议、训练、重载、审计、resume 和 target 拒绝真实声明；
+2. 取得真实三份 feature-complete NPZ 与四份上游 evidence 后，先检查 provenance；
+3. 在验证集确定正式预算、目标顺序、preference grid 和 seeds，注册新目录；
+4. 每 seed 保存三种 checkpoint、training history、test 预测和 identity；
+5. 逐 seed 报告，另报所有预注册 seed 的算术平均；任一 seed 未定义则该均值为 null；
+6. 同时检查对两种固定 baseline 的 hypervolume ≥2%、cold NDCG ≥3%、regret ≤0.005，
+   并检查 controllability ≥0.60；有限数值未过阈值是 failed，输入不足是 not_evaluable。
+
+均值不是显著性证据。现有 paired user bootstrap 对固定 checkpoint 的 objective mean
+和 cold NDCG 差值估区间，不估 hypervolume 的数据置信区间；其 Monte Carlo standard
+error 只描述积分误差。缺失 objective coverage、零 baseline 相对增益等保留 null。
+接近阈值的增益必须提高积分精度并补充分层、配对不确定性分析，不能靠增加 seed
+直到“过线”。Phase B 的随机曝光一致性和显著性要求仍需独立验证。
+
+没有真实数据或 score/API 时，继续工程和合成验证；不修改 evidence 让真实 gate 通过。
+最小交接为 train/validation/test NPZ、hash manifest，以及 feature_spec、
+behavior_provenance、decision_provenance、evaluation_protocol 四份注册文档。
+如果只有原始数据，则需要日志、caption/category metadata，以及已对齐 Jev 分数
+或可用决策 endpoint；行为 checkpoint 可在本地训练，已有 checkpoint 可缩短流程。
+已提供分数时不需要 live API。
 
 ### 2.6 Ablations
 

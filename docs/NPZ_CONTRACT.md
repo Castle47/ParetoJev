@@ -120,3 +120,49 @@ The feature specification is fitted on training slates only and reused for later
 splits. Its default features are strict prior item count, duration and tab indicators.
 Pseudo-slate sequence position is excluded by default because it can carry the logged
 production order; include it only as a declared ablation.
+
+## Strict comparison protocol: `baseline-harness-v1`
+
+The `compare-baselines` loader strengthens the legacy contract above. Every split
+requires the same tensor inputs plus this metadata:
+
+| Key | Shape | Meaning |
+|---|---|---|
+| `slate_ids` | `[N]` | nonempty integer/string IDs, unique within the split |
+| `candidate_ids` | `[N,K]` | candidate IDs in exact order; valid positions nonempty |
+| `user_ids` | `[N]` | nonempty integer/string IDs for paired user-cluster bootstrap |
+| `timestamps` | `[N,K]` | nonnegative integer event times at valid positions |
+| `objective_names` | `[M]` | unique ordered names |
+| `directions` | `[M]` | ordered `+1` / `-1` optimization directions |
+| `feature_names` | `[F]` | unique names in feature-column order |
+| `feature_spec_hash` | scalar string | canonical JSON SHA-256 of the shared train-fitted transform |
+| `data_kind` | scalar string | `synthetic` or `real`, matching the manifest |
+
+`mask` must be stored as boolean. Every row needs at least two valid candidates,
+with nonempty features and at least two objectives. All numeric arrays, including
+padding, must be finite. Valid labels, behavior/Jev scores, confidence and entropy
+are in `[0,1]`; popularity/history and preference weights are nonnegative. Request
+preferences sum to one. The loader zeroes padded 3-D tensor values. If preferences
+are omitted, the legacy loader deterministically generates them; every method sees
+the same resulting preferences. `target_probabilities` is **forbidden** here: no
+trainer receives privileged simulator targets.
+
+Train, validation and test must share dimensions, objective directions/order,
+feature names and feature hash. Valid timestamp ranges must be strictly separated;
+a timestamp cannot cross a split boundary. Slate IDs are split-local, because
+materialization may restart their row index. Audit identity therefore combines the
+split hash with slate/user/candidate/timestamp metadata, rather than assuming a
+slate ID is globally unique.
+
+`materialize-kuairand` preserves these identity fields and emits the feature hash
+and directions. Its `--data-kind {unverified,synthetic,real}` defaults to
+`unverified`: materialization alone does not establish data origin. The strict
+comparison loader rejects unverified inputs. Set `real` only for established real
+inputs and preserve their upstream evidence; relabeling a fixture is not verification.
+
+A manifest registers SHA-256 hashes for all three NPZ files. Real runs additionally
+require hashed `feature_spec`, `behavior_provenance`, `decision_provenance` and
+`evaluation_protocol` documents. The feature spec JSON's canonical content hash is
+separate from its file-byte SHA-256. Hashes establish consistency, not the truth of
+upstream claims. The manifest example and minimum handoff are in
+[BASELINE_HARNESS.md](BASELINE_HARNESS.md).
