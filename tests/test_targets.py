@@ -162,8 +162,20 @@ def test_microlens_requires_explicit_real_dataset_origin() -> None:
         "pairwise_vs_reference": {"hybrid_cv": {"auc": {"low": 0.01}}},
     }
     assert target_report(evaluate_targets(metrics, config))["status"] == "not_evaluable"
-    metrics["evidence"] = {"real_data": True, "data_kind": "real", "dataset": "microlens"}
+    metrics["evidence"] = {"real_data": True, "data_kind": "real", "dataset": "microlens", "scope": "full_200_user_protocol", "users": 200}
     assert target_report(evaluate_targets(metrics, config))["passed"]
+
+
+@pytest.mark.parametrize("field,value", [("users", 20), ("scope", "20_user_pilot")])
+def test_real_microlens_pilot_cannot_pass_full_protocol_targets(field, value) -> None:
+    metrics = {
+        "microlens": {"hybrid_cv": {"auc": 0.9, "hr@5": 0.9, "ndcg@10": 0.9}},
+        "pairwise_vs_reference": {"hybrid_cv": {"auc": {"low": 0.1}}},
+        "evidence": {"real_data": True, "data_kind": "real", "dataset": "microlens", "scope": "full_200_user_protocol", "users": 200},
+    }
+    metrics["evidence"][field] = value
+    report = target_report(evaluate_targets(metrics, load_yaml(CONFIGS / "targets_microlens.yaml")))
+    assert report["status"] == "not_evaluable" and not report["passed"]
 
 
 def test_file_checker_persists_actionable_missing_evidence(tmp_path) -> None:

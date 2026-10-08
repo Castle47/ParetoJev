@@ -61,7 +61,7 @@ def main() -> None:
                      "model": "autotrust/JEV-27B", "revision": expected_revision},
         "metrics": metrics, "microlens": metrics,
         "confidence_intervals": {column: bootstrap_metric_intervals(frame, column, **bootstrap) for column in columns},
-        "paired_vs_itemcf": {column: pairwise_metric_differences(frame, column, "itemcf", **bootstrap)
+        "pairwise_vs_reference": {column: pairwise_metric_differences(frame, column, "itemcf", **bootstrap)
                              for column in columns if column != "itemcf"},
         "complementarity": complementarity_report(frame, ["itemcf", "jev_click"], **options),
         "fusion": {"fixed_weights": {"itemcf": 0.5, "jev_click": 0.5}, "cv_folds": folds,

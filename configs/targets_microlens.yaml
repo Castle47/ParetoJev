@@ -5,6 +5,8 @@ evidence_requirements:
   evidence.real_data: true
   evidence.data_kind: real
   evidence.dataset: microlens
+  evidence.scope: full_200_user_protocol
+  evidence.users: 200
 targets:
   hybrid_auc:
     metric: microlens.hybrid_cv.auc

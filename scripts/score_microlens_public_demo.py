@@ -51,7 +51,11 @@ def main() -> None:
         if canonical_hash(payload) != observed["request_sha256"]:
             raise ValueError("Canary request hash mismatch")
         validate_public_response(observed["response"], client.revision)
-        cache.put(client.provider, client.model, payload, observed["response"])
+        cached = cache.get(client.provider, client.model, payload)
+        if cached is None:
+            cache.put(client.provider, client.model, payload, observed["response"])
+        elif cached != observed["response"]:
+            raise ValueError("Existing cached canary differs from the recorded response")
     registration_hash = sha256_file(args.registration)
     run_path = out / "run_registration.json"
     identity = {"registration_sha256": registration_hash, "input_sha256": sha256_file(args.input),
