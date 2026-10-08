@@ -4,7 +4,16 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from paretojev.data.kuairand import KuaiRandSlateConfig, build_session_slates, read_kuairand_log
+from paretojev.data.kuairand import (
+    KUAI_OBJECTIVES,
+    KuaiRandSamplingConfig,
+    KuaiRandSlateConfig,
+    PreparedKuaiRandSlates,
+    build_jev_input_rows,
+    build_session_slates,
+    read_kuairand_log,
+    stratified_sample_slates,
+)
 from paretojev.data.microlens import (
     MicroLensProtocol,
     cross_validated_hybrid,
@@ -50,6 +59,107 @@ def test_kuairand_session_slates(tmp_path: Path) -> None:
     assert slates.labels.shape[-1] == 6
     assert len(slates.user_ids) == 4
     assert slates.mask.sum() == 14
+    assert slates.item_prior_count is not None
+    assert slates.user_history_count is not None
+    assert slates.item_prior_count.shape == slates.item_ids.shape
+    assert slates.user_history_count.shape == slates.user_ids.shape
+
+    content = pd.DataFrame(
+        {
+            "final_video_id": sorted(frame["video_id"].unique()),
+            "caption": [f"video {value}" for value in sorted(frame["video_id"].unique())],
+        }
+    )
+    rows = build_jev_input_rows(slates, frame, content, slate_ids=[1, 0])
+    assert [row["slate_id"] for row in rows] == [1, 0]
+
+
+def test_kuairand_stratified_decision_sampling(tmp_path: Path) -> None:
+    n, k, m = 12, 3, len(KUAI_OBJECTIVES)
+    mask = np.ones((n, k), dtype=bool)
+    labels = np.zeros((n, k, m), dtype=np.float32)
+    for slate in range(n):
+        feedback = slate % 3
+        if feedback >= 1:
+            labels[slate, 0, 0] = 1
+        if feedback >= 2:
+            labels[slate, 1, 2] = 1
+    item_prior = np.zeros((n, k), dtype=np.int64)
+    item_prior[4:8] = 10
+    item_prior[8:] = 100
+    slates = PreparedKuaiRandSlates(
+        user_ids=np.repeat(np.arange(6), 2),
+        item_ids=np.arange(n * k).reshape(n, k),
+        timestamps=np.arange(n * k).reshape(n, k) * 1000 + 1,
+        labels=labels,
+        mask=mask,
+        duration_ms=np.full((n, k), 10_000, dtype=np.float32),
+        tab=np.ones((n, k), dtype=np.int16),
+        is_random=np.repeat(np.arange(n)[:, None] % 2, k, axis=1).astype(np.int8),
+        watch_ratio=np.zeros((n, k), dtype=np.float32),
+        objective_names=KUAI_OBJECTIVES,
+        item_prior_count=item_prior,
+        user_history_count=np.asarray([1, 5, 20] * 4, dtype=np.int64),
+    )
+    selected, report = stratified_sample_slates(
+        slates,
+        KuaiRandSamplingConfig(
+            max_slates=6,
+            per_cell=2,
+            max_per_user=1,
+            seed=11,
+        ),
+    )
+    assert 1 <= len(selected) <= 6
+    assert selected["user_id"].value_counts().max() == 1
+    assert selected["popularity_bucket"].nunique() >= 2
+    assert report["selected_slates"] == len(selected)
+    assert "selected_cell_counts" in report
+
+    path = tmp_path / "slates.npz"
+    slates.save(path)
+    loaded = PreparedKuaiRandSlates.load(path)
+    np.testing.assert_array_equal(loaded.item_prior_count, item_prior)
+    np.testing.assert_array_equal(loaded.user_history_count, slates.user_history_count)
+
+
+def test_kuairand_prefix_log_initializes_prior_counts() -> None:
+    def row(user: int, video: int, timestamp: int) -> dict[str, int]:
+        return {
+            "user_id": user,
+            "video_id": video,
+            "time_ms": timestamp,
+            "is_click": 0,
+            "is_like": 0,
+            "is_follow": 0,
+            "is_comment": 0,
+            "is_forward": 0,
+            "is_hate": 0,
+            "long_view": 0,
+            "play_time_ms": 0,
+            "duration_ms": 10_000,
+            "is_rand": 0,
+            "tab": 1,
+        }
+
+    prefix = pd.DataFrame([row(1, 10, 1_000), row(1, 11, 2_000)])
+    current = pd.DataFrame(
+        [
+            row(1, 10, 3_000),
+            row(1, 12, 4_000),
+            row(2, 10, 5_000),
+        ]
+    )
+    slates = build_session_slates(
+        current,
+        KuaiRandSlateConfig(slate_size=3, min_slate_size=2, stride=3),
+        prefix_log=prefix,
+    )
+    assert slates.user_history_count is not None
+    assert slates.item_prior_count is not None
+    # User 1 had two prior events; video 10 had one prior event.
+    assert slates.user_history_count[0] == 2
+    assert slates.item_prior_count[0, 0] == 1
 
 
 

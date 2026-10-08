@@ -84,15 +84,21 @@ bootstrap、top-k error complementarity 和每次运行的 provenance。
 
 ### 2.3 Jev 采样策略
 
+当前状态：采样器已经实现。`prepare-kuairand` 会写入严格早于当前曝光的 item
+prior count 和 user history count；`sample-kuairand-jev` 负责生成可审计 manifest
+与仅包含选中 slate 的 Jev JSONL。
+
 不要一开始打满 100 万+样本。首轮每个 bucket 采样相同数量：
 
 - cold / mid / warm item；
 - history 1–3 / 4–10 / >10；
 - standard / random exposure；
-- positive-rich / no-positive slate；
+- positive-rich / sparse-positive / no-positive slate；
 - Chinese original / translated English。
 
 首轮 5k–20k slates 足以评估互补性和成本；只有 gate/分桶有明确增益才扩容。
+默认 first probe 为 5k，joint cell 上限 250，单用户最多 2 个 slate；如果某些
+cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并破坏平衡。
 
 ### 2.4 Baselines
 

@@ -50,6 +50,29 @@ data/raw/kuairand/
 
 `play_time_ms / duration_ms` 用于连续观察指标，默认 clip 到 5；不把 outcome 本身泄漏进候选 pre-ranking feature。
 
+`prepare-kuairand` 额外保存：
+
+- `item_prior_count[N,K]`：每次候选曝光之前，该 item 在全局时间序列中已经出现的次数；
+- `user_history_count[N]`：每个 pseudo-slate 首次曝光之前，该用户已经发生的曝光次数。
+
+二者用于 cold/warm 与 short/long history 分桶，不使用当前或未来曝光。旧版 NPZ
+仍可加载，但运行 `sample-kuairand-jev` 前需要重新构建，避免用全周期 popularity
+替代严格 prior count。
+
+对 validation/test 日志构建 slate 时，应通过 `--prefix-log` 传入更早的训练日志，
+从而让第一条 validation 曝光的 prior count 继承训练期历史。工具要求 prefix 的
+最大时间戳严格小于当前日志的最小时间戳；若两段时间重叠会直接失败。
+
+首轮 decision annotation 推荐输出：
+
+```text
+data/processed/kuairand/
+├── train_slates.npz
+├── jev_sample_manifest.csv
+├── jev_sample_report.json
+└── train_jev_sample.jsonl
+```
+
 ## ID 和时间规则
 
 - content metadata 用 `final_video_id` 与 KuaiRand re-indexed `video_id` 对齐；

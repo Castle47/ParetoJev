@@ -11,13 +11,16 @@ import pandas as pd
 
 from paretojev.config import load_yaml
 from paretojev.data.kuairand import (
+    KuaiRandSamplingConfig,
     KuaiRandSlateConfig,
+    PreparedKuaiRandSlates,
     build_jev_input_rows,
     build_session_slates,
     export_jev_input_rows,
     export_slate_manifest,
     load_content_metadata,
     read_kuairand_log,
+    stratified_sample_slates,
 )
 from paretojev.data.microlens import (
     MicroLensProtocol,
@@ -395,13 +398,14 @@ def _command_evaluate_microlens(args: argparse.Namespace) -> int:
 
 def _command_prepare_kuairand(args: argparse.Namespace) -> int:
     frame = read_kuairand_log(args.log, nrows=args.nrows)
+    prefix = read_kuairand_log(args.prefix_log) if args.prefix_log else None
     config = KuaiRandSlateConfig(
         slate_size=args.slate_size,
         min_slate_size=args.min_slate_size,
         session_gap_minutes=args.session_gap_minutes,
         stride=args.stride,
     )
-    slates = build_session_slates(frame, config)
+    slates = build_session_slates(frame, config, prefix_log=prefix)
     slates.save(args.output)
     if args.manifest:
         export_slate_manifest(slates, args.manifest, max_rows=args.manifest_rows)
@@ -416,14 +420,76 @@ def _command_prepare_kuairand(args: argparse.Namespace) -> int:
     report = {
         "config": asdict(config),
         "input_rows": len(frame),
+        "prefix_rows": len(prefix) if prefix is not None else 0,
         "slates": len(slates.user_ids),
         "unique_users": int(len(set(slates.user_ids.tolist()))),
         "mean_valid_candidates": float(slates.mask.sum(axis=1).mean()),
         "objective_names": list(slates.objective_names),
         "output": str(args.output),
+        "prefix_log": str(args.prefix_log) if args.prefix_log else None,
         "manifest": str(args.manifest) if args.manifest else None,
         "jev_input": str(args.jev_input) if args.jev_input else None,
+        "provenance": runtime_provenance(
+            input_paths=[
+                args.log,
+                *([args.prefix_log] if args.prefix_log else []),
+            ],
+            config={"slates": asdict(config), "history_length": args.history_length},
+        ),
     }
+    if args.report:
+        atomic_write_json(args.report, report)
+    _print_json(report)
+    return 0
+
+
+def _command_sample_kuairand_jev(args: argparse.Namespace) -> int:
+    slates = PreparedKuaiRandSlates.load(args.slates)
+    config = KuaiRandSamplingConfig(
+        max_slates=args.max_slates,
+        per_cell=args.per_cell,
+        max_per_user=None if args.max_per_user == 0 else args.max_per_user,
+        seed=args.seed,
+        cold_quantile=args.cold_quantile,
+        warm_quantile=args.warm_quantile,
+        positive_rich_threshold=args.positive_rich_threshold,
+    )
+    selected, report = stratified_sample_slates(slates, config)
+    output = Path(args.output)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    selected.to_csv(output, index=False)
+
+    input_paths: list[str | Path] = [args.slates]
+    jev_rows = 0
+    if args.jev_input:
+        if not args.log or not args.content_directory:
+            raise ValueError(
+                "--log and --content-directory are required with --jev-input"
+            )
+        log = read_kuairand_log(args.log, nrows=args.nrows)
+        content = load_content_metadata(args.content_directory)
+        rows = build_jev_input_rows(
+            slates,
+            log,
+            content,
+            history_length=args.history_length,
+            slate_ids=selected["slate_id"].tolist(),
+        )
+        export_jev_input_rows(rows, args.jev_input)
+        jev_rows = len(rows)
+        input_paths.extend([args.log, args.content_directory])
+
+    report.update(
+        {
+            "output": str(output),
+            "jev_input": str(args.jev_input) if args.jev_input else None,
+            "jev_input_rows": jev_rows,
+            "provenance": runtime_provenance(
+                input_paths=input_paths,
+                config={"sampling": asdict(config), "history_length": args.history_length},
+            ),
+        }
+    )
     if args.report:
         atomic_write_json(args.report, report)
     _print_json(report)
@@ -627,6 +693,10 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_kuai.add_argument("--session-gap-minutes", type=int, default=30)
     prepare_kuai.add_argument("--stride", type=int)
     prepare_kuai.add_argument("--nrows", type=int)
+    prepare_kuai.add_argument(
+        "--prefix-log",
+        help="Earlier KuaiRand log used only to initialize strict prior item/user counts",
+    )
     prepare_kuai.add_argument("--manifest")
     prepare_kuai.add_argument("--manifest-rows", type=int)
     prepare_kuai.add_argument("--jev-input")
@@ -634,6 +704,32 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_kuai.add_argument("--history-length", type=int, default=10)
     prepare_kuai.add_argument("--report")
     prepare_kuai.set_defaults(func=_command_prepare_kuairand)
+
+    sample_kuai = subparsers.add_parser(
+        "sample-kuairand-jev",
+        help="Select a balanced cold/warm, history, exposure and feedback slate subset",
+    )
+    sample_kuai.add_argument("slates", help="PreparedKuaiRandSlates NPZ")
+    sample_kuai.add_argument("output", help="Selected slate metadata CSV")
+    sample_kuai.add_argument("--max-slates", type=int, default=5000)
+    sample_kuai.add_argument("--per-cell", type=int, default=250)
+    sample_kuai.add_argument(
+        "--max-per-user",
+        type=int,
+        default=2,
+        help="Maximum sampled slates per user; use 0 for unlimited",
+    )
+    sample_kuai.add_argument("--seed", type=int, default=0)
+    sample_kuai.add_argument("--cold-quantile", type=float, default=0.25)
+    sample_kuai.add_argument("--warm-quantile", type=float, default=0.75)
+    sample_kuai.add_argument("--positive-rich-threshold", type=int, default=2)
+    sample_kuai.add_argument("--log", help="Source KuaiRand log, required for Jev JSONL")
+    sample_kuai.add_argument("--content-directory")
+    sample_kuai.add_argument("--jev-input")
+    sample_kuai.add_argument("--history-length", type=int, default=10)
+    sample_kuai.add_argument("--nrows", type=int)
+    sample_kuai.add_argument("--report")
+    sample_kuai.set_defaults(func=_command_sample_kuairand_jev)
 
     score = subparsers.add_parser(
         "score-jsonl", help="Score JSONL recommendation slates with official or open Jev"

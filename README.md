@@ -28,7 +28,7 @@ Verified locally on **2026-10-08**:
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **24 passed** | `pytest` |
+| Unit/integration tests | **26 passed** | `pytest` |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
@@ -250,12 +250,46 @@ paretojev prepare-kuairand \
   --min-slate-size 5 \
   --session-gap-minutes 30 \
   --manifest data/processed/kuairand/train_manifest.jsonl \
-  --jev-input data/processed/kuairand/train_jev_input.jsonl \
-  --content-directory data/raw/kuairand \
   --report data/processed/kuairand/train_prepare_report.json
 ```
 
-The main experiment sequence is specified in [`docs/EXPERIMENT_PLAN.md`](docs/EXPERIMENT_PLAN.md). The first Jev run should be a stratified subset, not the full dataset: cold/warm items, short/long histories, and standard/random exposure buckets.
+Slate construction records strictly prior item exposure counts and user-history lengths.
+Use them to select a balanced first annotation batch rather than sending every slate
+to an API:
+
+```bash
+paretojev sample-kuairand-jev \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/jev_sample_manifest.csv \
+  --max-slates 5000 \
+  --per-cell 250 \
+  --max-per-user 2 \
+  --log data/raw/kuairand/log_standard_4_08_to_4_21_pure.csv \
+  --content-directory data/raw/kuairand \
+  --jev-input data/processed/kuairand/train_jev_sample.jsonl \
+  --report data/processed/kuairand/jev_sample_report.json
+```
+
+The sampler balances joint cells over cold/mid/warm item history, short/medium/long
+user history, standard/random exposure and no/sparse/rich positive-feedback density.
+Its popularity signal is based only on exposures preceding each candidate, rather
+than a future-contaminated full-period count. `scripts/prepare_kuairand.sh` runs both
+the slate and sampling stages.
+
+The main experiment sequence is specified in [`docs/EXPERIMENT_PLAN.md`](docs/EXPERIMENT_PLAN.md). The initial 5k slate budget is a cost-controlled probe; expansion depends on measured complementarity and bucket-level uplift.
+
+When preparing a later time split, initialize prior counts from the earlier split:
+
+```bash
+paretojev prepare-kuairand \
+  data/raw/kuairand/log_standard_4_22_to_5_08_pure.csv \
+  data/processed/kuairand/validation_slates.npz \
+  --prefix-log data/raw/kuairand/log_standard_4_08_to_4_21_pure.csv \
+  --report data/processed/kuairand/validation_prepare_report.json
+```
+
+The command rejects overlapping prefix/current timestamps, preventing an accidental
+future-contaminated cold-start count.
 
 ## Core model and losses
 

@@ -25,3 +25,15 @@ evaluation:
   ndcg_k: 10
   bootstrap_samples: 5000
   cold_item_quantile: 0.25
+decision_sampling:
+  max_slates: 5000
+  per_cell: 250
+  max_per_user: 2
+  seed: 0
+  popularity_quantiles: [0.25, 0.75]
+  history_buckets:
+    short_max: 3
+    medium_max: 10
+  feedback_buckets:
+    positive_rich_threshold: 2
+  dimensions: [popularity, history, exposure, feedback_density]

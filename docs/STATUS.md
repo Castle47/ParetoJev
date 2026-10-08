@@ -17,11 +17,13 @@
 - user-bootstrap intervals, paired reference tests and model-complementarity diagnostics
 - Phase A target file and one-command local execution scripts
 - KuaiRand pseudo-slate/content manifest pipeline
+- leakage-safe prior item/user counts for cold-start and history buckets
+- balanced KuaiRand Jev sampler across popularity, history, exposure and feedback-density cells
 - SASRec + MMoE behavior branch
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - precomputed real-data training contract
-- **24 passing tests** plus a successful synthetic Phase A CLI integration run
+- **26 passing tests** plus successful synthetic MicroLens and KuaiRand CLI integration runs
 - passing synthetic model smoke and target report
 
 ## Active next phase
@@ -47,5 +49,5 @@ validate code and report structure.
 3. Verify probability calibration and measure CF/Jev error complementarity.
 4. Run RRF, outer-CV simplex fusion and nested-CV stacking.
 5. Require both absolute Phase A targets and paired-bootstrap evidence versus reproduced item-CF.
-6. Only after a real uplift, expand decision scoring to a stratified KuaiRand subset.
+6. Only after a real uplift, use the implemented stratified KuaiRand subset runner.
 7. Only after teacher uplift survives robust evaluation, train the low-latency student.

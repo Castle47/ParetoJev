@@ -67,10 +67,13 @@ def runtime_provenance(
             stat = path.stat()
             entry.update(
                 {
+                    "type": "file",
                     "bytes": int(stat.st_size),
                     "sha256": sha256_file(path),
                 }
             )
+        elif path.exists() and path.is_dir():
+            entry["type"] = "directory"
         else:
             entry["missing"] = True
         inputs.append(entry)

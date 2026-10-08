@@ -91,3 +91,23 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   hybrid, nested-CV stacker, bootstrap, pairwise comparison, complementarity and
   provenance output.
 - Synthetic values are deliberately not committed as research outcomes.
+
+## 2026-10-08 — KuaiRand annotation-budget pipeline
+
+- Added strictly prior item-exposure and user-history counts during chronological
+  pseudo-slate construction; these fields are persisted in NPZ and remain optional
+  when loading older NPZ files.
+- Added balanced decision-annotation sampling over four joint dimensions:
+  cold/mid/warm item history, short/medium/long user history, standard/random
+  exposure and none/sparse/rich positive feedback.
+- Added per-cell caps, a global slate budget and a per-user cap to prevent a small
+  group of heavy users from dominating expensive Jev calls.
+- Added selected-slate manifests, bucket inventory reports, provenance and direct
+  JSONL generation using only the sampled slate IDs.
+- Reworked `scripts/prepare_kuairand.sh` so it no longer creates Jev prompts for the
+  entire training log by default.
+- Synthetic CLI verification prepared slates, sampled eight balanced users and
+  emitted exactly eight Jev JSONL records.
+- Current test count: **26 passed**.
+- Added `--prefix-log` for later KuaiRand time splits so prior item/user counts begin
+  with the earlier training history; overlapping timestamps are rejected.
