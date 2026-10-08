@@ -199,6 +199,9 @@ def load_pairs(directory: str | Path) -> pd.DataFrame:
 def prepare_microlens_candidates(
     directory: str | Path,
     protocol: MicroLensProtocol = MicroLensProtocol(),
+    *,
+    excluded_users: Iterable[int] = (),
+    require_strict_history: bool = False,
 ) -> pd.DataFrame:
     """Build deterministic candidate slates comparable to JEV-27B-VL Demo 07.
 
@@ -212,13 +215,20 @@ def prepare_microlens_candidates(
     titles = load_titles(directory)
     grouped = pairs.groupby("user", sort=False).agg(list)
     grouped = grouped[grouped["item"].str.len() >= protocol.history_length + 1]
-    if len(grouped) < protocol.n_users:
+    excluded = {int(user) for user in excluded_users}
+    sampling = grouped.loc[~grouped.index.isin(excluded)]
+    if require_strict_history:
+        eligible = sampling["timestamp"].map(
+            lambda times: max(times[-1 - protocol.history_length:-1]) < times[-1]
+        )
+        sampling = sampling.loc[eligible]
+    if len(sampling) < protocol.n_users:
         raise ValueError(
-            f"Only {len(grouped)} eligible users, but protocol requests {protocol.n_users}"
+            f"Only {len(sampling)} eligible users, but protocol requests {protocol.n_users}"
         )
 
     rng = random.Random(protocol.seed)
-    users = rng.sample([int(x) for x in grouped.index], protocol.n_users)
+    users = rng.sample([int(x) for x in sampling.index], protocol.n_users)
     chronological = pairs.sort_values("timestamp", kind="stable")
     all_times = chronological["timestamp"].to_numpy()
     all_items = chronological["item"].to_numpy()
@@ -228,7 +238,7 @@ def prepare_microlens_candidates(
     for item, timestamp in zip(all_items, all_times, strict=True):
         popularity_times[int(item)].append(int(timestamp))
 
-    held_out_users = set(users)
+    held_out_users = set(users) | excluded
     cooccurrence: dict[int, collections.Counter[int]] = collections.defaultdict(collections.Counter)
     for user, row in grouped.iterrows():
         if int(user) in held_out_users:

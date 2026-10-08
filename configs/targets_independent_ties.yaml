@@ -1,0 +1,20 @@
+# Prospective user-disjoint validation. These are two predeclared AUC tests.
+evidence_requirements:
+  evidence.real_data: true
+  evidence.dataset: microlens
+  evidence.scope: independent_200_user_protocol
+  evidence.users: 200
+  evidence.overlap_previous_users: 0
+  evidence.weights_tuned_on_new_users: false
+required_methods: [itemcf, title_ties, jev_ties, title_05, jev_05]
+targets:
+  jev_ties_improve_cf:
+    metric: primary_comparisons.jev_ties_vs_itemcf.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true
+  jev_ties_improve_cheap_title:
+    metric: primary_comparisons.jev_ties_vs_title_ties.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true

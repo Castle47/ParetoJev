@@ -35,8 +35,9 @@ def main() -> None:
     if len(expected) != len(rows) or set(expected) != set(map(str, pilot["users"])):
         raise ValueError("Pilot user selection differs from registration")
     decisions = sum(len(row["candidates"]) for row in rows)
-    cap = 4000 if scope == "full_200_user_protocol" else 400
-    if scope == "full_200_user_protocol" and len(rows) != 200:
+    full_scopes = {"full_200_user_protocol", "independent_200_user_protocol"}
+    cap = 4000 if scope in full_scopes else 400
+    if scope in full_scopes and len(rows) != 200:
         raise ValueError("Full registered protocol requires exactly 200 users")
     if decisions != pilot["planned_model_requests"] or decisions > cap:
         raise ValueError(f"This registered run is limited to {cap} pointwise decisions")
