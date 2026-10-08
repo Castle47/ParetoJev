@@ -7,6 +7,7 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 import torch
 from torch.utils.data import DataLoader
@@ -628,8 +629,52 @@ def _command_prepare_kuairand(args: argparse.Namespace) -> int:
     return 0
 
 
+def _load_behavior_probabilities_for_sampling(
+    slates: PreparedKuaiRandSlates,
+    path: str | Path,
+) -> np.ndarray:
+    """Load and exactly align a full-slate behavior score tensor."""
+
+    scores = SlateScoreTensor.load(path)
+    expected_ids = set(range(len(slates.user_ids)))
+    observed_ids = set(int(value) for value in scores.slate_ids)
+    if observed_ids != expected_ids:
+        missing = sorted(expected_ids - observed_ids)[:5]
+        extra = sorted(observed_ids - expected_ids)[:5]
+        raise ValueError(
+            "Behavior-informed sampling requires one score row for every slate; "
+            f"missing={missing}, extra={extra}"
+        )
+    if scores.objective_names != slates.objective_names:
+        raise ValueError(
+            "Behavior score objectives do not match prepared slates: "
+            f"{scores.objective_names} != {slates.objective_names}"
+        )
+    row_by_slate = {int(slate_id): index for index, slate_id in enumerate(scores.slate_ids)}
+    order = [row_by_slate[index] for index in range(len(slates.user_ids))]
+    candidate_ids = scores.candidate_ids[order]
+    mask = scores.mask[order]
+    if not np.array_equal(mask, slates.mask):
+        raise ValueError("Behavior score masks do not match prepared slates")
+    if not np.array_equal(candidate_ids[slates.mask], slates.item_ids[slates.mask]):
+        raise ValueError("Behavior score candidate IDs/order do not match prepared slates")
+    return scores.probabilities[order]
+
+
 def _command_sample_kuairand_jev(args: argparse.Namespace) -> int:
     slates = PreparedKuaiRandSlates.load(args.slates)
+    behavior_probabilities: np.ndarray | None = None
+    priority_strength = args.behavior_priority_strength
+    if args.behavior_scores:
+        behavior_probabilities = _load_behavior_probabilities_for_sampling(
+            slates, args.behavior_scores
+        )
+        if priority_strength is None:
+            priority_strength = 0.5
+    elif priority_strength not in (None, 0.0):
+        raise ValueError("--behavior-priority-strength requires --behavior-scores")
+    if priority_strength is None:
+        priority_strength = 0.0
     config = KuaiRandSamplingConfig(
         max_slates=args.max_slates,
         per_cell=args.per_cell,
@@ -638,13 +683,24 @@ def _command_sample_kuairand_jev(args: argparse.Namespace) -> int:
         cold_quantile=args.cold_quantile,
         warm_quantile=args.warm_quantile,
         positive_rich_threshold=args.positive_rich_threshold,
+        behavior_priority_strength=priority_strength,
+        entropy_weight=args.entropy_weight,
+        margin_uncertainty_weight=args.margin_uncertainty_weight,
+        objective_disagreement_weight=args.objective_disagreement_weight,
     )
-    selected, report = stratified_sample_slates(slates, config)
+    selected, report = stratified_sample_slates(
+        slates,
+        config,
+        behavior_probabilities=behavior_probabilities,
+    )
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     selected.to_csv(output, index=False)
 
-    input_paths: list[str | Path] = [args.slates]
+    input_paths: list[str | Path] = [
+        args.slates,
+        *([args.behavior_scores] if args.behavior_scores else []),
+    ]
     jev_rows = 0
     if args.jev_input:
         if not args.log or not args.content_directory:
@@ -1124,6 +1180,21 @@ def build_parser() -> argparse.ArgumentParser:
     sample_kuai.add_argument("--cold-quantile", type=float, default=0.25)
     sample_kuai.add_argument("--warm-quantile", type=float, default=0.75)
     sample_kuai.add_argument("--positive-rich-threshold", type=int, default=2)
+    sample_kuai.add_argument(
+        "--behavior-scores",
+        help=(
+            "Optional full-slate SlateScoreTensor. When supplied, prioritize "
+            "behavior-uncertain and cross-objective-conflict slates within each cell."
+        ),
+    )
+    sample_kuai.add_argument(
+        "--behavior-priority-strength",
+        type=float,
+        help="Blend in [0,1] between random within-cell order and active priority; default 0.5 with --behavior-scores",
+    )
+    sample_kuai.add_argument("--entropy-weight", type=float, default=0.5)
+    sample_kuai.add_argument("--margin-uncertainty-weight", type=float, default=0.3)
+    sample_kuai.add_argument("--objective-disagreement-weight", type=float, default=0.2)
     sample_kuai.add_argument("--log", help="Source KuaiRand log, required for Jev JSONL")
     sample_kuai.add_argument("--content-directory")
     sample_kuai.add_argument("--jev-input")

@@ -28,7 +28,7 @@ Verified locally on **2026-10-08**:
 | SASRec + MMoE behavior branch | Implemented | `paretojev.models.behavior` |
 | Confidence gate + Pareto reranker | Implemented | `paretojev.models.pareto_reranker` |
 | Pareto/Tchebycheff/uncertainty losses | Implemented | `paretojev.losses.pareto` |
-| Unit/integration tests | **46 passed** | `pytest` |
+| Unit/integration tests | **49 passed** | `pytest` |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
 
@@ -292,26 +292,6 @@ paretojev prepare-kuairand \
 
 Slate construction records item exposure counts and user-history lengths using only
 strictly earlier timestamps. Simultaneous events do not count one another as history.
-Select a balanced first annotation batch instead of sending every slate to an API:
-
-```bash
-paretojev sample-kuairand-jev \
-  data/processed/kuairand/train_slates.npz \
-  data/processed/kuairand/jev_sample_manifest.csv \
-  --max-slates 5000 \
-  --per-cell 250 \
-  --max-per-user 2 \
-  --log data/processed/kuairand/splits/reranker_train.csv \
-  --content-directory data/raw/kuairand \
-  --jev-input data/processed/kuairand/train_jev_sample.jsonl \
-  --report data/processed/kuairand/jev_sample_report.json
-```
-
-The sampler balances joint cells over cold/mid/warm item history, short/medium/long
-user history, standard/random exposure and no/sparse/rich positive-feedback density.
-`scripts/prepare_kuairand.sh` runs the chronological split, pseudo-slate and sampling
-stages. The initial 5k slate budget is a cost-controlled probe; expansion depends on
-measured complementarity and bucket-level uplift.
 
 When preparing a later 4/22–5/08 split, initialize counts from the complete earlier
 standard log:
@@ -327,10 +307,58 @@ paretojev prepare-kuairand \
 The command rejects overlapping prefix/current timestamps, preventing accidental
 future-contaminated histories.
 
-### 3. Score the selected slates
+### 3. Score every candidate slate with the out-of-period behavior model
 
-After generating `train_jev_sample.jsonl`, score only that balanced subset. For a
-first text-only probe:
+```bash
+paretojev score-kuairand-behavior \
+  artifacts/kuairand_behavior.pt \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/splits/reranker_train.csv \
+  data/processed/kuairand/train_behavior_scores.npz \
+  --prefix-log data/processed/kuairand/splits/prefix_before_reranker_train.csv \
+  --device cuda \
+  --report artifacts/kuairand_train_behavior.report.json
+```
+
+Histories are cut with `searchsorted(..., side="left")`, so neither the current
+candidate nor any simultaneous exposure enters the user state. Candidate/history OOV
+rates, Brier diagnostics, throughput and batch latency are written to the report.
+
+### 4. Select a cost-controlled Jev annotation batch
+
+The preferred first probe preserves the structural cold/history/exposure/feedback
+cells and, *within each cell*, softly prioritizes slates on which the behavior model
+is uncertain or chooses different winners for different objectives:
+
+```bash
+scripts/sample_kuairand_behavior_informed.sh \
+  data/processed/kuairand/train_slates.npz \
+  data/processed/kuairand/train_behavior_scores.npz \
+  data/processed/kuairand/splits/reranker_train.csv \
+  data/raw/kuairand \
+  data/processed/kuairand \
+  5000 \
+  0.5
+```
+
+Equivalent CLI flags are `--behavior-scores` and
+`--behavior-priority-strength`. Priority combines normalized Bernoulli entropy,
+low top-1/top-2 margin and cross-objective winner disagreement. Strength `0` recovers
+random within-cell order; strength `1` takes the highest-priority available examples;
+`0.5` deliberately keeps a randomized component so the teacher set does not collapse
+to only ambiguous cases.
+
+Without a neural score tensor, omit `--behavior-scores` to use the original purely
+structural balanced sampler. The initial 5k budget is an annotation-training probe,
+not an evaluation population. Because the structural sampler also balances observed
+feedback density, final validation/test metrics must be computed on the complete
+fixed evaluation protocol or with declared sampling weights, never directly on this
+selected training subset.
+
+### 5. Score the selected slates with Jev
+
+After generating `train_jev_sample.jsonl`, score only that subset. For a first
+text-only probe:
 
 ```bash
 export TYPESAFE_API_KEY="..."
@@ -350,24 +378,7 @@ The scorer's prompt objective names are explicitly mapped back to KuaiRand label
 materialization. Candidate IDs, candidate order and objective order are validated;
 a mismatch fails instead of silently permuting tensors.
 
-### 4. Score the same sampled slates with the out-of-period behavior model
-
-```bash
-paretojev score-kuairand-behavior \
-  artifacts/kuairand_behavior.pt \
-  data/processed/kuairand/train_slates.npz \
-  data/processed/kuairand/splits/reranker_train.csv \
-  data/processed/kuairand/train_behavior_scores.npz \
-  --prefix-log data/processed/kuairand/splits/prefix_before_reranker_train.csv \
-  --device cuda \
-  --report artifacts/kuairand_train_behavior.report.json
-```
-
-Histories are cut with `searchsorted(..., side="left")`, so neither the current
-candidate nor any simultaneous exposure enters the user state. Candidate/context
-OOV rates, Brier diagnostics and batch latency are written to the report.
-
-### 5. Materialize a trainable NPZ
+### 6. Materialize a trainable NPZ
 
 For the main experiment, pass `train_behavior_scores.npz` directly to
 `materialize-kuairand`:

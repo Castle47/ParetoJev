@@ -99,11 +99,17 @@ data/processed/kuairand/
 其中：
 
 - `train_behavior_scores.npz` 是正式 SASRec+MMoE 输出的 `SlateScoreTensor`；
+- `jev_sample_manifest.csv` 可在结构 cell 内使用 behavior entropy/margin/objective disagreement 做软优先级；
 - `train_behavior_prior.npz` 使用同一协议，但仅是 bootstrap-only fallback；
 - `candidate_feature_spec.json` 只在训练 split 拟合一次，validation/test 必须复用；
 - `train_features.npz` 是 `train-precomputed` 的完整输入；
 - materialization 会严格核验 slate ID、candidate ID/顺序、mask 和 objective alias；
 - 默认不加入 pseudo-slate 内的 sequence position，避免将日志中的原排序当成内容特征。
+
+
+`jev_sample_manifest.csv` 是成本受控的 teacher-training annotation subset。其
+feedback-density strata 使用了离线 outcome，因此不得直接在该子集上报告总体模型
+指标；validation/test 使用完整固定 protocol 或声明 sampling weights。
 
 历史 Bayes scorer 只看当前 slate 首次曝光之前、且出现在已准备 pseudo-slate 中的
 去重事件。它用于先跑通真实 Jev 物料链路，不应替代最终 SASRec+MMoE baseline。

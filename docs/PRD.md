@@ -82,6 +82,7 @@
 - target checker、测试、README、执行日志；
 - KuaiRand balanced annotation、严格 pre-slate behavior bootstrap、score alignment 与 final NPZ materialization；
 - KuaiRand chronological split、正式 SASRec+MMoE 训练、checkpoint 与 leakage-safe slate scoring。
+- behavior-informed Jev annotation selection：在结构分层内结合熵、候选 margin 与多目标 winner disagreement 控制 API 预算。
 
 ### 第二阶段实现
 
@@ -183,7 +184,7 @@ Gate 特征至少包括：
 - behavior/fusion/reranker/loss/metrics；
 - KuaiRand behavior-score 中间协议、pre-slate bootstrap、feature spec 与 final NPZ materializer；
 - checkpoint preference sweep、Pareto hypervolume、regret 与 controllability evaluator；
-- **46 项测试全部通过**；
+- **49 项测试全部通过**；
 - synthetic smoke target 与 synthetic CLI integration 通过。
 
 尚未完成的核心工作是获取真实数据、配置 decision endpoint、跑 Phase A/B 真实实验，并基于失败模式迭代。正式 SASRec+MMoE behavior baseline 已具备 chronological train/validation、显式 OOV、严格 pre-exposure history 与 slate scoring；PLE 仍属于第二轮 baseline。仓库中的 historical-Bayes signal 只用于 CPU bootstrap 和互补性 probe。

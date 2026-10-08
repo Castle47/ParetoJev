@@ -24,11 +24,12 @@
 - train-fitted KuaiRand candidate feature specification and feature-complete NPZ materialization
 - chronological equal-timestamp-safe KuaiRand split utility with cumulative prefix files
 - formal SASRec + MMoE behavior training, early stopping, OOV-aware checkpoint and strict slate scorer
+- behavior-informed Jev annotation ordering using entropy, margin uncertainty and cross-objective winner disagreement
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - checkpoint-level runtime-preference sweep with shared-box Pareto hypervolume, controllability, cold-item and regret diagnostics
 - precomputed real-data training contract
-- **46 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
+- **49 passing tests** plus successful synthetic MicroLens, KuaiRand, materialization and checkpoint-evaluation CLI integration runs
 - passing synthetic model smoke and target report
 
 ## Active next phase

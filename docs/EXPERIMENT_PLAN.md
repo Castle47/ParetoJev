@@ -107,6 +107,18 @@ prior count 和 user history count；`sample-kuairand-jev` 负责生成可审计
 默认 first probe 为 5k，joint cell 上限 250，单用户最多 2 个 slate；如果某些
 cell 库存不足，报告 shortfall，而不是从高频 cell 静默补齐并破坏平衡。
 
+正式 behavior checkpoint 可用后，优先采用 behavior-informed ordering：先保持上述
+结构 cell，再在 cell 内根据三类信号混合排序：
+
+- 多目标 Bernoulli entropy；
+- 每个目标 top-1/top-2 margin 的不确定性；
+- 不同目标 argmax candidate 的 winner disagreement。
+
+默认 `behavior_priority_strength=0.5`，即 active priority 与随机顺序各保留一部分；
+`1.0` 只用于 active-learning ablation。该 manifest 是 teacher annotation 的训练子集，
+不能直接作为总体评估集。由于 feedback-density cell 使用了 outcome label，最终指标
+必须在完整固定 validation/test protocol 上计算，或显式使用抽样权重。
+
 ### 2.4 物料化与 leakage gate
 
 当前状态：已实现并测试。

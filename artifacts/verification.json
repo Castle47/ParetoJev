@@ -12,7 +12,7 @@
   },
   "checks": {
     "compileall": true,
-    "pytest_passed": 46,
+    "pytest_passed": 49,
     "pytest_failed": 0,
     "synthetic_smoke_status": "passed",
     "target_report_passed": true,
@@ -20,7 +20,8 @@
     "required_targets_total": 4,
     "shell_syntax": true,
     "kuairand_temporal_split_cli": true,
-    "kuairand_neural_behavior_train_score_cli": true
+    "kuairand_neural_behavior_train_score_cli": true,
+    "behavior_informed_annotation_sampling": true
   },
   "smoke_summary": {
     "initial_eval_loss": 1.066369652748108,
@@ -41,5 +42,16 @@
     "explicit_item_oov": true,
     "out_of_period_reranker_scoring": true,
     "research_metric_claimed": false
+  },
+  "annotation_sampling_summary": {
+    "structural_cells_preserved": true,
+    "priority_signals": [
+      "bernoulli_entropy",
+      "top1_top2_margin_uncertainty",
+      "cross_objective_winner_disagreement"
+    ],
+    "default_priority_strength_with_behavior_scores": 0.5,
+    "exact_score_alignment_required": true,
+    "evaluation_sample_claimed": false
   }
 }

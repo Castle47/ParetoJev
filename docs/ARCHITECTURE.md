@@ -110,6 +110,25 @@ sigmoid is interpretable as a probability estimate; no post-hoc calibrator is fi
 the early-stopping labels. Class reweighting/focal variants require a separate,
 chronologically later calibration split.
 
+## Behavior-informed annotation policy
+
+Jev annotation is expensive, so the main pipeline does not send every pseudo-slate.
+It first preserves the existing structural cells over coldness, user-history length,
+random/standard exposure and feedback density. Inside each cell, a behavior checkpoint
+can provide an active-learning priority:
+
+```text
+priority = 0.5 * mean Bernoulli entropy
+         + 0.3 * (1 - mean top1/top2 utility margin)
+         + 0.2 * cross-objective winner disagreement
+```
+
+For `is_hate`, utility is `1 - p(hate)` before winner/margin calculation. The configured
+`behavior_priority_strength` interpolates percentile priority with a seeded random rank.
+A value of `0` reproduces random within-cell order; the recommended first probe uses
+`0.5`; `1` is a deterministic high-uncertainty ablation. This is an annotation-training
+policy, not an evaluation sampling policy.
+
 ## Pre-slate behavior bootstrap and materialization
 
 Real Jev annotations can now be materialized before the final neural behavior branch

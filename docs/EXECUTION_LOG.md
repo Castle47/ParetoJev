@@ -185,3 +185,29 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   score-kuairand-behavior`, producing an aligned `[8,3,6]` score tensor.
 - Synthetic quality and latency values are integration diagnostics only; no real-data
   recommendation metric is claimed.
+
+## 2026-10-08 — Behavior-informed Jev annotation policy
+
+- Extended the balanced KuaiRand annotation sampler with an optional full-slate
+  `SlateScoreTensor` from the formal behavior model.
+- Added three pre-Jev active-learning signals: normalized Bernoulli entropy,
+  top-1/top-2 margin uncertainty and cross-objective winner disagreement.
+- Negative-feedback winner/margin calculations use `1 - p(hate)` so all objectives
+  share a maximize-oriented utility convention.
+- Added a configurable interpolation between seeded random within-cell ordering and
+  active priority. The recommended first probe uses strength `0.5`; strength `0`
+  exactly keeps the structural sampler and strength `1` is a high-uncertainty ablation.
+- Added exact slate/candidate/mask/objective alignment checks before a behavior score
+  file can influence sampling.
+- Added inventory-versus-selected priority diagnostics and priority-bucket counts to
+  the manifest report.
+- Added `scripts/sample_kuairand_behavior_informed.sh` and documented that this is a
+  teacher-training annotation subset, not a population evaluation sample.
+
+### Verification
+
+- `python -m compileall -q src tests`: passed.
+- `bash -n scripts/*.sh`: passed.
+- `pytest -q`: **49 passed**.
+- Synthetic tests verify that strength `1` selects the intended high-uncertainty
+  slates and that malformed score shapes/alignments fail closed.

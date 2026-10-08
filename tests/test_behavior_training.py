@@ -16,6 +16,7 @@ from paretojev.data.behavior_sequences import (
 from paretojev.data.kuairand import (
     KUAI_OBJECTIVES,
     KuaiRandSlateConfig,
+    PreparedKuaiRandSlates,
     build_session_slates,
     read_kuairand_log,
 )
@@ -184,3 +185,61 @@ def test_behavior_cli_commands_are_registered() -> None:
     )
     assert train.func.__name__ == "_command_train_kuairand_behavior"
     assert score.func.__name__ == "_command_score_kuairand_behavior"
+
+
+def test_behavior_informed_sampling_cli_uses_aligned_scores(tmp_path: Path) -> None:
+    n, k, m = 5, 3, len(KUAI_OBJECTIVES)
+    slates = PreparedKuaiRandSlates(
+        user_ids=np.arange(n, dtype=np.int64),
+        item_ids=np.arange(n * k, dtype=np.int64).reshape(n, k) + 1,
+        timestamps=np.arange(n * k, dtype=np.int64).reshape(n, k) * 100 + 1,
+        labels=np.zeros((n, k, m), dtype=np.float32),
+        mask=np.ones((n, k), dtype=bool),
+        duration_ms=np.full((n, k), 10_000, dtype=np.float32),
+        tab=np.ones((n, k), dtype=np.int16),
+        is_random=np.zeros((n, k), dtype=np.int8),
+        watch_ratio=np.zeros((n, k), dtype=np.float32),
+        objective_names=KUAI_OBJECTIVES,
+        item_prior_count=np.ones((n, k), dtype=np.int64),
+        user_history_count=np.full(n, 5, dtype=np.int64),
+    )
+    probabilities = np.full((n, k, m), 0.05, dtype=np.float32)
+    probabilities[:4, 0, :] = 0.95
+    probabilities[4] = 0.5
+    slates_path = tmp_path / "slates.npz"
+    scores_path = tmp_path / "scores.npz"
+    output_path = tmp_path / "sample.csv"
+    report_path = tmp_path / "sample.report.json"
+    slates.save(slates_path)
+    SlateScoreTensor(
+        slate_ids=np.arange(n, dtype=np.int64),
+        candidate_ids=slates.item_ids.copy(),
+        probabilities=probabilities,
+        mask=slates.mask.copy(),
+        objective_names=KUAI_OBJECTIVES,
+    ).save(scores_path)
+
+    parser = build_parser()
+    args = parser.parse_args(
+        [
+            "sample-kuairand-jev",
+            str(slates_path),
+            str(output_path),
+            "--max-slates",
+            "1",
+            "--per-cell",
+            "1",
+            "--max-per-user",
+            "0",
+            "--behavior-scores",
+            str(scores_path),
+            "--behavior-priority-strength",
+            "1",
+            "--report",
+            str(report_path),
+        ]
+    )
+    assert args.func(args) == 0
+    selected = pd.read_csv(output_path)
+    assert selected["slate_id"].tolist() == [4]
+    assert report_path.exists()

@@ -432,3 +432,74 @@ def test_split_kuairand_cli_writes_strict_prefixes(tmp_path: Path, capsys) -> No
         "behavior_validation",
         "reranker_train",
     }
+
+
+def test_behavior_informed_sampling_prioritizes_uncertain_slates() -> None:
+    n, k, m = 6, 3, len(KUAI_OBJECTIVES)
+    slates = PreparedKuaiRandSlates(
+        user_ids=np.arange(n, dtype=np.int64),
+        item_ids=np.arange(n * k, dtype=np.int64).reshape(n, k) + 1,
+        timestamps=np.arange(n * k, dtype=np.int64).reshape(n, k) * 1000 + 1,
+        labels=np.zeros((n, k, m), dtype=np.float32),
+        mask=np.ones((n, k), dtype=bool),
+        duration_ms=np.full((n, k), 10_000, dtype=np.float32),
+        tab=np.ones((n, k), dtype=np.int16),
+        is_random=np.zeros((n, k), dtype=np.int8),
+        watch_ratio=np.zeros((n, k), dtype=np.float32),
+        objective_names=KUAI_OBJECTIVES,
+        item_prior_count=np.ones((n, k), dtype=np.int64),
+        user_history_count=np.full(n, 5, dtype=np.int64),
+    )
+    probabilities = np.full((n, k, m), 0.05, dtype=np.float32)
+    probabilities[:4, 0, :] = 0.95
+    probabilities[4:] = 0.5
+
+    selected, report = stratified_sample_slates(
+        slates,
+        KuaiRandSamplingConfig(
+            max_slates=2,
+            per_cell=2,
+            max_per_user=None,
+            seed=4,
+            behavior_priority_strength=1.0,
+        ),
+        behavior_probabilities=probabilities,
+    )
+    assert selected["slate_id"].tolist() == [4, 5]
+    assert report["behavior_informed"] is True
+    assert (
+        report["selected_behavior_priority"]["selected_mean"]
+        > report["selected_behavior_priority"]["inventory_mean"]
+    )
+    assert set(
+        [
+            "behavior_entropy",
+            "behavior_margin_uncertainty",
+            "behavior_objective_disagreement",
+            "behavior_annotation_priority",
+        ]
+    ).issubset(selected.columns)
+
+
+def test_behavior_informed_sampling_rejects_misaligned_shape() -> None:
+    n, k, m = 3, 2, len(KUAI_OBJECTIVES)
+    slates = PreparedKuaiRandSlates(
+        user_ids=np.arange(n, dtype=np.int64),
+        item_ids=np.arange(n * k, dtype=np.int64).reshape(n, k) + 1,
+        timestamps=np.arange(n * k, dtype=np.int64).reshape(n, k) + 1,
+        labels=np.zeros((n, k, m), dtype=np.float32),
+        mask=np.ones((n, k), dtype=bool),
+        duration_ms=np.ones((n, k), dtype=np.float32),
+        tab=np.ones((n, k), dtype=np.int16),
+        is_random=np.zeros((n, k), dtype=np.int8),
+        watch_ratio=np.zeros((n, k), dtype=np.float32),
+        objective_names=KUAI_OBJECTIVES,
+        item_prior_count=np.ones((n, k), dtype=np.int64),
+        user_history_count=np.ones(n, dtype=np.int64),
+    )
+    with pytest.raises(ValueError, match="shape mismatch"):
+        stratified_sample_slates(
+            slates,
+            KuaiRandSamplingConfig(behavior_priority_strength=1.0),
+            behavior_probabilities=np.zeros((n, k, m - 1), dtype=np.float32),
+        )

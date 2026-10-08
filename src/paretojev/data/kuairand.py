@@ -142,6 +142,10 @@ class KuaiRandSamplingConfig:
     cold_quantile: float = 0.25
     warm_quantile: float = 0.75
     positive_rich_threshold: int = 2
+    behavior_priority_strength: float = 0.0
+    entropy_weight: float = 0.5
+    margin_uncertainty_weight: float = 0.3
+    objective_disagreement_weight: float = 0.2
 
     def __post_init__(self) -> None:
         if self.max_slates <= 0:
@@ -154,7 +158,22 @@ class KuaiRandSamplingConfig:
             raise ValueError("Require 0 < cold_quantile < warm_quantile < 1")
         if self.positive_rich_threshold < 2:
             raise ValueError("positive_rich_threshold must be at least 2")
-
+        if not np.isfinite(self.behavior_priority_strength) or not (
+            0.0 <= self.behavior_priority_strength <= 1.0
+        ):
+            raise ValueError("behavior_priority_strength must be finite and lie in [0,1]")
+        priority_weights = (
+            self.entropy_weight,
+            self.margin_uncertainty_weight,
+            self.objective_disagreement_weight,
+        )
+        if (
+            any(not np.isfinite(value) or value < 0.0 for value in priority_weights)
+            or sum(priority_weights) <= 0.0
+        ):
+            raise ValueError(
+                "behavior-priority weights must be finite, non-negative and sum positive"
+            )
 
 
 def temporal_split_log(
@@ -427,6 +446,8 @@ def build_session_slates(
 def build_sampling_frame(
     slates: PreparedKuaiRandSlates,
     config: KuaiRandSamplingConfig = KuaiRandSamplingConfig(),
+    *,
+    behavior_probabilities: np.ndarray | None = None,
 ) -> tuple[pd.DataFrame, dict[str, object]]:
     """Describe slates for balanced, budget-aware Jev annotation.
 
@@ -529,6 +550,114 @@ def build_sampling_frame(
         + "|"
         + frame["feedback_bucket"].astype(str)
     )
+
+    behavior_summary: dict[str, object] | None = None
+    if behavior_probabilities is not None:
+        probabilities = np.asarray(behavior_probabilities, dtype=np.float64)
+        expected_shape = slates.labels.shape
+        if probabilities.shape != expected_shape:
+            raise ValueError(
+                "behavior_probabilities shape mismatch: "
+                f"expected {expected_shape}, got {probabilities.shape}"
+            )
+        valid = np.broadcast_to(slates.mask[..., None], probabilities.shape)
+        selected_probabilities = probabilities[valid]
+        if not np.isfinite(selected_probabilities).all():
+            raise ValueError("behavior_probabilities must be finite on valid candidates")
+        if np.any((selected_probabilities < 0.0) | (selected_probabilities > 1.0)):
+            raise ValueError("behavior_probabilities must lie in [0,1]")
+
+        clipped = np.clip(probabilities, 1e-7, 1.0 - 1e-7)
+        binary_entropy = -(
+            clipped * np.log(clipped)
+            + (1.0 - clipped) * np.log(1.0 - clipped)
+        ) / np.log(2.0)
+        candidate_objective_mask = np.broadcast_to(
+            slates.mask[..., None], binary_entropy.shape
+        )
+        entropy_sum = np.where(candidate_objective_mask, binary_entropy, 0.0).sum(
+            axis=(1, 2)
+        )
+        entropy_denominator = np.maximum(candidate_objective_mask.sum(axis=(1, 2)), 1)
+        mean_entropy = entropy_sum / entropy_denominator
+
+        utility = probabilities.copy()
+        if "is_hate" in slates.objective_names:
+            hate_index = slates.objective_names.index("is_hate")
+            utility[..., hate_index] = 1.0 - utility[..., hate_index]
+        utility = np.where(candidate_objective_mask, utility, -np.inf)
+        margin_uncertainty = np.zeros(len(frame), dtype=np.float64)
+        objective_disagreement = np.zeros(len(frame), dtype=np.float64)
+        for row_index in range(len(frame)):
+            valid_candidates = int(valid_count[row_index])
+            objective_values = utility[row_index, slates.mask[row_index], :]
+            if valid_candidates >= 2:
+                sorted_values = np.sort(objective_values, axis=0)
+                margins = sorted_values[-1] - sorted_values[-2]
+                margin_uncertainty[row_index] = 1.0 - float(np.mean(margins))
+            winners = np.argmax(objective_values, axis=0)
+            possible_unique = min(valid_candidates, len(slates.objective_names))
+            if possible_unique > 1:
+                objective_disagreement[row_index] = (
+                    len(np.unique(winners)) - 1
+                ) / (possible_unique - 1)
+
+        weights = np.asarray(
+            [
+                config.entropy_weight,
+                config.margin_uncertainty_weight,
+                config.objective_disagreement_weight,
+            ],
+            dtype=np.float64,
+        )
+        weights /= weights.sum()
+        priority = (
+            weights[0] * mean_entropy
+            + weights[1] * margin_uncertainty
+            + weights[2] * objective_disagreement
+        )
+        frame["behavior_entropy"] = mean_entropy
+        frame["behavior_margin_uncertainty"] = margin_uncertainty
+        frame["behavior_objective_disagreement"] = objective_disagreement
+        frame["behavior_annotation_priority"] = priority
+        if np.allclose(priority, priority[0]):
+            priority_bucket = np.full(len(priority), "mid", dtype=object)
+            priority_cutpoints = {
+                "low_max": float(priority[0]),
+                "high_min": float(priority[0]),
+            }
+        else:
+            low_cut = float(np.quantile(priority, 1.0 / 3.0))
+            high_cut = float(np.quantile(priority, 2.0 / 3.0))
+            priority_bucket = np.where(
+                priority <= low_cut,
+                "low",
+                np.where(priority >= high_cut, "high", "mid"),
+            )
+            priority_cutpoints = {"low_max": low_cut, "high_min": high_cut}
+        frame["behavior_priority_bucket"] = priority_bucket
+        behavior_summary = {
+            "priority_weights": {
+                "entropy": float(weights[0]),
+                "margin_uncertainty": float(weights[1]),
+                "objective_disagreement": float(weights[2]),
+            },
+            "priority_cutpoints": priority_cutpoints,
+            "priority_mean": float(priority.mean()),
+            "priority_std": float(priority.std()),
+            "priority_bucket_inventory": {
+                str(key): int(value)
+                for key, value in frame["behavior_priority_bucket"]
+                .value_counts()
+                .sort_index()
+                .items()
+            },
+        }
+    elif config.behavior_priority_strength > 0.0:
+        raise ValueError(
+            "behavior_priority_strength > 0 requires behavior_probabilities"
+        )
+
     report: dict[str, object] = {
         "slates": int(len(frame)),
         "unique_users": int(frame["user_id"].nunique()),
@@ -542,6 +671,8 @@ def build_sampling_frame(
             str(key): int(value)
             for key, value in frame["sampling_cell"].value_counts().sort_index().items()
         },
+        "behavior_informed": behavior_summary is not None,
+        "behavior_priority": behavior_summary,
     }
     return frame, report
 
@@ -549,15 +680,37 @@ def build_sampling_frame(
 def stratified_sample_slates(
     slates: PreparedKuaiRandSlates,
     config: KuaiRandSamplingConfig = KuaiRandSamplingConfig(),
+    *,
+    behavior_probabilities: np.ndarray | None = None,
 ) -> tuple[pd.DataFrame, dict[str, object]]:
     """Select a balanced slate subset under cell and per-user budgets."""
 
-    metadata, report = build_sampling_frame(slates, config)
+    metadata, report = build_sampling_frame(
+        slates, config, behavior_probabilities=behavior_probabilities
+    )
     rng = np.random.default_rng(config.seed)
     buckets: dict[str, list[int]] = {}
     for cell, group in metadata.groupby("sampling_cell", sort=True):
         positions = group.index.to_numpy(dtype=np.int64)
-        buckets[str(cell)] = positions[rng.permutation(len(positions))].tolist()
+        if behavior_probabilities is None or config.behavior_priority_strength <= 0.0:
+            ordered_positions = positions[rng.permutation(len(positions))]
+        else:
+            priority = group["behavior_annotation_priority"].to_numpy(dtype=np.float64)
+            if len(priority) == 1:
+                priority_rank = np.ones(1, dtype=np.float64)
+            else:
+                priority_rank = (
+                    pd.Series(priority).rank(method="average", pct=True).to_numpy()
+                )
+            random_rank = rng.random(len(positions))
+            blended = (
+                config.behavior_priority_strength * priority_rank
+                + (1.0 - config.behavior_priority_strength) * random_rank
+            )
+            # Stable index tie-break keeps a strength=1 run reproducible.
+            order = np.lexsort((positions, -blended))
+            ordered_positions = positions[order]
+        buckets[str(cell)] = ordered_positions.tolist()
 
     cell_order = list(buckets)
     if cell_order:
@@ -609,6 +762,10 @@ def stratified_sample_slates(
                 "max_per_user": config.max_per_user,
                 "seed": config.seed,
                 "positive_rich_threshold": config.positive_rich_threshold,
+                "behavior_priority_strength": config.behavior_priority_strength,
+                "entropy_weight": config.entropy_weight,
+                "margin_uncertainty_weight": config.margin_uncertainty_weight,
+                "objective_disagreement_weight": config.objective_disagreement_weight,
             },
             "selected_slates": int(len(selected)),
             "selected_unique_users": int(selected["user_id"].nunique()),
@@ -633,6 +790,29 @@ def stratified_sample_slates(
                 str(key): int(value)
                 for key, value in selected["feedback_bucket"].value_counts().sort_index().items()
             },
+            "selected_behavior_priority": (
+                {
+                    "inventory_mean": float(
+                        metadata["behavior_annotation_priority"].mean()
+                    ),
+                    "selected_mean": float(
+                        selected["behavior_annotation_priority"].mean()
+                    ) if len(selected) else None,
+                    "mean_lift": float(
+                        selected["behavior_annotation_priority"].mean()
+                        - metadata["behavior_annotation_priority"].mean()
+                    ) if len(selected) else None,
+                    "selected_bucket_counts": {
+                        str(key): int(value)
+                        for key, value in selected["behavior_priority_bucket"]
+                        .value_counts()
+                        .sort_index()
+                        .items()
+                    },
+                }
+                if behavior_probabilities is not None
+                else None
+            ),
         }
     )
     return selected, report

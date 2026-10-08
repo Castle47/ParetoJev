@@ -34,6 +34,9 @@ Target Mode 的核心不是“设一个很高的最终指标”，而是将研�
 
 若正式 behavior branch 尚未跑通，只允许把 historical-Bayes signal 标为 bootstrap，不得作为主 baseline。
 
+Jev annotation manifest 还必须记录 behavior priority 的 inventory mean、selected mean、
+priority bucket 分布与随机混合强度。高 priority lift 只说明选样器生效，不是推荐指标。
+
 ### T2：低风险胜点
 
 目标：MicroLens CV hybrid 同时改善至少两项核心指标，且没有显著伤害第三项。
