@@ -7,14 +7,19 @@ import random
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Sequence
+from typing import Iterable, Literal, Sequence
 
 import numpy as np
 import pandas as pd
 import requests
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from paretojev.metrics.ranking import per_user_auc, positive_ranks, single_positive_metrics
+from paretojev.metrics.ranking import (
+    TiePolicy,
+    per_user_auc,
+    positive_ranks,
+    single_positive_metrics,
+)
 
 MICROLENS_BASE_URL = "https://recsys.westlake.edu.cn/MicroLens-100k-Dataset/"
 MICROLENS_FILES = (
@@ -26,13 +31,36 @@ MICROLENS_FILES = (
 
 @dataclass(frozen=True)
 class MicroLensProtocol:
-    """Candidate protocol used by the public JEV-27B-VL recommendation demo."""
+    """Candidate protocol used by the public JEV-27B-VL recommendation demo.
+
+    ``upstream_occurrence`` reproduces the demo's negative sampler: draw from
+    the time-window interaction *occurrences* with replacement and retain the
+    first occurrence of each distinct item.  This intentionally gives popular
+    items more sampling mass. ``uniform_unique`` is a cleaner research variant
+    that samples uniformly from distinct eligible items, but it is not directly
+    comparable to the published demo.
+    """
 
     n_users: int = 200
     n_negatives: int = 19
     history_length: int = 5
     time_window_days: int = 3
     seed: int = 0
+    negative_sampling: Literal["upstream_occurrence", "uniform_unique"] = (
+        "upstream_occurrence"
+    )
+
+    def __post_init__(self) -> None:
+        if self.n_users <= 0:
+            raise ValueError("n_users must be positive")
+        if self.n_negatives <= 0:
+            raise ValueError("n_negatives must be positive")
+        if self.history_length <= 0:
+            raise ValueError("history_length must be positive")
+        if self.time_window_days <= 0:
+            raise ValueError("time_window_days must be positive")
+        if self.negative_sampling not in {"upstream_occurrence", "uniform_unique"}:
+            raise ValueError(f"Unknown negative_sampling: {self.negative_sampling}")
 
     @property
     def candidate_count(self) -> int:
@@ -219,7 +247,9 @@ def prepare_microlens_candidates(
         target_time = times[-1]
         history = items[-1 - protocol.history_length : -1]
         low = int(np.searchsorted(all_times, target_time - window_ms, side="left"))
-        high = int(np.searchsorted(all_times, target_time + window_ms, side="right"))
+        # The public demo uses NumPy's default ``side=left`` at both bounds.
+        # Preserve that half-open interval for exact candidate comparability.
+        high = int(np.searchsorted(all_times, target_time + window_ms, side="left"))
         seen = set(items)
         pool = [int(x) for x in all_items[low:high] if int(x) not in seen]
         unique_pool = list(dict.fromkeys(pool))
@@ -228,7 +258,16 @@ def prepare_microlens_candidates(
                 f"User {user} has only {len(unique_pool)} eligible negatives; "
                 f"need {protocol.n_negatives}"
             )
-        negatives = rng.sample(unique_pool, protocol.n_negatives)
+        if protocol.negative_sampling == "upstream_occurrence":
+            # Match upstream exactly: sample interaction occurrences (therefore
+            # popularity weighted), accepting only the first draw of each item.
+            negatives: list[int] = []
+            while len(negatives) < protocol.n_negatives:
+                candidate = int(rng.choice(pool))
+                if candidate not in negatives:
+                    negatives.append(candidate)
+        else:
+            negatives = rng.sample(unique_pool, protocol.n_negatives)
         candidates = [positive, *negatives]
 
         for position, candidate in enumerate(candidates):
@@ -343,9 +382,20 @@ def evaluate_score_column(
     frame: pd.DataFrame,
     score_column: str,
     ks: Iterable[int] = (1, 5, 10),
+    *,
+    tie_policy: TiePolicy = "upstream_jitter",
+    tie_seed: int = 1,
 ) -> dict[str, float]:
+    """Evaluate one score column under an explicit tie policy.
+
+    The default mirrors the public MicroLens JEV demo. Pass ``stable`` for the
+    conventional AUC half-credit treatment and stable input-order rank ties.
+    """
+
     _, scores, labels = grouped_score_arrays(frame, score_column)
-    return single_positive_metrics(scores, labels, ks=ks)
+    return single_positive_metrics(
+        scores, labels, ks=ks, tie_policy=tie_policy, tie_seed=tie_seed
+    )
 
 
 def _simplex_grid(n_models: int, step: float) -> list[np.ndarray]:
@@ -382,6 +432,8 @@ def cross_validated_hybrid(
     objective: str = "balanced",
     seed: int = 0,
     output_column: str = "hybrid_cv",
+    tie_policy: TiePolicy = "upstream_jitter",
+    tie_seed: int = 1,
 ) -> tuple[pd.DataFrame, list[dict[str, object]]]:
     """Tune a transparent linear hybrid without evaluating on its own users.
 
@@ -433,7 +485,13 @@ def cross_validated_hybrid(
                 weight * normalized_columns[column]
                 for weight, column in zip(weights, score_columns, strict=True)
             )
-            metrics = single_positive_metrics(combined, labels_val, ks=(1, 5, 10))
+            metrics = single_positive_metrics(
+                combined,
+                labels_val,
+                ks=(1, 5, 10),
+                tie_policy=tie_policy,
+                tie_seed=tie_seed,
+            )
             value = objective_value(metrics)
             if value > best_score + 1e-12:
                 best_score = value
@@ -468,12 +526,22 @@ def cross_validated_hybrid(
     return result, reports
 
 
-def per_user_metric_matrix(frame: pd.DataFrame, score_column: str) -> np.ndarray:
+def per_user_metric_matrix(
+    frame: pd.DataFrame,
+    score_column: str,
+    *,
+    tie_policy: TiePolicy = "upstream_jitter",
+    tie_seed: int = 1,
+) -> np.ndarray:
     """Return [N,5]: AUC, HR@1, HR@5, NDCG@10, MRR for bootstrap tests."""
 
     _, scores, labels = grouped_score_arrays(frame, score_column)
-    ranks = positive_ranks(scores, labels)
-    auc = per_user_auc(scores, labels)
+    ranks = positive_ranks(
+        scores, labels, tie_policy=tie_policy, tie_seed=tie_seed
+    )
+    auc = per_user_auc(
+        scores, labels, tie_policy=tie_policy, tie_seed=tie_seed
+    )
     return np.stack(
         [
             auc,

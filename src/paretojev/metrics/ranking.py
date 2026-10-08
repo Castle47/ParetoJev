@@ -1,21 +1,63 @@
 from __future__ import annotations
 
 import math
-from typing import Iterable
+from typing import Iterable, Literal
 
 import numpy as np
 
+TiePolicy = Literal["stable", "upstream_jitter", "random_jitter"]
 
-def positive_ranks(scores: np.ndarray, labels: np.ndarray) -> np.ndarray:
+
+def break_score_ties(
+    scores: np.ndarray,
+    *,
+    policy: TiePolicy = "stable",
+    seed: int = 1,
+    epsilon: float = 1e-9,
+) -> np.ndarray:
+    """Return scores with a declared deterministic tie policy applied.
+
+    ``upstream_jitter`` exactly mirrors the public JEV-27B-VL MicroLens demo:
+    every slate receives the same position-wise ``RandomState(seed)`` jitter.
+    It is provided for metric comparability, not because position-wise jitter is
+    the preferred statistical treatment. ``random_jitter`` draws independent
+    deterministic noise per cell and is less position-coupled. ``stable`` keeps
+    scores unchanged and lets stable sorting resolve ties by input order.
+    """
+
+    values = np.asarray(scores, dtype=np.float64)
+    if values.ndim != 2:
+        raise ValueError("scores must have shape [N,K]")
+    if policy == "stable":
+        return values
+    if epsilon <= 0:
+        raise ValueError("epsilon must be positive")
+    if policy == "upstream_jitter":
+        noise = np.random.RandomState(seed).rand(values.shape[1])[None, :]
+        return values + epsilon * noise
+    if policy == "random_jitter":
+        noise = np.random.default_rng(seed).random(values.shape)
+        return values + epsilon * noise
+    raise ValueError(f"Unknown tie policy: {policy}")
+
+
+def positive_ranks(
+    scores: np.ndarray,
+    labels: np.ndarray,
+    *,
+    tie_policy: TiePolicy = "stable",
+    tie_seed: int = 1,
+) -> np.ndarray:
     """Return 1-indexed ranks for rows containing exactly one positive item."""
+
     scores = np.asarray(scores)
     labels = np.asarray(labels)
     if scores.ndim != 2 or labels.shape != scores.shape:
         raise ValueError("scores and labels must both have shape [N,K]")
     if not np.all(labels.sum(axis=1) == 1):
         raise ValueError("each row must contain exactly one positive label")
-    # Stable sort makes tied-score behavior deterministic and reproducible.
-    order = np.argsort(-scores, axis=1, kind="stable")
+    ranked_scores = break_score_ties(scores, policy=tie_policy, seed=tie_seed)
+    order = np.argsort(-ranked_scores, axis=1, kind="stable")
     positive_index = labels.argmax(axis=1)
     ranks = np.empty(scores.shape[0], dtype=np.int64)
     for row in range(scores.shape[0]):
@@ -23,20 +65,37 @@ def positive_ranks(scores: np.ndarray, labels: np.ndarray) -> np.ndarray:
     return ranks
 
 
-def per_user_auc(scores: np.ndarray, labels: np.ndarray) -> np.ndarray:
-    """AUC for one-positive candidate sets, with 0.5 credit for score ties."""
+def per_user_auc(
+    scores: np.ndarray,
+    labels: np.ndarray,
+    *,
+    tie_policy: TiePolicy = "stable",
+    tie_seed: int = 1,
+) -> np.ndarray:
+    """AUC for one-positive candidate sets.
+
+    With ``stable`` this uses the conventional 0.5 credit for exact ties. With a
+    jitter policy it computes AUC after applying the declared deterministic tie
+    breaker, matching rank metrics under the same policy.
+    """
+
     scores = np.asarray(scores)
     labels = np.asarray(labels)
     if scores.shape != labels.shape or scores.ndim != 2:
         raise ValueError("scores and labels must have shape [N,K]")
+    evaluated = break_score_ties(scores, policy=tie_policy, seed=tie_seed)
     aucs = []
-    for row_scores, row_labels in zip(scores, labels, strict=True):
+    for row_scores, row_labels in zip(evaluated, labels, strict=True):
         positives = row_scores[row_labels == 1]
         negatives = row_scores[row_labels == 0]
         if len(positives) != 1 or len(negatives) == 0:
             raise ValueError("each row must have one positive and at least one negative")
         p = positives[0]
-        aucs.append(float(((p > negatives).sum() + 0.5 * (p == negatives).sum()) / len(negatives)))
+        if tie_policy == "stable":
+            value = ((p > negatives).sum() + 0.5 * (p == negatives).sum()) / len(negatives)
+        else:
+            value = (p > negatives).sum() / len(negatives)
+        aucs.append(float(value))
     return np.asarray(aucs, dtype=np.float64)
 
 
@@ -44,10 +103,15 @@ def single_positive_metrics(
     scores: np.ndarray,
     labels: np.ndarray,
     ks: Iterable[int] = (1, 5, 10),
+    *,
+    tie_policy: TiePolicy = "stable",
+    tie_seed: int = 1,
 ) -> dict[str, float]:
-    ranks = positive_ranks(scores, labels)
+    ranks = positive_ranks(scores, labels, tie_policy=tie_policy, tie_seed=tie_seed)
     result: dict[str, float] = {
-        "auc": float(per_user_auc(scores, labels).mean()),
+        "auc": float(
+            per_user_auc(scores, labels, tie_policy=tie_policy, tie_seed=tie_seed).mean()
+        ),
         "mrr": float((1.0 / ranks).mean()),
     }
     for k in ks:

@@ -36,3 +36,35 @@ def test_typesafe_scoring_parsers() -> None:
     noul = score_typesafe_noul(client, state, candidates, DEFAULT_OBJECTIVES[:2])
     assert noul.probabilities.shape == (2, 2)
     assert np.allclose(noul.probabilities, 0.8)
+
+
+def test_pointwise_noul_state_hides_competitors_and_keeps_candidate_text() -> None:
+    from paretojev.jev.prompts import build_open_jev_noul_requests, select_objectives
+
+    candidates = [
+        {"candidate_id": "a", "caption": "mountain trail"},
+        {"candidate_id": "b", "caption": "cat compilation"},
+    ]
+    state = build_state(
+        [{"candidate_id": "h", "caption": "hiking"}],
+        (),
+        include_candidates=False,
+    )
+    assert "candidates" not in state
+    requests = build_open_jev_noul_requests(
+        state, candidates, select_objectives(["click"])
+    )
+    assert len(requests) == 2
+    assert "mountain trail" in requests[0][2]
+    assert "cat compilation" in requests[1][2]
+
+
+def test_objective_selection_is_ordered_and_validated() -> None:
+    import pytest
+
+    from paretojev.jev.prompts import select_objectives
+
+    selected = select_objectives(["like", "click"])
+    assert [objective.name for objective in selected] == ["like", "click"]
+    with pytest.raises(ValueError, match="Unknown objectives"):
+        select_objectives(["not_an_objective"])

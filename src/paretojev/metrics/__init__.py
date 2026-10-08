@@ -8,6 +8,8 @@ from .pareto import (
     worst_objective_regret,
 )
 from .ranking import (
+    TiePolicy,
+    break_score_ties,
     dcg_at_k,
     ndcg_at_k,
     paired_bootstrap_difference,
@@ -26,6 +28,8 @@ __all__ = [
     "paired_dominance_rate",
     "pareto_front_mask",
     "worst_objective_regret",
+    "TiePolicy",
+    "break_score_ties",
     "dcg_at_k",
     "ndcg_at_k",
     "paired_bootstrap_difference",

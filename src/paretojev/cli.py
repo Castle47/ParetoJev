@@ -32,12 +32,14 @@ from paretojev.experiments import merge_decision_scores
 from paretojev.jev import (
     DecisionCache,
     OpenJevClient,
+    ScoreJsonlConfig,
     TypeSafeJevClient,
-    build_state,
     score_open_choice,
     score_open_noul,
     score_typesafe_choice,
     score_typesafe_noul,
+    run_score_jsonl,
+    select_objectives,
 )
 from paretojev.training import (
     PrecomputedTrainingConfig,
@@ -46,7 +48,7 @@ from paretojev.training import (
     run_precomputed_training,
     run_synthetic_smoke,
 )
-from paretojev.utils.io import atomic_write_json, read_jsonl, write_jsonl
+from paretojev.utils.io import atomic_write_json, read_jsonl
 
 
 def _print_json(payload: Any) -> None:
@@ -101,11 +103,14 @@ def _command_prepare_microlens(args: argparse.Namespace) -> int:
         history_length=args.history,
         time_window_days=args.window_days,
         seed=args.seed,
+        negative_sampling=args.negative_sampling,
     )
     frame = prepare_microlens_candidates(args.directory, protocol)
     save_microlens_protocol(frame, args.output_directory)
     metrics = {
-        column: evaluate_score_column(frame, column)
+        column: evaluate_score_column(
+            frame, column, tie_policy=args.tie_policy, tie_seed=args.tie_seed
+        )
         for column in ("pop", "title_sim", "itemcf")
     }
     report = {
@@ -113,6 +118,8 @@ def _command_prepare_microlens(args: argparse.Namespace) -> int:
         "rows": len(frame),
         "users": int(frame["user"].nunique()),
         "baseline_metrics": metrics,
+        "tie_policy": args.tie_policy,
+        "tie_seed": args.tie_seed,
     }
     atomic_write_json(Path(args.output_directory) / "prepare_report.json", report)
     _print_json(report)
@@ -133,7 +140,14 @@ def _command_evaluate_microlens(args: argparse.Namespace) -> int:
     report: dict[str, Any] = {
         "users": int(frame["user"].nunique()),
         "candidate_count": int(frame.groupby("user").size().iloc[0]),
-        "metrics": {column: evaluate_score_column(frame, column) for column in score_columns},
+        "metrics": {
+            column: evaluate_score_column(
+                frame, column, tie_policy=args.tie_policy, tie_seed=args.tie_seed
+            )
+            for column in score_columns
+        },
+        "tie_policy": args.tie_policy,
+        "tie_seed": args.tie_seed,
     }
     if args.hybrid:
         frame, folds = cross_validated_hybrid(
@@ -144,9 +158,14 @@ def _command_evaluate_microlens(args: argparse.Namespace) -> int:
             objective=args.objective,
             seed=args.seed,
             output_column=args.hybrid_output_column,
+            tie_policy=args.tie_policy,
+            tie_seed=args.tie_seed,
         )
         report["metrics"][args.hybrid_output_column] = evaluate_score_column(
-            frame, args.hybrid_output_column
+            frame,
+            args.hybrid_output_column,
+            tie_policy=args.tie_policy,
+            tie_seed=args.tie_seed,
         )
         report["hybrid"] = {"columns": args.hybrid, "folds": folds}
         output_scores = Path(args.output_scores or Path(args.input).with_name("evaluated_scores.csv"))
@@ -203,12 +222,14 @@ def _command_prepare_kuairand(args: argparse.Namespace) -> int:
 
 def _command_score_jsonl(args: argparse.Namespace) -> int:
     cache = DecisionCache(args.cache)
+    objectives = select_objectives(args.objectives)
     if args.provider == "typesafe":
         client: Any = TypeSafeJevClient(
             api_key=args.api_key,
             base_url=args.base_url or "https://api.typesafe.ai",
             model=args.model or "jev-1.13.0",
             cache=cache,
+            timeout_seconds=args.timeout_seconds,
         )
         score_function = score_typesafe_choice if args.mode == "choice" else score_typesafe_noul
     else:
@@ -217,43 +238,35 @@ def _command_score_jsonl(args: argparse.Namespace) -> int:
             base_url=args.base_url,
             model=args.model or "autotrust/JEV-27B",
             cache=cache,
+            timeout_seconds=args.timeout_seconds,
         )
         score_function = score_open_choice if args.mode == "choice" else score_open_noul
 
-    output_rows: list[dict[str, Any]] = []
-    for row in read_jsonl(args.input):
-        candidates = row.get("candidates")
-        if not isinstance(candidates, list) or len(candidates) < 2:
-            raise ValueError("Each input row needs a candidates list with at least two entries")
-        state = build_state(row.get("history", []), candidates, row.get("context"))
-        scored = score_function(client, state, candidates)
-        raw = scored.raw_response
-        resolved_model = raw.get("model") if isinstance(raw, dict) else None
-        usage = raw.get("usage") if isinstance(raw, dict) else None
-        output_rows.append(
-            {
-                "slate_id": row.get("slate_id"),
-                "candidate_ids": list(scored.candidate_ids),
-                "objective_names": list(scored.objective_names),
-                "probabilities": scored.probabilities.tolist(),
-                "confidence": scored.confidence.tolist(),
-                "entropy": scored.entropy.tolist(),
-                "requested_model": getattr(client, "model", None),
-                "resolved_model": resolved_model or getattr(client, "model", None),
-                "usage": usage,
-                "provider": args.provider,
-                "mode": args.mode,
-            }
-        )
-    write_jsonl(args.output, output_rows)
-    _print_json(
-        {
-            "rows": len(output_rows),
-            "output": str(args.output),
-            "cache_entries": cache.count(),
-        }
+    config = ScoreJsonlConfig(
+        provider=args.provider,
+        mode=args.mode,
+        objective_names=tuple(objective.name for objective in objectives),
+        noul_scope=args.noul_scope,
+        resume=args.resume and not args.overwrite,
+        overwrite=args.overwrite,
+        continue_on_error=args.continue_on_error,
+        durable_every=args.durable_every,
+        start_index=args.start_index,
+        max_new_rows=args.max_rows,
     )
-    return 0
+    report = run_score_jsonl(
+        args.input,
+        args.output,
+        client=client,
+        score_function=score_function,
+        objectives=objectives,
+        config=config,
+        error_path=args.errors,
+        report_path=args.report,
+        cache_count=cache.count,
+    )
+    _print_json(report)
+    return 0 if report["status"] == "completed" else 2
 
 
 def _command_merge_decision_scores(args: argparse.Namespace) -> int:
@@ -323,6 +336,18 @@ def build_parser() -> argparse.ArgumentParser:
     prepare_micro.add_argument("--history", type=int, default=5)
     prepare_micro.add_argument("--window-days", type=int, default=3)
     prepare_micro.add_argument("--seed", type=int, default=0)
+    prepare_micro.add_argument(
+        "--negative-sampling",
+        choices=["upstream_occurrence", "uniform_unique"],
+        default="upstream_occurrence",
+        help="Use upstream occurrence-weighted sampling for published-demo comparability",
+    )
+    prepare_micro.add_argument(
+        "--tie-policy",
+        choices=["stable", "upstream_jitter", "random_jitter"],
+        default="upstream_jitter",
+    )
+    prepare_micro.add_argument("--tie-seed", type=int, default=1)
     prepare_micro.set_defaults(func=_command_prepare_microlens)
 
     evaluate_micro = subparsers.add_parser(
@@ -336,6 +361,12 @@ def build_parser() -> argparse.ArgumentParser:
     evaluate_micro.add_argument("--weight-step", type=float, default=0.05)
     evaluate_micro.add_argument("--objective", choices=["auc", "ndcg@10", "balanced"], default="balanced")
     evaluate_micro.add_argument("--seed", type=int, default=0)
+    evaluate_micro.add_argument(
+        "--tie-policy",
+        choices=["stable", "upstream_jitter", "random_jitter"],
+        default="upstream_jitter",
+    )
+    evaluate_micro.add_argument("--tie-seed", type=int, default=1)
     evaluate_micro.add_argument("--output")
     evaluate_micro.add_argument("--output-scores")
     evaluate_micro.set_defaults(func=_command_evaluate_microlens)
@@ -368,7 +399,32 @@ def build_parser() -> argparse.ArgumentParser:
     score.add_argument("--base-url")
     score.add_argument("--api-key")
     score.add_argument("--model")
+    score.add_argument(
+        "--objectives",
+        nargs="+",
+        help="Subset such as: click long_view like (default: all objectives)",
+    )
+    score.add_argument(
+        "--noul-scope",
+        choices=["pointwise", "slate"],
+        default="pointwise",
+        help="Pointwise hides competing candidates from each Noul decision",
+    )
     score.add_argument("--cache", default="artifacts/jev_cache.sqlite3")
+    score.add_argument("--timeout-seconds", type=float, default=300.0)
+    score.add_argument("--max-rows", type=int, help="Maximum number of new successful slates")
+    score.add_argument("--start-index", type=int, default=0)
+    score.add_argument("--durable-every", type=int, default=1)
+    score.add_argument("--continue-on-error", action="store_true")
+    score.add_argument("--errors")
+    score.add_argument("--report")
+    score.add_argument("--overwrite", action="store_true")
+    score.add_argument(
+        "--resume",
+        action=argparse.BooleanOptionalAction,
+        default=True,
+        help="Resume compatible existing JSONL output (default: true)",
+    )
     score.set_defaults(func=_command_score_jsonl)
 
     merge = subparsers.add_parser("merge-decision-scores", help="Merge score-jsonl output into candidate rows")

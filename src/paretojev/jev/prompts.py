@@ -54,6 +54,29 @@ DEFAULT_OBJECTIVES: tuple[DecisionObjective, ...] = (
 )
 
 
+OBJECTIVES_BY_NAME: dict[str, DecisionObjective] = {
+    objective.name: objective for objective in DEFAULT_OBJECTIVES
+}
+
+
+def select_objectives(names: Iterable[str] | None = None) -> tuple[DecisionObjective, ...]:
+    """Resolve a stable, validated subset of decision objectives by name."""
+
+    if names is None:
+        return DEFAULT_OBJECTIVES
+    requested = tuple(str(name) for name in names)
+    if not requested:
+        raise ValueError("At least one objective is required")
+    if len(set(requested)) != len(requested):
+        raise ValueError(f"Duplicate objective names: {requested}")
+    unknown = [name for name in requested if name not in OBJECTIVES_BY_NAME]
+    if unknown:
+        raise ValueError(
+            f"Unknown objectives {unknown}; available: {sorted(OBJECTIVES_BY_NAME)}"
+        )
+    return tuple(OBJECTIVES_BY_NAME[name] for name in requested)
+
+
 def _candidate_text(candidate: dict[str, Any]) -> str:
     fields = []
     for key in (
@@ -73,9 +96,19 @@ def _candidate_text(candidate: dict[str, Any]) -> str:
 
 def build_state(
     history: Iterable[dict[str, Any]],
-    candidates: Iterable[dict[str, Any]],
+    candidates: Iterable[dict[str, Any]] = (),
     context: dict[str, Any] | None = None,
+    *,
+    include_candidates: bool = True,
 ) -> dict[str, Any]:
+    """Build a serializable recommendation state.
+
+    Pointwise Noul scoring should normally set ``include_candidates=False``:
+    candidate content is then carried only by that candidate's question, so a
+    score cannot depend on competing candidates. Choice scoring necessarily
+    keeps the full candidate set in state.
+    """
+
     history_rows = [
         {
             "position": idx + 1,
@@ -91,12 +124,14 @@ def build_state(
         }
         for idx, item in enumerate(candidates)
     ]
-    return {
+    state: dict[str, Any] = {
         "task": "short-video recommendation reranking",
         "recent_history_oldest_to_newest": history_rows,
         "current_context": context or {},
-        "candidates": candidate_rows,
     }
+    if include_candidates:
+        state["candidates"] = candidate_rows
+    return state
 
 
 def build_typesafe_choice_questions(
@@ -159,7 +194,11 @@ def build_open_jev_noul_requests(
     requests_: list[tuple[str, Any, str, list[str] | None]] = []
     for idx, candidate in enumerate(candidates):
         candidate_id = str(candidate.get("candidate_id", candidate.get("item_id", candidate.get("video_id", idx))))
+        candidate_text = _candidate_text(candidate)
         for objective in objectives:
-            question = f"For candidate {candidate_id}, {objective.question[0].lower() + objective.question[1:]}"
+            question = (
+                f"Candidate {candidate_id}: {candidate_text}. "
+                f"{objective.question}"
+            )
             requests_.append(("noul", state, question, None))
     return requests_

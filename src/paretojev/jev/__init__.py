@@ -3,12 +3,15 @@ from .client import DecisionAPIError, OpenJevClient, RetryPolicy, TypeSafeJevCli
 from .prompts import (
     DEFAULT_OBJECTIVES,
     DecisionObjective,
+    OBJECTIVES_BY_NAME,
     build_open_jev_choice_requests,
     build_open_jev_noul_requests,
     build_state,
     build_typesafe_choice_questions,
     build_typesafe_noul_questions,
+    select_objectives,
 )
+from .runner import ScoreJsonlConfig, run_score_jsonl
 from .scoring import (
     DecisionScores,
     score_open_choice,
@@ -25,11 +28,15 @@ __all__ = [
     "TypeSafeJevClient",
     "DEFAULT_OBJECTIVES",
     "DecisionObjective",
+    "OBJECTIVES_BY_NAME",
     "build_open_jev_choice_requests",
     "build_open_jev_noul_requests",
     "build_state",
     "build_typesafe_choice_questions",
     "build_typesafe_noul_questions",
+    "select_objectives",
+    "ScoreJsonlConfig",
+    "run_score_jsonl",
     "DecisionScores",
     "score_open_choice",
     "score_open_noul",

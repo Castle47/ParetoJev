@@ -41,16 +41,31 @@ class _HTTPDecisionClient:
         self.retry = retry
         self.timeout_seconds = timeout_seconds
         self.session = requests.Session()
+        self._request_count = 0
+        self._cache_hit_count = 0
+        self._http_call_count = 0
+        self._retry_count = 0
+
+    def stats(self) -> dict[str, int]:
+        return {
+            "requests": self._request_count,
+            "cache_hits": self._cache_hit_count,
+            "http_calls": self._http_call_count,
+            "retries": self._retry_count,
+        }
 
     def _post(self, url: str, payload: dict[str, Any], headers: dict[str, str]) -> dict[str, Any]:
+        self._request_count += 1
         cached = self.cache.get(self.provider, self.model, payload) if self.cache else None
         if cached is not None:
+            self._cache_hit_count += 1
             return cached
 
         delay = self.retry.initial_delay_seconds
         last_error: Exception | None = None
         for attempt in range(1, self.retry.max_attempts + 1):
             try:
+                self._http_call_count += 1
                 response = self.session.post(
                     url,
                     json=payload,
@@ -78,6 +93,7 @@ class _HTTPDecisionClient:
                 last_error = exc
                 if attempt == self.retry.max_attempts:
                     break
+                self._retry_count += 1
                 time.sleep(delay + random.random() * min(0.25, delay / 5))
                 delay = min(delay * 2, self.retry.max_delay_seconds)
         raise DecisionAPIError(f"Decision API failed after retries: {last_error}") from last_error
