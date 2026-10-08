@@ -13,20 +13,24 @@
 - confidence-aware fusion and preference-conditioned set reranker
 - Pareto/Tchebycheff/uncertainty/distillation losses
 - precomputed real-data training contract
-- 14 passing tests
+- 15 passing tests
+- MicroLens official/legacy schema aliases and timestamp-unit normalization
 - passing synthetic smoke and target report
 
 ## Active next phase
 
 **Phase A — MicroLens reproduction and hybrid win**
 
-Required external inputs:
+Required external inputs for real benchmark numbers:
 
 1. official MicroLens pairs/title files;
 2. official Jev API key or a reachable self-hosted JEV endpoint;
 3. optional GPU endpoint for the JEV-27B-VL cover track.
 
-The current execution environment had no outbound dataset download path, so Phase A real metrics were not run.
+Work that does not depend on those inputs continues in parallel: protocol hardening,
+baseline correctness, resumable runners, test coverage and experiment reporting. The
+current execution environment has no outbound binary dataset download path, so Phase A
+real metrics have not yet been run.
 
 ## Go/no-go sequence
 
