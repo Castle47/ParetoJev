@@ -1,0 +1,22 @@
+{
+  "raw_real_responses": 400,
+  "unique_model_revisions": [
+    "7ce153d6f7933769527939bcb92ec3f3d8292884"
+  ],
+  "canary_http_calls": 1,
+  "scoring_http_calls": 399,
+  "total_real_http_calls": 400,
+  "failed_slates": 0,
+  "replay_http_calls": 0,
+  "scores_and_cache_byte_identical_on_replay": true,
+  "source_and_input_hashes_registered_before_scoring": true,
+  "test_result": "195 passed",
+  "score_file_sha256": "2eedf56243f0aa6886342a3dc9aed8e1c12dd3c70f9f25d9e136847e4c9c6721",
+  "raw_cache_sha256": "a2846dd7cd6022881ea891bbdcbac3ef916e419a2751e7308c9df394d0eae38a",
+  "model_inference_seconds_sum": 73.15570817817934,
+  "scoring_wall_seconds": 402.13863541703904,
+  "no_paid_service_or_user_credential_used": true,
+  "no_simulated_decision_values_used": true,
+  "raw_input_regeneration_sha256_identical": true,
+  "regeneration_log": "input_replay.txt"
+}

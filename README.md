@@ -32,13 +32,19 @@ Verified locally on **2026-10-08**:
 | Unit/integration tests | Current verified results in execution log | [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md) |
 | Synthetic end-to-end smoke run | **Passed** | [`artifacts/smoke_metrics.json`](artifacts/smoke_metrics.json) |
 | Registered six-objective baseline comparison | 3 seeds × 3 methods; exact resume verified | [`reports/synthetic-baseline-2026-10-08/README.md`](reports/synthetic-baseline-2026-10-08/README.md) |
-| Real MicroLens/KuaiRand/Jev experiments | Not run in this bootstrap | Requires datasets plus Jev endpoint/API or self-hosted model |
+| Real MicroLens / AutoTrust JEV-27B | 200-user CF baseline + 20-user / 400-decision real pilot completed | [`reports/microlens-real-2026-10-08/README.md`](reports/microlens-real-2026-10-08/README.md) |
+| Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
 
-Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). No real benchmark is claimed.
+Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). A first real MicroLens pilot is now available, with no established fusion win.
 
 The registered synthetic comparison did **not** show ParetoJev superiority:
 hypervolume was below both trainable baselines, despite better cold-NDCG. The real
 research gates remain `not_evaluable`; see the report for all results and limitations.
+
+The real text-only pilot used the author's public JEV-27B endpoint, verified each
+deployment revision, and required no user API key. Fixed fusion improved AUC on 20
+users but reduced NDCG, with the AUC difference interval crossing zero. This pilot
+cannot satisfy the main 200-user targets and is not a cover-image VL reproduction.
 
 ## Research hypothesis
 

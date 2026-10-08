@@ -1,0 +1,75 @@
+{
+  "data_kind": "real",
+  "dataset": "microlens",
+  "source_interactions": 719405,
+  "source_users": 100000,
+  "source_items": 19738,
+  "title_records": 19738,
+  "timestamp_min_ms": 1583378629552,
+  "timestamp_max_ms": 1662984152842,
+  "eligible_users_with_six_events": 59245,
+  "evaluation_users": 200,
+  "evaluation_rows": 4000,
+  "pilot_users": 20,
+  "pilot_rows": 400,
+  "pilot_unique_candidates": 378,
+  "blank_candidate_titles": 1,
+  "non_strict_history_boundary_users": [],
+  "candidate_count_per_user": [
+    20
+  ],
+  "positive_count_per_user": [
+    1
+  ],
+  "positive_positions_pilot": {
+    "1": 3,
+    "3": 1,
+    "4": 1,
+    "6": 1,
+    "7": 1,
+    "8": 1,
+    "9": 2,
+    "10": 2,
+    "12": 1,
+    "14": 2,
+    "15": 1,
+    "16": 1,
+    "18": 2,
+    "19": 1
+  },
+  "labels_excluded_from_decision_inputs": true,
+  "itemcf_training_user_overlap": 0,
+  "protocol_limitations": [
+    "Item-CF uses other eligible users histories across this retrospective dataset; this is user-held-out demo reproduction, not a globally chronological production forecast",
+    "Negatives are sampled non-next videos, not logged nonclick exposures",
+    "Titles only; no cover images sent to the public service"
+  ],
+  "provenance": {
+    "created_at_utc": "2026-10-08T09:08:10.952334+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "ce02e901289b38a955026820bee27fbde3a839ae",
+    "inputs": [
+      {
+        "path": "data/raw/microlens/MicroLens-100k_pairs.csv",
+        "type": "file",
+        "bytes": 18940682,
+        "sha256": "cc5972c79e8a24c8c7c8e229ce48b0d56c3719f804debb84df7382293c56bd4e"
+      },
+      {
+        "path": "data/raw/microlens/MicroLens-100k_title_en.csv",
+        "type": "file",
+        "bytes": 1500488,
+        "sha256": "1cc32b69821f3b782412833cf1f5750182779234f7c5ad87da7d8c6718b50b6b"
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "protocol": {
+    "n_users": 200,
+    "n_negatives": 19,
+    "history_length": 5,
+    "time_window_days": 3,
+    "seed": 0,
+    "negative_sampling": "upstream_occurrence"
+  },
+  "rows": 4000,
+  "users": 200,
+  "baseline_metrics": {
+    "pop": {
+      "auc": 0.5047368421052632,
+      "mrr": 0.16545971297364484,
+      "hr@1": 0.04,
+      "ndcg@1": 0.04,
+      "hr@5": 0.23,
+      "ndcg@5": 0.13093312530546958,
+      "hr@10": 0.465,
+      "ndcg@10": 0.20403202754788066
+    },
+    "title_sim": {
+      "auc": 0.601578947368421,
+      "mrr": 0.327698008153697,
+      "hr@1": 0.205,
+      "ndcg@1": 0.205,
+      "hr@5": 0.385,
+      "ndcg@5": 0.301001527222445,
+      "hr@10": 0.59,
+      "ndcg@10": 0.36674762550835355
+    },
+    "itemcf": {
+      "auc": 0.7276315789473684,
+      "mrr": 0.4600847555222555,
+      "hr@1": 0.355,
+      "ndcg@1": 0.355,
+      "hr@5": 0.49,
+      "ndcg@5": 0.431060761134766,
+      "hr@10": 0.73,
+      "ndcg@10": 0.5031604435662499
+    }
+  },
+  "tie_policy": "upstream_jitter",
+  "tie_seed": 1,
+  "evidence": {
+    "dataset": "microlens",
+    "data_kind": "real",
+    "real_data": true,
+    "scope": "200-user upstream baseline reproduction; no Jev"
+  },
+  "data_audit": "data_audit.json"
+}

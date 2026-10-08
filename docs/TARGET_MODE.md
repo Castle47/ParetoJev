@@ -69,6 +69,11 @@ priority bucket 分布与随机混合强度。高 priority lift 只说明选样�
 
 ## 2. 默认研究目标
 
+MicroLens 的正式 gate 还要求 `evidence.scope=full_200_user_protocol` 和
+`evidence.users=200`。首轮真实 20 用户先导试验只能验证链路与提供诊断；即便个别
+指标高于阈值，也不能将其登记为 Phase A 达标。不同模型版本、文本/封面输入及
+评价总体必须分别注明，不能混用上游结果。
+
 阈值是 go/no-go 条件，不是结果陈述。按阶段选择配置：
 
 | 配置 | 含义 |

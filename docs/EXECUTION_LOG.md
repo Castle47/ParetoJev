@@ -1,5 +1,34 @@
 # Execution Log
 
+## 2026-10-08 — First real MicroLens and public JEV-27B pilot
+
+- Downloaded official MicroLens pairs (18,940,682 bytes) and English titles
+  (1,500,488 bytes) through the official browser links after direct HTTP returned 403.
+  Registered their SHA-256 hashes; raw data is not redistributed in Git.
+- Audited 719,405 interactions, 100,000 users and 19,738 items. Reproduced the
+  200-user item-CF baseline: AUC 0.727632, HR@5 0.490, NDCG@10 0.503160.
+- No configured Jev API key/endpoint was available. Checked local resources (8GB
+  Apple M1, no CUDA) and found the author's public AutoTrust demo rather than
+  installing an infeasible 27B model or substituting a different model.
+- Registered a 20-user subset and 400 pointwise Noul requests before real scoring;
+  pinned model and deployment revision. Used 1 canary + 399 new calls, with the
+  canary cached, single concurrency, ≥1s request-start interval and no hidden retries.
+- All 400 real responses passed model/revision/schema checks; 0 failed slates.
+  Batch wall time: 402.14 seconds. Backend timing is informational, not a serving test.
+- Corrected rank normalization to average ranks for ties before comparison,
+  preventing candidate-position artifacts in fusion. Pilot candidate order is frozen
+  and shuffled; pointwise requests see no labels or competing candidates.
+- Pilot AUC/NDCG@10: item-CF 0.6500/0.5055; Jev 0.6289/0.3923;
+  fixed fusion 0.6895/0.4578; user-CV fusion 0.6237/0.4083.
+  Fixed-fusion paired AUC gain CI [−0.0816,+0.1684] crosses zero. No stable win claimed.
+- Added an explicit 200-user protocol scope gate; a real 20-user pilot cannot satisfy
+  the main MicroLens research targets. No true-CTR calibration claim on sampled negatives.
+- **195 tests passed in 5.23s**. Scoring replay makes 0 HTTP requests and preserves
+  score/cache hashes; rebuilding from raw CSVs exactly reproduces frozen pilot inputs.
+- Full evidence and instructions:
+  [`reports/microlens-real-2026-10-08`](../reports/microlens-real-2026-10-08/README.md).
+  No real six-objective ParetoJev or student model was trained in this phase.
+
 ## 2026-10-08 — Local restoration and unified baseline harness
 
 - Restored the user-provided Git Bundle with complete history. Verified upstream

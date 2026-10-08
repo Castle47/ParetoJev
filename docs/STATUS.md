@@ -34,8 +34,11 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **179 passing tests** on the restored local Python 3.12 environment
+- **195 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
+- real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
+- 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
+- zero-HTTP scoring replay and identical raw-input regeneration
 
 ## Current research boundary
 
@@ -47,9 +50,12 @@ The three-seed synthetic run showed weaker ParetoJev hypervolume and
 controllability despite improved cold-NDCG, so no superiority claim is made and no
 configuration is selected or changed based on those test results.
 
-Next research work is to inspect validation-only preference response and loss
-balance, preregister any new variant on a fresh held-out protocol, and obtain real
-inputs. The legacy smoke targets remain engineering probes with privileged
+The [first real MicroLens pilot](../reports/microlens-real-2026-10-08/README.md) now
+establishes real Jev input acquisition. It does not establish stable fusion uplift:
+fixed fusion AUC improves on 20 users, its interval crosses zero, and NDCG decreases.
+Next research work is to expand evaluation under a frozen protocol and inspect
+signal complementarity before training a complex real-data reranker. The legacy
+smoke targets remain engineering probes with privileged
 simulator probabilities; the comparison harness deliberately forbids those targets.
 
 ## External inputs for real experiments
@@ -67,18 +73,16 @@ statistical evidence remain prerequisites for a broad research claim.
 
 **Phase A — MicroLens reproduction and hybrid win**
 
-The code path is now ready for a real, reproducible run. Required external inputs for
-real benchmark numbers are:
+Official pairs/title files have been downloaded and hashed. The first real pilot
+uses AutoTrust's public demo endpoint with pinned deployment revision, one concurrent
+request and a 400-decision cap. No user API key or paid compute was needed. The
+local 8GB M1 cannot run the planned unquantized 27B deployment; no weights were downloaded.
 
-1. official MicroLens pairs/title files;
-2. official Jev API key or a reachable self-hosted JEV endpoint;
-3. optional GPU endpoint for the JEV-27B-VL cover track.
-
-Real datasets and an authorized Jev endpoint have not been supplied in this local
-handoff. No real MicroLens, KuaiRand or Jev benchmark was run. The earlier sandbox's
-download limitation is historical and was not reasserted as a local network failure.
-Serving targets additionally need a declared target device and benchmark protocol;
-no GPU latency result is claimed.
+The 200-user Jev evaluation is still pending; the public demo is only an established
+route for this bounded pilot, not a guaranteed bulk service. A larger controlled
+experiment can use a suitable endpoint, cached real scores, or dedicated model
+deployment. Native cover-image scoring needs the actual VL pipeline. Serving
+targets need a declared target device; no GPU latency benchmark is claimed.
 
 ## Go/no-go sequence
 

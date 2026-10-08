@@ -1,0 +1,835 @@
+{
+  "schema_version": "microlens-real-pilot-evaluation-v1",
+  "evidence": {
+    "data_kind": "real",
+    "real_data": true,
+    "dataset": "microlens",
+    "scope": "20_user_pilot",
+    "users": 20,
+    "candidates": 400,
+    "model": "autotrust/JEV-27B",
+    "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884"
+  },
+  "metrics": {
+    "pop": {
+      "auc": 0.4947368421052632,
+      "mrr": 0.16242911908353083,
+      "hr@1": 0.05,
+      "ndcg@1": 0.05,
+      "hr@5": 0.25,
+      "ndcg@5": 0.1352191086271238,
+      "hr@10": 0.55,
+      "ndcg@10": 0.2258985640926663
+    },
+    "title_sim": {
+      "auc": 0.6631578947368421,
+      "mrr": 0.39822211994232115,
+      "hr@1": 0.25,
+      "ndcg@1": 0.25,
+      "hr@5": 0.5,
+      "ndcg@5": 0.3911732909393883,
+      "hr@10": 0.6,
+      "ndcg@10": 0.425650316961456
+    },
+    "itemcf": {
+      "auc": 0.6499999999999999,
+      "mrr": 0.46849467418546364,
+      "hr@1": 0.4,
+      "ndcg@1": 0.4,
+      "hr@5": 0.5,
+      "ndcg@5": 0.4465338279036697,
+      "hr@10": 0.7,
+      "ndcg@10": 0.5055433101018566
+    },
+    "jev_click": {
+      "auc": 0.6289473684210525,
+      "mrr": 0.3441370639164757,
+      "hr@1": 0.25,
+      "ndcg@1": 0.25,
+      "hr@5": 0.4,
+      "ndcg@5": 0.3158764682653967,
+      "hr@10": 0.65,
+      "ndcg@10": 0.39227436118633763
+    },
+    "hybrid_fixed_05": {
+      "auc": 0.6894736842105262,
+      "mrr": 0.426729797979798,
+      "hr@1": 0.3,
+      "ndcg@1": 0.3,
+      "hr@5": 0.5,
+      "ndcg@5": 0.4130929753571458,
+      "hr@10": 0.65,
+      "ndcg@10": 0.457772701828221
+    },
+    "hybrid_cv": {
+      "auc": 0.6236842105263156,
+      "mrr": 0.39794092238171186,
+      "hr@1": 0.3,
+      "ndcg@1": 0.3,
+      "hr@5": 0.45,
+      "ndcg@5": 0.37808031558224253,
+      "hr@10": 0.55,
+      "ndcg@10": 0.40830680073742337
+    }
+  },
+  "microlens": {
+    "pop": {
+      "auc": 0.4947368421052632,
+      "mrr": 0.16242911908353083,
+      "hr@1": 0.05,
+      "ndcg@1": 0.05,
+      "hr@5": 0.25,
+      "ndcg@5": 0.1352191086271238,
+      "hr@10": 0.55,
+      "ndcg@10": 0.2258985640926663
+    },
+    "title_sim": {
+      "auc": 0.6631578947368421,
+      "mrr": 0.39822211994232115,
+      "hr@1": 0.25,
+      "ndcg@1": 0.25,
+      "hr@5": 0.5,
+      "ndcg@5": 0.3911732909393883,
+      "hr@10": 0.6,
+      "ndcg@10": 0.425650316961456
+    },
+    "itemcf": {
+      "auc": 0.6499999999999999,
+      "mrr": 0.46849467418546364,
+      "hr@1": 0.4,
+      "ndcg@1": 0.4,
+      "hr@5": 0.5,
+      "ndcg@5": 0.4465338279036697,
+      "hr@10": 0.7,
+      "ndcg@10": 0.5055433101018566
+    },
+    "jev_click": {
+      "auc": 0.6289473684210525,
+      "mrr": 0.3441370639164757,
+      "hr@1": 0.25,
+      "ndcg@1": 0.25,
+      "hr@5": 0.4,
+      "ndcg@5": 0.3158764682653967,
+      "hr@10": 0.65,
+      "ndcg@10": 0.39227436118633763
+    },
+    "hybrid_fixed_05": {
+      "auc": 0.6894736842105262,
+      "mrr": 0.426729797979798,
+      "hr@1": 0.3,
+      "ndcg@1": 0.3,
+      "hr@5": 0.5,
+      "ndcg@5": 0.4130929753571458,
+      "hr@10": 0.65,
+      "ndcg@10": 0.457772701828221
+    },
+    "hybrid_cv": {
+      "auc": 0.6236842105263156,
+      "mrr": 0.39794092238171186,
+      "hr@1": 0.3,
+      "ndcg@1": 0.3,
+      "hr@5": 0.45,
+      "ndcg@5": 0.37808031558224253,
+      "hr@10": 0.55,
+      "ndcg@10": 0.40830680073742337
+    }
+  },
+  "confidence_intervals": {
+    "pop": {
+      "auc": {
+        "mean": 0.4947368421052632,
+        "low": 0.3710526315789474,
+        "high": 0.6157894736842107,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.05,
+        "low": 0.0,
+        "high": 0.15,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.25,
+        "low": 0.05,
+        "high": 0.45,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.2258985640926663,
+        "low": 0.11847943623411525,
+        "high": 0.34490975221289155,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.16242911908353083,
+        "low": 0.09370468379659559,
+        "high": 0.26628666258169925,
+        "confidence": 0.95
+      }
+    },
+    "title_sim": {
+      "auc": {
+        "mean": 0.6631578947368421,
+        "low": 0.5078947368421052,
+        "high": 0.8,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.25,
+        "low": 0.05,
+        "high": 0.45,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.5,
+        "low": 0.3,
+        "high": 0.7,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.425650316961456,
+        "low": 0.24869153416202816,
+        "high": 0.5983412283976808,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.39822211994232115,
+        "low": 0.23684947349154978,
+        "high": 0.5638107164217361,
+        "confidence": 0.95
+      }
+    },
+    "itemcf": {
+      "auc": {
+        "mean": 0.6499999999999999,
+        "low": 0.48421052631578954,
+        "high": 0.8,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.4,
+        "low": 0.2,
+        "high": 0.6,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.5,
+        "low": 0.3,
+        "high": 0.7,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.5055433101018566,
+        "low": 0.3165303793214206,
+        "high": 0.6930786635707257,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.46849467418546364,
+        "low": 0.28053536184210526,
+        "high": 0.6583887714076855,
+        "confidence": 0.95
+      }
+    },
+    "jev_click": {
+      "auc": {
+        "mean": 0.6289473684210525,
+        "low": 0.4894736842105263,
+        "high": 0.7526315789473684,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.25,
+        "low": 0.05,
+        "high": 0.45,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.4,
+        "low": 0.2,
+        "high": 0.6,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.39227436118633763,
+        "low": 0.2289041873385991,
+        "high": 0.5620478760311569,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.3441370639164757,
+        "low": 0.18189879360835243,
+        "high": 0.517586290955776,
+        "confidence": 0.95
+      }
+    },
+    "hybrid_fixed_05": {
+      "auc": {
+        "mean": 0.6894736842105262,
+        "low": 0.5526315789473684,
+        "high": 0.8131578947368421,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.3,
+        "low": 0.1,
+        "high": 0.5,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.5,
+        "low": 0.3,
+        "high": 0.7,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.457772701828221,
+        "low": 0.281451692718945,
+        "high": 0.632772701828221,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.426729797979798,
+        "low": 0.256167297979798,
+        "high": 0.6009772727272726,
+        "confidence": 0.95
+      }
+    },
+    "hybrid_cv": {
+      "auc": {
+        "mean": 0.6236842105263156,
+        "low": 0.47105263157894733,
+        "high": 0.7657894736842106,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "mean": 0.3,
+        "low": 0.1,
+        "high": 0.5,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "mean": 0.45,
+        "low": 0.25,
+        "high": 0.65,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "mean": 0.40830680073742337,
+        "low": 0.22543930394957448,
+        "high": 0.592533556898137,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "mean": 0.39794092238171186,
+        "low": 0.2257373238968634,
+        "high": 0.5776666168261562,
+        "confidence": 0.95
+      }
+    }
+  },
+  "pairwise_vs_reference": {
+    "pop": {
+      "auc": {
+        "difference": -0.15526315789473688,
+        "low": -0.3131578947368421,
+        "high": -0.0025657894736851707,
+        "positive_interval": false
+      },
+      "hr@1": {
+        "difference": -0.35,
+        "low": -0.6,
+        "high": -0.1,
+        "positive_interval": false
+      },
+      "hr@5": {
+        "difference": -0.25,
+        "low": -0.5,
+        "high": 0.0,
+        "positive_interval": false
+      },
+      "ndcg@10": {
+        "difference": -0.27964474600919026,
+        "low": -0.4533346118057155,
+        "high": -0.09987647169483897,
+        "positive_interval": false
+      },
+      "mrr": {
+        "difference": -0.3060655551019328,
+        "low": -0.5095063969666814,
+        "high": -0.09960381221483218,
+        "positive_interval": false
+      }
+    },
+    "title_sim": {
+      "auc": {
+        "difference": 0.013157894736842082,
+        "low": -0.20269736842105238,
+        "high": 0.22631578947368425,
+        "positive_interval": false
+      },
+      "hr@1": {
+        "difference": -0.15,
+        "low": -0.35,
+        "high": 0.05,
+        "positive_interval": false
+      },
+      "hr@5": {
+        "difference": 0.0,
+        "low": -0.3,
+        "high": 0.3,
+        "positive_interval": false
+      },
+      "ndcg@10": {
+        "difference": -0.07989299314040052,
+        "low": -0.31387737836063645,
+        "high": 0.14270377656479488,
+        "positive_interval": false
+      },
+      "mrr": {
+        "difference": -0.07027255424314247,
+        "low": -0.2710116389458495,
+        "high": 0.12386115034131663,
+        "positive_interval": false
+      }
+    },
+    "jev_click": {
+      "auc": {
+        "difference": -0.021052631578947368,
+        "low": -0.2,
+        "high": 0.1526315789473684,
+        "positive_interval": false
+      },
+      "hr@1": {
+        "difference": -0.15,
+        "low": -0.35,
+        "high": 0.05,
+        "positive_interval": false
+      },
+      "hr@5": {
+        "difference": -0.1,
+        "low": -0.35,
+        "high": 0.15,
+        "positive_interval": false
+      },
+      "ndcg@10": {
+        "difference": -0.11326894891551886,
+        "low": -0.30265098045960925,
+        "high": 0.08377057518828304,
+        "positive_interval": false
+      },
+      "mrr": {
+        "difference": -0.12435761026898798,
+        "low": -0.31117988047491724,
+        "high": 0.060457907036419026,
+        "positive_interval": false
+      }
+    },
+    "hybrid_fixed_05": {
+      "auc": {
+        "difference": 0.039473684210526314,
+        "low": -0.08157894736842106,
+        "high": 0.16842105263157892,
+        "positive_interval": false
+      },
+      "hr@1": {
+        "difference": -0.1,
+        "low": -0.25,
+        "high": 0.0,
+        "positive_interval": false
+      },
+      "hr@5": {
+        "difference": 0.0,
+        "low": -0.15,
+        "high": 0.15,
+        "positive_interval": false
+      },
+      "ndcg@10": {
+        "difference": -0.047770608273635586,
+        "low": -0.1636080116710243,
+        "high": 0.07015806388571559,
+        "positive_interval": false
+      },
+      "mrr": {
+        "difference": -0.041764876205665685,
+        "low": -0.1614659518113465,
+        "high": 0.051609810511126245,
+        "positive_interval": false
+      }
+    },
+    "hybrid_cv": {
+      "auc": {
+        "difference": -0.026315789473684226,
+        "low": -0.11578947368421053,
+        "high": 0.06578947368421051,
+        "positive_interval": false
+      },
+      "hr@1": {
+        "difference": -0.1,
+        "low": -0.25,
+        "high": 0.0,
+        "positive_interval": false
+      },
+      "hr@5": {
+        "difference": -0.05,
+        "low": -0.15,
+        "high": 0.0,
+        "positive_interval": false
+      },
+      "ndcg@10": {
+        "difference": -0.0972365093644332,
+        "low": -0.19711919805508962,
+        "high": -0.006662495886271493,
+        "positive_interval": false
+      },
+      "mrr": {
+        "difference": -0.0705537518037518,
+        "low": -0.18378787878787878,
+        "high": 0.0028217442279941914,
+        "positive_interval": false
+      }
+    }
+  },
+  "complementarity": {
+    "itemcf__vs__jev_click": {
+      "mean_spearman_rank_correlation": 0.09400357761948938,
+      "top1_agreement": 0.4,
+      "mean_top5_jaccard": 0.18373015873015872,
+      "left_positive_rank_win_rate": 0.45,
+      "right_positive_rank_win_rate": 0.3,
+      "positive_rank_tie_rate": 0.25,
+      "union_hr@5": 0.6,
+      "right_rescues_left_miss@5": 0.2,
+      "left_rescues_right_miss@5": 0.3333333333333333,
+      "oracle": {
+        "hr@1": 0.45,
+        "hr@5": 0.6,
+        "ndcg@10": 0.6045141771514598,
+        "mrr": 0.52885101010101
+      }
+    }
+  },
+  "fusion": {
+    "fixed_weights": {
+      "itemcf": 0.5,
+      "jev_click": 0.5
+    },
+    "cv_folds": [
+      {
+        "fold": 0,
+        "held_out_users": [
+          21221,
+          96217,
+          28789,
+          11281
+        ],
+        "weights": {
+          "itemcf": 0.5,
+          "jev_click": 0.5
+        },
+        "validation_metrics": {
+          "auc": 0.7039473684210527,
+          "mrr": 0.4828914141414141,
+          "hr@1": 0.375,
+          "ndcg@1": 0.375,
+          "hr@5": 0.5625,
+          "ndcg@5": 0.4769331095982161,
+          "hr@10": 0.625,
+          "ndcg@10": 0.4949996612430841
+        }
+      },
+      {
+        "fold": 1,
+        "held_out_users": [
+          60339,
+          89681,
+          16247,
+          55716
+        ],
+        "weights": {
+          "itemcf": 0.8,
+          "jev_click": 0.2
+        },
+        "validation_metrics": {
+          "auc": 0.7203947368421053,
+          "mrr": 0.443655303030303,
+          "hr@1": 0.3125,
+          "ndcg@1": 0.3125,
+          "hr@5": 0.5625,
+          "ndcg@5": 0.4456831095982161,
+          "hr@10": 0.625,
+          "ndcg@10": 0.46449748432721494
+        }
+      },
+      {
+        "fold": 2,
+        "held_out_users": [
+          41106,
+          36532,
+          6943,
+          56447
+        ],
+        "weights": {
+          "itemcf": 1.0,
+          "jev_click": 0.0
+        },
+        "validation_metrics": {
+          "auc": 0.680921052631579,
+          "mrr": 0.500297619047619,
+          "hr@1": 0.4375,
+          "ndcg@1": 0.4375,
+          "hr@5": 0.5,
+          "ndcg@5": 0.46875,
+          "hr@10": 0.75,
+          "ndcg@10": 0.5425118527477336
+        }
+      },
+      {
+        "fold": 3,
+        "held_out_users": [
+          32123,
+          28736,
+          93116,
+          92553
+        ],
+        "weights": {
+          "itemcf": 0.8,
+          "jev_click": 0.2
+        },
+        "validation_metrics": {
+          "auc": 0.6677631578947367,
+          "mrr": 0.42582070707070707,
+          "hr@1": 0.3125,
+          "ndcg@1": 0.3125,
+          "hr@5": 0.5,
+          "ndcg@5": 0.4144331095982161,
+          "hr@10": 0.5625,
+          "ndcg@10": 0.43324748432721494
+        }
+      },
+      {
+        "fold": 4,
+        "held_out_users": [
+          63538,
+          36880,
+          8284,
+          77264
+        ],
+        "weights": {
+          "itemcf": 0.8,
+          "jev_click": 0.2
+        },
+        "validation_metrics": {
+          "auc": 0.756578947368421,
+          "mrr": 0.5009469696969697,
+          "hr@1": 0.375,
+          "ndcg@1": 0.375,
+          "hr@5": 0.625,
+          "ndcg@5": 0.5081831095982161,
+          "hr@10": 0.6875,
+          "ndcg@10": 0.5269974843272149
+        }
+      }
+    ],
+    "normalization": "within-slate average ranks for ties"
+  },
+  "score_distribution": {
+    "min": 0.0134121183314461,
+    "max": 0.9128508531747671,
+    "mean": 0.2656603745839324,
+    "std": 0.15486328059351515,
+    "distinct_scores": 270
+  },
+  "limitations": [
+    "20 users chosen before Jev scoring; a feasibility pilot, not the 200-user target protocol.",
+    "AUC/HR/NDCG measure ranking among sampled alternatives, not calibrated real CTR.",
+    "Other-user item-CF histories span the retrospective dataset; no global time-causal claim.",
+    "Titles only; this is not a reproduction of cover-image JEV-27B-VL results.",
+    "Bootstrap is conditional on the recorded out-of-fold scores; it does not refit fusion weights in each resample.",
+    "One candidate title is missing in the source; no users or candidates were dropped after observing scores.",
+    "No multi-objective ParetoJev training or serving performance claim is made."
+  ],
+  "provenance": {
+    "created_at_utc": "2026-10-08T09:17:41.940969+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "35c584c15b24582d457afcc027af499f292386e6",
+    "inputs": [
+      {
+        "path": "data/processed/microlens-real-pilot/candidates.csv",
+        "type": "file",
+        "bytes": 210439,
+        "sha256": "6c2f3f11db6644bbf8bc0d9f799fd88911e6ca52880f5516e979325d825a30d0"
+      },
+      {
+        "path": "artifacts/microlens-real-public/scores.jsonl",
+        "type": "file",
+        "bytes": 37908,
+        "sha256": "2eedf56243f0aa6886342a3dc9aed8e1c12dd3c70f9f25d9e136847e4c9c6721"
+      },
+      {
+        "path": "reports/microlens-real-2026-10-08/registration.json",
+        "type": "file",
+        "bytes": 4709,
+        "sha256": "0656b73ea1b7b8ca6cd3f5751824833ecdbe6b05962bb4668b6a010112fd40ec"
+      }
+    ]
+  },
+  "target_configuration": {
+    "evidence_requirements": {
+      "evidence.real_data": true,
+      "evidence.data_kind": "real",
+      "evidence.dataset": "microlens",
+      "evidence.scope": "full_200_user_protocol",
+      "evidence.users": 200
+    },
+    "targets": {
+      "hybrid_auc": {
+        "metric": "microlens.hybrid_cv.auc",
+        "op": ">=",
+        "threshold": 0.735,
+        "required": true,
+        "description": "Cross-validated CF + decision-score hybrid clears the published single-system reference band."
+      },
+      "hybrid_hr5": {
+        "metric": "microlens.hybrid_cv.hr@5",
+        "op": ">=",
+        "threshold": 0.6,
+        "required": true
+      },
+      "hybrid_ndcg10": {
+        "metric": "microlens.hybrid_cv.ndcg@10",
+        "op": ">=",
+        "threshold": 0.51,
+        "required": true
+      },
+      "hybrid_auc_ci_vs_itemcf": {
+        "metric": "pairwise_vs_reference.hybrid_cv.auc.low",
+        "op": ">",
+        "threshold": 0.0,
+        "required": true,
+        "description": "The paired user-bootstrap confidence interval must exclude zero versus the reproduced item-CF baseline."
+      },
+      "stack_auc": {
+        "metric": "microlens.stack_cv.auc",
+        "op": ">=",
+        "threshold": 0.735,
+        "required": false
+      },
+      "stack_hr5": {
+        "metric": "microlens.stack_cv.hr@5",
+        "op": ">=",
+        "threshold": 0.6,
+        "required": false
+      },
+      "stack_ndcg10": {
+        "metric": "microlens.stack_cv.ndcg@10",
+        "op": ">=",
+        "threshold": 0.51,
+        "required": false
+      }
+    }
+  },
+  "target_report": {
+    "passed": false,
+    "status": "not_evaluable",
+    "reason": "",
+    "required_passed": 0,
+    "required_total": 4,
+    "required_not_evaluable": 4,
+    "targets": [
+      {
+        "name": "hybrid_auc",
+        "metric": "microlens.hybrid_cv.auc",
+        "operator": ">=",
+        "threshold": 0.735,
+        "actual": 0.6236842105263156,
+        "required": true,
+        "passed": false,
+        "detail": "Cross-validated CF + decision-score hybrid clears the published single-system reference band.",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20"
+      },
+      {
+        "name": "hybrid_hr5",
+        "metric": "microlens.hybrid_cv.hr@5",
+        "operator": ">=",
+        "threshold": 0.6,
+        "actual": 0.45,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20"
+      },
+      {
+        "name": "hybrid_ndcg10",
+        "metric": "microlens.hybrid_cv.ndcg@10",
+        "operator": ">=",
+        "threshold": 0.51,
+        "actual": 0.40830680073742337,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20"
+      },
+      {
+        "name": "hybrid_auc_ci_vs_itemcf",
+        "metric": "pairwise_vs_reference.hybrid_cv.auc.low",
+        "operator": ">",
+        "threshold": 0.0,
+        "actual": -0.11578947368421053,
+        "required": true,
+        "passed": false,
+        "detail": "The paired user-bootstrap confidence interval must exclude zero versus the reproduced item-CF baseline.",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20"
+      },
+      {
+        "name": "stack_auc",
+        "metric": "microlens.stack_cv.auc",
+        "operator": ">=",
+        "threshold": 0.735,
+        "actual": null,
+        "required": false,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20; missing metric microlens.stack_cv.auc"
+      },
+      {
+        "name": "stack_hr5",
+        "metric": "microlens.stack_cv.hr@5",
+        "operator": ">=",
+        "threshold": 0.6,
+        "actual": null,
+        "required": false,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20; missing metric microlens.stack_cv.hr@5"
+      },
+      {
+        "name": "stack_ndcg10",
+        "metric": "microlens.stack_cv.ndcg@10",
+        "operator": ">=",
+        "threshold": 0.51,
+        "actual": null,
+        "required": false,
+        "passed": false,
+        "detail": "",
+        "status": "not_evaluable",
+        "reason": "evidence evidence.scope must equal 'full_200_user_protocol'; got '20_user_pilot'; evidence evidence.users must equal 200; got 20; missing metric microlens.stack_cv.ndcg@10"
+      }
+    ]
+  }
+}
