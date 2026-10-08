@@ -419,8 +419,10 @@ def _simplex_grid(n_models: int, step: float) -> list[np.ndarray]:
 
 
 def _within_slate_rank_normalize(scores: np.ndarray) -> np.ndarray:
-    order = np.argsort(np.argsort(scores, axis=1, kind="stable"), axis=1, kind="stable")
-    return order.astype(np.float64) / max(scores.shape[1] - 1, 1)
+    # Equal scores carry equal information. Assigning distinct ranks by input
+    # position can bias fusion when the held-out positive is stored first.
+    ranks = pd.DataFrame(scores).rank(axis=1, method="average").to_numpy()
+    return (ranks - 1.0) / max(scores.shape[1] - 1, 1)
 
 
 def cross_validated_hybrid(

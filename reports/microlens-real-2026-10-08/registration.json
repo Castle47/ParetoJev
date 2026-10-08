@@ -1,0 +1,139 @@
+{
+  "schema_version": "microlens-real-probe-v1",
+  "registered_at": "2026-10-08T08:57:49.908160+00:00",
+  "data_kind": "real",
+  "dataset": "microlens",
+  "data_files": [
+    {
+      "file": "MicroLens-100k_pairs.csv",
+      "url": "https://recsys.westlake.edu.cn/MicroLens-100k-Dataset/MicroLens-100k_pairs.csv",
+      "sha256": "cc5972c79e8a24c8c7c8e229ce48b0d56c3719f804debb84df7382293c56bd4e",
+      "bytes": 18940682,
+      "acquisition": "official download portal via browser"
+    },
+    {
+      "file": "MicroLens-100k_title_en.csv",
+      "url": "https://recsys.westlake.edu.cn/MicroLens-100k-Dataset/MicroLens-100k_title_en.csv",
+      "sha256": "1cc32b69821f3b782412833cf1f5750182779234f7c5ad87da7d8c6718b50b6b",
+      "bytes": 1500488,
+      "acquisition": "official download portal via browser"
+    }
+  ],
+  "scope": "text-only next-item reranking; not six-objective Pareto experiment",
+  "protocol": {
+    "users": 200,
+    "negatives": 19,
+    "history": 5,
+    "window_days": 3,
+    "seed": 0,
+    "negative_sampling": "upstream_occurrence",
+    "candidate_order_seed": 37,
+    "tie_policy": "upstream_jitter",
+    "tie_seed": 1
+  },
+  "methods": [
+    "pop",
+    "title_sim",
+    "itemcf",
+    "real_jev_click",
+    "fixed_0.5_rank_fusion",
+    "five_fold_cv_rank_fusion"
+  ],
+  "evaluation": {
+    "folds": 5,
+    "weight_step": 0.05,
+    "cv_seed": 0,
+    "bootstrap_samples": 5000,
+    "confidence": 0.95,
+    "reference": "itemcf",
+    "rank_normalization": "average ranks for ties; tied scores cannot be distinguished by candidate position"
+  },
+  "decision_service_status": "one_real_canary_succeeded_with_expected_model_and_revision",
+  "scoring_rules": [
+    "freeze input files before any Jev results",
+    "hide labels and shuffle candidate order deterministically",
+    "no mock scores or substitution",
+    "no method tuning on this evaluation set",
+    "record actual backend and fail on unavailable model"
+  ],
+  "provenance": {
+    "created_at_utc": "2026-10-08T08:57:49.914183+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "25a46b5a1feb5ce92a22856de2211c24e13d7164",
+    "inputs": []
+  },
+  "pilot": {
+    "users": [
+      36880,
+      8284,
+      60339,
+      32123,
+      21221,
+      36532,
+      11281,
+      93116,
+      28736,
+      41106,
+      89681,
+      92553,
+      28789,
+      56447,
+      16247,
+      77264,
+      96217,
+      63538,
+      6943,
+      55716
+    ],
+    "n_users": 20,
+    "user_selection_seed": 20261008,
+    "candidate_order": "Random(37+slate_id) permutation before scoring and evaluation; one candidate per Jev request",
+    "mode": "noul",
+    "objective": "click",
+    "planned_model_requests": 400,
+    "max_concurrency": 1,
+    "minimum_request_interval_seconds": 1.0,
+    "candidate_file_sha256": "6c2f3f11db6644bbf8bc0d9f799fd88911e6ca52880f5516e979325d825a30d0",
+    "jev_input_sha256": "ba81e4bd4fc1ec3275fe8ae3251fccb72d4153d83f388a66a90a22afe300e8be",
+    "limitations": [
+      "pilot size is resource bounded, not a full 200-user benchmark",
+      "sampled non-next items are not observed negative exposures",
+      "no genuine CTR calibration claim",
+      "public demo model version differs from TypeSafe official Jev"
+    ],
+    "objectives": [
+      {
+        "name": "click",
+        "question": "Would this user validly play or click this candidate video in the current feed context?",
+        "true_criteria": "The candidate closely matches the user's recent interests and is likely to receive a valid play/click.",
+        "false_criteria": "The candidate is unlikely to receive a valid play/click from this user.",
+        "direction": 1
+      }
+    ]
+  },
+  "decision_service": {
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+    "model": "autotrust/JEV-27B",
+    "expected_revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "space_revision": "71d2b0ada40875f405b9a46adec369f4bf584831",
+    "source": "https://huggingface.co/spaces/autotrust/JEV-27B-Demo/blob/71d2b0ada40875f405b9a46adec369f4bf584831/README.md",
+    "health": {
+      "status": "ok",
+      "configured": true
+    }
+  },
+  "protocol_notes": [
+    "200-user upstream-reproduction metrics retain original candidate order; pilot uses frozen shuffled order to remove positive-first position artifacts",
+    "rank-fusion tie handling corrected by permutation-invariance test before comparative evaluation",
+    "400 requested decisions in total, with the real canary reused from cache"
+  ]
+}

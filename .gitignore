@@ -22,3 +22,4 @@ artifacts/*.csv
 # Reproducible comparison runs contain checkpoints, prediction tensors and logs.
 artifacts/comparison*/
 artifacts/.comparison*.lock
+artifacts/microlens-real*/

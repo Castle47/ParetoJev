@@ -233,6 +233,7 @@ def run_score_jsonl(
                     "confidence": scored.confidence.tolist(),
                     "entropy": scored.entropy.tolist(),
                     "resolved_model": resolved_model or client.model,
+                    "resolved_model_revision": raw.get("revision") if isinstance(raw, dict) else None,
                     "usage": usage,
                     "latency_ms": latency_ms,
                 }
