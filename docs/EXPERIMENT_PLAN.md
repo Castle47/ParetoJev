@@ -11,8 +11,11 @@
 
 ## Stage 1：MicroLens 可比较 Demo
 
-当前代码状态：协议、决策打分 runner、校准、融合、统计检验和 target gate
-均已实现；尚缺真实数据与 Jev 推理结果。
+当前状态：官方 MicroLens 数据和两批各 200 名用户的真实 AutoTrust JEV-27B
+打分已完成。原始 Phase A 总目标尚未全部达标；新评价用户上的 Jev tie-breaking
+通过两项预注册 AUC 检验，但仅支持有限的增量信号结论。接下来的 SASRec 与
+MiniLM 对照将这 400 名已看过结果的用户视为开发集，独立保留 1,000 名用户
+选择行为模型 checkpoint。详见各阶段报告，不再把真实数据列为当前缺失输入。
 
 ### 1.1 数据与复现
 

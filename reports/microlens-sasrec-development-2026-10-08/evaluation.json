@@ -1,0 +1,332 @@
+{
+  "scope": "development_only",
+  "users": 400,
+  "new_jev_requests": 0,
+  "metrics": {
+    "sasrec": {
+      "auc": 0.7622368421052631,
+      "mrr": 0.4179972127545657,
+      "hr@1": 0.26,
+      "ndcg@1": 0.26,
+      "hr@5": 0.59,
+      "ndcg@5": 0.42598190419452747,
+      "hr@10": 0.84,
+      "ndcg@10": 0.5074177188996645
+    },
+    "itemcf": {
+      "auc": 0.6814473684210526,
+      "mrr": 0.4186198603788977,
+      "hr@1": 0.2889583333333334,
+      "ndcg@1": 0.2889583333333334,
+      "hr@5": 0.5380539860681114,
+      "ndcg@5": 0.41761928840332,
+      "hr@10": 0.6944590815101651,
+      "ndcg@10": 0.4676625746570753
+    },
+    "jev": {
+      "auc": 0.6474342105263159,
+      "mrr": 0.34188369534339924,
+      "hr@1": 0.19875,
+      "ndcg@1": 0.19875,
+      "hr@5": 0.4645833333333333,
+      "ndcg@5": 0.3351509752308342,
+      "hr@10": 0.67,
+      "ndcg@10": 0.4007267084344058
+    },
+    "minilm": {
+      "auc": 0.584342105263158,
+      "mrr": 0.2934855137874681,
+      "hr@1": 0.1625,
+      "ndcg@1": 0.1625,
+      "hr@5": 0.375,
+      "ndcg@5": 0.2718173492682996,
+      "hr@10": 0.5975,
+      "ndcg@10": 0.3432339456869316
+    },
+    "tfidf": {
+      "auc": 0.5776315789473684,
+      "mrr": 0.29539726031704516,
+      "hr@1": 0.1675,
+      "ndcg@1": 0.1675,
+      "hr@5": 0.37295036764705886,
+      "ndcg@5": 0.27353088790800656,
+      "hr@10": 0.575612432910227,
+      "ndcg@10": 0.3383456122886084
+    },
+    "cf_jev_ties": {
+      "auc": 0.7240131578947367,
+      "mrr": 0.44824290901056574,
+      "hr@1": 0.3075,
+      "ndcg@1": 0.3075,
+      "hr@5": 0.57625,
+      "ndcg@5": 0.4500708203210037,
+      "hr@10": 0.745,
+      "ndcg@10": 0.5049001689995368
+    },
+    "sasrec_jev05": {
+      "auc": 0.7622368421052631,
+      "mrr": 0.4180056452942483,
+      "hr@1": 0.26,
+      "ndcg@1": 0.26,
+      "hr@5": 0.59,
+      "ndcg@5": 0.42598190419452747,
+      "hr@10": 0.84,
+      "ndcg@10": 0.5074250980086664
+    },
+    "sasrec_jev20": {
+      "auc": 0.7701315789473685,
+      "mrr": 0.4201512470856027,
+      "hr@1": 0.25125,
+      "ndcg@1": 0.25125,
+      "hr@5": 0.62125,
+      "ndcg@5": 0.43900499410878024,
+      "hr@10": 0.8525,
+      "ndcg@10": 0.5130209833850043
+    },
+    "cf_minilm_ties": {
+      "auc": 0.6897368421052632,
+      "mrr": 0.428925707333602,
+      "hr@1": 0.3,
+      "ndcg@1": 0.3,
+      "hr@5": 0.545,
+      "ndcg@5": 0.4271846783622385,
+      "hr@10": 0.71,
+      "ndcg@10": 0.479875936696992
+    },
+    "sasrec_minilm05": {
+      "auc": 0.7621710526315789,
+      "mrr": 0.41798332386567677,
+      "hr@1": 0.26,
+      "ndcg@1": 0.26,
+      "hr@5": 0.59,
+      "ndcg@5": 0.42598190419452747,
+      "hr@10": 0.84,
+      "ndcg@10": 0.5074027624379819
+    },
+    "sasrec_minilm20": {
+      "auc": 0.7577631578947368,
+      "mrr": 0.39573197981499064,
+      "hr@1": 0.21125,
+      "ndcg@1": 0.21125,
+      "hr@5": 0.59875,
+      "ndcg@5": 0.4139988652185798,
+      "hr@10": 0.8279166666666667,
+      "ndcg@10": 0.4878143319061832
+    }
+  },
+  "descriptive_comparisons": {
+    "sasrec_vs_itemcf": {
+      "auc": {
+        "difference": 0.08078947368421051,
+        "low": 0.05302631578947368,
+        "high": 0.10835526315789473
+      },
+      "hr@5": {
+        "difference": 0.051946013931888545,
+        "low": 6.751967234264545e-05,
+        "high": 0.10377304244066039
+      },
+      "ndcg@10": {
+        "difference": 0.039755144242589295,
+        "low": 0.002831096091070638,
+        "high": 0.07605585713257881
+      }
+    },
+    "jev_vs_minilm": {
+      "auc": {
+        "difference": 0.0630921052631579,
+        "low": 0.0330246710526316,
+        "high": 0.09296217105263158
+      },
+      "hr@5": {
+        "difference": 0.08958333333333332,
+        "low": 0.04,
+        "high": 0.13875
+      },
+      "ndcg@10": {
+        "difference": 0.05749276274747414,
+        "low": 0.026039580936677287,
+        "high": 0.08929356471506722
+      }
+    },
+    "sasrec_jev05_vs_sasrec": {
+      "auc": {
+        "difference": 2.7755575615628914e-19,
+        "low": -0.00019736842105263136,
+        "high": 0.0001973684210526322
+      },
+      "hr@5": {
+        "difference": 0.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "ndcg@10": {
+        "difference": 7.379109001889178e-06,
+        "low": -4.486938504784974e-05,
+        "high": 6.700671205351727e-05
+      }
+    },
+    "sasrec_minilm05_vs_sasrec": {
+      "auc": {
+        "difference": -6.578947368421046e-05,
+        "low": -0.00019736842105263136,
+        "high": 0.0
+      },
+      "hr@5": {
+        "difference": 0.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "ndcg@10": {
+        "difference": -1.495646168261658e-05,
+        "low": -4.486938504784974e-05,
+        "high": 0.0
+      }
+    },
+    "sasrec_jev05_vs_sasrec_minilm05": {
+      "auc": {
+        "difference": 6.578947368421073e-05,
+        "low": 0.0,
+        "high": 0.0001973684210526322
+      },
+      "hr@5": {
+        "difference": 0.0,
+        "low": 0.0,
+        "high": 0.0
+      },
+      "ndcg@10": {
+        "difference": 2.2335570684505757e-05,
+        "low": 0.0,
+        "high": 6.700671205351727e-05
+      }
+    },
+    "sasrec_jev20_vs_sasrec": {
+      "auc": {
+        "difference": 0.007894736842105267,
+        "low": 0.0013157894736842177,
+        "high": 0.01427631578947369
+      },
+      "hr@5": {
+        "difference": 0.03125,
+        "low": 0.00375,
+        "high": 0.06
+      },
+      "ndcg@10": {
+        "difference": 0.005603264485339816,
+        "low": -0.010440634970031799,
+        "high": 0.021086409825110595
+      }
+    },
+    "sasrec_jev20_vs_sasrec_minilm20": {
+      "auc": {
+        "difference": 0.012368421052631582,
+        "low": 0.005592105263157899,
+        "high": 0.019144736842105266
+      },
+      "hr@5": {
+        "difference": 0.0225,
+        "low": -0.00125,
+        "high": 0.0475
+      },
+      "ndcg@10": {
+        "difference": 0.025206651478821153,
+        "low": 0.009165555452325624,
+        "high": 0.04098244051279329
+      }
+    },
+    "cf_jev_ties_vs_cf_minilm_ties": {
+      "auc": {
+        "difference": 0.03427631578947368,
+        "low": 0.014934210526315788,
+        "high": 0.05447368421052632
+      },
+      "hr@5": {
+        "difference": 0.03125,
+        "low": 0.00125,
+        "high": 0.0625
+      },
+      "ndcg@10": {
+        "difference": 0.025024232302544785,
+        "low": 0.008068939171637386,
+        "high": 0.04216784005706592
+      }
+    }
+  },
+  "development_gates": {
+    "behavior_validation_ndcg10_improves": true,
+    "jev05_over_sasrec_auc_lower95_positive": false,
+    "jev05_over_minilm05_auc_lower95_positive": false
+  },
+  "original_project_targets_achieved": false,
+  "oov": {
+    "history_rate": 0.0025,
+    "candidate_rate": 0.000625,
+    "positive_rate": 0.0
+  },
+  "ties": {
+    "sasrec_tied_candidates": 0,
+    "itemcf_tied_candidates": 7564
+  },
+  "selected_checkpoint": {
+    "learning_rate": 0.001,
+    "best_epoch": 15,
+    "epochs_run": 20,
+    "checkpoint": "artifacts/microlens-real-sasrec-dev/sasrec_lr0.001.pt",
+    "checkpoint_sha256": "002dca26c558124719b7e28e7b8c92ffc0ccc2b4b80262fbf0702c1f97fda431",
+    "validation": {
+      "auc": 0.7914210526315789,
+      "mrr": 0.4587363240216955,
+      "hr@1": 0.288,
+      "ndcg@1": 0.288,
+      "hr@5": 0.655,
+      "ndcg@5": 0.4790162884701843,
+      "hr@10": 0.869,
+      "ndcg@10": 0.548039475725152
+    },
+    "exact_reload": true
+  },
+  "limitations": [
+    "Previously examined 400 users, so all downstream Jev comparisons are developmental.",
+    "User holdout within one retrospective dataset, not a global chronological split.",
+    "Training users can contain interactions later than evaluation events.",
+    "Sampled alternatives are unobserved items, not verified nonclick exposures.",
+    "One training seed and two learning rates; PyTorch SASRec-style variant, not paper reproduction.",
+    "SASRec scores are uncalibrated next-item logits; only one observed objective.",
+    "OOV/padding embeddings are zero; OOV rates and tied predictions must be reported.",
+    "MiniLM is frozen external pretraining; its training corpus independence from MicroLens is unverified."
+  ],
+  "provenance": {
+    "created_at_utc": "2026-10-08T14:49:30.317763+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "611372a7d10d6c5e5ad7e1a32b546a4ba2db241d",
+    "inputs": [
+      {
+        "path": "reports/microlens-sasrec-development-2026-10-08/registration.json",
+        "type": "file",
+        "bytes": 24927,
+        "sha256": "27b5113f733e5f40a2ea5ddf73a61478b7db0e9d24eb0de2059f39b9466f0097"
+      },
+      {
+        "path": "artifacts/microlens-real-sasrec-dev/sasrec_lr0.001.pt",
+        "type": "file",
+        "bytes": 5427343,
+        "sha256": "002dca26c558124719b7e28e7b8c92ffc0ccc2b4b80262fbf0702c1f97fda431"
+      },
+      {
+        "path": "artifacts/microlens-real-sasrec-dev/title_embeddings.npz",
+        "type": "file",
+        "bytes": 28040241,
+        "sha256": "c9d865119d137c167710b03462cc1e3c97da0f569d3acf4f90182d215dcd03ce"
+      }
+    ]
+  }
+}

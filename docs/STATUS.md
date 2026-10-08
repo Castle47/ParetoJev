@@ -34,7 +34,7 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **200 passing tests** on the local Python 3.12 environment
+- **203 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
@@ -43,6 +43,9 @@
 - new 200-user evaluation disjoint from the earlier cohort; CF refitted excluding all 400 users
 - frozen Jev tie-breaking versus CF and TF-IDF control passes both predeclared AUC tests
 - zero-HTTP scoring replay and identical raw-input regeneration
+- real SASRec-style next-item training: 57,845 users, separate 1,000-user checkpoint validation
+- frozen MiniLM semantic control, cached 400-user developmental fusion comparison
+- raw split/history audit and exact offline checkpoint/evaluation replay
 
 ## Current research boundary
 
@@ -63,9 +66,15 @@ The [new-user validation](../reports/microlens-independent-2026-10-08/README.md)
 has now tested that hypothesis without new-user tuning: Jev tie AUC 0.7176 versus
 CF 0.6650 and title tie AUC 0.6738, both predeclared 97.5% gain intervals positive.
 The call plan saves only 5.45%, and the 5% fusion and tie rule have identical weak
-orders on these users. Next work should investigate a stronger cheap semantic
-control or behavior baseline and cost reduction, rather than crediting untested
-neural ParetoJev complexity. The original full project gates are not all achieved. The legacy
+orders on these users. That finding motivated stronger behavior and cheap semantic controls, without
+crediting untested neural ParetoJev complexity. The [SASRec/MiniLM development experiment](../reports/microlens-sasrec-development-2026-10-08/README.md)
+now supplies both controls. SASRec validation NDCG@10 is 0.5480 versus CF 0.4854.
+On the already examined 400 users, AUC is 0.7622 for SASRec and 0.7701 for fixed
+20% Jev fusion; the matched MiniLM fusion is 0.7578. The 5% rules barely change
+ordering and fail the two increment gates; only the behavior-strength gate passes.
+The 20% diagnostic is promising, but NDCG gain versus SASRec remains uncertain,
+and no independent confirmation or multi-objective ParetoJev claim follows.
+The original full project gates are not all achieved. The legacy
 smoke targets remain engineering probes with privileged
 simulator probabilities; the comparison harness deliberately forbids those targets.
 
@@ -106,3 +115,13 @@ targets need a declared target device; no GPU latency benchmark is claimed.
 6. Run the implemented strict temporal split, formal SASRec+MMoE trainer/scorer, stratified KuaiRand subset scorer and materializer.
 7. Compare the formal neural branch with the historical-Bayes bootstrap and add PLE only if the first baseline is stable.
 8. Only after teacher uplift survives robust evaluation, train the low-latency student.
+
+## Immediate next experiment
+
+Freeze the 20% Jev rule and matched MiniLM control before a new user cohort is
+examined. Select new users, exclude them from both behavior/CF training, and refit
+with the registered training recipe. Existing checkpoint-selection users are not
+a fresh test set. This requires newly aligned real Jev scores from the existing
+revision-pinned endpoint or an equivalent audited cache; the current development
+turn made no new Jev requests. No additional user-supplied dataset or key was
+needed for the completed SASRec/MiniLM work.

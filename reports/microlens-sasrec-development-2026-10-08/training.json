@@ -1,0 +1,97 @@
+{
+  "recipes": [
+    {
+      "learning_rate": 0.001,
+      "best_epoch": 15,
+      "epochs_run": 20,
+      "checkpoint": "artifacts/microlens-real-sasrec-dev/sasrec_lr0.001.pt",
+      "checkpoint_sha256": "002dca26c558124719b7e28e7b8c92ffc0ccc2b4b80262fbf0702c1f97fda431",
+      "validation": {
+        "auc": 0.7914210526315789,
+        "mrr": 0.4587363240216955,
+        "hr@1": 0.288,
+        "ndcg@1": 0.288,
+        "hr@5": 0.655,
+        "ndcg@5": 0.4790162884701843,
+        "hr@10": 0.869,
+        "ndcg@10": 0.548039475725152
+      },
+      "exact_reload": true
+    },
+    {
+      "learning_rate": 0.0003,
+      "best_epoch": 28,
+      "epochs_run": 30,
+      "checkpoint": "artifacts/microlens-real-sasrec-dev/sasrec_lr0.0003.pt",
+      "checkpoint_sha256": "3e42e8f6cce27ce337590854edc20d0e984f39c636d282b9e81bfb131c22b62e",
+      "validation": {
+        "auc": 0.7863157894736842,
+        "mrr": 0.4601428303808335,
+        "hr@1": 0.299,
+        "ndcg@1": 0.299,
+        "hr@5": 0.655,
+        "ndcg@5": 0.48036142924795533,
+        "hr@10": 0.863,
+        "ndcg@10": 0.5472042539794443
+      },
+      "exact_reload": true
+    }
+  ],
+  "selected": {
+    "learning_rate": 0.001,
+    "best_epoch": 15,
+    "epochs_run": 20,
+    "checkpoint": "artifacts/microlens-real-sasrec-dev/sasrec_lr0.001.pt",
+    "checkpoint_sha256": "002dca26c558124719b7e28e7b8c92ffc0ccc2b4b80262fbf0702c1f97fda431",
+    "validation": {
+      "auc": 0.7914210526315789,
+      "mrr": 0.4587363240216955,
+      "hr@1": 0.288,
+      "ndcg@1": 0.288,
+      "hr@5": 0.655,
+      "ndcg@5": 0.4790162884701843,
+      "hr@10": 0.869,
+      "ndcg@10": 0.548039475725152
+    },
+    "exact_reload": true
+  },
+  "validation_itemcf": {
+    "auc": 0.6974473684210526,
+    "mrr": 0.4332982488211867,
+    "hr@1": 0.30318809523809526,
+    "ndcg@1": 0.30318809523809526,
+    "hr@5": 0.5582927170868347,
+    "ndcg@5": 0.4343777684909707,
+    "hr@10": 0.7174399277193395,
+    "ndcg@10": 0.48543793131476953
+  },
+  "elapsed_seconds": 418.16345175000606,
+  "registration_sha256": "27b5113f733e5f40a2ea5ddf73a61478b7db0e9d24eb0de2059f39b9466f0097",
+  "validation_oov": {
+    "history_rate": 0.0008,
+    "candidate_rate": 0.0005,
+    "positive_rate": 0.0
+  },
+  "provenance": {
+    "created_at_utc": "2026-10-08T14:47:23.520462+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "611372a7d10d6c5e5ad7e1a32b546a4ba2db241d",
+    "inputs": [
+      {
+        "path": "reports/microlens-sasrec-development-2026-10-08/registration.json",
+        "type": "file",
+        "bytes": 24927,
+        "sha256": "27b5113f733e5f40a2ea5ddf73a61478b7db0e9d24eb0de2059f39b9466f0097"
+      }
+    ]
+  }
+}

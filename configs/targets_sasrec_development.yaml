@@ -1,0 +1,22 @@
+# Development diagnostics only. These cannot satisfy original independent gates.
+evidence_requirements:
+  scope: development_only
+  users: 400
+  new_jev_requests: 0
+  original_project_targets_achieved: false
+targets:
+  stronger_behavior_on_validation:
+    metric: validation_ndcg10_gain
+    op: ">"
+    threshold: 0.0
+    required: true
+  jev05_adds_to_sasrec:
+    metric: descriptive_comparisons.sasrec_jev05_vs_sasrec.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true
+  jev05_exceeds_cheap_semantics:
+    metric: descriptive_comparisons.sasrec_jev05_vs_sasrec_minilm05.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true

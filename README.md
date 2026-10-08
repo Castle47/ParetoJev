@@ -34,6 +34,7 @@ Verified locally on **2026-10-08**:
 | Registered six-objective baseline comparison | 3 seeds × 3 methods; exact resume verified | [`reports/synthetic-baseline-2026-10-08/README.md`](reports/synthetic-baseline-2026-10-08/README.md) |
 | Real MicroLens / AutoTrust JEV-27B | 200 users / 4,000 verified decisions; main targets 2/4 passed | [`reports/microlens-real-200-2026-10-08/README.md`](reports/microlens-real-200-2026-10-08/README.md) |
 | New-user tie-breaking validation | 200 disjoint evaluation users; 2/2 predeclared AUC comparisons pass; request savings only 5.45% | [`reports/microlens-independent-2026-10-08/README.md`](reports/microlens-independent-2026-10-08/README.md) |
+| Real SASRec + semantic development controls | Trained on 57,845 users; held-out validation improves; fixed 20% Jev shows developmental uplift; 5% gates fail | [`reports/microlens-sasrec-development-2026-10-08/README.md`](reports/microlens-sasrec-development-2026-10-08/README.md) |
 | Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -55,6 +56,16 @@ intervals exclude zero. This supports a narrow incremental-signal hypothesis, no
 completion of the original project targets. The tie-only call plan saves just
 5.45% of pointwise requests; the experiment actually collected all 4,000 scores
 for the matched fixed-weight comparison. No new-user outcomes tuned any weights.
+
+A real SASRec-style next-item model has now been trained on MicroLens, with
+1,000 separate users used only for checkpoint selection. On the 400 previously
+examined development users, SASRec reaches AUC 0.7622 versus refitted CF 0.6814.
+Fixed 5% Jev fusion barely changes its continuous-score ordering; the separately
+preregistered 20% fusion reaches AUC 0.7701 and HR@5 0.6213, exceeding the matched
+MiniLM control. These are development results, not new independent confirmation:
+only 1/3 registered development gates passes and original project gates remain unmet.
+No new Jev requests were made. This next-item model does not train the KuaiRand
+six-objective MMoE heads or the full ParetoJev reranker.
 
 ## Research hypothesis
 

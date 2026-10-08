@@ -37,6 +37,19 @@ Target Mode 的核心不是“设一个很高的最终指标”，而是将研�
 Jev annotation manifest 还必须记录 behavior priority 的 inventory mean、selected mean、
 priority bucket 分布与随机混合强度。高 priority lift 只说明选样器生效，不是推荐指标。
 
+### T1.6：更强行为与廉价语义对照（开发阶段）
+
+真实 MicroLens 的下一项开发实验先用独立的 1,000 名验证用户选择 SASRec
+checkpoint，再复用已经看过的 400 名用户的真实 Jev 缓存。
+
+- SASRec 的验证 NDCG@10 必须高于相同训练用户下的 item-CF；
+- 固定 5% Jev 融合相对 SASRec 的开发集 AUC 增量区间下界 > 0；
+- 同一融合相对固定 5% MiniLM 语义对照的开发集 AUC 增量区间下界 > 0。
+
+这些是预登记的开发诊断，区间为描述性 pointwise 95%，不是独立确认检验。
+20% 权重的结果同时报告，但不能用它事后替换 5% gate。即使绝对指标超过
+原 Phase A 阈值，也不能把开发集结果转换为正式达标。
+
 ### T2：低风险胜点
 
 目标：MicroLens CV hybrid 同时改善至少两项核心指标，且没有显著伤害第三项。
@@ -83,6 +96,7 @@ MicroLens 的正式 gate 还要求 `evidence.scope=full_200_user_protocol` 和
 | `targets_comparison.yaml` | 真实 KuaiRand 统一 harness 的双固定 baseline gate |
 | `targets_microlens.yaml` | 真实 MicroLens 的 CV 与配对区间 gate |
 | `targets_independent_ties.yaml` | 新评价用户上的两项预登记 AUC 增量检验；不是原项目总体验收 |
+| `targets_sasrec_development.yaml` | 已评价用户上的 SASRec / MiniLM / Jev 开发诊断；不满足独立研究 gate |
 | `targets_research.yaml` | 合并的 MicroLens、KuaiRand、serving 计划；未做阶段保持不可评估 |
 
 比较 harness 保留主 namespace `kuairand.paretojev`（EMER-like），第二个固定比较为

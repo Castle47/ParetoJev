@@ -357,3 +357,46 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - `pytest -q`: **49 passed**.
 - Synthetic tests verify that strength `1` selects the intended high-uncertainty
   slates and that malformed score shapes/alignments fail closed.
+
+
+## 2026-10-08 — Real SASRec and semantic development controls
+
+- Registered implementation and experiment at commit `611372a` before training.
+  The 400 previously examined users became development users; 1,000 separate users
+  select checkpoints. Both groups are excluded from SASRec and refitted CF training.
+- Trained a real SASRec-style next-item model on 57,845 users / 503,713 interactions /
+  442,815 valid targets. CPU, four threads, fixed seed, two learning rates, maximum
+  30 epochs, patience five, unseen-item negative sampling. This is not six-objective
+  MMoE training or an exact original SASRec paper reproduction.
+- Learning rate 0.001 stopped after epoch 20 and selected epoch 15; rate 0.0003 ran
+  30 epochs, best epoch 28. Validation NDCG@10 0.548039 vs 0.547204; select the former.
+  CF on identical validation/training users is 0.485438. Both saved checkpoints reload
+  with exact validation predictions. Total training 418.16 seconds.
+- Downloaded the pinned MiniLM revision with safetensors; no remote model code.
+  Encoded 19,738 titles into 384 dimensions in 24.67 seconds, including model load
+  but excluding download. All 72 missing titles use zero vectors.
+- Reused 8,000 genuine cached Jev candidate scores; **zero new Jev requests**.
+- Development AUC / HR@5 / NDCG@10: CF 0.681447 / 0.538054 / 0.467663;
+  SASRec 0.762237 / 0.590000 / 0.507418; SASRec+20% Jev
+  0.770132 / 0.621250 / 0.513021; SASRec+20% MiniLM
+  0.757763 / 0.598750 / 0.487814. All registered methods appear in the report.
+- Development pointwise 95% AUC difference interval for 20% Jev vs SASRec is
+  [0.001316, 0.014276], vs matched MiniLM [0.005592, 0.019145]. NDCG gain vs
+  SASRec includes zero. These descriptive intervals are not independent or
+  multiplicity-corrected confirmatory tests.
+- SASRec has no within-user exact ties across 8,000 candidates. A 5% rank weight
+  cannot strictly reverse an adjacent rank among 20 strictly ordered candidates;
+  it can only introduce a limiting tie. Thus the old CF 5% rule barely changes
+  SASRec. Registered development gates are **1/3**, with both 5% increment gates
+  failing. The preregistered 20% result does not replace those gates.
+- `203 passed in 7.33s`; model tests cover causal histories, right-padding
+  invariance, empty/OOV inputs, strict-time labels, negative exclusion, finite
+  gradients and actual learning. Raw audit rebuilt the training arrays, checked
+  all 1,400 validation/development slates and verified train/validation/development
+  user isolation. HTTP-blocked replay reproduces predictions, per-user metrics,
+  aggregates and intervals exactly. Full training was not independently repeated.
+- Report: `reports/microlens-sasrec-development-2026-10-08/README.md`.
+  Original project targets remain unmet; no full ParetoJev performance claim.
+  Next independent study requires a newly excluded user cohort and corresponding
+  genuine Jev scores, not relabeling either development or checkpoint-validation
+  users as unseen tests. No external input blocks the engineering completed here.

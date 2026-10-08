@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "train_users": 57845,
+  "validation_users": 1000,
+  "development_users": 400,
+  "user_overlap": 0,
+  "raw_slates_audited": 1400,
+  "all_histories_strictly_precede_targets": true,
+  "train_arrays_rebuilt_exactly": true,
+  "train_only_vocabulary_and_negative_exclusion_sets_verified": true,
+  "all_negative_items_unseen_and_within_time_window": true,
+  "network_blocked_during_replay": true,
+  "all_metrics_and_intervals_replayed_exactly": true,
+  "predictions_sha256": "5a2b3ed81d8a58e0f9a932e24467566ab7e6f841f92d7f4375af08b9beed0990",
+  "per_user_metrics_sha256": "21d41db84f5a6b86a3813935556d184f1f8855c98a7872b4349a57abc19c2ab9",
+  "registration_sha256": "27b5113f733e5f40a2ea5ddf73a61478b7db0e9d24eb0de2059f39b9466f0097"
+}
