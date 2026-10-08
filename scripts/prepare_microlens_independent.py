@@ -1,6 +1,7 @@
 """Pre-register a user-disjoint, no-tuning validation of Jev tie-breaking."""
 from __future__ import annotations
 
+import argparse
 import json
 import random
 from dataclasses import asdict
@@ -17,12 +18,19 @@ from paretojev.utils.provenance import sha256_file, runtime_provenance
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", default="data/processed/microlens-independent-200")
+    parser.add_argument("--replay-data", action="store_true", help="Rebuild into an empty output directory and verify the existing registration")
+    args = parser.parse_args()
     previous_path = Path("reports/microlens-real-200-2026-10-08/registration.json")
     previous = read_json(previous_path)
     excluded = sorted(previous["cohort"]["users"])
-    root = Path("data/processed/microlens-independent-200")
+    root = Path(args.output_dir)
     report = Path("reports/microlens-independent-2026-10-08")
-    for path in (root, report):
+    frozen = read_json(report / "registration.json") if args.replay_data else None
+    if frozen and sha256_file(previous_path) != frozen["development_registration_sha256"]:
+        raise ValueError("Development registration changed")
+    for path in (root,) if args.replay_data else (root, report):
         if path.exists() and any(path.iterdir()):
             raise ValueError(f"Refuse to overwrite a registered cohort: {path}")
     for entry in previous["data_files"]:
@@ -30,6 +38,8 @@ def main() -> None:
             raise ValueError("Raw source file changed")
     protocol = MicroLensProtocol(n_users=200, n_negatives=19, history_length=5,
         time_window_days=3, seed=20261009, negative_sampling="upstream_occurrence")
+    if frozen and asdict(protocol) != frozen["protocol"]:
+        raise ValueError("Preparation protocol changed")
     frame = prepare_microlens_candidates("data/raw/microlens", protocol,
         excluded_users=excluded, require_strict_history=True)
     users = [int(x) for x in frame.user.unique()]
@@ -56,6 +66,14 @@ def main() -> None:
     if max_state > 6000 or max_question > 1000:
         raise ValueError("Frozen request exceeds public endpoint limits; no truncation performed")
     tie_calls = sum(int(row["tie_only_requires_jev"]) for row in call_rows)
+    if frozen:
+        expected = {"candidates.csv": frozen["cohort"]["candidate_file_sha256"],
+                    "jev_input.jsonl": frozen["cohort"]["jev_input_sha256"],
+                    "tie_request_plan.csv": frozen["cost_plan"]["request_mask_sha256"]}
+        if users != frozen["cohort"]["users"] or any(sha256_file(root / name) != digest for name, digest in expected.items()):
+            raise ValueError("Recreated independent input hashes differ")
+        print(json.dumps({"status": "verified", "users": 200, "decisions": 4000, "all_three_input_hashes_identical": True}, indent=2))
+        return
     registration = {
         "schema_version": "microlens-independent-v1", "registered_at": datetime.now(timezone.utc).isoformat(),
         "dataset": "microlens", "data_kind": "real", "evaluation_scope": "independent_200_user_protocol",

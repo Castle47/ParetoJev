@@ -209,6 +209,11 @@ def prepare_microlens_candidates(
     items as history, and negatives sampled from items watched by other users in
     a ±time-window around the positive timestamp. Item-CF is trained only on
     non-test users, matching the public demo's leakage controls.
+
+    ``excluded_users`` removes prior development/evaluation users from both new
+    user selection and CF fitting. ``require_strict_history`` optionally requires
+    the selected recent history to precede the target timestamp strictly. Defaults
+    preserve the original upstream-reproduction protocol.
     """
 
     pairs = load_pairs(directory)

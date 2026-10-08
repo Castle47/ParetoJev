@@ -23,6 +23,8 @@ def main() -> None:
     raw = Path("artifacts/microlens-real-independent-200")
     registration = read_json(report_dir / "registration.json")
     scoring = read_json(raw / "scoring_report.json")
+    initial_path = report_dir / "scoring_initial_report.json"
+    collection = read_json(initial_path) if initial_path.exists() else scoring
     audit = read_json(report_dir / "score_audit.json")
     if scoring["status"] != "completed" or scoring["completed_rows_total"] != 200:
         raise ValueError("Wait for the complete registered cohort")
@@ -30,6 +32,8 @@ def main() -> None:
         raise ValueError("Frozen candidates changed")
     if scoring["evidence"]["registration_sha256"] != sha256_file(report_dir / "registration.json"):
         raise ValueError("Scoring registration changed")
+    if collection["evidence"]["registration_sha256"] != sha256_file(report_dir / "registration.json"):
+        raise ValueError("Original collection cost belongs to a different registration")
     if audit["score_sha256"] != sha256_file(raw / "scores.jsonl") or not audit["all_scores_equal_raw_responses"]:
         raise ValueError("Exact raw-response audit is required")
     frame = load_prepared_candidates(source / "candidates.csv")
@@ -95,11 +99,11 @@ def main() -> None:
         "metric_definition": "AUC half-credit ties; HR/NDCG/MRR integrate uniformly over remaining tied rank positions",
         "primary_metric": "auc", "primary_comparisons": primary,
         "secondary_comparisons": secondary,
-        "cost": {"actual_http_calls_to_collect_all_methods": scoring["client_stats"]["http_calls"],
+        "cost": {"actual_http_calls_to_collect_all_methods": collection["client_stats"]["http_calls"],
                  "observed_decisions": 4000,
                  "policy_candidate_requests": {method: (actual_tie_calls if method == "jev_ties" else 4000 if method in ("jev_only", "jev_05") else 0) for method in METHODS},
                  "tie_only_saved_fraction": 1 - actual_tie_calls / 4000,
-                 "actual_scoring_wall_seconds": scoring["elapsed_seconds"],
+                 "actual_scoring_wall_seconds": collection["elapsed_seconds"],
                  "note": "Policy request counts are the frozen label-free plan. Actual measurement collects all scores once; no separate tie-only latency, price or savings was measured."},
         "limitations": registration["limitations"] + [
             "Only the two predeclared AUC comparisons are confirmatory at 97.5% two-sided intervals; other metrics and method comparisons are secondary.",
