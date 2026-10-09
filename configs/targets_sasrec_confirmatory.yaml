@@ -1,0 +1,21 @@
+# Fixed new-user confirmation of the 20% Jev rule, not a ParetoJev architecture gate.
+evidence_requirements:
+  evidence.real_data: true
+  evidence.scope: sasrec_new_700_user_confirmation
+  evidence.users: 700
+  evidence.previous_evaluation_overlap: 0
+  evidence.training_user_overlap: 0
+  evidence.weight_tuned_on_test: false
+  evidence.complete_raw_score_audit: true
+required_methods: [sasrec, sasrec_jev20, sasrec_minilm20]
+targets:
+  jev20_improves_sasrec_auc:
+    metric: primary_comparisons.sasrec_jev20_vs_sasrec.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true
+  jev20_improves_minilm_control_auc:
+    metric: primary_comparisons.sasrec_jev20_vs_sasrec_minilm20.auc.low
+    op: ">"
+    threshold: 0.0
+    required: true
