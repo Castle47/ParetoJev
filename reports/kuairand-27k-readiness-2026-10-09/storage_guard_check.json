@@ -1,0 +1,6 @@
+{
+  "status": "passed",
+  "full_download_rejected_before_network": true,
+  "partial_archive_created": false,
+  "reason": "insufficient local storage"
+}

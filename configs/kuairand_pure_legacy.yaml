@@ -1,0 +1,39 @@
+dataset:
+  variant: pure
+  train_log: log_standard_4_08_to_4_21_pure.csv
+  validation_test_log: log_standard_4_22_to_5_08_pure.csv
+  random_test_log: log_random_4_22_to_5_08_pure.csv
+slates:
+  protocol_name: exposed-session pseudo-slate
+  slate_size: 20
+  min_slate_size: 5
+  session_gap_minutes: 30
+  stride: 20
+objectives:
+  - {name: is_click, direction: 1}
+  - {name: long_view, direction: 1}
+  - {name: is_like, direction: 1}
+  - {name: is_follow, direction: 1}
+  - {name: deep_engagement, direction: 1}
+  - {name: is_hate, direction: -1}
+jev:
+  model: jev-1.13.0
+  modes: [choice, noul]
+  history_length: 10
+  language_ablations: [zh, translated_en]
+evaluation:
+  ndcg_k: 10
+  bootstrap_samples: 5000
+  cold_item_quantile: 0.25
+decision_sampling:
+  max_slates: 5000
+  per_cell: 250
+  max_per_user: 2
+  seed: 0
+  popularity_quantiles: [0.25, 0.75]
+  history_buckets:
+    short_max: 3
+    medium_max: 10
+  feedback_buckets:
+    positive_rich_threshold: 2
+  dimensions: [popularity, history, exposure, feedback_density]

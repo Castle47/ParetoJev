@@ -73,6 +73,10 @@ bootstrap、top-k error complementarity 和每次运行的 provenance。
 
 ## Stage 2：KuaiRand 主实验
 
+当前主数据集已由用户明确指定为 **KuaiRand-27K**。Pure 不作默认替代。
+获取与字段审计入口见 `scripts/prepare_kuairand_27k.py`；当前存储空间不足，
+真实 27K 多目标模型尚未训练。全量审计、时点特征可用性和外存读取适配是前置条件。
+
 ### 2.1 数据切分
 
 4/08–4/21 standard 先按完整时间戳组切成三个互斥区间：

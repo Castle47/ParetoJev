@@ -1,8 +1,23 @@
+# Active project dataset: complete KuaiRand-27K. Never fall back to Pure/1K.
 dataset:
-  variant: pure
-  train_log: log_standard_4_08_to_4_21_pure.csv
-  validation_test_log: log_standard_4_22_to_5_08_pure.csv
-  random_test_log: log_random_4_22_to_5_08_pure.csv
+  variant: 27k
+  train_logs:
+    - log_standard_4_08_to_4_21_27k_part1.csv
+    - log_standard_4_08_to_4_21_27k_part2.csv
+  validation_test_logs:
+    - log_standard_4_22_to_5_08_27k_part1.csv
+    - log_standard_4_22_to_5_08_27k_part2.csv
+  random_test_log: log_random_4_22_to_5_08_27k.csv
+  user_features: user_features_27k.csv
+  item_basic_features: video_features_basic_27k.csv
+  published_aggregate_features:
+    - video_features_statistic_27k_part1.csv
+    - video_features_statistic_27k_part2.csv
+    - video_features_statistic_27k_part3.csv
+  published_aggregates_allowed_as_model_inputs: false
+  history_length: 50
+  ingestion: chunked_full_dataset_audit
+  training_ready: false
 slates:
   protocol_name: exposed-session pseudo-slate
   slate_size: 20
@@ -17,7 +32,9 @@ objectives:
   - {name: deep_engagement, direction: 1}
   - {name: is_hate, direction: -1}
 jev:
-  model: jev-1.13.0
+  model: autotrust/JEV-27B
+  scoring_enabled: false
+  readiness: register_language_objectives_and_budget_after_behavior_validation
   modes: [choice, noul]
   history_length: 10
   language_ablations: [zh, translated_en]

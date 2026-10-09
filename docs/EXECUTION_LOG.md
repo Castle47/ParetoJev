@@ -446,3 +446,30 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   checkpoint predictions, all metrics/intervals and historical costs replay exactly.
   Verification: `portable_replay.json`; full training and cross-hardware replay were
   not independently repeated.
+
+
+## 2026-10-09 — User-selected KuaiRand-27K acquisition readiness
+
+- Switched the active config to complete 27K standard shards and random track;
+  moved the old Pure script/config to explicit legacy names. No user/item
+  downsampling or automatic 1K/Pure fallback was introduced.
+- Initial storage check: about 4.3 GiB free, later about 10 GiB after system space
+  fluctuations; no large writable volume mounted. Requested a data directory
+  with roughly 100 GiB workspace headroom while completing independent work.
+- Verified official archive HTTP Range support and size 9,892,191,178 bytes.
+  A 64 KiB prefix established layout; a 2 MiB prefix contained the entire
+  3,519,028-byte user table. Actual 27,285 distinct users and 30 non-ID fields;
+  is_lowactive_period is constant, onehot_feat4 has 874 missing entries, and
+  onehot_feat12..17 each have 714. No snapshot timestamp exists in the table.
+  Whole-archive MD5 remains unverified because the full archive was not downloaded.
+- Implemented checksum-pinned/resumable downloads with disk checks, bounded-space
+  writes and no TLS bypass; atomic extraction rejects unsafe paths and links.
+  Full 27K audit uses bounded CSV chunks, checks labels/IDs/track/date ranges and
+  emits feedback counts by date/tab, explicit prefix scope and source hashes.
+- Whole-month item statistics are excluded from strict temporal model features.
+  Published 30/62 feature counts are not treated as validated safe input counts.
+  Current legacy behavior training remains in-memory with only a few context
+  features; full rich-feature 27K model training is explicitly still unfinished.
+- 226 tests passed in 7.44s. A real CLI download attempt was rejected before
+  accessing the large file due to storage, leaving no large partial archive.
+  No new Jev inference was requested. Report: reports/kuairand-27k-readiness-2026-10-09/.

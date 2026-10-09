@@ -34,7 +34,7 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **209 passing tests** on the local Python 3.12 environment
+- **226 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
@@ -133,3 +133,23 @@ Prioritize the local semantic baseline, comparable deployment-cost measurements
 and real multi-objective data requirements before increasing model complexity
 or Jev collection. No unresolved input blocks the completed study. The original
 KuaiRand/ParetoJev and serving research gates remain unevaluated.
+
+## Active dataset: KuaiRand-27K
+
+The user explicitly selected the full 27K variant. The active configuration and
+preparation entry point now require its four standard shards and random track;
+Pure is retained only as an explicitly named legacy path. New code supports
+checksum-pinned acquisition, guarded resume/extraction and chunked full-log
+audits. A bounded official archive prefix yielded the complete real 27,285-user,
+30-field user table: one constant column and seven columns with missing values.
+This is a schema/quality probe, not complete dataset acquisition or model training.
+
+The remaining storage request is a writable data directory with about 100 GiB
+workspace headroom. Local free space has ranged from about 4.3 to 10 GiB during
+this task, insufficient for the archive, extracted core, supplements and working
+files. No old results were deleted. See the [27K readiness report](../reports/kuairand-27k-readiness-2026-10-09/README.md).
+
+The existing in-memory, low-context SASRec+MMoE trainer is not yet a rich-feature
+27K trainer. After full acquisition, resolve temporal feature availability, scene
+label definitions, content alignment and external-memory history/index design
+before training pXTR. New Jev scoring remains disabled during this prerequisite.

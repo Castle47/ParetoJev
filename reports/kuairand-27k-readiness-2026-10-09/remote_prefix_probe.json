@@ -1,0 +1,30 @@
+{
+  "source": "official KuaiRand-27K archive HTTP byte-range prefix",
+  "compressed_bytes": 65536,
+  "decompressed_prefix_bytes": 361614,
+  "scope": "prefix_probe_only",
+  "members": [
+    {
+      "name": "KuaiRand-27K",
+      "bytes": 0,
+      "is_file": false
+    },
+    {
+      "name": "KuaiRand-27K/load_data_27k.py",
+      "bytes": 2037,
+      "is_file": true
+    },
+    {
+      "name": "KuaiRand-27K/data",
+      "bytes": 0,
+      "is_file": false
+    },
+    {
+      "name": "KuaiRand-27K/data/user_features_27k.csv",
+      "bytes": 3519028,
+      "is_file": true
+    }
+  ],
+  "complete_dataset_downloaded": false,
+  "first_csv_header": "user_id,user_active_degree,is_lowactive_period,is_live_streamer,is_video_author,follow_user_num,follow_user_num_range,fans_user_num,fans_user_num_range,friend_user_num,friend_user_num_range,register_days,register_days_range,onehot_feat0,onehot_feat1,onehot_feat2,onehot_feat3,onehot_feat4,onehot_feat5,onehot_feat6,onehot_feat7,onehot_feat8,onehot_feat9,onehot_feat10,onehot_feat11,onehot_feat12,onehot_feat13,onehot_feat14,onehot_feat15,onehot_feat16,onehot_feat17"
+}
