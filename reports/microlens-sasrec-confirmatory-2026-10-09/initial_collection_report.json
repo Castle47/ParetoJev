@@ -1,0 +1,81 @@
+{
+  "status": "failed",
+  "input": "data/processed/microlens-sasrec-confirmatory/test/jev_input.jsonl",
+  "output": "artifacts/microlens-real-sasrec-confirmatory/scores.jsonl",
+  "errors": "artifacts/microlens-real-sasrec-confirmatory/errors.jsonl",
+  "signature": {
+    "schema_version": 2,
+    "provider": "autotrust-public-demo",
+    "mode": "noul",
+    "noul_scope": "pointwise",
+    "objective_names": [
+      "click"
+    ],
+    "requested_model": "autotrust/JEV-27B@7ce153d6f7933769527939bcb92ec3f3d8292884"
+  },
+  "config": {
+    "provider": "autotrust-public-demo",
+    "mode": "noul",
+    "objective_names": [
+      "click"
+    ],
+    "noul_scope": "pointwise",
+    "resume": true,
+    "overwrite": false,
+    "continue_on_error": false,
+    "durable_every": 1,
+    "start_index": 0,
+    "max_new_rows": null
+  },
+  "examined_input_rows": 178,
+  "newly_scored_rows": 177,
+  "skipped_completed_rows": 0,
+  "skipped_before_start": 0,
+  "failed_rows": 1,
+  "completed_rows_total": 177,
+  "elapsed_seconds": 3609.62341916695,
+  "latency": {
+    "count": 177,
+    "mean_ms": 20331.84421308586,
+    "p50_ms": 20158.06220896775,
+    "p95_ms": 21187.616166414227,
+    "max_ms": 28383.900542045012
+  },
+  "usage_totals": {
+    "decisions": 3540.0
+  },
+  "client_stats": {
+    "requests": 3546,
+    "http_calls": 3546,
+    "cache_hits": 0
+  },
+  "cache_entries": 3545,
+  "provenance": {
+    "created_at_utc": "2026-10-09T02:59:20.864786+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "cf2f3d1ac5b13f5f9bcc58df128f41d51a4f9c21",
+    "inputs": [
+      {
+        "path": "data/processed/microlens-sasrec-confirmatory/test/jev_input.jsonl",
+        "type": "file",
+        "bytes": 2166627,
+        "sha256": "3a5399b5a51067ae51abcf63de408410ae22c7751e99d4f2128847b8c69df131"
+      }
+    ],
+    "config_hash": "b01db2bdb56e9f8c7eecbc6b9f18304294868d2015f68966bb89d0a922d1cb34"
+  },
+  "identity": {
+    "registration_sha256": "8cdf3ec3083f5a2368df2329776f303db1afd7c4bea2a6e3e1f55bd8ed75c009",
+    "prediction_freeze_sha256": "ca99ce18fecd04b024b2d322b2e056f64a92105d1a9965677d9f071a43dd3296"
+  },
+  "lifetime_attempts": 3546
+}

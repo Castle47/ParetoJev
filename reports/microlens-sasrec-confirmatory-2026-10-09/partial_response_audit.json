@@ -1,0 +1,9 @@
+{
+  "valid_cached_responses": 3545,
+  "all_requests_match_frozen_inputs": true,
+  "all_model_revisions_valid": true,
+  "completed_users": 177,
+  "http_attempts": 3546,
+  "test_metrics_computed": false,
+  "cache_sha256_before_resume": "f6e28d1dc04e89e660e6570785b8692760dd1624dafea787b489d42f14209e60"
+}

@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "byte_identical_files": {
+    "train.npz": true,
+    "test/candidates.csv": true,
+    "test/jev_input.jsonl": true,
+    "validation/candidates.csv": true
+  },
+  "test_outcome_metrics_computed": false
+}

@@ -1,0 +1,21 @@
+{
+  "kind": "operational_transport_contingency",
+  "recorded_at": "2026-10-09T03:02:51.484486+00:00",
+  "original_max_attempts": 14000,
+  "extra_transport_attempts": 20,
+  "maximum_total_attempts": 14020,
+  "reason": "One inspected TLS unexpected EOF consumed one attempt without a cached result. The original attempt cap equaled the required decisions, leaving no transport contingency.",
+  "research_registration_unchanged": true,
+  "test_users_unchanged": 700,
+  "models_weights_prompts_and_tests_unchanged": true,
+  "interim_test_metrics_inspected": false,
+  "resume_rule": "After inspection and healthy same-model service, resume only timeouts or TLS unexpected EOF. Each run stops on its first error. No certificate bypass, HTTP-error/model-revision retry or outcome-driven expansion.",
+  "anchors": {
+    "reports/microlens-sasrec-confirmatory-2026-10-09/registration.json": "8cdf3ec3083f5a2368df2329776f303db1afd7c4bea2a6e3e1f55bd8ed75c009",
+    "reports/microlens-sasrec-confirmatory-2026-10-09/prediction_freeze.json": "ca99ce18fecd04b024b2d322b2e056f64a92105d1a9965677d9f071a43dd3296",
+    "reports/microlens-sasrec-confirmatory-2026-10-09/initial_transport_error.json": "ebbe7d2af35597750d647f82a351adeb9ab3d33212f63ed39237ef2de42fd90a",
+    "reports/microlens-sasrec-confirmatory-2026-10-09/initial_collection_report.json": "44421039c226ff8b7d9e949c2306ebfc594791a4ec84545220fa7fef56e48f86",
+    "reports/microlens-sasrec-confirmatory-2026-10-09/partial_response_audit.json": "cb6de2089d7ba6d33f3da472580b7863b3effb5843217b3060de89da579eade8",
+    "scripts/resume_microlens_confirmatory_transport.py": "49ec0465235d1c50f07a25aa9cd68244e6f28f67cd64b020736a52dd16b10c6a"
+  }
+}
