@@ -1,0 +1,43 @@
+{
+  "checkpoint_sha256": "80f885e26f49f47fb4e76d57081e24451dfdcbac139afe63e238793ffecc5b9f",
+  "registration_sha256": "8cdf3ec3083f5a2368df2329776f303db1afd7c4bea2a6e3e1f55bd8ed75c009",
+  "fixed_epoch": 15,
+  "validation": {
+    "auc": 0.7880526315789473,
+    "mrr": 0.44952033443852324,
+    "hr@1": 0.276,
+    "ndcg@1": 0.276,
+    "hr@5": 0.666,
+    "ndcg@5": 0.47581479407141536,
+    "hr@10": 0.857,
+    "ndcg@10": 0.5379466871590779
+  },
+  "validation_cf": {
+    "auc": 0.6978157894736842,
+    "mrr": 0.4335214326718025,
+    "hr@1": 0.3030214285714286,
+    "ndcg@1": 0.3030214285714286,
+    "hr@5": 0.5586052170868347,
+    "ndcg@5": 0.4346406023280313,
+    "hr@10": 0.7178994820538939,
+    "ndcg@10": 0.4857530194513665
+  },
+  "exact_reload": true,
+  "test_metrics_inspected": false,
+  "elapsed_seconds": 119.43087483302224,
+  "provenance": {
+    "created_at_utc": "2026-10-09T01:58:48.651642+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "8a4b708ff309afcf02277acada9444ba6cb2fa00",
+    "inputs": []
+  }
+}

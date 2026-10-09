@@ -97,6 +97,7 @@ MicroLens 的正式 gate 还要求 `evidence.scope=full_200_user_protocol` 和
 | `targets_microlens.yaml` | 真实 MicroLens 的 CV 与配对区间 gate |
 | `targets_independent_ties.yaml` | 新评价用户上的两项预登记 AUC 增量检验；不是原项目总体验收 |
 | `targets_sasrec_development.yaml` | 已评价用户上的 SASRec / MiniLM / Jev 开发诊断；不满足独立研究 gate |
+| `targets_sasrec_confirmatory.yaml` | 固定 700 名新评价用户、20% Jev 融合的两项 AUC 确认要求；不证明多目标架构有效 |
 | `targets_research.yaml` | 合并的 MicroLens、KuaiRand、serving 计划；未做阶段保持不可评估 |
 
 比较 harness 保留主 namespace `kuairand.paretojev`（EMER-like），第二个固定比较为

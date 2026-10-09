@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "sampled_user_ids_reproduced_exactly": true,
+  "training_membership_matches_raw_exclusions": true,
+  "all_700_slate_histories_targets_negatives_and_time_windows_verified": true,
+  "test_outcome_metrics_computed": false,
+  "behavior_and_semantic_predictions_frozen": true
+}
