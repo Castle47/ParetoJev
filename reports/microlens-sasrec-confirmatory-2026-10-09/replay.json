@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "checkpoint_predictions_exact": true,
+  "all_metrics_intervals_and_cost_exact": true,
+  "http_requests": 0,
+  "per_user_metrics_sha256": "27b825d2dddd4fa9520be9367004d0e69d2628a0b7995396444a89bf6219a958"
+}

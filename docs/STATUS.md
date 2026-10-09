@@ -34,7 +34,7 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **203 passing tests** on the local Python 3.12 environment
+- **209 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
@@ -46,6 +46,8 @@
 - real SASRec-style next-item training: 57,845 users, separate 1,000-user checkpoint validation
 - frozen MiniLM semantic control, cached 400-user developmental fusion comparison
 - raw split/history audit and exact offline checkpoint/evaluation replay
+- fixed 700-user confirmation completed: 14,000 genuine scores, 1/2 AUC gates passed
+- Jev improves SASRec AUC but superiority over MiniLM fusion remains unconfirmed
 
 ## Current research boundary
 
@@ -116,12 +118,18 @@ targets need a declared target device; no GPU latency benchmark is claimed.
 7. Compare the formal neural branch with the historical-Bayes bootstrap and add PLE only if the first baseline is stable.
 8. Only after teacher uplift survives robust evaluation, train the low-latency student.
 
-## Immediate next experiment
+## Latest confirmation and next decision
 
-Freeze the 20% Jev rule and matched MiniLM control before a new user cohort is
-examined. Select new users, exclude them from both behavior/CF training, and refit
-with the registered training recipe. Existing checkpoint-selection users are not
-a fresh test set. This requires newly aligned real Jev scores from the existing
-revision-pinned endpoint or an equivalent audited cache; the current development
-turn made no new Jev requests. No additional user-supplied dataset or key was
-needed for the completed SASRec/MiniLM work.
+The [fixed 700-user study](../reports/microlens-sasrec-confirmatory-2026-10-09/README.md)
+completed with no outcome-driven changes. AUC: SASRec 0.779549; MiniLM fusion
+0.783083; Jev fusion 0.785301. Jev minus SASRec is +0.005752 with predeclared
+97.5% interval [0.000413, 0.011128]. Jev minus MiniLM is +0.002218 with interval
+[-0.003459, 0.007895]. The joint confirmation gate fails (1/2), and HR/NDCG gains
+are uncertain. Do not expand this cohort or change weights to turn that result
+into a pass. One TLS EOF was handled by a separate, documented operational
+amendment allowing up to 20 extra transport attempts; exactly one was needed.
+
+Prioritize the local semantic baseline, comparable deployment-cost measurements
+and real multi-objective data requirements before increasing model complexity
+or Jev collection. No unresolved input blocks the completed study. The original
+KuaiRand/ParetoJev and serving research gates remain unevaluated.

@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "users": 700,
+  "decisions": 14000,
+  "all_scores_equal_raw_responses": true,
+  "score_sha256": "ca794cf9f32cddb530b95299a5994392a694d53efa6b4c210373fee4a2a86a84",
+  "raw_cache_sha256": "fab4a28f11188c748c99b17a6a808c225a66163d1560f8721d73b33df4ccd917",
+  "training_raw_rebuild_exact": true,
+  "train_test_overlap": 0,
+  "previous_evaluation_overlap": 0,
+  "history_strict": true,
+  "registration_sha256": "8cdf3ec3083f5a2368df2329776f303db1afd7c4bea2a6e3e1f55bd8ed75c009"
+}

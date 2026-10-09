@@ -15,7 +15,7 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-Verified locally on **2026-10-08**:
+Verified locally on **2026-10-09**:
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -35,6 +35,7 @@ Verified locally on **2026-10-08**:
 | Real MicroLens / AutoTrust JEV-27B | 200 users / 4,000 verified decisions; main targets 2/4 passed | [`reports/microlens-real-200-2026-10-08/README.md`](reports/microlens-real-200-2026-10-08/README.md) |
 | New-user tie-breaking validation | 200 disjoint evaluation users; 2/2 predeclared AUC comparisons pass; request savings only 5.45% | [`reports/microlens-independent-2026-10-08/README.md`](reports/microlens-independent-2026-10-08/README.md) |
 | Real SASRec + semantic development controls | Trained on 57,845 users; held-out validation improves; fixed 20% Jev shows developmental uplift; 5% gates fail | [`reports/microlens-sasrec-development-2026-10-08/README.md`](reports/microlens-sasrec-development-2026-10-08/README.md) |
+| Fixed 700-user confirmation | 14,000 real decisions; AUC gain vs SASRec passes, superiority vs MiniLM does not; **1/2 gates** | [`reports/microlens-sasrec-confirmatory-2026-10-09/README.md`](reports/microlens-sasrec-confirmatory-2026-10-09/README.md) |
 | Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -66,6 +67,15 @@ MiniLM control. These are development results, not new independent confirmation:
 only 1/3 registered development gates passes and original project gates remain unmet.
 No new Jev requests were made. This next-item model does not train the KuaiRand
 six-objective MMoE heads or the full ParetoJev reranker.
+
+The fixed 700-user confirmation is now complete: AUC is 0.7795 for SASRec,
+0.7831 for its 20% MiniLM fusion and 0.7853 for its 20% Jev fusion. The registered
+97.5% AUC difference interval is positive versus SASRec but includes zero versus
+MiniLM. **Only 1/2 confirmation gates passes.** HR/NDCG increments remain uncertain.
+This supports a narrow AUC increment, not a validated advantage over the semantic
+control or success of the full ParetoJev architecture. All 14,000 genuine scores
+were audited; one TLS interruption used one transparently recorded contingency
+attempt. Offline collection and evaluation replay require no new requests.
 
 ## Research hypothesis
 

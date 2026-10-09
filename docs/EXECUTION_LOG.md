@@ -400,3 +400,41 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   Next independent study requires a newly excluded user cohort and corresponding
   genuine Jev scores, not relabeling either development or checkpoint-validation
   users as unseen tests. No external input blocks the engineering completed here.
+
+
+## 2026-10-09 — Fixed 700-user confirmation of 20% Jev fusion
+
+- Registered at `8a4b708`: 700 previously unevaluated users, fixed 20% rank fusion,
+  two AUC comparisons with 97.5% two-sided Bonferroni intervals; no interim test
+  evaluation, optional stopping or sample expansion. Sample size was chosen from
+  development variance; the planning approximation was not a success guarantee.
+- Excluded 700 test + 400 development + 1,000 validation users from current model
+  training. Refit SASRec from scratch on 57,145 users / 497,581 interactions /
+  437,383 targets, fixed learning rate 0.001 and epoch 15 (119.43 seconds).
+  Validation NDCG@10: 0.537947 vs matched CF 0.485753, diagnostic only.
+- Behavior/semantic predictions frozen at `cf2f3d1` before test evaluation. Raw
+  regeneration produces identical train NPZ, test candidates, Jev input and
+  validation candidates. All real prompts fit the existing service limits.
+- Initial collection stopped after one TLS unexpected EOF: 177 complete users,
+  3,545 valid responses, 3,546 attempts. All cached responses verified before
+  continuation; no interim outcome metrics examined. Commit `eeaf708` records a
+  separate operational amendment adding at most 20 transport attempts. Research
+  registration, users, prompts, model, weight and tests were unchanged. Certificate,
+  HTTP and model-revision failures are not accepted by the resume exception.
+- Completed 700 users / 14,000 real decisions using 14,001 attempts; the partially
+  scored user's five cached responses were reused. Active collection time totals
+  14,324.94 seconds (3.98 h), excluding repair waits and including the one-request/s
+  limit; not an online serving benchmark.
+- AUC / HR@5 / NDCG@10: CF 0.703233 / 0.569349 / 0.489881;
+  SASRec 0.779549 / 0.641429 / 0.533152; MiniLM fusion
+  0.783083 / 0.649048 / 0.530522; Jev fusion 0.785301 / 0.647381 / 0.539898.
+- Primary Jev vs SASRec AUC +0.005752, 97.5% interval [0.000413, 0.011128];
+  vs MiniLM +0.002218, interval [-0.003459, 0.007895]. **1/2 gates passed, overall
+  failed.** Secondary HR/NDCG intervals contain zero. Do not claim equivalence,
+  Jev superiority over the semantic control, or full ParetoJev architecture success.
+- All final scores match raw responses at the pinned revision. Raw split/history
+  audit and exact checkpoint/evaluation replay pass. HTTP-blocked collection
+  replay skips all 700 users; score/cache/attempt-ledger hashes and historical
+  collection costs remain unchanged. `209 passed in 7.64s`.
+- Source and detailed evidence: `reports/microlens-sasrec-confirmatory-2026-10-09/`.
+  No external input remains unresolved for this completed study.

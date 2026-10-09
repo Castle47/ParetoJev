@@ -1,0 +1,352 @@
+{
+  "evidence": {
+    "real_data": true,
+    "scope": "sasrec_new_700_user_confirmation",
+    "users": 700,
+    "previous_evaluation_overlap": 0,
+    "training_user_overlap": 0,
+    "weight_tuned_on_test": false,
+    "complete_raw_score_audit": true
+  },
+  "metrics": {
+    "itemcf": {
+      "auc": 0.703233082706767,
+      "mrr": 0.43623799705622723,
+      "hr@1": 0.30276700680272106,
+      "ndcg@1": 0.30276700680272106,
+      "hr@5": 0.5693494169597663,
+      "ndcg@5": 0.44006557458577766,
+      "hr@10": 0.7245418605916174,
+      "ndcg@10": 0.48988059843306747
+    },
+    "sasrec": {
+      "auc": 0.7795488721804512,
+      "mrr": 0.4479134373661132,
+      "hr@1": 0.28714285714285714,
+      "ndcg@1": 0.28714285714285714,
+      "hr@5": 0.6414285714285715,
+      "ndcg@5": 0.4660333572795351,
+      "hr@10": 0.8457142857142858,
+      "ndcg@10": 0.5331515194598249
+    },
+    "minilm": {
+      "auc": 0.6176691729323308,
+      "mrr": 0.31372831424926734,
+      "hr@1": 0.17714285714285713,
+      "ndcg@1": 0.17714285714285713,
+      "hr@5": 0.42714285714285716,
+      "ndcg@5": 0.30251542928600317,
+      "hr@10": 0.6328571428571429,
+      "ndcg@10": 0.36856689270691123
+    },
+    "jev": {
+      "auc": 0.6690977443609022,
+      "mrr": 0.37427578904931297,
+      "hr@1": 0.23642857142857143,
+      "ndcg@1": 0.23642857142857143,
+      "hr@5": 0.48047619047619056,
+      "ndcg@5": 0.3636297530546126,
+      "hr@10": 0.6866666666666666,
+      "ndcg@10": 0.4302854834632153
+    },
+    "sasrec_minilm20": {
+      "auc": 0.7830827067669173,
+      "mrr": 0.4391359914319058,
+      "hr@1": 0.26071428571428573,
+      "ndcg@1": 0.26071428571428573,
+      "hr@5": 0.6490476190476191,
+      "ndcg@5": 0.4621343964570815,
+      "hr@10": 0.8576190476190475,
+      "ndcg@10": 0.5305223515279761
+    },
+    "sasrec_jev20": {
+      "auc": 0.7853007518796993,
+      "mrr": 0.4529992188866304,
+      "hr@1": 0.28285714285714286,
+      "ndcg@1": 0.28285714285714286,
+      "hr@5": 0.6473809523809523,
+      "ndcg@5": 0.47178733348260193,
+      "hr@10": 0.8542857142857143,
+      "ndcg@10": 0.5398982700198672
+    }
+  },
+  "methods": {
+    "itemcf": {
+      "evaluated": true
+    },
+    "sasrec": {
+      "evaluated": true
+    },
+    "minilm": {
+      "evaluated": true
+    },
+    "jev": {
+      "evaluated": true
+    },
+    "sasrec_minilm20": {
+      "evaluated": true
+    },
+    "sasrec_jev20": {
+      "evaluated": true
+    }
+  },
+  "primary_comparisons": {
+    "sasrec_jev20_vs_sasrec": {
+      "auc": {
+        "difference": 0.005751879699248123,
+        "low": 0.0004130639097744419,
+        "high": 0.011128289473684244,
+        "confidence": 0.975
+      }
+    },
+    "sasrec_jev20_vs_sasrec_minilm20": {
+      "auc": {
+        "difference": 0.0022180451127819544,
+        "low": -0.0034591165413533813,
+        "high": 0.007894736842105262,
+        "confidence": 0.975
+      }
+    }
+  },
+  "secondary_comparisons": {
+    "sasrec_jev20_vs_sasrec": {
+      "auc": {
+        "difference": 0.005751879699248123,
+        "low": 0.0009774436090225589,
+        "high": 0.01048872180451128,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "difference": 0.005085781520517256,
+        "low": -0.01149663036850122,
+        "high": 0.02140837053674984,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "difference": -0.004285714285714286,
+        "low": -0.03142857142857143,
+        "high": 0.023571428571428573,
+        "confidence": 0.95
+      },
+      "ndcg@1": {
+        "difference": -0.004285714285714286,
+        "low": -0.03142857142857143,
+        "high": 0.023571428571428573,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "difference": 0.005952380952380951,
+        "low": -0.015476190476190477,
+        "high": 0.028095238095238097,
+        "confidence": 0.95
+      },
+      "ndcg@5": {
+        "difference": 0.005753976203066812,
+        "low": -0.00898584829351272,
+        "high": 0.020847684403247642,
+        "confidence": 0.95
+      },
+      "hr@10": {
+        "difference": 0.008571428571428572,
+        "low": -0.002857142857142857,
+        "high": 0.02,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "difference": 0.006746750560042271,
+        "low": -0.006108689246272102,
+        "high": 0.019414090589342122,
+        "confidence": 0.95
+      }
+    },
+    "sasrec_jev20_vs_sasrec_minilm20": {
+      "auc": {
+        "difference": 0.0022180451127819544,
+        "low": -0.002744360902255636,
+        "high": 0.007142857142857142,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "difference": 0.013863227454724576,
+        "low": -0.0007520033207021775,
+        "high": 0.028328168663311438,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "difference": 0.02214285714285714,
+        "low": -0.0014285714285714286,
+        "high": 0.045714285714285714,
+        "confidence": 0.95
+      },
+      "ndcg@1": {
+        "difference": 0.02214285714285714,
+        "low": -0.0014285714285714286,
+        "high": 0.045714285714285714,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "difference": -0.0016666666666666668,
+        "low": -0.021904761904761903,
+        "high": 0.018095238095238095,
+        "confidence": 0.95
+      },
+      "ndcg@5": {
+        "difference": 0.009652937025520435,
+        "low": -0.004356055131610184,
+        "high": 0.023569650621090732,
+        "confidence": 0.95
+      },
+      "hr@10": {
+        "difference": -0.0033333333333333335,
+        "low": -0.015238095238095238,
+        "high": 0.00810119047619039,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "difference": 0.00937591849189124,
+        "low": -0.002440536930908291,
+        "high": 0.02081657731651978,
+        "confidence": 0.95
+      }
+    },
+    "sasrec_vs_itemcf": {
+      "auc": {
+        "difference": 0.07631578947368421,
+        "low": 0.0556766917293233,
+        "high": 0.09714285714285714,
+        "confidence": 0.95
+      },
+      "mrr": {
+        "difference": 0.011675440309885947,
+        "low": -0.016118224464679153,
+        "high": 0.040117925712134996,
+        "confidence": 0.95
+      },
+      "hr@1": {
+        "difference": -0.015624149659863943,
+        "low": -0.050789158163265305,
+        "high": 0.02026738945578231,
+        "confidence": 0.95
+      },
+      "ndcg@1": {
+        "difference": -0.015624149659863943,
+        "low": -0.050789158163265305,
+        "high": 0.02026738945578231,
+        "confidence": 0.95
+      },
+      "hr@5": {
+        "difference": 0.07207915446880507,
+        "low": 0.033024984335839606,
+        "high": 0.11053542011102685,
+        "confidence": 0.95
+      },
+      "ndcg@5": {
+        "difference": 0.025967782693757466,
+        "low": -0.0050364411473702965,
+        "high": 0.05683329437015136,
+        "confidence": 0.95
+      },
+      "hr@10": {
+        "difference": 0.12117242512266839,
+        "low": 0.0907988597546122,
+        "high": 0.1514028103613547,
+        "confidence": 0.95
+      },
+      "ndcg@10": {
+        "difference": 0.043270921026757544,
+        "low": 0.016043727410300326,
+        "high": 0.07043334386572869,
+        "confidence": 0.95
+      }
+    }
+  },
+  "original_project_targets_achieved": false,
+  "limitations": [
+    "Same retrospective dataset, not a global chronological or cross-platform holdout.",
+    "New evaluation users contributed to previous development model fits; current models are refit from scratch excluding them.",
+    "Fixed weight and neural recipe were selected using previous development evidence, not this cohort.",
+    "Sampled alternatives are not observed nonclick exposures; one next-item objective only.",
+    "One seed and one model checkpoint, with no claim about training-seed variability.",
+    "Title-only frozen MiniLM; its external pretraining corpus independence is unverified.",
+    "Statistical intervals condition on this checkpoint, candidate sample and public dataset.",
+    "A successful fixed fusion result does not establish neural ParetoJev multi-objective superiority."
+  ],
+  "cost": {
+    "total_http_attempts": 14001,
+    "collection_wall_seconds": 14324.94098120794,
+    "scored_candidate_decisions": 14000,
+    "note": "No online serving latency or price claim."
+  },
+  "oov": {
+    "candidate_rate": 0.00028571428571428574,
+    "history_rate": 0.0017142857142857142
+  },
+  "provenance": {
+    "created_at_utc": "2026-10-09T06:02:38.977107+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "eeaf708ebeac0b73b605d3cca4ec8afe99a06f5a",
+    "inputs": [
+      {
+        "path": "reports/microlens-sasrec-confirmatory-2026-10-09/registration.json",
+        "type": "file",
+        "bytes": 32731,
+        "sha256": "8cdf3ec3083f5a2368df2329776f303db1afd7c4bea2a6e3e1f55bd8ed75c009"
+      },
+      {
+        "path": "reports/microlens-sasrec-confirmatory-2026-10-09/prediction_freeze.json",
+        "type": "file",
+        "bytes": 370,
+        "sha256": "ca99ce18fecd04b024b2d322b2e056f64a92105d1a9965677d9f071a43dd3296"
+      },
+      {
+        "path": "artifacts/microlens-real-sasrec-confirmatory/scores.jsonl",
+        "type": "file",
+        "bytes": 1327452,
+        "sha256": "ca794cf9f32cddb530b95299a5994392a694d53efa6b4c210373fee4a2a86a84"
+      }
+    ]
+  },
+  "target_report": {
+    "passed": false,
+    "status": "failed",
+    "reason": "",
+    "required_passed": 1,
+    "required_total": 2,
+    "required_not_evaluable": 0,
+    "targets": [
+      {
+        "name": "jev20_improves_sasrec_auc",
+        "metric": "primary_comparisons.sasrec_jev20_vs_sasrec.auc.low",
+        "operator": ">",
+        "threshold": 0.0,
+        "actual": 0.0004130639097744419,
+        "required": true,
+        "passed": true,
+        "detail": "",
+        "status": "passed",
+        "reason": ""
+      },
+      {
+        "name": "jev20_improves_minilm_control_auc",
+        "metric": "primary_comparisons.sasrec_jev20_vs_sasrec_minilm20.auc.low",
+        "operator": ">",
+        "threshold": 0.0,
+        "actual": -0.0034591165413533813,
+        "required": true,
+        "passed": false,
+        "detail": "",
+        "status": "failed",
+        "reason": ""
+      }
+    ]
+  }
+}

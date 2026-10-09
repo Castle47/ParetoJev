@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "http_calls": 0,
+  "completed_users_skipped": 700,
+  "scores_cache_and_attempt_ledger_unchanged": true,
+  "artifact_hashes": {
+    "artifacts/microlens-real-sasrec-confirmatory/scores.jsonl": "ca794cf9f32cddb530b95299a5994392a694d53efa6b4c210373fee4a2a86a84",
+    "artifacts/microlens-real-sasrec-confirmatory/http_attempts.jsonl": "59dce40ca50d1802f452b72794d1a52128f8dac8351feff0e65c842072f95e90",
+    "artifacts/microlens-real-sasrec-confirmatory/requests.sqlite3": "fab4a28f11188c748c99b17a6a808c225a66163d1560f8721d73b33df4ccd917"
+  }
+}
