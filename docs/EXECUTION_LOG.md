@@ -438,3 +438,11 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   collection costs remain unchanged. `209 passed in 7.64s`.
 - Source and detailed evidence: `reports/microlens-sasrec-confirmatory-2026-10-09/`.
   No external input remains unresolved for this completed study.
+
+- Exported a 52,842,522-byte offline data package containing 21 required ignored
+  files, with per-file SHA-256s and no environment or credentials. Restored source
+  commit `5a5feef` plus that package into a separate temporary directory; confirmed
+  the restored package was imported and blocked HTTP throughout. Cached collection,
+  checkpoint predictions, all metrics/intervals and historical costs replay exactly.
+  Verification: `portable_replay.json`; full training and cross-hardware replay were
+  not independently repeated.

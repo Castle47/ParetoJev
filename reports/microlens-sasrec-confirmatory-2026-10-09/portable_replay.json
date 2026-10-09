@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "source_commit_checked": "5a5feefde89c2b700a3cf5a3266150b72a67f789",
+  "archive_sha256": "9580b6018ac8a73c0ac9c8823667e200c8e29966b0a81e56569ba4bbe0cd9a94",
+  "data_files_checked": 21,
+  "restored_source_imported": true,
+  "all_restored_data_hashes_match": true,
+  "http_blocked_for_entire_replay": true,
+  "collection_checkpoint_and_evaluation_replay_exact": true,
+  "scope": "same-machine fresh-directory replay; not an independent training or cross-hardware run"
+}

@@ -173,5 +173,10 @@ MiniLM 方案更值得采用。优先整理本地语义基线、可比的部署�
 不含虚拟环境、凭据或无关文件。解压到匹配源码根目录后，使用记录的依赖环境运行
 `run_microlens_confirmatory.py replay` 即可离线复核。源码 bundle 单独不包含这些数据。
 
+已在本机另一临时目录恢复提交 `5a5feef` 的源码及 21 个数据文件（压缩包
+52,842,522 字节），逐文件哈希一致，并在整个重放过程中禁止 HTTP。采集缓存、
+checkpoint、所有指标、区间与成本均复现一致，见 [独立目录重放记录](portable_replay.json)。
+可通过 `scripts/verify_microlens_confirmation_export.py` 再次执行这项检查。
+
 跨机器复现需遵循记录的 Python、PyTorch 与 CPU 设置；本轮只验证本机相同运行时，
 未宣称跨硬件逐位一致。
