@@ -473,3 +473,8 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - 226 tests passed in 7.44s. A real CLI download attempt was rejected before
   accessing the large file due to storage, leaving no large partial archive.
   No new Jev inference was requested. Report: reports/kuairand-27k-readiness-2026-10-09/.
+
+- A later repeat prefix probe hit a read timeout. The previously acquired complete
+  user table and matching SHA-256 remain intact; no new large download or model
+  training was performed. Network reachability is intermittent, not continuously
+  guaranteed by the earlier successful range response.

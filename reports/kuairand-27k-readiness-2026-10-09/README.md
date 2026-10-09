@@ -20,6 +20,9 @@
 - 前缀源来自官方完整 27K 包，已记录实际文件 SHA-256；**无法仅凭前缀验证整包
   发布 MD5**。正式获取必须继续完成整包校验。
 
+后续重复前缀探测遇到一次读取超时，未改写已经保存的完整用户表。官方入口曾成功
+返回数据，但当前网络可用性并不稳定；该状态另记在 [网络记录](network_status.json)。
+
 证据：[前缀目录探测](remote_prefix_probe.json)、[完整用户表核查](user_feature_probe.json)、
 [数据和资源计划](acquisition_plan.json)、[磁盘阻塞测试](storage_guard_check.json)。
 

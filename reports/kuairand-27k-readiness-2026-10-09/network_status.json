@@ -1,0 +1,8 @@
+{
+  "official_archive_range_access_succeeded": true,
+  "complete_user_table_obtained": true,
+  "later_repeat_probe_status": "read_timeout",
+  "existing_user_table_preserved": true,
+  "full_archive_download_attempted": false,
+  "note": "Official access worked for the recorded prefix acquisition but a later repeat timed out. Resume-capable full acquisition remains conditional on adequate storage and service availability."
+}
