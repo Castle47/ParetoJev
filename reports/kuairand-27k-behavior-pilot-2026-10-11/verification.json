@@ -1,0 +1,24 @@
+{
+  "created_at_utc": "2026-10-11T10:50:56.757750+00:00",
+  "test_command": ".venv/bin/python -m pytest -q",
+  "test_exit_code": 0,
+  "tests_passed": 239,
+  "tested_implementation_commit": "9059f45",
+  "training_implementation_commit": "fa77eb1054e3318f5164d011c0a94bfc8dfc1154",
+  "fresh_process_checkpoint_replay": "passed",
+  "full_training_replayed": false,
+  "report_consistency_checks": "passed",
+  "new_jev_requests": 0,
+  "files": {
+    "summary.json": "585b01ee1464f662e4e9aef8a96c3b06e97ed45387ee46ebc1f9c8ad7fe6485d",
+    "preparation.json": "f6c89d24fb80c212cb878104e6f2aa994c9316196dec95cdac471227482fa850",
+    "results.json": "8d0092f1c707024f333ba31c2c392e3d34bc7d46dfa4cf0ec842e1c8026e2685",
+    "replay.json": "1da84aec172ad34e86b4c14cf4138c900b8af95bca2d8a2f6cac27372f018c29",
+    "README.md": "2525522ea599259af95ac611706d944f2446c384e572b1a4d0791f6abbe6c344",
+    "REGISTRATION.md": "14c92bcc9ce7598f8c9716acc8a7e74eccbc5057272450be9ad64f3157ac7b69",
+    "prepare.log": "c62ea56bacb43aa903c3bf49d68b5b4026cc9c2cf692f77e53d27bdffbf78836",
+    "tests.log": "1f83e41d699215aa1cc7e00bb34cdb94d16aac908b86d44c612d4c5981f6acae",
+    "replay.log": "904baa617ef46a1f1c09cf237abc0e5db6bd7f0457fe313d2dc76c5d6fa5213e",
+    "train.log": "9041f64181cee26f0abf5c27a1d8d1e2317d786853387188ad65b2899483a051"
+  }
+}

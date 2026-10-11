@@ -36,8 +36,9 @@ Verified locally on **2026-10-11**:
 | New-user tie-breaking validation | 200 disjoint evaluation users; 2/2 predeclared AUC comparisons pass; request savings only 5.45% | [`reports/microlens-independent-2026-10-08/README.md`](reports/microlens-independent-2026-10-08/README.md) |
 | Real SASRec + semantic development controls | Trained on 57,845 users; held-out validation improves; fixed 20% Jev shows developmental uplift; 5% gates fail | [`reports/microlens-sasrec-development-2026-10-08/README.md`](reports/microlens-sasrec-development-2026-10-08/README.md) |
 | Fixed 700-user confirmation | 14,000 real decisions; AUC gain vs SASRec passes, superiority vs MiniLM does not; **1/2 gates** | [`reports/microlens-sasrec-confirmatory-2026-10-09/README.md`](reports/microlens-sasrec-confirmatory-2026-10-09/README.md) |
-| KuaiRand-27K acquisition and audit | Full core and supplements verified; 323,464,444 exposure rows audited; rich-feature pXTR training pending | [`reports/kuairand-27k-acquisition-2026-10-11/README.md`](reports/kuairand-27k-acquisition-2026-10-11/README.md) |
-| Real KuaiRand multi-objective / serving experiments | Not run | Requires real multi-objective data and a registered deployment protocol |
+| KuaiRand-27K acquisition and audit | Full core and supplements verified; 323,464,444 exposure rows audited | [`reports/kuairand-27k-acquisition-2026-10-11/README.md`](reports/kuairand-27k-acquisition-2026-10-11/README.md) |
+| Real KuaiRand-27K behavior pilot | 426,832 train / 197,078 validation targets; 7 tasks; event-only gates 6/7, calibration and overfitting remain | [`reports/kuairand-27k-behavior-pilot-2026-10-11/README.md`](reports/kuairand-27k-behavior-pilot-2026-10-11/README.md) |
+| Real KuaiRand Jev + ParetoJev / serving experiments | Not run | Requires a stronger frozen behavior baseline and registered real Jev/reranker protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
 

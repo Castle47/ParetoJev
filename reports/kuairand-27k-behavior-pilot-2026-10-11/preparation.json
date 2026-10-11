@@ -1,0 +1,302 @@
+{
+  "events": {
+    "status": "complete",
+    "rows": 136296576,
+    "dtype": [
+      [
+        "time",
+        "<i8"
+      ],
+      [
+        "item",
+        "<i4"
+      ],
+      [
+        "duration",
+        "<i8"
+      ],
+      [
+        "tab",
+        "|u1"
+      ],
+      [
+        "labels",
+        "|u1"
+      ]
+    ],
+    "audit_sha256": "0c4fa786aea2a4a4b0c60c8a08e40a5c63609338626aa5463fa3fdbb6d640088",
+    "source_sha256": {
+      "log_standard_4_08_to_4_21_27k_part1.csv": "b433233d6bdf9e8590aa1c92a9d3fe2876ae6e9f8c5c04ee085ad21fbfd6413f",
+      "log_standard_4_08_to_4_21_27k_part2.csv": "26fefe715f3ac9b693ba8771b66dbda9a0f34a19034acb9005cb04aecd894717"
+    },
+    "training_label_diagnostics_by_tab": {
+      "0": {
+        "rows": 20482865,
+        "duration_zero": 3013247,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 3013247,
+        "provided_positive_formula_negative": 12091,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 2362
+      },
+      "1": {
+        "rows": 65856185,
+        "duration_zero": 5335262,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 5335262,
+        "provided_positive_formula_negative": 401298,
+        "provided_negative_formula_positive": 25,
+        "mismatch_within_100ms_of_threshold": 82323
+      },
+      "2": {
+        "rows": 3388290,
+        "duration_zero": 266438,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 266438,
+        "provided_positive_formula_negative": 19653,
+        "provided_negative_formula_positive": 1,
+        "mismatch_within_100ms_of_threshold": 4086
+      },
+      "3": {
+        "rows": 340876,
+        "duration_zero": 15830,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 15830,
+        "provided_positive_formula_negative": 27,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 7
+      },
+      "4": {
+        "rows": 7724818,
+        "duration_zero": 218958,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 218958,
+        "provided_positive_formula_negative": 41246,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 8667
+      },
+      "5": {
+        "rows": 121611,
+        "duration_zero": 3499,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 3499,
+        "provided_positive_formula_negative": 250,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 62
+      },
+      "6": {
+        "rows": 1220602,
+        "duration_zero": 43210,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 43210,
+        "provided_positive_formula_negative": 2396,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 473
+      },
+      "7": {
+        "rows": 43073,
+        "duration_zero": 2176,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 2176,
+        "provided_positive_formula_negative": 50,
+        "provided_negative_formula_positive": 1,
+        "mismatch_within_100ms_of_threshold": 15
+      },
+      "8": {
+        "rows": 162299,
+        "duration_zero": 0,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 0,
+        "provided_positive_formula_negative": 0,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 0
+      },
+      "10": {
+        "rows": 7345,
+        "duration_zero": 0,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 0,
+        "provided_positive_formula_negative": 0,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 0
+      },
+      "12": {
+        "rows": 110505,
+        "duration_zero": 0,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 0,
+        "provided_positive_formula_negative": 0,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 0
+      },
+      "9": {
+        "rows": 19783,
+        "duration_zero": 0,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 0,
+        "provided_positive_formula_negative": 0,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 0
+      },
+      "11": {
+        "rows": 47290,
+        "duration_zero": 3565,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 3565,
+        "provided_positive_formula_negative": 70,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 19
+      },
+      "14": {
+        "rows": 2061,
+        "duration_zero": 231,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 231,
+        "provided_positive_formula_negative": 7,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 0
+      },
+      "13": {
+        "rows": 23032,
+        "duration_zero": 0,
+        "duration_negative": 0,
+        "play_negative": 0,
+        "invalid_union": 0,
+        "provided_positive_formula_negative": 120,
+        "provided_negative_formula_positive": 0,
+        "mismatch_within_100ms_of_threshold": 20
+      }
+    },
+    "store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+    "offsets_sha256": "af6ed151a857b3cd70993d815a6c439e388a34727c1d59a1a4d75becc057ced6"
+  },
+  "samples": {
+    "config_hash": "9d00c28bf5ffb6f4e09cdaedb8dcadb4037a25b20d3e0035493e27857df646cb",
+    "source_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+    "splits": {
+      "train": {
+        "rows": 426832,
+        "users": 26758,
+        "represented_exposures": 99550635.0,
+        "min_time": 1649344285486,
+        "max_time": 1650211197691,
+        "positives": [
+          203128,
+          150058,
+          10037,
+          948,
+          1331,
+          525,
+          215
+        ],
+        "history_length_median": 50.0,
+        "history_length_50_fraction": 0.9482653596731266,
+        "sha256": "d144e9bb58cf89d2cd0e94ac3a94bfebc949f68e4526d6829bbb8e28c2b21fc3"
+      },
+      "validation": {
+        "rows": 197078,
+        "users": 24892,
+        "represented_exposures": 18036928.0,
+        "min_time": 1650211201078,
+        "max_time": 1650383997344,
+        "positives": [
+          95910,
+          71657,
+          4578,
+          403,
+          687,
+          240,
+          94
+        ],
+        "history_length_median": 50.0,
+        "history_length_50_fraction": 0.9963009569814997,
+        "sha256": "0db383bb4c3bc9c96c754b4ec8bdeee2b58f44d1a6b43b073a2a1f7ef8699c11"
+      }
+    }
+  },
+  "user_snapshot": {
+    "regime": "released_user_snapshot_NOT_temporally_verified",
+    "fields": [
+      "user_active_degree",
+      "is_lowactive_period",
+      "is_live_streamer",
+      "is_video_author",
+      "follow_user_num",
+      "follow_user_num_range",
+      "fans_user_num",
+      "fans_user_num_range",
+      "friend_user_num",
+      "friend_user_num_range",
+      "register_days",
+      "register_days_range",
+      "onehot_feat0",
+      "onehot_feat1",
+      "onehot_feat2",
+      "onehot_feat3",
+      "onehot_feat4",
+      "onehot_feat5",
+      "onehot_feat6",
+      "onehot_feat7",
+      "onehot_feat8",
+      "onehot_feat9",
+      "onehot_feat10",
+      "onehot_feat11",
+      "onehot_feat12",
+      "onehot_feat13",
+      "onehot_feat14",
+      "onehot_feat15",
+      "onehot_feat16",
+      "onehot_feat17"
+    ],
+    "cardinalities": [
+      10,
+      2,
+      2,
+      3,
+      2557,
+      9,
+      2209,
+      10,
+      1392,
+      8,
+      2807,
+      8,
+      3,
+      8,
+      51,
+      1447,
+      16,
+      35,
+      4,
+      119,
+      455,
+      8,
+      6,
+      6,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "source_sha256": "dc729a656301b4c6d07f713fe41d05ec9bfaab670b90e531c70037caf033c011",
+    "encoded_sha256": "543755c3dcb4576c4339051f0c3ef7c158c75864fea090983fb665d29a9ae9ab"
+  },
+  "config_sha256": "462e4c881d7c60c0c14b76a51896512daeb8eace1fd0063f92e311325fd9091c",
+  "source_sha256": "f130e1917b485d24ff63c5a8f0727385b210f3c68abd1c3ecb4d6fe0e473dc04"
+}

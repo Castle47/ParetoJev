@@ -1,0 +1,3211 @@
+{
+  "scope": "development_pilot_not_confirmatory_benchmark",
+  "dataset": "KuaiRand-27K",
+  "config": {
+    "experiment_id": "kuairand27k-behavior-pilot-v1",
+    "scope": "development_pilot_not_confirmatory_benchmark",
+    "seed": 20261011,
+    "timezone": "Asia/Shanghai",
+    "train_end_exclusive_ms": 1650211200000,
+    "validation_end_exclusive_ms": 1650384000000,
+    "train_end_exclusive_local": "2022-04-18T00:00:00+08:00",
+    "validation_end_exclusive_local": "2022-04-20T00:00:00+08:00",
+    "history_length": 50,
+    "train_targets_per_user": 16,
+    "validation_targets_per_user": 8,
+    "sampling": "uniform_without_replacement_per_user_and_period; inverse_inclusion_weights",
+    "history": "all strictly earlier exposures from both complete early standard shards; no past outcomes used",
+    "objectives": [
+      "is_click",
+      "long_view",
+      "is_like",
+      "is_follow",
+      "is_comment",
+      "is_forward",
+      "is_hate"
+    ],
+    "label_policy": "retain publisher binary labels, including invalid-duration rows; is_click has mixed scene semantics",
+    "feature_regimes": [
+      "event_only",
+      "released_user_snapshot"
+    ],
+    "metadata_limit": "released_user_snapshot is a sensitivity experiment with unknown profile snapshot timing, not leakage-safe evidence",
+    "excluded": [
+      "whole-month item statistics",
+      "current outcomes",
+      "play_time_ms",
+      "stay times",
+      "captions",
+      "Jev"
+    ],
+    "item_hash_buckets": 65536,
+    "hidden_dim": 32,
+    "layers": 1,
+    "heads": 2,
+    "experts": 4,
+    "epochs": 3,
+    "batch_size": 256,
+    "learning_rate": 0.001,
+    "checkpoint_selection": "minimum inverse-inclusion-weighted validation mean binary log loss",
+    "baselines": [
+      "training global prevalence",
+      "training tab prevalence with 100 pseudo-exposures of shrinkage"
+    ],
+    "readiness_gate": "each of 7 objectives: >=20 sampled validation positives, AUC>0.5, logloss and Brier below training global prevalence; development point estimates only",
+    "research_target_mode": false,
+    "jev_requests": 0
+  },
+  "sample_manifest": {
+    "config_hash": "9d00c28bf5ffb6f4e09cdaedb8dcadb4037a25b20d3e0035493e27857df646cb",
+    "source_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+    "splits": {
+      "train": {
+        "rows": 426832,
+        "users": 26758,
+        "represented_exposures": 99550635.0,
+        "min_time": 1649344285486,
+        "max_time": 1650211197691,
+        "positives": [
+          203128,
+          150058,
+          10037,
+          948,
+          1331,
+          525,
+          215
+        ],
+        "history_length_median": 50.0,
+        "history_length_50_fraction": 0.9482653596731266,
+        "sha256": "d144e9bb58cf89d2cd0e94ac3a94bfebc949f68e4526d6829bbb8e28c2b21fc3"
+      },
+      "validation": {
+        "rows": 197078,
+        "users": 24892,
+        "represented_exposures": 18036928.0,
+        "min_time": 1650211201078,
+        "max_time": 1650383997344,
+        "positives": [
+          95910,
+          71657,
+          4578,
+          403,
+          687,
+          240,
+          94
+        ],
+        "history_length_median": 50.0,
+        "history_length_50_fraction": 0.9963009569814997,
+        "sha256": "0db383bb4c3bc9c96c754b4ec8bdeee2b58f44d1a6b43b073a2a1f7ef8699c11"
+      }
+    }
+  },
+  "baselines": {
+    "global_prevalence": {
+      "is_click": {
+        "sampled_positives": 95910,
+        "prevalence": 0.38253411650657654,
+        "mean_prediction": 0.38147228956222534,
+        "auc": 0.5,
+        "average_precision": 0.3825341266539402,
+        "logloss": 0.6652934752312235,
+        "brier": 0.23620289609705677,
+        "ece10": 0.0010618370917148414
+      },
+      "long_view": {
+        "sampled_positives": 71657,
+        "prevalence": 0.2646098732948303,
+        "mean_prediction": 0.2628026604652405,
+        "auc": 0.5,
+        "average_precision": 0.2646098534628513,
+        "logloss": 0.5778320793708807,
+        "brier": 0.19459474485975028,
+        "ece10": 0.001807192997610845
+      },
+      "is_like": {
+        "sampled_positives": 4578,
+        "prevalence": 0.015388915315270424,
+        "mean_prediction": 0.016480237245559692,
+        "auc": 0.5,
+        "average_precision": 0.015388914897259666,
+        "logloss": 0.07954244782588392,
+        "brier": 0.015153287180012463,
+        "ece10": 0.001091322348300026
+      },
+      "is_follow": {
+        "sampled_positives": 403,
+        "prevalence": 0.0009686447447165847,
+        "mean_prediction": 0.001227573142386973,
+        "auc": 0.5,
+        "average_precision": 0.0009686447159959834,
+        "logloss": 0.0077196879610758815,
+        "brier": 0.0009677734873401497,
+        "ece10": 0.00025892842639098953
+      },
+      "is_comment": {
+        "sampled_positives": 687,
+        "prevalence": 0.002431774977594614,
+        "mean_prediction": 0.0023366808891296387,
+        "auc": 0.5,
+        "average_precision": 0.002431774967444567,
+        "logloss": 0.017067908612209522,
+        "brier": 0.002425870480836008,
+        "ece10": 9.509407831492839e-05
+      },
+      "is_forward": {
+        "sampled_positives": 240,
+        "prevalence": 0.0009381240233778954,
+        "mean_prediction": 0.0009006415493786335,
+        "auc": 0.5,
+        "average_precision": 0.0009381239976120102,
+        "logloss": 0.007478705814308506,
+        "brier": 0.0009372453259110403,
+        "ece10": 3.74824482333767e-05
+      },
+      "is_hate": {
+        "sampled_positives": 94,
+        "prevalence": 0.0005013187183067203,
+        "mean_prediction": 0.0005199056467972696,
+        "auc": 0.5,
+        "average_precision": 0.0005013187389781674,
+        "logloss": 0.004310683867803737,
+        "brier": 0.0005010677639732589,
+        "ece10": 1.8586907819102126e-05
+      }
+    },
+    "tab_prevalence": {
+      "is_click": {
+        "sampled_positives": 95910,
+        "prevalence": 0.38253411650657654,
+        "mean_prediction": 0.38121294206815176,
+        "auc": 0.6389722080589598,
+        "average_precision": 0.46578716676084647,
+        "logloss": 0.615413649355571,
+        "brier": 0.2155020789464129,
+        "ece10": 0.005270367816898061
+      },
+      "long_view": {
+        "sampled_positives": 71657,
+        "prevalence": 0.2646098732948303,
+        "mean_prediction": 0.262533878011325,
+        "auc": 0.6426299648302782,
+        "average_precision": 0.33905142386664033,
+        "logloss": 0.5281584099254616,
+        "brier": 0.17953489406021952,
+        "ece10": 0.006630891654357613
+      },
+      "is_like": {
+        "sampled_positives": 4578,
+        "prevalence": 0.015388915315270424,
+        "mean_prediction": 0.0164202710132095,
+        "auc": 0.5914092323609212,
+        "average_precision": 0.018915883721228537,
+        "logloss": 0.07811011028290278,
+        "brier": 0.015118521641666265,
+        "ece10": 0.0010313561159498302
+      },
+      "is_follow": {
+        "sampled_positives": 403,
+        "prevalence": 0.0009686447447165847,
+        "mean_prediction": 0.0012185945397278272,
+        "auc": 0.6034402766665112,
+        "average_precision": 0.0012477209557094655,
+        "logloss": 0.007618028707759662,
+        "brier": 0.0009677910401480277,
+        "ece10": 0.00024994982373184404
+      },
+      "is_comment": {
+        "sampled_positives": 687,
+        "prevalence": 0.002431774977594614,
+        "mean_prediction": 0.0023262285733469355,
+        "auc": 0.559681496044718,
+        "average_precision": 0.0027662987257962447,
+        "logloss": 0.016979765530712548,
+        "brier": 0.002425469137962776,
+        "ece10": 0.00010554639409763198
+      },
+      "is_forward": {
+        "sampled_positives": 240,
+        "prevalence": 0.0009381240233778954,
+        "mean_prediction": 0.0008979727360205349,
+        "auc": 0.6109329704472635,
+        "average_precision": 0.0012139691591238765,
+        "logloss": 0.007351225431852408,
+        "brier": 0.0009370680099527925,
+        "ece10": 4.015126159147523e-05
+      },
+      "is_hate": {
+        "sampled_positives": 94,
+        "prevalence": 0.0005013187183067203,
+        "mean_prediction": 0.0005175688623504911,
+        "auc": 0.5251446474547002,
+        "average_precision": 0.0005390047554421779,
+        "logloss": 0.004351486160015254,
+        "brier": 0.0005010989398304449,
+        "ece10": 1.6250123372323644e-05
+      }
+    }
+  },
+  "models": {
+    "event_only": {
+      "parameters": 2371427,
+      "best_epoch": 1,
+      "validation": {
+        "is_click": {
+          "sampled_positives": 95910,
+          "prevalence": 0.38253411650657654,
+          "mean_prediction": 0.28764151893375534,
+          "auc": 0.6898487431062933,
+          "average_precision": 0.5442374093195183,
+          "logloss": 0.6275607136183959,
+          "brier": 0.22063286702245954,
+          "ece10": 0.09489260779214591
+        },
+        "long_view": {
+          "sampled_positives": 71657,
+          "prevalence": 0.2646098732948303,
+          "mean_prediction": 0.18687063712013238,
+          "auc": 0.7052627037501297,
+          "average_precision": 0.4187473818880804,
+          "logloss": 0.5347349611931548,
+          "brier": 0.18133016080405,
+          "ece10": 0.07773921944089732
+        },
+        "is_like": {
+          "sampled_positives": 4578,
+          "prevalence": 0.015388915315270424,
+          "mean_prediction": 0.010190234079699994,
+          "auc": 0.6718138811524411,
+          "average_precision": 0.033683482629512373,
+          "logloss": 0.07775230991399226,
+          "brier": 0.015070083407712383,
+          "ece10": 0.005287086379184528
+        },
+        "is_follow": {
+          "sampled_positives": 403,
+          "prevalence": 0.0009686447447165847,
+          "mean_prediction": 0.0010063366134839733,
+          "auc": 0.6273981839645679,
+          "average_precision": 0.0015556366713812084,
+          "logloss": 0.0075783791109976,
+          "brier": 0.0009675070910574621,
+          "ece10": 3.769189748799009e-05
+        },
+        "is_comment": {
+          "sampled_positives": 687,
+          "prevalence": 0.002431774977594614,
+          "mean_prediction": 0.0014134087604805706,
+          "auc": 0.6521325984605622,
+          "average_precision": 0.004911803504615421,
+          "logloss": 0.017038899167070205,
+          "brier": 0.002425229617818855,
+          "ece10": 0.0010183662069639964
+        },
+        "is_forward": {
+          "sampled_positives": 240,
+          "prevalence": 0.0009381240233778954,
+          "mean_prediction": 0.0005397144239837877,
+          "auc": 0.6209286940273216,
+          "average_precision": 0.0013584194783518612,
+          "logloss": 0.007485722948388087,
+          "brier": 0.0009372561314887428,
+          "ece10": 0.0003984095736282225
+        },
+        "is_hate": {
+          "sampled_positives": 94,
+          "prevalence": 0.0005013187183067203,
+          "mean_prediction": 0.00047998280329460596,
+          "auc": 0.5548609049963946,
+          "average_precision": 0.00064556290202666,
+          "logloss": 0.004306162240219005,
+          "brier": 0.0005010635299746964,
+          "ece10": 2.133593568356149e-05
+        }
+      },
+      "by_tab": {
+        "0": {
+          "rows": 30465,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 4459,
+              "prevalence": 0.11981752514839172,
+              "mean_prediction": 0.0975417169100483,
+              "auc": 0.5633472189396124,
+              "average_precision": 0.1465176971893386,
+              "logloss": 0.3666159044194736,
+              "brier": 0.10539159998533698,
+              "ece10": 0.022365245006870094
+            },
+            "long_view": {
+              "sampled_positives": 1775,
+              "prevalence": 0.03874586522579193,
+              "mean_prediction": 0.025601865778764235,
+              "auc": 0.5894093070266462,
+              "average_precision": 0.05199187981055109,
+              "logloss": 0.1653912735791031,
+              "brier": 0.03729082529123582,
+              "ece10": 0.013249435595287315
+            },
+            "is_like": {
+              "sampled_positives": 254,
+              "prevalence": 0.0049361372366547585,
+              "mean_prediction": 0.0021727437752354813,
+              "auc": 0.5823791668793488,
+              "average_precision": 0.0065308654384837244,
+              "logloss": 0.03246653933595604,
+              "brier": 0.004919244570069489,
+              "ece10": 0.0027633938171929503
+            },
+            "is_follow": {
+              "sampled_positives": 18,
+              "prevalence": 0.00026816039462573826,
+              "mean_prediction": 0.000424608311626731,
+              "auc": 0.5168176691577195,
+              "average_precision": 0.00033092805321242554,
+              "logloss": 0.0025119397149764556,
+              "brier": 0.00026812422818845935,
+              "ece10": 0.00015644791928152445
+            },
+            "is_comment": {
+              "sampled_positives": 83,
+              "prevalence": 0.001234253984875977,
+              "mean_prediction": 0.00041173181184394475,
+              "auc": 0.5587289398023936,
+              "average_precision": 0.0013827773985282373,
+              "logloss": 0.010067002425394364,
+              "brier": 0.0012334274390837178,
+              "ece10": 0.0008225221683430628
+            },
+            "is_forward": {
+              "sampled_positives": 6,
+              "prevalence": 0.00017870603187475353,
+              "mean_prediction": 0.00011364962422506551,
+              "auc": 0.7807899982812072,
+              "average_precision": 0.0005357226260789911,
+              "logloss": 0.0017022063425085599,
+              "brier": 0.00017867178391545505,
+              "ece10": 6.505640695484663e-05
+            },
+            "is_hate": {
+              "sampled_positives": 10,
+              "prevalence": 0.0006088842055760324,
+              "mean_prediction": 0.00044800746144742535,
+              "auc": 0.7046316850322295,
+              "average_precision": 0.0013054850461537324,
+              "logloss": 0.005127753059967399,
+              "brier": 0.0006085259973694633,
+              "ece10": 0.00016087675518522805
+            }
+          }
+        },
+        "1": {
+          "rows": 140044,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 77606,
+              "prevalence": 0.45158934593200684,
+              "mean_prediction": 0.33325030284147955,
+              "auc": 0.5941157241098066,
+              "average_precision": 0.540783695500098,
+              "logloss": 0.7050161405225925,
+              "brier": 0.25478433223862756,
+              "ece10": 0.11833901334312588
+            },
+            "long_view": {
+              "sampled_positives": 59086,
+              "prevalence": 0.32214707136154175,
+              "mean_prediction": 0.22377538057376842,
+              "auc": 0.6048011644397389,
+              "average_precision": 0.4103391301913376,
+              "logloss": 0.637831714223357,
+              "brier": 0.22118876949259775,
+              "ece10": 0.09837167529427997
+            },
+            "is_like": {
+              "sampled_positives": 3841,
+              "prevalence": 0.01924133114516735,
+              "mean_prediction": 0.012675997654904743,
+              "auc": 0.6387543959060029,
+              "average_precision": 0.037074330739872215,
+              "logloss": 0.0940802665960485,
+              "brier": 0.018798090119793304,
+              "ece10": 0.0066966085845976695
+            },
+            "is_follow": {
+              "sampled_positives": 326,
+              "prevalence": 0.0012067368952557445,
+              "mean_prediction": 0.001152733648646196,
+              "auc": 0.5777462311393092,
+              "average_precision": 0.0018147001389772067,
+              "logloss": 0.009263896148254824,
+              "brier": 0.0012051498877609051,
+              "ece10": 5.400319274348986e-05
+            },
+            "is_comment": {
+              "sampled_positives": 532,
+              "prevalence": 0.002854818245396018,
+              "mean_prediction": 0.001687994922534484,
+              "auc": 0.6249284186058666,
+              "average_precision": 0.004950933720522481,
+              "logloss": 0.019622546199922954,
+              "brier": 0.002846601851797428,
+              "ece10": 0.0011668232813418636
+            },
+            "is_forward": {
+              "sampled_positives": 202,
+              "prevalence": 0.001231453032232821,
+              "mean_prediction": 0.0006493357683324495,
+              "auc": 0.5419168072809604,
+              "average_precision": 0.001422306837930055,
+              "logloss": 0.00969648171950585,
+              "brier": 0.0012302582805113515,
+              "ece10": 0.000582117205496135
+            },
+            "is_hate": {
+              "sampled_positives": 73,
+              "prevalence": 0.0004857727326452732,
+              "mean_prediction": 0.0004900672641121015,
+              "auc": 0.5975918183889488,
+              "average_precision": 0.0007079319182877802,
+              "logloss": 0.0041876767445721014,
+              "brier": 0.0004855325185722163,
+              "ece10": 4.2945507915527765e-06
+            }
+          }
+        },
+        "2": {
+          "rows": 7119,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 3806,
+              "prevalence": 0.4068267345428467,
+              "mean_prediction": 0.3339068032391125,
+              "auc": 0.6193526969246712,
+              "average_precision": 0.5221572727345917,
+              "logloss": 0.6662432841709576,
+              "brier": 0.23681079354555104,
+              "ece10": 0.07404987245235746
+            },
+            "long_view": {
+              "sampled_positives": 3065,
+              "prevalence": 0.3245089650154114,
+              "mean_prediction": 0.23466894167005425,
+              "auc": 0.6181714263654765,
+              "average_precision": 0.42263156172740984,
+              "logloss": 0.6293317430578215,
+              "brier": 0.21863388079012858,
+              "ece10": 0.09082675969372851
+            },
+            "is_like": {
+              "sampled_positives": 194,
+              "prevalence": 0.019603945314884186,
+              "mean_prediction": 0.010155144370136544,
+              "auc": 0.565916656793967,
+              "average_precision": 0.027992344613737785,
+              "logloss": 0.0999573546758412,
+              "brier": 0.019279935364753177,
+              "ece10": 0.009476246861792156
+            },
+            "is_follow": {
+              "sampled_positives": 38,
+              "prevalence": 0.001844944548793137,
+              "mean_prediction": 0.0011501469755466971,
+              "auc": 0.6107211738821196,
+              "average_precision": 0.0066724849196033095,
+              "logloss": 0.01350548673795932,
+              "brier": 0.0018416358132529711,
+              "ece10": 0.0006947975402400033
+            },
+            "is_comment": {
+              "sampled_positives": 27,
+              "prevalence": 0.0020667247008532286,
+              "mean_prediction": 0.0014868118032857244,
+              "auc": 0.6690809164957084,
+              "average_precision": 0.003986302876529988,
+              "logloss": 0.014681729277924606,
+              "brier": 0.0020619646005653985,
+              "ece10": 0.0005799129607474612
+            },
+            "is_forward": {
+              "sampled_positives": 16,
+              "prevalence": 0.0007077162154018879,
+              "mean_prediction": 0.0005745721601896404,
+              "auc": 0.6416536653944337,
+              "average_precision": 0.006779460284339715,
+              "logloss": 0.005794921792920501,
+              "brier": 0.0007071535260236943,
+              "ece10": 0.0001331440421586969
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.00020704095368273556,
+              "mean_prediction": 0.0004945766627253197,
+              "auc": 0.7731268760493841,
+              "average_precision": 0.0009119413598374533,
+              "logloss": 0.002067337324871373,
+              "brier": 0.0002070777103101019,
+              "ece10": 0.00028753570408192384
+            }
+          }
+        },
+        "3": {
+          "rows": 862,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 24,
+              "prevalence": 0.02267785742878914,
+              "mean_prediction": 0.06664809454888176,
+              "auc": 0.5260446859486425,
+              "average_precision": 0.02721234575199639,
+              "logloss": 0.12937144695990854,
+              "brier": 0.02432570995439644,
+              "ece10": 0.04397023698830752
+            },
+            "long_view": {
+              "sampled_positives": 6,
+              "prevalence": 0.004773781169205904,
+              "mean_prediction": 0.015288467176132005,
+              "auc": 0.31349016957687464,
+              "average_precision": 0.004666755644278193,
+              "logloss": 0.03643031550916369,
+              "brier": 0.004932116505822973,
+              "ece10": 0.010514686044976835
+            },
+            "is_like": {
+              "sampled_positives": 2,
+              "prevalence": 0.0006490807281807065,
+              "mean_prediction": 0.0013782561965154404,
+              "auc": 0.8208500889742044,
+              "average_precision": 0.02259700502755682,
+              "logloss": 0.005309388692797436,
+              "brier": 0.000647984500828362,
+              "ece10": 0.0007291754611037697
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00032107957697407956,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00032113455211513973,
+              "brier": 1.0992326268708849e-07,
+              "ece10": 0.00032107957697407956
+            },
+            "is_comment": {
+              "sampled_positives": 1,
+              "prevalence": 0.00014708233356941491,
+              "mean_prediction": 0.0002743431670509065,
+              "auc": 0.9673333248055669,
+              "average_precision": 0.004482993860247539,
+              "logloss": 0.0013965686750740767,
+              "brier": 0.00014702653207921605,
+              "ece10": 0.00012726083291821267
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 6.935044017273372e-05,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 6.935331352410364e-05,
+              "brier": 5.746275809262556e-09,
+              "ece10": 6.935044017273372e-05
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00041688521989330135,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004169723140003832,
+              "brier": 1.7413960605917644e-07,
+              "ece10": 0.00041688521989330135
+            }
+          }
+        },
+        "4": {
+          "rows": 14333,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 8998,
+              "prevalence": 0.5408329963684082,
+              "mean_prediction": 0.4294996026428182,
+              "auc": 0.5865950577610661,
+              "average_precision": 0.6178503542692917,
+              "logloss": 0.7030749817758241,
+              "brier": 0.2547551127536007,
+              "ece10": 0.1113333964365873
+            },
+            "long_view": {
+              "sampled_positives": 7183,
+              "prevalence": 0.40146034955978394,
+              "mean_prediction": 0.31792048011980384,
+              "auc": 0.5942918583256599,
+              "average_precision": 0.4872090434001648,
+              "logloss": 0.6735873231286847,
+              "brier": 0.24011415102594708,
+              "ece10": 0.08500074839819764
+            },
+            "is_like": {
+              "sampled_positives": 234,
+              "prevalence": 0.011223877780139446,
+              "mean_prediction": 0.012288105496031982,
+              "auc": 0.615100433461578,
+              "average_precision": 0.02099476093496721,
+              "logloss": 0.06061026757953096,
+              "brier": 0.011075450089570919,
+              "ece10": 0.0010642280937375834
+            },
+            "is_follow": {
+              "sampled_positives": 15,
+              "prevalence": 0.000555202888790518,
+              "mean_prediction": 0.0013714179719358688,
+              "auc": 0.5960437281536916,
+              "average_precision": 0.0007090676993569002,
+              "logloss": 0.00501392536666075,
+              "brier": 0.0005555702904278205,
+              "ece10": 0.0008162150635833938
+            },
+            "is_comment": {
+              "sampled_positives": 43,
+              "prevalence": 0.0028499492909759283,
+              "mean_prediction": 0.001935279294640113,
+              "auc": 0.6838751830392351,
+              "average_precision": 0.011373808981570916,
+              "logloss": 0.01920079251692462,
+              "brier": 0.0028397775922876555,
+              "ece10": 0.0009146699553294993
+            },
+            "is_forward": {
+              "sampled_positives": 14,
+              "prevalence": 0.0006383145228028297,
+              "mean_prediction": 0.0008174882198193069,
+              "auc": 0.7930050168233247,
+              "average_precision": 0.0027043326233003747,
+              "logloss": 0.005199691025154566,
+              "brier": 0.0006376775450217798,
+              "ece10": 0.00017917369568352045
+            },
+            "is_hate": {
+              "sampled_positives": 8,
+              "prevalence": 0.0005608302308246493,
+              "mean_prediction": 0.0004832430420324293,
+              "auc": 0.6218065656134519,
+              "average_precision": 0.0013875897679513137,
+              "logloss": 0.004760375760170993,
+              "brier": 0.000560517242607045,
+              "ece10": 7.758721530537402e-05
+            }
+          }
+        },
+        "5": {
+          "rows": 355,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 105,
+              "prevalence": 0.3070690929889679,
+              "mean_prediction": 0.17191885739704546,
+              "auc": 0.5860258159275313,
+              "average_precision": 0.41466741126596063,
+              "logloss": 0.6634192213850864,
+              "brier": 0.22742386972927622,
+              "ece10": 0.13721544465831562
+            },
+            "long_view": {
+              "sampled_positives": 53,
+              "prevalence": 0.1253640353679657,
+              "mean_prediction": 0.08112850694498523,
+              "auc": 0.7441813698512052,
+              "average_precision": 0.31908538053127433,
+              "logloss": 0.36041927728578044,
+              "brier": 0.10656837190620505,
+              "ece10": 0.044235527966007895
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.005466508916671395,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.005487008268822591,
+              "brier": 4.067345989889561e-05,
+              "ece10": 0.005466508916671395
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0007230005513408845,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.000723276529993062,
+              "brier": 5.516599911819606e-07,
+              "ece10": 0.0007230005513408845
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0008770460038767128,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0008774952175236432,
+              "brier": 8.976848982592118e-07,
+              "ece10": 0.0008770460038767128
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003236095391245903,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00032367059756303207,
+              "brier": 1.2208025596385326e-07,
+              "ece10": 0.0003236095391245903
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.0006096639554016292,
+              "mean_prediction": 0.00046017401300613484,
+              "auc": 0.8168228728150886,
+              "average_precision": 0.0033192516596258297,
+              "logloss": 0.005118595625692343,
+              "brier": 0.0006092905748939144,
+              "ece10": 0.0001494899160511534
+            }
+          }
+        },
+        "6": {
+          "rows": 3012,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 718,
+              "prevalence": 0.19354386627674103,
+              "mean_prediction": 0.13957513642185623,
+              "auc": 0.6045423127768094,
+              "average_precision": 0.2700257673386828,
+              "logloss": 0.4918736284445055,
+              "brier": 0.15597530386724617,
+              "ece10": 0.05745491563508342
+            },
+            "long_view": {
+              "sampled_positives": 356,
+              "prevalence": 0.088028684258461,
+              "mean_prediction": 0.05943811596188914,
+              "auc": 0.6126219999678049,
+              "average_precision": 0.14034695453325383,
+              "logloss": 0.2964974532069874,
+              "brier": 0.07989404696914897,
+              "ece10": 0.02859056456663605
+            },
+            "is_like": {
+              "sampled_positives": 44,
+              "prevalence": 0.01080872118473053,
+              "mean_prediction": 0.003842844141720628,
+              "auc": 0.5150777494069422,
+              "average_precision": 0.012240147685325383,
+              "logloss": 0.06496508701575161,
+              "brier": 0.010746004970673812,
+              "ece10": 0.006965877381683926
+            },
+            "is_follow": {
+              "sampled_positives": 6,
+              "prevalence": 0.001131504657678306,
+              "mean_prediction": 0.0006087989606505032,
+              "auc": 0.5464432530149328,
+              "average_precision": 0.0015521306790746078,
+              "logloss": 0.008990303636150242,
+              "brier": 0.0011305106273201955,
+              "ece10": 0.0005227056457142578
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0006598955725445344,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0006601560910622925,
+              "brier": 5.206874450594563e-07,
+              "ece10": 0.0006598955725445344
+            },
+            "is_forward": {
+              "sampled_positives": 2,
+              "prevalence": 0.0010677980026230216,
+              "mean_prediction": 0.00021994869418025373,
+              "auc": 0.27267788431532425,
+              "average_precision": 0.0014108207705197757,
+              "logloss": 0.009525313688461384,
+              "brier": 0.0010675034696610557,
+              "ece10": 0.0008478493503135501
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004559101923096064,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004560143482456282,
+              "brier": 2.0824831308714441e-07,
+              "ece10": 0.0004559101923096064
+            }
+          }
+        },
+        "7": {
+          "rows": 143,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 80,
+              "prevalence": 0.5116515159606934,
+              "mean_prediction": 0.11200081883852837,
+              "auc": 0.44726527047291503,
+              "average_precision": 0.5180653265570933,
+              "logloss": 1.200315338944261,
+              "brier": 0.41125795057222875,
+              "ece10": 0.39965068678733956
+            },
+            "long_view": {
+              "sampled_positives": 45,
+              "prevalence": 0.29164016246795654,
+              "mean_prediction": 0.040270580768991135,
+              "auc": 0.47427316999134334,
+              "average_precision": 0.3006362449967446,
+              "logloss": 0.9941180333652336,
+              "brier": 0.27024287639702044,
+              "ece10": 0.2513695777483509
+            },
+            "is_like": {
+              "sampled_positives": 7,
+              "prevalence": 0.030354103073477745,
+              "mean_prediction": 0.0031382461164162294,
+              "auc": 0.8904208473501729,
+              "average_precision": 0.25755956482221015,
+              "logloss": 0.1625970705058634,
+              "brier": 0.03003712235939625,
+              "ece10": 0.027215856416818503
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0005261043441914227,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0005262526394852057,
+              "brier": 2.964710793217201e-07,
+              "ece10": 0.0005261043441914227
+            },
+            "is_comment": {
+              "sampled_positives": 1,
+              "prevalence": 0.004213458858430386,
+              "mean_prediction": 0.0005715118479937154,
+              "auc": 0.4397084729370315,
+              "average_precision": 0.007495334536665953,
+              "logloss": 0.03298196065996817,
+              "brier": 0.0042100090377758794,
+              "ece10": 0.003641947143871729
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00019468764106563734,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0001947112021693123,
+              "brier": 4.7112474501913903e-08,
+              "ece10": 0.00019468764106563734
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.000444740234581652,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004448394059789764,
+              "brier": 1.9828369275582671e-07,
+              "ece10": 0.000444740234581652
+            }
+          }
+        },
+        "8": {
+          "rows": 291,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 12,
+              "prevalence": 0.047980792820453644,
+              "mean_prediction": 0.10161243081459284,
+              "auc": 0.5460932314554524,
+              "average_precision": 0.0899963819956717,
+              "logloss": 0.2125607500834328,
+              "brier": 0.048821224974047894,
+              "ece10": 0.05363163895582269
+            },
+            "long_view": {
+              "sampled_positives": 6,
+              "prevalence": 0.014544506557285786,
+              "mean_prediction": 0.037512800242273076,
+              "auc": 0.7726330465045059,
+              "average_precision": 0.11968171293383008,
+              "logloss": 0.08119696043406015,
+              "brier": 0.014594820956015733,
+              "ece10": 0.025621424761865744
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0022376024709975743,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0022404828359443105,
+              "brier": 5.74886278938525e-06,
+              "ece10": 0.0022376024709975743
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00047304408135548007,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004731628970520221,
+              "brier": 2.3754658789698816e-07,
+              "ece10": 0.00047304408135548007
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00041687302808803136,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00041697213883307236,
+              "brier": 1.9814709494386848e-07,
+              "ece10": 0.00041687302808803136
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00012832762688580379,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00012833729310209028,
+              "brier": 1.9330048478710643e-08,
+              "ece10": 0.00012832762688580379
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004399036039210093,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00044000055613901696,
+              "brier": 1.9384737105666904e-07,
+              "ece10": 0.0004399036039210093
+            }
+          }
+        },
+        "9": {
+          "rows": 45,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 44,
+              "prevalence": 0.991321861743927,
+              "mean_prediction": 0.5635695552454114,
+              "auc": 0.7343411829311626,
+              "average_precision": 0.997518743600268,
+              "logloss": 0.5832949308768581,
+              "brier": 0.1967909470015583,
+              "ece10": 0.4277523472066878
+            },
+            "long_view": {
+              "sampled_positives": 9,
+              "prevalence": 0.19757910072803497,
+              "mean_prediction": 0.447172245181323,
+              "auc": 0.7401822261817737,
+              "average_precision": 0.40460192752411966,
+              "logloss": 0.6051721269360557,
+              "brier": 0.2071649618847198,
+              "ece10": 0.25914343762958564
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.013817566740346864,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.013928389396193256,
+              "brier": 0.00021899454652561082,
+              "ece10": 0.013817566740346864
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.001666904956489955,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0016683384366893823,
+              "brier": 2.8635805519340265e-06,
+              "ece10": 0.001666904956489955
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0023907692249188783,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.002393959865248899,
+              "brier": 6.368734300626877e-06,
+              "ece10": 0.0023907692249188783
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0010999655728382279,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0011006150709818954,
+              "brier": 1.297901970993838e-06,
+              "ece10": 0.0010999655728382279
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004671254316079728,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004672345926317736,
+              "brier": 2.1825402585237055e-07,
+              "ece10": 0.0004671254316079728
+            }
+          }
+        },
+        "10": {
+          "rows": 15,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 15,
+              "prevalence": 1.0,
+              "mean_prediction": 0.4221364348111073,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.8825927793519581,
+              "brier": 0.34006521427768743,
+              "ece10": 0.5778635617537445
+            },
+            "long_view": {
+              "sampled_positives": 12,
+              "prevalence": 0.8291032314300537,
+              "mean_prediction": 0.2962334778124738,
+              "auc": 0.9980701110510884,
+              "average_precision": 0.9996025764536003,
+              "logloss": 0.9781700270273568,
+              "brier": 0.38730969630240325,
+              "ece10": 0.5624651646386577
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.014189429304942738,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.014300258651583238,
+              "brier": 0.00021926050341740383,
+              "ece10": 0.014189429304942738
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0013633378600606688,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0013642886080366457,
+              "brier": 1.8996986087266317e-06,
+              "ece10": 0.0013633378600606688
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.002153684213269679,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0021561750206877295,
+              "brier": 4.9736066968968544e-06,
+              "ece10": 0.002153684213269679
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0008835774034084759,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00088399210058816,
+              "brier": 8.288541121181818e-07,
+              "ece10": 0.0008835774034084759
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00048025684977646586,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004803722799983385,
+              "brier": 2.3078643694878204e-07,
+              "ece10": 0.00048025684977646586
+            }
+          }
+        },
+        "11": {
+          "rows": 195,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 1,
+              "prevalence": 0.00016638341185171157,
+              "mean_prediction": 0.09077035454972772,
+              "auc": 0.884213529222979,
+              "average_precision": 0.0014351614556637623,
+              "logloss": 0.09570476985248784,
+              "brier": 0.008702364967646025,
+              "ece10": 0.09060397149799673
+            },
+            "long_view": {
+              "sampled_positives": 23,
+              "prevalence": 0.13133594393730164,
+              "mean_prediction": 0.02402467274326203,
+              "auc": 0.6006683858739976,
+              "average_precision": 0.22565450682871185,
+              "logloss": 0.5025871534835271,
+              "brier": 0.12498902581102417,
+              "ece10": 0.107311267263631
+            },
+            "is_like": {
+              "sampled_positives": 1,
+              "prevalence": 0.0032444766256958246,
+              "mean_prediction": 0.0019611054765654337,
+              "auc": 0.16371765828067242,
+              "average_precision": 0.003877180026131909,
+              "logloss": 0.02328876612405234,
+              "brier": 0.003239694723622687,
+              "ece10": 0.001283371188160093
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00042035661661632537,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00042044909647093,
+              "brier": 1.8490289429618716e-07,
+              "ece10": 0.00042035661661632537
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003948641400781515,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0003949492597329508,
+              "brier": 1.7018586322526833e-07,
+              "ece10": 0.0003948641400781515
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00010980417132505734,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0001098108665949776,
+              "brier": 1.3389333282893141e-08,
+              "ece10": 0.00010980417132505734
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.006072994787245989,
+              "mean_prediction": 0.00044379833430013583,
+              "auc": 0.41927731012052805,
+              "average_precision": 0.010411997228900934,
+              "logloss": 0.047375075304071805,
+              "brier": 0.006067845369645953,
+              "ece10": 0.005629196448391235
+            }
+          }
+        },
+        "12": {
+          "rows": 162,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 28,
+              "prevalence": 0.1754312813282013,
+              "mean_prediction": 0.06552908291804672,
+              "auc": 0.5214928965974202,
+              "average_precision": 0.19509519187912833,
+              "logloss": 0.5341749789087177,
+              "brier": 0.15660495368551292,
+              "ece10": 0.10990220259084271
+            },
+            "long_view": {
+              "sampled_positives": 18,
+              "prevalence": 0.11082834005355835,
+              "mean_prediction": 0.01726797571052413,
+              "auc": 0.595288849775033,
+              "average_precision": 0.17519057724586246,
+              "logloss": 0.46043382319867243,
+              "brier": 0.10692569779680733,
+              "ece10": 0.09356036650809035
+            },
+            "is_like": {
+              "sampled_positives": 1,
+              "prevalence": 0.0026107369922101498,
+              "mean_prediction": 0.0014804869066846807,
+              "auc": 0.6822254483598024,
+              "average_precision": 0.00816989724695059,
+              "logloss": 0.0184129028782884,
+              "brier": 0.0026052542361477992,
+              "ece10": 0.0011302500231764457
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003461849194904373,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0003462481202783658,
+              "brier": 1.2636901052429118e-07,
+              "ece10": 0.0003461849194904373
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00030050834779898216,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.000300559357683744,
+              "brier": 1.0199303723891116e-07,
+              "ece10": 0.00030050834779898216
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 8.189437642740128e-05,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 8.189826852903808e-05,
+              "brier": 7.783623529882346e-09,
+              "ece10": 8.189437642740128e-05
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00041418720355975206,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00041427314948091966,
+              "brier": 1.7184421213113414e-07,
+              "ece10": 0.00041418720355975206
+            }
+          }
+        },
+        "13": {
+          "rows": 24,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 14,
+              "prevalence": 0.2279260754585266,
+              "mean_prediction": 0.19533707408226453,
+              "auc": 0.8342186744279434,
+              "average_precision": 0.6677708198117518,
+              "logloss": 0.49527212161517864,
+              "brier": 0.16185193223357985,
+              "ece10": 0.19431472477055792
+            },
+            "long_view": {
+              "sampled_positives": 11,
+              "prevalence": 0.19271650910377502,
+              "mean_prediction": 0.10116327215611093,
+              "auc": 0.8773188683635974,
+              "average_precision": 0.5913228226633122,
+              "logloss": 0.4779978000378556,
+              "brier": 0.1536602167783218,
+              "ece10": 0.11020269931142887
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.005133252009872704,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.005148266385778219,
+              "brier": 2.9891295975580506e-05,
+              "ece10": 0.005133252009872704
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0007974956845767816,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0007978205462567502,
+              "brier": 6.493620370723276e-07,
+              "ece10": 0.0007974956845767816
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0008729839757480707,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.000873397428974071,
+              "brier": 8.263269187621121e-07,
+              "ece10": 0.0008729839757480707
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003232519181164095,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0003233084747887791,
+              "brier": 1.1308423273690645e-07,
+              "ece10": 0.0003232519181164095
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00048070205996005017,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004808176816911976,
+              "brier": 2.311692919105376e-07,
+              "ece10": 0.00048070205996005017
+            }
+          }
+        },
+        "14": {
+          "rows": 13,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.1444240251104279,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.15605434804665577,
+              "brier": 0.020966497070369308,
+              "ece10": 0.1444240251104279
+            },
+            "long_view": {
+              "sampled_positives": 9,
+              "prevalence": 0.4489826261997223,
+              "mean_prediction": 0.052444584913895954,
+              "auc": 0.7187592340127309,
+              "average_precision": 0.7592184126939214,
+              "logloss": 1.321256460654459,
+              "brier": 0.4011480682983888,
+              "ece10": 0.3965380379882279
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.003111162387040998,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0031163315594754976,
+              "brier": 1.0313764261169004e-05,
+              "ece10": 0.003111162387040998
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0005330825368849223,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0005332266665595515,
+              "brier": 2.881539672816809e-07,
+              "ece10": 0.0005330825368849223
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0005379483673656402,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.000538100973291647,
+              "brier": 3.050894799174273e-07,
+              "ece10": 0.0005379483673656402
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00018112935993383884,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00018114654130151132,
+              "brier": 3.435817327946953e-08,
+              "ece10": 0.00018112935993383884
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.000471019958928197,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00047113099158738045,
+              "brier": 2.2199549952126496e-07,
+              "ece10": 0.000471019958928197
+            }
+          }
+        }
+      },
+      "readiness_gates": {
+        "is_click": true,
+        "long_view": true,
+        "is_like": true,
+        "is_follow": true,
+        "is_comment": true,
+        "is_forward": false,
+        "is_hate": true
+      },
+      "all_gates_pass": false,
+      "exact_checkpoint_replay": true,
+      "checkpoint_sha256": "10775ffd88183c0d2e31efc4eac125fc6152835ad9a95973db503d1a620389b5",
+      "predictions_sha256": "1844aff1993e095874f5063fad4dc0584c9ce7b87527cf1ed3a40d7fa6cfb941",
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_logloss": 0.17595865616475945,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.28764151893375534,
+              "auc": 0.6898487431062933,
+              "average_precision": 0.5442374093195183,
+              "logloss": 0.6275607136183959,
+              "brier": 0.22063286702245954,
+              "ece10": 0.09489260779214591
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.18687063712013238,
+              "auc": 0.7052627037501297,
+              "average_precision": 0.4187473818880804,
+              "logloss": 0.5347349611931548,
+              "brier": 0.18133016080405,
+              "ece10": 0.07773921944089732
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.010190234079699994,
+              "auc": 0.6718138811524411,
+              "average_precision": 0.033683482629512373,
+              "logloss": 0.07775230991399226,
+              "brier": 0.015070083407712383,
+              "ece10": 0.005287086379184528
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.0010063366134839733,
+              "auc": 0.6273981839645679,
+              "average_precision": 0.0015556366713812084,
+              "logloss": 0.0075783791109976,
+              "brier": 0.0009675070910574621,
+              "ece10": 3.769189748799009e-05
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0014134087604805706,
+              "auc": 0.6521325984605622,
+              "average_precision": 0.004911803504615421,
+              "logloss": 0.017038899167070205,
+              "brier": 0.002425229617818855,
+              "ece10": 0.0010183662069639964
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.0005397144239837877,
+              "auc": 0.6209286940273216,
+              "average_precision": 0.0013584194783518612,
+              "logloss": 0.007485722948388087,
+              "brier": 0.0009372561314887428,
+              "ece10": 0.0003984095736282225
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.00047998280329460596,
+              "auc": 0.5548609049963946,
+              "average_precision": 0.00064556290202666,
+              "logloss": 0.004306162240219005,
+              "brier": 0.0005010635299746964,
+              "ece10": 2.133593568356149e-05
+            }
+          },
+          "elapsed_seconds": 291.6103812919973
+        },
+        {
+          "epoch": 2,
+          "train_logloss": 0.15232671959095329,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.3521261143451942,
+              "auc": 0.6713193371870045,
+              "average_precision": 0.5210819229048576,
+              "logloss": 0.6393956009065511,
+              "brier": 0.22348159685149344,
+              "ece10": 0.07894179984369763
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.2311604202157428,
+              "auc": 0.6899896093365718,
+              "average_precision": 0.39878777624535977,
+              "logloss": 0.5537571224127624,
+              "brier": 0.1860134737031421,
+              "ece10": 0.07842633163103295
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.01266135039320411,
+              "auc": 0.6607125888615973,
+              "average_precision": 0.03156987865758153,
+              "logloss": 0.07793070264512676,
+              "brier": 0.015090168522582782,
+              "ece10": 0.0031897994658411006
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.0010164772863600915,
+              "auc": 0.6177122609895864,
+              "average_precision": 0.0015916982845333915,
+              "logloss": 0.007600848715738051,
+              "brier": 0.0009675894078406873,
+              "ece10": 4.7832570364108074e-05
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0017546937403809368,
+              "auc": 0.642625051529587,
+              "average_precision": 0.0046032979340596344,
+              "logloss": 0.017120514493089028,
+              "brier": 0.0024249055473252526,
+              "ece10": 0.0006770812270636302
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.0007099352933708134,
+              "auc": 0.629774657213511,
+              "average_precision": 0.0013169275154171678,
+              "logloss": 0.007522887970592068,
+              "brier": 0.0009373942879804391,
+              "ece10": 0.00022818870424119687
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.0004794924567553309,
+              "auc": 0.6202646775055825,
+              "average_precision": 0.0021082041597308447,
+              "logloss": 0.004290950564521332,
+              "brier": 0.0005010474787839584,
+              "ece10": 2.1826282222836556e-05
+            }
+          },
+          "elapsed_seconds": 571.0627318329971
+        },
+        {
+          "epoch": 3,
+          "train_logloss": 0.10776499062458177,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.37593266999484504,
+              "auc": 0.6404682940299901,
+              "average_precision": 0.4929396088206193,
+              "logloss": 0.7983851985543913,
+              "brier": 0.26258329535033337,
+              "ece10": 0.17695187357223602
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.2438098881589498,
+              "auc": 0.6644652771974391,
+              "average_precision": 0.37740532753696987,
+              "logloss": 0.6759800364996426,
+              "brier": 0.21124329358781527,
+              "ece10": 0.14253364905721363
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.014232445482404788,
+              "auc": 0.6368582935690793,
+              "average_precision": 0.027593368679157498,
+              "logloss": 0.08292412460676656,
+              "brier": 0.015322579463564332,
+              "ece10": 0.003316289517505633
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.0009470139914889991,
+              "auc": 0.6170204395573538,
+              "average_precision": 0.0016390551511680646,
+              "logloss": 0.007715834621726462,
+              "brier": 0.0009678156748863482,
+              "ece10": 2.163072450698426e-05
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0018168448404318055,
+              "auc": 0.6313239571581489,
+              "average_precision": 0.003973858612070785,
+              "logloss": 0.017967720043491696,
+              "brier": 0.0024295366162204205,
+              "ece10": 0.0006149301270127614
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.0007383563634005192,
+              "auc": 0.6124450717050681,
+              "average_precision": 0.0013064951939177009,
+              "logloss": 0.00777404412280109,
+              "brier": 0.0009378288414739219,
+              "ece10": 0.000199767634211491
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.0005313781347880647,
+              "auc": 0.5670099558975459,
+              "average_precision": 0.0018917008825526712,
+              "logloss": 0.0042746134940253085,
+              "brier": 0.0005010111997289784,
+              "ece10": 3.005939580989728e-05
+            }
+          },
+          "elapsed_seconds": 876.7343784579971
+        }
+      ],
+      "temporal_evidence_eligible": true
+    },
+    "released_user_snapshot": {
+      "parameters": 2450279,
+      "best_epoch": 1,
+      "validation": {
+        "is_click": {
+          "sampled_positives": 95910,
+          "prevalence": 0.38253411650657654,
+          "mean_prediction": 0.29916235712095113,
+          "auc": 0.692052074793462,
+          "average_precision": 0.5486967514337443,
+          "logloss": 0.6209106556152979,
+          "brier": 0.21769656604436602,
+          "ece10": 0.08337176737906425
+        },
+        "long_view": {
+          "sampled_positives": 71657,
+          "prevalence": 0.2646098732948303,
+          "mean_prediction": 0.19328921699881046,
+          "auc": 0.7047120342711444,
+          "average_precision": 0.4202172589155935,
+          "logloss": 0.5313663936636629,
+          "brier": 0.18007919219598323,
+          "ece10": 0.07132063472698721
+        },
+        "is_like": {
+          "sampled_positives": 4578,
+          "prevalence": 0.015388915315270424,
+          "mean_prediction": 0.013814611185355957,
+          "auc": 0.754315061138129,
+          "average_precision": 0.05981138564711318,
+          "logloss": 0.07237313471116288,
+          "brier": 0.01481997301800369,
+          "ece10": 0.0016451623385048306
+        },
+        "is_follow": {
+          "sampled_positives": 403,
+          "prevalence": 0.0009686447447165847,
+          "mean_prediction": 0.001011281926206745,
+          "auc": 0.7387960134576903,
+          "average_precision": 0.01911425112298805,
+          "logloss": 0.007188642413422617,
+          "brier": 0.0009642132473161703,
+          "ece10": 4.26372102107616e-05
+        },
+        "is_comment": {
+          "sampled_positives": 687,
+          "prevalence": 0.002431774977594614,
+          "mean_prediction": 0.0014534708671139994,
+          "auc": 0.6521423991735161,
+          "average_precision": 0.004853964448187956,
+          "logloss": 0.017025267975428707,
+          "brier": 0.002425244651572915,
+          "ece10": 0.0009783041003305676
+        },
+        "is_forward": {
+          "sampled_positives": 240,
+          "prevalence": 0.0009381240233778954,
+          "mean_prediction": 0.000839652395995705,
+          "auc": 0.6703558727357308,
+          "average_precision": 0.0017584488375505824,
+          "logloss": 0.0073090105613661345,
+          "brier": 0.0009369634871603904,
+          "ece10": 9.847160161630533e-05
+        },
+        "is_hate": {
+          "sampled_positives": 94,
+          "prevalence": 0.0005013187183067203,
+          "mean_prediction": 0.0004261496053034187,
+          "auc": 0.7060095779713587,
+          "average_precision": 0.022818353732002562,
+          "logloss": 0.004243399257748085,
+          "brier": 0.0005009988586317773,
+          "ece10": 7.51691336747488e-05
+        }
+      },
+      "by_tab": {
+        "0": {
+          "rows": 30465,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 4459,
+              "prevalence": 0.11981752514839172,
+              "mean_prediction": 0.10033344579878956,
+              "auc": 0.5714986301145052,
+              "average_precision": 0.1482284312046448,
+              "logloss": 0.3655743246288144,
+              "brier": 0.10520011313586841,
+              "ece10": 0.0196897054509331
+            },
+            "long_view": {
+              "sampled_positives": 1775,
+              "prevalence": 0.03874586522579193,
+              "mean_prediction": 0.026433563646847954,
+              "auc": 0.5883171788500576,
+              "average_precision": 0.05312755177961447,
+              "logloss": 0.16532572805130913,
+              "brier": 0.03726140668608628,
+              "ece10": 0.012508688959941216
+            },
+            "is_like": {
+              "sampled_positives": 254,
+              "prevalence": 0.0049361372366547585,
+              "mean_prediction": 0.004155641949180406,
+              "auc": 0.5888653277965212,
+              "average_precision": 0.006736866081228667,
+              "logloss": 0.03126410275332621,
+              "brier": 0.0049138891453523225,
+              "ece10": 0.0007804956432480256
+            },
+            "is_follow": {
+              "sampled_positives": 18,
+              "prevalence": 0.00026816039462573826,
+              "mean_prediction": 0.0004215280905329574,
+              "auc": 0.6611806227532725,
+              "average_precision": 0.0007754232353726419,
+              "logloss": 0.002455867779246575,
+              "brier": 0.00026808637374874333,
+              "ece10": 0.00015336769818775082
+            },
+            "is_comment": {
+              "sampled_positives": 83,
+              "prevalence": 0.001234253984875977,
+              "mean_prediction": 0.00039915892268970604,
+              "auc": 0.6292254413810581,
+              "average_precision": 0.007856170583794996,
+              "logloss": 0.009948454204953536,
+              "brier": 0.0012332604070116294,
+              "ece10": 0.0008350950574973015
+            },
+            "is_forward": {
+              "sampled_positives": 6,
+              "prevalence": 0.00017870603187475353,
+              "mean_prediction": 0.00024424720346393906,
+              "auc": 0.7407032479794555,
+              "average_precision": 0.0006485072580575572,
+              "logloss": 0.001686661255224726,
+              "brier": 0.00017866745028744234,
+              "ece10": 6.554117228402693e-05
+            },
+            "is_hate": {
+              "sampled_positives": 10,
+              "prevalence": 0.0006088842055760324,
+              "mean_prediction": 0.00031274527349793314,
+              "auc": 0.8263666557548653,
+              "average_precision": 0.15292294378637003,
+              "logloss": 0.004940368992255815,
+              "brier": 0.0006083242917142069,
+              "ece10": 0.00029613894313472027
+            }
+          }
+        },
+        "1": {
+          "rows": 140044,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 77606,
+              "prevalence": 0.45158934593200684,
+              "mean_prediction": 0.3461188097464783,
+              "auc": 0.5979829950635867,
+              "average_precision": 0.5442531358737983,
+              "logloss": 0.6970610971945858,
+              "brier": 0.25124853853089785,
+              "ece10": 0.10547050856311206
+            },
+            "long_view": {
+              "sampled_positives": 59086,
+              "prevalence": 0.32214707136154175,
+              "mean_prediction": 0.23165973281540456,
+              "auc": 0.6041917451915154,
+              "average_precision": 0.4100491231233707,
+              "logloss": 0.6333927895279788,
+              "brier": 0.21960913322337144,
+              "ece10": 0.09048731974738268
+            },
+            "is_like": {
+              "sampled_positives": 3841,
+              "prevalence": 0.01924133114516735,
+              "mean_prediction": 0.016736212535944865,
+              "auc": 0.7487042509701953,
+              "average_precision": 0.0663230068182742,
+              "logloss": 0.08696267318305288,
+              "brier": 0.01844343337117516,
+              "ece10": 0.002609239997090179
+            },
+            "is_follow": {
+              "sampled_positives": 326,
+              "prevalence": 0.0012067368952557445,
+              "mean_prediction": 0.0011752161326327912,
+              "auc": 0.7229932791064237,
+              "average_precision": 0.021378908875904865,
+              "logloss": 0.008749994002174095,
+              "brier": 0.0012005703417463558,
+              "ece10": 3.152070875689453e-05
+            },
+            "is_comment": {
+              "sampled_positives": 532,
+              "prevalence": 0.002854818245396018,
+              "mean_prediction": 0.0017313162260708345,
+              "auc": 0.631452614665224,
+              "average_precision": 0.005303889807315561,
+              "logloss": 0.019595406967803337,
+              "brier": 0.0028464270598167734,
+              "ece10": 0.0011235019778055133
+            },
+            "is_forward": {
+              "sampled_positives": 202,
+              "prevalence": 0.001231453032232821,
+              "mean_prediction": 0.0009995441418063165,
+              "auc": 0.6225972794350356,
+              "average_precision": 0.0020083418274195485,
+              "logloss": 0.00940878784480212,
+              "brier": 0.0012297459199946232,
+              "ece10": 0.00023190883202226813
+            },
+            "is_hate": {
+              "sampled_positives": 73,
+              "prevalence": 0.0004857727326452732,
+              "mean_prediction": 0.0004535101737760122,
+              "auc": 0.6684083224417128,
+              "average_precision": 0.0012428433497045199,
+              "logloss": 0.00416059252544082,
+              "brier": 0.00048550649518029973,
+              "ece10": 3.2262539544536494e-05
+            }
+          }
+        },
+        "2": {
+          "rows": 7119,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 3806,
+              "prevalence": 0.4068267345428467,
+              "mean_prediction": 0.3374676571636849,
+              "auc": 0.613286041543836,
+              "average_precision": 0.5114525431423558,
+              "logloss": 0.667256889014315,
+              "brier": 0.23715479598994452,
+              "ece10": 0.06948569724073733
+            },
+            "long_view": {
+              "sampled_positives": 3065,
+              "prevalence": 0.3245089650154114,
+              "mean_prediction": 0.235750532848938,
+              "auc": 0.6113523088339682,
+              "average_precision": 0.4178784337118249,
+              "logloss": 0.631945748217808,
+              "brier": 0.21930569710207204,
+              "ece10": 0.08878211348658312
+            },
+            "is_like": {
+              "sampled_positives": 194,
+              "prevalence": 0.019603945314884186,
+              "mean_prediction": 0.014658734168485075,
+              "auc": 0.6668845192478823,
+              "average_precision": 0.05552830312510378,
+              "logloss": 0.09325631433409175,
+              "brier": 0.019017816241543323,
+              "ece10": 0.004952700600813094
+            },
+            "is_follow": {
+              "sampled_positives": 38,
+              "prevalence": 0.001844944548793137,
+              "mean_prediction": 0.0012436419064623294,
+              "auc": 0.7956783385582402,
+              "average_precision": 0.0893224971253979,
+              "logloss": 0.01236159542608251,
+              "brier": 0.0018324964938321812,
+              "ece10": 0.000601302609324371
+            },
+            "is_comment": {
+              "sampled_positives": 27,
+              "prevalence": 0.0020667247008532286,
+              "mean_prediction": 0.0017235027108976088,
+              "auc": 0.5955870112640731,
+              "average_precision": 0.0028327422535104367,
+              "logloss": 0.014806728279378182,
+              "brier": 0.0020624981180854276,
+              "ece10": 0.00034322205313557674
+            },
+            "is_forward": {
+              "sampled_positives": 16,
+              "prevalence": 0.0007077162154018879,
+              "mean_prediction": 0.0010187127391522055,
+              "auc": 0.526392767755872,
+              "average_precision": 0.004113754847504561,
+              "logloss": 0.005899414884515787,
+              "brier": 0.0007073739383721225,
+              "ece10": 0.0003109965368038682
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.00020704095368273556,
+              "mean_prediction": 0.00044935605829381713,
+              "auc": 0.8264400215883169,
+              "average_precision": 0.00119173237323096,
+              "logloss": 0.0020242850056512085,
+              "brier": 0.0002070406211377087,
+              "ece10": 0.00024231509965042135
+            }
+          }
+        },
+        "3": {
+          "rows": 862,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 24,
+              "prevalence": 0.02267785742878914,
+              "mean_prediction": 0.09150855411005487,
+              "auc": 0.5870716076042767,
+              "average_precision": 0.03427403465192517,
+              "logloss": 0.147482906022985,
+              "brier": 0.027142609129234767,
+              "ece10": 0.06883069726055344
+            },
+            "long_view": {
+              "sampled_positives": 6,
+              "prevalence": 0.004773781169205904,
+              "mean_prediction": 0.02709409132698621,
+              "auc": 0.6419471369964169,
+              "average_precision": 0.014714973269274213,
+              "logloss": 0.04415402571119931,
+              "brier": 0.005342525449270082,
+              "ece10": 0.02232031058848172
+            },
+            "is_like": {
+              "sampled_positives": 2,
+              "prevalence": 0.0006490807281807065,
+              "mean_prediction": 0.0037608054206483897,
+              "auc": 0.8411255853523572,
+              "average_precision": 0.030766258720741124,
+              "logloss": 0.006846225998847862,
+              "brier": 0.0006565129684444908,
+              "ece10": 0.003111724685236719
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004079356311925393,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004080423691594169,
+              "brier": 2.1337719948112514e-07,
+              "ece10": 0.0004079356311925393
+            },
+            "is_comment": {
+              "sampled_positives": 1,
+              "prevalence": 0.00014708233356941491,
+              "mean_prediction": 0.00038565520873508894,
+              "auc": 0.9759884747237003,
+              "average_precision": 0.006089085975246542,
+              "logloss": 0.0014092000170734594,
+              "brier": 0.0001469896061234808,
+              "ece10": 0.0002385728746023951
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00022464950139979543,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0002246825938944257,
+              "brier": 6.616738653685373e-08,
+              "ece10": 0.00022464950139979543
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003089222003177743,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00030897123572765827,
+              "brier": 9.804946133037301e-08,
+              "ece10": 0.0003089222003177743
+            }
+          }
+        },
+        "4": {
+          "rows": 14333,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 8998,
+              "prevalence": 0.5408329963684082,
+              "mean_prediction": 0.45234103906720313,
+              "auc": 0.6000142195371974,
+              "average_precision": 0.6372464088178269,
+              "logloss": 0.6893022021462499,
+              "brier": 0.2481067527509301,
+              "ece10": 0.08849195722894061
+            },
+            "long_view": {
+              "sampled_positives": 7183,
+              "prevalence": 0.40146034955978394,
+              "mean_prediction": 0.32795673239886336,
+              "auc": 0.604305897804116,
+              "average_precision": 0.500787948355882,
+              "logloss": 0.6673668497869537,
+              "brier": 0.23741348867151993,
+              "ece10": 0.07694979057567082
+            },
+            "is_like": {
+              "sampled_positives": 234,
+              "prevalence": 0.011223877780139446,
+              "mean_prediction": 0.016452032485633632,
+              "auc": 0.7270041565888814,
+              "average_precision": 0.041837394910059465,
+              "logloss": 0.05856691028953931,
+              "brier": 0.011000148730039488,
+              "ece10": 0.005377291727778248
+            },
+            "is_follow": {
+              "sampled_positives": 15,
+              "prevalence": 0.000555202888790518,
+              "mean_prediction": 0.001210353754110449,
+              "auc": 0.5351573336407988,
+              "average_precision": 0.0020708267205049985,
+              "logloss": 0.004931680401967104,
+              "brier": 0.0005557836533955881,
+              "ece10": 0.000655150845757974
+            },
+            "is_comment": {
+              "sampled_positives": 43,
+              "prevalence": 0.0028499492909759283,
+              "mean_prediction": 0.002000547420777993,
+              "auc": 0.6480757732150995,
+              "average_precision": 0.005709595033489805,
+              "logloss": 0.019499194283267466,
+              "brier": 0.0028416054999416468,
+              "ece10": 0.0008494018291916194
+            },
+            "is_forward": {
+              "sampled_positives": 14,
+              "prevalence": 0.0006383145228028297,
+              "mean_prediction": 0.0011020576064035992,
+              "auc": 0.5843724711847983,
+              "average_precision": 0.0009007266408934715,
+              "logloss": 0.005438949556942928,
+              "brier": 0.0006381869141196736,
+              "ece10": 0.00046374308226781297
+            },
+            "is_hate": {
+              "sampled_positives": 8,
+              "prevalence": 0.0005608302308246493,
+              "mean_prediction": 0.0005042447156617725,
+              "auc": 0.8015526135838482,
+              "average_precision": 0.0019612132359818272,
+              "logloss": 0.004709033825097831,
+              "brier": 0.0005604645789701614,
+              "ece10": 5.658554167603088e-05
+            }
+          }
+        },
+        "5": {
+          "rows": 355,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 105,
+              "prevalence": 0.3070690929889679,
+              "mean_prediction": 0.2029609944897196,
+              "auc": 0.6379040781307934,
+              "average_precision": 0.39343129481405026,
+              "logloss": 0.6323371830291733,
+              "brier": 0.21899051826437516,
+              "ece10": 0.11357451317888004
+            },
+            "long_view": {
+              "sampled_positives": 53,
+              "prevalence": 0.1253640353679657,
+              "mean_prediction": 0.09284778371429447,
+              "auc": 0.6953123843554737,
+              "average_precision": 0.2529868684024703,
+              "logloss": 0.36164385329288923,
+              "brier": 0.10694463081119261,
+              "ece10": 0.03733084179504249
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.010421285811335185,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.010518169587767308,
+              "brier": 0.00018988143359533307,
+              "ece10": 0.010421285811335185
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0008427644719391336,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0008432815372726724,
+              "brier": 1.0328797042144763e-06,
+              "ece10": 0.0008427644719391336
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0009387948522426526,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0009393444021074548,
+              "brier": 1.0979798701685546e-06,
+              "ece10": 0.0009387948522426526
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0006743527597595541,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0006746278974099749,
+              "brier": 5.49909271153351e-07,
+              "ece10": 0.0006743527597595541
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.0006096639554016292,
+              "mean_prediction": 0.00039370224571674974,
+              "auc": 0.10535974469243603,
+              "average_precision": 0.0006814137363998829,
+              "logloss": 0.005261443609000861,
+              "brier": 0.0006094057723910613,
+              "ece10": 0.0002159616833405385
+            }
+          }
+        },
+        "6": {
+          "rows": 3012,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 718,
+              "prevalence": 0.19354386627674103,
+              "mean_prediction": 0.15791051208432383,
+              "auc": 0.602427386688133,
+              "average_precision": 0.288808221228364,
+              "logloss": 0.48405151729066503,
+              "brier": 0.15349126416062067,
+              "ece10": 0.03563335084982958
+            },
+            "long_view": {
+              "sampled_positives": 356,
+              "prevalence": 0.088028684258461,
+              "mean_prediction": 0.06582567987303008,
+              "auc": 0.5642831987448559,
+              "average_precision": 0.13281988267929784,
+              "logloss": 0.29802662776190514,
+              "brier": 0.07995209562440653,
+              "ece10": 0.022307487090196622
+            },
+            "is_like": {
+              "sampled_positives": 44,
+              "prevalence": 0.01080872118473053,
+              "mean_prediction": 0.006533123628075555,
+              "auc": 0.6322164507108754,
+              "average_precision": 0.01941690813245653,
+              "logloss": 0.06014129971306263,
+              "brier": 0.01069038776509984,
+              "ece10": 0.004275597895329
+            },
+            "is_follow": {
+              "sampled_positives": 6,
+              "prevalence": 0.001131504657678306,
+              "mean_prediction": 0.0006130281779252479,
+              "auc": 0.46605916948481374,
+              "average_precision": 0.004334016124105489,
+              "logloss": 0.009094198005669827,
+              "brier": 0.0011301931060476974,
+              "ece10": 0.000518476428439513
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.000708278523829394,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.000708615056968515,
+              "brier": 6.723914020822981e-07,
+              "ece10": 0.000708278523829394
+            },
+            "is_forward": {
+              "sampled_positives": 2,
+              "prevalence": 0.0010677980026230216,
+              "mean_prediction": 0.00046344316494920573,
+              "auc": 0.3313921298988957,
+              "average_precision": 0.0015402003198302365,
+              "logloss": 0.008985313507986759,
+              "brier": 0.001067344928813762,
+              "ece10": 0.000604354879544598
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00036327267868353444,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0003633400542156868,
+              "brier": 1.347170301863546e-07,
+              "ece10": 0.00036327267868353444
+            }
+          }
+        },
+        "7": {
+          "rows": 143,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 80,
+              "prevalence": 0.5116515159606934,
+              "mean_prediction": 0.14056105683218376,
+              "auc": 0.468239682078536,
+              "average_precision": 0.5170685639294681,
+              "logloss": 1.108308183336216,
+              "brier": 0.39047737182908127,
+              "ece10": 0.3721149340586063
+            },
+            "long_view": {
+              "sampled_positives": 45,
+              "prevalence": 0.29164016246795654,
+              "mean_prediction": 0.04723581787304044,
+              "auc": 0.5399454897590631,
+              "average_precision": 0.29945614350389216,
+              "logloss": 0.9599940205088274,
+              "brier": 0.26851825044532046,
+              "ece10": 0.2444043347257168
+            },
+            "is_like": {
+              "sampled_positives": 7,
+              "prevalence": 0.030354103073477745,
+              "mean_prediction": 0.006766844948190952,
+              "auc": 0.8640189548771064,
+              "average_precision": 0.5924264553060848,
+              "logloss": 0.1296390091580664,
+              "brier": 0.029096015363926777,
+              "ece10": 0.02358725758504378
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0006313416116432159,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0006316502993592972,
+              "brier": 6.167947204967859e-07,
+              "ece10": 0.0006313416116432159
+            },
+            "is_comment": {
+              "sampled_positives": 1,
+              "prevalence": 0.004213458858430386,
+              "mean_prediction": 0.0006030432804692872,
+              "auc": 0.5722427549998272,
+              "average_precision": 0.009794906648542758,
+              "logloss": 0.03231625005284249,
+              "brier": 0.004209464848892835,
+              "ece10": 0.0036104157113961573
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004409522084224788,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00044110017392192806,
+              "brier": 2.9574108129913914e-07,
+              "ece10": 0.0004409522084224788
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00035520606894411376,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00035527063105727103,
+              "brier": 1.2909220567872105e-07,
+              "ece10": 0.00035520606894411376
+            }
+          }
+        },
+        "8": {
+          "rows": 291,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 12,
+              "prevalence": 0.047980792820453644,
+              "mean_prediction": 0.13298994663964991,
+              "auc": 0.461156204891089,
+              "average_precision": 0.1302930751657059,
+              "logloss": 0.2351797408060807,
+              "brier": 0.053437621279971,
+              "ece10": 0.10359567904645195
+            },
+            "long_view": {
+              "sampled_positives": 6,
+              "prevalence": 0.014544506557285786,
+              "mean_prediction": 0.05909644272625319,
+              "auc": 0.849219679201688,
+              "average_precision": 0.15161313567068213,
+              "logloss": 0.09489997489806332,
+              "brier": 0.015819655806304126,
+              "ece10": 0.04455193592493883
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.004544080912747246,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.004559778041609452,
+              "brier": 3.114895182602966e-05,
+              "ece10": 0.004544080912747246
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0005093947665861708,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0005095588517840011,
+              "brier": 3.2799325606521055e-07,
+              "ece10": 0.0005093947665861708
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0005868961657493516,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0005870900489536803,
+              "brier": 3.875676347083927e-07,
+              "ece10": 0.0005868961657493516
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00039571128947414087,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00039580482260705656,
+              "brier": 1.8699341992042957e-07,
+              "ece10": 0.00039571128947414087
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003396143696811451,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0003396733175622938,
+              "brier": 1.1786784397877939e-07,
+              "ece10": 0.0003396143696811451
+            }
+          }
+        },
+        "9": {
+          "rows": 45,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 44,
+              "prevalence": 0.991321861743927,
+              "mean_prediction": 0.5283236786583803,
+              "auc": 0.861033045837775,
+              "average_precision": 0.9987310150589253,
+              "logloss": 0.6426788951529169,
+              "brier": 0.225121142964925,
+              "ece10": 0.4629982128360039
+            },
+            "long_view": {
+              "sampled_positives": 9,
+              "prevalence": 0.19757910072803497,
+              "mean_prediction": 0.3862523673625003,
+              "auc": 0.6204514375918533,
+              "average_precision": 0.36319525112077394,
+              "logloss": 0.5744340037849608,
+              "brier": 0.19210452251537863,
+              "ece10": 0.18867326862597084
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.01111323026543815,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.011190399758475113,
+              "brier": 0.00015249609885655918,
+              "ece10": 0.01111323026543815
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0014103319712560403,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0014117464748768225,
+              "brier": 2.8243686037327463e-06,
+              "ece10": 0.0014103319712560403
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0020160759455453764,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.002018118643204665,
+              "brier": 4.079860443617884e-06,
+              "ece10": 0.0020160759455453764
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0010878497416685925,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0010884679008878013,
+              "brier": 1.2353319034951247e-06,
+              "ece10": 0.0010878497416685925
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.000531505670263404,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0005316477807744963,
+              "brier": 2.8411914908320083e-07,
+              "ece10": 0.000531505670263404
+            }
+          }
+        },
+        "10": {
+          "rows": 15,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 15,
+              "prevalence": 1.0,
+              "mean_prediction": 0.43409402622731663,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.8560790809100531,
+              "brier": 0.3276061705165333,
+              "ece10": 0.5659059742306318
+            },
+            "long_view": {
+              "sampled_positives": 12,
+              "prevalence": 0.8291032314300537,
+              "mean_prediction": 0.3113064730775394,
+              "auc": 0.9735378410810678,
+              "average_precision": 0.9951932791410236,
+              "logloss": 0.9561416563230075,
+              "brier": 0.37576708212379173,
+              "ece10": 0.5507468132683881
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.017763556988969722,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.017964098327982,
+              "brier": 0.0003938943623560232,
+              "ece10": 0.017763556988969722
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0018383152721431048,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0018402327650035614,
+              "brier": 3.829129668493615e-06,
+              "ece10": 0.0018383152721431048
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0019922986729505026,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0019943554648020976,
+              "brier": 4.107743151167524e-06,
+              "ece10": 0.0019922986729505026
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0013442765037053716,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0013452377107042552,
+              "brier": 1.920503200060724e-06,
+              "ece10": 0.0013442765037053716
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00048757914632377826,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00048769917771907803,
+              "brier": 2.399833494522846e-07,
+              "ece10": 0.00048757914632377826
+            }
+          }
+        },
+        "11": {
+          "rows": 195,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 1,
+              "prevalence": 0.00016638341185171157,
+              "mean_prediction": 0.09404398778853988,
+              "auc": 0.7611525157793388,
+              "average_precision": 0.0006962403023672171,
+              "logloss": 0.09949710401972187,
+              "brier": 0.009583472177148576,
+              "ece10": 0.09387760390315118
+            },
+            "long_view": {
+              "sampled_positives": 23,
+              "prevalence": 0.13133594393730164,
+              "mean_prediction": 0.02793153391819236,
+              "auc": 0.5429206727654532,
+              "average_precision": 0.14933690025382032,
+              "logloss": 0.49664949010867104,
+              "brier": 0.12462386817453264,
+              "ece10": 0.10340440608870066
+            },
+            "is_like": {
+              "sampled_positives": 1,
+              "prevalence": 0.0032444766256958246,
+              "mean_prediction": 0.003617551203454597,
+              "auc": 0.4852271372361989,
+              "average_precision": 0.006283517849333671,
+              "logloss": 0.022496489561964362,
+              "brier": 0.0032443961403668168,
+              "ece10": 0.00037307453872907024
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00041069395593178887,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004107965182872556,
+              "brier": 2.050353059506586e-07,
+              "ece10": 0.00041069395593178887
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00038681493599621725,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00038691406786036634,
+              "brier": 1.98157265963668e-07,
+              "ece10": 0.00038681493599621725
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0002859791512806229,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0002860284768784236,
+              "brier": 9.862229048745034e-08,
+              "ece10": 0.0002859791512806229
+            },
+            "is_hate": {
+              "sampled_positives": 1,
+              "prevalence": 0.006072994787245989,
+              "mean_prediction": 0.00031638054365308674,
+              "auc": 0.7227616223455137,
+              "average_precision": 0.021563911043592017,
+              "logloss": 0.048865982139182425,
+              "brier": 0.006069001481157784,
+              "ece10": 0.005756614239038284
+            }
+          }
+        },
+        "12": {
+          "rows": 162,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 28,
+              "prevalence": 0.1754312813282013,
+              "mean_prediction": 0.10316888460590726,
+              "auc": 0.4128049686802776,
+              "average_precision": 0.148175220933965,
+              "logloss": 0.50532293208176,
+              "brier": 0.1531983290250314,
+              "ece10": 0.07535728336115258
+            },
+            "long_view": {
+              "sampled_positives": 18,
+              "prevalence": 0.11082834005355835,
+              "mean_prediction": 0.03373498031216448,
+              "auc": 0.41558738524386196,
+              "average_precision": 0.09724698650979025,
+              "logloss": 0.42575141720189036,
+              "brier": 0.10570897299633918,
+              "ece10": 0.07868854464029429
+            },
+            "is_like": {
+              "sampled_positives": 1,
+              "prevalence": 0.0026107369922101498,
+              "mean_prediction": 0.0035056411968463997,
+              "auc": 0.7352147581130029,
+              "average_precision": 0.009788867562380038,
+              "logloss": 0.017569372323833043,
+              "brier": 0.0026041511874171034,
+              "ece10": 0.0008949042669852734
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004132847712343678,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00041339224620540513,
+              "brier": 2.148598189746524e-07,
+              "ece10": 0.0004132847712343678
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00045255227737281515,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004526886242548238,
+              "brier": 2.7253358936178293e-07,
+              "ece10": 0.00045255227737281515
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.00029640107471800317,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00029645851314696555,
+              "brier": 1.1483755112499664e-07,
+              "ece10": 0.00029640107471800317
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003120159926676407,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00031206599258633337,
+              "brier": 9.99778181998549e-08,
+              "ece10": 0.0003120159926676407
+            }
+          }
+        },
+        "13": {
+          "rows": 24,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 14,
+              "prevalence": 0.2279260754585266,
+              "mean_prediction": 0.22762298471492218,
+              "auc": 0.9656925823526538,
+              "average_precision": 0.8579662284178462,
+              "logloss": 0.46297072550128,
+              "brier": 0.14784023682091488,
+              "ece10": 0.0647821483918761
+            },
+            "long_view": {
+              "sampled_positives": 11,
+              "prevalence": 0.19271650910377502,
+              "mean_prediction": 0.11836912389803408,
+              "auc": 0.907058525546405,
+              "average_precision": 0.6088312304759407,
+              "logloss": 0.44269551263453594,
+              "brier": 0.14421457592455061,
+              "ece10": 0.16868612244180262
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.015035984483960542,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.01522325423311557,
+              "brier": 0.0003647508794557448,
+              "ece10": 0.015035984483960542
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0010646295205104688,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0010653316360706472,
+              "brier": 1.402577598664262e-06,
+              "ece10": 0.0010646295205104688
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.001213225071226129,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0012141927351695776,
+              "brier": 1.932302975283803e-06,
+              "ece10": 0.001213225071226129
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0008700430860373146,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0008705103221054978,
+              "brier": 9.335971358793751e-07,
+              "ece10": 0.0008700430860373146
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004051137864549335,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004051960772281137,
+              "brier": 1.6453686537426598e-07,
+              "ece10": 0.0004051137864549335
+            }
+          }
+        },
+        "14": {
+          "rows": 13,
+          "metrics": {
+            "is_click": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.17989468792076896,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.1987421701178676,
+              "brier": 0.03292413997628594,
+              "ece10": 0.1798946906067134
+            },
+            "long_view": {
+              "sampled_positives": 9,
+              "prevalence": 0.4489826261997223,
+              "mean_prediction": 0.10235393577936268,
+              "auc": 0.3662085734436704,
+              "average_precision": 0.4677888612359594,
+              "logloss": 1.1385594488690642,
+              "brier": 0.3750419728791668,
+              "ece10": 0.34662868925993556
+            },
+            "is_like": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.003879008936364058,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0038886070676903534,
+              "brier": 1.910922928711936e-05,
+              "ece10": 0.003879008936364058
+            },
+            "is_follow": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0006624490574512536,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0006627058110770162,
+              "brier": 5.131969306147353e-07,
+              "ece10": 0.0006624490574512536
+            },
+            "is_comment": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0006921648157623009,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0006924080920029917,
+              "brier": 4.863214354730115e-07,
+              "ece10": 0.0006921648157623009
+            },
+            "is_forward": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0003705432211897438,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.00037061651300740716,
+              "brier": 1.4654087228052662e-07,
+              "ece10": 0.0003705432211897438
+            },
+            "is_hate": {
+              "sampled_positives": 0,
+              "prevalence": 0.0,
+              "mean_prediction": 0.0004499282684020787,
+              "auc": null,
+              "average_precision": null,
+              "logloss": 0.0004500315207758374,
+              "brier": 2.064405565691127e-07,
+              "ece10": 0.0004499282684020787
+            }
+          }
+        }
+      },
+      "readiness_gates": {
+        "is_click": true,
+        "long_view": true,
+        "is_like": true,
+        "is_follow": true,
+        "is_comment": true,
+        "is_forward": true,
+        "is_hate": true
+      },
+      "all_gates_pass": true,
+      "exact_checkpoint_replay": true,
+      "checkpoint_sha256": "b850f3664d0e0af8c2cfdbc3f61f856a79809b18b22a5ba09dbad05a390025f5",
+      "predictions_sha256": "8cced4f1d13e5dc5f90958a80cd7bb76e1b4bb34b09f16b9856b12642a5b1228",
+      "epochs": [
+        {
+          "epoch": 1,
+          "train_logloss": 0.17563785856290348,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.29916235712095113,
+              "auc": 0.692052074793462,
+              "average_precision": 0.5486967514337443,
+              "logloss": 0.6209106556152979,
+              "brier": 0.21769656604436602,
+              "ece10": 0.08337176737906425
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.19328921699881046,
+              "auc": 0.7047120342711444,
+              "average_precision": 0.4202172589155935,
+              "logloss": 0.5313663936636629,
+              "brier": 0.18007919219598323,
+              "ece10": 0.07132063472698721
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.013814611185355957,
+              "auc": 0.754315061138129,
+              "average_precision": 0.05981138564711318,
+              "logloss": 0.07237313471116288,
+              "brier": 0.01481997301800369,
+              "ece10": 0.0016451623385048306
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.001011281926206745,
+              "auc": 0.7387960134576903,
+              "average_precision": 0.01911425112298805,
+              "logloss": 0.007188642413422617,
+              "brier": 0.0009642132473161703,
+              "ece10": 4.26372102107616e-05
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0014534708671139994,
+              "auc": 0.6521423991735161,
+              "average_precision": 0.004853964448187956,
+              "logloss": 0.017025267975428707,
+              "brier": 0.002425244651572915,
+              "ece10": 0.0009783041003305676
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.000839652395995705,
+              "auc": 0.6703558727357308,
+              "average_precision": 0.0017584488375505824,
+              "logloss": 0.0073090105613661345,
+              "brier": 0.0009369634871603904,
+              "ece10": 9.847160161630533e-05
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.0004261496053034187,
+              "auc": 0.7060095779713587,
+              "average_precision": 0.022818353732002562,
+              "logloss": 0.004243399257748085,
+              "brier": 0.0005009988586317773,
+              "ece10": 7.51691336747488e-05
+            }
+          },
+          "elapsed_seconds": 290.1787723749985
+        },
+        {
+          "epoch": 2,
+          "train_logloss": 0.1527372694103311,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.35221643005655895,
+              "auc": 0.6733211157612938,
+              "average_precision": 0.5228810246803606,
+              "logloss": 0.6420163861060197,
+              "brier": 0.22432671792156575,
+              "ece10": 0.08597032264800035
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.23270063916507316,
+              "auc": 0.6893942591029799,
+              "average_precision": 0.3998316086716365,
+              "logloss": 0.5529872551028835,
+              "brier": 0.18574377110682877,
+              "ece10": 0.07583153934037298
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.015017995077707413,
+              "auc": 0.7554214249611721,
+              "average_precision": 0.06069175376591645,
+              "logloss": 0.07237005402964883,
+              "brier": 0.014809048673628276,
+              "ece10": 0.0004022018550962793
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.0013307165720771903,
+              "auc": 0.7221654282632427,
+              "average_precision": 0.01954939620054839,
+              "logloss": 0.007287743928273262,
+              "brier": 0.000960353713248504,
+              "ece10": 0.0003978030230675086
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0017545544480541118,
+              "auc": 0.6505843317413622,
+              "average_precision": 0.004988096794196712,
+              "logloss": 0.01694212908041324,
+              "brier": 0.0024241057942637157,
+              "ece10": 0.0006772205193904552
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.0008037826239289085,
+              "auc": 0.6118966557232285,
+              "average_precision": 0.0016838057395921705,
+              "logloss": 0.0075064147550822505,
+              "brier": 0.0009371630859194669,
+              "ece10": 0.00013434137368310175
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.0003268730992853646,
+              "auc": 0.7420215910538279,
+              "average_precision": 0.06529660527510013,
+              "logloss": 0.003976639246865697,
+              "brier": 0.0004981067199636744,
+              "ece10": 0.0001744456396928029
+            }
+          },
+          "elapsed_seconds": 565.7725595829979
+        },
+        {
+          "epoch": 3,
+          "train_logloss": 0.10768280265753731,
+          "validation": {
+            "is_click": {
+              "sampled_positives": 95910,
+              "prevalence": 0.38253411650657654,
+              "mean_prediction": 0.3787466741739727,
+              "auc": 0.6428733983378869,
+              "average_precision": 0.49469023189802724,
+              "logloss": 0.7798491097735074,
+              "brier": 0.26045232225477133,
+              "ece10": 0.1723771953045467
+            },
+            "long_view": {
+              "sampled_positives": 71657,
+              "prevalence": 0.2646098732948303,
+              "mean_prediction": 0.24151011920694412,
+              "auc": 0.6593653140727138,
+              "average_precision": 0.3762531475552331,
+              "logloss": 0.6662742325875445,
+              "brier": 0.21072098423967736,
+              "ece10": 0.14008378536077842
+            },
+            "is_like": {
+              "sampled_positives": 4578,
+              "prevalence": 0.015388915315270424,
+              "mean_prediction": 0.014915096099232259,
+              "auc": 0.7285382241050403,
+              "average_precision": 0.05611049752098259,
+              "logloss": 0.07647186117821245,
+              "brier": 0.015008632204074375,
+              "ece10": 0.0030879929648968264
+            },
+            "is_follow": {
+              "sampled_positives": 403,
+              "prevalence": 0.0009686447447165847,
+              "mean_prediction": 0.0009022446402422554,
+              "auc": 0.712761768440193,
+              "average_precision": 0.022933362237354607,
+              "logloss": 0.007238780108805857,
+              "brier": 0.0009605929287941919,
+              "ece10": 8.46722801051021e-05
+            },
+            "is_comment": {
+              "sampled_positives": 687,
+              "prevalence": 0.002431774977594614,
+              "mean_prediction": 0.0022734070503178886,
+              "auc": 0.6381905594652408,
+              "average_precision": 0.00675350365008825,
+              "logloss": 0.017638968643603092,
+              "brier": 0.0024274613609195587,
+              "ece10": 0.00015836791712667823
+            },
+            "is_forward": {
+              "sampled_positives": 240,
+              "prevalence": 0.0009381240233778954,
+              "mean_prediction": 0.0009270468785464612,
+              "auc": 0.6283162726096073,
+              "average_precision": 0.0019752757704434784,
+              "logloss": 0.007856131545910586,
+              "brier": 0.0009376290621352447,
+              "ece10": 1.1077119065548901e-05
+            },
+            "is_hate": {
+              "sampled_positives": 94,
+              "prevalence": 0.0005013187183067203,
+              "mean_prediction": 0.000751407145322432,
+              "auc": 0.7115904282220452,
+              "average_precision": 0.06485442449298759,
+              "logloss": 0.004075013091359505,
+              "brier": 0.0005491680826144052,
+              "ece10": 0.0002942973081384067
+            }
+          },
+          "elapsed_seconds": 881.9935395409993
+        }
+      ],
+      "temporal_evidence_eligible": false
+    }
+  },
+  "probability_status": "sigmoid estimates; calibration measured, not assumed",
+  "input_fields": {
+    "event_only": [
+      "history_video_ids",
+      "candidate_video_id",
+      "user_id",
+      "tab",
+      "duration_ms",
+      "time_ms",
+      "strictly_prior_exposure_count"
+    ],
+    "derived_numeric_columns": [
+      "log_duration",
+      "duration_invalid",
+      "log_prior_exposure_count",
+      "hour_sin",
+      "hour_cos",
+      "weekday_sin",
+      "weekday_cos"
+    ]
+  },
+  "provenance": {
+    "created_at_utc": "2026-10-11T10:16:19.066582+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3"
+    },
+    "git_commit": "fa77eb1054e3318f5164d011c0a94bfc8dfc1154",
+    "inputs": [
+      {
+        "path": "configs/kuairand_27k_behavior_pilot.json",
+        "type": "file",
+        "bytes": 1814,
+        "sha256": "462e4c881d7c60c0c14b76a51896512daeb8eace1fd0063f92e311325fd9091c"
+      },
+      {
+        "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/behavior-pilot-v1/preparation.json",
+        "type": "file",
+        "bytes": 8439,
+        "sha256": "f6c89d24fb80c212cb878104e6f2aa994c9316196dec95cdac471227482fa850"
+      },
+      {
+        "path": "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/train_kuairand_behavior_pilot.py",
+        "type": "file",
+        "bytes": 9990,
+        "sha256": "bee48b3b1d4e0da425b5ddbc3cbf2145f7c35dcfa79c328a6b0713076f44ca4f"
+      },
+      {
+        "path": "src/paretojev/models/kuairand_pilot.py",
+        "type": "file",
+        "bytes": 2556,
+        "sha256": "90afc56627c66bcd64557f89f80d35aea321585f581d123743eeef4e07a08dd5"
+      }
+    ]
+  }
+}

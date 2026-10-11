@@ -1,0 +1,20 @@
+{
+  "status": "passed",
+  "scope": "fresh_process_same_machine_cpu",
+  "full_training_replayed": false,
+  "new_jev_calls": 0,
+  "checks": {
+    "event_only": {
+      "predictions_exact": true,
+      "metrics_exact": true,
+      "rows": 197078,
+      "checkpoint_sha256": "10775ffd88183c0d2e31efc4eac125fc6152835ad9a95973db503d1a620389b5"
+    },
+    "released_user_snapshot": {
+      "predictions_exact": true,
+      "metrics_exact": true,
+      "rows": 197078,
+      "checkpoint_sha256": "b850f3664d0e0af8c2cfdbc3f61f856a79809b18b22a5ba09dbad05a390025f5"
+    }
+  }
+}

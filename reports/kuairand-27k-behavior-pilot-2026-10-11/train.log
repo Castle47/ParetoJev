@@ -1,0 +1,61 @@
+event_only epoch=1 step=0 loss=0.186571
+event_only epoch=1 step=200 loss=0.178748
+event_only epoch=1 step=400 loss=0.171637
+event_only epoch=1 step=600 loss=0.154785
+event_only epoch=1 step=800 loss=0.155256
+event_only epoch=1 step=1000 loss=0.162793
+event_only epoch=1 step=1200 loss=0.198487
+event_only epoch=1 step=1400 loss=0.170437
+event_only epoch=1 step=1600 loss=0.188101
+event_only epoch=1 validation_mean_logloss=0.182351
+event_only epoch=2 step=0 loss=0.173847
+event_only epoch=2 step=200 loss=0.147730
+event_only epoch=2 step=400 loss=0.131333
+event_only epoch=2 step=600 loss=0.166394
+event_only epoch=2 step=800 loss=0.137138
+event_only epoch=2 step=1000 loss=0.173884
+event_only epoch=2 step=1200 loss=0.165096
+event_only epoch=2 step=1400 loss=0.145007
+event_only epoch=2 step=1600 loss=0.158892
+event_only epoch=2 validation_mean_logloss=0.186803
+event_only epoch=3 step=0 loss=0.113875
+event_only epoch=3 step=200 loss=0.096732
+event_only epoch=3 step=400 loss=0.091236
+event_only epoch=3 step=600 loss=0.115277
+event_only epoch=3 step=800 loss=0.107002
+event_only epoch=3 step=1000 loss=0.104121
+event_only epoch=3 step=1200 loss=0.096241
+event_only epoch=3 step=1400 loss=0.107824
+event_only epoch=3 step=1600 loss=0.115160
+event_only epoch=3 validation_mean_logloss=0.227860
+released_user_snapshot epoch=1 step=0 loss=0.186725
+released_user_snapshot epoch=1 step=200 loss=0.178065
+released_user_snapshot epoch=1 step=400 loss=0.172478
+released_user_snapshot epoch=1 step=600 loss=0.153213
+released_user_snapshot epoch=1 step=800 loss=0.155117
+released_user_snapshot epoch=1 step=1000 loss=0.156799
+released_user_snapshot epoch=1 step=1200 loss=0.199881
+released_user_snapshot epoch=1 step=1400 loss=0.173376
+released_user_snapshot epoch=1 step=1600 loss=0.180082
+released_user_snapshot epoch=1 validation_mean_logloss=0.180060
+released_user_snapshot epoch=2 step=0 loss=0.172379
+released_user_snapshot epoch=2 step=200 loss=0.147774
+released_user_snapshot epoch=2 step=400 loss=0.138400
+released_user_snapshot epoch=2 step=600 loss=0.166483
+released_user_snapshot epoch=2 step=800 loss=0.144879
+released_user_snapshot epoch=2 step=1000 loss=0.165082
+released_user_snapshot epoch=2 step=1200 loss=0.174396
+released_user_snapshot epoch=2 step=1400 loss=0.143016
+released_user_snapshot epoch=2 step=1600 loss=0.166405
+released_user_snapshot epoch=2 validation_mean_logloss=0.186155
+released_user_snapshot epoch=3 step=0 loss=0.111122
+released_user_snapshot epoch=3 step=200 loss=0.095844
+released_user_snapshot epoch=3 step=400 loss=0.081936
+released_user_snapshot epoch=3 step=600 loss=0.100224
+released_user_snapshot epoch=3 step=800 loss=0.098645
+released_user_snapshot epoch=3 step=1000 loss=0.105452
+released_user_snapshot epoch=3 step=1200 loss=0.103125
+released_user_snapshot epoch=3 step=1400 loss=0.100297
+released_user_snapshot epoch=3 step=1600 loss=0.114198
+released_user_snapshot epoch=3 validation_mean_logloss=0.222772
+Training complete

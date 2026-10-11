@@ -1,0 +1,82 @@
+{
+  "status": "completed_development_pilot",
+  "research_targets_achieved": false,
+  "jev_calls": 0,
+  "primary_readiness_gates_passed": 6,
+  "primary_readiness_gates_total": 7,
+  "primary_beats_tab_logloss_count": 3,
+  "splits": {
+    "train": {
+      "rows": 426832,
+      "users": 26758,
+      "represented_exposures": 99550635.0,
+      "min_time": 1649344285486,
+      "max_time": 1650211197691,
+      "positives": [
+        203128,
+        150058,
+        10037,
+        948,
+        1331,
+        525,
+        215
+      ],
+      "history_length_median": 50.0,
+      "history_length_50_fraction": 0.9482653596731266,
+      "sha256": "d144e9bb58cf89d2cd0e94ac3a94bfebc949f68e4526d6829bbb8e28c2b21fc3"
+    },
+    "validation": {
+      "rows": 197078,
+      "users": 24892,
+      "represented_exposures": 18036928.0,
+      "min_time": 1650211201078,
+      "max_time": 1650383997344,
+      "positives": [
+        95910,
+        71657,
+        4578,
+        403,
+        687,
+        240,
+        94
+      ],
+      "history_length_median": 50.0,
+      "history_length_50_fraction": 0.9963009569814997,
+      "sha256": "0db383bb4c3bc9c96c754b4ec8bdeee2b58f44d1a6b43b073a2a1f7ef8699c11"
+    }
+  },
+  "label_diagnostics_training_only": {
+    "rows": 99550635,
+    "duration_zero": 8902416,
+    "duration_negative": 0,
+    "play_negative": 0,
+    "invalid_union": 8902416,
+    "provided_positive_formula_negative": 477208,
+    "provided_negative_formula_positive": 27,
+    "mismatch_within_100ms_of_threshold": 98034
+  },
+  "encoding": {
+    "sampled_train_targets_before_nominal_4_08": 341,
+    "sample_time_ranges_local": {
+      "train": [
+        "2022-04-07T23:11:25.486000+08:00",
+        "2022-04-17T23:59:57.691000+08:00"
+      ],
+      "validation": [
+        "2022-04-18T00:00:01.078000+08:00",
+        "2022-04-19T23:59:57.344000+08:00"
+      ]
+    },
+    "validation_users_not_in_training": 77,
+    "train": {
+      "unique_candidate_ids": 297956,
+      "occupied_candidate_hash_buckets": 64920
+    },
+    "validation": {
+      "unique_candidate_ids": 137887,
+      "occupied_candidate_hash_buckets": 57628
+    }
+  },
+  "source_code_commit": "fa77eb1054e3318f5164d011c0a94bfc8dfc1154",
+  "external_artifact_directory": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/behavior-pilot-v1"
+}

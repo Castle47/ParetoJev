@@ -509,3 +509,56 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - No new Jev calls or trained 27K model. Next work is explicit feature/label timing
   and scalable rich-feature pXTR training, not a recommendation win claim.
   Evidence: `reports/kuairand-27k-acquisition-2026-10-11/`.
+
+## 2026-10-11 — First real 27K seven-target behavior pilot
+
+- Registered fixed periods, seed, target budgets, two feature regimes, three epochs,
+  baselines and development gates before fitting (`9906097`). Training code/runtime
+  provenance records `fa77eb1`; subsequent diagnostic-cutoff parameterization did
+  not change this run's already materialized samples or model implementation.
+- Re-read both complete early standard shards, verified their SHA-256 against the
+  full audit, and built a bounded-memory per-user disk index for 136,296,576 events.
+  Per-user stable sorting and strict `< target.time_ms` histories exclude all tied
+  timestamps. Histories contain exposure IDs, not delayed feedback labels.
+- Fixed per-user sampling yielded 426,832 training targets from 26,758 users and
+  197,078 validation targets from 24,892 users. Inverse-inclusion weights represent
+  99,550,635 and 18,036,928 exposures respectively. This is target-sampled training,
+  not full-exposure fitting. History length is 50 in 94.83% / 99.63% of samples.
+- Training-period validity flags are 8,902,416 zero-duration rows, with no negative
+  durations or play times. On valid rows, 477,208 provided-long-view positives fail
+  the comparison formula and 27 differences go the other way; 98,034 differences
+  are within 100 ms of the threshold. Kept every published feedback label.
+- Raw date partitions and time_ms are not fully aligned: 341 sampled training
+  targets precede nominal April 8. Actual sampled training starts April 7 at
+  23:11:25.486 +08:00. Kept the predeclared timestamp-only boundaries, and documented
+  actual ranges rather than changing the protocol after looking at results.
+- Trained SASRec-style + MMoE on seven raw labels, fixed 65,536 item hash buckets,
+  a 32-dimensional one-layer encoder, CPU, three epochs and weighted BCE. Primary
+  event-only inputs have seven fields; the sensitivity model adds 30 user profile
+  fields whose snapshot timing is unknown. Month-wide item aggregates are excluded.
+  User IDs and profile vocabularies use training-fitted OOV handling.
+- Primary model: best epoch 1, AUCs 0.689849 / 0.705263 / 0.671814 / 0.627398 /
+  0.652133 / 0.620929 / 0.554861 (click, long-view, like, follow, comment, forward,
+  hate). Six of seven minimum development gates pass; forward fails. Only three
+  of seven log losses beat the stronger tab-prevalence baseline. Click and long-view
+  mean probabilities are 28.76% / 18.69% versus weighted prevalence 38.25% / 26.46%.
+- Profile sensitivity: best epoch 1, seven of seven minimum gates pass, but this
+  is not temporally verified evidence. Both regimes overfit: primary validation
+  mean log loss 0.182351 -> 0.186803 -> 0.227860; profile 0.180060 -> 0.186155 ->
+  0.222772. Do not extend epochs or lower gates to manufacture success.
+- Both best checkpoints and all seven metrics replay exactly in a fresh CPU
+  process. This is checkpoint/inference replay, not a second complete training
+  run or cross-hardware reproduction. Source, config, samples, checkpoints and
+  predictions have recorded hashes; heavy files stay on the dedicated external disk.
+- 239 tests passed. Added coverage for unsorted shards, same-time exclusions,
+  future-record invariance, inverse sampling weights, raw-label retention, source
+  integrity, numerical gradients with empty histories, OOV users/profiles and
+  training-bound diagnostic cache validation. Synthetic trainer/replay smoke also
+  passed separately; its scores are not included in real evidence.
+- Corrected the README to put the 27K pilot first and label Pure/in-memory commands
+  as legacy. The seven raw outputs do not silently replace the six-objective
+  reranker contract. Real Jev/ParetoJev comparison and research gates remain pending;
+  this run made zero Jev requests. No external input currently blocks behavior work.
+- Evidence: `reports/kuairand-27k-behavior-pilot-2026-10-11/`. Next: better training
+  coverage and available item/history features, regularization and independently
+  assessed calibration, followed by frozen out-of-period reranker features.
