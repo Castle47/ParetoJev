@@ -34,7 +34,12 @@ def main():
                 if not np.array_equal(actual,np.load(path)): raise ValueError('Prediction replay mismatch')
                 if metrics(evaluation['y'],actual,evaluation['weight'])!=evidence[kind]:
                     raise ValueError('Metric replay mismatch')
-            checks[regime]={'predictions_exact':True,'metrics_exact':True}
+            for tab,expected in evidence.get('by_tab',{}).items():
+                mask=evaluation['x'][:,0]==int(tab)
+                actual=dict(rows=int(mask.sum()),raw=metrics(evaluation['y'][mask],raw[mask],evaluation['weight'][mask]),
+                    calibrated=metrics(evaluation['y'][mask],calibrated[mask],evaluation['weight'][mask]))
+                if actual!=expected: raise ValueError('Scene metric replay mismatch')
+            checks[regime]={'predictions_exact':True,'metrics_exact':True,'scene_metrics_exact':True}
             print(f'{regime}: exact replay passed',flush=True)
     atomic_write_json(a.output,dict(status='passed',checks=checks,
         full_training_replayed=False,scope='fresh_process_same_machine',jev_requests=0))
