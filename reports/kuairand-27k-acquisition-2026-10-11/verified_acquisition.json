@@ -1,0 +1,47 @@
+{
+  "dataset": "KuaiRand-27K",
+  "data_root": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k",
+  "all_three_download_checksums_verified": true,
+  "downloaded_bytes": 16803052466,
+  "extracted_files": 11,
+  "extracted_bytes": 49005793097,
+  "user_table_matches_earlier_probe": true,
+  "downloads": {
+    "dataset": "KuaiRand-27K",
+    "assets": {
+      "KuaiRand-27K.tar.gz": {
+        "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/downloads/KuaiRand-27K.tar.gz",
+        "name": "KuaiRand-27K.tar.gz",
+        "url": "https://zenodo.org/records/10439422/files/KuaiRand-27K.tar.gz",
+        "md5": "3e3c799a24e2d23a4d2c757fbf9adf59",
+        "role": "full_27k_core",
+        "sha256": "b8a8a5b777e564202cff6b96676959ee0d6baccc7ad7376bcb4af6767362d41b",
+        "bytes": 9892191178,
+        "status": "verified_existing"
+      },
+      "kuairand_video_captions.csv": {
+        "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/downloads/kuairand_video_captions.csv",
+        "name": "kuairand_video_captions.csv",
+        "url": "https://zenodo.org/records/18159199/files/kuairand_video_captions.csv",
+        "md5": "9fd4e7587ffd0c8dc289d013858fb229",
+        "role": "content_supplement",
+        "sha256": "0032ff2062abbcf10d6a1dfb033a65b0cdcd448f4fc56e19c75f8ff4494e4455",
+        "bytes": 3222932768,
+        "status": "verified_existing"
+      },
+      "kuairand_video_categories.csv": {
+        "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/downloads/kuairand_video_categories.csv",
+        "name": "kuairand_video_categories.csv",
+        "url": "https://zenodo.org/records/18159199/files/kuairand_video_categories.csv",
+        "md5": "8a4c772d3d8f8cf65fa1e1eb896f4177",
+        "role": "content_supplement",
+        "sha256": "744010240c8ae829a80998532737f710e6493d50c500c256ca39bd9f102aa4ad",
+        "bytes": 3687928520,
+        "status": "downloaded_verified"
+      }
+    },
+    "complete": true
+  },
+  "extraction_manifest_sha256": "4ab33da91d13926c4e2ec29d191048214eac4399095fe0b0cedc5af3a05ed0d6",
+  "real_model_training_performed": false
+}

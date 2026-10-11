@@ -79,6 +79,35 @@ def storage_plan(root: str | Path, minimum_free_gib: float = 100) -> dict:
         'planning_basis': 'Published core expands to about 46 GB; supplements about 6.9 GB. Reserve archive and preprocessing space. 100 GiB is a conservative workspace planning floor, not a published dataset size.'}
 
 
+def recorded_acquisition_status(root: str | Path) -> dict:
+    """Fast manifest/size availability check, not a new cryptographic rehash."""
+    root = Path(root)
+    manifest_path = root/'download_manifest.json'
+    downloaded = read_json(manifest_path).get('assets', {}) if manifest_path.exists() else {}
+    present = {}
+    for asset in ASSETS:
+        record = downloaded.get(asset['name'], {})
+        path = root/'downloads'/asset['name']
+        present[asset['name']] = bool(record.get('md5') == asset['md5'] and path.is_file()
+            and path.stat().st_size == record.get('bytes'))
+    extracted_path = root/'extracted/extraction_manifest.json'
+    extracted = read_json(extracted_path) if extracted_path.exists() else {}
+    extraction_available = extracted.get('status') == 'complete' and extracted.get('archive_md5') == ASSETS[0]['md5']
+    if extraction_available:
+        for name in CORE_FILES:
+            relative = 'KuaiRand-27K/data/'+name
+            path = root/'extracted'/relative
+            record = extracted.get('files', {}).get(relative, {})
+            if not path.is_file() or path.stat().st_size != record.get('bytes'):
+                extraction_available = False
+                break
+    return {'core_archive_available': present[ASSETS[0]['name']],
+        'all_download_files_available': all(present.values()),
+        'full_core_dataset_acquired': present[ASSETS[0]['name']] or extraction_available,
+        'full_core_dataset_extracted': extraction_available,
+        'verification_scope': 'previous verified manifests and current sizes; audit rehashes source logs'}
+
+
 def discover_data(root: str | Path) -> Path:
     root = Path(root)
     candidates = (root, root/'data', root/'KuaiRand-27K/data', root/'extracted/KuaiRand-27K/data')

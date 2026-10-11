@@ -1,33 +1,122 @@
-# KuaiRand-27K acquisition on external storage
+# KuaiRand-27K：移动硬盘获取与全量日志审计
 
-The user supplied `/Volumes/曾诚的移动硬盘/`. Write, fsync, atomic rename and
-exclusive file locking passed. The selected data root is
-`/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k`.
-About 883 GiB was available at startup; the previous storage blocker is resolved.
-Existing files elsewhere on the disk were not changed.
+**完整 27K 主包、caption、category 已下载并通过官方 MD5 校验；主包已安全解压，
+全部常规和随机日志已扫描。存储阻塞已解除。真实富特征多目标模型尚未训练，
+本报告不包含 ParetoJev 效果或模型 benchmark 结论。**
 
-The active job downloads the checksum-pinned full 27K archive and both content
-supplements. Complete download, extraction, dataset audit and behavior training
-are separate milestones. A `.part` file is not a verified finished download.
-No recommendation benchmark or trained 27K model is claimed by this report.
+## 数据位置与完整性
 
-See `storage_check.json` and `acquisition_plan.json` for the initial checks.
-The external data root holds persistent partial files and acquisition manifests.
+数据根目录：`/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k`。
+项目默认路径 `data/raw/kuairand-27k` 已链接到该目录，未复制大文件到系统盘。
+原硬盘其他文件未改动。
 
-Two long-stream category transfers hit read timeouts. The verified core archive
-and captions were retained. Categories now resume using exact 32 MiB HTTP byte
-ranges with at most eight transport retries per invocation. TLS verification
-and the final whole-file published MD5 remain mandatory; HTTP errors are not
-automatically retried. Tests verify that partial-range recovery neither loses
-nor duplicates bytes and refuses a server that ignores requested ranges.
+| 已验证下载 | 字节数 |
+|---|---:|
+| KuaiRand-27K.tar.gz | 9,892,191,178 |
+| kuairand_video_captions.csv | 3,222,932,768 |
+| kuairand_video_categories.csv | 3,687,928,520 |
 
-Current engineering checks: 229 tests passed in 15.15 seconds. This is not a
-recommendation benchmark. Completion is reported only after file checksums and
-the separate audit stage finish.
+合计下载 16,803,052,466 字节。主包解压得到 11 个文件（10 个 CSV 和原始加载脚本），
+共 49,005,793,097 字节；加载脚本仅保存，未执行。三个下载均满足发布方 MD5，
+同时记录 SHA-256。五个日志全扫描得到的 SHA-256 与解压清单逐一相同。
 
-The verified core archive is extracted independently of the slower category
-download. Per-phase locks serialize writers to the same outputs; audit refuses
-an incomplete extraction. Two added tests cover these dependency boundaries.
-The caption scan covers all 32,038,725 distinct catalog IDs without duplicate
-rows; 26,420,471 videos (82.4642%) have nonblank caption or cover text. This is
-catalog coverage, not yet exposure-weighted coverage or model performance.
+完整性证据：[获取记录](verified_acquisition.json)、[当前状态](current_state.json)、
+[存储检查](storage_check.json)。外接盘保存 `download_manifest.json` 和
+`extracted/extraction_manifest.json`；Git 中只保存代码与报告，不包含这些大数据文件。
+
+## 全量日志结果
+
+| 轨道 | 时间范围 | 实际行数 | 出现用户数 |
+|---|---|---:|---:|
+| 早期常规 | 2022-04-08 至 04-21 | 136,296,576 | 26,904 |
+| 后期常规 | 2022-04-22 至 05-08 | 185,981,809 | 27,285 |
+| 随机曝光 | 2022-04-22 至 05-08 | 1,186,059 | 27,285 |
+
+常规合计 **322,278,385**，随机 **1,186,059**，总计 **323,464,444** 条，
+与官方常规/随机行数分别一致。这里的早期、后期是源文件时间分组，尚未被注册为
+最终的行为训练、行为验证、重排训练和重排测试划分。
+
+全期每名用户曝光数中位数为 **8,646**，最少 110，最多 228,030。
+全体 27,285 人全期都有至少 51 条曝光；这不表示每一次预测前都有 50 条历史，
+也不表示这些曝光都是点击或长看。后期有 381 名用户未在早期常规日志中出现，
+后续需要正确处理未见用户。
+
+原始二元反馈字段均完成取值检查，常规/随机标记和日期范围通过核对。
+日志内部存在全局时间回退，因此不能把文件排列或分片顺序直接当作时间顺序。
+
+## 真实多目标标签规模
+
+下表是早期常规轨道的原始正例数，仅作标签库存审计，不是模型效果：
+
+| 原始反馈 | 正例数 | 比例 |
+|---|---:|---:|
+| is_click（点击/有效播放，依场景而异） | 51,897,747 | 38.0771% |
+| long_view | 35,825,612 | 26.2850% |
+| 点赞 | 2,223,155 | 1.6311% |
+| 关注 | 147,737 | 0.1084% |
+| 评论 | 333,453 | 0.2447% |
+| 转发 | 120,993 | 0.0888% |
+| 负反馈 | 67,910 | 0.0498% |
+
+随机曝光轨道分布不同，例如 is_click 为 17.6158%，long_view 为 8.4961%，
+关注正例仅 310 条。不能只看整体准确率，也不能假定每个目标在每个细分场景都
+有足够正例。后续需要各目标的 PR-AUC、校准、样本数和不确定性报告。
+
+## 需要处理的质量与定义问题
+
+- **27,310,928 条**记录的视频时长非正或播放时长为负，约占全部曝光 **8.4433%**。
+  这是一项待细分核查的条件计数，不等于这些记录的所有反馈标签都无效。
+- 在剩余有效时长记录中，**1,600,795 条**的原始 long_view 与公开文档中的
+  简单时长公式不一致，约占有效时长记录 **0.5405%**。保留原始标签，不自动
+  用公式重写标签或悄悄删除记录；须按场景和差异类型进一步核查。
+- `is_click` 在不同界面代表点击或有效播放，必须明确场景/目标含义，不能把
+  混合字段统一包装成已经校准的 CTR。
+- 用户表实际有 30 个非 ID 字段；此前完整用户表探测与这次解压 SHA-256 相同。
+  其中 1 个字段为常量、7 个字段有缺失值，且没有快照时间列。
+- 物品基础表头有 11 个非 ID 字段，另有 51 个整月汇总统计字段。它们是原始
+  字段规模，不是批准的入模特征数量。整月汇总统计默认排除出严格时间模型；
+  历史统计需要从预测前数据重建。物品基础表的逐值质量尚未全部审计。
+
+详细证据：[全量审计](full_audit.json)、[审计摘要](audit_summary.json)。
+
+## 内容可用性
+
+caption 表实际有 **32,038,725 行、同样数量的唯一视频 ID，无重复**，ID 全部处于
+27K 目录范围。24,750,399 行有非空 caption，7,865,433 行有非空封面文字；
+两者至少一个非空的视频为 **26,420,471**，占目录 **82.4642%**。
+
+这是目录层面的文本覆盖率，尚不是按曝光加权的覆盖率；不能把 17.5% 的目录
+缺失比例直接当作 17.5% 曝光缺失。后续需要在训练/评价样本上进一步做实际连接。
+缺少文字时应保留缺失标记和行为信号回退，不能编造 Jev 内容判断。
+category 文件已完整下载并校验，但分类值质量及连接覆盖仍待特征准备阶段检查。
+
+证据：[caption 全表库存](caption_inventory.json)。
+
+## 获取过程中修复的工程问题
+
+类别文件的两个长连接读取超时，已保存的前缀保留。随后使用固定 32 MiB 字节范围、
+每次调用最多 8 次运输错误重试完成续传。拒绝不符合范围的响应，不跳过证书验证，
+完整文件最后仍必须通过发布 MD5；没有降低校验标准。
+
+验证后的主包不可变，因此解压与另一补充文件下载可以独立推进。各阶段使用独立
+写锁，同一阶段写入仍互斥；日志审计拒绝未完成的解压。新增测试覆盖断点恢复
+不重复/丢失字节、忽略 Range 的服务、有限重试、阶段锁和读取完成状态。
+
+全部 **233 项测试通过（7.84 秒）**。这些是工程测试，不是推荐 benchmark。
+
+## 下一项建模工作
+
+1. 按训练期检查时长缺失、长看标签差异和场景含义，确定标签与有效性掩码。
+2. 明确每个特征的来源、预测时点可用性和缺失策略，建立外存时间/历史索引。
+3. 注册行为训练/验证及重排训练/验证/测试，避免未来信息和训练内预测泄漏。
+4. 使用有界词表或可扩展表示接入用户、物品、上下文和历史特征，训练多目标行为
+   预测器；现有小型内存训练入口不能直接代表已适配全量 27K 的强精排。
+5. 验证行为预测和校准后，再登记真实 Jev 注释及 ParetoJev 的公平比较。
+
+本轮未新增 Jev 推理，没有训练新的 27K 模型，也没有改写以前的实验结论。
+
+## 官方来源
+
+- [KuaiRand 主数据与说明](https://github.com/chongminggao/KuaiRand)
+- [主包发布页](https://zenodo.org/records/10439422)
+- [内容补充发布页](https://zenodo.org/records/18159199)

@@ -34,7 +34,7 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **229 passing tests** on the local Python 3.12 environment
+- **233 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
@@ -134,7 +134,7 @@ and real multi-objective data requirements before increasing model complexity
 or Jev collection. No unresolved input blocks the completed study. The original
 KuaiRand/ParetoJev and serving research gates remain unevaluated.
 
-## Active dataset: KuaiRand-27K
+## 2026-10-09 initial KuaiRand-27K readiness
 
 The user explicitly selected the full 27K variant. The active configuration and
 preparation entry point now require its four standard shards and random track;
@@ -155,10 +155,21 @@ label definitions, content alignment and external-memory history/index design
 before training pXTR. New Jev scoring remains disabled during this prerequisite.
 
 
-## 2026-10-11 external storage update
+## 2026-10-11 full 27K acquisition and log audit completed
 
-The user connected a writable external drive with about 883 GiB free. The data
-root is `/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k`. The prior storage
-blocker is resolved, and full checksum-pinned acquisition has started. Download,
-extraction, full audit and rich-feature model training remain separate milestones;
-follow the [new acquisition report](../reports/kuairand-27k-acquisition-2026-10-11/README.md).
+The external data root is `/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k`;
+`data/raw/kuairand-27k` links to it. The storage blocker is resolved. All three
+published downloads pass MD5, the core is fully extracted (49,005,793,097 bytes),
+and all five logs have been scanned and rehashed against the extraction manifest.
+Observed rows match the publisher: 322,278,385 standard + 1,186,059 random.
+
+The caption table covers all 32,038,725 catalog IDs without duplicates; 82.4642%
+have caption or cover text. This is catalog coverage, not exposure-weighted
+coverage. Quality audit found 27,310,928 rows with nonpositive duration or negative
+play time, plus 1,600,795 long-view/formula mismatches among valid-duration rows.
+Do not silently rewrite labels or discard all affected feedback. Scene definitions,
+feature-time availability, per-value metadata quality and external-memory training
+remain prerequisites. The 27K rich-feature pXTR and ParetoJev models are not trained.
+
+The [complete acquisition report](../reports/kuairand-27k-acquisition-2026-10-11/README.md)
+records scope, real label counts and remaining work. No new Jev inference was made.

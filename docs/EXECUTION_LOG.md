@@ -478,3 +478,34 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   user table and matching SHA-256 remain intact; no new large download or model
   training was performed. Network reachability is intermittent, not continuously
   guaranteed by the earlier successful range response.
+
+
+## 2026-10-11 — Full 27K acquired on user-provided external disk
+
+- Verified write/fsync/atomic rename and locks on `/Volumes/曾诚的移动硬盘/`
+  with about 883 GiB free. Created the dedicated `ParetoJev/kuairand-27k` directory;
+  other drive files were not changed. The default project data path now links there.
+- Downloaded and verified the published MD5 of the 9,892,191,178-byte core archive,
+  3,222,932,768-byte captions and 3,687,928,520-byte categories. Two long category
+  streams timed out; exact 32 MiB ranges with bounded transport retries completed
+  the retained prefix. No TLS bypass, source substitution or checksum relaxation.
+- Per-phase locks allow immutable core extraction alongside supplement download;
+  partial extraction cannot be audited. Extracted all 11 files, 49,005,793,097 bytes.
+  Original loader code was not executed.
+- Full log scan: 136,296,576 early standard + 185,981,809 late standard + 1,186,059
+  random exposures. The 322,278,385 standard and 1,186,059 random counts exactly
+  match the publisher. All log SHA-256s match the extraction manifest.
+- Full-period user exposure count median 8,646; all 27,285 users have at least 51
+  full-period exposures, not necessarily 50 pre-event or positive-feedback events.
+- Found 27,310,928 duration/play-time validity flags (8.4433% of exposures) and
+  1,600,795 long_view/formula mismatches (0.5405% of remaining valid-duration rows).
+  Raw labels remain unchanged. Further scene-specific definition checks are needed.
+- Caption scan: 32,038,725 unique IDs, no duplicate rows; 26,420,471 have nonblank
+  caption or cover text (82.4642% of catalog). Exposure-weighted join coverage and
+  category value quality are not yet established. User-table SHA matches the prior
+  bounded probe; metadata snapshot timing and whole-month aggregate risks remain.
+- 233 tests passed in 7.84s. Plan output now reports recorded acquisition/extraction
+  availability instead of hard-coding false; it does not claim a fresh hash check.
+- No new Jev calls or trained 27K model. Next work is explicit feature/label timing
+  and scalable rich-feature pXTR training, not a recommendation win claim.
+  Evidence: `reports/kuairand-27k-acquisition-2026-10-11/`.

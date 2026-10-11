@@ -186,3 +186,31 @@ def test_bounded_retry_budget_stops_after_retaining_valid_prefix(tmp_path):
     with pytest.raises(requests.ConnectionError):
         download_asset(asset(b'abcdef'),tmp_path,session=s,reserve_bytes=0,request_bytes=3,max_transport_retries=0)
     assert len(s.calls)==1 and (tmp_path/'data.bin.part').read_bytes()==b'ab'
+
+
+def test_recorded_availability_does_not_stay_false_after_complete_acquisition(tmp_path):
+    from paretojev.data.kuairand_27k import recorded_acquisition_status
+    assert recorded_acquisition_status(tmp_path)['full_core_dataset_acquired'] is False
+    downloads=tmp_path/'downloads';downloads.mkdir()
+    entries={}
+    for a in ASSETS:
+        (downloads/a['name']).write_bytes(b'x')
+        entries[a['name']]={'md5':a['md5'],'bytes':1}
+    atomic_write_json(tmp_path/'download_manifest.json',{'assets':entries})
+    r=recorded_acquisition_status(tmp_path)
+    assert r['all_download_files_available'] and r['full_core_dataset_acquired']
+    (downloads/ASSETS[1]['name']).unlink()
+    r=recorded_acquisition_status(tmp_path)
+    assert not r['all_download_files_available'] and r['core_archive_available']
+
+
+def test_recorded_extraction_requires_every_core_file(tmp_path):
+    from paretojev.data.kuairand_27k import recorded_acquisition_status
+    root=tmp_path/'extracted';data=root/'KuaiRand-27K/data';data.mkdir(parents=True)
+    entries={}
+    for name in CORE_FILES:
+        (data/name).write_bytes(b'x');entries['KuaiRand-27K/data/'+name]={'bytes':1}
+    atomic_write_json(root/'extraction_manifest.json',{'status':'complete','archive_md5':ASSETS[0]['md5'],'files':entries})
+    assert recorded_acquisition_status(tmp_path)['full_core_dataset_extracted']
+    (data/CORE_FILES[-1]).unlink()
+    assert not recorded_acquisition_status(tmp_path)['full_core_dataset_extracted']

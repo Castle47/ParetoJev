@@ -6,7 +6,7 @@ import fcntl
 from pathlib import Path
 
 from paretojev.data.acquisition import download_asset, extract_27k
-from paretojev.data.kuairand_27k import ASSETS, CORE_FILES, audit_directory, feature_contract, storage_plan
+from paretojev.data.kuairand_27k import ASSETS, CORE_FILES, audit_directory, feature_contract, storage_plan, recorded_acquisition_status
 from paretojev.utils.io import atomic_write_json, read_json
 from paretojev.utils.provenance import runtime_provenance, sha256_file
 
@@ -24,7 +24,7 @@ def main():
     args = parser.parse_args(); root = args.root.expanduser().resolve()
     plan = {'dataset':'KuaiRand-27K','storage':storage_plan(root),'sources':list(ASSETS),
         'expected_core_files':list(CORE_FILES),'feature_contract':feature_contract(),
-        'full_core_dataset_acquired':False,'model_training_completed':False,
+        **recorded_acquisition_status(root),'model_training_completed':False,
         'source_hashes':{str(path):sha256_file(path) for path in (Path(__file__).relative_to(Path.cwd()),
             Path('src/paretojev/data/acquisition.py'),Path('src/paretojev/data/kuairand_27k.py'),Path('configs/kuairand.yaml'))},
         'provenance':runtime_provenance()}
