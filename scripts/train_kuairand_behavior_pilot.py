@@ -123,7 +123,7 @@ def run(args):
                 best_score = score; best_epoch = epoch+1
             atomic_write_json(args.output / f'{regime}-epochs.json', records)
             print(f'{regime} epoch={epoch+1} validation_mean_logloss={mean_loss:.6f}', flush=True)
-        saved = torch.load(checkpoint, map_location=args.device, weights_only=False)
+        saved = torch.load(checkpoint, map_location=args.device, weights_only=True)
         model.load_state_dict(saved['state_dict'])
         replay = predict(model, val, profiles, args.device, config['batch_size'])
         stored = np.load(args.output / f'{regime}-validation-predictions.npy')
@@ -138,7 +138,8 @@ def run(args):
         result['models'][regime] = dict(parameters=sum(p.numel() for p in model.parameters()),
             best_epoch=best_epoch, validation=best_score, by_tab=by_tab, readiness_gates=gates,
             all_gates_pass=all(gates.values()), exact_checkpoint_replay=True,
-            checkpoint_sha256=sha256_file(checkpoint), epochs=records,
+            checkpoint_sha256=sha256_file(checkpoint),
+            predictions_sha256=sha256_file(args.output / f'{regime}-validation-predictions.npy'), epochs=records,
             temporal_evidence_eligible=regime=='event_only')
         atomic_write_json(args.output / 'results.json', result)
         del model, optimizer
