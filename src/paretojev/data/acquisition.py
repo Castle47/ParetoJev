@@ -7,6 +7,7 @@ from pathlib import Path, PurePosixPath
 import re
 import shutil
 import tarfile
+import time
 
 import requests
 
@@ -29,10 +30,12 @@ def require_space(directory: Path, required_bytes: int) -> None:
         raise OSError(f'Insufficient storage: {free / 2**30:.2f} GiB free; need {required_bytes / 2**30:.2f} GiB. No data removed.')
 
 
-def download_asset(asset: dict, directory: str | Path, *, reserve_bytes: int = 2 * 2**30, session=None) -> dict:
+def download_asset(asset: dict, directory: str | Path, *, reserve_bytes: int = 2 * 2**30, session=None,
+                   request_bytes: int | None = None, max_transport_retries: int = 0) -> dict:
     """Resume exact byte ranges, retain interrupted data, and require published MD5.
 
-    No retry or TLS bypass. Content-length is not an integrity substitute. An
+    Bounded range mode supports explicitly capped transport retries; never bypass TLS.
+    Content-length is not an integrity substitute. An
     ignored Range response is rejected rather than appended or silently restarted.
     """
     directory = Path(directory)
@@ -61,31 +64,34 @@ def download_asset(asset: dict, directory: str | Path, *, reserve_bytes: int = 2
     if offset: headers['Range'] = f'bytes={offset}-'
     client = session or requests.Session()
     try:
-        with client.get(asset['url'],headers=headers,stream=True,timeout=(10,60)) as response:
-            response.raise_for_status()
-            if response.headers.get('Content-Encoding','identity') not in ('','identity'):
-                raise ValueError('Byte-range transfer must not use content encoding')
-            total = None
-            if offset:
-                match = re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)', response.headers.get('Content-Range',''))
-                if response.status_code != 206 or not match or int(match[1]) != offset:
-                    raise ValueError('Server did not honor the exact resume range; partial file preserved')
-                if int(match[2]) < offset or int(match[3]) <= int(match[2]):
-                    raise ValueError('Invalid Content-Range total/end')
-                total = int(match[3])
-            elif response.status_code != 200:
-                raise ValueError('A fresh download requires a full HTTP 200 response')
-            elif response.headers.get('Content-Length'):
-                total = int(response.headers['Content-Length'])
-            if total is not None: require_space(directory, reserve_bytes + max(0,total-offset))
-            with partial.open('ab' if offset else 'wb') as handle:
-                for chunk in response.iter_content(1 << 20):
-                    if not chunk: continue
-                    require_space(directory,reserve_bytes + len(chunk))
-                    handle.write(chunk)
-                handle.flush(); os.fsync(handle.fileno())
-            if total is not None and partial.stat().st_size != total:
-                raise ValueError('Interrupted/short transfer; partial file retained')
+        if request_bytes is not None:
+            _transfer_ranges(asset, partial, client, request_bytes, max_transport_retries, reserve_bytes)
+        else:
+            with client.get(asset['url'],headers=headers,stream=True,timeout=(10,60)) as response:
+                response.raise_for_status()
+                if response.headers.get('Content-Encoding','identity') not in ('','identity'):
+                    raise ValueError('Byte-range transfer must not use content encoding')
+                total = None
+                if offset:
+                    match = re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)', response.headers.get('Content-Range',''))
+                    if response.status_code != 206 or not match or int(match[1]) != offset:
+                        raise ValueError('Server did not honor the exact resume range; partial file preserved')
+                    if int(match[2]) < offset or int(match[3]) <= int(match[2]):
+                        raise ValueError('Invalid Content-Range total/end')
+                    total = int(match[3])
+                elif response.status_code != 200:
+                    raise ValueError('A fresh download requires a full HTTP 200 response')
+                elif response.headers.get('Content-Length'):
+                    total = int(response.headers['Content-Length'])
+                if total is not None: require_space(directory, reserve_bytes + max(0,total-offset))
+                with partial.open('ab' if offset else 'wb') as handle:
+                    for chunk in response.iter_content(1 << 20):
+                        if not chunk: continue
+                        require_space(directory,reserve_bytes + len(chunk))
+                        handle.write(chunk)
+                    handle.flush(); os.fsync(handle.fileno())
+                if total is not None and partial.stat().st_size != total:
+                    raise ValueError('Interrupted/short transfer; partial file retained')
     finally:
         if session is None: client.close()
     observed = hashes(partial)
@@ -93,6 +99,54 @@ def download_asset(asset: dict, directory: str | Path, *, reserve_bytes: int = 2
         raise ValueError('Published checksum mismatch; unverified partial retained, not promoted')
     os.replace(partial, final)
     return {'path': str(final.resolve()), **asset, **observed, 'status': 'downloaded_verified'}
+
+
+def _transfer_ranges(asset, partial, client, request_bytes, max_retries, reserve_bytes):
+    if request_bytes <= 0 or max_retries < 0:
+        raise ValueError('Positive range size and nonnegative retry budget required')
+    known_total = None
+    retries = 0
+    while True:
+        offset = partial.stat().st_size if partial.exists() else 0
+        if known_total is not None and offset == known_total:
+            return
+        requested_end = offset + request_bytes - 1
+        try:
+            with client.get(asset['url'], headers={'Accept-Encoding':'identity',
+                    'Range':f'bytes={offset}-{requested_end}'}, stream=True, timeout=(10,60)) as response:
+                response.raise_for_status()
+                match = re.fullmatch(r'bytes (\d+)-(\d+)/(\d+)', response.headers.get('Content-Range',''))
+                if response.status_code != 206 or not match or int(match[1]) != offset:
+                    raise ValueError('Bounded download requires an exact HTTP range response')
+                end, total = int(match[2]), int(match[3])
+                if not offset <= end <= requested_end or end >= total:
+                    raise ValueError('Invalid bounded Content-Range')
+                if known_total is not None and total != known_total:
+                    raise ValueError('Remote object length changed between ranges')
+                if response.headers.get('Content-Encoding','identity') not in ('','identity'):
+                    raise ValueError('Range payload must not use content encoding')
+                known_total = total
+                require_space(partial.parent, reserve_bytes + total-offset)
+                with partial.open('ab') as handle:
+                    for chunk in response.iter_content(1 << 20):
+                        if not chunk: continue
+                        if handle.tell() + len(chunk) > end + 1:
+                            raise ValueError('Range body exceeds declared bounds')
+                        require_space(partial.parent,reserve_bytes + len(chunk))
+                        handle.write(chunk)
+                    handle.flush(); os.fsync(handle.fileno())
+                if partial.stat().st_size != end + 1:
+                    raise requests.ConnectionError('Short ranged response; retained exact prefix')
+                print(f'Range progress {asset["name"]}: {end+1}/{total} bytes',flush=True)
+        except (requests.Timeout, requests.ConnectionError) as error:
+            if isinstance(error, requests.exceptions.SSLError) and 'CERTIFICATE_VERIFY_FAILED' in str(error):
+                raise
+            if retries >= max_retries:
+                raise
+            retries += 1
+            retained = partial.stat().st_size if partial.exists() else 0
+            print(f'Transport retry {retries}/{max_retries}: {type(error).__name__}; retained {retained} bytes',flush=True)
+            time.sleep(min(2 ** retries, 30))
 
 
 def safe_member_path(name: str) -> PurePosixPath:

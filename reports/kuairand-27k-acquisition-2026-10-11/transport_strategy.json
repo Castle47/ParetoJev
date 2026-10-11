@@ -1,0 +1,12 @@
+{
+  "reason": "two category-CSV long-stream read timeouts",
+  "request_range_mib": 32,
+  "max_transport_retries_per_run": 8,
+  "partial_prefix_preserved": true,
+  "final_published_md5_required": true,
+  "tls_verification_disabled": false,
+  "source_hashes": {
+    "src/paretojev/data/acquisition.py": "a2d811c4e53d43701fccdab42a581ea9e141e1bcd4ee6397c036089815230aba",
+    "scripts/prepare_kuairand_27k.py": "96fce468bb0c8ce5e641c5aab0f2ae6795c70b5ab15729537811826a8060510a"
+  }
+}

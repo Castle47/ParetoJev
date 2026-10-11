@@ -1,0 +1,9 @@
+{
+  "reason": "category CSV read timeout",
+  "retained_category_bytes": 67108864,
+  "verified_assets": [
+    "KuaiRand-27K.tar.gz",
+    "kuairand_video_captions.csv"
+  ],
+  "action": "resume exact byte range; no TLS bypass or data replacement"
+}

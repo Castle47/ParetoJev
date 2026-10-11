@@ -16,6 +16,9 @@ def main():
     parser.add_argument('stage',choices=['plan','download','extract','audit'])
     parser.add_argument('--root',type=Path,default=Path('data/raw/kuairand-27k'))
     parser.add_argument('--report',type=Path,default=Path('reports/kuairand-27k-readiness-2026-10-09/acquisition_plan.json'))
+    parser.add_argument('--asset', action='append', choices=[a['name'] for a in ASSETS], help='Download only explicitly selected assets; other files remain unchanged')
+    parser.add_argument('--range-mib',type=int,default=None,help='Bound each download request; final full checksum remains required')
+    parser.add_argument('--transport-retries',type=int,default=0)
     parser.add_argument('--chunksize',type=int,default=100_000)
     parser.add_argument('--max-rows-per-file',type=int,default=None,help='Explicit prefix audit, never a full-dataset claim')
     args = parser.parse_args(); root = args.root.expanduser().resolve()
@@ -39,11 +42,19 @@ def main():
             manifest_path = root/'download_manifest.json'
             manifest = read_json(manifest_path) if manifest_path.exists() else {'dataset':'KuaiRand-27K','assets':{}}
             for asset in ASSETS:
-                result = download_asset(asset,root/'downloads')
+                if args.asset and asset['name'] not in args.asset:
+                    continue
+                result = download_asset(asset,root/'downloads',
+                    request_bytes=args.range_mib * 2**20 if args.range_mib is not None else None,
+                    max_transport_retries=args.transport_retries)
                 manifest['assets'][asset['name']] = result
                 atomic_write_json(manifest_path,manifest)
                 print(f"Verified {asset['name']}: {result['bytes']} bytes",flush=True)
-            manifest['complete'] = True;atomic_write_json(manifest_path,manifest)
+            manifest['complete'] = all(a['name'] in manifest['assets'] and
+                manifest['assets'][a['name']]['md5'] == a['md5'] and
+                (root/'downloads'/a['name']).is_file() and
+                (root/'downloads'/a['name']).stat().st_size == manifest['assets'][a['name']]['bytes'] for a in ASSETS)
+            atomic_write_json(manifest_path,manifest)
         elif args.stage == 'extract':
             extract_27k(root/'downloads/KuaiRand-27K.tar.gz',root/'extracted',expected_md5=ASSETS[0]['md5'])
         else:

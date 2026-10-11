@@ -145,3 +145,44 @@ def test_extraction_temporary_symlink_does_not_overwrite_external_file(tmp_path)
     with pytest.raises(ValueError,match='symlinks'):
         extract_27k(p,out,expected_md5=md5,reserve_bytes=0)
     assert other.read_text()=='keep'
+
+
+class RangeSession:
+    def __init__(self, data, interrupt=False):
+        self.data=data;self.calls=[];self.interrupt=interrupt
+    def get(self,url,**kwargs):
+        import requests
+        requested=kwargs['headers']['Range'];self.calls.append(requested)
+        start,end=map(int,requested.removeprefix('bytes=').split('-'))
+        end=min(end,len(self.data)-1)
+        response=Response(self.data[start:end+1],206,{'Content-Range':f'bytes {start}-{end}/{len(self.data)}'})
+        if self.interrupt:
+            self.interrupt=False
+            def chunks(_):
+                yield self.data[start:start+2]
+                raise requests.ConnectionError('read timed out')
+            response.iter_content=chunks
+        return response
+
+
+def test_bounded_ranges_and_retry_preserve_every_byte(tmp_path,monkeypatch):
+    monkeypatch.setattr('paretojev.data.acquisition.time.sleep',lambda _:None)
+    data=b'abcdef';s=RangeSession(data,interrupt=True)
+    result=download_asset(asset(data),tmp_path,session=s,reserve_bytes=0,request_bytes=3,max_transport_retries=1)
+    assert s.calls==['bytes=0-2','bytes=2-4','bytes=5-7']
+    assert (tmp_path/'data.bin').read_bytes()==data
+    assert result['md5']==hashlib.md5(data).hexdigest()
+
+
+def test_bounded_mode_rejects_range_ignored_by_server(tmp_path):
+    with pytest.raises(ValueError,match='exact HTTP range'):
+        download_asset(asset(b'abcdef'),tmp_path,session=Session(Response(b'abcdef')),reserve_bytes=0,request_bytes=3)
+    assert not (tmp_path/'data.bin.part').exists()
+
+
+def test_bounded_retry_budget_stops_after_retaining_valid_prefix(tmp_path):
+    import requests
+    s=RangeSession(b'abcdef',interrupt=True)
+    with pytest.raises(requests.ConnectionError):
+        download_asset(asset(b'abcdef'),tmp_path,session=s,reserve_bytes=0,request_bytes=3,max_transport_retries=0)
+    assert len(s.calls)==1 and (tmp_path/'data.bin.part').read_bytes()==b'ab'

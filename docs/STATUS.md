@@ -34,7 +34,7 @@
 - shared evaluation, per-slate prediction audit, user-cluster bootstrap and undefined-metric handling
 - method-level resume with artifact/source hashes, concurrent-writer lock and deterministic training
 - real-data evidence requirements which synthetic results cannot satisfy
-- **226 passing tests** on the local Python 3.12 environment
+- **229 passing tests** on the local Python 3.12 environment
 - passing synthetic model smoke and target report
 - real official MicroLens acquisition and 200-user item-CF/title baseline reproduction
 - 20-user / 400-candidate real AutoTrust JEV-27B pilot, revision-checked and cached
@@ -153,3 +153,12 @@ The existing in-memory, low-context SASRec+MMoE trainer is not yet a rich-featur
 27K trainer. After full acquisition, resolve temporal feature availability, scene
 label definitions, content alignment and external-memory history/index design
 before training pXTR. New Jev scoring remains disabled during this prerequisite.
+
+
+## 2026-10-11 external storage update
+
+The user connected a writable external drive with about 883 GiB free. The data
+root is `/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k`. The prior storage
+blocker is resolved, and full checksum-pinned acquisition has started. Download,
+extraction, full audit and rich-feature model training remain separate milestones;
+follow the [new acquisition report](../reports/kuairand-27k-acquisition-2026-10-11/README.md).
