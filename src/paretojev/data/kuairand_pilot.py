@@ -16,6 +16,8 @@ from .kuairand_27k import BINARY_LABELS, HashReader, USER_COUNT, USER_FILE, USER
 from ..utils.io import atomic_write_json, read_json
 from ..utils.provenance import canonical_hash, sha256_file
 
+DEFAULT_TRAIN_END_MS = 1650211200000
+
 EVENT = np.dtype([('time', '<i8'), ('item', '<i4'), ('duration', '<i8'),
                   ('tab', 'u1'), ('labels', 'u1')])
 NUMERIC_NAMES = ['log_duration', 'duration_invalid', 'log_prior_exposure_count',
@@ -45,12 +47,14 @@ def label_diagnostics(frame):
     return out
 
 
-def ingest(data: Path, audit_path: Path, out: Path, chunksize=250000):
+def ingest(data: Path, audit_path: Path, out: Path, chunksize=250000, train_end_ms=DEFAULT_TRAIN_END_MS):
     """Use audited per-user counts for a 3 GB disk array, rehash sources in flight."""
     out.mkdir(parents=True, exist_ok=True)
     manifest = out / 'events.json'
     if manifest.exists():
         result = read_json(manifest)
+        if result.get('diagnostics_train_end_ms', DEFAULT_TRAIN_END_MS) != train_end_ms:
+            raise ValueError('Training cutoff changed; label diagnostics would be stale')
         if result['audit_sha256'] != sha256_file(audit_path):
             raise ValueError('Audit changed')
         if (out / 'events.bin').stat().st_size != result['rows'] * EVENT.itemsize:
@@ -93,7 +97,7 @@ def ingest(data: Path, audit_path: Path, out: Path, chunksize=250000):
                         events[cursor[user]:stop] = values[start:end]
                         cursor[user] = stop
                     # Diagnose only the predeclared training period.
-                    for tab, metrics in label_diagnostics(f[f.time_ms < 1650211200000]).items():
+                    for tab, metrics in label_diagnostics(f[f.time_ms < train_end_ms]).items():
                         dst = diag.setdefault(tab, {k: 0 for k in metrics})
                         for key, value in metrics.items(): dst[key] += value
                     rows += len(f)
@@ -106,6 +110,7 @@ def ingest(data: Path, audit_path: Path, out: Path, chunksize=250000):
     events.flush()
     np.save(out / 'offsets.npy', offsets)
     result = dict(status='complete', rows=int(offsets[-1]), dtype=EVENT.descr,
+                  diagnostics_train_end_ms=int(train_end_ms),
                   audit_sha256=sha256_file(audit_path), source_sha256=hashes,
                   training_label_diagnostics_by_tab=diag,
                   store_sha256=sha256_file(out / 'events.bin'),

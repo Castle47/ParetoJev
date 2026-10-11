@@ -63,8 +63,12 @@ def test_disk_ingestion_shards_and_hash_guard(tmp_path):
             user_event_counts=[1, 1], source_sha256=sha256_file(path)))
     audit = tmp_path / 'audit.json'; audit.write_text(json.dumps({'logs': {'early_standard': sources}}))
     out = tmp_path / 'out'
-    result = ingest(tmp_path, audit, out, chunksize=1)
+    result = ingest(tmp_path, audit, out, chunksize=1, train_end_ms=100)
     assert result['rows'] == 4
+    assert sum(v['rows'] for v in result['training_label_diagnostics_by_tab'].values()) == 3
+    import pytest
+    with pytest.raises(ValueError, match='cutoff changed'):
+        ingest(tmp_path, audit, out, train_end_ms=200)
     m = prepare_samples(out, config())
     assert m['splits']['train']['rows'] == 3
     assert m['splits']['validation']['rows'] == 1

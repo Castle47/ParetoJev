@@ -26,7 +26,7 @@ def main():
         if registration.exists() and read_json(registration) != config:
             raise ValueError('Existing preparation has a different registration')
         atomic_write_json(registration, config)
-        events = ingest(data, args.audit, args.output)
+        events = ingest(data, args.audit, args.output, train_end_ms=config['train_end_exclusive_ms'])
         samples = prepare_samples(args.output, config)
         with np.load(args.output / 'train.npz') as train:
             profile = user_snapshot(data, args.output, train['user'])
