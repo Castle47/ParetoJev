@@ -54,3 +54,10 @@ decision_sampling:
   feedback_buckets:
     positive_rich_threshold: 2
   dimensions: [popularity, history, exposure, feedback_density]
+
+# Separate registered pilot; seven raw outputs do not silently replace the
+# six-objective downstream contract above. The mapping still needs registration.
+behavior_pilot:
+  config: configs/kuairand_27k_behavior_pilot.json
+  full_exposure_training: false
+  research_target_mode: false

@@ -305,9 +305,45 @@ scripts/run_microlens_phase_a.sh
 
 The script exits non-zero when a required target fails or cannot be evaluated. Phase A research gates also require explicit real MicroLens evidence. Existing `evaluate-microlens` reports do not establish that origin automatically and therefore remain `not_evaluable` until reviewed evidence is supplied; a high metric alone is insufficient.
 
-## KuaiRand workflow
+## Active KuaiRand-27K workflow
 
-Place the official files under `data/raw/kuairand/` or another local path. The minimum primary-track inputs are:
+The active dataset is the complete **27K**, explicitly selected by the user. Its
+core archive, captions and categories are acquired and verified on the external
+drive. `data/raw/kuairand-27k` points to that directory. Do not load the full shards
+with the older in-memory trainer below.
+
+The registered bounded-memory behavior pilot uses all early standard exposures
+as history sources, with at most 16 training and 8 validation targets per eligible
+user. It predicts seven raw feedback labels with 50-event histories. It is a
+**target-sampled development experiment**, not full-exposure training or a
+ParetoJev benchmark. Released user profiles are a separate sensitivity regime
+because their snapshot timing is unknown. The legacy six-objective reranker
+contract is not silently equated to these seven raw outputs.
+
+```bash
+.venv/bin/python scripts/prepare_kuairand_behavior_pilot.py \
+  --data-root data/raw/kuairand-27k \
+  --output data/raw/kuairand-27k/behavior-pilot-v1 \
+  --audit reports/kuairand-27k-acquisition-2026-10-11/full_audit.json
+.venv/bin/python scripts/train_kuairand_behavior_pilot.py \
+  --data data/raw/kuairand-27k/behavior-pilot-v1 \
+  --output data/raw/kuairand-27k/behavior-pilot-v1/run-v1
+.venv/bin/python scripts/replay_kuairand_behavior_pilot.py \
+  --data data/raw/kuairand-27k/behavior-pilot-v1 \
+  --run data/raw/kuairand-27k/behavior-pilot-v1/run-v1 \
+  --output data/raw/kuairand-27k/behavior-pilot-v1/run-v1/replay.json
+```
+
+A completed preparation can be reused; existing run outputs are never overwritten.
+See the [registration](reports/kuairand-27k-behavior-pilot-2026-10-11/REGISTRATION.md)
+for periods, feature availability, hash collisions, sampling weights and gates.
+Research target mode remains disabled for this pilot; no Jev service is invoked.
+
+## Legacy small-file/Pure workflow
+
+The examples below document the earlier in-memory interfaces for small files and
+synthetic protocol checks. They are **not the active 27K procedure** and have not
+been run as a complete real multi-objective reranker benchmark. Example inputs:
 
 ```text
 log_standard_4_08_to_4_21_pure.csv

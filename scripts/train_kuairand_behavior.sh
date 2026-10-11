@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Legacy in-memory workflow: do not pass complete 27K shards here.
+# Current 27K entry point: scripts/train_kuairand_behavior_pilot.py.
 set -euo pipefail
 
 TRAIN_LOG="${1:?Chronologically early behavior-train log required}"
