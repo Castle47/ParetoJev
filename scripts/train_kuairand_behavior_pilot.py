@@ -89,6 +89,7 @@ def run(args):
             if sha256_file(args.data / 'user_snapshot.npy') != spec['encoded_sha256']: raise ValueError('Profile checksum mismatch')
             profiles = np.load(args.data / 'user_snapshot.npy'); cardinalities = spec['cardinalities']
         model = KuaiRandPilotModel(config, profile_cardinalities=cardinalities).to(args.device)
+        model.set_training_users(np.unique(train['user']))
         with torch.no_grad():
             for j, head in enumerate(model.heads):
                 head.bias.fill_(float(np.log(prior[j]/(1-prior[j]))))

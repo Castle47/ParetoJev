@@ -81,6 +81,9 @@ def test_model_empty_history_gradients_and_regime_guard():
     m = KuaiRandPilotModel(c)
     fields = dict(history=torch.tensor([[0, 0, 0], [2, 3, 0]]), item=torch.tensor([2, 4]),
         user=torch.tensor([0, 1]), tab=torch.tensor([0, 1]), numeric=torch.zeros(2, 7))
+    m.set_training_users([0])
+    assert m.known_users[0] and not m.known_users[1]
+    assert not m.users.weight[0].any()
     logits = m(**fields)
     assert logits.shape == (2, 7) and torch.isfinite(logits).all()
     logits.sum().backward()
