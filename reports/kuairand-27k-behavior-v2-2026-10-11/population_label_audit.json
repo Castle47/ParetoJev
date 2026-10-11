@@ -1,0 +1,86 @@
+{
+  "scope": "post-experiment descriptive full-period label audit; no model or gate changed",
+  "source_store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+  "objective_order": [
+    "is_click",
+    "long_view",
+    "is_like",
+    "is_follow",
+    "is_comment",
+    "is_forward",
+    "is_hate"
+  ],
+  "periods": {
+    "train": {
+      "exposures": 99550635,
+      "positive_counts": [
+        37949167,
+        26167030,
+        1672674,
+        111159,
+        244716,
+        90160,
+        48688
+      ],
+      "prevalence": [
+        0.3812046703669946,
+        0.2628514624743479,
+        0.01680224340105917,
+        0.0011166076439391873,
+        0.002458206318824586,
+        0.0009056697629301913,
+        0.0004890777442052479
+      ],
+      "hate_positive_index_rows": 48688,
+      "hate_positive_index_sha256": "905385011ec143b37f276842088a8c41ffe7b15fbade6c893dc1747fde3e2b2b"
+    },
+    "calibration": {
+      "exposures": 9039832,
+      "positive_counts": [
+        3425233,
+        2375176,
+        136068,
+        8719,
+        21823,
+        7762,
+        5597
+      ],
+      "prevalence": [
+        0.3789044973402161,
+        0.2627455908472635,
+        0.015052049639860563,
+        0.0009645090749474105,
+        0.0024140935362515588,
+        0.0008586442756900792,
+        0.0006191486744443923
+      ],
+      "hate_positive_index_rows": 5597,
+      "hate_positive_index_sha256": "a44f1dc7102b9d8dad8f407798e65930c331b3600959a3e34122aeddb93ee487"
+    },
+    "evaluation": {
+      "exposures": 8997096,
+      "positive_counts": [
+        3460977,
+        2405976,
+        133971,
+        8897,
+        22148,
+        7831,
+        4471
+      ],
+      "prevalence": [
+        0.38467712248485514,
+        0.267416953203567,
+        0.014890471325414333,
+        0.0009888746324369553,
+        0.0024616831919988405,
+        0.0008703919575827579,
+        0.0004969381231455127
+      ],
+      "hate_positive_index_rows": 4471,
+      "hate_positive_index_sha256": "8b59c871946a20b3faf412d224e2583083aeea798c313a6e021681d540489f71"
+    }
+  },
+  "index_unit": "zero_based_EVENT_records",
+  "event_itemsize": 22
+}

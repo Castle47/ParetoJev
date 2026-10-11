@@ -17,7 +17,7 @@ dataset:
   published_aggregates_allowed_as_model_inputs: false
   history_length: 50
   ingestion: chunked_full_dataset_audit
-  training_ready: false
+  training_ready: false  # Full research/reranker qualification, not pilot fitting status.
 slates:
   protocol_name: exposed-session pseudo-slate
   slate_size: 20
@@ -60,4 +60,10 @@ decision_sampling:
 behavior_pilot:
   config: configs/kuairand_27k_behavior_pilot.json
   full_exposure_training: false
+  research_target_mode: false
+
+# Latest behavior controls; not a declaration that all behavior/research gates pass.
+behavior_development_v2:
+  config: configs/kuairand_27k_behavior_v2.json
+  feature_regimes: [exposure_context, upload_metadata_assumed_static]
   research_target_mode: false

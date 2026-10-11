@@ -64,7 +64,7 @@ def main():
     for key,label in zip(BINARY_LABELS,NAMES):
         b=r['baselines']['tab'][key];c=context['calibrated'][key];v=content['calibrated'][key]
         lines.append(f"| {label} | {v['sampled_positives']} | {b['logloss']:.6f} | {context['raw'][key]['logloss']:.6f} | {c['logloss']:.6f} | {content['raw'][key]['logloss']:.6f} | {v['logloss']:.6f} | {'通过' if content['gates'][key] else '未通过'} |")
-    lines += ['', '| 任务 | tab AUC | 统计组 AUC | 视频组 AUC | tab Brier | 视频组校准 Brier | 实际发生率 | 视频组平均预测 |',
+    lines += ['', '| 任务 | tab AUC | 统计组 AUC | 视频组 AUC | tab Brier | 视频组校准 Brier | 样本加权发生率 | 视频组平均预测 |',
         '|---|---:|---:|---:|---:|---:|---:|---:|']
     for key,label in zip(BINARY_LABELS,NAMES):
         b=r['baselines']['tab'][key];c=context['calibrated'][key];v=content['calibrated'][key]
@@ -93,6 +93,8 @@ def main():
         '后续需按未通过项决定是否继续完善行为基线；通过开发筛查也不能跳过后续时段验证。',
         '向重排器导出特征时，必须把同一 slate 的历史和请求时间冻结在共同决策时点，不能直接混用各曝光自己的未来历史。',
         '七原始目标与原六目标协议的映射仍须明确登记，再开展真实 Jev 和统一融合比较。','']
+    if (a.output/'POST_RUN_NOTES.md').exists():
+        lines += ['', '[全量负反馈核对、运行优化与离线交付说明](POST_RUN_NOTES.md)', '']
     (a.output/'README.md').write_text('\n'.join(lines),encoding='utf-8')
 
 

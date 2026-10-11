@@ -1,0 +1,21 @@
+{
+  "scope": "frozen evaluation feature/model/prediction replay only; no raw logs or retraining data",
+  "archive": "ParetoJev-kuairand27k-behavior-v2-replay-2026-10-11.tar.gz",
+  "bytes": 48981162,
+  "sha256": "829e199a5bfd69463cce5b23006d22434376a50eeef87239624cddc02bb50956",
+  "files": [
+    "data/evaluation-x.npy",
+    "data/evaluation-y.npy",
+    "data/evaluation-weight.npy",
+    "data/evaluation-user.npy",
+    "data/evaluation-time.npy",
+    "data/samples.json",
+    "run/results.json",
+    "run/exposure_context.joblib",
+    "run/exposure_context-raw.npy",
+    "run/exposure_context-calibrated.npy",
+    "run/upload_metadata_assumed_static.joblib",
+    "run/upload_metadata_assumed_static-raw.npy",
+    "run/upload_metadata_assumed_static-calibrated.npy"
+  ]
+}

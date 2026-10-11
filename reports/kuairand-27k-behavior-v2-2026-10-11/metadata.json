@@ -1,0 +1,35 @@
+{
+  "rows": 32038725,
+  "source_sha256": "b3ccf2be3a63e08bb85a08093ee01f8d6266cdcd184eabf0d5ecd1797530f950",
+  "index_sha256": "0ad5532587892c14e5ec5316c4419b4aa286bbb08db6ca00f3a89a9a18b7dde1",
+  "missing": {
+    "author": 0,
+    "upload_day": 579,
+    "duration": 6758072,
+    "width": 222,
+    "height": 222
+  },
+  "fields": [
+    [
+      "author",
+      "<i8"
+    ],
+    [
+      "upload_day",
+      "<i4"
+    ],
+    [
+      "duration",
+      "<f4"
+    ],
+    [
+      "width",
+      "<f4"
+    ],
+    [
+      "height",
+      "<f4"
+    ]
+  ],
+  "assumption": "properties fixed at upload; not timestamp-proven"
+}

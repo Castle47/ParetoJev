@@ -1,0 +1,128 @@
+{
+  "config_hash": "0971c2bdb412f89f83251c6c24037ff1a9b540662530738606c9ecfcaeac14d3",
+  "event_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+  "metadata_manifest_sha256": "4be29e3f6890fc829e5312f4272f40ba3442f6f7a2b339b78c9291f2eea62a3e",
+  "feature_source_sha256": "1d2a1cffaac46ef1f572302ed689db54b8d9380d6faac67606e1fca78e770119",
+  "core_fields": [
+    "tab",
+    "log_duration",
+    "duration_missing",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "log_exposures_1h",
+    "log_exposures_1d",
+    "log_exposures_7d",
+    "log_hours_since_last",
+    "history_length_fraction",
+    "history_mean_log_duration",
+    "history_duration_known_fraction",
+    "candidate_repeat_fraction",
+    "same_tab_fraction",
+    "distinct_history_fraction",
+    "log_observed_history_days"
+  ],
+  "extra_fields": [
+    "log_basic_duration",
+    "log_width",
+    "log_height",
+    "aspect_ratio",
+    "log_upload_age_days",
+    "metadata_available",
+    "author_repeat_fraction",
+    "history_author_known_fraction"
+  ],
+  "splits": {
+    "train": {
+      "rows": 1699506,
+      "users": 26758,
+      "min_time": 1649341109393,
+      "max_time": 1650211199979,
+      "represented_exposures": 99550635.0,
+      "positives": [
+        808294,
+        596092,
+        40067,
+        3649,
+        5453,
+        2025,
+        856
+      ],
+      "diagnostics": {
+        "rows": 1699506,
+        "metadata_available": 1699485,
+        "future_upload_masked": 0,
+        "missing_upload_masked": 21,
+        "history_50": 1619465
+      },
+      "files": {
+        "x": "bcfe185660a54c09c5143cbda25a1abc5748a3e79b8a6b367f8cf47f650e9239",
+        "y": "4fa1db92d7cac58b5ac3e07f283bb872f91c903bd6ac58bf318782265c46aa98",
+        "weight": "e29d482dc83610345092bc4339199743c5c87fee8a304d8167d0ab09d2b52602",
+        "user": "7170fb9c0299266c5c5bc4ac537246523ee3a93bd4813c8b3dff547697fc9449",
+        "time": "29e36b12cbf8b7fa977d0eab18717e295c35c182a446727097b9158843e0392c"
+      }
+    },
+    "calibration": {
+      "rows": 188642,
+      "users": 24045,
+      "min_time": 1650211200629,
+      "max_time": 1650297599495,
+      "represented_exposures": 9039832.0,
+      "positives": [
+        91790,
+        68685,
+        4357,
+        392,
+        698,
+        227,
+        92
+      ],
+      "diagnostics": {
+        "rows": 188642,
+        "metadata_available": 188622,
+        "future_upload_masked": 0,
+        "missing_upload_masked": 20,
+        "history_50": 188172
+      },
+      "files": {
+        "x": "06149fd2f3f419bccb3dc284c39e3f99a9dd81ecffa3d9574da9096b25a3b34c",
+        "y": "d555c9423428a31e52ea95739547ae85f1d16cf07e0e96a1afeb35594062cc60",
+        "weight": "39e84e148db77598a1794af25ef8968a4d9f8de57c6873c1d39511c781a5e67c",
+        "user": "400db2634d3ff3ef463ceaf2d9205028fc06edcb60aa59b7498bab2416239a8a",
+        "time": "c30086072a4995521da9eb143e4a88552f5d9bacd387ea363314db9f8c899c3d"
+      }
+    },
+    "evaluation": {
+      "rows": 187419,
+      "users": 23881,
+      "min_time": 1650297600094,
+      "max_time": 1650383999961,
+      "represented_exposures": 8997096.0,
+      "positives": [
+        91319,
+        68126,
+        4286,
+        376,
+        712,
+        222,
+        85
+      ],
+      "diagnostics": {
+        "rows": 187419,
+        "metadata_available": 187413,
+        "future_upload_masked": 0,
+        "missing_upload_masked": 6,
+        "history_50": 186938
+      },
+      "files": {
+        "x": "d5a81c0f4566b71a883eecd9b91da275fddefe3d4608956bb7fec7cdf6f945fe",
+        "y": "41c44003b0ab70bd12bedc34446bbc44def71d69c46c6f5b9dada92f39cf4d92",
+        "weight": "91dd1ef4e5c22f94a648a40cdc451f33e934a2d14847d8d0c9b94f5597b69c9e",
+        "user": "0c312a040c95cf48fafb810ff6276e7d868e1e52a8b5cfce1fe8c9b6baf79a30",
+        "time": "75ca1980fee1dce2500af4f665dba6ed46544ad0d5e2dfe9b55e96e751903637"
+      }
+    }
+  }
+}

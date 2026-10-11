@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "checks": {
+    "exposure_context": {
+      "predictions_exact": true,
+      "metrics_exact": true,
+      "scene_metrics_exact": true
+    },
+    "upload_metadata_assumed_static": {
+      "predictions_exact": true,
+      "metrics_exact": true,
+      "scene_metrics_exact": true
+    }
+  },
+  "full_training_replayed": false,
+  "scope": "fresh_process_same_machine",
+  "jev_requests": 0
+}

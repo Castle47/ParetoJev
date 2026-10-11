@@ -1,0 +1,13 @@
+metadata rows 5,000,000
+metadata rows 10,000,000
+metadata rows 15,000,000
+metadata rows 20,000,000
+metadata rows 25,000,000
+metadata rows 30,000,000
+feature user 0
+feature user 5000
+feature user 10000
+feature user 15000
+feature user 20000
+feature user 25000
+Preparation complete

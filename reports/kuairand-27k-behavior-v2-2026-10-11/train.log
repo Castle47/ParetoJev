@@ -1,0 +1,33 @@
+fit exposure_context is_click
+fitted exposure_context is_click seconds=12.9
+fit exposure_context long_view
+fitted exposure_context long_view seconds=13.4
+fit exposure_context is_like
+fitted exposure_context is_like seconds=12.6
+fit exposure_context is_follow
+fitted exposure_context is_follow seconds=14.6
+fit exposure_context is_comment
+fitted exposure_context is_comment seconds=11.7
+fit exposure_context is_forward
+fitted exposure_context is_forward seconds=13.3
+fit exposure_context is_hate
+fitted exposure_context is_hate seconds=13.1
+frozen exposure_context
+fit upload_metadata_assumed_static is_click
+fitted upload_metadata_assumed_static is_click seconds=17.7
+fit upload_metadata_assumed_static long_view
+fitted upload_metadata_assumed_static long_view seconds=19.3
+fit upload_metadata_assumed_static is_like
+fitted upload_metadata_assumed_static is_like seconds=18.6
+fit upload_metadata_assumed_static is_follow
+fitted upload_metadata_assumed_static is_follow seconds=20.2
+fit upload_metadata_assumed_static is_comment
+fitted upload_metadata_assumed_static is_comment seconds=19.1
+fit upload_metadata_assumed_static is_forward
+fitted upload_metadata_assumed_static is_forward seconds=18.1
+fit upload_metadata_assumed_static is_hate
+fitted upload_metadata_assumed_static is_hate seconds=16.4
+frozen upload_metadata_assumed_static
+exposure_context gates 6 /7
+upload_metadata_assumed_static gates 6 /7
+Experiment complete

@@ -1,0 +1,112 @@
+{
+  "exposure_context": {
+    "model_sha256": "ea9b55a085d9d47d8965e7c8b921146affeb0226f94b59b2ad86168c5b3711b5",
+    "calibration": [
+      {
+        "slope": 1.0281099151612507,
+        "intercept": 0.0030868176724474818,
+        "objective": 0.5613585799245989,
+        "iterations": 5,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.083016388464241,
+        "intercept": 0.04150987034908197,
+        "objective": 0.47004674723619855,
+        "iterations": 6,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9843608077667694,
+        "intercept": -0.06545008757121473,
+        "objective": 0.07153493872564166,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.1036494247011082,
+        "intercept": 0.5680721999745862,
+        "objective": 0.006932875409816653,
+        "iterations": 14,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.8324032188975674,
+        "intercept": -0.9170541929889335,
+        "objective": 0.01700907814652458,
+        "iterations": 9,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.7894724053890848,
+        "intercept": -1.4675997394504208,
+        "objective": 0.006693655974675485,
+        "iterations": 13,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9295126080201906,
+        "intercept": 0.03252798030284013,
+        "objective": 0.004462821209611793,
+        "iterations": 15,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      }
+    ],
+    "columns": 18
+  },
+  "upload_metadata_assumed_static": {
+    "model_sha256": "4446842cd6c37ed0fd0bc1df1d7bbd4b9b246233165aba43de95da21e02ff159",
+    "calibration": [
+      {
+        "slope": 1.0341162341368044,
+        "intercept": 0.002800375769858816,
+        "objective": 0.5609339983341606,
+        "iterations": 6,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.0743343500070355,
+        "intercept": 0.037447778967687306,
+        "objective": 0.46990470245547544,
+        "iterations": 6,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9888809297676338,
+        "intercept": -0.043694924194571036,
+        "objective": 0.07113399036802771,
+        "iterations": 9,
+        "status": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH"
+      },
+      {
+        "slope": 1.0860353077075944,
+        "intercept": 0.5298947056574304,
+        "objective": 0.0069544212754829625,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.8692947739026767,
+        "intercept": -0.691423899883406,
+        "objective": 0.016970180631319567,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.7996454663432275,
+        "intercept": -1.4004697183577772,
+        "objective": 0.006691284852577367,
+        "iterations": 13,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9210277718262274,
+        "intercept": 0.14924053704317722,
+        "objective": 0.004601725890344356,
+        "iterations": 16,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      }
+    ],
+    "columns": 26
+  }
+}

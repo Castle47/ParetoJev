@@ -562,3 +562,62 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Evidence: `reports/kuairand-27k-behavior-pilot-2026-10-11/`. Next: better training
   coverage and available item/history features, regularization and independently
   assessed calibration, followed by frozen out-of-period reranker features.
+
+## 2026-10-11 — Richer 27K controls and separate calibration period
+
+- Preregistered v2 (`eb9eafc`) before fitting: 64 training targets/user, eight per
+  calibration/evaluation day, seven raw objectives, identical data for two feature
+  regimes, 64 fixed boosting iterations, positive-slope Platt calibration and
+  stricter gates against tab prevalence. Research target mode remains disabled.
+- Verified all 32,038,725 unique basic-video IDs and source SHA-256. Built a dense
+  external-disk index plus a local lookup cache. Unknown/invalid durations:
+  6,758,072 catalog rows; unknown upload dates: 579. Future/missing upload dates
+  mask candidate attributes, and historical authors are masked at their own times.
+  Physical/author/upload attributes are explicitly assumed static, not proven so.
+- Prepared 1,699,506 train targets (26,758 users), 188,642 April-18 calibration
+  targets (24,045 users), and 187,419 April-19 evaluation targets (23,881 users).
+  Weights represent 99,550,635 / 9,039,832 / 8,997,096 exposures. This is sampled
+  target training over complete early histories, not full-exposure fitting.
+- Exposure-only control: 18 request/history derived inputs; content control adds
+  eight upload-property/author-match inputs. No user snapshots, month aggregates,
+  past feedback labels or Jev signals. Raw user/item/author IDs are not ordinal
+  tree features. This is a new independent-head tree baseline, not a SASRec refit.
+- First startup (`run-v1`) was interrupted in repeated mmap-backed column access
+  without completing a model group or evaluation. Changed only the loader to
+  materialize bounded arrays (512 MiB cap per period). Synthetic predictions,
+  calibration parameters and metrics match the mmap implementation exactly.
+  Successful frozen run: `behavior-v2/run-v2`, training source `3facc4f`; fitting,
+  calibration and evaluation took 258.6 seconds after loading/baseline setup.
+- Both regimes pass 6/7 stricter point-estimate gates; is_hate fails log loss and
+  Brier against tab prevalence. Content-model AUCs: click/valid-play 0.7567,
+  long-view 0.7777, like 0.7681, follow 0.7446, comment 0.7181, forward 0.6771,
+  hate 0.5745. Click/long-view calibrated means are 38.525% / 26.712%, versus
+  weighted evaluation prevalences 38.334% / 26.689%. Positive-slope calibration
+  changes no observed AUC; like log loss slightly worsens, which is retained.
+- Content-minus-context calibrated log-loss point differences are negative for
+  all tasks. Of seven exploratory 95% user-bootstrap intervals, only click, like
+  and hate exclude zero. No multiplicity correction or unseen-test claim: April
+  19 had already been used in v1 development. No Jev/ParetoJev gain is established.
+- Shared evaluator exactly reproduces both v1 reports. 246 tests pass. Real raw and
+  calibrated predictions plus objective/scene metrics replay exactly in a fresh
+  process; the 1,000-replicate bootstrap results replay exactly as well.
+  Exported a 48,981,162-byte frozen-evaluation package and independently restored
+  it into a fresh directory; both models' predictions and metrics replay exactly.
+  No complete retraining or cross-hardware replay was performed.
+- Training-only consistency check: log/basic duration missingness agrees on
+  426,823 of 426,832 v1 training targets; nine differ. This supports consistency,
+  not proof of online attribute availability. Full-period post-experiment label
+  audit revalidated the entire event-store SHA and exposure totals. It found
+  48,688 training hate positives versus 856 sampled, 5,597 calibration positives
+  versus 92 sampled, and 4,471 evaluation positives versus 85 sampled. True full
+  hate prevalence changes from 0.06191% on April 18 to 0.04969% on April 19, while
+  the sampled evaluation estimate is 0.0432%. Original model/gate decisions remain
+  unchanged; full source-offset positive indices and hashes are prepared for a
+  separately registered sampling study. This was a label audit, not full-population
+  model evaluation. April 20 onward was not used for model selection/evaluation.
+- Next: increase sparse positive coverage with correct inclusion weights and
+  distinguish model weakness, sampling variability and temporal change. Later
+  reranker exports must freeze a common slate decision time and explicitly map
+  the seven raw objectives to any six-objective protocol. No new external input
+  blocks this work; zero Jev requests were made this round.
+- Evidence: `reports/kuairand-27k-behavior-v2-2026-10-11/`.

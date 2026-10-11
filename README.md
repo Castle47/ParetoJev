@@ -38,6 +38,7 @@ Verified locally on **2026-10-11**:
 | Fixed 700-user confirmation | 14,000 real decisions; AUC gain vs SASRec passes, superiority vs MiniLM does not; **1/2 gates** | [`reports/microlens-sasrec-confirmatory-2026-10-09/README.md`](reports/microlens-sasrec-confirmatory-2026-10-09/README.md) |
 | KuaiRand-27K acquisition and audit | Full core and supplements verified; 323,464,444 exposure rows audited | [`reports/kuairand-27k-acquisition-2026-10-11/README.md`](reports/kuairand-27k-acquisition-2026-10-11/README.md) |
 | Real KuaiRand-27K behavior pilot | 426,832 train / 197,078 validation targets; 7 tasks; event-only gates 6/7, calibration and overfitting remain | [`reports/kuairand-27k-behavior-pilot-2026-10-11/README.md`](reports/kuairand-27k-behavior-pilot-2026-10-11/README.md) |
+| 27K richer controls + time-separated calibration | 1,699,506 train targets; both controls beat tab priors on 6/7 objectives; hate remains unresolved | [`reports/kuairand-27k-behavior-v2-2026-10-11/README.md`](reports/kuairand-27k-behavior-v2-2026-10-11/README.md) |
 | Real KuaiRand Jev + ParetoJev / serving experiments | Not run | Requires a stronger frozen behavior baseline and registered real Jev/reranker protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -313,32 +314,53 @@ core archive, captions and categories are acquired and verified on the external
 drive. `data/raw/kuairand-27k` points to that directory. Do not load the full shards
 with the older in-memory trainer below.
 
-The registered bounded-memory behavior pilot uses all early standard exposures
-as history sources, with at most 16 training and 8 validation targets per eligible
-user. It predicts seven raw feedback labels with 50-event histories. It is a
-**target-sampled development experiment**, not full-exposure training or a
-ParetoJev benchmark. Released user profiles are a separate sensitivity regime
-because their snapshot timing is unknown. The legacy six-objective reranker
-contract is not silently equated to these seven raw outputs.
+The latest registered development run is **v2**: 1,699,506 training targets,
+188,642 calibration targets (April 18), and 187,419 evaluation targets (April 19).
+The evaluation day was already seen during v1 development; this is not a fresh
+confirmatory test. Two sets of seven independent histogram-boosted classifiers
+compare exposure/history statistics with additional upload-property features.
+SASRec was not retrained in this experiment. Both sets pass 6/7 stricter development
+gates against tab prevalence; **hate remains unresolved**. Jev/ParetoJev research
+targets remain pending. See the [report and feature assumptions](reports/kuairand-27k-behavior-v2-2026-10-11/README.md).
+
+For a new data directory, prepare once (the existing `behavior-v2` is already
+complete). This uses the v1 complete early-event store and verifies its hashes:
 
 ```bash
-.venv/bin/python scripts/prepare_kuairand_behavior_pilot.py \
-  --data-root data/raw/kuairand-27k \
-  --output data/raw/kuairand-27k/behavior-pilot-v1 \
-  --audit reports/kuairand-27k-acquisition-2026-10-11/full_audit.json
-.venv/bin/python scripts/train_kuairand_behavior_pilot.py \
-  --data data/raw/kuairand-27k/behavior-pilot-v1 \
-  --output data/raw/kuairand-27k/behavior-pilot-v1/run-v1
-.venv/bin/python scripts/replay_kuairand_behavior_pilot.py \
-  --data data/raw/kuairand-27k/behavior-pilot-v1 \
-  --run data/raw/kuairand-27k/behavior-pilot-v1/run-v1 \
-  --output data/raw/kuairand-27k/behavior-pilot-v1/run-v1/replay.json
+.venv/bin/python scripts/prepare_kuairand_behavior_v2.py \
+  --root data/raw/kuairand-27k \
+  --cache data/processed/kuairand-v2-metadata \
+  --output data/raw/kuairand-27k/behavior-v2
 ```
 
-A completed preparation can be reused; existing run outputs are never overwritten.
-See the [registration](reports/kuairand-27k-behavior-pilot-2026-10-11/REGISTRATION.md)
-for periods, feature availability, hash collisions, sampling weights and gates.
-Research target mode remains disabled for this pilot; no Jev service is invoked.
+The frozen successful run is `behavior-v2/run-v2`. Replay it without fitting:
+
+```bash
+.venv/bin/python scripts/replay_kuairand_behavior_v2.py \
+  --data data/raw/kuairand-27k/behavior-v2 \
+  --run data/raw/kuairand-27k/behavior-v2/run-v2 \
+  --output data/raw/kuairand-27k/behavior-v2/run-v2/replay-check.json
+```
+
+To refit the registered experiment, choose a fresh output directory:
+
+```bash
+.venv/bin/python scripts/run_kuairand_behavior_v2.py \
+  --data data/raw/kuairand-27k/behavior-v2 \
+  --output data/raw/kuairand-27k/behavior-v2/run-reproduction
+```
+
+The loader checks hashes and caps each materialized period at 512 MiB. Its arrays
+fit the registered target-sampling budget; do not substitute full-exposure arrays
+without a new streaming plan. Calibration uses April 18 only. April 20 onward is
+reserved for later work. The six-objective reranker protocol is not silently
+equated to these seven raw feedback outputs; a common slate decision time is
+required before exporting reranker features. Research target mode stays off.
+
+The first real SASRec-style + MMoE pilot remains reproducible through
+`scripts/prepare_kuairand_behavior_pilot.py`, `scripts/train_kuairand_behavior_pilot.py`
+and `scripts/replay_kuairand_behavior_pilot.py`; its original protocol and results
+are in the [v1 registration](reports/kuairand-27k-behavior-pilot-2026-10-11/REGISTRATION.md).
 
 ## Legacy small-file/Pure workflow
 
