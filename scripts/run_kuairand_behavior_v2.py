@@ -99,7 +99,12 @@ def run(a):
         for name,v in score.items():
             baseline=result['baselines']['tab'][name]
             gates[name]=v['sampled_positives']>=20 and v['auc'] is not None and v['auc']>.5 and v['logloss']<baseline['logloss'] and v['brier']<baseline['brier']
-        result['models'][regime]=dict(raw=metrics(y,raw,w),calibrated=score,gates=gates,
+        by_tab={}
+        for tab in np.unique(evaluation['x'][:,0]):
+            mask=evaluation['x'][:,0]==tab
+            by_tab[str(int(tab))]=dict(rows=int(mask.sum()),raw=metrics(y[mask],raw[mask],w[mask]),
+                calibrated=metrics(y[mask],p[mask],w[mask]))
+        result['models'][regime]=dict(raw=metrics(y,raw,w),calibrated=score,gates=gates,by_tab=by_tab,
             all_gates_pass=all(gates.values()),**frozen[regime],
             raw_sha256=sha256_file(a.output/f'{regime}-raw.npy'),
             calibrated_sha256=sha256_file(a.output/f'{regime}-calibrated.npy'))

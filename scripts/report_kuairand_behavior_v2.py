@@ -6,6 +6,7 @@ from pathlib import Path
 import numpy as np
 from paretojev.data.kuairand_27k import BINARY_LABELS
 from paretojev.utils.io import read_json, atomic_write_json
+from paretojev.utils.provenance import sha256_file
 
 def auc_text(value):
     return 'NA' if value is None else f'{value:.4f}'
@@ -20,6 +21,8 @@ def main():
     a=p.parse_args();r=read_json(a.run/'results.json');replay=read_json(a.run/'replay.json')
     if r['scope']!='previously_seen_development_period_not_confirmatory' or replay['status']!='passed':
         raise ValueError('Completed real run and successful replay required')
+    if read_json(a.data/'samples.json')!=r['samples'] or sha256_file(a.data/'metadata.json')!=r['samples']['metadata_manifest_sha256']:
+        raise ValueError('Report input provenance changed')
     a.output.mkdir(parents=True,exist_ok=True)
     for path in [a.run/'results.json',a.run/'replay.json',a.run/'frozen_models.json',a.data/'samples.json',a.data/'metadata.json']:
         shutil.copyfile(path,a.output/path.name)
@@ -67,7 +70,7 @@ def main():
         b=r['baselines']['tab'][key];c=context['calibrated'][key];v=content['calibrated'][key]
         lines.append(f"| {label} | {auc_text(b['auc'])} | {auc_text(c['auc'])} | {auc_text(v['auc'])} | {b['brier']:.7f} | {v['brier']:.7f} | {v['prevalence']:.3%} | {v['mean_prediction']:.3%} |")
     lines += ['', '开发门槛要求：每任务至少 20 个阳性、AUC>0.5，校准后 log loss 和 Brier 均优于按 tab 发生率。',
-        '基线仅从同一批训练目标估计，tab 平滑使用 100 个全局先验伪曝光。所有 PR-AUC、ECE、原始/校准均值及参数见 results.json。',
+        '基线仅从同一批训练目标估计，tab 平滑使用 100 个全局先验伪曝光。所有 PR-AUC、ECE、原始/校准均值、参数与各 tab 分层结果见 results.json。',
         '正斜率校准不增加理论排序信息；浮点饱和/评估裁剪可能造成极小的并列变化。校准对单项指标有害时也保留结果，未按评估结果选择是否校准。','',
         '## 视频属性增量的探索性区间','',
         '以下为「视频组 − 统计组」校准后 log loss；负值有利于视频组。按用户簇做 1,000 次 bootstrap。',
