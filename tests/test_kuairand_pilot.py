@@ -92,3 +92,17 @@ def test_model_empty_history_gradients_and_regime_guard():
         m(**fields, profile=torch.zeros(2, 1, dtype=torch.long))
     enriched = KuaiRandPilotModel(c, profile_cardinalities=[3, 2])
     assert torch.isfinite(enriched(**fields, profile=torch.tensor([[0, 0], [2, 1]]))).all()
+
+
+def test_profile_vocab_does_not_fit_validation_users(tmp_path, monkeypatch):
+    import paretojev.data.kuairand_pilot as module
+    from paretojev.data.kuairand_27k import USER_FIELDS, USER_FILE
+    monkeypatch.setattr(module, 'USER_COUNT', 2)
+    frame = pd.DataFrame({'user_id': [0, 1], **{name: ['train_value', 'future_only_value'] for name in USER_FIELDS}})
+    frame.to_csv(tmp_path / USER_FILE, index=False)
+    module.user_snapshot(tmp_path, tmp_path, np.array([0]))
+    encoded = np.load(tmp_path / 'user_snapshot.npy')
+    assert (encoded[0] == 1).all()
+    assert (encoded[1] == 0).all()
+    spec = json.loads((tmp_path / 'user_snapshot.json').read_text())
+    assert all('future_only_value' not in vocab for vocab in spec['vocabulary'].values())
