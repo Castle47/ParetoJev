@@ -53,7 +53,7 @@ def runtime_provenance(
     """Capture compact, machine-readable provenance for an experiment artifact."""
 
     packages: dict[str, str] = {}
-    for package in ("numpy", "pandas", "scikit-learn", "torch", "requests", "PyYAML"):
+    for package in ("numpy", "pandas", "scikit-learn", "torch", "requests", "PyYAML", "scipy", "joblib", "threadpoolctl"):
         try:
             packages[package] = metadata.version(package)
         except metadata.PackageNotFoundError:

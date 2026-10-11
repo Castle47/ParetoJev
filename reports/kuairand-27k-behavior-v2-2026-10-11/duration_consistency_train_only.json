@@ -1,0 +1,29 @@
+{
+  "scope": "v1_training_targets_only; descriptive consistency, not proof of online availability",
+  "rows": [
+    {
+      "log_duration_missing": false,
+      "basic_duration_missing": false,
+      "samples": 394134,
+      "click_prevalence": 0.3945049047470093
+    },
+    {
+      "log_duration_missing": false,
+      "basic_duration_missing": true,
+      "samples": 0,
+      "click_prevalence": null
+    },
+    {
+      "log_duration_missing": true,
+      "basic_duration_missing": false,
+      "samples": 9,
+      "click_prevalence": 0.1323682963848114
+    },
+    {
+      "log_duration_missing": true,
+      "basic_duration_missing": true,
+      "samples": 32689,
+      "click_prevalence": 0.24721451103687286
+    }
+  ]
+}
