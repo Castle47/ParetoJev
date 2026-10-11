@@ -18,10 +18,13 @@ from paretojev.utils.provenance import canonical_hash, sha256_file, runtime_prov
 
 def load_split(root,manifest,split):
     spec=manifest['splits'][split];result={}
+    total_bytes=sum((root/f'{split}-{key}.npy').stat().st_size for key in spec['files'])
+    if total_bytes > 512 * 1024**2:
+        raise ValueError('This pilot loader requires <=512 MiB per period; register a streaming plan for larger arrays')
     for key,digest in spec['files'].items():
         path=root/f'{split}-{key}.npy'
         if sha256_file(path)!=digest: raise ValueError(f'Changed data: {path}')
-        result[key]=np.load(path,mmap_mode='r')[:spec['rows']]
+        result[key]=np.load(path)[:spec['rows']]
     if result['time'].min()!=spec['min_time'] or result['time'].max()!=spec['max_time']:
         raise ValueError('Recorded period mismatch')
     return result

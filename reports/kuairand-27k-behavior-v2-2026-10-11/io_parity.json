@@ -1,0 +1,11 @@
+{
+  "scope": "synthetic engineering parity",
+  "predictions_exact": {
+    "exposure_context-raw.npy": true,
+    "exposure_context-calibrated.npy": true,
+    "upload_metadata_assumed_static-raw.npy": true,
+    "upload_metadata_assumed_static-calibrated.npy": true
+  },
+  "metrics_and_calibration_exact": true,
+  "real_benchmark": false
+}
