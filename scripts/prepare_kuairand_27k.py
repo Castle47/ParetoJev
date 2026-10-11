@@ -36,7 +36,10 @@ def main():
         atomic_write_json(args.report,plan)
         raise OSError('Full 27K acquisition needs the registered 100 GiB free-space floor; provide a larger data directory. No download started.')
     root.mkdir(parents=True,exist_ok=True)
-    with (root/'acquisition.lock').open('a') as lock:
+    # Verified final downloads are immutable. Extraction can read the completed
+    # core while a different supplementary asset is still downloading.
+    lock_name = {'download':'acquisition.lock','extract':'extraction.lock','audit':'audit.lock'}[args.stage]
+    with (root/lock_name).open('a') as lock:
         fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
         if args.stage == 'download':
             manifest_path = root/'download_manifest.json'
@@ -58,6 +61,9 @@ def main():
         elif args.stage == 'extract':
             extract_27k(root/'downloads/KuaiRand-27K.tar.gz',root/'extracted',expected_md5=ASSETS[0]['md5'])
         else:
+            extracted = root/'extracted/extraction_manifest.json'
+            if extracted.exists() and read_json(extracted).get('status') != 'complete':
+                raise ValueError('Wait for complete atomic extraction before full audit')
             report = audit_directory(root,chunksize=args.chunksize,max_rows_per_file=args.max_rows_per_file)
             report['provenance'] = runtime_provenance()
             atomic_write_json(args.report,report)

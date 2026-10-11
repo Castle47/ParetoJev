@@ -24,3 +24,10 @@ nor duplicates bytes and refuses a server that ignores requested ranges.
 Current engineering checks: 229 tests passed in 15.15 seconds. This is not a
 recommendation benchmark. Completion is reported only after file checksums and
 the separate audit stage finish.
+
+The verified core archive is extracted independently of the slower category
+download. Per-phase locks serialize writers to the same outputs; audit refuses
+an incomplete extraction. Two added tests cover these dependency boundaries.
+The caption scan covers all 32,038,725 distinct catalog IDs without duplicate
+rows; 26,420,471 videos (82.4642%) have nonblank caption or cover text. This is
+catalog coverage, not yet exposure-weighted coverage or model performance.
