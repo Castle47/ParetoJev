@@ -1,0 +1,30 @@
+{
+  "scope": "engineering_only_not_benchmark",
+  "status": 200,
+  "request": {
+    "kind": "choice",
+    "state": "Engineering availability probe, not benchmark data. A: 烹饪教学。B: 足球比赛。Recent exposures: 做饭与家常菜。",
+    "question": "Which candidate best matches the recent content interests?",
+    "options": [
+      "A",
+      "B"
+    ]
+  },
+  "response": {
+    "kind": "choice",
+    "options": [
+      "A",
+      "B"
+    ],
+    "probabilities": [
+      0.9992739186482332,
+      0.0007260813517667215
+    ],
+    "choice_index": 0,
+    "choice": "A",
+    "model": "autotrust/JEV-27B",
+    "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "elapsed_seconds": 0.1176063739694655,
+    "image_used": false
+  }
+}

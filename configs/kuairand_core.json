@@ -1,0 +1,56 @@
+{
+  "experiment_id": "kuairand27k-core-choice-v1",
+  "seed": 20261013,
+  "dataset": "KuaiRand-27K",
+  "slate_size": 10,
+  "maximum_slate_span_ms": 300000,
+  "history_length": 50,
+  "jev_history_length": 10,
+  "boundaries_ms": [1650384000000, 1650470400000, 1650513600000, 1650556800000],
+  "split_names": ["train", "validation", "test"],
+  "strata": ["hate", "follow", "forward", "comment", "like", "other"],
+  "stratum_priority_bits": [64, 8, 32, 16, 4],
+  "sample_budgets": {
+    "train": [100, 100, 100, 100, 200, 400],
+    "validation": [40, 40, 40, 40, 80, 160],
+    "test": [60, 60, 60, 60, 120, 240]
+  },
+  "objectives": ["is_click", "long_view", "is_like", "is_follow", "is_comment", "is_forward", "is_hate"],
+  "directions": [1, 1, 1, 1, 1, 1, -1],
+  "behavior": "frozen v2 upload_metadata_assumed_static tree plus its April18 calibrator",
+  "jev": {
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+    "model": "autotrust/JEV-27B",
+    "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "kind": "choice",
+    "max_concurrency": 1,
+    "minimum_interval_seconds": 1.0,
+    "max_http_calls": 15400,
+    "planned_successful_calls": 14000,
+    "history_text_characters": 160,
+    "candidate_text_characters": 220,
+    "on_transport_error": "persist reservation and error; bounded backoff and same-payload retry, never replace a slate"
+  },
+  "methods": ["emer_like_no_jev", "cmr_like_no_jev", "paretojev_no_jev", "emer_like", "cmr_like", "paretojev"],
+  "training": {
+    "seeds": [7, 17, 29], "epochs": 20, "batch_size": 32,
+    "learning_rate": 0.001, "weight_decay": 0.0001,
+    "hidden_dim": 48, "n_heads": 4, "n_layers": 1, "ff_dim": 96,
+    "dropout": 0.05, "fusion_hidden_dim": 24, "device": "cpu", "cpu_threads": 4,
+    "sampling": "same enriched training rows and order for every method; unweighted training gives registered rare-task emphasis",
+    "selection": "maximum inverse-inclusion-weighted validation preference utility; earliest tie, epoch zero eligible"
+  },
+  "evaluation": {
+    "top_k": 3, "random_preferences": 8, "include_pairwise_preferences": true,
+    "dirichlet_alpha": 0.7, "hypervolume_samples": 200000,
+    "cold_quantile": 0.25, "seed": 20261013, "bootstrap_samples": 1000,
+    "slate_weights": "inverse stratum inclusion probability N_h/n_h",
+    "population": "nonoverlapping ten-exposure same-tab unique-item blocks within five minutes; full early 27K users",
+    "primary_comparator": "emer_like_no_jev",
+    "required_hypervolume_relative_gain": 0.02,
+    "required_cold_ndcg_relative_gain": 0.03,
+    "maximum_worst_objective_regret": 0.005,
+    "minimum_controllability": 0.60,
+    "no_test_based_tuning": true
+  }
+}
