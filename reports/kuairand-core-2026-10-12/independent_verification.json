@@ -1,0 +1,541 @@
+{
+  "all_18_checkpoints_and_validation_selection_verified": true,
+  "all_real_no_jev_checkpoints_invariant": true,
+  "base_and_full_non_jev_inputs_identical": true,
+  "full_jev_tensors_match_raw_scored_artifact": true,
+  "independently_recomputed_weighted_objectives_cold_metrics_controllability_regret": true,
+  "refinement": "Exact box-union volume of the SAME frozen maximize-utility points and origin; no changed models/preferences/reference/labels/thresholds.",
+  "moocore_version": "0.3.2",
+  "numpy_version": "2.5.3",
+  "library_fixture_checks": [
+    {
+      "dimensions": 2,
+      "points": 6,
+      "exact": 0.7135115273293166,
+      "inclusion_exclusion": 0.713511527329316
+    },
+    {
+      "dimensions": 3,
+      "points": 6,
+      "exact": 0.41402003063656545,
+      "inclusion_exclusion": 0.4140200306365654
+    },
+    {
+      "dimensions": 7,
+      "points": 6,
+      "exact": 0.014614353615493335,
+      "inclusion_exclusion": 0.01461435361549333
+    }
+  ],
+  "best_epochs": {
+    "7/emer_like_no_jev": 1,
+    "7/cmr_like_no_jev": 17,
+    "7/paretojev_no_jev": 7,
+    "7/emer_like": 20,
+    "7/cmr_like": 17,
+    "7/paretojev": 15,
+    "17/emer_like_no_jev": 20,
+    "17/cmr_like_no_jev": 2,
+    "17/paretojev_no_jev": 7,
+    "17/emer_like": 2,
+    "17/cmr_like": 2,
+    "17/paretojev": 0,
+    "29/emer_like_no_jev": 16,
+    "29/cmr_like_no_jev": 12,
+    "29/paretojev_no_jev": 6,
+    "29/emer_like": 18,
+    "29/cmr_like": 2,
+    "29/paretojev": 12
+  },
+  "per_seed": {
+    "7": {
+      "methods": {
+        "emer_like_no_jev": {
+          "exact_hypervolume": 0.00034882550342865215,
+          "registered_mc_hypervolume": 0.00034,
+          "registered_mc_hits": 68,
+          "registered_mc_standard_error": 4.122404638072299e-05,
+          "cold_ndcg": 0.4049260794099229,
+          "controllability": 0.07327326691394649
+        },
+        "cmr_like_no_jev": {
+          "exact_hypervolume": 0.0010023184441696885,
+          "registered_mc_hypervolume": 0.00104,
+          "registered_mc_hits": 208,
+          "registered_mc_standard_error": 7.207351802153131e-05,
+          "cold_ndcg": 0.22630098072517008,
+          "controllability": 0.15838015883967418
+        },
+        "paretojev_no_jev": {
+          "exact_hypervolume": 0.0005187605302937254,
+          "registered_mc_hypervolume": 0.00048,
+          "registered_mc_hits": 96,
+          "registered_mc_standard_error": 4.897803589365339e-05,
+          "cold_ndcg": 0.35403487795895283,
+          "controllability": -0.07260947180850898
+        },
+        "emer_like": {
+          "exact_hypervolume": 0.0005523114081601784,
+          "registered_mc_hypervolume": 0.000545,
+          "registered_mc_hits": 109,
+          "registered_mc_standard_error": 5.2187305688261014e-05,
+          "cold_ndcg": 0.2852855322008125,
+          "controllability": -0.013737301757945556
+        },
+        "cmr_like": {
+          "exact_hypervolume": 0.0008362435079700011,
+          "registered_mc_hypervolume": 0.000865,
+          "registered_mc_hits": 173,
+          "registered_mc_standard_error": 6.573628278964365e-05,
+          "cold_ndcg": 0.17768204958322356,
+          "controllability": 0.21040420984541977
+        },
+        "paretojev": {
+          "exact_hypervolume": 0.0005573869338172851,
+          "registered_mc_hypervolume": 0.000525,
+          "registered_mc_hits": 105,
+          "registered_mc_standard_error": 5.122130294125677e-05,
+          "cold_ndcg": 0.36110960697508093,
+          "controllability": 0.1195211952003444
+        },
+        "behavior_weighted_sum": {
+          "exact_hypervolume": 0.0014477119055094306,
+          "registered_mc_hypervolume": 0.001505,
+          "registered_mc_hits": 301,
+          "registered_mc_standard_error": 8.66814563502483e-05,
+          "cold_ndcg": 0.25436836972603233,
+          "controllability": 0.2060179043175939
+        }
+      },
+      "comparisons": {
+        "paretojev_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": 0.5978961639520477,
+          "registered_mc_hypervolume_relative_gain": 0.5441176470588234
+        },
+        "paretojev_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.44390234754283175,
+          "registered_mc_hypervolume_relative_gain": -0.49519230769230765
+        },
+        "paretojev_vs_paretojev_no_jev": {
+          "exact_hypervolume_relative_gain": 0.07445902544221927,
+          "registered_mc_hypervolume_relative_gain": 0.0937499999999999
+        },
+        "paretojev_vs_emer_like": {
+          "exact_hypervolume_relative_gain": 0.009189608583342501,
+          "registered_mc_hypervolume_relative_gain": -0.03669724770642211
+        },
+        "paretojev_vs_cmr_like": {
+          "exact_hypervolume_relative_gain": -0.3334633650306551,
+          "registered_mc_hypervolume_relative_gain": -0.3930635838150289
+        },
+        "emer_like_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": 0.5833458354719947,
+          "registered_mc_hypervolume_relative_gain": 0.6029411764705882
+        },
+        "cmr_like_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.1656907913505098,
+          "registered_mc_hypervolume_relative_gain": -0.1682692307692307
+        },
+        "paretojev_vs_behavior_weighted_sum": {
+          "exact_hypervolume_relative_gain": -0.6149876700633004,
+          "registered_mc_hypervolume_relative_gain": -0.6511627906976744
+        }
+      }
+    },
+    "17": {
+      "methods": {
+        "emer_like_no_jev": {
+          "exact_hypervolume": 0.0006403747888098006,
+          "registered_mc_hypervolume": 0.00068,
+          "registered_mc_hits": 136,
+          "registered_mc_standard_error": 5.828969034057395e-05,
+          "cold_ndcg": 0.41437323422152333,
+          "controllability": 0.17665510105150936
+        },
+        "cmr_like_no_jev": {
+          "exact_hypervolume": 0.0009775838870366785,
+          "registered_mc_hypervolume": 0.001015,
+          "registered_mc_hits": 203,
+          "registered_mc_standard_error": 7.120287125530824e-05,
+          "cold_ndcg": 0.3124007417219972,
+          "controllability": 0.23448029869459155
+        },
+        "paretojev_no_jev": {
+          "exact_hypervolume": 0.0005293672128934558,
+          "registered_mc_hypervolume": 0.000485,
+          "registered_mc_hits": 97,
+          "registered_mc_standard_error": 4.923234582060863e-05,
+          "cold_ndcg": 0.4049022988688466,
+          "controllability": 0.02890247752524092
+        },
+        "emer_like": {
+          "exact_hypervolume": 0.00044533148840920125,
+          "registered_mc_hypervolume": 0.000435,
+          "registered_mc_hits": 87,
+          "registered_mc_standard_error": 4.662675063737554e-05,
+          "cold_ndcg": 0.3035577566799512,
+          "controllability": 0.0024320548099264184
+        },
+        "cmr_like": {
+          "exact_hypervolume": 0.0009304596410825007,
+          "registered_mc_hypervolume": 0.001,
+          "registered_mc_hits": 200,
+          "registered_mc_standard_error": 7.067531393633848e-05,
+          "cold_ndcg": 0.310588626868731,
+          "controllability": 0.23198020529141647
+        },
+        "paretojev": {
+          "exact_hypervolume": 0.0004108762118400708,
+          "registered_mc_hypervolume": 0.0004,
+          "registered_mc_hits": 80,
+          "registered_mc_standard_error": 4.471241438347968e-05,
+          "cold_ndcg": 0.3817697207650097,
+          "controllability": -0.02630623680475584
+        },
+        "behavior_weighted_sum": {
+          "exact_hypervolume": 0.0014477119055094306,
+          "registered_mc_hypervolume": 0.001505,
+          "registered_mc_hits": 301,
+          "registered_mc_standard_error": 8.66814563502483e-05,
+          "cold_ndcg": 0.25436836972603233,
+          "controllability": 0.2060179043175939
+        }
+      },
+      "comparisons": {
+        "paretojev_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.3583816555243773,
+          "registered_mc_hypervolume_relative_gain": -0.411764705882353
+        },
+        "paretojev_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.5797023485262754,
+          "registered_mc_hypervolume_relative_gain": -0.6059113300492611
+        },
+        "paretojev_vs_paretojev_no_jev": {
+          "exact_hypervolume_relative_gain": -0.22383517181906265,
+          "registered_mc_hypervolume_relative_gain": -0.1752577319587629
+        },
+        "paretojev_vs_emer_like": {
+          "exact_hypervolume_relative_gain": -0.07736995354227139,
+          "registered_mc_hypervolume_relative_gain": -0.08045977011494249
+        },
+        "paretojev_vs_cmr_like": {
+          "exact_hypervolume_relative_gain": -0.558415869212709,
+          "registered_mc_hypervolume_relative_gain": -0.6000000000000001
+        },
+        "emer_like_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.3045767944161363,
+          "registered_mc_hypervolume_relative_gain": -0.3602941176470589
+        },
+        "cmr_like_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.048204810430155676,
+          "registered_mc_hypervolume_relative_gain": -0.014778325123152747
+        },
+        "paretojev_vs_behavior_weighted_sum": {
+          "exact_hypervolume_relative_gain": -0.716189242986512,
+          "registered_mc_hypervolume_relative_gain": -0.7342192691029901
+        }
+      }
+    },
+    "29": {
+      "methods": {
+        "emer_like_no_jev": {
+          "exact_hypervolume": 0.0005681305252676444,
+          "registered_mc_hypervolume": 0.00057,
+          "registered_mc_hits": 114,
+          "registered_mc_standard_error": 5.3370174254915075e-05,
+          "cold_ndcg": 0.3172554343214727,
+          "controllability": 0.15096381318964278
+        },
+        "cmr_like_no_jev": {
+          "exact_hypervolume": 0.0010190867744051175,
+          "registered_mc_hypervolume": 0.0011,
+          "registered_mc_hits": 220,
+          "registered_mc_standard_error": 7.41211845561038e-05,
+          "cold_ndcg": 0.30451596347869986,
+          "controllability": 0.12014609975375727
+        },
+        "paretojev_no_jev": {
+          "exact_hypervolume": 0.00036405934676657923,
+          "registered_mc_hypervolume": 0.00032,
+          "registered_mc_hits": 64,
+          "registered_mc_standard_error": 3.999359948791806e-05,
+          "cold_ndcg": 0.3902068601170985,
+          "controllability": 0.1042368956897221
+        },
+        "emer_like": {
+          "exact_hypervolume": 0.0007282558400362077,
+          "registered_mc_hypervolume": 0.00083,
+          "registered_mc_hits": 166,
+          "registered_mc_standard_error": 6.439375357905455e-05,
+          "cold_ndcg": 0.28699114265875614,
+          "controllability": 0.1668975028936654
+        },
+        "cmr_like": {
+          "exact_hypervolume": 0.0011523469638978969,
+          "registered_mc_hypervolume": 0.00119,
+          "registered_mc_hits": 238,
+          "registered_mc_standard_error": 7.7090333375852e-05,
+          "cold_ndcg": 0.2914973680250876,
+          "controllability": 0.1227293612559207
+        },
+        "paretojev": {
+          "exact_hypervolume": 0.0005933068959358952,
+          "registered_mc_hypervolume": 0.000595,
+          "registered_mc_hits": 119,
+          "registered_mc_standard_error": 5.45273314494667e-05,
+          "cold_ndcg": 0.39615982444312536,
+          "controllability": 0.25988207095097593
+        },
+        "behavior_weighted_sum": {
+          "exact_hypervolume": 0.0014477119055094306,
+          "registered_mc_hypervolume": 0.001505,
+          "registered_mc_hits": 301,
+          "registered_mc_standard_error": 8.66814563502483e-05,
+          "cold_ndcg": 0.25436836972603233,
+          "controllability": 0.2060179043175939
+        }
+      },
+      "comparisons": {
+        "paretojev_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": 0.04431441288318427,
+          "registered_mc_hypervolume_relative_gain": 0.04385964912280713
+        },
+        "paretojev_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": -0.4178053225327818,
+          "registered_mc_hypervolume_relative_gain": -0.4590909090909091
+        },
+        "paretojev_vs_paretojev_no_jev": {
+          "exact_hypervolume_relative_gain": 0.62969829288932,
+          "registered_mc_hypervolume_relative_gain": 0.859375
+        },
+        "paretojev_vs_emer_like": {
+          "exact_hypervolume_relative_gain": -0.18530430747194981,
+          "registered_mc_hypervolume_relative_gain": -0.2831325301204819
+        },
+        "paretojev_vs_cmr_like": {
+          "exact_hypervolume_relative_gain": -0.4851317228892662,
+          "registered_mc_hypervolume_relative_gain": -0.5
+        },
+        "emer_like_vs_emer_like_no_jev": {
+          "exact_hypervolume_relative_gain": 0.28184599778920316,
+          "registered_mc_hypervolume_relative_gain": 0.45614035087719307
+        },
+        "cmr_like_vs_cmr_like_no_jev": {
+          "exact_hypervolume_relative_gain": 0.13076432040889618,
+          "registered_mc_hypervolume_relative_gain": 0.08181818181818183
+        },
+        "paretojev_vs_behavior_weighted_sum": {
+          "exact_hypervolume_relative_gain": -0.5901761298791569,
+          "registered_mc_hypervolume_relative_gain": -0.6046511627906976
+        }
+      }
+    }
+  },
+  "comparisons": {
+    "paretojev_vs_emer_like_no_jev": {
+      "exact_mean_seed_relative_gain": 0.09460964043695157,
+      "exact_per_seed": [
+        0.5978961639520477,
+        -0.3583816555243773,
+        0.04431441288318427
+      ],
+      "ratio_of_mean_exact_hypervolumes": 0.002722108905506948,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": 0.058737530099759176,
+        "cold_item_ndcg_relative_gain": 0.0206064187566533,
+        "worst_objective_regret": 0.05226604711273335,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "paretojev_vs_cmr_like_no_jev": {
+      "exact_mean_seed_relative_gain": -0.4804700062006297,
+      "exact_per_seed": [
+        -0.44390234754283175,
+        -0.5797023485262754,
+        -0.4178053225327818
+      ],
+      "ratio_of_mean_exact_hypervolumes": -0.4793011956357701,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": -0.5200648489441594,
+        "cold_item_ndcg_relative_gain": 0.3729018493121201,
+        "worst_objective_regret": 0.0891489873849477,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "paretojev_vs_paretojev_no_jev": {
+      "exact_mean_seed_relative_gain": 0.16010738217082554,
+      "exact_per_seed": [
+        0.07445902544221927,
+        -0.22383517181906265,
+        0.62969829288932
+      ],
+      "ratio_of_mean_exact_hypervolumes": 0.10578127551384253,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": 0.259289089347079,
+        "cold_item_ndcg_relative_gain": -0.007297399477352415,
+        "worst_objective_regret": 0.03813684805679427,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "paretojev_vs_emer_like": {
+      "exact_mean_seed_relative_gain": -0.08449488414362623,
+      "exact_per_seed": [
+        0.009189608583342501,
+        -0.07736995354227139,
+        -0.18530430747194981
+      ],
+      "ratio_of_mean_exact_hypervolumes": -0.09521340477688156,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": -0.13342984931394883,
+        "cold_item_ndcg_relative_gain": 0.30127484745066635,
+        "worst_objective_regret": 0.04430102588042534,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "paretojev_vs_cmr_like": {
+      "exact_mean_seed_relative_gain": -0.4590036523775434,
+      "exact_per_seed": [
+        -0.3334633650306551,
+        -0.558415869212709,
+        -0.4851317228892662
+      ],
+      "ratio_of_mean_exact_hypervolumes": -0.46504171522601545,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": -0.49768786127167636,
+        "cold_item_ndcg_relative_gain": 0.5401894255260865,
+        "worst_objective_regret": 0.0915922109273692,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "emer_like_vs_emer_like_no_jev": {
+      "exact_mean_seed_relative_gain": 0.18687167961502052,
+      "exact_per_seed": [
+        0.5833458354719947,
+        -0.3045767944161363,
+        0.28184599778920316
+      ],
+      "ratio_of_mean_exact_hypervolumes": 0.10824156126919404,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": 0.23292913656690747,
+        "cold_item_ndcg_relative_gain": -0.21942863681088243,
+        "worst_objective_regret": 0.04811038786952113,
+        "controllability_spearman_mean": 0.05186408531521542
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "cmr_like_vs_cmr_like_no_jev": {
+      "exact_mean_seed_relative_gain": -0.027710427123923093,
+      "exact_per_seed": [
+        -0.1656907913505098,
+        -0.048204810430155676,
+        0.13076432040889618
+      ],
+      "ratio_of_mean_exact_hypervolumes": -0.02665531278906952,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": -0.03374312469140054,
+        "cold_item_ndcg_relative_gain": -0.08779808999630019,
+        "worst_objective_regret": 0.04107176580974692,
+        "controllability_spearman_mean": 0.18837125879758565
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": false,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    },
+    "paretojev_vs_behavior_weighted_sum": {
+      "exact_mean_seed_relative_gain": -0.6404510143096563,
+      "exact_per_seed": [
+        -0.6149876700633004,
+        -0.716189242986512,
+        -0.5901761298791569
+      ],
+      "ratio_of_mean_exact_hypervolumes": -0.6404510143096565,
+      "note": "Registered aggregation is mean of per-seed relative gains; ratio of means is supplementary, not a replacement.",
+      "other_metrics": {
+        "hypervolume_relative_gain": -0.663344407530454,
+        "cold_item_ndcg_relative_gain": 0.4926373031495217,
+        "worst_objective_regret": 0.11324560803969054,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates_with_exact_hv": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates_with_exact_hv": false
+    }
+  },
+  "registry_sha256": "d1b260eed89b07975344ebb350b30a51eae41371ae75d9db85b1ea141133c13a",
+  "registered_summary_sha256": "a7dd7bca1241076d855245867b0cd6c6d57470a834f252682977c5f35081cc21",
+  "replay_sha256": "0939ee1c0179a8cc9f53a7a698f6e9315fbe03467fa510f47ad84ca7cdc924c9",
+  "provenance": {
+    "created_at_utc": "2026-10-12T08:45:17.191049+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "7e7dfecb55f113a5d87ea0179908f2b6ce3d6a83",
+    "inputs": []
+  }
+}

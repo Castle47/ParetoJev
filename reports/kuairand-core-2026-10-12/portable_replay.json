@@ -1,0 +1,22 @@
+{
+  "exact_predictions_metrics_and_intervals": true,
+  "summary_sha256": "a7dd7bca1241076d855245867b0cd6c6d57470a834f252682977c5f35081cc21",
+  "provenance": {
+    "created_at_utc": "2026-10-12T09:01:56.383111+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "7e7dfecb55f113a5d87ea0179908f2b6ce3d6a83",
+    "inputs": []
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "registration": {
+    "config_hash": "6bba3916f888353c12464626593996f0ae945ab868d75a0ded0d5f4c8961fd1e",
+    "input_sha256": "1f03385851bd8441f22d4e113687af850fce38d4557d9acfba4936b24dc0d1bc",
+    "planned_calls": 14000,
+    "service": {
+      "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+      "model": "autotrust/JEV-27B",
+      "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+      "kind": "choice",
+      "max_concurrency": 1,
+      "minimum_interval_seconds": 1.0,
+      "max_http_calls": 15400,
+      "planned_successful_calls": 14000,
+      "history_text_characters": 160,
+      "candidate_text_characters": 220,
+      "on_transport_error": "persist reservation and error; bounded backoff and same-payload retry, never replace a slate"
+    },
+    "source_sha256": "19f36bb49809ee282cbae92f85c8488a5519a9f841f5918a3cebf14611ecad72",
+    "validator_sha256": "ad5009113e8a1edc92cf1394fe0ac4b6511a4fb00f3e0133711ac01fea07dc0a"
+  },
+  "scores_sha256": "2ef26f36ef9efe89aa56766d1e6edea445a059c3171f35e13072c7ea66d0d2a3",
+  "valid_decisions": 14000,
+  "lifetime_attempts": 14000,
+  "cached_payloads": 14000,
+  "complete": true,
+  "score_semantics": "within-slate categorical choice, not pXTR"
+}

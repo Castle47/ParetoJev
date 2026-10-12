@@ -1,0 +1,6 @@
+{
+  "file": "ParetoJev-core-replay-2026-10-12.tar.gz",
+  "bytes": 29595275,
+  "sha256": "84c8c6037b11a7a459c14c4ae441e492b6fafd09661266dc92d0f721958f6749",
+  "scope": "frozen reranker tensors/checkpoints/predictions/raw real Jev response cache; no complete raw 27K logs"
+}

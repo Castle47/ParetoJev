@@ -1,0 +1,12 @@
+{
+  "core_validation_complete": true,
+  "overall_superiority_supported": false,
+  "primary_comparator": "emer_like_no_jev",
+  "primary_gates_passed": 1,
+  "primary_gates_required": 4,
+  "exact_hv_refinement": true,
+  "registered_mean_relative_hv_gain": 0.09460964043695157,
+  "supplementary_ratio_of_mean_hv": 0.002722108905506948,
+  "scope": "current project variants and fixed retrospective offline protocol; not original-paper or online superiority",
+  "research_targets_achieved": false
+}

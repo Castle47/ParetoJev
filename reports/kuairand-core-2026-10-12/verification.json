@@ -1,0 +1,12 @@
+{
+  "real_response_audit": true,
+  "real_cohort_audit": true,
+  "exact_predictions_metrics_intervals": true,
+  "primary_all_point_gates": false,
+  "full_project_research_targets_achieved": false,
+  "independent_arithmetic_and_exact_hv_verified": true,
+  "fresh_directory_prediction_metric_interval_replay": true,
+  "fresh_directory_real_response_replay": true,
+  "current_core_validation_complete": true,
+  "overall_superiority_supported": false
+}

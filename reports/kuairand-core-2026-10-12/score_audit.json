@@ -1,0 +1,26 @@
+{
+  "all_scores_match_validated_raw_responses": true,
+  "decisions_checked": 14000,
+  "lifetime_http_attempts": 14000,
+  "model": "autotrust/JEV-27B",
+  "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+  "score_semantics": "categorical relative Choice, not event probability",
+  "provenance": {
+    "created_at_utc": "2026-10-12T08:27:27.434289+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "7e7dfecb55f113a5d87ea0179908f2b6ce3d6a83",
+    "inputs": []
+  }
+}

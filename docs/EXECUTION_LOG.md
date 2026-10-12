@@ -705,3 +705,42 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Live handles, paths and anti-duplication notes are in
   `reports/kuairand-core-2026-10-12/STATUS.md`. Do not change frozen numerical code
   or dependent scripts while the run is in progress.
+
+
+### 2026-10-12 — Core validation completed; negative overall conclusion
+
+- All 14,000 registered real Choice decisions completed in 14,000 HTTP attempts,
+  pinned to the same JEV-27B revision. Raw request/response/tensor audit passes.
+- All 18 arms/seeds executed 20 epochs; checkpoints were selected using validation
+  only. Seed 17 ParetoJev retained epoch zero, documenting unstable training benefit.
+  No seed/checkpoint was replaced after seeing test results.
+- Primary registered Monte Carlo result: mean HV relative gain +5.87%, cold NDCG
+  +2.06%, worst regret .052266, controllability .117699; only 1/4 point gates pass.
+- Completion review found small seven-dimensional HV (.0003–.0015): 200,000 unit-cube
+  samples produce only tens/hundreds of hits, too coarse for narrow gain claims.
+  Preserved every original report and performed a numerical-only exact-HV refinement
+  using isolated moocore 0.3.2. Its maximization/origin semantics passed independently
+  enumerable 2D/3D/7D inclusion-exclusion fixtures. NumPy remained 2.5.3 in the frozen
+  training environment; no checkpoints, preferences, labels, reference or gates changed.
+- Exact primary HV relative gains: +59.79%, -35.84%, +4.43%; registered mean-of-ratios
+  +9.46%. Supplementary ratio of mean absolute HVs +0.27%, not substituted for the
+  registered aggregation. Primary gate count remains 1/4. ParetoJev exact mean HV
+  relative changes: -48.05% vs no-Jev CMR-like, -8.45% vs same-Jev EMER-like,
+  -45.90% vs same-Jev CMR-like, -64.05% vs the fixed behavior weighted sum.
+- Cold NDCG favors ParetoJev over several comparators, but within-ParetoJev Jev/no-Jev
+  cold intervals cross zero for every seed. Thus local cold gains do not prove that
+  Jev caused them or that the full framework wins overall. Full uncertainty and
+  per-seed tables are retained. EMER-like/CMR-like are still project variants.
+- Independently verified all 18 checkpoint/receipt hashes, earliest validation
+  selection, real no-Jev checkpoint invariance, common tensors and source identities.
+  Independently recomputed weighted objectives, cold metrics, regret and controllability
+  from predictions. Original process replay is exact for predictions/metrics/intervals.
+- Exported the frozen tensors/checkpoints/predictions and original real Jev cache.
+  Verified archive/file hashes after fresh-directory extraction; all three seeds'
+  predictions/metrics/intervals and all 14,000 raw decisions replay independently.
+  Full upstream raw logs are deliberately excluded from the lightweight package;
+  no complete retraining or cross-hardware bitwise reproducibility is claimed.
+- Core hypothesis validation is finished; overall superiority is not supported.
+  Quantitative research and deployment targets are not relabeled as achieved.
+  Final interpretation and requirement-by-requirement evidence:
+  `reports/kuairand-core-2026-10-12/README.md` and `completion_audit.json`.

@@ -1,0 +1,7 @@
+# Optional isolated audit dependency set; keep the frozen training environment unchanged.
+# Install with uv pip install --target <audit-dir> --no-deps -r requirements-hv-audit.txt.
+# The audit script appends this directory; NumPy comes from the original project environment.
+moocore==0.3.2
+cffi==2.1.1
+pycparser==3.11
+platformdirs==4.13.0

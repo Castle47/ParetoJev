@@ -1,0 +1,58 @@
+{
+  "scope": "Verify the current ParetoJev hypothesis on real 27K data and the established project baseline variants; not make it win or finish serving/student research.",
+  "requirements": {
+    "all_seven_real_feedback_objectives": {
+      "verified": true,
+      "evidence": "cohort_audit.json; features.json; frozen full/*.npz"
+    },
+    "real_versioned_jev_scores": {
+      "verified": true,
+      "evidence": "score_audit.json; portable_score_audit.json; 14000 responses"
+    },
+    "no_jev_primary_and_cmr_controls": {
+      "verified": true,
+      "evidence": "18 checkpoint hashes and real checkpoint channel-invariance checks in independent_verification.json"
+    },
+    "same_jev_and_no_jev_factorial_controls": {
+      "verified": true,
+      "evidence": "all eight registered/sanity comparisons in independent_verification.json"
+    },
+    "common_inputs_and_temporal_boundaries": {
+      "verified": true,
+      "evidence": "cohort_audit.json; independent_verification.json; base/full equality and candidate/objective identity checks"
+    },
+    "same_registered_budgets_and_validation_only_selection": {
+      "verified": true,
+      "evidence": "20 epochs per arm and earliest validation maximum checked for all 18 checkpoints; epoch 0 retained"
+    },
+    "unchanged_weighted_evaluator_and_gates": {
+      "verified": true,
+      "evidence": "independent weighted objective/cold/control/regret arithmetic; exact same front/reference HV refinement"
+    },
+    "uncertainty_and_negative_results": {
+      "verified": true,
+      "evidence": "all three seed evaluation reports and paired intervals; README explicitly discloses instability and limits"
+    },
+    "exact_saved_model_replay": {
+      "verified": true,
+      "evidence": "replay.json; portable_replay.json"
+    },
+    "reproducible_raw_decision_evidence": {
+      "verified": true,
+      "evidence": "portable_score_audit.json; archive FILES.json and export.json"
+    }
+  },
+  "core_validation_finished": true,
+  "overall_superiority_supported": false,
+  "registered_primary_point_gates": {
+    "passed": 1,
+    "total": 4
+  },
+  "full_project_research_targets_achieved": false,
+  "limitations": [
+    "Project EMER-like/CMR-like, not published-system reproduction.",
+    "Retrospective logged pseudo-slates, not online causal uplift.",
+    "One fixed recipe, three seeds; no proof of architecture upper bounds.",
+    "No full retraining or cross-hardware bitwise replay claimed."
+  ]
+}

@@ -1,0 +1,326 @@
+{
+  "config": {
+    "experiment_id": "kuairand27k-core-choice-v1",
+    "seed": 20261013,
+    "dataset": "KuaiRand-27K",
+    "slate_size": 10,
+    "maximum_slate_span_ms": 300000,
+    "history_length": 50,
+    "jev_history_length": 10,
+    "boundaries_ms": [
+      1650384000000,
+      1650470400000,
+      1650513600000,
+      1650556800000
+    ],
+    "split_names": [
+      "train",
+      "validation",
+      "test"
+    ],
+    "strata": [
+      "hate",
+      "follow",
+      "forward",
+      "comment",
+      "like",
+      "other"
+    ],
+    "stratum_priority_bits": [
+      64,
+      8,
+      32,
+      16,
+      4
+    ],
+    "sample_budgets": {
+      "train": [
+        100,
+        100,
+        100,
+        100,
+        200,
+        400
+      ],
+      "validation": [
+        40,
+        40,
+        40,
+        40,
+        80,
+        160
+      ],
+      "test": [
+        60,
+        60,
+        60,
+        60,
+        120,
+        240
+      ]
+    },
+    "objectives": [
+      "is_click",
+      "long_view",
+      "is_like",
+      "is_follow",
+      "is_comment",
+      "is_forward",
+      "is_hate"
+    ],
+    "directions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "behavior": "frozen v2 upload_metadata_assumed_static tree plus its April18 calibrator",
+    "jev": {
+      "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+      "model": "autotrust/JEV-27B",
+      "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+      "kind": "choice",
+      "max_concurrency": 1,
+      "minimum_interval_seconds": 1.0,
+      "max_http_calls": 15400,
+      "planned_successful_calls": 14000,
+      "history_text_characters": 160,
+      "candidate_text_characters": 220,
+      "on_transport_error": "persist reservation and error; bounded backoff and same-payload retry, never replace a slate"
+    },
+    "methods": [
+      "emer_like_no_jev",
+      "cmr_like_no_jev",
+      "paretojev_no_jev",
+      "emer_like",
+      "cmr_like",
+      "paretojev"
+    ],
+    "training": {
+      "seeds": [
+        7,
+        17,
+        29
+      ],
+      "epochs": 20,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "weight_decay": 0.0001,
+      "hidden_dim": 48,
+      "n_heads": 4,
+      "n_layers": 1,
+      "ff_dim": 96,
+      "dropout": 0.05,
+      "fusion_hidden_dim": 24,
+      "device": "cpu",
+      "cpu_threads": 4,
+      "sampling": "same enriched training rows and order for every method; unweighted training gives registered rare-task emphasis",
+      "selection": "maximum inverse-inclusion-weighted validation preference utility; earliest tie, epoch zero eligible"
+    },
+    "evaluation": {
+      "top_k": 3,
+      "random_preferences": 8,
+      "include_pairwise_preferences": true,
+      "dirichlet_alpha": 0.7,
+      "hypervolume_samples": 200000,
+      "cold_quantile": 0.25,
+      "seed": 20261013,
+      "bootstrap_samples": 1000,
+      "slate_weights": "inverse stratum inclusion probability N_h/n_h",
+      "population": "nonoverlapping ten-exposure same-tab unique-item blocks within five minutes; full early 27K users",
+      "primary_comparator": "emer_like_no_jev",
+      "required_hypervolume_relative_gain": 0.02,
+      "required_cold_ndcg_relative_gain": 0.03,
+      "maximum_worst_objective_regret": 0.005,
+      "minimum_controllability": 0.6,
+      "no_test_based_tuning": true
+    }
+  },
+  "config_hash": "6bba3916f888353c12464626593996f0ae945ab868d75a0ded0d5f4c8961fd1e",
+  "selection": {
+    "config_hash": "6bba3916f888353c12464626593996f0ae945ab868d75a0ded0d5f4c8961fd1e",
+    "event_store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+    "selection_sha256": "e634c71841a4c3b44929fe02aa2868dcb91f2b02b54d9b771c39f581a0fe7290",
+    "popularity_sha256": "efbfce24adedd72231f3a80abee52be94e9d49ccbb06ab3fc5ce0e49b1cea850",
+    "population_by_split_stratum": [
+      [
+        1529,
+        2512,
+        2449,
+        6619,
+        28172,
+        458148
+      ],
+      [
+        336,
+        724,
+        738,
+        1965,
+        8627,
+        139895
+      ],
+      [
+        804,
+        1762,
+        1787,
+        4602,
+        19714,
+        323087
+      ]
+    ],
+    "sampled_by_split_stratum": [
+      [
+        100,
+        100,
+        100,
+        100,
+        200,
+        400
+      ],
+      [
+        40,
+        40,
+        40,
+        40,
+        80,
+        160
+      ],
+      [
+        60,
+        60,
+        60,
+        60,
+        120,
+        240
+      ]
+    ],
+    "selected_slates": 2000,
+    "source_record_unit": "zero_based_EVENT_records",
+    "source_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+    "provenance": {
+      "created_at_utc": "2026-10-12T04:03:57.769024+00:00",
+      "python": "3.12.11",
+      "platform": "macOS-26.6.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scikit-learn": "1.9.1",
+        "torch": "2.14.1",
+        "requests": "2.34.2",
+        "PyYAML": "6.0.3",
+        "scipy": "1.18.1",
+        "joblib": "1.6.0",
+        "threadpoolctl": "3.7.0"
+      },
+      "git_commit": "1c34cd4e9fc072f8ccf732bb0f46d06fe40bf97c",
+      "inputs": []
+    }
+  },
+  "features": {
+    "raw_slates_sha256": "5dfe47940c78aa4858119c8cebaa6000c316405f3b81b6c2df88eb1afe9c95a3",
+    "fields": [
+      "tab",
+      "log_duration",
+      "duration_missing",
+      "hour_sin",
+      "hour_cos",
+      "weekday_sin",
+      "weekday_cos",
+      "log_exposures_1h",
+      "log_exposures_1d",
+      "log_exposures_7d",
+      "log_hours_since_last",
+      "history_length_fraction",
+      "history_mean_log_duration",
+      "history_duration_known_fraction",
+      "candidate_repeat_fraction",
+      "same_tab_fraction",
+      "distinct_history_fraction",
+      "log_observed_history_days",
+      "log_basic_duration",
+      "log_width",
+      "log_height",
+      "aspect_ratio",
+      "log_upload_age_days",
+      "metadata_available",
+      "author_repeat_fraction",
+      "history_author_known_fraction"
+    ],
+    "metadata_index_sha256": "0ad5532587892c14e5ec5316c4419b4aa286bbb08db6ca00f3a89a9a18b7dde1",
+    "all_candidates_share_decision_time": true,
+    "all_histories_strictly_prior": true,
+    "total_slates": 2000,
+    "selected_users": 1689,
+    "positives_by_split": {
+      "train": [
+        3872,
+        2598,
+        595,
+        147,
+        124,
+        126,
+        210
+      ],
+      "validation": [
+        1709,
+        1166,
+        207,
+        45,
+        47,
+        53,
+        77
+      ],
+      "test": [
+        2426,
+        1666,
+        314,
+        80,
+        75,
+        72,
+        101
+      ]
+    },
+    "weighted_represented_slates_by_split": {
+      "train": 499428.9999999999,
+      "validation": 152285.0,
+      "test": 351756.0
+    }
+  },
+  "captions": {
+    "source_sha256": "0032ff2062abbcf10d6a1dfb033a65b0cdcd448f4fc56e19c75f8ff4494e4455",
+    "selected_text_sha256": "bb250234c3fff4b9c1d4ad3471f7906a49092b2ce14836486fe8409caf0cf638",
+    "selected_distinct_items": 35618,
+    "nonblank_texts": 31238,
+    "rows_scanned": 32038725
+  },
+  "prompts": {
+    "input_sha256": "1f03385851bd8441f22d4e113687af850fce38d4557d9acfba4936b24dc0d1bc",
+    "max_state_characters": 2371,
+    "missing_text_occurrences": 4590,
+    "truncated_text_occurrences": 307,
+    "outcome_fields_sent": false,
+    "score_semantics": "per-objective relative Choice distribution, not event probability"
+  },
+  "source_sha256": "ab91c78afb872b0db726d79c64f86d928eb2eeff06c50be366f4cbb87f75402b",
+  "provenance": {
+    "created_at_utc": "2026-10-12T04:12:56.311287+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "c37ce1faa6fe96a7068503f54d866ffd012cb178",
+    "inputs": []
+  }
+}

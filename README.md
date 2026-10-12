@@ -40,7 +40,7 @@ Verified locally on **2026-10-12**:
 | Real KuaiRand-27K behavior pilot | 426,832 train / 197,078 validation targets; 7 tasks; event-only gates 6/7, calibration and overfitting remain | [`reports/kuairand-27k-behavior-pilot-2026-10-11/README.md`](reports/kuairand-27k-behavior-pilot-2026-10-11/README.md) |
 | 27K richer controls + time-separated calibration | 1,699,506 train targets; both controls beat tab priors on 6/7 objectives; hate remains unresolved | [`reports/kuairand-27k-behavior-v2-2026-10-11/README.md`](reports/kuairand-27k-behavior-v2-2026-10-11/README.md) |
 | Aligned 27K behavior comparison | Same 1,699,506 train targets; tree/MMoE close, richer SASRec trades worse click/long-view for better like/follow/forward; all 6/7 gates | [`reports/kuairand-27k-aligned-2026-10-12/README.md`](reports/kuairand-27k-aligned-2026-10-12/README.md) |
-| Real KuaiRand core Jev/ParetoJev validation | Running: 2,000 frozen slates, real Choice scoring, 9 no-Jev checkpoints frozen; no test conclusion yet | [`core status`](reports/kuairand-core-2026-10-12/STATUS.md), [`registration`](reports/kuairand-core-2026-10-12/REGISTRATION.md) |
+| Real KuaiRand core Jev/ParetoJev validation | Complete: 14,000 real decisions, 18 training runs, primary 1/4 gates; overall superiority not supported | [`final report`](reports/kuairand-core-2026-10-12/README.md), [`completion audit`](reports/kuairand-core-2026-10-12/completion_audit.json) |
 | Serving/student experiments | Not run | Core offline validation takes priority |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -311,14 +311,16 @@ The script exits non-zero when a required target fails or cannot be evaluated. P
 
 ## Active KuaiRand-27K workflow
 
-**Current priority: core real-signal validation**, not further behavior-model tuning.
-The registered six-arm experiment compares EMER-like/CMR-like/ParetoJev with and
-without real Jev, using frozen behavior predictions and identical candidate
-inputs. Native Choice scoring is running; nine no-Jev checkpoints are frozen.
-The automatic driver continues through raw-response audit, remaining training,
-weighted evaluation and exact replay. There is no effectiveness conclusion yet.
-See [live-work status and resume notes](reports/kuairand-core-2026-10-12/STATUS.md).
-
+**Core real-signal validation is complete; superiority is not established.**
+The six-arm experiment used 14,000 real JEV-27B Choice decisions, 18 training runs
+and shared weighted evaluation. ParetoJev passes only 1/4 primary point gates
+against no-Jev EMER-like. Exact-HV per-seed changes are +59.79%, -35.84%, +4.43%:
+mean relative gain +9.46%, but the ratio of absolute HV means is only +0.27%.
+It loses HV against no-Jev CMR-like, equal-Jev comparators and the fixed behavior
+weighted sum, while some cold metrics improve. All raw responses, saved predictions,
+metrics and intervals replay; independent arithmetic and exact-HV checks pass.
+See [final findings and limits](reports/kuairand-core-2026-10-12/README.md).
+This completes the current core validation, not the unachieved research/serving targets.
 
 The active dataset is the complete **27K**, explicitly selected by the user. Its
 core archive, captions and categories are acquired and verified on the external

@@ -1,0 +1,683 @@
+{
+  "run_id": "0bd2a51ed04759e972d62b44584a5e655cc6069d731fc6a437f3976e1a94ce9f",
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "data_kind": "real",
+  "real_jev": true,
+  "comparisons": {
+    "paretojev_vs_emer_like_no_jev": {
+      "mean": {
+        "hypervolume_relative_gain": 0.058737530099759176,
+        "cold_item_ndcg_relative_gain": 0.0206064187566533,
+        "worst_objective_regret": 0.05226604711273335,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.00034,
+          "hypervolume_absolute_gain": 0.00018499999999999994,
+          "hypervolume_relative_gain": 0.5441176470588234,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.4049260794099229,
+          "cold_item_ndcg_relative_gain": -0.10820857105250763,
+          "worst_objective_regret": 0.04924433094820632,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.04924433094820632,
+            "is_forward": 0.0,
+            "is_hate": 1.2698196098615e-05
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.00068,
+          "hypervolume_absolute_gain": -0.00028000000000000003,
+          "hypervolume_relative_gain": -0.411764705882353,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.41437323422152333,
+          "cold_item_ndcg_relative_gain": -0.07868151406488731,
+          "worst_objective_regret": 0.09281658142140947,
+          "per_objective_regret": {
+            "is_click": 0.019496805887764868,
+            "long_view": 0.034100733662343896,
+            "is_like": 0.09281658142140947,
+            "is_follow": 0.03175712756779403,
+            "is_comment": 0.0,
+            "is_forward": 0.0,
+            "is_hate": 2.5396392196119777e-05
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.00057,
+          "hypervolume_absolute_gain": 2.5000000000000066e-05,
+          "hypervolume_relative_gain": 0.04385964912280713,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.3172554343214727,
+          "cold_item_ndcg_relative_gain": 0.24870934138735484,
+          "worst_objective_regret": 0.01473722896858426,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0028404549938932377,
+            "is_like": 0.0,
+            "is_follow": 0.014233722151244133,
+            "is_comment": 0.01473722896858426,
+            "is_forward": 0.0,
+            "is_hate": 5.0792784391795465e-05
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "paretojev_vs_cmr_like_no_jev": {
+      "mean": {
+        "hypervolume_relative_gain": -0.5200648489441594,
+        "cold_item_ndcg_relative_gain": 0.3729018493121201,
+        "worst_objective_regret": 0.0891489873849477,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.00104,
+          "hypervolume_absolute_gain": -0.0005149999999999999,
+          "hypervolume_relative_gain": -0.49519230769230765,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.22630098072517008,
+          "cold_item_ndcg_relative_gain": 0.5957050023288605,
+          "worst_objective_regret": 0.08469742705493191,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.03243554637092877,
+            "is_like": 1.7063821037943683e-05,
+            "is_follow": 0.0603408295379142,
+            "is_comment": 0.08469742705493191,
+            "is_forward": 0.04051865770717608,
+            "is_hate": 0.00012698196098004377
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.001015,
+          "hypervolume_absolute_gain": -0.0006150000000000001,
+          "hypervolume_relative_gain": -0.6059113300492611,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.3124007417219972,
+          "cold_item_ndcg_relative_gain": 0.22205126230059768,
+          "worst_objective_regret": 0.10312397070380672,
+          "per_objective_regret": {
+            "is_click": 0.047433726844242574,
+            "long_view": 0.05326935516400788,
+            "is_like": 0.06074632671212826,
+            "is_follow": 0.029301162693324834,
+            "is_comment": 0.0,
+            "is_forward": 0.10312397070380672,
+            "is_hate": 0.00010158556878414604
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.0011,
+          "hypervolume_absolute_gain": -0.000505,
+          "hypervolume_relative_gain": -0.4590909090909091,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.30451596347869986,
+          "cold_item_ndcg_relative_gain": 0.3009492833069021,
+          "worst_objective_regret": 0.07962556439610446,
+          "per_objective_regret": {
+            "is_click": 0.04538100793308836,
+            "long_view": 0.029010712074090894,
+            "is_like": 0.025104064543397808,
+            "is_follow": 0.07962556439610446,
+            "is_comment": 0.0,
+            "is_forward": 0.05171778923158529,
+            "is_hate": 7.618917658758217e-05
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.02702702702702703
+        }
+      ]
+    },
+    "paretojev_vs_paretojev_no_jev": {
+      "mean": {
+        "hypervolume_relative_gain": 0.259289089347079,
+        "cold_item_ndcg_relative_gain": -0.007297399477352415,
+        "worst_objective_regret": 0.03813684805679427,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "paretojev_no_jev",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.00048,
+          "hypervolume_absolute_gain": 4.4999999999999955e-05,
+          "hypervolume_relative_gain": 0.0937499999999999,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.35403487795895283,
+          "cold_item_ndcg_relative_gain": 0.019983141369897324,
+          "worst_objective_regret": 0.03860840381069319,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.016233000286531074,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.03860840381069319,
+            "is_forward": 0.0,
+            "is_hate": 5.07927843924616e-05
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "paretojev_no_jev",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.000485,
+          "hypervolume_absolute_gain": -8.5e-05,
+          "hypervolume_relative_gain": -0.1752577319587629,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.4049022988688466,
+          "cold_item_ndcg_relative_gain": -0.05713125899374026,
+          "worst_objective_regret": 0.07573864937919966,
+          "per_objective_regret": {
+            "is_click": 0.05691546849402096,
+            "long_view": 0.07573864937919966,
+            "is_like": 0.04459820617688892,
+            "is_follow": 0.0,
+            "is_comment": 0.0,
+            "is_forward": 0.0,
+            "is_hate": 0.0
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "paretojev_no_jev",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.00032,
+          "hypervolume_absolute_gain": 0.000275,
+          "hypervolume_relative_gain": 0.859375,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.3902068601170985,
+          "cold_item_ndcg_relative_gain": 0.015255919191785691,
+          "worst_objective_regret": 6.349098048996638e-05,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.0,
+            "is_forward": 0.0,
+            "is_hate": 6.349098048996638e-05
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "paretojev_vs_emer_like": {
+      "mean": {
+        "hypervolume_relative_gain": -0.13342984931394883,
+        "cold_item_ndcg_relative_gain": 0.30127484745066635,
+        "worst_objective_regret": 0.04430102588042534,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "emer_like",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.000545,
+          "hypervolume_absolute_gain": -2.0000000000000052e-05,
+          "hypervolume_relative_gain": -0.03669724770642211,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.2852855322008125,
+          "cold_item_ndcg_relative_gain": 0.26578310575138414,
+          "worst_objective_regret": 0.03235748861033452,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.001895431047095275,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.03235748861033452,
+            "is_forward": 0.012255395554474607,
+            "is_hate": 0.0
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.000435,
+          "hypervolume_absolute_gain": -3.499999999999998e-05,
+          "hypervolume_relative_gain": -0.08045977011494249,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.3035577566799512,
+          "cold_item_ndcg_relative_gain": 0.2576510148858406,
+          "worst_objective_regret": 0.04773602359530754,
+          "per_objective_regret": {
+            "is_click": 0.018982097543664533,
+            "long_view": 0.04773602359530754,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.022734861423870906,
+            "is_forward": 0.0,
+            "is_hate": 0.0
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.00083,
+          "hypervolume_absolute_gain": -0.00023499999999999997,
+          "hypervolume_relative_gain": -0.2831325301204819,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.28699114265875614,
+          "cold_item_ndcg_relative_gain": 0.3803904217147744,
+          "worst_objective_regret": 0.05280956543563395,
+          "per_objective_regret": {
+            "is_click": 0.01642532392445184,
+            "long_view": 0.0,
+            "is_like": 0.0,
+            "is_follow": 0.0402577646171523,
+            "is_comment": 0.00916961099001129,
+            "is_forward": 0.05280956543563395,
+            "is_hate": 0.000101585568783924
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "paretojev_vs_cmr_like": {
+      "mean": {
+        "hypervolume_relative_gain": -0.49768786127167636,
+        "cold_item_ndcg_relative_gain": 0.5401894255260865,
+        "worst_objective_regret": 0.0915922109273692,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "cmr_like",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.000865,
+          "hypervolume_absolute_gain": -0.00034,
+          "hypervolume_relative_gain": -0.3930635838150289,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.17768204958322356,
+          "cold_item_ndcg_relative_gain": 1.032335893367454,
+          "worst_objective_regret": 0.10265624058827447,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.01948374950984738,
+            "is_like": 0.0015774546214343266,
+            "is_follow": 0.0,
+            "is_comment": 0.05941111215327308,
+            "is_forward": 0.10265624058827447,
+            "is_hate": 0.00010158556878414604
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.001,
+          "hypervolume_absolute_gain": -0.0006000000000000001,
+          "hypervolume_relative_gain": -0.6000000000000001,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.310588626868731,
+          "cold_item_ndcg_relative_gain": 0.22918126337692038,
+          "worst_objective_regret": 0.07875555851124974,
+          "per_objective_regret": {
+            "is_click": 0.04670018991938951,
+            "long_view": 0.03694123185017395,
+            "is_like": 0.06546985346803658,
+            "is_follow": 0.029301162693324834,
+            "is_comment": 0.0032196552062302153,
+            "is_forward": 0.07875555851124974,
+            "is_hate": 0.00010158556878414604
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.00119,
+          "hypervolume_absolute_gain": -0.000595,
+          "hypervolume_relative_gain": -0.5,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.2914973680250876,
+          "cold_item_ndcg_relative_gain": 0.35905111983388494,
+          "worst_objective_regret": 0.09336483368258341,
+          "per_objective_regret": {
+            "is_click": 0.072297640769108,
+            "long_view": 0.04768643262457389,
+            "is_like": 0.028881212664037037,
+            "is_follow": 0.09336483368258341,
+            "is_comment": 0.0,
+            "is_forward": 0.07075694871550556,
+            "is_hate": 7.618917658736013e-05
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "emer_like_vs_emer_like_no_jev": {
+      "mean": {
+        "hypervolume_relative_gain": 0.23292913656690747,
+        "cold_item_ndcg_relative_gain": -0.21942863681088243,
+        "worst_objective_regret": 0.04811038786952113,
+        "controllability_spearman_mean": 0.05186408531521542
+      },
+      "gates": {
+        "hypervolume": true,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.000545,
+          "baseline_hypervolume": 0.00034,
+          "hypervolume_absolute_gain": 0.000205,
+          "hypervolume_relative_gain": 0.6029411764705882,
+          "cold_positive_ndcg_mean": 0.2852855322008125,
+          "baseline_cold_positive_ndcg_mean": 0.4049260794099229,
+          "cold_item_ndcg_relative_gain": -0.295462686383293,
+          "worst_objective_regret": 0.0168868423378718,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0,
+            "is_like": 0.0,
+            "is_follow": 0.007844527528096917,
+            "is_comment": 0.0168868423378718,
+            "is_forward": 0.0,
+            "is_hate": 1.2698196098615e-05
+          },
+          "controllability_spearman_mean": -0.013737301757945556,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.000435,
+          "baseline_hypervolume": 0.00068,
+          "hypervolume_absolute_gain": -0.00024500000000000005,
+          "hypervolume_relative_gain": -0.3602941176470589,
+          "cold_positive_ndcg_mean": 0.3035577566799512,
+          "baseline_cold_positive_ndcg_mean": 0.41437323422152333,
+          "cold_item_ndcg_relative_gain": -0.26742913969759524,
+          "worst_objective_regret": 0.0985945387849938,
+          "per_objective_regret": {
+            "is_click": 0.0005147083441003342,
+            "long_view": 0.0,
+            "is_like": 0.0985945387849938,
+            "is_follow": 0.050094130629701916,
+            "is_comment": 0.0,
+            "is_forward": 0.00975049285047952,
+            "is_hate": 0.00010158556878436809
+          },
+          "controllability_spearman_mean": 0.0024320548099264184,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "emer_like_no_jev",
+          "hypervolume": 0.00083,
+          "baseline_hypervolume": 0.00057,
+          "hypervolume_absolute_gain": 0.00026000000000000003,
+          "hypervolume_relative_gain": 0.45614035087719307,
+          "cold_positive_ndcg_mean": 0.28699114265875614,
+          "baseline_cold_positive_ndcg_mean": 0.3172554343214727,
+          "cold_item_ndcg_relative_gain": -0.09539408435175914,
+          "worst_objective_regret": 0.028849782485697806,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0031463462624177208,
+            "is_like": 0.028849782485697806,
+            "is_follow": 0.0,
+            "is_comment": 0.00556761797857297,
+            "is_forward": 0.0,
+            "is_hate": 0.0
+          },
+          "controllability_spearman_mean": 0.1668975028936654,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "cmr_like_vs_cmr_like_no_jev": {
+      "mean": {
+        "hypervolume_relative_gain": -0.03374312469140054,
+        "cold_item_ndcg_relative_gain": -0.08779808999630019,
+        "worst_objective_regret": 0.04107176580974692,
+        "controllability_spearman_mean": 0.18837125879758565
+      },
+      "gates": {
+        "hypervolume": false,
+        "cold_ndcg": false,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.000865,
+          "baseline_hypervolume": 0.00104,
+          "hypervolume_absolute_gain": -0.00017499999999999992,
+          "hypervolume_relative_gain": -0.1682692307692307,
+          "cold_positive_ndcg_mean": 0.17768204958322356,
+          "baseline_cold_positive_ndcg_mean": 0.22630098072517008,
+          "cold_item_ndcg_relative_gain": -0.21484189324389846,
+          "worst_objective_regret": 0.09884688523668356,
+          "per_objective_regret": {
+            "is_click": 0.0021871421778338895,
+            "long_view": 0.012951796861081388,
+            "is_like": 0.0,
+            "is_follow": 0.09884688523668356,
+            "is_comment": 0.025286314901658835,
+            "is_forward": 0.0,
+            "is_hate": 2.5396392195897732e-05
+          },
+          "controllability_spearman_mean": 0.21040420984541977,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.001,
+          "baseline_hypervolume": 0.001015,
+          "hypervolume_absolute_gain": -1.500000000000004e-05,
+          "hypervolume_relative_gain": -0.014778325123152747,
+          "cold_positive_ndcg_mean": 0.310588626868731,
+          "baseline_cold_positive_ndcg_mean": 0.3124007417219972,
+          "cold_item_ndcg_relative_gain": -0.005800609957830372,
+          "worst_objective_regret": 0.024368412192556976,
+          "per_objective_regret": {
+            "is_click": 0.0007335369248530621,
+            "long_view": 0.01632812331383393,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.0,
+            "is_forward": 0.024368412192556976,
+            "is_hate": 0.0
+          },
+          "controllability_spearman_mean": 0.23198020529141647,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "cmr_like_no_jev",
+          "hypervolume": 0.00119,
+          "baseline_hypervolume": 0.0011,
+          "hypervolume_absolute_gain": 9.000000000000002e-05,
+          "hypervolume_relative_gain": 0.08181818181818183,
+          "cold_positive_ndcg_mean": 0.2914973680250876,
+          "baseline_cold_positive_ndcg_mean": 0.30451596347869986,
+          "cold_item_ndcg_relative_gain": -0.042751766787171734,
+          "worst_objective_regret": 2.220446049250313e-16,
+          "per_objective_regret": {
+            "is_click": 0.0,
+            "long_view": 0.0,
+            "is_like": 0.0,
+            "is_follow": 0.0,
+            "is_comment": 0.0,
+            "is_forward": 0.0,
+            "is_hate": 2.220446049250313e-16
+          },
+          "controllability_spearman_mean": 0.1227293612559207,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    },
+    "paretojev_vs_behavior_weighted_sum": {
+      "mean": {
+        "hypervolume_relative_gain": -0.663344407530454,
+        "cold_item_ndcg_relative_gain": 0.4926373031495217,
+        "worst_objective_regret": 0.11324560803969054,
+        "controllability_spearman_mean": 0.11769900978218817
+      },
+      "gates": {
+        "hypervolume": false,
+        "cold_ndcg": true,
+        "regret": false,
+        "controllability": false
+      },
+      "all_point_gates": false,
+      "per_seed": [
+        {
+          "baseline": "behavior_weighted_sum",
+          "hypervolume": 0.000525,
+          "baseline_hypervolume": 0.001505,
+          "hypervolume_absolute_gain": -0.00098,
+          "hypervolume_relative_gain": -0.6511627906976744,
+          "cold_positive_ndcg_mean": 0.36110960697508093,
+          "baseline_cold_positive_ndcg_mean": 0.25436836972603233,
+          "cold_item_ndcg_relative_gain": 0.4196325091992151,
+          "worst_objective_regret": 0.10909672322241357,
+          "per_objective_regret": {
+            "is_click": 0.0071822809854462655,
+            "long_view": 0.06692096755753818,
+            "is_like": 0.022988517967641287,
+            "is_follow": 0.0012572560536175947,
+            "is_comment": 0.09961554704241324,
+            "is_forward": 0.10909672322241357,
+            "is_hate": 8.888737268619717e-05
+          },
+          "controllability_spearman_mean": 0.1195211952003444,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "behavior_weighted_sum",
+          "hypervolume": 0.0004,
+          "baseline_hypervolume": 0.001505,
+          "hypervolume_absolute_gain": -0.001105,
+          "hypervolume_relative_gain": -0.7342192691029901,
+          "cold_positive_ndcg_mean": 0.3817697207650097,
+          "baseline_cold_positive_ndcg_mean": 0.25436836972603233,
+          "cold_item_ndcg_relative_gain": 0.500853746777538,
+          "worst_objective_regret": 0.12975237106525914,
+          "per_objective_regret": {
+            "is_click": 0.05385214301913038,
+            "long_view": 0.11781750460685658,
+            "is_like": 0.07211411867607115,
+            "is_follow": 0.0,
+            "is_comment": 0.06378902646073745,
+            "is_forward": 0.12975237106525914,
+            "is_hate": 6.34909804900774e-05
+          },
+          "controllability_spearman_mean": -0.02630623680475584,
+          "paired_dominance_rate": 0.0
+        },
+        {
+          "baseline": "behavior_weighted_sum",
+          "hypervolume": 0.000595,
+          "baseline_hypervolume": 0.001505,
+          "hypervolume_absolute_gain": -0.00091,
+          "hypervolume_relative_gain": -0.6046511627906976,
+          "cold_positive_ndcg_mean": 0.39615982444312536,
+          "baseline_cold_positive_ndcg_mean": 0.25436836972603233,
+          "cold_item_ndcg_relative_gain": 0.5574256534718119,
+          "worst_objective_regret": 0.10088772983139893,
+          "per_objective_regret": {
+            "is_click": 0.05881386415736772,
+            "long_view": 0.10088772983139893,
+            "is_like": 0.02240720755734371,
+            "is_follow": 0.026424364700971648,
+            "is_comment": 0.03228957154448281,
+            "is_forward": 0.09719277872498785,
+            "is_hate": 8.888737268575309e-05
+          },
+          "controllability_spearman_mean": 0.25988207095097593,
+          "paired_dominance_rate": 0.0
+        }
+      ]
+    }
+  },
+  "research_targets_achieved": false,
+  "limitations": [
+    "Weighted retrospective exposed-session pseudo-slates, not causal online uplift.",
+    "Project EMER-like/CMR-like variants, not original-paper reproductions.",
+    "Choice distributions are not calibrated event probabilities.",
+    "Bootstrap conditions on fitted checkpoints and sampled cohorts; no HV population interval."
+  ]
+}
