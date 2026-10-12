@@ -28,6 +28,7 @@ also supervise the full model's score head. Fixed loss weights are published as
 from __future__ import annotations
 
 from collections.abc import Iterable
+from dataclasses import replace
 
 import torch
 import torch.nn.functional as F
@@ -41,10 +42,12 @@ from paretojev.losses.pareto import (
     gaussian_pareto_pairwise_loss,
     pareto_pairwise_loss,
 )
-from paretojev.models.pareto_reranker import ParetoJevConfig, ParetoJevReranker, PreferenceFiLM
+from paretojev.models.pareto_reranker import ParetoJevConfig, ParetoJevReranker, PreferenceFiLM, without_jev
 
 
 COMPARISON_METHODS = ("emer_like", "cmr_like", "paretojev")
+ABLATION_METHODS = tuple(name + "_no_jev" for name in COMPARISON_METHODS)
+
 COMPARISON_LOSS_WEIGHTS = {
     "preference_ranking": 1.0,
     "calibration": 0.25,
@@ -87,6 +90,8 @@ class _FeatureSetEncoder(nn.Module):
 
     def encode(self, batch: SlateBatch) -> torch.Tensor:
         batch.validate()
+        if not self.config.use_jev:
+            batch = without_jev(batch)
         if not batch.mask.any(dim=1).all():
             raise ValueError("each comparison slate must contain a valid candidate")
         history = torch.log1p(batch.history_length.clamp_min(0))[:, None, :]
@@ -172,9 +177,10 @@ def build_comparison_model(method: str, config: ParetoJevConfig) -> nn.Module:
         "cmr_like": CMRLikeReranker,
         "paretojev": ParetoJevReranker,
     }
-    if method not in classes:
-        raise ValueError(f"unknown comparison method {method!r}; expected {COMPARISON_METHODS}")
-    return classes[method](config)
+    if method not in COMPARISON_METHODS + ABLATION_METHODS:
+        raise ValueError(f"unknown comparison method {method!r}; expected {COMPARISON_METHODS + ABLATION_METHODS}")
+    base = method.removesuffix("_no_jev")
+    return classes[base](replace(config, use_jev=not method.endswith("_no_jev")))
 
 
 def _utility_targets(targets: torch.Tensor, directions: Iterable[int]) -> torch.Tensor:
@@ -229,6 +235,12 @@ def comparison_training_loss(
     ``target_probabilities`` are ignored, even when present in ``SlateBatch``.
     Objective logits always model *utility*: a negative target becomes ``1-p``.
     """
+    use_jev = not method.endswith("_no_jev")
+    if method not in COMPARISON_METHODS + ABLATION_METHODS:
+        raise ValueError("Unknown comparison method")
+    method = method.removesuffix("_no_jev")
+    if model.config.use_jev != use_jev:
+        raise ValueError("Jev availability and model configuration disagree")
     expected = {
         "emer_like": EMERLikeReranker,
         "cmr_like": CMRLikeReranker,
@@ -267,9 +279,9 @@ def comparison_training_loss(
             gaussian_pareto_pairwise_loss(scores, output["score_logvar"], batch.labels, batch.mask, directions)
             if "score_logvar" in output else scores.sum() * 0
         )
-        components["jev_distillation"] = candidate_distribution_kl(
+        components["jev_distillation"] = (candidate_distribution_kl(
             output["objective_logits"], _utility_targets(batch.jev_scores, directions), batch.mask
-        )
+        ) if use_jev else scores.sum() * 0)
         components["fusion_calibration"] = brier_loss(output["fused_scores"], targets, batch.mask)
     total = sum(COMPARISON_LOSS_WEIGHTS[name] * loss for name, loss in components.items())
     return {"total_loss": total, **components, **output}

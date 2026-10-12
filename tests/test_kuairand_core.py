@@ -37,3 +37,16 @@ def test_choice_validation_rejects_unpinned_and_permuted_results():
     for change in ({'revision':'other'},{'options':['B','A']},{'probabilities':[float('nan'),1.]},
         {'choice':'A'},{'probabilities':[.3,.8]},{'image_used':True}):
         with pytest.raises(DecisionAPIError):validate_choice({**r,**change},model='m',revision='r',options=['A','B'])
+
+
+def test_weighted_objective_metric_matches_explicit_population_replication():
+    import pytest
+    from paretojev.evaluation.comparison import comparison_objective_metrics
+    scores=np.array([[2.,1.],[1.,2.],[2.,1.]])
+    labels=np.array([[[1.,1.],[0.,0.]],[[0.,1.],[1.,0.]],[[0.,1.],[0.,1.]]])
+    mask=np.ones((3,2),dtype=bool);weights=np.array([2,3,4]);idx=np.repeat(np.arange(3),weights)
+    actual=comparison_objective_metrics(scores,labels,mask,[1,-1],top_k=1,sample_weights=weights)
+    expected=comparison_objective_metrics(scores[idx],labels[idx],mask[idx],[1,-1],top_k=1)
+    np.testing.assert_allclose(actual[0],expected[0]);np.testing.assert_allclose(actual[1],expected[1])
+    with pytest.raises(ValueError,match='sample_weights'):
+        comparison_objective_metrics(scores,labels,mask,[1,-1],top_k=1,sample_weights=[1,-1,1])

@@ -173,3 +173,20 @@ def test_comparison_rejects_method_model_mismatch_and_invalid_directions():
         comparison_training_loss("emer_like", model, _batch(), [1, -1])
     with pytest.raises(ValueError, match="directions"):
         comparison_training_loss("cmr_like", model, _batch(), [1, 0])
+
+
+@pytest.mark.parametrize('method', ['emer_like_no_jev','cmr_like_no_jev','paretojev_no_jev'])
+def test_no_jev_models_and_training_loss_cannot_use_any_jev_channel(method):
+    torch.manual_seed(9)
+    model=build_comparison_model(method,_config()).eval();batch=_batch()
+    changed=replace(batch,jev_scores=1-batch.jev_scores,jev_confidence=1-batch.jev_confidence,
+        jev_entropy=1-batch.jev_entropy)
+    first=comparison_training_loss(method,model,batch,[1,-1])
+    second=comparison_training_loss(method,model,changed,[1,-1])
+    torch.testing.assert_close(first['score_mean'],second['score_mean'],rtol=0,atol=0)
+    torch.testing.assert_close(first['total_loss'],second['total_loss'],rtol=0,atol=0)
+    if method=='paretojev_no_jev':
+        assert first['jev_distillation'].item()==0
+        torch.testing.assert_close(first['fused_scores'],batch.behavior_scores,rtol=0,atol=0)
+    first['total_loss'].backward()
+    assert any(p.grad is not None and p.grad.abs().sum()>0 for p in model.parameters())

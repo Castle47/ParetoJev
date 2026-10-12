@@ -133,7 +133,8 @@ def _validation_score(model, loader, directions, evaluation, device) -> float:
             labels.append(batch.labels.cpu().numpy())
             masks.append(batch.mask.cpu().numpy())
         points, coverage = comparison_objective_metrics(np.concatenate(scores), np.concatenate(labels),
-                                                    np.concatenate(masks), directions, top_k=evaluation.top_k)
+                                                    np.concatenate(masks), directions, top_k=evaluation.top_k,
+                                                    sample_weights=getattr(loader.dataset, "sample_weights", None))
         if not np.isfinite(points).all() or (coverage <= 0).any():
             raise ValueError("Validation must cover every registered objective")
         rows.append(float(np.dot(preference, points)))

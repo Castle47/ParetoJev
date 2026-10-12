@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 import torch
 from torch import nn
@@ -20,6 +20,15 @@ class ParetoJevConfig:
     dropout: float = 0.1
     fusion_hidden_dim: int = 32
     predict_uncertainty: bool = True
+    use_jev: bool = True
+    log_popularity_reliability: bool = False
+
+
+def without_jev(batch: SlateBatch) -> SlateBatch:
+    """Erase every Jev channel, including reliability, before model consumption."""
+    return replace(batch, jev_scores=torch.full_like(batch.jev_scores, 0.5),
+        jev_confidence=torch.zeros_like(batch.jev_confidence),
+        jev_entropy=torch.ones_like(batch.jev_entropy))
 
 
 class PreferenceFiLM(nn.Module):
@@ -76,6 +85,8 @@ class ParetoJevReranker(nn.Module):
 
     def forward(self, batch: SlateBatch) -> dict[str, torch.Tensor]:
         batch.validate()
+        if not self.config.use_jev:
+            batch = without_jev(batch)
         fused, gate = self.fusion(
             batch.behavior_scores,
             batch.jev_scores,
@@ -84,11 +95,15 @@ class ParetoJevReranker(nn.Module):
             batch.popularity,
             batch.history_length,
         )
+        if not self.config.use_jev:
+            fused, gate = batch.behavior_scores, torch.zeros_like(batch.behavior_scores)
+        reliability_popularity = (torch.log1p(batch.popularity.clamp_min(0))
+            if self.config.log_popularity_reliability else batch.popularity)
         reliability = torch.cat(
             [
                 batch.jev_confidence.mean(dim=-1, keepdim=True),
                 batch.jev_entropy.mean(dim=-1, keepdim=True),
-                batch.popularity,
+                reliability_popularity,
             ],
             dim=-1,
         )

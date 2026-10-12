@@ -84,9 +84,18 @@ def _contributions(
     return numerator, denominator, cold_numerator, cold_denominator
 
 
+def _slate_weights(values, n):
+    if values is None:
+        return None
+    weights = np.asarray(values, dtype=np.float64)
+    if weights.shape != (n,) or not np.isfinite(weights).all() or (weights <= 0).any():
+        raise ValueError("sample_weights must be finite positive values, one per slate")
+    return weights
+
+
 def comparison_objective_metrics(
     scores: np.ndarray, labels: np.ndarray, mask: np.ndarray,
-    directions: Iterable[int], *, top_k: int,
+    directions: Iterable[int], *, top_k: int, sample_weights=None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Shared checkpoint-selection and comparison metric definitions.
 
@@ -112,7 +121,11 @@ def comparison_objective_metrics(
     if not np.isfinite(labels[mask]).all() or np.any((labels[mask] < 0) | (labels[mask] > 1)):
         raise ValueError("valid labels must be finite and in [0,1]")
     num, den, _, _ = _contributions(scores, labels, mask, directions, top_k, np.zeros_like(mask))
-    return _divide(num.sum(axis=0), den.sum(axis=0)), (den > 0).mean(axis=0)
+    weights = _slate_weights(sample_weights, len(scores))
+    coverage = (den > 0).mean(axis=0) if weights is None else np.average(den > 0, axis=0, weights=weights)
+    if weights is not None:
+        num, den = num * weights[:, None], den * weights[:, None]
+    return _divide(num.sum(axis=0), den.sum(axis=0)), coverage
 
 
 def _bootstrap(
@@ -202,6 +215,7 @@ def evaluate_comparison(
     audit_path: Path | str | None = None,
     group_ids: Sequence[str | int] | None = None,
     bootstrap_samples: int = 0,
+    sample_weights=None,
 ) -> dict[str, object]:
     """Compare separately trained checkpoints using identical observed labels.
 
@@ -302,6 +316,10 @@ def evaluate_comparison(
         method: tuple(np.concatenate([part[index] for part in parts], axis=1) for index in range(4))
         for method, parts in statistics_parts.items()
     }
+    sample_weights = _slate_weights(sample_weights, len(labels))
+    if sample_weights is not None:
+        statistics = {method: tuple(part * sample_weights[None, :, None] for part in parts)
+                      for method, parts in statistics.items()}
     rng = np.random.default_rng(config.seed)
     hv_samples = rng.random((config.hypervolume_samples, len(names)))
     summaries: dict[str, dict[str, object]] = {}
@@ -370,9 +388,17 @@ def evaluate_comparison(
         for comparator in research_comparators
         if "paretojev" in point_arrays and comparator in point_arrays
     }
+    factorial_pairs = [("paretojev", "emer_like_no_jev"), ("paretojev", "cmr_like_no_jev"),
+        ("paretojev", "paretojev_no_jev"), ("paretojev", "emer_like"), ("paretojev", "cmr_like"),
+        ("emer_like", "emer_like_no_jev"), ("cmr_like", "cmr_like_no_jev")]
+    factorial = {f"{method}_vs_{comparator}": compare_pair(method, comparator)
+                 for method, comparator in factorial_pairs if method in models and comparator in models}
     first_stats = statistics[baseline]
     coverage = (first_stats[1][0] > 0).mean(axis=0)
     cold_coverage = (first_stats[3][0] > 0).mean(axis=0)
+    if sample_weights is not None:
+        coverage = np.average(first_stats[1][0] > 0, axis=0, weights=sample_weights)
+        cold_coverage = np.average(first_stats[3][0] > 0, axis=0, weights=sample_weights)
     report: dict[str, object] = {
         "schema_version": "checkpoint-comparison-v1", "config": asdict(config),
         "objective_names": names, "directions": direction_array.tolist(),
@@ -407,6 +433,11 @@ def evaluate_comparison(
         report["paired_user_bootstrap"] = _bootstrap(statistics, groups, names, positive, baseline, bootstrap_samples, config.seed)
     else:
         report["paired_user_bootstrap"] = {"status": "not_requested", "samples": 0}
+    if any(name.endswith("_no_jev") for name in models):
+        report["factorial_comparisons"] = factorial
+    if sample_weights is not None:
+        report["population_weighting"] = {"kind": "inverse inclusion weights", "sum": float(sample_weights.sum()),
+            "effective_slates_kish": float(sample_weights.sum()**2 / np.square(sample_weights).sum())}
     if audit_path is not None:
         path = Path(audit_path)
         path.parent.mkdir(parents=True, exist_ok=True)
@@ -421,6 +452,8 @@ def evaluate_comparison(
             arrays[name] = np.stack([statistics[method][index] for method in models])
         if groups is not None:
             arrays["group_ids"] = groups
+        if sample_weights is not None:
+            arrays["slate_weights"] = sample_weights
         # A file object prevents numpy silently appending an unexpected suffix.
         with path.open("wb") as handle:
             np.savez_compressed(handle, **arrays)
