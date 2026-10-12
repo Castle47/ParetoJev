@@ -54,3 +54,44 @@ def test_weighted_normalization_and_model_missing_values():
         else:
             assert not model.users.weight[0].any()
             assert not model.known_users.any()
+
+
+def test_exact_occurrence_preparation_with_duplicate_timestamps(tmp_path):
+    import importlib.util
+    from pathlib import Path
+    from paretojev.utils.io import atomic_write_json, read_json
+    from paretojev.utils.provenance import sha256_file, canonical_hash
+    spec = importlib.util.spec_from_file_location('prepare_aligned', Path('scripts/prepare_kuairand_aligned.py'))
+    module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+    store, data, out = [tmp_path/name for name in ('store', 'data', 'out')]
+    store.mkdir(); data.mkdir()
+    e = np.zeros(12, dtype=EVENT)
+    e['time'] = [20, 10, 20, 110, 120, 210, 220, 30, 110, 230, 130, 240]
+    e['item'] = np.arange(12); e['labels'] = np.arange(12)
+    e.tofile(store/'events.bin'); np.save(store/'offsets.npy', [0, 7, 12])
+    atomic_write_json(store/'events.json', dict(rows=12, store_sha256=sha256_file(store/'events.bin'),
+        offsets_sha256=sha256_file(store/'offsets.npy')))
+    c = dict(train_end_ms=100, calibration_end_ms=200, evaluation_end_ms=300,
+        targets_per_user=dict(train=64, calibration=8, evaluation=8), seed=20261012)
+    atomic_write_json(tmp_path/'v2.json', c)
+    manifest = dict(config_hash=canonical_hash(c), event_manifest_sha256=sha256_file(store/'events.json'), splits={})
+    for salt, split in enumerate(('train', 'calibration', 'evaluation')):
+        rows = {k: [] for k in ('user', 'time', 'y', 'weight')}
+        for user, block in enumerate((e[:7], e[7:])):
+            block = block[np.argsort(block['time'], kind='stable')]
+            idx, w = selected_indices(block, user, c, salt)
+            rows['user'].extend([user]*len(idx)); rows['time'].extend(block['time'][idx])
+            rows['y'].extend((block['labels'][idx, None] >> np.arange(7)) & 1)
+            rows['weight'].extend([w]*len(idx))
+        files = {}
+        for key, values in rows.items():
+            path = data/f'{split}-{key}.npy'; np.save(path, np.array(values))
+            files[key] = sha256_file(path)
+        manifest['splits'][split] = dict(rows=len(rows['user']), files=files)
+    atomic_write_json(data/'samples.json', manifest)
+    module.prepare(store, data, out, dict(v2_config=str(tmp_path/'v2.json'), history_length=3, item_hash_buckets=16))
+    assert read_json(out/'sequences.json')['splits']['train']['rows'] == 4
+    records = np.load(out/'train-record.npy')
+    assert records.tolist() == [1, 0, 2, 7]
+    assert np.array_equal(e['time'][records], np.load(data/'train-time.npy'))
+    with pytest.raises(ValueError, match='Existing'): module.prepare(store, data, out, {})
