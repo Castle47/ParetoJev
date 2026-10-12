@@ -15,7 +15,7 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-Verified locally on **2026-10-11**:
+Verified locally on **2026-10-12**:
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -39,6 +39,7 @@ Verified locally on **2026-10-11**:
 | KuaiRand-27K acquisition and audit | Full core and supplements verified; 323,464,444 exposure rows audited | [`reports/kuairand-27k-acquisition-2026-10-11/README.md`](reports/kuairand-27k-acquisition-2026-10-11/README.md) |
 | Real KuaiRand-27K behavior pilot | 426,832 train / 197,078 validation targets; 7 tasks; event-only gates 6/7, calibration and overfitting remain | [`reports/kuairand-27k-behavior-pilot-2026-10-11/README.md`](reports/kuairand-27k-behavior-pilot-2026-10-11/README.md) |
 | 27K richer controls + time-separated calibration | 1,699,506 train targets; both controls beat tab priors on 6/7 objectives; hate remains unresolved | [`reports/kuairand-27k-behavior-v2-2026-10-11/README.md`](reports/kuairand-27k-behavior-v2-2026-10-11/README.md) |
+| Aligned 27K behavior comparison | Same 1,699,506 train targets; tree/MMoE close, richer SASRec trades worse click/long-view for better like/follow/forward; all 6/7 gates | [`reports/kuairand-27k-aligned-2026-10-12/README.md`](reports/kuairand-27k-aligned-2026-10-12/README.md) |
 | Real KuaiRand Jev + ParetoJev / serving experiments | Not run | Requires a stronger frozen behavior baseline and registered real Jev/reranker protocol |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
@@ -323,13 +324,18 @@ SASRec was not retrained in this experiment. Both sets pass 6/7 stricter develop
 gates against tab prevalence; **hate remains unresolved**. Jev/ParetoJev research
 targets remain pending. See the [report and feature assumptions](reports/kuairand-27k-behavior-v2-2026-10-11/README.md).
 
-The next registered comparison is **aligned v3**: reuse those exact rows and the
-frozen tree, fit a 26-feature MMoE control, and fit SASRec + MMoE with those same
+The completed **aligned v3** comparison reuses those exact rows and the
+frozen tree, fits a 26-feature MMoE control, and fits SASRec + MMoE with those same
 features plus user/candidate/history IDs. Only tree vs tabular MMoE has identical
 information; the sequence arm tests an explicitly richer package. Both neural
 arms use three fixed epochs, then the same April 18 calibration and April 19
 evaluator. Rare-feedback enrichment is deferred. See the
-[registration](reports/kuairand-27k-aligned-2026-10-12/REGISTRATION.md).
+[registration](reports/kuairand-27k-aligned-2026-10-12/REGISTRATION.md) and
+[results](reports/kuairand-27k-aligned-2026-10-12/README.md). Tree and tabular MMoE
+are close; the richer SASRec package has worse click/long-view but better
+like/follow/forward predictions in this fixed-budget development run. All three
+pass 6/7 gates; hate remains unresolved. This does not establish architecture
+superiority or a Jev/ParetoJev increment.
 
 ```bash
 .venv/bin/python scripts/prepare_kuairand_aligned.py \

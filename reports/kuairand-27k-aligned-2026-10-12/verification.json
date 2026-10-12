@@ -1,0 +1,12 @@
+{
+  "tests_passed": 252,
+  "exact_real_predictions_objective_scene_metrics_bootstrap": true,
+  "fresh_directory_archive_replay": true,
+  "exact_io_parity_scope": "synthetic engineering verification only",
+  "full_retraining_reproduced": false,
+  "cross_hardware_replay": false,
+  "evaluation_scope": "previously_seen_development_period_not_confirmatory",
+  "rare_feedback_sampling_changed": false,
+  "jev_requests": 0,
+  "research_targets_achieved": false
+}

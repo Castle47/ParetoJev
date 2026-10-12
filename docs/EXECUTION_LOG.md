@@ -622,7 +622,7 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   blocks this work; zero Jev requests were made this round.
 - Evidence: `reports/kuairand-27k-behavior-v2-2026-10-11/`.
 
-### 2026-10-12 — Aligned behavior controls (execution in progress)
+### 2026-10-12 — Aligned behavior controls (completed)
 
 - User corrected the priority: match behavior-model data/information/evaluation
   before rare-feedback optimization. Registered `configs/kuairand_27k_aligned.json`
@@ -646,4 +646,29 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Sequential throughput restored to about 200 batches/33 seconds at startup.
   252 tests pass. Synthetic frozen archive restored into a fresh directory and
   all predictions/metrics/bootstrap replay exactly. This synthetic verification
-  is engineering evidence only; real training/evaluation is still in progress.
+  is engineering evidence only; real training was still in progress at that checkpoint.
+
+- Real aligned comparison completed: tree/tabular MMoE/SASRec MMoE all pass 6/7
+  unchanged development gates; hate fails all three. Identical-information MMoE
+  is close to the tree, with worse click/long-view/like calibrated NLL (exploratory
+  user-bootstrap intervals exclude zero). Richer SASRec has worse click/long-view
+  but better like/follow/forward NLL; those five exploratory intervals exclude
+  zero. Comment/hate differences remain uncertain. No multiplicity correction.
+- AUC tree vs SASRec: click .7567 vs .7149; long-view .7777 vs .7364; like .7681
+  vs .7816; follow .7446 vs .7661; comment .7181 vs .7049; forward .6771 vs .7359;
+  hate .5745 vs .5672. No overall SASRec or architecture superiority claim.
+- Tabular MMoE has 24,231 parameters; sequence/ID arm 2,383,639. SASRec training
+  log loss declines .16624 -> .15523 -> .13332; this does not establish its best
+  epoch or diagnose the cause of weaker development click/long-view. Final epoch
+  and registered calibration are retained even when metrics worsen.
+- All real raw/calibrated predictions, per-objective/scene metrics and all three
+  1,000-replicate paired user-bootstrap comparisons match exactly on fresh-process
+  replay. No full retraining or cross-hardware replication is claimed.
+- Evidence and interpretation: `reports/kuairand-27k-aligned-2026-10-12/`.
+  Next neural improvement should use a preregistered time holdout inside training
+  and separate ID/sequence controls; do not prioritize making hate pass or claim
+  a Jev/ParetoJev increment. Existing results remain frozen.
+- Portable real frozen-evaluation archive restored into a fresh directory; all
+  predictions, objective/scene metrics and bootstrap intervals again match exactly.
+  Removed only this round's reconstructible local array/epoch cache after verification;
+  original external-drive data, sequence artifacts, models and results are retained.

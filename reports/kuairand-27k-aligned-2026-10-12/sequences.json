@@ -1,0 +1,38 @@
+{
+  "config_hash": "86ffadb523a583a5224266ccb3be2df23a3bb5621615dfe36f0491045154bd0c",
+  "sample_manifest_sha256": "feeb5d08214497cdc81cacfa17fd9b31797f4705f34f1683f3cb611c0ef5b8d9",
+  "event_store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+  "record_unit": "zero_based_EVENT_records",
+  "splits": {
+    "train": {
+      "rows": 1699506,
+      "files": {
+        "history": "2ae770b2381016289b0e0ca31cd36acd1f709a3d9a4be25913ede49b8d1bb1e5",
+        "item": "ff7f260fe5fcc72df307ef6202abaebb8cfebd0682b9ef168b525e7b5dc61418",
+        "record": "4fba8709cb8e5193f98dc92cdce180548b05a0aeeacc49b79a1d7739e055cf18",
+        "history_max_time": "9b124ac37be3fd2e23f79502d9cbc6ad83eecfa5b78cd4006a0f9f3c7fde7321"
+      },
+      "all_histories_strictly_prior": true
+    },
+    "calibration": {
+      "rows": 188642,
+      "files": {
+        "history": "43a46fb5280ab593be9edafe001331d53d40cf1fc80ab7414f6b1898c40b6a45",
+        "item": "a0cb4fb7f15bcb1f6242bf7a4f39bfbace7a70ea54528baac72d17c210900066",
+        "record": "f7361ab0304fa1291debf28dff9ce493843020296673f2d290d1868fc20272ed",
+        "history_max_time": "303d5469ed767ef99efadc477a0173c1a7daf3d108e6e738b6ba121f31f881da"
+      },
+      "all_histories_strictly_prior": true
+    },
+    "evaluation": {
+      "rows": 187419,
+      "files": {
+        "history": "c80b4f27f7d4fcdfb53c6228f2d61d02093e63f1f0b627d199e147ffc37b85b1",
+        "item": "01d794e4963a3ad6d42b2677ab6d2565659be048cbff2e561193071622f89b3e",
+        "record": "506102af56e297d1a6d04ed342cf8b4b6324d546e1f043ebb2252fd2b7a506cf",
+        "history_max_time": "9fa1e805e99db7ae84349221c4f5db733582dd41306c39ed8d65b501706e63ad"
+      },
+      "all_histories_strictly_prior": true
+    }
+  }
+}

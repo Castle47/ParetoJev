@@ -74,6 +74,8 @@ def report(a):
         '  --tree data/raw/kuairand-27k/behavior-v2/run-v2 \\',
         '  --output data/raw/kuairand-27k/behavior-aligned-v3/run-v1 --replay',
         '```', '', '重新训练时去掉 `--replay` 并使用新的 output 目录。完整源数据保存在外接硬盘项目目录。']
+    if (a.output/'FINDINGS.md').exists():
+        lines += ['', '结论、限制和后续决策见 [FINDINGS.md](FINDINGS.md)。']
     (a.output/'README.md').write_text('\n'.join(lines)+'\n')
 
 

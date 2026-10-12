@@ -1,0 +1,93 @@
+{
+  "config": {
+    "experiment_id": "kuairand27k-aligned-behavior-v3",
+    "scope": "previously_seen_development_period_not_confirmatory",
+    "seed": 20261012,
+    "v2_config": "configs/kuairand_27k_behavior_v2.json",
+    "regimes": [
+      "tabular_mmoe",
+      "sasrec_mmoe"
+    ],
+    "columns": 26,
+    "item_hash_buckets": 65536,
+    "history_length": 50,
+    "hidden_dim": 32,
+    "heads": 2,
+    "layers": 1,
+    "experts": 4,
+    "epochs": 3,
+    "batch_size": 512,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "clip_grad_norm": 5.0,
+    "threads": 4,
+    "checkpoint_selection": "fixed final epoch; no selection using calibration/evaluation",
+    "comparison": "tree vs tabular MMoE has identical 26 source features; SASRec MMoE additionally receives user/candidate IDs and last 50 strictly earlier item IDs, so its contrast measures the richer sequence-ID package, not architecture alone",
+    "research_target_mode": false,
+    "jev_requests": 0
+  },
+  "sample_manifest_sha256": "feeb5d08214497cdc81cacfa17fd9b31797f4705f34f1683f3cb611c0ef5b8d9",
+  "sequence_manifest_sha256": "03a191c310eea70a8f229470517a30dec42b339afc16198ce544f8662d85a415",
+  "provenance": {
+    "created_at_utc": "2026-10-12T03:20:27.643910+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "2ae868697c37f92d44d64f43be9daa27c9c710e9",
+    "inputs": [
+      {
+        "path": "configs/kuairand_27k_aligned.json",
+        "type": "file",
+        "bytes": 900,
+        "sha256": "665f52aca40aa005246ed8416f47f66eb597f818713ab0146a7706a587977a57"
+      },
+      {
+        "path": "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_kuairand_aligned.py",
+        "type": "file",
+        "bytes": 15261,
+        "sha256": "89a556e9549dc7dcce340a1ef8529da3d0e7118b20367a397e2bdf9525660035"
+      },
+      {
+        "path": "src/paretojev/models/kuairand_aligned.py",
+        "type": "file",
+        "bytes": 3498,
+        "sha256": "59cae02d88bdbcf1000eb736ee22c54bfab23d4a452965c160ab04c65d7f9a18"
+      },
+      {
+        "path": "src/paretojev/data/kuairand_aligned.py",
+        "type": "file",
+        "bytes": 1551,
+        "sha256": "debaff8fdd2be027d03d16e2baf398a6705b750cad4ba2a25022b929fbe1d602"
+      },
+      {
+        "path": "src/paretojev/data/aligned_batches.py",
+        "type": "file",
+        "bytes": 2551,
+        "sha256": "2920c339181900911677f783c95a5d741518c6fd9c16e49895b9af3153267baf"
+      },
+      {
+        "path": "src/paretojev/training/behavior_calibration.py",
+        "type": "file",
+        "bytes": 2937,
+        "sha256": "51ec31de2ff1daaa593c298c7ab8b577c3b7813ac8bff43a08ea343dd105ff14"
+      },
+      {
+        "path": "src/paretojev/evaluation/behavior_metrics.py",
+        "type": "file",
+        "bytes": 1245,
+        "sha256": "6f36ed000f326b03c73edf2837b8efae105a8a1d7800589c2105f5a4895ccf1b"
+      }
+    ],
+    "config_hash": "86ffadb523a583a5224266ccb3be2df23a3bb5621615dfe36f0491045154bd0c"
+  }
+}

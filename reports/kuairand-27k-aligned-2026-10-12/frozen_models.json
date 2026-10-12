@@ -1,0 +1,148 @@
+{
+  "tabular_mmoe": {
+    "checkpoint_sha256": "bed798f632e5aeffeb1f4d4405214830be2ee4774502f234a4afc0cf5622c819",
+    "calibration": [
+      {
+        "slope": 0.9566380609951228,
+        "intercept": 0.04537195345738118,
+        "objective": 0.5630283147522989,
+        "iterations": 5,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.0470781053037321,
+        "intercept": 0.09134633564970036,
+        "objective": 0.4705428450150276,
+        "iterations": 7,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.8903540846025224,
+        "intercept": -0.4718795547544409,
+        "objective": 0.07144404133230711,
+        "iterations": 10,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.0996317447182655,
+        "intercept": 0.5320019321781071,
+        "objective": 0.007021246049830774,
+        "iterations": 15,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9265251043056407,
+        "intercept": -0.307721480763823,
+        "objective": 0.016895149876514456,
+        "iterations": 13,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.8924787975034465,
+        "intercept": -0.7315790512876705,
+        "objective": 0.0066942806171003824,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.0893312673973312,
+        "intercept": 0.9177858629568808,
+        "objective": 0.004583307845884872,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      }
+    ],
+    "parameters": 24231,
+    "epochs": [
+      {
+        "epoch": 1,
+        "training_logloss": 0.16757779326648656,
+        "elapsed_seconds": 52.197674791998
+      },
+      {
+        "epoch": 2,
+        "training_logloss": 0.16452969379262358,
+        "elapsed_seconds": 97.42012779199285
+      },
+      {
+        "epoch": 3,
+        "training_logloss": 0.16374373236825715,
+        "elapsed_seconds": 169.38985420799872
+      }
+    ],
+    "fit_and_calibration_seconds": 172.5207981249987
+  },
+  "sasrec_mmoe": {
+    "checkpoint_sha256": "b81a469d22cf2364709f7e39734e84e49c94dacf379906208caa7bd8a8ceb969",
+    "calibration": [
+      {
+        "slope": 0.4876022398771221,
+        "intercept": -0.10707836024523562,
+        "objective": 0.5981952887123623,
+        "iterations": 8,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.5546976995647982,
+        "intercept": -0.25476729876700677,
+        "objective": 0.5019608644198862,
+        "iterations": 8,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.728814904956891,
+        "intercept": -0.8659277714180403,
+        "objective": 0.06812717427013268,
+        "iterations": 8,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.9370951931082696,
+        "intercept": -0.4583983681623598,
+        "objective": 0.006982459261708938,
+        "iterations": 12,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.5271087988540397,
+        "intercept": -2.38006730231129,
+        "objective": 0.017129567963091393,
+        "iterations": 13,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 0.6601529487954967,
+        "intercept": -2.1996969519938983,
+        "objective": 0.006842874628606814,
+        "iterations": 15,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      },
+      {
+        "slope": 1.1773337862437874,
+        "intercept": 1.6283348058285745,
+        "objective": 0.004248571530862893,
+        "iterations": 13,
+        "status": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL"
+      }
+    ],
+    "parameters": 2383639,
+    "epochs": [
+      {
+        "epoch": 1,
+        "training_logloss": 0.16624273530148478,
+        "elapsed_seconds": 373.8606214580068
+      },
+      {
+        "epoch": 2,
+        "training_logloss": 0.15523022932200337,
+        "elapsed_seconds": 734.7957060000044
+      },
+      {
+        "epoch": 3,
+        "training_logloss": 0.13332206038210406,
+        "elapsed_seconds": 1154.6077895000053
+      }
+    ],
+    "fit_and_calibration_seconds": 1165.5038407500106
+  }
+}

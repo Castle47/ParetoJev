@@ -1,0 +1,11 @@
+{
+  "identity": "2e67914ef52cd0af78804533ec75c867cdb0701ea4cf42dddd4eb5dc0c0406cb",
+  "seed": 20261012,
+  "epochs": 3,
+  "rows": 1699506,
+  "files": {
+    "epoch-0.npy": "10f2c8d3a5f386d925542d6d713875e2d58cf6080fc96bfddf44ebdd666e2333",
+    "epoch-1.npy": "b3cd53b7d68553bc55850dc9e75b9523e3967321b1a15fb6cca76aa286c2b164",
+    "epoch-2.npy": "527e99e6ad4644c1a839092eb90ce642f25aa313a47419128c39c025cd051e87"
+  }
+}

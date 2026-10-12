@@ -1,0 +1,6 @@
+{
+  "file": "ParetoJev-aligned-behavior-replay-2026-10-12.tar.gz",
+  "bytes": 101720015,
+  "sha256": "c9494b5622b118d694f755322349afcf5ed89428098f85fa8c15efcdf167d614",
+  "scope": "frozen development evaluation, excludes full training arrays"
+}

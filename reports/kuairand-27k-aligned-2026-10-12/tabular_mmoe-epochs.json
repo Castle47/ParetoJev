@@ -1,0 +1,17 @@
+[
+  {
+    "epoch": 1,
+    "training_logloss": 0.16757779326648656,
+    "elapsed_seconds": 52.197674791998
+  },
+  {
+    "epoch": 2,
+    "training_logloss": 0.16452969379262358,
+    "elapsed_seconds": 97.42012779199285
+  },
+  {
+    "epoch": 3,
+    "training_logloss": 0.16374373236825715,
+    "elapsed_seconds": 169.38985420799872
+  }
+]

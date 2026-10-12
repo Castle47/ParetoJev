@@ -1,0 +1,71 @@
+tabular_mmoe epoch=1 step=0 loss=0.196851 epoch_seconds=0.7
+tabular_mmoe epoch=1 step=200 loss=0.179292 epoch_seconds=3.5
+tabular_mmoe epoch=1 step=400 loss=0.163811 epoch_seconds=10.5
+tabular_mmoe epoch=1 step=600 loss=0.168551 epoch_seconds=12.6
+tabular_mmoe epoch=1 step=800 loss=0.159588 epoch_seconds=14.5
+tabular_mmoe epoch=1 step=1000 loss=0.172978 epoch_seconds=17.7
+tabular_mmoe epoch=1 step=1200 loss=0.163525 epoch_seconds=22.1
+tabular_mmoe epoch=1 step=1400 loss=0.177760 epoch_seconds=26.7
+tabular_mmoe epoch=1 step=1600 loss=0.175384 epoch_seconds=29.9
+tabular_mmoe epoch=1 step=1800 loss=0.154073 epoch_seconds=31.6
+tabular_mmoe epoch=1 step=2000 loss=0.169912 epoch_seconds=33.5
+tabular_mmoe epoch=1 step=2200 loss=0.172925 epoch_seconds=36.9
+tabular_mmoe epoch=1 step=2400 loss=0.162853 epoch_seconds=40.8
+tabular_mmoe epoch=1 step=2600 loss=0.159008 epoch_seconds=42.7
+tabular_mmoe epoch=1 step=2800 loss=0.175518 epoch_seconds=45.5
+tabular_mmoe epoch=1 step=3000 loss=0.163346 epoch_seconds=49.6
+tabular_mmoe epoch=1 step=3200 loss=0.142948 epoch_seconds=51.2
+tabular_mmoe epoch=1 complete mean_loss=0.167578
+tabular_mmoe epoch=2 step=0 loss=0.152589 epoch_seconds=0.0
+tabular_mmoe epoch=2 step=200 loss=0.177679 epoch_seconds=1.8
+tabular_mmoe epoch=2 step=400 loss=0.176924 epoch_seconds=7.0
+tabular_mmoe epoch=2 step=600 loss=0.158307 epoch_seconds=9.7
+tabular_mmoe epoch=2 step=800 loss=0.177352 epoch_seconds=11.9
+tabular_mmoe epoch=2 step=1000 loss=0.148188 epoch_seconds=15.3
+tabular_mmoe epoch=2 step=1200 loss=0.144597 epoch_seconds=17.2
+tabular_mmoe epoch=2 step=1400 loss=0.163629 epoch_seconds=18.7
+tabular_mmoe epoch=2 step=1600 loss=0.176150 epoch_seconds=20.2
+tabular_mmoe epoch=2 step=1800 loss=0.168627 epoch_seconds=22.9
+tabular_mmoe epoch=2 step=2000 loss=0.180881 epoch_seconds=25.9
+tabular_mmoe epoch=2 step=2200 loss=0.166798 epoch_seconds=27.6
+tabular_mmoe epoch=2 step=2400 loss=0.152732 epoch_seconds=29.3
+tabular_mmoe epoch=2 step=2600 loss=0.169863 epoch_seconds=33.2
+tabular_mmoe epoch=2 step=2800 loss=0.164360 epoch_seconds=36.1
+tabular_mmoe epoch=2 step=3000 loss=0.159557 epoch_seconds=38.4
+tabular_mmoe epoch=2 step=3200 loss=0.175734 epoch_seconds=43.3
+tabular_mmoe epoch=2 complete mean_loss=0.164530
+tabular_mmoe epoch=3 step=0 loss=0.165267 epoch_seconds=0.0
+tabular_mmoe epoch=3 step=200 loss=0.162802 epoch_seconds=2.7
+tabular_mmoe epoch=3 step=400 loss=0.173985 epoch_seconds=5.5
+tabular_mmoe epoch=3 step=600 loss=0.178082 epoch_seconds=7.6
+tabular_mmoe epoch=3 step=800 loss=0.164099 epoch_seconds=9.3
+tabular_mmoe epoch=3 step=1000 loss=0.164523 epoch_seconds=11.0
+tabular_mmoe epoch=3 step=1200 loss=0.154282 epoch_seconds=16.0
+tabular_mmoe epoch=3 step=1400 loss=0.193534 epoch_seconds=19.9
+tabular_mmoe epoch=3 step=1600 loss=0.158981 epoch_seconds=26.3
+tabular_mmoe epoch=3 step=1800 loss=0.153013 epoch_seconds=30.8
+tabular_mmoe epoch=3 step=2000 loss=0.168166 epoch_seconds=42.6
+tabular_mmoe epoch=3 step=2200 loss=0.164119 epoch_seconds=44.6
+tabular_mmoe epoch=3 step=2400 loss=0.160121 epoch_seconds=46.4
+tabular_mmoe epoch=3 step=2600 loss=0.161464 epoch_seconds=52.0
+tabular_mmoe epoch=3 step=2800 loss=0.161125 epoch_seconds=59.3
+tabular_mmoe epoch=3 step=3000 loss=0.149673 epoch_seconds=69.1
+tabular_mmoe epoch=3 step=3200 loss=0.174314 epoch_seconds=70.9
+tabular_mmoe epoch=3 complete mean_loss=0.163744
+frozen tabular_mmoe
+sasrec_mmoe epoch=1 step=0 loss=0.196760 epoch_seconds=2.0
+sasrec_mmoe epoch=1 step=200 loss=0.180511 epoch_seconds=281.4
+Traceback (most recent call last):
+  File "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_kuairand_aligned.py", line 209, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_kuairand_aligned.py", line 205, in main
+    if not a.replay: fit(a, config, manifest, sequence, v2)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_kuairand_aligned.py", line 104, in fit
+    logits = model(**batch(train, idx, regime))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_kuairand_aligned.py", line 35, in batch
+    fields[key] = torch.as_tensor(data[key][idx], dtype=torch.long)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
