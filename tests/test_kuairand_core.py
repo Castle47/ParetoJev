@@ -25,3 +25,15 @@ def test_common_boundary_excludes_earlier_candidates_in_same_slate():
     # A later exposure cannot change any candidate's features at the shared time.
     altered['item'][3]=0
     np.testing.assert_array_equal(x,common_time_features(altered,e[[4,2,3]],meta,history_length=3)[0])
+
+
+def test_choice_validation_rejects_unpinned_and_permuted_results():
+    import pytest
+    from paretojev.jev.public_choice import validate_choice
+    from paretojev.jev.client import DecisionAPIError
+    r=dict(model='m',revision='r',kind='choice',options=['A','B'],probabilities=[.2,.8],
+        choice_index=1,choice='B',image_used=False,elapsed_seconds=.1)
+    assert validate_choice(r,model='m',revision='r',options=['A','B'])==[.2,.8]
+    for change in ({'revision':'other'},{'options':['B','A']},{'probabilities':[float('nan'),1.]},
+        {'choice':'A'},{'probabilities':[.3,.8]},{'image_used':True}):
+        with pytest.raises(DecisionAPIError):validate_choice({**r,**change},model='m',revision='r',options=['A','B'])
