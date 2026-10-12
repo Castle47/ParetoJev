@@ -314,7 +314,7 @@ core archive, captions and categories are acquired and verified on the external
 drive. `data/raw/kuairand-27k` points to that directory. Do not load the full shards
 with the older in-memory trainer below.
 
-The latest registered development run is **v2**: 1,699,506 training targets,
+The completed tree-control run **v2** uses: 1,699,506 training targets,
 188,642 calibration targets (April 18), and 187,419 evaluation targets (April 19).
 The evaluation day was already seen during v1 development; this is not a fresh
 confirmatory test. Two sets of seven independent histogram-boosted classifiers
@@ -322,6 +322,30 @@ compare exposure/history statistics with additional upload-property features.
 SASRec was not retrained in this experiment. Both sets pass 6/7 stricter development
 gates against tab prevalence; **hate remains unresolved**. Jev/ParetoJev research
 targets remain pending. See the [report and feature assumptions](reports/kuairand-27k-behavior-v2-2026-10-11/README.md).
+
+The next registered comparison is **aligned v3**: reuse those exact rows and the
+frozen tree, fit a 26-feature MMoE control, and fit SASRec + MMoE with those same
+features plus user/candidate/history IDs. Only tree vs tabular MMoE has identical
+information; the sequence arm tests an explicitly richer package. Both neural
+arms use three fixed epochs, then the same April 18 calibration and April 19
+evaluator. Rare-feedback enrichment is deferred. See the
+[registration](reports/kuairand-27k-aligned-2026-10-12/REGISTRATION.md).
+
+```bash
+.venv/bin/python scripts/prepare_kuairand_aligned.py \
+  --store data/raw/kuairand-27k/behavior-pilot-v1 \
+  --data data/raw/kuairand-27k/behavior-v2 \
+  --output data/raw/kuairand-27k/behavior-aligned-v3
+.venv/bin/python scripts/run_kuairand_aligned.py \
+  --data data/raw/kuairand-27k/behavior-v2 \
+  --sequences data/raw/kuairand-27k/behavior-aligned-v3 \
+  --tree data/raw/kuairand-27k/behavior-v2/run-v2 \
+  --output data/raw/kuairand-27k/behavior-aligned-v3/run-v1
+```
+
+Use `--replay` on the second command to verify frozen predictions, scene metrics
+and paired bootstrap. Use a fresh output directory to retrain; completed data
+and runs are never overwritten.
 
 For a new data directory, prepare once (the existing `behavior-v2` is already
 complete). This uses the v1 complete early-event store and verifies its hashes:

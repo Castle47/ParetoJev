@@ -56,3 +56,15 @@ Upload metadata still assumes static-at-upload fields without timestamp proof.
 No user profile snapshots, monthly aggregates, outcome features or Jev are used.
 No current ParetoJev / real Jev increment is established. Research target mode
 stays false. Rare-feedback work is deferred until after this comparison.
+
+## Operational amendment (before neural evaluation)
+
+The initial run completed/froze tabular MMoE but was interrupted during the first
+SASRec epoch under severe system memory pressure (8 GB machine, approximately
+6 GB swap used; sampled process footprint ~1 GB, resident set ~77 MB). No SASRec
+checkpoint or new evaluation result existed. Keep the completed tabular arm.
+Replace fully resident arrays with hash-verified local SSD file-backed arrays;
+load calibration arrays only after training. Restart only the unfinished SASRec
+arm from the identical seed, rows/order, parameters and fixed budget. Synthetic
+before/after predictions, calibration, metrics and paired intervals match exactly
+(`io_parity.json`). This changes I/O, not the registered statistical protocol.

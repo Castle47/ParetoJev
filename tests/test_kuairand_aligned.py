@@ -95,3 +95,24 @@ def test_exact_occurrence_preparation_with_duplicate_timestamps(tmp_path):
     assert records.tolist() == [1, 0, 2, 7]
     assert np.array_equal(e['time'][records], np.load(data/'train-time.npy'))
     with pytest.raises(ValueError, match='Existing'): module.prepare(store, data, out, {})
+
+
+def test_local_cache_preserves_arrays_and_rejects_tampering(tmp_path):
+    import importlib.util
+    import sys
+    from pathlib import Path
+    from paretojev.utils.provenance import sha256_file
+    sys.path.insert(0, str(Path('scripts').resolve()))
+    try:
+        spec = importlib.util.spec_from_file_location('run_aligned', Path('scripts/run_kuairand_aligned.py'))
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+    finally:
+        sys.path.pop(0)
+    source = tmp_path/'source.npy'; original = np.arange(48).reshape(12,4)
+    np.save(source, original); digest = sha256_file(source)
+    actual = module.cached_array(source, digest, tmp_path/'cache')
+    assert isinstance(actual, np.memmap)
+    assert np.array_equal(actual, original)
+    np.save(tmp_path/'cache'/f'{digest}.npy', original+1)
+    with pytest.raises(ValueError, match='cache changed'):
+        module.cached_array(source, digest, tmp_path/'cache')

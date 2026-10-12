@@ -2,6 +2,7 @@
 """Fit aligned neural controls and compare with a verified frozen v2 tree."""
 import argparse
 import fcntl
+import shutil
 import time
 from pathlib import Path
 import joblib
@@ -9,7 +10,7 @@ import numpy as np
 import torch
 from torch.nn import functional as F
 from threadpoolctl import threadpool_limits
-from run_kuairand_behavior_v2 import load_split, probabilities
+from run_kuairand_behavior_v2 import probabilities
 from paretojev.data.kuairand_27k import BINARY_LABELS
 from paretojev.models.kuairand_aligned import AlignedBehaviorModel, fit_normalization
 from paretojev.evaluation.behavior_metrics import metrics
@@ -18,21 +19,42 @@ from paretojev.utils.io import read_json, atomic_write_json
 from paretojev.utils.provenance import canonical_hash, sha256_file, runtime_provenance
 
 
-def load_sequences(root, manifest, split):
-    result = {}
-    for key in ('history', 'item'):
-        path = root/f'{split}-{key}.npy'
-        if sha256_file(path) != manifest['splits'][split]['files'][key]: raise ValueError('Sequence data changed')
-        result[key] = np.load(path)
+def cached_array(path, digest, cache):
+    """Verified local SSD file pages may be reclaimed without anonymous swap."""
+    if sha256_file(path) != digest: raise ValueError(f'Changed artifact: {path}')
+    cache.mkdir(parents=True, exist_ok=True)
+    target = cache/f'{digest}.npy'
+    if not target.exists():
+        temporary = target.with_suffix('.partial')
+        shutil.copyfile(path, temporary)
+        if sha256_file(temporary) != digest: raise ValueError('Cache copy differs')
+        temporary.replace(target)
+    elif sha256_file(target) != digest:
+        raise ValueError('Local cache changed')
+    return np.load(target, mmap_mode='r')
+
+
+def load_split(root, manifest, split, cache):
+    spec = manifest['splits'][split]
+    result = {key: cached_array(root/f'{split}-{key}.npy', digest, cache)[:spec['rows']]
+              for key, digest in spec['files'].items()}
+    if result['time'].min() != spec['min_time'] or result['time'].max() != spec['max_time']:
+        raise ValueError('Recorded period mismatch')
+    return result
+
+
+def load_sequences(root, manifest, split, cache):
+    result = {key: cached_array(root/f'{split}-{key}.npy', manifest['splits'][split]['files'][key], cache)
+              for key in ('history', 'item')}
     if len(result['item']) != manifest['splits'][split]['rows']: raise ValueError('Sequence row mismatch')
     return result
 
 
 def batch(data, idx, regime):
-    fields = dict(x=torch.from_numpy(data['x'][idx]))
+    fields = dict(x=torch.from_numpy(np.array(data['x'][idx], copy=True)))
     if regime == 'sasrec_mmoe':
         for key in ('history', 'item', 'user'):
-            fields[key] = torch.as_tensor(data[key][idx], dtype=torch.long)
+            fields[key] = torch.as_tensor(np.array(data[key][idx], copy=True), dtype=torch.long)
     return fields
 
 
@@ -66,26 +88,37 @@ def validate(a, config):
 
 
 def fit(a, config, manifest, sequence, v2):
-    if list(a.output.glob('*.pt')) or (a.output/'results.json').exists():
+    if (list(a.output.glob('*.pt')) and not a.resume_frozen) or (a.output/'results.json').exists():
         raise ValueError('Existing run: use --replay or a fresh output')
-    train = load_split(a.data, manifest, 'train')
-    cal = load_split(a.data, manifest, 'calibration')
-    train.update(load_sequences(a.sequences, sequence, 'train'))
-    cal.update(load_sequences(a.sequences, sequence, 'calibration'))
+    train = load_split(a.data, manifest, 'train', a.cache)
+    train.update(load_sequences(a.sequences, sequence, 'train', a.cache))
     mean, scale = fit_normalization(train['x'][:, 1:], train['weight'])
     prior = np.average(train['y'], axis=0, weights=train['weight'].astype('float64')).clip(1e-7, 1-1e-7)
     weight = train['weight']/train['weight'].mean(dtype='float64')
-    frozen = {}; n = len(train['x'])
+    frozen = read_json(a.output/'frozen_models.json') if a.resume_frozen else {}
+    n = len(train['x'])
     start = time.monotonic()
-    atomic_write_json(a.output/'registration.json', dict(config=config,
+    registration = dict(config=config,
         sample_manifest_sha256=sha256_file(a.data/'samples.json'),
         sequence_manifest_sha256=sha256_file(a.sequences/'sequences.json'),
         provenance=runtime_provenance(input_paths=[a.config, Path(__file__),
             Path('src/paretojev/models/kuairand_aligned.py'),
             Path('src/paretojev/data/kuairand_aligned.py'),
             Path('src/paretojev/training/behavior_calibration.py'),
-            Path('src/paretojev/evaluation/behavior_metrics.py')], config=config)))
+            Path('src/paretojev/evaluation/behavior_metrics.py')], config=config))
+    if a.resume_frozen:
+        old = read_json(a.output/'registration.json')
+        for key in ('config', 'sample_manifest_sha256', 'sequence_manifest_sha256'):
+            if registration[key] != old[key]: raise ValueError('Resume protocol mismatch')
+        atomic_write_json(a.output/'resume_provenance.json', registration)
+    else:
+        atomic_write_json(a.output/'registration.json', registration)
     for regime in config['regimes']:
+        if regime in frozen:
+            if sha256_file(a.output/f'{regime}.pt') != frozen[regime]['checkpoint_sha256']:
+                raise ValueError('Completed arm changed before resume')
+            print(f'Reusing already frozen {regime}', flush=True)
+            continue
         torch.manual_seed(config['seed']); rng = np.random.default_rng(config['seed'])
         model = AlignedBehaviorModel(config, regime)
         with torch.no_grad():
@@ -112,6 +145,8 @@ def fit(a, config, manifest, sequence, v2):
             records.append(dict(epoch=epoch+1, training_logloss=loss_sum/n, elapsed_seconds=time.monotonic()-regime_start))
             atomic_write_json(a.output/f'{regime}-epochs.json', records)
             print(f'{regime} epoch={epoch+1} complete mean_loss={loss_sum/n:.6f}', flush=True)
+        cal = load_split(a.data, manifest, 'calibration', a.cache)
+        if regime == 'sasrec_mmoe': cal.update(load_sequences(a.sequences, sequence, 'calibration', a.cache))
         cal_raw = predict(model, cal, config['batch_size'])
         parameters = fit_calibration(cal['y'], cal_raw, cal['weight'], v2['calibration'])
         checkpoint = a.output/f'{regime}.pt'
@@ -124,15 +159,15 @@ def fit(a, config, manifest, sequence, v2):
             fit_and_calibration_seconds=time.monotonic()-regime_start)
         atomic_write_json(a.output/'frozen_models.json', frozen)
         print(f'frozen {regime}', flush=True)
-        del model, optimizer
+        del model, optimizer, cal, cal_raw
     print(f'All neural models/calibrators frozen seconds={time.monotonic()-start:.1f}; evaluation starts now', flush=True)
 
 
 def evaluate(a, config, manifest, sequence, v2, tree, replay=False):
     frozen = read_json(a.output/'frozen_models.json')
     if set(frozen) != set(config['regimes']): raise ValueError('All arms must be frozen before evaluation')
-    data = load_split(a.data, manifest, 'evaluation')
-    data.update(load_sequences(a.sequences, sequence, 'evaluation'))
+    data = load_split(a.data, manifest, 'evaluation', a.cache)
+    data.update(load_sequences(a.sequences, sequence, 'evaluation', a.cache))
     y, w = data['y'], data['weight']; predictions = {}; models = {}; exact = {}
     for regime in ['tree']+config['regimes']:
         if regime == 'tree':
@@ -196,7 +231,10 @@ def main():
     p = argparse.ArgumentParser()
     for name in ('data', 'sequences', 'tree', 'output'): p.add_argument('--'+name, type=Path, required=True)
     p.add_argument('--config', type=Path, default=Path('configs/kuairand_27k_aligned.json'))
-    p.add_argument('--replay', action='store_true'); a = p.parse_args()
+    p.add_argument('--replay', action='store_true')
+    p.add_argument('--resume-frozen', action='store_true')
+    p.add_argument('--cache', type=Path, default=Path('data/processed/kuairand-aligned-local-cache'))
+    a = p.parse_args()
     config = read_json(a.config); a.output.mkdir(parents=True, exist_ok=True)
     torch.set_num_threads(config['threads']); torch.use_deterministic_algorithms(True)
     with (a.output/'.lock').open('a') as lock, threadpool_limits(limits=config['threads']):
