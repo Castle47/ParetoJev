@@ -1,0 +1,26 @@
+{
+  "all_source_occurrences_labels_and_weights_match": true,
+  "all_candidate_and_history_boundaries_match": true,
+  "outcome_fields_sent": false,
+  "slates_checked": 2000,
+  "distinct_source_records": 20000,
+  "users": 1689,
+  "provenance": {
+    "created_at_utc": "2026-10-12T04:27:38.378876+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "a15c7f58d8c9daa83dfd090067a70701f70b55ac",
+    "inputs": []
+  }
+}
