@@ -1,0 +1,19 @@
+{
+  "real_jev_progress": {
+    "validated_decisions": 1400,
+    "planned_decisions": 14000,
+    "lifetime_attempts": 1400,
+    "cache_hits_this_process": 0,
+    "elapsed_seconds": 1602.3816076250077,
+    "complete": false,
+    "provenance": "real JEV Choice; no labels loaded"
+  },
+  "frozen_no_jev_models": 9,
+  "scorer_pid": 40712,
+  "scorer_exec_session": 53190,
+  "finisher_pid": 41371,
+  "finisher_exec_session": 89698,
+  "current_goal_complete": false,
+  "core_effectiveness_conclusion": "not evaluated yet",
+  "automatically_continues_after_scoring": true
+}

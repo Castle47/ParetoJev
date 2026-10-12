@@ -40,7 +40,8 @@ Verified locally on **2026-10-12**:
 | Real KuaiRand-27K behavior pilot | 426,832 train / 197,078 validation targets; 7 tasks; event-only gates 6/7, calibration and overfitting remain | [`reports/kuairand-27k-behavior-pilot-2026-10-11/README.md`](reports/kuairand-27k-behavior-pilot-2026-10-11/README.md) |
 | 27K richer controls + time-separated calibration | 1,699,506 train targets; both controls beat tab priors on 6/7 objectives; hate remains unresolved | [`reports/kuairand-27k-behavior-v2-2026-10-11/README.md`](reports/kuairand-27k-behavior-v2-2026-10-11/README.md) |
 | Aligned 27K behavior comparison | Same 1,699,506 train targets; tree/MMoE close, richer SASRec trades worse click/long-view for better like/follow/forward; all 6/7 gates | [`reports/kuairand-27k-aligned-2026-10-12/README.md`](reports/kuairand-27k-aligned-2026-10-12/README.md) |
-| Real KuaiRand Jev + ParetoJev / serving experiments | Not run | Requires a stronger frozen behavior baseline and registered real Jev/reranker protocol |
+| Real KuaiRand core Jev/ParetoJev validation | Running: 2,000 frozen slates, real Choice scoring, 9 no-Jev checkpoints frozen; no test conclusion yet | [`core status`](reports/kuairand-core-2026-10-12/STATUS.md), [`registration`](reports/kuairand-core-2026-10-12/REGISTRATION.md) |
+| Serving/student experiments | Not run | Core offline validation takes priority |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
 
@@ -309,6 +310,15 @@ scripts/run_microlens_phase_a.sh
 The script exits non-zero when a required target fails or cannot be evaluated. Phase A research gates also require explicit real MicroLens evidence. Existing `evaluate-microlens` reports do not establish that origin automatically and therefore remain `not_evaluable` until reviewed evidence is supplied; a high metric alone is insufficient.
 
 ## Active KuaiRand-27K workflow
+
+**Current priority: core real-signal validation**, not further behavior-model tuning.
+The registered six-arm experiment compares EMER-like/CMR-like/ParetoJev with and
+without real Jev, using frozen behavior predictions and identical candidate
+inputs. Native Choice scoring is running; nine no-Jev checkpoints are frozen.
+The automatic driver continues through raw-response audit, remaining training,
+weighted evaluation and exact replay. There is no effectiveness conclusion yet.
+See [live-work status and resume notes](reports/kuairand-core-2026-10-12/STATUS.md).
+
 
 The active dataset is the complete **27K**, explicitly selected by the user. Its
 core archive, captions and categories are acquired and verified on the external

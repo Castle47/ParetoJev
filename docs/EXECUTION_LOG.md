@@ -672,3 +672,36 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   predictions, objective/scene metrics and bootstrap intervals again match exactly.
   Removed only this round's reconstructible local array/epoch cache after verification;
   original external-drive data, sequence artifacts, models and results are retained.
+
+
+### 2026-10-12 — Core real Jev validation in progress
+
+- User explicitly prioritized the core ParetoJev-vs-no-Jev-baseline question and
+  delegated implementation choices. No further upstream behavior tuning was done.
+- Registered a seven-raw-objective, six-arm experiment before sample selection:
+  EMER-like/CMR-like/ParetoJev, each with/without Jev, plus a fixed behavior-sum
+  sanity control. Shared frozen v2 tree, 3 seeds, 20 epochs, validation selection,
+  original 2% HV / 3% cold NDCG / .005 regret / .60 controllability point thresholds.
+- Selected 1,000/400/600 train/validation/test ten-candidate slates from full early
+  27K logs, representing 499,429/152,285/351,756 eligible slates with exact inverse
+  stratum weights. Common decision-time history prevents candidate-specific
+  future history. Independent audit matched all 20,000 source records, labels,
+  weights, candidates and strictly prior histories across 1,689 selected users.
+- Joined 35,618 distinct candidate/history items to the complete caption table.
+  Outcome-free prompts have max state length 2,371 characters. Missing/truncated
+  text is recorded without replacing samples. Native Choice scores are relative
+  distributions, explicitly not event pXTR. Pin the same public JEV-27B revision.
+- Added no-Jev path/loss invariance and weighted evaluation. Weighted metrics and
+  grouped bootstrap match explicit integer-weight replication. 260 tests pass;
+  staged six-arm synthetic fit/evaluation/replay passes as engineering evidence.
+- Nine real no-Jev checkpoints are frozen. Test model comparisons have not run.
+  Real Choice scoring is active (14,000 planned decisions, bounded 15,400 total
+  attempts, concurrency one). Durable reservation ledger and raw response cache
+  preserve progress across transport failures.
+- A verified-PID dependency driver automatically audits complete responses,
+  materializes real-score tensors, trains remaining arms, compares all methods,
+  and replays predictions/metrics/intervals. Final artifacts still require review;
+  no research conclusion or goal completion is claimed at this checkpoint.
+- Live handles, paths and anti-duplication notes are in
+  `reports/kuairand-core-2026-10-12/STATUS.md`. Do not change frozen numerical code
+  or dependent scripts while the run is in progress.

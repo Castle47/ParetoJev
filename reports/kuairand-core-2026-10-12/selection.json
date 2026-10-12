@@ -1,0 +1,79 @@
+{
+  "config_hash": "6bba3916f888353c12464626593996f0ae945ab868d75a0ded0d5f4c8961fd1e",
+  "event_store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+  "selection_sha256": "e634c71841a4c3b44929fe02aa2868dcb91f2b02b54d9b771c39f581a0fe7290",
+  "popularity_sha256": "efbfce24adedd72231f3a80abee52be94e9d49ccbb06ab3fc5ce0e49b1cea850",
+  "population_by_split_stratum": [
+    [
+      1529,
+      2512,
+      2449,
+      6619,
+      28172,
+      458148
+    ],
+    [
+      336,
+      724,
+      738,
+      1965,
+      8627,
+      139895
+    ],
+    [
+      804,
+      1762,
+      1787,
+      4602,
+      19714,
+      323087
+    ]
+  ],
+  "sampled_by_split_stratum": [
+    [
+      100,
+      100,
+      100,
+      100,
+      200,
+      400
+    ],
+    [
+      40,
+      40,
+      40,
+      40,
+      80,
+      160
+    ],
+    [
+      60,
+      60,
+      60,
+      60,
+      120,
+      240
+    ]
+  ],
+  "selected_slates": 2000,
+  "source_record_unit": "zero_based_EVENT_records",
+  "source_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+  "provenance": {
+    "created_at_utc": "2026-10-12T04:03:57.769024+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "1c34cd4e9fc072f8ccf732bb0f46d06fe40bf97c",
+    "inputs": []
+  }
+}

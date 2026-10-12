@@ -1,0 +1,18 @@
+Fit seed=7 method=emer_like_no_jev
+Frozen 7/emer_like_no_jev best_epoch=1
+Fit seed=7 method=cmr_like_no_jev
+Frozen 7/cmr_like_no_jev best_epoch=1
+Fit seed=7 method=paretojev_no_jev
+Frozen 7/paretojev_no_jev best_epoch=1
+No-Jev arms frozen; test comparison has not run
+Fit seed=7 method=emer_like
+Frozen 7/emer_like best_epoch=1
+Fit seed=7 method=cmr_like
+Frozen 7/cmr_like best_epoch=1
+Fit seed=7 method=paretojev
+Frozen 7/paretojev best_epoch=0
+Evaluated all arms seed=7
+Core comparison complete; inspect failures and uncertainty before claiming a win
+Evaluated all arms seed=7
+Core comparison complete; inspect failures and uncertainty before claiming a win
+Synthetic staged six-arm training, weighted evaluation and exact replay passed
