@@ -12,6 +12,7 @@ from torch.nn import functional as F
 from threadpoolctl import threadpool_limits
 from run_kuairand_behavior_v2 import probabilities
 from paretojev.data.kuairand_27k import BINARY_LABELS
+from paretojev.data.aligned_batches import stage_epochs, sequential_batches
 from paretojev.models.kuairand_aligned import AlignedBehaviorModel, fit_normalization
 from paretojev.evaluation.behavior_metrics import metrics
 from paretojev.training.behavior_calibration import fit_calibration, apply_calibration, cluster_logloss_difference
@@ -97,6 +98,11 @@ def fit(a, config, manifest, sequence, v2):
     weight = train['weight']/train['weight'].mean(dtype='float64')
     frozen = read_json(a.output/'frozen_models.json') if a.resume_frozen else {}
     n = len(train['x'])
+    staged = stage_epochs(train, weight, a.cache/('epochs-'+canonical_hash(config)),
+        seed=config['seed'], epochs=config['epochs'],
+        identity=canonical_hash([manifest, sequence, config]))
+    training_users = np.unique(train['user'])
+    del train, weight
     start = time.monotonic()
     registration = dict(config=config,
         sample_manifest_sha256=sha256_file(a.data/'samples.json'),
@@ -104,6 +110,7 @@ def fit(a, config, manifest, sequence, v2):
         provenance=runtime_provenance(input_paths=[a.config, Path(__file__),
             Path('src/paretojev/models/kuairand_aligned.py'),
             Path('src/paretojev/data/kuairand_aligned.py'),
+            Path('src/paretojev/data/aligned_batches.py'),
             Path('src/paretojev/training/behavior_calibration.py'),
             Path('src/paretojev/evaluation/behavior_metrics.py')], config=config))
     if a.resume_frozen:
@@ -119,27 +126,26 @@ def fit(a, config, manifest, sequence, v2):
                 raise ValueError('Completed arm changed before resume')
             print(f'Reusing already frozen {regime}', flush=True)
             continue
-        torch.manual_seed(config['seed']); rng = np.random.default_rng(config['seed'])
+        torch.manual_seed(config['seed'])
         model = AlignedBehaviorModel(config, regime)
         with torch.no_grad():
             model.mean.copy_(torch.from_numpy(mean)); model.scale.copy_(torch.from_numpy(scale))
-            if regime == 'sasrec_mmoe': model.known_users[np.unique(train['user'])] = True
+            if regime == 'sasrec_mmoe': model.known_users[training_users] = True
             for j, head in enumerate(model.heads): head.bias.fill_(float(np.log(prior[j]/(1-prior[j]))))
         optimizer = torch.optim.AdamW(model.parameters(), lr=config['learning_rate'], weight_decay=config['weight_decay'])
         records = []; regime_start = time.monotonic()
         for epoch in range(config['epochs']):
-            model.train(); order = rng.permutation(n); loss_sum = 0.; epoch_start = time.monotonic()
-            for step, offset in enumerate(range(0, n, config['batch_size'])):
-                idx = order[offset:offset+config['batch_size']]
-                y = torch.as_tensor(train['y'][idx], dtype=torch.float32)
-                w = torch.from_numpy(weight[idx])
+            model.train(); loss_sum = 0.; epoch_start = time.monotonic()
+            for step, rows in enumerate(sequential_batches(staged[epoch], config['batch_size'])):
+                y = torch.as_tensor(rows['y'], dtype=torch.float32)
+                w = torch.from_numpy(rows['weight'])
                 optimizer.zero_grad(set_to_none=True)
-                logits = model(**batch(train, idx, regime))
+                logits = model(**batch(rows, slice(None), regime))
                 loss = (F.binary_cross_entropy_with_logits(logits, y, reduction='none').mean(1)*w).mean()
                 if not torch.isfinite(loss): raise ValueError('Nonfinite loss')
                 loss.backward(); torch.nn.utils.clip_grad_norm_(model.parameters(), config['clip_grad_norm'])
                 optimizer.step(); model.reset_reserved()
-                loss_sum += float(loss.detach())*len(idx)
+                loss_sum += float(loss.detach())*len(rows['x'])
                 if step % 200 == 0:
                     print(f'{regime} epoch={epoch+1} step={step} loss={float(loss.detach()):.6f} epoch_seconds={time.monotonic()-epoch_start:.1f}', flush=True)
             records.append(dict(epoch=epoch+1, training_logloss=loss_sum/n, elapsed_seconds=time.monotonic()-regime_start))

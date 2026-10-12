@@ -1,5 +1,6 @@
 {
   "scope": "synthetic_engineering_only",
   "exact_predictions_calibration_metrics_and_bootstrap": true,
-  "change": "bounded local SSD file-backed arrays instead of anonymous resident arrays; no statistical change"
+  "change": "bounded local SSD file-backed arrays instead of anonymous resident arrays; no statistical change",
+  "sequential_staging_exact_predictions_calibration_metrics_and_bootstrap": true
 }

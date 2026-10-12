@@ -116,3 +116,22 @@ def test_local_cache_preserves_arrays_and_rejects_tampering(tmp_path):
     np.save(tmp_path/'cache'/f'{digest}.npy', original+1)
     with pytest.raises(ValueError, match='cache changed'):
         module.cached_array(source, digest, tmp_path/'cache')
+
+
+def test_sequential_staging_preserves_every_permuted_batch(tmp_path):
+    from paretojev.data.aligned_batches import stage_epochs, sequential_batches
+    rng = np.random.default_rng(1); n=23
+    data=dict(x=rng.normal(size=(n,26)).astype('float32'),y=rng.integers(0,2,(n,7),dtype='uint8'),
+        history=rng.integers(0,99,(n,50),dtype='int32'),item=np.arange(n,dtype='int32'),user=np.arange(n,dtype='int32'))
+    weights=np.linspace(.1,3,n)
+    paths=stage_epochs(data,weights,tmp_path,seed=9,epochs=3,identity='test',chunk_size=5)
+    order_rng=np.random.default_rng(9)
+    for path in paths:
+        order=order_rng.permutation(n)
+        for step, rows in enumerate(sequential_batches(path,7)):
+            idx=order[step*7:step*7+7]
+            for key in data: assert np.array_equal(rows[key],data[key][idx])
+            assert np.array_equal(rows['weight'],weights[idx])
+    assert paths==stage_epochs(data,weights,tmp_path,seed=9,epochs=3,identity='test')
+    with pytest.raises(ValueError,match='protocol changed'):
+        stage_epochs(data,weights,tmp_path,seed=9,epochs=3,identity='other')

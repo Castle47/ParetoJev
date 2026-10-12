@@ -18,6 +18,10 @@ def report(a):
     for name in ('results.json', 'replay.json', 'registration.json', 'frozen_models.json',
                  'tabular_mmoe-epochs.json', 'sasrec_mmoe-epochs.json'):
         shutil.copyfile(a.run/name, a.output/name)
+    if r['sample_manifest_sha256'] != sha256_file(a.data/'samples.json'):
+        raise ValueError('Report data manifest mismatch')
+    if (a.run/'resume_provenance.json').exists():
+        shutil.copyfile(a.run/'resume_provenance.json', a.output/'resume_provenance.json')
     s = read_json(a.data/'samples.json')
     shutil.copyfile(a.sequences/'sequences.json', a.output/'sequences.json')
     lines = ['# KuaiRand-27K：对齐样本后的行为模型对照', '',

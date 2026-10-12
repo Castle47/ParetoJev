@@ -68,3 +68,11 @@ load calibration arrays only after training. Restart only the unfinished SASRec
 arm from the identical seed, rows/order, parameters and fixed budget. Synthetic
 before/after predictions, calibration, metrics and paired intervals match exactly
 (`io_parity.json`). This changes I/O, not the registered statistical protocol.
+
+Local random gathers still suffered under memory pressure, so the unfinished
+first SASRec epoch was interrupted again before producing a checkpoint/evaluation.
+Stage all three exact registered permutations into sequential local files, then
+load just one batch at a time. Every row, weight, batch boundary and final short
+batch is preserved. Tests compare all staged batches with the original sampler;
+synthetic end-to-end predictions/calibration/metrics/intervals remain exactly
+identical. This is a second I/O-only amendment; no outcome-driven tuning.
