@@ -20,7 +20,7 @@ def export(a):
             (stage/dest).mkdir(exist_ok=True)
             for name in names: shutil.copyfile(root/name, stage/dest/name)
         copy(a.data, 'data', ['samples.json']+[f'evaluation-{key}.npy' for key in ('x','y','weight','user','time')])
-        copy(a.sequences, 'sequences', ['sequences.json']+[f'evaluation-{key}.npy' for key in ('history','item','record','history_max_time')])
+        copy(a.sequences, 'sequences', ['sequences.json']+[f'evaluation-{key}.npy' for key in read_json(a.sequences/'sequences.json')['splits']['evaluation']['files']])
         copy(a.tree, 'tree', ['results.json','upload_metadata_assumed_static.joblib',
             'upload_metadata_assumed_static-raw.npy','upload_metadata_assumed_static-calibrated.npy'])
         names=['results.json','replay.json','frozen_models.json','registration.json','resume_provenance.json']

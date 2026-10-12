@@ -621,3 +621,29 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   the seven raw objectives to any six-objective protocol. No new external input
   blocks this work; zero Jev requests were made this round.
 - Evidence: `reports/kuairand-27k-behavior-v2-2026-10-11/`.
+
+### 2026-10-12 — Aligned behavior controls (execution in progress)
+
+- User corrected the priority: match behavior-model data/information/evaluation
+  before rare-feedback optimization. Registered `configs/kuairand_27k_aligned.json`
+  and `reports/kuairand-27k-aligned-2026-10-12/REGISTRATION.md` before fitting.
+- Recovered all exact v2 target occurrences from the SHA-verified early event
+  store. User/time/seven labels/inclusion weights match every row; source record
+  indices disambiguate ties. All last-50 histories are strictly earlier.
+- Frozen v2 tree is reused, not refit. Tabular MMoE receives the same 26 source
+  features; SASRec MMoE adds ordered item IDs and user/candidate IDs. The latter
+  tests a richer package, not a pure architecture contrast. No rare oversampling.
+- Both neural arms register fixed three epochs/final checkpoint, independent
+  April 18 calibration, and unchanged April 19 development evaluator/gates.
+- Initial source `899dbe5` completed/froze tabular MMoE. SASRec's unfinished first
+  epoch was interrupted under system memory pressure; source `066b0c0` replaced
+  resident arrays with local SSD file-backed arrays. Random gathering remained
+  slow and was interrupted before any SASRec checkpoint/evaluation. Source
+  `2ae8686` stages exactly the same three permutations and reads batches
+  sequentially; tabular checkpoint is retained and SASRec restarts from seed.
+  Exact synthetic predictions/calibration/metrics/bootstrap parity holds for both
+  I/O changes. No new neural evaluation was inspected during these amendments.
+- Sequential throughput restored to about 200 batches/33 seconds at startup.
+  252 tests pass. Synthetic frozen archive restored into a fresh directory and
+  all predictions/metrics/bootstrap replay exactly. This synthetic verification
+  is engineering evidence only; real training/evaluation is still in progress.
