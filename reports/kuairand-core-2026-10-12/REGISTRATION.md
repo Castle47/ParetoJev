@@ -91,3 +91,24 @@ The outcome can be improvement, failure or insufficient evidence. Do not relabel
 failures as success, broaden a narrow result into a universal claim, or imply that
 engineering tests prove the recommendation hypothesis. Preserve checkpoints and
 verify exact prediction/metric replay from saved data before completing the goal.
+
+## Implementation details frozen before reranker training
+
+Reranker candidate features are 25 train-weighted standardized numeric columns,
+25 missing indicators and 15 tab indicators (65 derived inputs). Behavior scores
+are the original frozen 26-feature tree predictions plus its April 18 calibrator.
+Real-count popularity enters the Pareto reliability projection through log1p,
+as it already does in the shared baseline encoder and fusion gate; a config flag
+preserves legacy checkpoint behavior outside this run. The no-Jev Pareto arm
+bypasses the fusion contribution and disables Jev distillation. Its unused Jev
+channels contain structural constants only, explicitly labeled absent, never
+passed off as real model predictions. No-Jev checkpoints can train before scoring
+finishes. A common-input hash covering features, labels, weights and exact source
+occurrences must match before reusing them with the later real-score dataset.
+
+Prepared population sizes: 499,429 train / 152,285 validation / 351,756 test eligible
+slates. Exactly 1,000 / 400 / 600 selected. The selected test contains 80 follows,
+75 comments, 72 forwards and 101 hates, without reading any model-comparison result.
+Counts describe the enriched sample; weighted metrics estimate the eligible
+population. Maximum prompt state length is 2,371 characters. Text truncation and
+missingness are recorded, with no sample replacement.

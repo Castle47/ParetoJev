@@ -390,7 +390,8 @@ def evaluate_comparison(
     }
     factorial_pairs = [("paretojev", "emer_like_no_jev"), ("paretojev", "cmr_like_no_jev"),
         ("paretojev", "paretojev_no_jev"), ("paretojev", "emer_like"), ("paretojev", "cmr_like"),
-        ("emer_like", "emer_like_no_jev"), ("cmr_like", "cmr_like_no_jev")]
+        ("emer_like", "emer_like_no_jev"), ("cmr_like", "cmr_like_no_jev"),
+        ("paretojev", "behavior_weighted_sum")]
     factorial = {f"{method}_vs_{comparator}": compare_pair(method, comparator)
                  for method, comparator in factorial_pairs if method in models and comparator in models}
     first_stats = statistics[baseline]

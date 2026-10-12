@@ -230,3 +230,32 @@ def test_custom_generic_baseline_does_not_relabel_fixed_research_namespaces() ->
     assert report["comparisons"]["paretojev"]["baseline"] == "cmr_like"
     assert report["kuairand"]["paretojev"]["baseline"] == "emer_like"
     assert report["kuairand"]["paretojev_vs_cmr"]["baseline"] == "cmr_like"
+
+
+def test_population_weighting_matches_replicated_slates_and_cluster_bootstrap(tmp_path):
+    from dataclasses import fields, replace
+    original=batch(3)
+    original.labels[1]=torch.tensor([[1.,.2],[0.,.9],[0.,.3]])
+    original.labels[2]=torch.tensor([[0.,1.],[0.,1.],[0.,1.]])
+    weights=np.array([2,3,4]);indices=np.repeat(np.arange(3),weights)
+    repeated=replace(original,**{f.name:getattr(original,f.name)[indices] for f in fields(original)
+        if isinstance(getattr(original,f.name),torch.Tensor)})
+    groups=np.array(['a','b','c'])
+    actual=compare(batches=[original],sample_weights=weights,group_ids=groups,bootstrap_samples=20,
+        audit_path=tmp_path/'weighted.npz')
+    expected=compare(batches=[repeated],group_ids=groups[indices],bootstrap_samples=20,
+        audit_path=tmp_path/'repeated.npz')
+    assert actual['objective_metric_coverage']['click']==pytest.approx(5/9)
+    for method in actual['methods']:
+        for key in ('points','hypervolume','cold_positive_ndcg_mean'):
+            np.testing.assert_allclose(actual['methods'][method][key],expected['methods'][method][key],atol=1e-12)
+    a=actual['paired_user_bootstrap']['comparisons'];b=expected['paired_user_bootstrap']['comparisons']
+    for method in a:
+        for name,value in a[method]['objective_mean_absolute_gain'].items():
+            other=b[method]['objective_mean_absolute_gain'][name]
+            assert value['valid_replicates']==other['valid_replicates']
+            if value['interval'] is None:assert other['interval'] is None
+            else:np.testing.assert_allclose(value['interval'],other['interval'],atol=1e-12)
+    with np.load(tmp_path/'weighted.npz') as a,np.load(tmp_path/'repeated.npz') as b:
+        for name in ('utility_numerator','utility_denominator','cold_numerator','cold_denominator'):
+            np.testing.assert_allclose(a[name].sum(2),b[name].sum(2),atol=1e-12)
