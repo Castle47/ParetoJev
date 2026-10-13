@@ -58,3 +58,23 @@ def test_publisher_hash_checks_reject_same_size_corruption(tmp_path):
     p.write_bytes(b'abc');assert m.check(p,spec)=='wrong_size'
     q=tmp_path/'config';q.write_bytes(b'{}')
     assert m.check(q,dict(size=2,blobId=hashlib.sha1(b'blob 2\0{}').hexdigest()))=='ok'
+
+
+def test_grouped_wire_response_is_preserved_atomically(tmp_path):
+    import hashlib,json,sqlite3
+    row=dict(slate_id=0,state='context',questions=[f'q{i}' for i in range(7)],options=['A','B'])
+    children=[]
+    for i in range(7):
+        r=response();r.pop('num_model_requests');r.update(implementation='pytorch-peft-group-v3',question_index=i,group_shared_forwards=2);children.append(r)
+    group=dict(model=native.MODEL,protocol=native.PROTOCOL,implementation='pytorch-peft-group-v3',
+        model_forward_calls=2,question_count=7,results=children)
+    assert len(native.validate_group(group,row))==7
+    ledger=native.Ledger(tmp_path/'native.sqlite3',10,time.time()+100)
+    ledger.put_group(row,group,.2)
+    assert json.loads(ledger.db.execute('SELECT raw_json FROM groups').fetchone()[0])==group
+    for j in range(7):
+        key=hashlib.sha256(native.canonical(native.payload(row,j)).encode()).hexdigest()
+        assert ledger.cached(0,j,key)==children[j]
+    with pytest.raises(sqlite3.IntegrityError):ledger.put_group(row,group,.2)
+    assert ledger.db.execute('SELECT COUNT(*) FROM results').fetchone()[0]==7
+    ledger.db.close()

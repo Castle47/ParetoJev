@@ -44,7 +44,10 @@ def validate(response,options):
     index=response.get('choice_index')
     if type(index)!=int or not 0<=index<len(options) or p[index]!=max(p) or response.get('choice')!=options[index]:
         raise ValueError('Inconsistent winner')
-    if response.get('num_model_requests')!=1:raise ValueError('Expected exactly one System 1 request')
+    if response.get('implementation')=='pytorch-peft-group-v3' and 'group_shared_forwards' in response:
+        if 'num_model_requests' in response or response['group_shared_forwards']!=2 or type(response.get('question_index'))!=int or not 0<=response['question_index']<7:
+            raise ValueError('Invalid shared forward accounting')
+    elif response.get('num_model_requests')!=1:raise ValueError('Unexpected System 1 forward count')
     if not isinstance(response.get('elapsed_seconds'),(int,float)) or not math.isfinite(response['elapsed_seconds']) or response['elapsed_seconds']<0:
         raise ValueError('Invalid elapsed time')
     return p
@@ -69,18 +72,34 @@ def payload(row,j):
     return dict(kind='choice',state=row['state'],question=row['questions'][j],options=row['options'],thinking='off')
 
 
+def group_payload(row):
+    return dict(kind='choice',state=row['state'],questions=row['questions'],options=row['options'],thinking='off')
+
+
+def validate_group(r,row):
+    if r.get('model')!=MODEL or r.get('protocol')!=PROTOCOL or r.get('implementation')!='pytorch-peft-group-v3':
+        raise ValueError('Unexpected grouped producer')
+    if r.get('model_forward_calls')!=2 or r.get('question_count')!=7 or len(r.get('results',[]))!=7:
+        raise ValueError('Invalid grouped coverage or forward accounting')
+    for j,value in enumerate(r['results']):
+        if value.get('question_index')!=j or value.get('implementation')!=r['implementation']:raise ValueError('Goal order or implementation differs')
+        validate(value,row['options'])
+    return r['results']
+
+
 def producer(model_dir,endpoint):
+    with urllib.request.urlopen(endpoint.rstrip('/')+'/info',timeout=30) as r:info=json.load(r)
+    if info.get('implementation')!='pytorch-peft-group-v3' or info.get('huggingface_revision')!=REVISION:
+        raise ValueError('Expected pinned grouped service before opening a new collection')
     files=sorted(set(model_dir.glob('model*.safetensors'))|set((model_dir/'adapter_vllm').glob('*'))|set((model_dir/'adapter').glob('*'))|
                  {model_dir/name for name in ('config.json','calibration.json','tokenizer.json','tokenizer_config.json','serve_decide.py','head.safetensors','judge_config.json')})
     if len(list(model_dir.glob('model-*.safetensors')))!=13:raise ValueError('Missing model shards')
     identities={str(p.relative_to(model_dir)):digest(p) for p in files if p.is_file()}
-    info_url=endpoint.rstrip('/')+'/info'
-    with urllib.request.urlopen(info_url,timeout=30) as r:info=json.load(r)
     packages={}
-    for p in ('vllm','torch','transformers','huggingface_hub','peft','accelerate'):
+    for p in ('vllm','torch','transformers','huggingface_hub','peft','accelerate','flash-linear-attention','fla-core','causal-conv1d','triton'):
         try:packages[p]=importlib.metadata.version(p)
         except importlib.metadata.PackageNotFoundError:packages[p]=None
-    if info.get('implementation')=='pytorch-peft-direct-head-v1':
+    if info.get('implementation','').startswith('pytorch-peft-'):
         identities['custom/torch_head_server.py']=digest('/root/torch_head_server.py')
     result=dict(model=MODEL,huggingface_revision=REVISION,files=identities,service_info=info,
         packages=packages,
@@ -95,21 +114,27 @@ def probe(rows,endpoint,out):
         start=time.monotonic()
         def one(row):
             results=[]
-            for j in range(7):
-                t=time.monotonic();r=post(endpoint,payload(row,j));validate(r,row['options'])
-                results.append(dict(slate_id=row['slate_id'],objective=j,response=r,wall_seconds=time.monotonic()-t))
+            if workers==1:
+                for j in range(7):
+                    t=time.monotonic();r=post(endpoint,payload(row,j));validate(r,row['options'])
+                    results.append(dict(slate_id=row['slate_id'],objective=j,response=r,wall_seconds=time.monotonic()-t))
+            else:
+                t=time.monotonic();r=post(endpoint+'_many',group_payload(row));children=validate_group(r,row)
+                results=[dict(slate_id=row['slate_id'],objective=j,response=value,group_response=r,
+                    wall_seconds=time.monotonic()-t) for j,value in enumerate(children)]
             return results
         with concurrent.futures.ThreadPoolExecutor(max_workers=workers) as pool:
             values=[r for rs in pool.map(one,sample) for r in rs]
         elapsed=time.monotonic()-start
-        runs.append(dict(workers=workers,decisions=len(values),elapsed_seconds=elapsed,qps=len(values)/elapsed,rows=values))
+        runs.append(dict(workers=workers,decisions=len(values),http_requests=len(values) if workers==1 else len(sample),
+            elapsed_seconds=elapsed,qps=len(values)/elapsed,rows=values))
         save(out/f'probe-{workers}.json',runs[-1])
         print('probe',workers,'qps',runs[-1]['qps'],flush=True)
     base=runs[0]['rows'];maxdiff=max(abs(a-b) for run in runs[1:] for r0,r in zip(base,run['rows'])
         for a,b in zip(r0['response']['probabilities'],r['response']['probabilities']))
-    report=dict(real_requests=sum(r['decisions'] for r in runs),runs=[{k:v for k,v in r.items() if k!='rows'} for r in runs],
+    report=dict(real_requests=sum(r['http_requests'] for r in runs),real_decisions=sum(r['decisions'] for r in runs),runs=[{k:v for k,v in r.items() if k!='rows'} for r in runs],
         maximum_probability_difference=maxdiff,stability_threshold=.01,passed=maxdiff<=.01,
-        interpretation='Transport/schema/numerical stability only, no recommendation-effect test.')
+        interpretation='Uncached single-question reference vs grouped shared-prefix inference; numerical and throughput check only, no recommendation-effect test.')
     save(out/'probe.json',report)
     if not report['passed']:raise ValueError('Native concurrent inference failed registered numerical stability check')
 
@@ -119,7 +144,8 @@ class Ledger:
         self.lock=threading.Lock();self.max_attempts=max_attempts;self.deadline=deadline
         self.db=sqlite3.connect(path,check_same_thread=False);self.db.execute('PRAGMA journal_mode=WAL')
         self.db.executescript('CREATE TABLE IF NOT EXISTS attempts(id INTEGER PRIMARY KEY, row_id INT, goal INT, time REAL);'
-            'CREATE TABLE IF NOT EXISTS results(row_id INT, goal INT, payload_hash TEXT, raw_json TEXT, wall REAL, PRIMARY KEY(row_id,goal));')
+            'CREATE TABLE IF NOT EXISTS results(row_id INT, goal INT, payload_hash TEXT, raw_json TEXT, wall REAL, PRIMARY KEY(row_id,goal));'
+            'CREATE TABLE IF NOT EXISTS groups(row_id INT PRIMARY KEY,payload_hash TEXT,raw_json TEXT,wall REAL);')
     def cached(self,i,j,key):
         with self.lock:r=self.db.execute('SELECT payload_hash,raw_json FROM results WHERE row_id=? AND goal=?',(i,j)).fetchone()
         if r and r[0]!=key:raise ValueError('Cached input changed')
@@ -133,6 +159,15 @@ class Ledger:
     def put(self,i,j,key,r,elapsed):
         with self.lock:
             self.db.execute('INSERT INTO results VALUES(?,?,?,?,?)',(i,j,key,canonical(r),elapsed));self.db.commit()
+    def put_group(self,row,r,elapsed):
+        validate_group(r,row)
+        with self.lock:
+            with self.db:
+                self.db.execute('INSERT INTO groups VALUES(?,?,?,?)',(row['slate_id'],
+                    hashlib.sha256(canonical(group_payload(row)).encode()).hexdigest(),canonical(r),elapsed))
+                for j,child in enumerate(r['results']):
+                    key=hashlib.sha256(canonical(payload(row,j)).encode()).hexdigest()
+                    self.db.execute('INSERT INTO results VALUES(?,?,?,?,?)',(row['slate_id'],j,key,canonical(child),elapsed))
 
 
 def collect(rows,a,out):
@@ -140,24 +175,30 @@ def collect(rows,a,out):
     if end.tzinfo is None:raise ValueError('Explicit timezone required for collection deadline')
     ledger=Ledger(out/'native.sqlite3',a.max_attempts,end.timestamp());start=time.monotonic()
     def one(row):
+        hits=[]
         for j in range(7):
             p=payload(row,j);key=hashlib.sha256(canonical(p).encode()).hexdigest();cached=ledger.cached(row['slate_id'],j,key)
-            if cached is not None:validate(cached,row['options']);continue
-            for attempt in range(3):
-                ledger.reserve(row['slate_id'],j);t=time.monotonic()
-                try:
-                    r=post(a.endpoint,p);validate(r,row['options'])
-                    ledger.put(row['slate_id'],j,key,r,time.monotonic()-t);break
-                except urllib.error.HTTPError as e:
-                    if e.code not in (408,429,500,502,503,504) or attempt==2:raise
-                except (urllib.error.URLError,TimeoutError):
-                    if attempt==2:raise
-                time.sleep(2**attempt)
+            hits.append(cached is not None)
+            if cached is not None:validate(cached,row['options'])
+        if all(hits):return row['slate_id']
+        if any(hits):raise ValueError('Partial grouped transaction; audit before resuming')
+        for attempt in range(3):
+            ledger.reserve(row['slate_id'],-1);t=time.monotonic()
+            try:
+                r=post(a.endpoint+'_many',group_payload(row));validate_group(r,row)
+                ledger.put_group(row,r,time.monotonic()-t);break
+            except urllib.error.HTTPError as e:
+                if e.code not in (408,429,500,502,503,504) or attempt==2:raise
+            except (urllib.error.URLError,TimeoutError):
+                if attempt==2:raise
+            time.sleep(2**attempt)
         return row['slate_id']
-    # One sequential seven-goal stream per row improves prefix-cache reuse.
+    # One HTTP group contains seven independent decisions sharing a token prefix.
     # Keep only 2*workers rows in flight; do not allocate 252K futures.
     with concurrent.futures.ThreadPoolExecutor(max_workers=a.workers) as pool:
-        it=iter(rows);pending=set()
+        # Deterministic scheduling only, without looking at scores or labels.
+        # Keeping validation first preserves useful coverage if the rental ends.
+        it=iter(sorted(rows,key=lambda r:(r['split']!='validation',r['slate_id'])));pending=set()
         for _ in range(a.workers*2):
             row=next(it,None)
             if row is not None:pending.add(pool.submit(one,row))
@@ -177,14 +218,17 @@ def collect(rows,a,out):
         for j in range(7):
             key=hashlib.sha256(canonical(payload(row,j)).encode()).hexdigest()
             p[row['slate_id'],:,j]=validate(ledger.cached(row['slate_id'],j,key),row['options'])
-    entropy=-(p*np.log(np.maximum(p,1e-300))).sum(1)/math.log(10)
+    entropy=np.clip(-(p*np.log(np.maximum(p,1e-300))).sum(1)/math.log(10),0,1)
     entropy=np.broadcast_to(entropy[:,None,:],p.shape).copy()
     np.savez_compressed(out/'scores.npz',probabilities=p,entropy=entropy,confidence=1-entropy,
         candidate_ids=np.array([r['candidate_ids'] for r in rows]),slate_ids=np.arange(len(rows)),
         objective_names=np.array(rows[0]['objective_names']),model=np.array(MODEL),revision=np.array(REVISION))
+    groups=ledger.db.execute('SELECT COUNT(*) FROM groups').fetchone()[0]
+    attempts=ledger.db.execute('SELECT COUNT(*) FROM attempts').fetchone()[0]
+    if groups!=len(rows):raise ValueError('Missing original HTTP envelopes')
     ledger.db.execute('PRAGMA wal_checkpoint(TRUNCATE)');ledger.db.close()
     save(out/'complete.json',dict(complete=True,valid_decisions=len(rows)*7,scores_sha256=digest(out/'scores.npz'),
-        registration_sha256=digest(out/'registration.json'),public_cache_mixed=False))
+        http_groups=groups,http_attempts=attempts,registration_sha256=digest(out/'registration.json'),public_cache_mixed=False))
 
 
 def main(a):
@@ -207,7 +251,9 @@ def main(a):
         identity=producer(a.model_dir,a.endpoint)
         registration=dict(input_sha256=digest(a.input),source=identity,slates=len(rows),goals=rows[0]['objective_names'],
             script_sha256=digest(__file__),max_attempts=a.max_attempts,stop_at=a.stop_at,workers=a.workers,
-            separate_probe_requests=336,transfer_manifest_sha256=digest(a.manifest),
+            separate_probe_http_requests=144,separate_probe_decisions=336,transfer_manifest_sha256=digest(a.manifest),
+            transport='One real HTTP group per slate; groups table retains exact wire responses, results table retains aligned child decisions.',
+            collection_order='validation first, then training; ascending original slate IDs within each split; no adaptive sample replacement',
             kind='all-new native scores; no imported public responses',test_opened=False)
         reg=a.output/'registration.json'
         if reg.exists() and json.loads(reg.read_text())!=registration:raise ValueError('Native registration changed')
@@ -223,5 +269,5 @@ if __name__=='__main__':
     p.add_argument('--model-dir',type=Path,default=Path('/root/autodl-tmp/JEV-27B'))
     p.add_argument('--source',type=Path,default=Path('/root/autodl-tmp/jev-service/source.json'))
     p.add_argument('--endpoint',default='http://127.0.0.1:8000/v1/decide');p.add_argument('--workers',type=int,default=16)
-    p.add_argument('--stop-at',default='2026-10-14T00:55:00+08:00');p.add_argument('--max-attempts',type=int,default=277200)
+    p.add_argument('--stop-at',default='2026-10-14T00:55:00+08:00');p.add_argument('--max-attempts',type=int,default=39600)
     p.add_argument('--stage',choices=['probe','score'],default='probe');main(p.parse_args())

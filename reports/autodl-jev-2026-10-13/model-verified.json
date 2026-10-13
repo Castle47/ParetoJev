@@ -1,0 +1,30 @@
+{
+  "revision": "14b425269ed24452e0a5ad5a8f3e51d139647a88",
+  "all_publisher_hashes_match": true,
+  "files": {
+    "adapter/adapter_config.json": "ok",
+    "adapter/adapter_model.safetensors": "ok",
+    "calibration.json": "ok",
+    "chat_template.jinja": "ok",
+    "config.json": "ok",
+    "head.safetensors": "ok",
+    "judge_config.json": "ok",
+    "model-00001-of-00013.safetensors": "ok",
+    "model-00002-of-00013.safetensors": "ok",
+    "model-00003-of-00013.safetensors": "ok",
+    "model-00004-of-00013.safetensors": "ok",
+    "model-00005-of-00013.safetensors": "ok",
+    "model-00006-of-00013.safetensors": "ok",
+    "model-00007-of-00013.safetensors": "ok",
+    "model-00008-of-00013.safetensors": "ok",
+    "model-00009-of-00013.safetensors": "ok",
+    "model-00010-of-00013.safetensors": "ok",
+    "model-00011-of-00013.safetensors": "ok",
+    "model-00012-of-00013.safetensors": "ok",
+    "model-00013-of-00013.safetensors": "ok",
+    "model.safetensors.index.json": "ok",
+    "tokenizer.json": "ok",
+    "tokenizer_config.json": "ok"
+  },
+  "manifest_sha256": "b6acc2ecab3525fc75c8f306fa78a19d5230d112feee6c073682f1bbc5cc3e5e"
+}

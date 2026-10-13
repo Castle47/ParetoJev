@@ -1,0 +1,8 @@
+{
+  "original_registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+  "original_stop_at": "2026-10-14T00:55:00+08:00",
+  "new_stop_at": "2026-10-14T04:00:00+08:00",
+  "authorized_total_cny": 65.0,
+  "scientific_protocol_unchanged": true,
+  "note": "Operator must obtain explicit user budget authorization before invoking this wrapper."
+}

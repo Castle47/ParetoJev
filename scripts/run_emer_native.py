@@ -37,7 +37,7 @@ def native_arrays(folder,config,expected_input_sha):
     source=reg['source']
     if str(arrays['model'])!=source['model'] or str(arrays['revision'])!=source['huggingface_revision']:
         raise ValueError('Model provenance differs')
-    ent=-(p*np.log(np.maximum(p,1e-300))).sum(1)/np.log(10)
+    ent=np.clip(-(p*np.log(np.maximum(p,1e-300))).sum(1)/np.log(10),0,1)
     if not np.allclose(arrays['entropy'],ent[:,None,:],atol=1e-10) or not np.allclose(arrays['confidence'],1-arrays['entropy'],atol=1e-10):
         raise ValueError('Signal summary differs from actual categorical distribution')
     return arrays
@@ -64,6 +64,18 @@ def main(a):
     with gzip.open(inputs,'rt') as f:rows=[json.loads(line) for line in f]
     seen=np.zeros((len(rows),7),dtype=bool)
     with sqlite3.connect('file:'+str((a.scores/'native.sqlite3').resolve())+'?mode=ro',uri=True) as db:
+        group_count=0
+        for i,key,text in db.execute('SELECT row_id,payload_hash,raw_json FROM groups'):
+            if not 0<=i<len(rows):raise ValueError('Unexpected HTTP group')
+            row=rows[i];wire=dict(kind='choice',state=row['state'],questions=row['questions'],options=row['options'],thinking='off')
+            expected=hashlib.sha256(json.dumps(wire,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            group=json.loads(text)
+            if key!=expected or group['question_count']!=7 or len(group['results'])!=7:raise ValueError('Original HTTP request/envelope differs')
+            for j,child in enumerate(group['results']):
+                saved=db.execute('SELECT raw_json FROM results WHERE row_id=? AND goal=?',(i,j)).fetchone()
+                if saved is None or json.loads(saved[0])!=child:raise ValueError('Child differs from exact HTTP envelope')
+            group_count+=1
+        if group_count!=len(rows):raise ValueError('Missing original HTTP groups')
         for i,j,key,text in db.execute('SELECT row_id,goal,payload_hash,raw_json FROM results'):
             if not 0<=i<len(rows) or not 0<=j<7 or seen[i,j]:raise ValueError('Native response coverage differs')
             row=rows[i];p=dict(kind='choice',state=row['state'],question=row['questions'][j],options=row['options'],thinking='off')

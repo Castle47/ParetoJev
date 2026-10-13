@@ -1,0 +1,31 @@
+{
+  "real_requests": 144,
+  "real_decisions": 336,
+  "runs": [
+    {
+      "workers": 1,
+      "decisions": 112,
+      "http_requests": 112,
+      "elapsed_seconds": 46.79102512309328,
+      "qps": 2.3936214200343184
+    },
+    {
+      "workers": 8,
+      "decisions": 112,
+      "http_requests": 16,
+      "elapsed_seconds": 14.734015184920281,
+      "qps": 7.601458162920034
+    },
+    {
+      "workers": 16,
+      "decisions": 112,
+      "http_requests": 16,
+      "elapsed_seconds": 6.466720492113382,
+      "qps": 17.319443470085314
+    }
+  ],
+  "maximum_probability_difference": 0.0009060204029083252,
+  "stability_threshold": 0.01,
+  "passed": true,
+  "interpretation": "Uncached single-question reference vs grouped shared-prefix inference; numerical and throughput check only, no recommendation-effect test."
+}

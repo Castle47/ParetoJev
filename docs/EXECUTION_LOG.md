@@ -846,3 +846,21 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Development phase complete. Signal repair is supported; stable EMER uplift,
   production RT and online business gains remain unproved. Evidence:
   `reports/jev-signal-diagnosis-2026-10-13/README.md`.
+
+
+## 2026-10-13 — Native Jev grouped inference and authorized budget extension
+
+- Replaced unstable cross-slate BF16 batching with within-slate shared-prefix
+  inference, 64-token cache boundaries and independent seven-question branches.
+  Pinned publisher checkpoint unchanged; FP16 compute and FP32 residual/head
+  explicitly registered as a new producer, separate from public-service scores.
+- v9 probe: 144 HTTP requests / 336 real decisions; maximum absolute probability
+  difference 0.0009060204 versus uncached reference, below unchanged 0.01 guard.
+  16-worker probe about17.32 decisions/s; no recommendation-effect claim.
+- User authorized TOTAL65 CNY, excluding future independent test. Verified AutoDL
+  shutdown 2026-10-14 04:20 +08; collector resumed with cutoff04:00. Immutable
+  execution-extension receipt preserves the original scientific registration.
+- Backed up 3,303 actual HTTP groups /23,121 child decisions at23:26. Collection
+  still active toward36,000 slates /252,000 decisions, validation first. Source
+  hashes match deployment. 283 local tests pass; independent test remains closed.
+- Evidence and exact producer registration: reports/autodl-jev-2026-10-13/README.md.
