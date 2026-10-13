@@ -1,0 +1,63 @@
+{
+  "config_hash": "dea89a9fd8842bb4ce4a7827804013a6b29261d2d9562bc735b5e93537e5be06",
+  "event_store_sha256": "21fe6ef7a6cfbf57bf8209d25f2a7fee8c84f5f3a99869c24e939b8005047c8d",
+  "selection_sha256": "45ff7907af69e4c08f1b8d7b34334c3f0d68172785c0d613b9e661d4bf061eee",
+  "popularity_sha256": "89f64d66d5d000c17a905c234a9fcc26824419c5cc44dc5f00357c5c1ab17f14",
+  "population_by_split_stratum": [
+    [
+      2746,
+      4758,
+      4869,
+      13038,
+      54392,
+      898611
+    ],
+    [
+      1156,
+      2471,
+      2484,
+      6541,
+      27919,
+      460587
+    ]
+  ],
+  "sampled_by_split_stratum": [
+    [
+      1500,
+      2000,
+      2000,
+      2500,
+      6000,
+      16000
+    ],
+    [
+      500,
+      500,
+      500,
+      500,
+      1000,
+      3000
+    ]
+  ],
+  "selected_slates": 36000,
+  "source_record_unit": "zero_based_EVENT_records",
+  "source_manifest_sha256": "301fecfdf4efdbc23968a532931d001f47de37057f58a9a1e6378dac6e25a88e",
+  "provenance": {
+    "created_at_utc": "2026-10-13T08:17:10.518633+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "9ff8c8e2c8b1c7f6f84ccedad79a232633886fc2",
+    "inputs": []
+  }
+}

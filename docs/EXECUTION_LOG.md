@@ -1,5 +1,38 @@
 # Execution Log
 
+## 2026-10-13 — Expand the underpowered EMER/JeV pilot
+
+- User approved larger chronological training, validation, independent testing,
+  power planning and sustainable real Jev production. No new model framework.
+- Recomputed paired user-cluster delta-method precision from the already-opened
+  600-slate pilot, averaging the fixed three seeds first. A 1% long-view relative
+  effect projects to 43,459 slates only under unchanged design/noise assumptions.
+  Added user-correlation sensitivity; no claim that 50K rows guarantee power.
+- Prepared April 19–20 training (30,000 slates, 11,427 users) and April 21
+  validation (6,000 slates, 4,253 users); union 12,606 users. All 360,000 candidate
+  records, labels and timestamps matched the source store; sampling weights and
+  strict Jev histories verified. No April23+ observations opened.
+- Generalized the existing sampler to two development splits; kept all original
+  three-split defaults intact. Added explicit long-view question override and an
+  optional metadata RAM copy to avoid random external-drive reads.
+- Materialized 65 train-normalized common features and seven frozen behavior
+  predictions. Started 12 EMER trials and 252,000 native Jev requests separately;
+  shell dependency starts the 12 Jev-arm fits only after complete real scores.
+  Missing Jev is an ignored structural baseline block, never a fabricated signal.
+- Public service single-request probe succeeded with the registered self-reported
+  revision. Total nominal train/validation/test request plan is 602,000; one-second
+  pacing implies approximately seven days before failures/downtime/overhead.
+  No new API credential is required for current public execution; faster resources
+  remain an optional user input. Workers need this computer and external drive.
+- Added tests for clustered information not growing with duplicate rows, power
+  scaling, weighted two-split sampling and rejection of missing/misaligned Jev.
+  A full run exposed an unrelated flaky harness test relying on id() uniqueness
+  after object collection; retained model references in the test, not production.
+  All 277 tests then passed. Source scripts compile and shell syntax checks pass.
+- In a progress message, positive-list counts were mistakenly stated as 712/655;
+  promptly corrected to audited validation follow/forward counts 506/521. Reports
+  use only audited figures. No new effectiveness result or completion claim.
+
 ## 2026-10-08 — New-user confirmation of Jev tie-breaking
 
 - Pre-registered `94c5744`: 200 new evaluation users, seed 20261009, zero overlap

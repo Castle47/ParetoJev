@@ -1,0 +1,67 @@
+{
+  "experiment_id": "emer-jev-scale-v3",
+  "development_config_hash": "dea89a9fd8842bb4ce4a7827804013a6b29261d2d9562bc735b5e93537e5be06",
+  "stage": "development_running_test_not_opened",
+  "primary": "long_view NDCG@3",
+  "planning_relative_effect": 0.01,
+  "planning_power": 0.8,
+  "planning_two_sided_alpha": 0.05,
+  "model": {
+    "feature_dim": 65,
+    "objectives": 7,
+    "hidden_dim": 48,
+    "layers": 2,
+    "heads": 4,
+    "ff_dim": 96,
+    "dropout": 0.05
+  },
+  "training": {
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rates": [
+      0.001,
+      0.0003
+    ],
+    "prior_coefficients": [
+      1.0,
+      0.25
+    ],
+    "weight_decay": 0.0001,
+    "cpu_threads": 4,
+    "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+    "posterior": "number of six positive feedback bits minus explicit hate bit",
+    "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+    "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+    "sample_weights": "inverse inclusion weights normalized to training mean one"
+  },
+  "effect_gates": {
+    "top_k": 3,
+    "primary": "long_view NDCG@3",
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20261013,
+    "bootstrap_unit": "paired user clusters, averaged over fixed fitted seeds",
+    "success": "primary lower 95% CI > 0 and primary point gain > 0 in every seed, positive-goal mean lower CI >= 0, click lower CI >= -0.005, hate-risk increase upper CI <= 0.005",
+    "click_maximum_absolute_ndcg_drop": 0.005,
+    "hate_maximum_absolute_risk_increase": 0.005,
+    "causal_online_uplift": false
+  },
+  "prospective_test": {
+    "timezone": "Asia/Shanghai",
+    "start_inclusive": "2022-04-23",
+    "end_exclusive": "2022-04-26",
+    "planned_slates": 50000,
+    "quotas_status": "not final; inventory and development precision required before freezing",
+    "current_authorized_test_requests": 0,
+    "may_open_after": [
+      "complete real development scores and audit",
+      "both arms complete equal-budget training and checkpoint selection",
+      "final sample and precision protocol frozen before any test performance evaluation"
+    ]
+  },
+  "interpretation": "offline logged-candidate ranking only; no causal business uplift or production RT claim"
+}

@@ -1,0 +1,13 @@
+{
+  "role": "one existing development request, availability only, not a bulk throughput test",
+  "request_sha256": "21ac0f5f02dae967472e30d2522d8159dd87576da2b602c039bf842562cba3b4",
+  "public_max_concurrency": 1,
+  "project_start_spacing_seconds": 1,
+  "http_status": 200,
+  "model": "autotrust/JEV-27B",
+  "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+  "elapsed_seconds": 0.22175163100473583,
+  "kind": "choice",
+  "registered_revision_matches": true,
+  "wall_seconds": 1.7098199579922948
+}

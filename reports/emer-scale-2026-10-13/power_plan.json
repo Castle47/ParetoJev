@@ -1,0 +1,335 @@
+{
+  "role": "planning from already-opened April22 pilot, no new-test evaluation",
+  "pilot": {
+    "slates": 600,
+    "users": 578,
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "tensor_sha256": "18795f73c9d52870194d34d0582adc3f728580b986dc4f8c8beaf9fc3b557349",
+    "predictions_sha256": "cb61f565ad0af5b51f3da5b6fc71211c14f1de8b2fcbcd50a4cc72e22dfb1a68"
+  },
+  "assumptions": {
+    "power": 0.8,
+    "two_sided_alpha": 0.05,
+    "primary": "long_view NDCG@3",
+    "target_relative_gain": 0.01,
+    "independent_user_universe_ceiling": 27285,
+    "projection": "SE scales as sqrt(pilot_n/new_n) only if weighting, sampling and correlation design remain comparable.",
+    "caveats": [
+      "Re-trained rankings and new dates may change variance.",
+      "Seven effects do not each have 80% power; only the primary is sized.",
+      "No joint power guarantee for all success gates.",
+      "Day generalization is not measured by user-only clusters.",
+      "Only 578 pilot users and 22 extra rows: ICC cannot be reliably estimated.",
+      "Finite 27K users limit independent-user growth; more rows alone do not imply target power."
+    ]
+  },
+  "goals": {
+    "is_click": {
+      "pilot_baseline": 0.4588805550647997,
+      "pilot_difference": -0.006565370293842713,
+      "paired_user_cluster_standard_error": 0.012712439766230352,
+      "eligible_slates": 538,
+      "eligible_users": 521,
+      "observed_positive_labels": 2508,
+      "positive_label_users": 521,
+      "kish_effective_eligible_slates": 237.17341794254634,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.004588805550647997,
+          "iid_style_required_slates": 36143
+        },
+        "0.02": {
+          "absolute_effect": 0.009177611101295995,
+          "iid_style_required_slates": 9036
+        },
+        "0.03": {
+          "absolute_effect": 0.01376641665194399,
+          "iid_style_required_slates": 4016
+        }
+      }
+    },
+    "long_view": {
+      "pilot_baseline": 0.3908503216202894,
+      "pilot_difference": -0.013480838493808715,
+      "paired_user_cluster_standard_error": 0.011873218916633541,
+      "eligible_slates": 479,
+      "eligible_users": 464,
+      "observed_positive_labels": 1684,
+      "positive_label_users": 464,
+      "kish_effective_eligible_slates": 201.33408107696832,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.003908503216202894,
+          "iid_style_required_slates": 43459
+        },
+        "0.02": {
+          "absolute_effect": 0.007817006432405788,
+          "iid_style_required_slates": 10865
+        },
+        "0.03": {
+          "absolute_effect": 0.011725509648608681,
+          "iid_style_required_slates": 4829
+        }
+      }
+    },
+    "is_like": {
+      "pilot_baseline": 0.3208881496878465,
+      "pilot_difference": 0.007857656180678425,
+      "paired_user_cluster_standard_error": 0.01324450589041566,
+      "eligible_slates": 194,
+      "eligible_users": 187,
+      "observed_positive_labels": 378,
+      "positive_label_users": 187,
+      "kish_effective_eligible_slates": 149.61864043192642,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.0032088814968784653,
+          "iid_style_required_slates": 80228
+        },
+        "0.02": {
+          "absolute_effect": 0.0064177629937569305,
+          "iid_style_required_slates": 20057
+        },
+        "0.03": {
+          "absolute_effect": 0.009626644490635395,
+          "iid_style_required_slates": 8915
+        }
+      }
+    },
+    "is_follow": {
+      "pilot_baseline": 0.28110076033694475,
+      "pilot_difference": -0.0031817644083183007,
+      "paired_user_cluster_standard_error": 0.022344575381863276,
+      "eligible_slates": 61,
+      "eligible_users": 61,
+      "observed_positive_labels": 77,
+      "positive_label_users": 61,
+      "kish_effective_eligible_slates": 60.679385623306,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.0028110076033694476,
+          "iid_style_required_slates": 297564
+        },
+        "0.02": {
+          "absolute_effect": 0.005622015206738895,
+          "iid_style_required_slates": 74391
+        },
+        "0.03": {
+          "absolute_effect": 0.008433022810108342,
+          "iid_style_required_slates": 33063
+        }
+      }
+    },
+    "is_comment": {
+      "pilot_baseline": 0.2975831646421964,
+      "pilot_difference": -0.04191271822967545,
+      "paired_user_cluster_standard_error": 0.02127560771940448,
+      "eligible_slates": 68,
+      "eligible_users": 67,
+      "observed_positive_labels": 78,
+      "positive_label_users": 67,
+      "kish_effective_eligible_slates": 64.66475621575856,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.002975831646421964,
+          "iid_style_required_slates": 240717
+        },
+        "0.02": {
+          "absolute_effect": 0.005951663292843928,
+          "iid_style_required_slates": 60180
+        },
+        "0.03": {
+          "absolute_effect": 0.008927494939265892,
+          "iid_style_required_slates": 26747
+        }
+      }
+    },
+    "is_forward": {
+      "pilot_baseline": 0.26456651034083833,
+      "pilot_difference": 0.01513658882562842,
+      "paired_user_cluster_standard_error": 0.02526647773730478,
+      "eligible_slates": 63,
+      "eligible_users": 61,
+      "observed_positive_labels": 77,
+      "positive_label_users": 61,
+      "kish_effective_eligible_slates": 62.6933501740363,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_relative_effects": {
+        "0.01": {
+          "absolute_effect": 0.0026456651034083836,
+          "iid_style_required_slates": 429516
+        },
+        "0.02": {
+          "absolute_effect": 0.005291330206816767,
+          "iid_style_required_slates": 107379
+        },
+        "0.03": {
+          "absolute_effect": 0.00793699531022515,
+          "iid_style_required_slates": 47724
+        }
+      }
+    },
+    "is_hate": {
+      "pilot_baseline": 0.9995793478152901,
+      "pilot_difference": 5.5237155567916554e-05,
+      "paired_user_cluster_standard_error": 3.74595408142863e-05,
+      "eligible_slates": 600,
+      "eligible_users": 578,
+      "observed_positive_labels": 95,
+      "positive_label_users": 55,
+      "kish_effective_eligible_slates": 286.5803581634401,
+      "note": "Kish describes weight imbalance only, not independent observations.",
+      "planning_absolute_risk_reduction": {
+        "effect": 5e-05,
+        "iid_style_required_slates": 2644,
+        "note": "0.005 percentage points risk reduction; never a 1% relative increase of near-one no-hate utility."
+      }
+    }
+  },
+  "cluster_sensitivity": [
+    {
+      "slates": 20000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0,
+      "long_view_relative_mde_80pct": 0.014740847943332774
+    },
+    {
+      "slates": 20000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0.1,
+      "long_view_relative_mde_80pct": 0.015430992702634698
+    },
+    {
+      "slates": 20000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0.3,
+      "long_view_relative_mde_80pct": 0.016712008820068014
+    },
+    {
+      "slates": 20000,
+      "users": 10000,
+      "assumed_within_user_correlation": 1,
+      "long_view_relative_mde_80pct": 0.02046094830770141
+    },
+    {
+      "slates": 20000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0,
+      "long_view_relative_mde_80pct": 0.014740847943332774
+    },
+    {
+      "slates": 20000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0.1,
+      "long_view_relative_mde_80pct": 0.014712874256883921
+    },
+    {
+      "slates": 20000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0.3,
+      "long_view_relative_mde_80pct": 0.014657401354370455
+    },
+    {
+      "slates": 20000,
+      "users": 20000,
+      "assumed_within_user_correlation": 1,
+      "long_view_relative_mde_80pct": 0.01446807529788308
+    },
+    {
+      "slates": 50000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0,
+      "long_view_relative_mde_80pct": 0.009322930828628046
+    },
+    {
+      "slates": 50000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0.1,
+      "long_view_relative_mde_80pct": 0.011010106928789176
+    },
+    {
+      "slates": 50000,
+      "users": 10000,
+      "assumed_within_user_correlation": 0.3,
+      "long_view_relative_mde_80pct": 0.013749861262119292
+    },
+    {
+      "slates": 50000,
+      "users": 10000,
+      "assumed_within_user_correlation": 1,
+      "long_view_relative_mde_80pct": 0.02046094830770141
+    },
+    {
+      "slates": 50000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0,
+      "long_view_relative_mde_80pct": 0.009322930828628046
+    },
+    {
+      "slates": 50000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0.1,
+      "long_view_relative_mde_80pct": 0.00997875682104157
+    },
+    {
+      "slates": 50000,
+      "users": 20000,
+      "assumed_within_user_correlation": 0.3,
+      "long_view_relative_mde_80pct": 0.011162744303646775
+    },
+    {
+      "slates": 50000,
+      "users": 20000,
+      "assumed_within_user_correlation": 1,
+      "long_view_relative_mde_80pct": 0.014468075297883081
+    },
+    {
+      "slates": 50000,
+      "users": 27285,
+      "assumed_within_user_correlation": 0,
+      "long_view_relative_mde_80pct": 0.009322930828628046
+    },
+    {
+      "slates": 50000,
+      "users": 27285,
+      "assumed_within_user_correlation": 0.1,
+      "long_view_relative_mde_80pct": 0.009684830902149012
+    },
+    {
+      "slates": 50000,
+      "users": 27285,
+      "assumed_within_user_correlation": 0.3,
+      "long_view_relative_mde_80pct": 0.010363322232581088
+    },
+    {
+      "slates": 50000,
+      "users": 27285,
+      "assumed_within_user_correlation": 1,
+      "long_view_relative_mde_80pct": 0.012386932731405672
+    }
+  ],
+  "budget": {
+    "train_slates": 30000,
+    "validation_slates": 6000,
+    "planned_test_slates": 50000,
+    "nominal_requests": 602000,
+    "maximum_attempts_with_10pct_retry_budget": 662200,
+    "minimum_start_interval_seconds": 1,
+    "nominal_spacing_floor_hours": 167.22194444444443,
+    "note": "Excludes final response latency, failures, downtime and training; not a throughput commitment.",
+    "local_memory_bytes": 8589934592,
+    "model_parameter_count": 26895998464,
+    "theoretical_bf16_weight_bytes": 53791996928,
+    "theoretical_4bit_weight_bytes": 13447999232.0,
+    "local_full_model_fit": false
+  }
+}

@@ -15,6 +15,16 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
+**Expanded EMER / EMER+Jev development is running.** The new cohort contains
+30,000 training and 6,000 validation slates (360,000 source-verified candidate
+exposures), with train-only feature normalization. The fixed behavior model and
+equal 43,345-parameter rerankers are retained. Real seven-goal Jev scoring needs
+252,000 development requests and is resumable; baseline training runs alongside it.
+The independent April 23–25 test remains unopened, with 50,000 slates a planning
+budget, not a power guarantee. No new superiority result is available.
+See the [expanded experiment report](reports/emer-scale-2026-10-13/README.md) and
+[machine-readable targets](configs/emer_jev_scale_target.json).
+
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
 the three reused periods. A frozen-EMER, one-coefficient bounded correction still

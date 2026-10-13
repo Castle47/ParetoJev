@@ -30,8 +30,13 @@ QUESTIONS = [
 def select(root, output, config):
     store=root/'behavior-pilot-v1'; source=read_json(store/'events.json')
     if sha256_file(store/'offsets.npy') != source['offsets_sha256']: raise ValueError('Offsets changed')
-    offsets=np.load(store/'offsets.npy'); counts=np.zeros((3,6),dtype='int64')
-    heaps=[[[] for _ in range(6)] for _ in range(3)]
+    splits=len(config['split_names'])
+    if len(config['boundaries_ms']) != splits+1 or np.any(np.diff(config['boundaries_ms'])<=0):
+        raise ValueError('Strict chronological split boundaries required')
+    if any(len(config['sample_budgets'][name])!=6 or min(config['sample_budgets'][name])<=0 for name in config['split_names']):
+        raise ValueError('Six positive stratum budgets required per split')
+    offsets=np.load(store/'offsets.npy'); counts=np.zeros((splits,6),dtype='int64')
+    heaps=[[[] for _ in range(6)] for _ in range(splits)]
     popularity=np.zeros(ITEM_COUNT,dtype='uint32'); digest=hashlib.sha256()
     with (store/'events.bin').open('rb') as handle:
         for user in range(len(offsets)-1):
@@ -59,7 +64,7 @@ def select(root, output, config):
         if handle.read(1): raise ValueError('Unaccounted event records')
     if digest.hexdigest()!=source['store_sha256']: raise ValueError('Full event hash mismatch')
     rows=[]; sampled=np.zeros_like(counts)
-    for split in range(3):
+    for split in range(splits):
         for stratum in range(6):
             selected=heaps[split][stratum]; sampled[split,stratum]=len(selected)
             for _,_,payload in selected: rows.append((*payload,counts[split,stratum]/len(selected)))
@@ -83,7 +88,9 @@ def features(root,output,config,metadata_path):
         raise ValueError('Selection changed')
     metadata_manifest=read_json(root/'behavior-v2/metadata.json')
     if sha256_file(metadata_path)!=metadata_manifest['index_sha256']: raise ValueError('Metadata changed')
-    metadata=np.load(metadata_path,mmap_mode='r'); store=root/'behavior-pilot-v1'
+    metadata=np.load(metadata_path,mmap_mode='r')
+    if config.get('metadata_in_memory',False): metadata=np.array(metadata,copy=True)
+    store=root/'behavior-pilot-v1'
     offsets=np.load(store/'offsets.npy'); selected=dict(np.load(output/'selection.npz'))
     n=len(selected['user']); k=config['slate_size']; h=config['jev_history_length']
     x=np.zeros((n,k,26),dtype='float32'); labels=np.zeros((n,k,7),dtype='uint8')
@@ -165,7 +172,7 @@ def prompts(output,config):
             state=json.dumps(state,ensure_ascii=False,separators=(',',':'));max_state=max(max_state,len(state))
             if len(state)>6000:raise ValueError('Registered prompt exceeds service limit; no sample substitution')
             row=dict(slate_id=i,split=config['split_names'][int(raw['split'][i])],candidate_ids=raw['items'][i].tolist(),
-                state=state,options=aliases,questions=QUESTIONS,objective_names=config['objectives'])
+                state=state,options=aliases,questions=config.get('questions',QUESTIONS),objective_names=config['objectives'])
             handle.write(json.dumps(row,ensure_ascii=False,separators=(',',':'))+'\n')
     atomic_write_json(output/'prompts.json',dict(input_sha256=sha256_file(output/'jev_input.jsonl'),
         max_state_characters=max_state,missing_text_occurrences=missing,truncated_text_occurrences=truncated,

@@ -1,0 +1,29 @@
+{
+  "captured_at": "2026-10-13T08:31:44.860980+00:00",
+  "status": "running, not complete",
+  "data_root": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3",
+  "independent_test_opened": false,
+  "scoring": {
+    "validated_decisions": 500,
+    "planned_decisions": 252000,
+    "lifetime_attempts": 500,
+    "cache_hits_this_process": 0,
+    "elapsed_seconds": 509.18368962497334,
+    "complete": false,
+    "provenance": "real JEV Choice; no labels loaded"
+  },
+  "baseline_completed_trials": 2,
+  "baseline_planned_trials": 12,
+  "jev_arm_planned_trials": 12,
+  "tests": {
+    "passed": 277,
+    "log_sha256": "ef2cde4f84466f63158104cc735e067a540c4572cb89b68ca5c76ac81c8c2e99"
+  },
+  "terminal_sessions": {
+    "baseline": 93786,
+    "jev_then_jev_arm": 63904
+  },
+  "source_records_checked": 360000,
+  "pipeline": "EMER baseline runs independently; complete real Jev scoring -> EMER+Jev training; no automatic independent test evaluation",
+  "resume_command": "bash scripts/continue_emer_scale.sh (only after existing workers exit)"
+}

@@ -1,0 +1,132 @@
+{
+  "experiment_id": "emer-jev-scale-v3-development",
+  "seed": 20261015,
+  "dataset": "KuaiRand-27K",
+  "slate_size": 10,
+  "maximum_slate_span_ms": 300000,
+  "history_length": 50,
+  "jev_history_length": 10,
+  "boundaries_ms": [
+    1650297600000,
+    1650470400000,
+    1650556800000
+  ],
+  "split_names": [
+    "train",
+    "validation"
+  ],
+  "strata": [
+    "hate",
+    "follow",
+    "forward",
+    "comment",
+    "like",
+    "other"
+  ],
+  "stratum_priority_bits": [
+    64,
+    8,
+    32,
+    16,
+    4
+  ],
+  "sample_budgets": {
+    "train": [
+      1500,
+      2000,
+      2000,
+      2500,
+      6000,
+      16000
+    ],
+    "validation": [
+      500,
+      500,
+      500,
+      500,
+      1000,
+      3000
+    ]
+  },
+  "objectives": [
+    "is_click",
+    "long_view",
+    "is_like",
+    "is_follow",
+    "is_comment",
+    "is_forward",
+    "is_hate"
+  ],
+  "directions": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "behavior": "frozen v2 upload_metadata_assumed_static tree plus its April18 calibrator",
+  "jev": {
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+    "model": "autotrust/JEV-27B",
+    "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "kind": "choice",
+    "max_concurrency": 1,
+    "minimum_interval_seconds": 1.0,
+    "max_http_calls": 277200,
+    "planned_successful_calls": 252000,
+    "history_text_characters": 160,
+    "candidate_text_characters": 220,
+    "on_transport_error": "persist reservation and error; bounded backoff and same-payload retry, never replace a slate"
+  },
+  "methods": [
+    "emer",
+    "emer_jev"
+  ],
+  "training": {
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rates": [
+      0.001,
+      0.0003
+    ],
+    "prior_coefficients": [
+      1.0,
+      0.25
+    ],
+    "weight_decay": 0.0001,
+    "cpu_threads": 4,
+    "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+    "posterior": "number of six positive feedback bits minus explicit hate bit",
+    "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+    "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+    "sample_weights": "inverse inclusion weights normalized to training mean one"
+  },
+  "evaluation": {
+    "role": "development only; no held-out performance is computed by preparation",
+    "top_k": 3,
+    "independent_test_window": [
+      "2022-04-23",
+      "2022-04-26"
+    ],
+    "test_target_slates": 50000,
+    "test_target_status": "planning budget, not a power guarantee; seal final quotas after development precision audit",
+    "no_test_based_tuning": true
+  },
+  "metadata_in_memory": true,
+  "questions": [
+    "Which candidate is this user most likely to click or validly play in this feed?",
+    "Which candidate is this user most likely to achieve a long_view on? Here long_view means watching the entire video when its duration is at most 18 seconds, or watching at least 18 seconds when its duration exceeds 18 seconds. Compare the likelihood of meeting each video's own threshold, not the total seconds watched. A zero or unavailable duration is unknown, not a zero-second completion target.",
+    "Which candidate is this user most likely to explicitly like?",
+    "Which candidate is this user most likely to follow the creator after viewing?",
+    "Which candidate is this user most likely to comment on?",
+    "Which candidate is this user most likely to forward or share?",
+    "Which candidate is this user most likely to give explicit negative feedback such as dislike or not interested?"
+  ]
+}

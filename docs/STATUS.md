@@ -4,6 +4,17 @@
 
 ## Current experiment
 
+Expanded EMER/EMER+Jev development is active. Data preparation and all 360,000
+candidate source checks passed: 30,000 training slates / 11,427 users and 6,000
+validation slates / 4,253 users. Baseline training and real Jev scoring started;
+the Jev arm trains automatically after all 252,000 development decisions finish.
+No new test metrics exist. April 23–25 remains unopened. Its provisional 50,000
+slate budget is subject to a pre-test precision and inventory audit; pilot power
+extrapolation is not a guarantee with only 27K users. All 277 tests pass after
+fixing an old test's garbage-collected object-id reuse assumption. See
+[expanded report](../reports/emer-scale-2026-10-13/README.md) for evidence and
+[execution protocol](EMER_SCALE_EXPERIMENT.md) for resume instructions.
+
 Signal diagnosis and long-view definition repair are complete. The original
 question omitted the documented 18-second / short-video completion threshold.
 With the same real contexts and labels, the corrected question improves AUC and

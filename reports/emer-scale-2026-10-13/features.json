@@ -1,0 +1,60 @@
+{
+  "raw_slates_sha256": "7b9f98d802c053e604f551eb78ab30986282798455d64cf366b69a7c29bbf8fd",
+  "fields": [
+    "tab",
+    "log_duration",
+    "duration_missing",
+    "hour_sin",
+    "hour_cos",
+    "weekday_sin",
+    "weekday_cos",
+    "log_exposures_1h",
+    "log_exposures_1d",
+    "log_exposures_7d",
+    "log_hours_since_last",
+    "history_length_fraction",
+    "history_mean_log_duration",
+    "history_duration_known_fraction",
+    "candidate_repeat_fraction",
+    "same_tab_fraction",
+    "distinct_history_fraction",
+    "log_observed_history_days",
+    "log_basic_duration",
+    "log_width",
+    "log_height",
+    "aspect_ratio",
+    "log_upload_age_days",
+    "metadata_available",
+    "author_repeat_fraction",
+    "history_author_known_fraction"
+  ],
+  "metadata_index_sha256": "0ad5532587892c14e5ec5316c4419b4aa286bbb08db6ca00f3a89a9a18b7dde1",
+  "all_candidates_share_decision_time": true,
+  "all_histories_strictly_prior": true,
+  "total_slates": 36000,
+  "selected_users": 12606,
+  "positives_by_split": {
+    "train": [
+      114776,
+      77086,
+      14526,
+      2469,
+      3188,
+      2482,
+      3054
+    ],
+    "validation": [
+      23653,
+      15936,
+      2713,
+      603,
+      678,
+      640,
+      857
+    ]
+  },
+  "weighted_represented_slates_by_split": {
+    "train": 978414.0,
+    "validation": 501158.0
+  }
+}
