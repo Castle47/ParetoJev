@@ -151,8 +151,12 @@ def test_harness_trains_each_model_reproducibly_and_resumes_without_retraining(
 ):
     training, evaluation = _small_configs()
     calls = {method: [] for method in COMPARISON_METHODS}
+    # Keep objects alive: Python may reuse id() after a completed model is
+    # collected, which would falsely report that two independent fits shared it.
+    model_references = []
     original_loss = runner.comparison_training_loss
     def record_loss(method, model, batch, directions):
+        model_references.append(model)
         first_parameter = next(model.parameters())
         calls[method].append((id(model), first_parameter.detach().clone()))
         return original_loss(method, model, batch, directions)
