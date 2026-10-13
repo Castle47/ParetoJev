@@ -779,3 +779,37 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Reported all four existing matched-config comparisons as post-confirmation
   diagnostics only; they do not replace the registered final models or conclusion.
   Evidence: `reports/emer-jev-2026-10-13/README.md` and `completion_audit.json`.
+
+## 2026-10-13 — Signal diagnosis and long-view definition repair
+
+- Audited weighted within-slate AUC, top-three metrics and complementary pair
+  errors on existing April 20/21/22 data. April 22 is explicitly development now.
+  Original Jev long-view AUC is about 0.50, below goal-specific behavior predictions.
+  Correcting some wrong pairs is not evidence that an oracle-selected mixture is deployable.
+- Registered a real 400-slate validation probe that changes only the long-view
+  question. It now specifies completion for videos <=18 seconds, otherwise at
+  least 18 seconds, and treats zero duration as unknown. Observed labels are not
+  rewritten. Validation AUC improves 0.501152 -> 0.568800; NDCG improves
+  0.331146 -> 0.402383; both paired-user difference intervals exclude zero.
+- After the registered signal-quality gate passed, collected 1,000 training and
+  600 reused-development corrected scores. In all three periods, old/new signal
+  AUC and NDCG difference interval lower bounds are positive. These are development
+  findings, not new confirmation or proof of incremental value over behavior.
+- Tested bounded Jev-only corrections with frozen EMER checkpoints. Original seven
+  signals with seven coefficients give -0.10% long-view change; corrected single
+  signal with one coefficient gives -0.02% (absolute -0.000077802, 95% interval
+  [-0.003867474, +0.003266609]). Click/hate guards pass, gain conditions do not.
+  Coefficients/regularization are selected on April 21 only; zero correction is
+  always eligible. No new date is opened when development evidence is absent.
+- Added a configurable late-history start to future cohort preparation: April 23
+  histories would include April 22 exposures. April 23 was not prepared/scored.
+- All 2,000 corrected native responses and source candidate mappings audited;
+  all three baseline checkpoint hashes unchanged. Both correction variants replay
+  predictions, metrics and 2,000-bootstrap intervals exactly from saved coefficients.
+- Verified 38 payload hashes in a 39-file portable archive and repeated both
+  replays in a new directory. All 272 tests pass, including analytic-gradient,
+  zero/uniform-signal, padding and permutation checks. The uniform-rank centering
+  fix removes only floating-point offsets; the old residual results were replayed.
+- Development phase complete. Signal repair is supported; stable EMER uplift,
+  production RT and online business gains remain unproved. Evidence:
+  `reports/jev-signal-diagnosis-2026-10-13/README.md`.

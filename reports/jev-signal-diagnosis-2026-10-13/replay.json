@@ -1,0 +1,14 @@
+{
+  "status": "exact",
+  "models": {
+    "bounded-residual": {
+      "exact_predictions": true,
+      "exact_metrics_and_intervals": true
+    },
+    "corrected-residual": {
+      "exact_predictions": true,
+      "exact_metrics_and_intervals": true
+    }
+  },
+  "baseline_weights_unchanged": true
+}

@@ -1,0 +1,24 @@
+{
+  "development_phase_complete": true,
+  "signal_definition_repair_supported": true,
+  "emer_incremental_uplift_supported": false,
+  "april23_confirmation_run": false,
+  "april23_data_preserved": true,
+  "real_corrected_decisions": 2000,
+  "original_emer_weights_unchanged": true,
+  "all_native_responses_audited": true,
+  "exact_saved_coefficient_prediction_metric_interval_replay": true,
+  "unit_tests_passed": 272,
+  "report_sha256": "cebad70166ba73105036ab6f897a9bd99dcb8c865d5d220f17664c52702460b7",
+  "model_registration_sha256": "f0669b99491ef2a69e6fd92bf38ea607fa5d3404faf73ec2bea5d421020e5524",
+  "confirmation_gate": {
+    "primary_ci_positive": false,
+    "primary_positive_every_seed": false,
+    "positive_mean_noninferior": false,
+    "click_noninferior": true,
+    "hate_noninferior": true
+  },
+  "portable_payload_files_verified": 38,
+  "portable_fresh_directory_replay": true,
+  "portable_archive_sha256": "f1ebb0cfa1dced2dc5c9c05053884f2690418161f96713cbb493979417b4ebe9"
+}

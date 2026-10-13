@@ -4,6 +4,17 @@
 
 ## Current experiment
 
+Signal diagnosis and long-view definition repair are complete. The original
+question omitted the documented 18-second / short-video completion threshold.
+With the same real contexts and labels, the corrected question improves AUC and
+NDCG over the old question in all three reused periods. The repaired signal still
+has not produced reliable incremental EMER gains: the one-coefficient bounded
+correction changes long-view NDCG by -0.02%, with its interval crossing zero.
+All 2,000 new native decisions pass audit; saved coefficients, predictions and
+intervals replay exactly, including from a fresh-directory package. All 272 tests
+pass. April 23 was not prepared/scored because the development gate failed.
+See [signal diagnosis](../reports/jev-signal-diagnosis-2026-10-13/README.md).
+
 EMER + Jev versus EMER is now the active question. Independent paper-aligned
 public-data model, normalized signal ranks, posterior-count supervision,
 behavior-prior pairwise losses and previous-model advantage weights are implemented.

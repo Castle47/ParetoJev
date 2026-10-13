@@ -1,0 +1,43 @@
+{
+  "role": "development probe only",
+  "column_order": [
+    "old Jev long-view",
+    "explicit-definition Jev long-view",
+    "behavior long-view"
+  ],
+  "ndcg": {
+    "values": [
+      0.3311459918731636,
+      0.40238290215484673,
+      0.43955911212819243
+    ],
+    "difference": 0.07123691028168311,
+    "difference_ci": [
+      0.006912756820984935,
+      0.13918289440055392
+    ],
+    "users": 378,
+    "valid_replicates": 2000
+  },
+  "within_slate_auc": {
+    "values": [
+      0.501151809490212,
+      0.5688004540454402,
+      0.5817745176872259
+    ],
+    "difference": 0.06764864455522823,
+    "difference_ci": [
+      0.019502990962978955,
+      0.11673849115429707
+    ],
+    "users": 378,
+    "valid_replicates": 2000
+  },
+  "criterion_passed": true,
+  "real_decisions": 400,
+  "http_attempts": 400,
+  "new_calls_this_process": 400,
+  "scores_sha256": "58da9a2c8fd8d465ff704f7674a542c4041d0c3c822bd1944fd637f11e90bf1c",
+  "labels_unchanged": true,
+  "inputs_unchanged": true
+}

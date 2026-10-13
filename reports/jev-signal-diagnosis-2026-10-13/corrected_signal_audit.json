@@ -1,0 +1,26 @@
+{
+  "all_native_responses_match": true,
+  "splits": {
+    "train": {
+      "real_decisions": 1000,
+      "scores_sha256": "4f09aad0454f0362d925991e76bc5311ba66188e26eebad2bec6b493e29db014",
+      "original_inputs_and_labels_sha256": "e87ab5e2d9eb7e7134544fd3c97708b2ba554e54a71829106eb46e3ea5cdb951",
+      "question_only_changed": true
+    },
+    "validation": {
+      "real_decisions": 400,
+      "scores_sha256": "58da9a2c8fd8d465ff704f7674a542c4041d0c3c822bd1944fd637f11e90bf1c",
+      "original_inputs_and_labels_sha256": "340f2441fd22833658afca66cb4b3c74f4ec49e9531e636fc84d957ddb036ca0",
+      "question_only_changed": true
+    },
+    "april22": {
+      "real_decisions": 600,
+      "scores_sha256": "5148256fd233e0aa45c867b6c33f5203805b96367366598c9995afbe95394912",
+      "original_inputs_and_labels_sha256": "18795f73c9d52870194d34d0582adc3f728580b986dc4f8c8beaf9fc3b557349",
+      "question_only_changed": true
+    }
+  },
+  "total_real_decisions": 2000,
+  "model": "autotrust/JEV-27B",
+  "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884"
+}

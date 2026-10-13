@@ -1,0 +1,934 @@
+{
+  "status": "exploratory reused data; April22 is development now, not a fresh test",
+  "splits": {
+    "train": {
+      "slates": 1000,
+      "input_sha256": "e87ab5e2d9eb7e7134544fd3c97708b2ba554e54a71829106eb46e3ea5cdb951",
+      "metrics": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5292784540163432,
+              0.5000707521153659,
+              0.6152931683203783
+            ],
+            "difference": -0.029207701900977323,
+            "difference_ci": [
+              -0.061415177872416314,
+              0.004148623817783171
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.44117912078633154,
+              0.43501096946461537,
+              0.5367471451258844
+            ],
+            "difference": -0.006168151321716164,
+            "difference_ci": [
+              -0.04911586505643741,
+              0.033097999122893886
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20672845451135,
+            "behavior_right_jev_wrong": 0.2382818230531538,
+            "behavior_tie_fraction": 0.07093360526282133,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 862,
+          "positive_bits": 3872,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5845819529401645,
+              0.49034066940899373,
+              0.6213782556506986
+            ],
+            "difference": -0.09424128353117073,
+            "difference_ci": [
+              -0.1366903706966378,
+              -0.05283340905722137
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4305006781091766,
+              0.3207487492594551,
+              0.46488194998321636
+            ],
+            "difference": -0.10975192884972146,
+            "difference_ci": [
+              -0.1581465363637671,
+              -0.06387930818412896
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21584214589276368,
+            "behavior_right_jev_wrong": 0.3097018544149973,
+            "behavior_tie_fraction": 0.03809590427932172,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 764,
+          "positive_bits": 2598,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5712129366541986,
+              0.5181725712747914,
+              0.48124411979045056
+            ],
+            "difference": -0.05304036537940715,
+            "difference_ci": [
+              -0.10066875403666138,
+              0.002311515898246683
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.340402283350995,
+              0.28944122537446565,
+              0.25514978899741964
+            ],
+            "difference": -0.050961057976529334,
+            "difference_ci": [
+              -0.10963077074474145,
+              0.009979246026790296
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19976820602587048,
+            "behavior_right_jev_wrong": 0.25447480197994377,
+            "behavior_tie_fraction": 0.06635799980233474,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 294,
+          "positive_bits": 595,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5126440785175396,
+              0.5521442739147896,
+              0.5086441099593255
+            ],
+            "difference": 0.039500195397250026,
+            "difference_ci": [
+              -0.037119110380248545,
+              0.11494027927019392
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2635503673932656,
+              0.2947147973289274,
+              0.25379258890840223
+            ],
+            "difference": 0.03116442993566182,
+            "difference_ci": [
+              -0.05771497836036155,
+              0.12324632612117417
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.22812013973772252,
+            "behavior_right_jev_wrong": 0.19374166629781414,
+            "behavior_tie_fraction": 0.1154357648721015,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 101,
+          "positive_bits": 147,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.5179770035948439,
+              0.5392026597222698,
+              0.5077020563363134
+            ],
+            "difference": 0.021225656127425885,
+            "difference_ci": [
+              -0.05949086977725299,
+              0.1017296154404864
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.20570405326428412,
+              0.23307270903777974,
+              0.22167937631487777
+            ],
+            "difference": 0.02736865577349562,
+            "difference_ci": [
+              -0.06992901997897934,
+              0.11833827249594797
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.24585001472960802,
+            "behavior_right_jev_wrong": 0.23013286650492087,
+            "behavior_tie_fraction": 0.03302283712012298,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 118,
+          "positive_bits": 124,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.554333016389885,
+              0.5164436769388923,
+              0.5207579385619964
+            ],
+            "difference": -0.03788933945099271,
+            "difference_ci": [
+              -0.13491502621977772,
+              0.05250372485971044
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.24229313510001968,
+              0.27857722726316375,
+              0.2640094546740811
+            ],
+            "difference": 0.03628409216314407,
+            "difference_ci": [
+              -0.0752987462405451,
+              0.13628111772786147
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.18378628170912156,
+            "behavior_right_jev_wrong": 0.24944060581629116,
+            "behavior_tie_fraction": 0.1938459671186184,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 103,
+          "positive_bits": 126,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5164792768959439,
+              0.5198605098605101,
+              0.47694203944203956
+            ],
+            "difference": 0.003381232964566272,
+            "difference_ci": [
+              -0.09257902117956472,
+              0.0769173754158985
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9994387256914058,
+              0.9994183157165479,
+              0.9993196675047346
+            ],
+            "difference": -2.0409974857860114e-05,
+            "difference_ci": [
+              -0.00018367064002585697,
+              0.00019239467688805792
+            ],
+            "users": 880,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.25077320827320826,
+            "behavior_right_jev_wrong": 0.2463949013949014,
+            "behavior_tie_fraction": 0.03798901715568382,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 99,
+          "positive_bits": 210,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "validation": {
+      "slates": 400,
+      "input_sha256": "340f2441fd22833658afca66cb4b3c74f4ec49e9531e636fc84d957ddb036ca0",
+      "metrics": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5362321832477013,
+              0.5423474512191642,
+              0.5265809548148251
+            ],
+            "difference": 0.00611526797146289,
+            "difference_ci": [
+              -0.038259543093058776,
+              0.050528763484834975
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4578945429402422,
+              0.4859608332175856,
+              0.46230642485666423
+            ],
+            "difference": 0.02806629027734342,
+            "difference_ci": [
+              -0.027380586973564453,
+              0.07816533695868302
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19789444131153483,
+            "behavior_right_jev_wrong": 0.19326385794100287,
+            "behavior_tie_fraction": 0.09507230427950594,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 353,
+          "positive_bits": 1709,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5817745176872259,
+              0.501151809490212,
+              0.5473605770365103
+            ],
+            "difference": -0.08062270819701389,
+            "difference_ci": [
+              -0.14530879981950567,
+              -0.01798494080408168
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.43955911212819243,
+              0.3311459918731636,
+              0.3918746806813752
+            ],
+            "difference": -0.1084131202550288,
+            "difference_ci": [
+              -0.18358205228968022,
+              -0.032940494867786975
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21945869448872876,
+            "behavior_right_jev_wrong": 0.29959447931848815,
+            "behavior_tie_fraction": 0.046482984090166685,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 330,
+          "positive_bits": 1166,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.6096003197617352,
+              0.49549978502759384,
+              0.5076992327345563
+            ],
+            "difference": -0.11410053473414139,
+            "difference_ci": [
+              -0.1886629705125926,
+              -0.036854434213022653
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.37641523473113975,
+              0.25065210054965054,
+              0.3060993934971726
+            ],
+            "difference": -0.1257631341814892,
+            "difference_ci": [
+              -0.2162735882211618,
+              -0.034156782722062004
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.16178602031526051,
+            "behavior_right_jev_wrong": 0.2703970105283703,
+            "behavior_tie_fraction": 0.07150578688755622,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 114,
+          "positive_bits": 207,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5376364087301585,
+              0.5292906746031742,
+              0.4770833333333331
+            ],
+            "difference": -0.00834573412698425,
+            "difference_ci": [
+              -0.1346512071121446,
+              0.11895441366727
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.27335005550271185,
+              0.2705213756835754,
+              0.19542506325333836
+            ],
+            "difference": -0.002828679819136426,
+            "difference_ci": [
+              -0.15002387127521644,
+              0.15053870067038028
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19469246031746032,
+            "behavior_right_jev_wrong": 0.2101686507936508,
+            "behavior_tie_fraction": 0.09680059523809523,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 40,
+          "positive_bits": 45,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.5551991952365826,
+              0.45457475014050774,
+              0.5630765118049162
+            ],
+            "difference": -0.10062444509607482,
+            "difference_ci": [
+              -0.2163199702549892,
+              0.012195631609367194
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.29492847208346545,
+              0.1261931066228941,
+              0.2766393136863633
+            ],
+            "difference": -0.16873536546057136,
+            "difference_ci": [
+              -0.2953392555274633,
+              -0.05619763016822009
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.16808090804681963,
+            "behavior_right_jev_wrong": 0.2710965308832034,
+            "behavior_tie_fraction": 0.03256420594775554,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 45,
+          "positive_bits": 47,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5102035849167508,
+              0.5445046951461443,
+              0.5410953871474963
+            ],
+            "difference": 0.03430111022939353,
+            "difference_ci": [
+              -0.12937678429135555,
+              0.19180055017699982
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.26476206014433556,
+              0.2184606853804647,
+              0.26763283904686364
+            ],
+            "difference": -0.04630137476387086,
+            "difference_ci": [
+              -0.22030242337135647,
+              0.12027230496490848
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.25851592235007126,
+            "behavior_right_jev_wrong": 0.2391011440285676,
+            "behavior_tie_fraction": 0.12568424958485797,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 41,
+          "positive_bits": 53,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5777782738095238,
+              0.4977400793650795,
+              0.4325760582010583
+            ],
+            "difference": -0.08003819444444432,
+            "difference_ci": [
+              -0.2107138402120894,
+              0.03544130272613293
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.999650655021834,
+              0.9995954952884389,
+              0.9995464644143104
+            ],
+            "difference": -5.5159733395093724e-05,
+            "difference_ci": [
+              -0.00019833716268559398,
+              9.221207816973718e-05
+            ],
+            "users": 378,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21358134920634922,
+            "behavior_right_jev_wrong": 0.29343353174603176,
+            "behavior_tie_fraction": 0.021453373015873016,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 40,
+          "positive_bits": 77,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "april22_development": {
+      "slates": 600,
+      "input_sha256": "18795f73c9d52870194d34d0582adc3f728580b986dc4f8c8beaf9fc3b557349",
+      "metrics": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5312760693716941,
+              0.5411260384933093,
+              0.5262226034510512
+            ],
+            "difference": 0.009849969121615176,
+            "difference_ci": [
+              -0.03180589459131651,
+              0.052190516345286625
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4589224461353449,
+              0.5021446322123818,
+              0.4588805550648002
+            ],
+            "difference": 0.04322218607703693,
+            "difference_ci": [
+              -0.00811639774151886,
+              0.09782291804706938
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2253143637171373,
+            "behavior_right_jev_wrong": 0.22144208187246905,
+            "behavior_tie_fraction": 0.07489697454658935,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 527,
+          "positive_bits": 2508,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5654228467437207,
+              0.5029348740452286,
+              0.5473391125827456
+            ],
+            "difference": -0.062487972698492045,
+            "difference_ci": [
+              -0.11154111461455304,
+              -0.013251921538453379
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4183992857838748,
+              0.3411569360553915,
+              0.39085032162028993
+            ],
+            "difference": -0.07724234972848332,
+            "difference_ci": [
+              -0.13729325792923325,
+              -0.0200842753186837
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2137779136061327,
+            "behavior_right_jev_wrong": 0.280540423853854,
+            "behavior_tie_fraction": 0.03713646003929731,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 477,
+          "positive_bits": 1684,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.6096942067393967,
+              0.5273791350924282,
+              0.5469076979204315
+            ],
+            "difference": -0.0823150716469685,
+            "difference_ci": [
+              -0.15703578600260593,
+              -0.0033184648426430206
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.3643655166300885,
+              0.3734881055531204,
+              0.3208881496878466
+            ],
+            "difference": 0.009122588923031916,
+            "difference_ci": [
+              -0.0788794738096614,
+              0.10299486786794146
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20926336539810125,
+            "behavior_right_jev_wrong": 0.2947289297875356,
+            "behavior_tie_fraction": 0.05616366402681526,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 193,
+          "positive_bits": 378,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5159195065920374,
+              0.5028920918802421,
+              0.5531621948824491
+            ],
+            "difference": -0.01302741471179536,
+            "difference_ci": [
+              -0.12524543572720814,
+              0.1026134350210661
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.24565478450757938,
+              0.2559565166262903,
+              0.28110076033694487
+            ],
+            "difference": 0.010301732118710938,
+            "difference_ci": [
+              -0.10153767006476182,
+              0.12181149714044383
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2171576294246244,
+            "behavior_right_jev_wrong": 0.2340750829495946,
+            "behavior_tie_fraction": 0.11809528608565775,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 61,
+          "positive_bits": 77,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.5235705609588059,
+              0.42770692561037793,
+              0.5655525453979013
+            ],
+            "difference": -0.09586363534842801,
+            "difference_ci": [
+              -0.208383004724964,
+              0.021530211679130856
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2521454301899538,
+              0.15847113134287852,
+              0.2975831646421965
+            ],
+            "difference": -0.09367429884707526,
+            "difference_ci": [
+              -0.20725856566247625,
+              0.022650077271130064
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21105414933588976,
+            "behavior_right_jev_wrong": 0.3012488231393145,
+            "behavior_tie_fraction": 0.027476303867147032,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 68,
+          "positive_bits": 78,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5292451170284544,
+              0.5333324539303634,
+              0.5592943222789839
+            ],
+            "difference": 0.004087336901908989,
+            "difference_ci": [
+              -0.10978045647721242,
+              0.10344593304121989
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.22644897418587326,
+              0.21703767204034483,
+              0.2645665103408384
+            ],
+            "difference": -0.009411302145528433,
+            "difference_ci": [
+              -0.14779531554458045,
+              0.11391522012579366
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.22449291685916592,
+            "behavior_right_jev_wrong": 0.2285092725541703,
+            "behavior_tie_fraction": 0.18120782558775508,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 63,
+          "positive_bits": 77,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5128472222222223,
+              0.46927910052910055,
+              0.45429894179894204
+            ],
+            "difference": -0.0435681216931218,
+            "difference_ci": [
+              -0.15380706325989205,
+              0.07350659013605434
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9995920948511904,
+              0.9996048418870908,
+              0.9995793478152897
+            ],
+            "difference": 1.2747035900373405e-05,
+            "difference_ci": [
+              -0.000149041481978765,
+              0.00017506039002692929
+            ],
+            "users": 578,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.23371362433862433,
+            "behavior_right_jev_wrong": 0.27503306878306877,
+            "behavior_tie_fraction": 0.02880291005291005,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 60,
+          "positive_bits": 95,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    }
+  },
+  "protocol_findings": {
+    "long_view_question": "Existing question says long view but omits the duration<=18s completion / duration>18s at-least-18s rule.",
+    "history": "Last ten exposures, not selected positive interactions; no feedback is supplied.",
+    "choice": "Within-slate categorical distributions, not calibrated marginal event probabilities.",
+    "availability": "Logs do not provide feedback completion/availability timestamps; cannot silently substitute clicked history.",
+    "label_definition_source": "https://github.com/chongminggao/KuaiRand#data-descriptions",
+    "causality": "These are hypotheses and protocol differences, not proven causes of failed uplift."
+  }
+}

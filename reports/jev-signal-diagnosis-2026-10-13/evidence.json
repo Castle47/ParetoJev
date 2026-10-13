@@ -1,0 +1,7 @@
+{
+  "report_sha256": "cebad70166ba73105036ab6f897a9bd99dcb8c865d5d220f17664c52702460b7",
+  "signal_audit_sha256": "bf2dde687da6bc8d6d090844a70dd5220b040f784a9346f6225f9fb74592144b",
+  "corrected_response_audit_sha256": "48eb6b1863d7449e9335f47f77b1d23413f86a6b3002ce2d7115c610d438e5bc",
+  "confirmation_allowed": false,
+  "fresh_confirmation_done": false
+}

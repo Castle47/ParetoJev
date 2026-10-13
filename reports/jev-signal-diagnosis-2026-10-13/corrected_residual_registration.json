@@ -1,0 +1,20 @@
+{
+  "role": "development only; no fresh-test claim",
+  "question": "Which candidate is this user most likely to achieve a long_view on? Here long_view means watching the entire video when its duration is at most 18 seconds, or watching at least 18 seconds when its duration exceeds 18 seconds. Compare the likelihood of meeting each video's own threshold, not the total seconds watched. A zero or unavailable duration is unknown, not a zero-second completion target.",
+  "model": "frozen v1 no-Jev EMER + one corrected LongView rank coefficient",
+  "training": "April20 only; weighted long-view pair logistic loss",
+  "selection": "April21 long-view maximum subject to click/hate absolute decrease <=.005 and six-positive mean >= baseline; zero fallback",
+  "cap": 0.25,
+  "ridge_grid": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "additional_parameters": 1,
+  "signal_sha256": {
+    "train": "4f09aad0454f0362d925991e76bc5311ba66188e26eebad2bec6b493e29db014",
+    "validation": "58da9a2c8fd8d465ff704f7674a542c4041d0c3c822bd1944fd637f11e90bf1c",
+    "april22_development": "5148256fd233e0aa45c867b6c33f5203805b96367366598c9995afbe95394912"
+  },
+  "confirmation_gate": "same five effect conditions on reused April22 development; new April23 only if all pass"
+}

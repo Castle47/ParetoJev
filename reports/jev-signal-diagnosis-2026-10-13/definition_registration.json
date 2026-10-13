@@ -1,0 +1,15 @@
+{
+  "role": "development probe only; no fresh-test claim",
+  "changed_field": "question only",
+  "question": "Which candidate is this user most likely to achieve a long_view on? Here long_view means watching the entire video when its duration is at most 18 seconds, or watching at least 18 seconds when its duration exceeds 18 seconds. Compare the likelihood of meeting each video's own threshold, not the total seconds watched. A zero or unavailable duration is unknown, not a zero-second completion target.",
+  "model": "autotrust/JEV-27B",
+  "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+  "rows": 400,
+  "inputs_sha256": "1f03385851bd8441f22d4e113687af850fce38d4557d9acfba4936b24dc0d1bc",
+  "validation_sha256": "340f2441fd22833658afca66cb4b3c74f4ec49e9531e636fc84d957ddb036ca0",
+  "max_http_attempts": 440,
+  "minimum_interval_seconds": 1,
+  "bootstrap_samples": 2000,
+  "criterion": "new-minus-old long-view NDCG lower paired-user 95% CI >0; report AUC too; do not replace observed labels",
+  "decision": "collect training/new development scores only if this criterion passes"
+}

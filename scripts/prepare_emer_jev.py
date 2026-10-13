@@ -43,7 +43,10 @@ def ingest_day(root, out, c):
                 with io.BufferedReader(tracker) as handle:
                     columns = ['user_id', 'video_id', 'time_ms', 'duration_ms', 'tab', *BINARY_LABELS]
                     for f in pd.read_csv(handle, usecols=columns, dtype='int64', chunksize=500000):
-                        use = (f.time_ms >= c['fresh_test_start_ms']) & (f.time_ms < c['fresh_test_end_ms'])
+                        # Later confirmation days must retain intervening late
+                        # exposures for histories, not just the target test day.
+                        history_start = c.get('history_start_ms', c['fresh_test_start_ms'])
+                        use = (f.time_ms >= history_start) & (f.time_ms < c['fresh_test_end_ms'])
                         selected = f.loc[use]
                         values = np.empty(len(selected), dtype=DAY_EVENT)
                         values['user'] = selected.user_id

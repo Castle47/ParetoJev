@@ -15,6 +15,14 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
+The subsequent **signal diagnosis and task-definition repair** is complete.
+Explicitly defining the long-view event improves real Jev signal ranking across
+the three reused periods. A frozen-EMER, one-coefficient bounded correction still
+does not establish incremental uplift (long-view change -0.02%, interval crosses
+zero). All 2,000 new responses were audited; the April 23 confirmation gate failed,
+so that date remains unused. See the
+[`signal diagnosis report`](reports/jev-signal-diagnosis-2026-10-13/README.md).
+
 The **2026-10-13 EMER + Jev versus EMER experiment is complete**, using an
 independent paper-aligned public-data implementation, equal-capacity arms and a
 fresh April 22 confirmation cohort. It does **not establish incremental

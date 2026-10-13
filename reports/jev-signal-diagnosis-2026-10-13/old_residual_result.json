@@ -1,0 +1,170 @@
+{
+  "role": "development only; April22 already seen",
+  "results": {
+    "objectives": {
+      "is_click": {
+        "emer": 0.4588805550648005,
+        "emer_jev": 0.4594021311530727,
+        "absolute_gain": 0.0005215760882721909,
+        "relative_gain": 0.0011366271299042884,
+        "confidence_interval": [
+          -0.002336203466375461,
+          0.003263506044709781
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "long_view": {
+        "emer": 0.3908503216202897,
+        "emer_jev": 0.39045528704727966,
+        "absolute_gain": -0.00039503457301004463,
+        "relative_gain": -0.0010107055083705928,
+        "confidence_interval": [
+          -0.002880479512481203,
+          0.0021759944986252822
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_like": {
+        "emer": 0.3208881496878467,
+        "emer_jev": 0.32121751423973083,
+        "absolute_gain": 0.00032936455188414815,
+        "relative_gain": 0.001026415441656375,
+        "confidence_interval": [
+          -0.004124736296792089,
+          0.0048702886085634205
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_follow": {
+        "emer": 0.28110076033694475,
+        "emer_jev": 0.27834288012546204,
+        "absolute_gain": -0.0027578802114827106,
+        "relative_gain": -0.009811002318801788,
+        "confidence_interval": [
+          -0.00911363083939919,
+          0.0
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_comment": {
+        "emer": 0.29758316464219653,
+        "emer_jev": 0.293608674130367,
+        "absolute_gain": -0.00397449051182952,
+        "relative_gain": -0.013355898397707771,
+        "confidence_interval": [
+          -0.01132193004714251,
+          0.0021949817933200545
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_forward": {
+        "emer": 0.26456651034083833,
+        "emer_jev": 0.2632967896980795,
+        "absolute_gain": -0.0012697206427588204,
+        "relative_gain": -0.00479924931210323,
+        "confidence_interval": [
+          -0.010800314039003193,
+          0.0078024479704476265
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_hate": {
+        "emer": 0.99957934781529,
+        "emer_jev": 0.9995878458392236,
+        "absolute_gain": 8.498023933545262e-06,
+        "relative_gain": 8.501600150221984e-06,
+        "confidence_interval": [
+          -8.240353157323854e-06,
+          2.639191875935531e-05
+        ],
+        "valid_bootstrap_replicates": 2000
+      }
+    },
+    "positive_mean": {
+      "emer": 0.33564491028215276,
+      "emer_jev": 0.33438721273233196,
+      "absolute_gain": -0.0012576975498207927,
+      "confidence_interval": [
+        -0.003820957297314572,
+        0.001051741884698036
+      ]
+    },
+    "per_seed": {
+      "7": {
+        "emer": [
+          0.45393313498893323,
+          0.37936252141431376,
+          0.3363993081622233,
+          0.27810787627087846,
+          0.3037310613717516,
+          0.2556419674317473,
+          0.9995793478152902
+        ],
+        "emer_jev": [
+          0.4554978632537496,
+          0.37817741769528374,
+          0.33738740181787574,
+          0.2698342356364304,
+          0.2918075898362631,
+          0.2518328055034709,
+          0.9996048418870909
+        ]
+      },
+      "17": {
+        "emer": [
+          0.4736418650919868,
+          0.4248312494623288,
+          0.28721892521091247,
+          0.27420779021058317,
+          0.29756609612216717,
+          0.30487349340853914,
+          0.9995920948511904
+        ],
+        "emer_jev": [
+          0.4736418650919868,
+          0.4248312494623288,
+          0.28721892521091247,
+          0.27420779021058317,
+          0.29756609612216717,
+          0.30487349340853914,
+          0.9995920948511904
+        ]
+      },
+      "29": {
+        "emer": [
+          0.4490666651134803,
+          0.3683571939842257,
+          0.339046215690404,
+          0.2909866145293728,
+          0.29145233643267077,
+          0.23318407018222856,
+          0.99956660077939
+        ],
+        "emer_jev": [
+          0.4490666651134803,
+          0.3683571939842257,
+          0.339046215690404,
+          0.2909866145293728,
+          0.29145233643267077,
+          0.23318407018222856,
+          0.99956660077939
+        ]
+      }
+    },
+    "gates": {
+      "primary_ci_positive": false,
+      "primary_positive_every_seed": false,
+      "positive_mean_noninferior": false,
+      "click_noninferior": true,
+      "hate_noninferior": true
+    },
+    "all_effect_gates": false,
+    "bootstrap_users": 578,
+    "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+    "online_business_success": false
+  },
+  "fresh_confirmation_allowed": false,
+  "base_weights_unchanged": true,
+  "baseline_parameters": 43345,
+  "additional_parameters": 7
+}
