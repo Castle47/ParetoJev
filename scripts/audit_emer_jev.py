@@ -69,6 +69,11 @@ def audit(a):
                 np.testing.assert_array_equal(tail['item'],raw['jev_history'][i,:len(tail)])
                 np.testing.assert_array_equal(tail['time'],raw['jev_history_time'][i,:len(tail)])
                 if not (tail['time']<t0).all():raise ValueError('History leakage')
+    if a.cohort_only:
+        report=dict(source_candidates=len(records),histories_checked=len(raw['items']),
+            source_labels_features_and_histories_match=True,weights_verified=True,
+            fresh_time_window_verified=True)
+        atomic_write_json(out/'cohort_audit.json',report);print(report,flush=True);return
     complete=read_json(out/'jev/complete.json')
     if complete['registration']['config_hash']!=canonical_hash(c) or complete['scores_sha256']!=sha256_file(out/'jev/scores.npz'):
         raise ValueError('Score registration mismatch')
@@ -178,6 +183,7 @@ def audit_metrics(a):
 
 if __name__=='__main__':
     p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--data',type=Path,required=True)
-    p.add_argument('--config',type=Path,default=Path('configs/emer_jev.json'));p.add_argument('--metrics-only',action='store_true');a=p.parse_args()
+    p.add_argument('--config',type=Path,default=Path('configs/emer_jev.json'));p.add_argument('--metrics-only',action='store_true')
+    p.add_argument('--cohort-only',action='store_true');a=p.parse_args()
     torch.set_num_threads(4)
     with torch.no_grad():audit_metrics(a) if a.metrics_only else audit(a)

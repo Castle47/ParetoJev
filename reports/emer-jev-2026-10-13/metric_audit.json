@@ -1,0 +1,5 @@
+{
+  "independent_scalar_metrics_match": true,
+  "checked_models": 6,
+  "maximum_absolute_tolerance": 1e-12
+}

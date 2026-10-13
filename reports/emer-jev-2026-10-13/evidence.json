@@ -1,0 +1,12 @@
+{
+  "files": {
+    "predictions.npz": "cb61f565ad0af5b51f3da5b6fc71211c14f1de8b2fcbcd50a4cc72e22dfb1a68",
+    "test.npz": "18795f73c9d52870194d34d0582adc3f728580b986dc4f8c8beaf9fc3b557349",
+    "raw_slates.npz": "ddd1dfc917c0743dfd059b875fb451f44989b7bbd2516431639455ed9f86356f",
+    "selection.json": "eeb385801a1a1a8d46facef2e82b2f7ccc25878ae33a09b678c48f7f1ebdd450",
+    "evaluation.json": "324bfbdd5af4e2e6e00b15195b131d0c64c91994f9ccb3308dbd54afc17bd5be",
+    "audit.json": "e6dfffcbc2f5f8abb3de3d793c2d94910cdc48576625cb77aa0b6f16dfeec94e",
+    "replay.json": "1361cbe342b5b69eec12a54dfcd6b1a68e14239af4a14e8de208ada52d9052b1"
+  },
+  "report_sha256": "b9a81012b7cca85d6bf3db954a291585c4fdd0df8ce89faec0058178836b02c1"
+}

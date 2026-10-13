@@ -15,7 +15,7 @@ def report(a):
     results=evaluation['results'];a.output.mkdir(parents=True,exist_ok=True)
     outcome='本轮离线效果条件全部通过' if results['all_effect_gates'] else '本轮未达到预登记的完整效果条件'
     lines=['# EMER＋Jev 增量实验：'+outcome,'',
-        '**日期：2026-10-13。** 两组仅改变 Jev 输入是否可用；同一行为模型、候选、监督、网络尺寸与调参预算。',
+        '**日期：2026-10-13。** 两组比较 Jev 输入是否可用；共用行为模型、候选、监督、网络尺寸及相同超参数搜索空间和预算。各自按验证集选择配置，实际选中超参数见下表。',
         '这是独立实现的 EMER 公开数据适配，不能称为快手工业系统完整复现。',
         '','## 新日期确认结果','',
         '主指标 long_view NDCG@3。以下为三个固定训练种子的指标均值；区间为 2,000 次配对用户 bootstrap，条件于已训练模型。',
@@ -27,7 +27,8 @@ def report(a):
     lines+=['','is_hate 列是“无负反馈比例”，越高越好，其余为 NDCG@3。','',
         '|验收条件|结果|','|---|---|']
     lines += [f'|{key}|{"通过" if value else "未通过"}|' for key,value in results['gates'].items()]
-    lines+=['','六正向目标均值：'+str(results['positive_mean']),'',
+    mean=results['positive_mean'];lo,hi=mean['confidence_interval']
+    lines+=['',f'六正向目标均值：{mean["emer"]:.6f} → {mean["emer_jev"]:.6f}；绝对变化 {mean["absolute_gain"]:+.6f}，95% 区间 [{lo:+.6f}, {hi:+.6f}]。','',
         '|随机种子|EMER 长看|EMER＋Jev 长看|差值|','|---|---:|---:|---:|']
     for seed,row in results['per_seed'].items():
         b,f=row['emer'][1],row['emer_jev'][1];lines.append(f'|{seed}|{b:.6f}|{f:.6f}|{f-b:+.6f}|')
@@ -45,7 +46,7 @@ def report(a):
         '','|本地缓存分数就绪的排序模块|p50 ms|p95 ms|p99 ms|','|---|---:|---:|---:|']
     for arm,row in evaluation['latency']['milliseconds'].items():
         lines.append(f'|{arm}|{row["p50"]:.3f}|{row["p95"]:.3f}|{row["p99"]:.3f}|')
-    lines+=['','本地 CPU 四线程、10 候选、batch 1、50 次预热、500 次交替测量。从准备好的数值张量到分数/排序，不包含特征获取和 Jev 生产。',
+    lines+=['','本轮硬件为 Apple M1，CPU 四线程、10 候选、batch 1、50 次预热、500 次交替测量。从准备好的数值张量到分数/排序，不包含特征获取和 Jev 生产。',
         '','七次串行 HTTP 累计耗时（含重试尝试网络耗时，排除请求间限速/退避等待）：'+str(audit['serial_seven_http_seconds_excluding_pacing'])+' 秒。',
         '','服务报告的单次推理耗时分位数：'+str(audit['service_inference_seconds'])+' 秒。两者不能当作目标硬件的完整推荐 RT。',
         '','**当前没有证明生产低延迟或线上业务收益。** 未指定部署硬件/并发/新增 RT 预算，未完成学生蒸馏，也没有线上 A/B。',
@@ -55,8 +56,18 @@ def report(a):
         '','已曝光伪候选组不包含原始未曝光召回项；逆包含权重只修正本次分层抽样。没有 p_watchtime，未实现 IPUT，也不拿视频总时长替代观看时长。内容属性与文本快照时点仍有局限。',
         '','结论限定于当前采样、冻结行为模型、文本 Choice 信号和训练预算。公开数据离线增益不能等同于业务因果收益。',
         '','协议见 [实验设计](../../docs/EMER_JEV_EXPERIMENT.md)；配置见 [注册配置](../../configs/emer_jev.json)。']
+    if (a.data/'matched_config_diagnostic.json').exists():
+        diagnostic=read_json(a.data/'matched_config_diagnostic.json')
+        lines+=['','## 确认后的同配置诊断','',
+            '为检查分别选择超参数的影响，以下列出原有四个配置的两臂配对结果；每个配置仍只用验证集选 epoch。所有配置全部报告，不据测试结果重新选择最终模型。',
+            '这是事后诊断，不是新的确认实验，也不替换上述预登记结论。',
+            '','|共同学习率|共同先验系数|长看 NDCG 绝对变化（三种子均值）|六正向均值绝对变化|','|---|---|---:|---:|']
+        for row in diagnostic['rows']:
+            lines.append(f'|{row["learning_rate"]}|{row["prior_coefficient"]}|{row["mean_delta"][1]:+.6f}|{row["positive_mean_delta"]:+.6f}|')
     (a.output/'README.md').write_text('\n'.join(lines)+'\n')
-    for name in ('evaluation.json','audit.json','replay.json','preparation.json','selection.json','development_registration.json','preparation_registration.json','feature_spec.json'):
+    names=['evaluation.json','audit.json','replay.json','preparation.json','selection.json','development_registration.json','preparation_registration.json','feature_spec.json','metric_audit.json','cohort_audit.json']
+    if (a.data/'matched_config_diagnostic.json').exists():names.append('matched_config_diagnostic.json')
+    for name in names:
         shutil.copyfile(a.data/name,a.output/name)
     atomic_write_json(a.output/'evidence.json',dict(files={name:sha256_file(a.data/name) for name in
         ('predictions.npz','test.npz','raw_slates.npz','selection.json','evaluation.json','audit.json','replay.json')},

@@ -1,0 +1,21 @@
+{
+  "exact_predictions_and_metrics": true,
+  "provenance": {
+    "created_at_utc": "2026-10-13T05:02:06.123050+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "98a4f04a066fd8e7b6a30e72133ca2b83905da16",
+    "inputs": []
+  }
+}

@@ -1,0 +1,322 @@
+{
+  "results": {
+    "objectives": {
+      "is_click": {
+        "emer": 0.4588805550648005,
+        "emer_jev": 0.4523151847709575,
+        "absolute_gain": -0.00656537029384302,
+        "relative_gain": -0.014307362169477623,
+        "confidence_interval": [
+          -0.031124651177136423,
+          0.018557339830601073
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "long_view": {
+        "emer": 0.3908503216202897,
+        "emer_jev": 0.37736948312648105,
+        "absolute_gain": -0.013480838493808656,
+        "relative_gain": -0.034491051300464995,
+        "confidence_interval": [
+          -0.03619749495314187,
+          0.010152867544782396
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_like": {
+        "emer": 0.3208881496878467,
+        "emer_jev": 0.32874580586852503,
+        "absolute_gain": 0.007857656180678352,
+        "relative_gain": 0.024487212096557995,
+        "confidence_interval": [
+          -0.017886243587606074,
+          0.03409747189802468
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_follow": {
+        "emer": 0.28110076033694475,
+        "emer_jev": 0.2779189959286265,
+        "absolute_gain": -0.003181764408318244,
+        "relative_gain": -0.01131894628995092,
+        "confidence_interval": [
+          -0.04821574847603346,
+          0.04000613452646613
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_comment": {
+        "emer": 0.29758316464219653,
+        "emer_jev": 0.25567044641252096,
+        "absolute_gain": -0.04191271822967557,
+        "relative_gain": -0.1408437143279592,
+        "confidence_interval": [
+          -0.08630703578737303,
+          -0.0011955575164664363
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_forward": {
+        "emer": 0.26456651034083833,
+        "emer_jev": 0.27970309916646674,
+        "absolute_gain": 0.015136588825628405,
+        "relative_gain": 0.057212792375452556,
+        "confidence_interval": [
+          -0.034984060602448935,
+          0.06264897466603372
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_hate": {
+        "emer": 0.99957934781529,
+        "emer_jev": 0.9996345849708582,
+        "absolute_gain": 5.523715556821074e-05,
+        "relative_gain": 5.5260400976609497e-05,
+        "confidence_interval": [
+          -1.2721813297686402e-05,
+          0.0001373990973221606
+        ],
+        "valid_bootstrap_replicates": 2000
+      }
+    },
+    "positive_mean": {
+      "emer": 0.33564491028215276,
+      "emer_jev": 0.3286205025455963,
+      "absolute_gain": -0.0070244077365564555,
+      "confidence_interval": [
+        -0.02292755526585441,
+        0.008442118566782524
+      ]
+    },
+    "per_seed": {
+      "7": {
+        "emer": [
+          0.45393313498893323,
+          0.37936252141431376,
+          0.3363993081622233,
+          0.27810787627087846,
+          0.3037310613717516,
+          0.2556419674317473,
+          0.9995793478152902
+        ],
+        "emer_jev": [
+          0.4551944254051974,
+          0.3957028313587997,
+          0.31010502157256303,
+          0.3110238604625945,
+          0.2211141168030921,
+          0.33590385297845693,
+          0.9996430829947917
+        ]
+      },
+      "17": {
+        "emer": [
+          0.4736418650919868,
+          0.4248312494623288,
+          0.28721892521091247,
+          0.27420779021058317,
+          0.29756609612216717,
+          0.30487349340853914,
+          0.9995920948511904
+        ],
+        "emer_jev": [
+          0.4636405504536127,
+          0.3727472274834194,
+          0.3172042755884127,
+          0.2711043508531249,
+          0.26311851194474967,
+          0.24992047216901092,
+          0.9996430829947917
+        ]
+      },
+      "29": {
+        "emer": [
+          0.4490666651134803,
+          0.3683571939842257,
+          0.339046215690404,
+          0.2909866145293728,
+          0.29145233643267077,
+          0.23318407018222856,
+          0.99956660077939
+        ],
+        "emer_jev": [
+          0.43811057845406187,
+          0.36365839053722276,
+          0.35892812044459893,
+          0.25162877647016013,
+          0.2827787104897213,
+          0.2532849723519323,
+          0.999617588922991
+        ]
+      }
+    },
+    "gates": {
+      "primary_ci_positive": false,
+      "primary_positive_every_seed": false,
+      "positive_mean_noninferior": false,
+      "click_noninferior": false,
+      "hate_noninferior": true
+    },
+    "all_effect_gates": false,
+    "bootstrap_users": 578,
+    "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+    "online_business_success": false
+  },
+  "latency": {
+    "protocol": {
+      "device": "local CPU, four threads",
+      "slate_size": 10,
+      "batch_size": 1,
+      "warmup": 50,
+      "iterations": 500,
+      "scope": "ready numeric tensors through scores and sorting; feature lookup and Jev production excluded and reported separately",
+      "production_rt_budget": null
+    },
+    "milliseconds": {
+      "emer": {
+        "p50": 0.3744374989764765,
+        "p95": 0.42839439556701103,
+        "p99": 0.46838834561640397
+      },
+      "emer_jev": {
+        "p50": 0.4266460018698126,
+        "p95": 0.4669746573199518,
+        "p99": 0.5165645838133058
+      }
+    },
+    "cached_signal_only": true,
+    "complete_recommendation_rt_measured": false
+  },
+  "config": {
+    "experiment_id": "emer-jev-public-v1",
+    "dataset": "KuaiRand-27K",
+    "implementation": "independent paper-aligned public-data adaptation",
+    "development_source": "core-choice-v1 train and validation only; its old test is excluded",
+    "fresh_test_start_ms": 1650556800000,
+    "fresh_test_end_ms": 1650643200000,
+    "sample_seed": 20261013,
+    "slate_size": 10,
+    "maximum_slate_span_ms": 300000,
+    "test_stratum_budgets": [
+      60,
+      60,
+      60,
+      60,
+      120,
+      240
+    ],
+    "stratum_priority_bits": [
+      64,
+      8,
+      32,
+      16,
+      4
+    ],
+    "objectives": [
+      "is_click",
+      "long_view",
+      "is_like",
+      "is_follow",
+      "is_comment",
+      "is_forward",
+      "is_hate"
+    ],
+    "directions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "model": {
+      "feature_dim": 65,
+      "objectives": 7,
+      "hidden_dim": 48,
+      "layers": 2,
+      "heads": 4,
+      "ff_dim": 96,
+      "dropout": 0.05
+    },
+    "training": {
+      "seeds": [
+        7,
+        17,
+        29
+      ],
+      "epochs": 30,
+      "batch_size": 32,
+      "learning_rates": [
+        0.001,
+        0.0003
+      ],
+      "prior_coefficients": [
+        1.0,
+        0.25
+      ],
+      "weight_decay": 0.0001,
+      "cpu_threads": 4,
+      "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+      "posterior": "number of six positive feedback bits minus explicit hate bit",
+      "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+      "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+      "sample_weights": "inverse inclusion weights normalized to training mean one"
+    },
+    "evaluation": {
+      "top_k": 3,
+      "primary": "long_view NDCG@3",
+      "bootstrap_samples": 2000,
+      "bootstrap_seed": 20261013,
+      "bootstrap_unit": "paired user clusters, averaged over fixed fitted seeds",
+      "success": "primary lower 95% CI > 0 and primary point gain > 0 in every seed, positive-goal mean lower CI >= 0, click lower CI >= -0.005, hate-risk increase upper CI <= 0.005",
+      "click_maximum_absolute_ndcg_drop": 0.005,
+      "hate_maximum_absolute_risk_increase": 0.005,
+      "causal_online_uplift": false
+    },
+    "jev": {
+      "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+      "model": "autotrust/JEV-27B",
+      "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+      "kind": "choice",
+      "history_length": 10,
+      "history_characters": 160,
+      "candidate_characters": 220,
+      "max_http_calls": 4620,
+      "minimum_interval_seconds": 1.0,
+      "planned_calls": 4200,
+      "concurrency": 1
+    },
+    "latency": {
+      "device": "local CPU, four threads",
+      "slate_size": 10,
+      "batch_size": 1,
+      "warmup": 50,
+      "iterations": 500,
+      "scope": "ready numeric tensors through scores and sorting; feature lookup and Jev production excluded and reported separately",
+      "production_rt_budget": null
+    }
+  },
+  "predictions_sha256": "cb61f565ad0af5b51f3da5b6fc71211c14f1de8b2fcbcd50a4cc72e22dfb1a68",
+  "test_sha256": "18795f73c9d52870194d34d0582adc3f728580b986dc4f8c8beaf9fc3b557349",
+  "selection_sha256": "eeb385801a1a1a8d46facef2e82b2f7ccc25878ae33a09b678c48f7f1ebdd450",
+  "provenance": {
+    "created_at_utc": "2026-10-13T05:02:02.734906+00:00",
+    "python": "3.12.11",
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "packages": {
+      "numpy": "2.5.3",
+      "pandas": "3.0.6",
+      "scikit-learn": "1.9.1",
+      "torch": "2.14.1",
+      "requests": "2.34.2",
+      "PyYAML": "6.0.3",
+      "scipy": "1.18.1",
+      "joblib": "1.6.0",
+      "threadpoolctl": "3.7.0"
+    },
+    "git_commit": "98a4f04a066fd8e7b6a30e72133ca2b83905da16",
+    "inputs": []
+  },
+  "implementation": "EMER paper-aligned public-data adaptation, not industrial reproduction"
+}

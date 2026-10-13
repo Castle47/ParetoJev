@@ -15,14 +15,20 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-Current work on **2026-10-13** focuses on **EMER + Jev versus EMER**, with an
+The **2026-10-13 EMER + Jev versus EMER experiment is complete**, using an
 independent paper-aligned public-data implementation, equal-capacity arms and a
-fresh April 22 confirmation cohort. Both models are selected on development
-validation only; real test scoring is running. See
-[`docs/EMER_JEV_EXPERIMENT.md`](docs/EMER_JEV_EXPERIMENT.md).
-The earlier ParetoJev validation below remains a negative result.
+fresh April 22 confirmation cohort. It does **not establish incremental
+superiority**: long-view NDCG averages -3.45% relative change, with its paired
+interval crossing zero. All 4,200 real test decisions, source audits and exact
+prediction/metric replay are complete. See the
+[`final report`](reports/emer-jev-2026-10-13/README.md) and
+[`registered design`](docs/EMER_JEV_EXPERIMENT.md).
+The earlier ParetoJev validation below remains a negative result, with a
+subsequently discovered preprocessing defect documented in
+[`post-run correction`](reports/kuairand-core-2026-10-12/POST_RUN_CORRECTION_2026-10-13.md).
+Its numerical reproducibility does not establish architectural validity.
 
-Verified milestones through **2026-10-12**:
+Verified milestones through **2026-10-13**:
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -48,6 +54,7 @@ Verified milestones through **2026-10-12**:
 | 27K richer controls + time-separated calibration | 1,699,506 train targets; both controls beat tab priors on 6/7 objectives; hate remains unresolved | [`reports/kuairand-27k-behavior-v2-2026-10-11/README.md`](reports/kuairand-27k-behavior-v2-2026-10-11/README.md) |
 | Aligned 27K behavior comparison | Same 1,699,506 train targets; tree/MMoE close, richer SASRec trades worse click/long-view for better like/follow/forward; all 6/7 gates | [`reports/kuairand-27k-aligned-2026-10-12/README.md`](reports/kuairand-27k-aligned-2026-10-12/README.md) |
 | Real KuaiRand core Jev/ParetoJev validation | Complete: 14,000 real decisions, 18 training runs, primary 1/4 gates; overall superiority not supported | [`final report`](reports/kuairand-core-2026-10-12/README.md), [`completion audit`](reports/kuairand-core-2026-10-12/completion_audit.json) |
+| EMER + Jev versus EMER | 24 development fits; fresh 600-slate test and 4,200 real decisions; no stable incremental advantage established | [`final report`](reports/emer-jev-2026-10-13/README.md) |
 | Serving/student experiments | Not run | Core offline validation takes priority |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.

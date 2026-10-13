@@ -744,3 +744,38 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   Quantitative research and deployment targets are not relabeled as achieved.
   Final interpretation and requirement-by-requirement evidence:
   `reports/kuairand-core-2026-10-12/README.md` and `completion_audit.json`.
+
+## 2026-10-13 — EMER + Jev versus EMER
+
+- Implemented an independent paper-aligned public-data EMER adaptation: normalized
+  signal ranks, comparative Transformer, posterior feedback-count supervision,
+  frozen-behavior prior ranking losses and previous-model Mean@3 advantage ratios.
+  Both arms have 43,345 parameters; Jev changes inputs only, with a common search
+  space and budget and separate validation-only selection.
+- Discovered and fixed a training-constant feature scaling defect. Original core
+  validation numeric values reached 678,447.875 after a weekday change; the new
+  training-only encoder uses scale one for constant fields (maximum about 13.612).
+  Preserved original results and added a post-run correction instead of rewriting
+  their audited bytes or attributing all failures to this one defect.
+- Completed 24 development fits (3 seeds, 4 settings, 2 arms, 30 epochs) on 1,000
+  train / 400 validation pseudo-slates. Excluded the old core test from development.
+  Frozen a fresh April 22 test of 600 ten-candidate pseudo-slates from complete
+  late standard logs, with exact stratified inverse-inclusion weights.
+- Collected 4,200 real Choice decisions in 4,200 HTTP attempts at a fixed JEV-27B
+  revision. Source records, labels, weights, features and histories match; all
+  requests/responses and candidate/objective mappings pass audit. Verified all
+  24 training receipts and earliest validation epoch/config selection.
+- Primary long-view NDCG averages 0.390850 -> 0.377369 (-3.45% relative), with
+  absolute-gain 95% paired-user interval [-0.036197, +0.010153]. Click changes
+  -1.43%; like/forward point gains have intervals crossing zero. Incremental
+  superiority is not established; production success is not claimed.
+- Cached-input M1 CPU ranking p95 is 0.428/0.467 ms. Seven serial public-service
+  HTTP decisions have median 4.41 seconds, excluding pacing and backoff. These
+  measurements do not establish complete recommendation RT or an online uplift.
+- All 268 tests passed. Independently reconstructed scalar metrics, replayed all
+  predictions/2,000-bootstrap intervals exactly, exported an 82-file portable
+  archive and verified its 81 payload files and fresh-directory replay. The full
+  source logs are excluded; no full retraining/cross-hardware bitwise proof claimed.
+- Reported all four existing matched-config comparisons as post-confirmation
+  diagnostics only; they do not replace the registered final models or conclusion.
+  Evidence: `reports/emer-jev-2026-10-13/README.md` and `completion_audit.json`.

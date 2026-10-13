@@ -9,8 +9,14 @@ public-data model, normalized signal ranks, posterior-count supervision,
 behavior-prior pairwise losses and previous-model advantage weights are implemented.
 Both arms have 43,345 parameters; 24 development fits and validation-only selection
 of six checkpoints are complete. A new April 22 cohort of 600 ten-candidate slates
-is frozen, with 4,200 real Jev decisions being collected. Confirmation outcomes
-and production RT are not yet claimed. See [registered design](EMER_JEV_EXPERIMENT.md).
+is frozen; all 4,200 real Jev decisions, audits and exact prediction/metric replay
+are complete. Incremental superiority is not established: mean relative long-view
+NDCG change is -3.45% and its interval crosses zero. Like and forward point gains
+also have intervals crossing zero. Cached-input ranking p95 is 0.428/0.467 ms;
+seven serial HTTP requests have a 4.41-second median excluding pacing. Production
+RT and business uplift are not validated. See the
+[final report](../reports/emer-jev-2026-10-13/README.md) and
+[registered design](EMER_JEV_EXPERIMENT.md).
 
 Below is the historical implementation inventory; completion of those components
 does not mean that the research or production goals have succeeded.

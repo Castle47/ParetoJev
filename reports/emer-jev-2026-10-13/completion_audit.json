@@ -1,0 +1,34 @@
+{
+  "experiment_complete": true,
+  "incremental_superiority_supported": false,
+  "production_low_rt_validated": false,
+  "online_business_uplift_validated": false,
+  "development_fits": 24,
+  "selected_checkpoints": 6,
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "real_test_decisions": 4200,
+  "source_candidates_audited": 6000,
+  "unit_tests_passed": 268,
+  "independent_scalar_metric_audit": true,
+  "exact_prediction_metric_interval_replay": true,
+  "portable_files_verified": 81,
+  "fresh_directory_replay": true,
+  "matched_configuration_diagnostic": "exploratory only; primary result not replaced",
+  "source_package_sha256": "e7ddf4f54feea2ca8e8c712198033b253ada53fc4d0e30efb7f31fce21f5e9f9",
+  "report_sha256": "b9a81012b7cca85d6bf3db954a291585c4fdd0df8ce89faec0058178836b02c1",
+  "portable_archive_sha256": "4d19c43699eb4d0338ba47e995474b39008b8497899097db8afc158dfc186784",
+  "execution_source": {
+    "prepare_emer_jev.py": "e6ef1028ad05fbd1a7dbc34a29d3c41c37d3779b3f1acf73e3152b48f6c38a55",
+    "run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+    "score_emer_jev.py": "0234e1a5ac30f5a93537470d59643baea1f10b0ea327cdf7bfe202190c0fbdc1",
+    "audit_emer_jev.py": "9891fa3205a51bd19233f0b1252c3890acdd4bd639a3b0751b0bdb12a3409c85",
+    "report_emer_jev.py": "ca7a37f289de28a4657a1e55b2addb5dfa0a22565483e9941e1cfad0651cd12b",
+    "diagnose_emer_jev.py": "6cb3162108f61fb08bbd03e4e67e01732cdf3cfed7ece1270075d09167cf3341",
+    "export_emer_jev.py": "d5f73428fd328c19ce5440a84cb0e497ad8541430a661a5dd4cce1cdcc6cda53"
+  },
+  "note": "Model/config/selection frozen before new test; audit/report/replay tooling completed without altering fitted model source or primary evaluation formulas."
+}

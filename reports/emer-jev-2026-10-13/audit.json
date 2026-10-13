@@ -1,0 +1,23 @@
+{
+  "source_candidates": 6000,
+  "histories_checked": 600,
+  "real_jev_decisions": 4200,
+  "selected_models_checked": 6,
+  "training_receipts_checked": 24,
+  "earliest_validation_selection_verified": true,
+  "source_labels_features_and_histories_match": true,
+  "no_jev_checkpoint_invariant": true,
+  "inference_labels_invariant": true,
+  "service_inference_seconds": {
+    "p50": 0.14810636651236564,
+    "p95": 0.2161582568194717,
+    "p99": 0.22283994257450107
+  },
+  "serial_seven_http_seconds_excluding_pacing": {
+    "p50": 4.4103997294732835,
+    "p95": 5.077696625393583,
+    "p99": 5.47572528775374
+  },
+  "http_attempts": 4200,
+  "complete_recommendation_rt_measured": false
+}
