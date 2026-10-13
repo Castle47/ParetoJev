@@ -1,6 +1,19 @@
 # Project Status
 
-**Updated:** 2026-10-08
+**Updated:** 2026-10-13
+
+## Current experiment
+
+EMER + Jev versus EMER is now the active question. Independent paper-aligned
+public-data model, normalized signal ranks, posterior-count supervision,
+behavior-prior pairwise losses and previous-model advantage weights are implemented.
+Both arms have 43,345 parameters; 24 development fits and validation-only selection
+of six checkpoints are complete. A new April 22 cohort of 600 ten-candidate slates
+is frozen, with 4,200 real Jev decisions being collected. Confirmation outcomes
+and production RT are not yet claimed. See [registered design](EMER_JEV_EXPERIMENT.md).
+
+Below is the historical implementation inventory; completion of those components
+does not mean that the research or production goals have succeeded.
 
 ## Completed
 

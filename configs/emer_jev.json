@@ -1,0 +1,48 @@
+{
+  "experiment_id": "emer-jev-public-v1",
+  "dataset": "KuaiRand-27K",
+  "implementation": "independent paper-aligned public-data adaptation",
+  "development_source": "core-choice-v1 train and validation only; its old test is excluded",
+  "fresh_test_start_ms": 1650556800000,
+  "fresh_test_end_ms": 1650643200000,
+  "sample_seed": 20261013,
+  "slate_size": 10,
+  "maximum_slate_span_ms": 300000,
+  "test_stratum_budgets": [60, 60, 60, 60, 120, 240],
+  "stratum_priority_bits": [64, 8, 32, 16, 4],
+  "objectives": ["is_click", "long_view", "is_like", "is_follow", "is_comment", "is_forward", "is_hate"],
+  "directions": [1, 1, 1, 1, 1, 1, -1],
+  "model": {"feature_dim": 65, "objectives": 7, "hidden_dim": 48, "layers": 2, "heads": 4, "ff_dim": 96, "dropout": 0.05},
+  "training": {
+    "seeds": [7, 17, 29], "epochs": 30, "batch_size": 32,
+    "learning_rates": [0.001, 0.0003], "prior_coefficients": [1.0, 0.25],
+    "weight_decay": 0.0001, "cpu_threads": 4,
+    "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+    "posterior": "number of six positive feedback bits minus explicit hate bit",
+    "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+    "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+    "sample_weights": "inverse inclusion weights normalized to training mean one"
+  },
+  "evaluation": {
+    "top_k": 3, "primary": "long_view NDCG@3",
+    "bootstrap_samples": 2000, "bootstrap_seed": 20261013,
+    "bootstrap_unit": "paired user clusters, averaged over fixed fitted seeds",
+    "success": "primary lower 95% CI > 0 and primary point gain > 0 in every seed, positive-goal mean lower CI >= 0, click lower CI >= -0.005, hate-risk increase upper CI <= 0.005",
+    "click_maximum_absolute_ndcg_drop": 0.005,
+    "hate_maximum_absolute_risk_increase": 0.005,
+    "causal_online_uplift": false
+  },
+  "jev": {
+    "endpoint": "https://autotrust-jev-27b-demo.hf.space/api/decide",
+    "model": "autotrust/JEV-27B", "revision": "7ce153d6f7933769527939bcb92ec3f3d8292884",
+    "kind": "choice", "history_length": 10, "history_characters": 160, "candidate_characters": 220,
+    "max_http_calls": 4620, "minimum_interval_seconds": 1.0,
+    "planned_calls": 4200, "concurrency": 1
+  },
+  "latency": {
+    "device": "local CPU, four threads", "slate_size": 10, "batch_size": 1,
+    "warmup": 50, "iterations": 500,
+    "scope": "ready numeric tensors through scores and sorting; feature lookup and Jev production excluded and reported separately",
+    "production_rt_budget": null
+  }
+}

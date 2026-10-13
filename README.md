@@ -15,7 +15,14 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-Verified locally on **2026-10-12**:
+Current work on **2026-10-13** focuses on **EMER + Jev versus EMER**, with an
+independent paper-aligned public-data implementation, equal-capacity arms and a
+fresh April 22 confirmation cohort. Both models are selected on development
+validation only; real test scoring is running. See
+[`docs/EMER_JEV_EXPERIMENT.md`](docs/EMER_JEV_EXPERIMENT.md).
+The earlier ParetoJev validation below remains a negative result.
+
+Verified milestones through **2026-10-12**:
 
 | Milestone | Status | Evidence |
 |---|---|---|
