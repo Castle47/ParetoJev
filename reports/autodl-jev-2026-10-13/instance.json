@@ -1,5 +1,5 @@
 {
-  "status": "instance_created_and_gpu_verified; service_setup_in_progress",
+  "status": "service healthy; 336-request stability probe failed; bulk scoring withheld",
   "instance_id": "td89w6tsnx-ba43120e",
   "name": "JEV-27B-ParetoJev",
   "region": "北京B区",
@@ -31,6 +31,11 @@
   "public_service_revision_compatibility": "not established; existing cache must not be silently relabeled",
   "network": "Direct Hugging Face timed out; AutoDL documented network_turbo returned HTTP 200.",
   "setup": "Native Jupyter terminal; Python venv, pinned vLLM 0.31.0. Initial Aliyun package mirror failed; restarted with official PyPI and single-process flock.",
-  "service_health_confirmed": false,
-  "scoring_migrated": false
+  "service_health_confirmed": true,
+  "scoring_migrated": false,
+  "implementation": "pytorch-peft-direct-head-v1",
+  "probe_requests": 336,
+  "probe_max_probability_difference": 0.0370255708694458,
+  "probe_stability_limit": 0.01,
+  "probe_passed": false
 }

@@ -11,7 +11,7 @@ date -Is
 nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
 python -m venv "$jev_env"
 unset http_proxy https_proxy HTTP_PROXY HTTPS_PROXY ALL_PROXY all_proxy
-"$jev_env/bin/python" -m pip install --index-url https://pypi.org/simple --no-cache-dir 'vllm==0.31.0' huggingface_hub
+"$jev_env/bin/python" -m pip install --index-url https://mirrors.aliyun.com/pypi/simple --no-cache-dir 'vllm==0.31.0' huggingface_hub
 # AutoDL's documented academic download proxy; do not print proxy credentials.
 if test -f /etc/network_turbo; then source /etc/network_turbo >/dev/null; fi
 export HF_HOME=/root/autodl-tmp/hf-cache

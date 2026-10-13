@@ -1,0 +1,27 @@
+{
+  "time": "2026-10-13T12:57:37.293898+00:00",
+  "system_free_gib": 29.19,
+  "data_free_gib": 10.02,
+  "finished_model_shards": 12,
+  "model_tree_gib": 49.727,
+  "setup_tail": [
+    "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05",
+    "Looking in indexes: https://mirrors.aliyun.com/pypi/simple",
+    "Collecting vllm==0.31.0",
+    "  Downloading https://mirrors.aliyun.com/pypi/packages/e1/98/841d1328827dc082492fcbb0f57bdf6a9d35aa0df52bd47b75be3f504804/vllm-0.31.0-cp38-abi3-manylinux_2_28_x86_64.whl (320.6 MB)"
+  ],
+  "download_tail": [
+    "Fetching 24 files:  83%|████████▎ | 20/24 [41:06<04:47, 71.98s/it]",
+    "Fetching 24 files:  88%|████████▊ | 21/24 [41:37<02:59, 59.68s/it]",
+    "Fetching 24 files:  92%|█████████▏| 22/24 [43:45<02:40, 80.17s/it]",
+    "Fetching 24 files:  96%|█████████▌| 23/24 [45:32<01:28, 88.36s/it]"
+  ],
+  "torch-setup_tail": [
+    "Fetching 24 files:  83%|███████████████████████████████████████████████████████████████████████▋              | 20/24 [08:49<02:52, 43.19s/it]",
+    "Fetching 24 files:  88%|███████████████████████████████████████████████████████████████████████████▎          | 21/24 [09:16<01:57, 39.22s/it]",
+    "Fetching 24 files:  92%|██████████████████████████████████████████████████████████████████████████████▊       | 22/24 [11:28<02:06, 63.23s/it]",
+    "Fetching 24 files:  96%|██████████████████████████████████████████████████████████████████████████████████▍   | 23/24 [13:15<01:15, 75.16s/it]"
+  ],
+  "http_health": "URLError",
+  "gpu": "0 MiB, 100 %"
+}

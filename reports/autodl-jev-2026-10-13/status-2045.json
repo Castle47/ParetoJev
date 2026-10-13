@@ -1,0 +1,27 @@
+{
+  "time": "2026-10-13T12:45:04.853641+00:00",
+  "system_free_gib": 29.19,
+  "data_free_gib": 15.88,
+  "finished_model_shards": 8,
+  "model_tree_gib": 42.064,
+  "setup_tail": [
+    "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05",
+    "Looking in indexes: https://mirrors.aliyun.com/pypi/simple",
+    "Collecting vllm==0.31.0",
+    "  Downloading https://mirrors.aliyun.com/pypi/packages/e1/98/841d1328827dc082492fcbb0f57bdf6a9d35aa0df52bd47b75be3f504804/vllm-0.31.0-cp38-abi3-manylinux_2_28_x86_64.whl (320.6 MB)"
+  ],
+  "download_tail": [
+    "Fetching 24 files:  54%|█████▍    | 13/24 [28:34<34:14, 186.75s/it]",
+    "Fetching 24 files:  58%|█████▊    | 14/24 [30:25<27:20, 164.09s/it]",
+    "Fetching 24 files:  62%|██████▎   | 15/24 [30:36<17:39, 117.74s/it]Error while downloading from https://huggingface.co/autotrust/JEV-27B/resolve/14b425269ed24452e0a5ad5a8f3e51d139647a88/model-00011-of-00013.safetensors: _ssl.c:983: The handshake operation timed out",
+    "Trying to resume download..."
+  ],
+  "torch-setup_tail": [
+    "Fetching 24 files:  17%|██████████████▌                                                                        | 4/24 [00:11<00:57,  2.86s/it]",
+    "Fetching 24 files:  58%|██████████████████████████████████████████████████▏                                   | 14/24 [00:13<00:07,  1.40it/s]",
+    "Fetching 24 files:  62%|█████████████████████████████████████████████████████▊                                | 15/24 [00:13<00:06,  1.48it/s]",
+    "Fetching 24 files:  67%|█████████████████████████████████████████████████████████▎                            | 16/24 [02:25<02:19, 17.38s/it]"
+  ],
+  "http_health": "URLError",
+  "gpu": "0 MiB, 100 %"
+}

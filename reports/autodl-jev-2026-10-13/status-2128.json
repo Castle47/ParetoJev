@@ -1,0 +1,54 @@
+{
+  "time": "2026-10-13T13:28:28.673356+00:00",
+  "system_free_gib": 29.19,
+  "data_free_gib": 9.06,
+  "finished_model_shards": 13,
+  "model_tree_gib": 50.943,
+  "setup_tail": [
+    "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05",
+    "Looking in indexes: https://mirrors.aliyun.com/pypi/simple",
+    "Collecting vllm==0.31.0",
+    "  Downloading https://mirrors.aliyun.com/pypi/packages/e1/98/841d1328827dc082492fcbb0f57bdf6a9d35aa0df52bd47b75be3f504804/vllm-0.31.0-cp38-abi3-manylinux_2_28_x86_64.whl (320.6 MB)"
+  ],
+  "download_tail": [
+    "",
+    "Fetching 24 files: 100%|██████████| 24/24 [1:00:15<00:00, 326.80s/it]",
+    "Fetching 24 files: 100%|██████████| 24/24 [1:00:15<00:00, 150.65s/it]",
+    "PINNED_MODEL_DOWNLOAD_COMPLETE"
+  ],
+  "torch-setup_tail": [
+    "  File \"/root/jev-torch-env/lib/python3.12/site-packages/transformers/modeling_utils.py\", line 4469, in _load_pretrained_model",
+    "    file_pointer = safe_open(file, framework=\"pt\", device=device, backend=backend)",
+    "                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^",
+    "FileNotFoundError: No such file or directory: /root/autodl-tmp/JEV-27B/model-00013-of-00013.safetensors"
+  ],
+  "http_health": 200,
+  "probe": {
+    "real_requests": 336,
+    "runs": [
+      {
+        "workers": 1,
+        "decisions": 112,
+        "elapsed_seconds": 26.797503990121186,
+        "qps": 4.1794937334943
+      },
+      {
+        "workers": 8,
+        "decisions": 112,
+        "elapsed_seconds": 27.93430746719241,
+        "qps": 4.009406717225367
+      },
+      {
+        "workers": 16,
+        "decisions": 112,
+        "elapsed_seconds": 27.90018178196624,
+        "qps": 4.014310762390556
+      }
+    ],
+    "maximum_probability_difference": 0.0370255708694458,
+    "stability_threshold": 0.01,
+    "passed": false,
+    "interpretation": "Transport/schema/numerical stability only, no recommendation-effect test."
+  },
+  "gpu": "58885 MiB, 0 %"
+}

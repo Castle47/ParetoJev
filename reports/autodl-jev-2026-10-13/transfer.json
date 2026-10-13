@@ -1,0 +1,11 @@
+{
+  "source_input_sha256": "736d0fff748ba364583007e00213027f692522774b2cf90a9d79d7edb933ce40",
+  "compressed_sha256": "21e1d02f77f4cb6d9db20e93b02893ea04ca40356e847644b91c82268afec636",
+  "slates": 36000,
+  "goals": 7,
+  "candidate_count": 10,
+  "reference_decisions": 112,
+  "independent_test_included": false,
+  "labels_included": false,
+  "public_reference_used_for_training": false
+}

@@ -1,0 +1,21 @@
+{
+  "time": "2026-10-13T12:37:53.709015+00:00",
+  "system_free_gib": 29.35,
+  "data_free_gib": 25.76,
+  "finished_model_shards": 6,
+  "model_tree_gib": 32.939,
+  "setup_tail": [
+    "NVIDIA RTX PRO 6000 Blackwell Server Edition, 97887 MiB, 595.71.05",
+    "Looking in indexes: https://mirrors.aliyun.com/pypi/simple",
+    "Collecting vllm==0.31.0",
+    "  Downloading https://mirrors.aliyun.com/pypi/packages/e1/98/841d1328827dc082492fcbb0f57bdf6a9d35aa0df52bd47b75be3f504804/vllm-0.31.0-cp38-abi3-manylinux_2_28_x86_64.whl (320.6 MB)"
+  ],
+  "download_tail": [
+    "Fetching 24 files:  42%|████▏     | 10/24 [19:27<47:25, 203.28s/it]",
+    "Fetching 24 files:  46%|████▌     | 11/24 [19:49<32:03, 147.93s/it]",
+    "Fetching 24 files:  50%|█████     | 12/24 [27:51<49:54, 249.52s/it]",
+    "Fetching 24 files:  54%|█████▍    | 13/24 [28:34<34:14, 186.75s/it]"
+  ],
+  "http_health": "URLError",
+  "gpu": "0 MiB, 100 %"
+}
