@@ -34,8 +34,13 @@ def report(source,output):
         if name in result['conditions']:
             lines+=['','|预设条件|通过|','|---|---|']
             for key,value in result['conditions'][name].items():lines.append(f'|{key}|{"是" if value else "否"}|')
+            conditions=result['conditions'][name]
+            unchanged=[seed for seed,row in r['per_seed'].items() if row['emer']==row['emer_jev']]
+            lines+=['',f'预设条件通过{sum(conditions.values())}/{len(conditions)}项。']
+            if unchanged:lines.append(f'种子{"、".join(unchanged)}的两组指标完全相同，未达到“每个种子严格提升”；没有把零收益改写为正收益。')
     lines+=['','## 选模与证据边界','',f'两项要求的比较同时通过：{"是" if result["screen_passed"] else "否"}。这不自动等价于独立确认或线上收益。',
-        f'18个模型中有{len(result["fallback_models"])}个保留epoch0原EMER。全部回退记录和逐目标结果见evaluation.json。','',
+        f'18个模型中有{len(result["fallback_models"])}个保留epoch0原EMER。全部回退记录和逐目标结果见evaluation.json。',
+        '单项守护允许最多0.005绝对下降；通过守护并不代表每个目标都提升。应结合上表查看长看等目标的实际退化。','',
         '|折|种子|模型|选中轮次|','|---|---|---|---:|']
     for fold,rows in read_json(source/'selection.json')['folds'].items():
         for seed,arms in rows.items():

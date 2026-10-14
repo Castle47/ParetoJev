@@ -1072,3 +1072,18 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Automatic finalizer waits for all18 fits, audits selected inner metrics,
   computes all three comparisons, independently replays and writes the report.
 - Budget65CNY unchanged; no newAPI/GPU spend. Results remain exploratory.
+
+
+## 2026-10-15 — Complete balanced-transfer comparisons
+
+- All18 fits and guarded selections verified; exact independent prediction,
+  metric and bootstrap replay passed. Both process handles exited0.
+- Controlled Jev increment:+1.63%, conditional difference interval
+  [+0.003066959,+0.006823961]. All per-goal guards pass, with follow and
+  comments positive and long-view−0.73% relative.
+- Original-EMER reference:+1.99%; shared no-Jev training change:+0.35%.
+- Seed29 exactly matches its anchor in both arms/all folds. Strict every-seed
+  positive condition fails;4/5 conditions in both required comparisons.
+ 13/18 models retain epoch0. No threshold or seed exclusions were changed.
+- All evidence published in reports/emer-balanced-transfer-v1; exploratory
+  limitations retained. Goal remains unachieved; no paidGPU/API activity.

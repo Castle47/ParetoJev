@@ -22,3 +22,8 @@
 
 
 执行脚本：`scripts/run_emer_balanced_transfer.py`；自动后处理：`scripts/finish_emer_balanced_transfer.sh`。输出目录为外接盘`emer-jev-scale-v3/balanced-transfer-v1`，注册副本保存在`reports/emer-balanced-transfer-v1-start/registration.json`。实时任务句柄见`docs/GOAL_PROGRESS.md`。
+
+
+## 已完成结果（2026-10-15）
+
+18次训练、全部选模审计和精确重放完成。[完整报告](../reports/emer-balanced-transfer-v1/README.md)保留三组对照：相同训练下Jev增量+1.63%，相对原EMER+1.99%，无Jev训练修改本身+0.35%。全部单项点估计守护通过，但种子29均回退到原EMER，零收益未达到严格正收益要求，因此两项要求的比较都是4/5通过，整体未通过。未放宽门槛，也未移除回退的种子。

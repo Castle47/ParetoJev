@@ -49,6 +49,16 @@ This is retrospective evidence on an already explored cohort, not a replacement
 for new-date confirmation. The goal remains unachieved; next steps are recorded
 in [goal progress](docs/GOAL_PROGRESS.md).
 
+The controlled [task-balanced follow-up](reports/emer-balanced-transfer-v1/README.md)
+is also complete: 18 fits, all selection audits and exact replay passed. With
+identical training in both arms, Jev adds **1.63%** to the six-goal mean; all
+per-goal point guards pass. Follow is +0.86%, comments +3.15%, while long view
+is -0.73%. Seed29 retains the original anchor and has exactly zero gain, so
+both required comparisons still pass only **4/5** conditions. The +1.99% gain
+versus the original EMER includes shared training changes; it is not all Jev
+increment. This follow-up was designed after the earlier outer results were
+opened and remains exploratory. No new paid scoring was used.
+
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
 the three reused periods. A frozen-EMER, one-coefficient bounded correction still
