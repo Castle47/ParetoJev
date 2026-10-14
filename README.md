@@ -15,7 +15,17 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-**As of 2026-10-15, stable overall EMER+Jev superiority remains unproven.**
+**As of 2026-10-15, a candidate passes all registered retrospective offline
+conditions; independent confirmation remains unverified.** The
+[matched-comparator fallback report](reports/emer-matched-fallback-v1/README.md)
+shows +1.97% mean six-goal NDCG@3 versus identically trained EMER for the50/50
+recipe, with positive point gains in every seed/fold and all point guards passing.
+Long view still declines0.66%; this is not all-goal dominance. Choices used frozen
+inner metrics, both earlier recipes were reported, and exact prediction replay
+passed. Earlier outer results had already been inspected, so this is exploratory
+rather than pristine confirmation. The independent50K cohort remains unscored.
+
+
 The active comparison is EMER+Jev versus EMER with the same frozen seven-goal
 tree behavior predictor and equal 43,345-parameter rerankers. It tests the
 incremental value of real Jev inputs; it does not establish superiority of the

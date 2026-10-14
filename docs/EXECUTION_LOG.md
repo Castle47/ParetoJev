@@ -1114,3 +1114,18 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Preserved all reports and added a three-study evidence ledger. Next audit
   targets the original-anchor fallback versus an improved matched comparator,
   using inner records only; no new coefficient or seed search is launched.
+
+
+## 2026-10-15 — Complete matched-baseline fallback policy evaluation
+
+- Froze all18 inner-only decisions across both original transfer recipes before
+  any new policy outer metrics; no new fitting or scoring requests.
+- Recomputed inner metrics and audited all36 selected model slots, exact
+  prediction/metric replay, unchanged comparator predictions and exact per-row
+  routing to the frozen source checkpoint. All passed.
+- Balanced recipe remains4/5. Blended recipe main and original-reference
+  comparisons both5/5: controlled mean+1.97%, long-view−0.66% within point guard.
+- Preserved previous failures, all seeds and both recipes. This remains
+  exploratory after prior outer inspection; independent-date evidence missing.
+- All source/runtime checks exited0. Next work is fixed-candidate packaging and
+  independent-evaluator readiness with per-fold feature specs, not more tuning.

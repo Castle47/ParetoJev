@@ -1,0 +1,116 @@
+{
+  "models": [
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer-seed7.pt",
+      "checkpoint_sha256": "4709cae7166bd373fae0f19ea00d5a20369a18431ddf933169354cd54548f089",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer_jev-seed7.pt",
+      "checkpoint_sha256": "79f6ce0ce5664436e0bc1e8edc1b61a1e8aeb7b84dafe2c520ba22487d970119",
+      "best_epoch": 10,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer-seed17.pt",
+      "checkpoint_sha256": "c324825fcdc94d8f122047435f4b02e264311f63b98cff405f984a9959d21ddc",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer_jev-seed17.pt",
+      "checkpoint_sha256": "898f4b12cd7c9242f691c4ed6d745f255cdf616414da8896ea386ec9f215c401",
+      "best_epoch": 10,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer-seed29.pt",
+      "checkpoint_sha256": "794c477bb61f6efe42e7811171b8b2c18754e031d7beeeb490c1783b89489e01",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-0/emer_jev-seed29.pt",
+      "checkpoint_sha256": "95e90d44356cf25b31b20225f9acd7fa0949f7cd9ff87cfeb01199608b201e7d",
+      "best_epoch": 15,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer-seed7.pt",
+      "checkpoint_sha256": "220810a6b686ff580ecae8173c6fdde3a7de89ef4edcf330b56941ef88ae94c0",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer_jev-seed7.pt",
+      "checkpoint_sha256": "f873161560573e2c58e20440c42143e0eea523179e062ad0845d444aea22cf59",
+      "best_epoch": 2,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer-seed17.pt",
+      "checkpoint_sha256": "90a4a82b29af1ab27f6d159b4bc7f3727788cf857373a37f4ca892f062216a8c",
+      "best_epoch": 1,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer-seed17.pt",
+      "checkpoint_sha256": "90a4a82b29af1ab27f6d159b4bc7f3727788cf857373a37f4ca892f062216a8c",
+      "best_epoch": 1,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer-seed29.pt",
+      "checkpoint_sha256": "e035e47da2cba3107971319c55594c1de1cd0950d63d95448e75b04367f66676",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-1/emer-seed29.pt",
+      "checkpoint_sha256": "e035e47da2cba3107971319c55594c1de1cd0950d63d95448e75b04367f66676",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer-seed7.pt",
+      "checkpoint_sha256": "f2a4977dfa15d8e24bb19a3f090e5b981aed7699073bd5b60390c71328794252",
+      "best_epoch": 8,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer_jev-seed7.pt",
+      "checkpoint_sha256": "b7891d90f098479cd5830040d3bbab22f0ca0d4e69e5d3f2673b0e68857c646b",
+      "best_epoch": 2,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer-seed17.pt",
+      "checkpoint_sha256": "7f4392724597acdae7e01789f0884010ae512b1b71befaa7893d47eeb4c355f2",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer-seed17.pt",
+      "checkpoint_sha256": "7f4392724597acdae7e01789f0884010ae512b1b71befaa7893d47eeb4c355f2",
+      "best_epoch": 0,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer-seed29.pt",
+      "checkpoint_sha256": "bc2e106cc82c8d2b1d278f511b232573125a7f7b97090ac1a93e8d6b72ead8b7",
+      "best_epoch": 4,
+      "validation_replayed": true
+    },
+    {
+      "path": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/blended-transfer-v1/fold-2/emer-seed29.pt",
+      "checkpoint_sha256": "bc2e106cc82c8d2b1d278f511b232573125a7f7b97090ac1a93e8d6b72ead8b7",
+      "best_epoch": 4,
+      "validation_replayed": true
+    }
+  ],
+  "selection_sha256": "576818583a128c0a56c6e9738ffde3ed7a9aca05563b6526e37d242f102dcf6a",
+  "all18_verified": true,
+  "new_training": false,
+  "policy_replayed": true
+}

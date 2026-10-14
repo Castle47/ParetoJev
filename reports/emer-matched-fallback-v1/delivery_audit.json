@@ -1,0 +1,53 @@
+{
+  "registration_sha256": "9e7a7114af45f022db9a07438bbd93dcfba23e98c4a937ee8c605aa19c4d7d49",
+  "recipes": {
+    "balanced": {
+      "comparator_predictions_unchanged": true,
+      "policy_routing_exact": true,
+      "exact_replay": true,
+      "evaluation_sha256": "c7c9912fe9fa3d05bbf93624a6f9cb58a1eae4110023e2170085a4c45035f2a3",
+      "policy_sha256": "ebf54f223360ced66b2b65529c7ef0360c7d61c467881567d1239cdf50d23619",
+      "screen_passed": false,
+      "conditions": {
+        "signal": {
+          "primary_conditional_ci_positive": true,
+          "primary_positive_each_seed": false,
+          "primary_positive_each_fold": true,
+          "positive_point_guards": true,
+          "hate_point_guard": true
+        },
+        "original_reference": {
+          "primary_conditional_ci_positive": true,
+          "primary_positive_each_seed": false,
+          "primary_positive_each_fold": true,
+          "positive_point_guards": true,
+          "hate_point_guard": true
+        }
+      }
+    },
+    "blended": {
+      "comparator_predictions_unchanged": true,
+      "policy_routing_exact": true,
+      "exact_replay": true,
+      "evaluation_sha256": "3f045e56de732b5efd15b50ed028b7ab774e148ac5e847325b5b3836bf5ec431",
+      "policy_sha256": "9690d2464844064a83a13ea25db14f4da8ad27440b599e41ef3f003c45373952",
+      "screen_passed": true,
+      "conditions": {
+        "signal": {
+          "primary_conditional_ci_positive": true,
+          "primary_positive_each_seed": true,
+          "primary_positive_each_fold": true,
+          "positive_point_guards": true,
+          "hate_point_guard": true
+        },
+        "original_reference": {
+          "primary_conditional_ci_positive": true,
+          "primary_positive_each_seed": true,
+          "primary_positive_each_fold": true,
+          "positive_point_guards": true,
+          "hate_point_guard": true
+        }
+      }
+    }
+  }
+}

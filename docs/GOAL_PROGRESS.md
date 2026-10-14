@@ -34,11 +34,23 @@ Report: reports/emer-blended-transfer-v1/README.md. All18 fits, guarded inner-se
 - All original criteria and both prior studies remain unchanged; all post-inspection studies remain exploratory. No paidGPU/API activity.
 - Current evidence ledger: reports/emer-budget-summary-2026-10-15/README.md.
 
+## Completed matched-comparator fallback policy
+
+Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_matched_fallback_v1.json. All18 decisions across both prior recipes were frozen using inner metrics before new outer calculations. All checkpoint/decision audits and exact independent replay passed. No new training or inference requests.
+
+- Balanced recipe unchanged:4/5, seed29 remains zero.
+- Blended recipe retains5/9 Jev model slots;4 use their exact matched no-Jev model. This fixes two old-anchor fallback slots where the matched comparator had already improved.
+- Main six-goal mean:0.301267045 →0.307199129, +1.97%, conditional absolute95% interval[+0.003325114,+0.009241747]. Main and original-reference comparisons both5/5.
+- Original-EMER reference:+2.56%; no-Jev training change:+0.58%. Do not attribute total reference change solely to Jev.
+- Main click−0.04%, long−0.66%, like+6.38%, follow+2.38%, comments+3.24%, forward+3.65%; no-hate absolute+0.000003430. Point guards pass; not every goal improves or has positive individual CI.
+- Row-level delivery audit proves matched comparator predictions unchanged and every routed output exactly matches the frozen chosen source model. Both recipes, all seeds/folds and prior failures remain published.
+- This is still post-inspection exploratory evidence. A5/5 screen does not prove new-date generalization or automatically complete the overall goal. All processes have exited successfully; there is no live training/evaluation session to poll.
+
 ## Next actions
 
-1. Audit a concrete comparator/fallback issue before any more coefficient experiments. In both transfer recipes, rejected Jev epochs fall back to the original anchor, while the matched no-Jev arm may select an improved checkpoint. Inspect paired inner metrics to determine whether this makes the fallback worse than the actual comparator. A changed deployment/selection policy must be separately registered and evaluated; never rewrite previous reports.
-2. If justified, prepare a matched-baseline fallback policy using only frozen inner metrics and existing models, with all choices frozen before new outer calculations. Report both prior recipes, not only a favorable result. No new mixtures or seed exclusions.
-3. Keep the65 CNY cap and untouched Apr23–25 confirmation queue. Stronger new-date evidence remains unavailable without matching scores/compute. Do not claim independent confirmation from reused outer data.
+1. Freeze a reviewable candidate/export package for the blended matched-fallback policy: model/feature-spec hashes, explicit user-to-fold routing, input/output schema and reproducible inference commands. Preserve all three seeds and both matched/reference comparators.
+2. Adapt independent-date evaluation readiness to these fold-specific encoders and models. The existing50K request packet is still unscored; do not feed full-development normalization into fold-specific models. User routing must use the original fixed hash, never outcomes.
+3. Stop recipe/coefficient tuning against the explored outer cohort. Keep the65 CNY cap; no paidGPU or newJev requests. Stronger confirmation requires the matching real-score input/compute, which has not been provided. List the minimum missing input once the local handoff is complete; do not repeat the rejected budget request.
 
 ## Paths and preserved confirmation
 
