@@ -18,7 +18,7 @@ Report: reports/emer-user-cv-v1/README.md. Protocol: docs/EMER_USER_CV.md.
 ## Next actions
 
 1. Diagnosis complete: reports/emer-user-cv-tradeoffs-v1. All36 existing Jev candidates fail at least one inner guard;5/9 selected candidates already fail inner follow guard. Sparse-goal supervision mismatch is a hypothesis, not proven causality.
-2. Implement and test the fixed18-fit experiment in configs/emer_balanced_transfer_v1.json and docs/EMER_BALANCED_TRANSFER.md. Both arms get identical task-balanced loss, anchor initialization and guarded inner selection. Freeze input/source hashes before execution. No training launched yet. Retain the original model code and outcomes. New results are exploratory because outer outcomes were already opened.
+2. The fixed18-fit experiment in configs/emer_balanced_transfer_v1.json is implemented and running. Five targeted tests pass; true-data inputs, anchors and source hashes are frozen. Both arms get identical task-balanced loss, anchor initialization and guarded inner selection. Retain the original model code and outcomes. New results are exploratory because outer outcomes were already opened.
 3. Seek actual improvement within the existing real-score resources and65 CNY cap. The positive aggregate result supports continued work but does not satisfy every registered requirement.
 
 ## Paths and preserved confirmation
@@ -28,3 +28,15 @@ Run data: /Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v
 Logs: sibling user-cv-v1-train.log, user-cv-v1-evaluate.log and fold0/1/2 selection-audit logs.
 
 The50K Apr23-25 cohort, input packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. No new paidGPU or externalJev inference was used in this run. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
+
+## Live balanced-transfer execution (verify before polling/restarting)
+
+- Training session20444, PID37992: scripts/run_emer_balanced_transfer.py --stage train.
+- Finalizer session88231, PID38033: waits for training, then audits18 checkpoints and inner selections, evaluates, replays and reports.
+- caffeinate waits only for finalizer38033. No recurring automation.
+- Parent run: emer-jev-scale-v3/user-cv-v1; new run: emer-jev-scale-v3/balanced-transfer-v1 on the external drive.
+- Logs: sibling balanced-transfer-v1-train.log and balanced-transfer-v1-evaluate.log.
+- CLI stages prepare/train/audit/evaluate/replay. Driver and original model sources must remain unchanged during this registered run.
+- Training uses only train/inner validation; all18 fits must finish before this experiment's outer predictions. Initial predictions are checked exactly against each original EMER on train and inner validation.
+- Main comparison: balanced EMER+Jev vs balanced EMER. Also require the original-EMER reference comparison to pass. All fallback-to-anchor checkpoints must be reported.
+- Next: monitor same live handle, verify final audit/replay, inspect all comparisons and limitations. Do not mistake a completed fit for effect evidence.

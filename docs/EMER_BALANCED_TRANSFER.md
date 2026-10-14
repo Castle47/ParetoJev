@@ -14,8 +14,11 @@
 
 主比较是“相同任务平衡训练下的EMER＋Jev vs EMER”；同时比较“任务平衡EMER＋Jev vs 原EMER”。两项比较都沿用原平均收益和七目标守护。不能把共享损失修改的收益冒充Jev增量，也不能只选一个有利比较宣布成功。
 
-配置：[emer_balanced_transfer_v1.json](../configs/emer_balanced_transfer_v1.json)。执行前还需完成实现、单元验证及输入/源码哈希注册。
+配置：[emer_balanced_transfer_v1.json](../configs/emer_balanced_transfer_v1.json)。实现及五项相关测试已通过，真实输入、原EMER检查点和源码哈希已冻结。18次训练已启动，全部完成后自动审计、评价、独立重放和生成报告。
 
 ## 证据与预算边界
 
 这是已打开外层结果后的探索性改进，不能重新称为未见测试。无论是否通过，都保留这个限制和原实验结果。不启动新的付费GPU或Jev请求，累计预算仍65元；Apr23–25独立测试不进入本轮。
+
+
+执行脚本：`scripts/run_emer_balanced_transfer.py`；自动后处理：`scripts/finish_emer_balanced_transfer.sh`。输出目录为外接盘`emer-jev-scale-v3/balanced-transfer-v1`，注册副本保存在`reports/emer-balanced-transfer-v1-start/registration.json`。实时任务句柄见`docs/GOAL_PROGRESS.md`。

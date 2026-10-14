@@ -1058,3 +1058,17 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Specified a fixed18-fit exploratory balanced-posterior follow-up, same recipe
   in both arms, identical anchor predictions and inner-only guarded selection.
   Implementation and execution registration are pending; no new training yet.
+
+
+## 2026-10-15 — Launch controlled balanced-posterior transfer
+
+- Implemented fixed18-fit protocol in separate scripts; original models,
+  training implementation,72-fit CV outputs and guards remain unchanged.
+- Five tests pass: rare/frequent conditional loss normalization, padding/ties
+  diagnostics, identical initial predictions/capacity, guarded earliest selection,
+  both real training arms and exclusion of outer input during fit.
+- Real source and anchor hash checks pass; registration copied to
+  reports/emer-balanced-transfer-v1-start. Training launched locally with2threads.
+- Automatic finalizer waits for all18 fits, audits selected inner metrics,
+  computes all three comparisons, independently replays and writes the report.
+- Budget65CNY unchanged; no newAPI/GPU spend. Results remain exploratory.
