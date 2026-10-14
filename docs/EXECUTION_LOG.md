@@ -1042,3 +1042,19 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Full seven-goal report, source/selection manifests, all audit receipts and
   replay evidence saved in reports/emer-user-cv-v1. Retrospective limitations
   and untouched chronological confirmation are retained explicitly.
+
+
+## 2026-10-15 — Diagnose sparse-goal tradeoffs before another experiment
+
+- Audited all36 existing Jev candidate receipts against each same-fold/seed
+  selected EMER: none passes every inner point guard;5/9 selected candidates
+  already fail the follow guard on inner validation. No new outer model scoring.
+- Measured positive support, user-weight concentration and tie-aware within-slate
+  signal AUC for every fold role. Follow training prevalence is roughly0.06%;
+  its standalone Jev AUC is below the behavior signal in all three outer folds.
+  These are descriptive findings, not a proven causal explanation.
+- Added two metric tests covering weighted ties, padding, zero support, and
+  user aggregation; both pass. Diagnostic report preserves the original result.
+- Specified a fixed18-fit exploratory balanced-posterior follow-up, same recipe
+  in both arms, identical anchor predictions and inner-only guarded selection.
+  Implementation and execution registration are pending; no new training yet.

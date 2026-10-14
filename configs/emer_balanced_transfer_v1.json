@@ -1,0 +1,58 @@
+{
+  "experiment_id": "emer-balanced-transfer-v1",
+  "role": "Exploratory follow-up after user-CV outer results were opened; not independent confirmation",
+  "hypothesis": "Replace summed-feedback posterior with equally weighted conditional per-goal pair losses to align sparse-goal supervision with the multi-objective evaluator",
+  "data": {
+    "source_run": "emer-jev-scale-v3/user-cv-v1",
+    "folds": [0, 1, 2],
+    "reuse_exact_saved_user_roles_and_train_only_encoding": true,
+    "new_jev_calls": 0,
+    "prospective_april23_25_used": false
+  },
+  "initialization": {
+    "anchor": "Original selected EMER for the same fold and seed, already trained without those outer users",
+    "both_arms": "Copy the identical anchor and zero the28 Jev projection columns; only use_jev differs",
+    "require_exact_anchor_predictions_before_training": true,
+    "parameters_per_arm": 43345
+  },
+  "training": {
+    "seeds": [7, 17, 29],
+    "epochs": 15,
+    "batch_size": 32,
+    "learning_rate": 0.0003,
+    "prior_coefficient": 0.25,
+    "weight_decay": 0.0001,
+    "gradient_clip_norm": 5.0,
+    "cpu_threads": 2,
+    "total_fits": 18,
+    "grid_search": false,
+    "posterior": "For each of all seven oriented binary goals, per-slate logistic pair loss divided by its training-weighted fraction of slates with both classes; average across goals, applying original sample weights. Zero-support tasks contribute zero.",
+    "prior": "Keep original EMER behavior-prior pair loss and epoch-snapshot advantage weights; same fixed coefficient in both arms"
+  },
+  "selection": {
+    "data": "Inner validation only, never outer rows",
+    "anchor": "Same fixed original EMER per fold and seed for both arms",
+    "admissible": "All six positive and no-hate point changes versus anchor at least -0.005",
+    "criterion": "Maximize six-positive mean among admissible epochs; epoch0 anchor is included; earliest tie wins",
+    "failed_guard_epoch_cannot_replace_best": true,
+    "all_18_selected_before_outer_evaluation": true
+  },
+  "evaluation": {
+    "primary_comparison": "Balanced EMER+Jev versus identically balanced EMER",
+    "reference_comparison": "Balanced EMER+Jev versus original frozen EMER",
+    "top_k": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 2026101501,
+    "maximum_positive_goal_absolute_point_drop": 0.005,
+    "maximum_hate_risk_absolute_point_increase": 0.005,
+    "screen": "For both comparisons: positive pooled primary conditional CI, positive primary point change in every seed and fold, and all seven original point guards",
+    "report": "All seven objectives, every fold/seed, support, selected epochs and all fallback-to-anchor cases"
+  },
+  "limitations": [
+    "This training recipe is an EMER adaptation; changes shared by both arms cannot be attributed to Jev.",
+    "The cohort and its outer results were already explored. New results remain exploratory even if all conditions pass.",
+    "Conditional bootstrap does not capture all training variation; folds overlap in their training users.",
+    "No claim of new-date confirmation, strict all-objective dominance, or online business uplift."
+  ],
+  "budget": {"total_project_cap_cny": 65, "paid_gpu": false, "new_api_requests": 0}
+}

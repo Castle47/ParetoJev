@@ -17,8 +17,8 @@ Report: reports/emer-user-cv-v1/README.md. Protocol: docs/EMER_USER_CV.md.
 
 ## Next actions
 
-1. Diagnose the follow tradeoff using the frozen inner-validation choices and all per-fold results, preserving the full original report.
-2. If changing training or selection, register it as a new exploratory experiment. Do not tune on outer outcomes and relabel them as untouched confirmation, pick a favorable fold, or loosen the registered guard to pass.
+1. Diagnosis complete: reports/emer-user-cv-tradeoffs-v1. All36 existing Jev candidates fail at least one inner guard;5/9 selected candidates already fail inner follow guard. Sparse-goal supervision mismatch is a hypothesis, not proven causality.
+2. Implement and test the fixed18-fit experiment in configs/emer_balanced_transfer_v1.json and docs/EMER_BALANCED_TRANSFER.md. Both arms get identical task-balanced loss, anchor initialization and guarded inner selection. Freeze input/source hashes before execution. No training launched yet. Retain the original model code and outcomes. New results are exploratory because outer outcomes were already opened.
 3. Seek actual improvement within the existing real-score resources and65 CNY cap. The positive aggregate result supports continued work but does not satisfy every registered requirement.
 
 ## Paths and preserved confirmation

@@ -1,0 +1,1592 @@
+{
+  "role": "Exploratory diagnosis after outer results were opened; no new confirmation",
+  "new_model_predictions": false,
+  "new_training": false,
+  "new_jev_calls": 0,
+  "inputs": {
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/evaluation.json": "a999b363ba72fe6adb8f1777a1b91478112a9b7f1a1ccc3d512220bd324e5869",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed17-trial3.json": "0683d308e4dce29b43efd030f1fb6c777449393f75716a3f836bda79faaab37c",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed29-trial1.json": "a632d08a408828c1fea9810221d80f6f3bbe0d1feda17ad5fe21f008193ff5bf",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed7-trial2.json": "8d6fece58d72e7b05525b4ec74d56ff40f96add6c46f908a1b84aec9859c94c4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed17-trial0.json": "9709533e755be80bb4d6122b1170631b49fb37a4a4e67692c71991df3ba3a18d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed17-trial1.json": "3e26bd8abc4954f932bcdac877a2be37c29199a252f6501292bbce423602196d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed17-trial2.json": "66d0b89618a71bff1675047c4bfe158ea0f8fd450b380a9da2f988a2d0d5183d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed17-trial3.json": "4cde1103f698dfd5fc398ba2576b0b338b4fccbb5830087f43013e2b93594c11",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed29-trial0.json": "bc483eb2d2cc70bf63a443cd9ab8a13f8d021ff211c2db1073044b2b06e11d71",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed29-trial1.json": "725f3920879b453e2b45235b725c7e8f26bfdd88b1d413259d948633004a4159",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed29-trial2.json": "e9a010ef1e19094aa4910979e3061acd0bbb357b9050f968cd6029ee67759a86",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed29-trial3.json": "4409837c3fb176131895971a944ecfea54cd132e1d3037669307172500780c30",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed7-trial0.json": "390ddc0528a912b52bc69b72f49dfc790832c33b8dfa87d7bb2cd669f2e3b357",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed7-trial1.json": "baa50d036a26b2e187b3594f20230967a98823f2c3b46ca30242ca9416a8d8d5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed7-trial2.json": "a193639fae1ee8ada06c985a14cb002b5f19aac870857f56b0d491294a0cd4f5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer_jev-seed7-trial3.json": "8e5ea7ad1ec91da346b9b0fea6e9f641db87492d2d5b7cdb7d44c2dcb24cc6cb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/test.npz": "edd32d0ae8ae0fef67158570bd177eff52af6a702fe20a0d85fa51503cf661fc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/train.npz": "a1002f69a8645434c93de0b3fd4c23d8f7e238db00e3e8f89960275832ec4247",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/validation.npz": "db0841d080d7d47fc3a136f26c7dee23f9cb41fecc451591237b9ecb506e5b49",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed17-trial0.json": "ef1487fd9eeadd5398104403b51319015492ee8f50ec391110545383456a6b29",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed29-trial1.json": "bb8229ec047486e19ebcf5ba3b79a4a1fb5fc3e9386e92e5d91474ce7bdefbb8",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed7-trial2.json": "ed0468fee6c1eda8b22effb8c0076dbd94ff6e9141630c32573335b71b028bf2",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed17-trial0.json": "8a3d82cfbcf06ab06c9a2424e2c27297af5b3fcb1495a42c13657c68813fb6af",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed17-trial1.json": "cd1da94f7398714cc03a6ae6856f4c61052e7c8dc01915602992dd53269e9a39",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed17-trial2.json": "f4a6e32f9a6df1ab7c90c84459e529e394b2141a15a1d53a1c5e5615ec944322",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed17-trial3.json": "5e00c229a75b8948ae24cf9ea25cbcee30b143105920665a2ee64277790a20df",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed29-trial0.json": "36a5e63e98dce0fd04048d307750d9b142ee2161c6bf8ab0e29a213be8100107",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed29-trial1.json": "f0840b554e1a4af1df9a73d7aa73007b5ad10a5c07e5920eb0a21f58509a4e27",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed29-trial2.json": "bb4e46f2934a10077aaf26f3ede4f80c5be5b4e8d6751d31bf49270c99ae31cd",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed29-trial3.json": "e9da5cb214de2dbfab8c0727c8b2b8851933f204e1c8d5028b1793460a450bd9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed7-trial0.json": "465e50be3af2050b6fa1bba50ab48c07f05d5a5ede6a5e1a8a0e6a716d9b93ce",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed7-trial1.json": "b42c1fc5e7d4b84dd468cd902f8e7cb3a1977ba994d66d193eaa90a724de91d5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed7-trial2.json": "d1a2c984f2e7bbb7ac0ae6fa34554147c427915b908282579b344aa00d2db95a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer_jev-seed7-trial3.json": "094bbf70f04b90404677e62e33b68e25e8ef643ea6c21353fda4d248af546635",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/test.npz": "24bf887574a1c8dd182aeee45528d1900beed741cdb028b60f5825c17e9234ab",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/train.npz": "a20713f36c32ea39c4b2e8b54bc9c4254e6fbfa0af1b03828d1433621f7ff427",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/validation.npz": "20ff74f3bf957d2c87d77bddd25f894da1f948804b2c01dbb7de13afac1c4c52",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed17-trial0.json": "b498bcb390e1a9996112d47a53b53f0f90c38090250a7494457cef2191ce82f4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed29-trial2.json": "097d5761b58fb089dc571c2d6f00683908ed6e87031088a05d43bbff9a49e584",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed7-trial0.json": "3741faa9d2ef017bef1e0f3324c8b07a657711f042a80671743912de1837dbcc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed17-trial0.json": "6ff6a57ec2dfd14247b9482af1fa20703d4eae4f148f630affa6e707d551ea3d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed17-trial1.json": "9351fb45294f5e7e77626488b93060f3448e7f5bbba288ecfaedf3a92f311fcb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed17-trial2.json": "97d9ee9465ee57a45930aa3495c9972d1f715b050c14c07350b051a6e9bfeeaa",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed17-trial3.json": "cadae28e02a4a437e5f73c2d3839f66780c6003ddf8fd83a622d49257fa4b806",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed29-trial0.json": "62c161c1d0f285ee6b061df8293df29cba5372bededbf1edc7048922e6a1513e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed29-trial1.json": "344e74fa8427f1bdc2b39e795effa32dce1591f33a166aa024e974f25ff765f0",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed29-trial2.json": "5001ad125767a657560491112c69adb3b9440738c4d704a277b79f3e9a66d2f4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed29-trial3.json": "bc9f8aca020e406c40b81b89e0dd8da6f76ca9bbae4ec6664c2efae08799f7df",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed7-trial0.json": "3c2f4be6637ea96902c1880b5d9f9359af1b9444f3a266df1324757e350e0b9d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed7-trial1.json": "6068d77f514299a5a99f463c8407729b2440273ed5683ae54315e9d12a14f487",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed7-trial2.json": "73a86c5650761577420e54800a59308dc312205c645d506dd2fc941008028c8c",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer_jev-seed7-trial3.json": "8ce33121660c5ba19db9927bf09b3d87f55ad13984d5b0a1f9286d1260bb681d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/test.npz": "fd6e19502981b8e881f37c03e063a5623c17102d671000ddfd9638d670843114",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/train.npz": "ceb24200fad0b9cae2614161732afe6a5572077a30aec1dcde3dab4592814581",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/validation.npz": "6582b040b91d55f57001e47804f32270fde0660554e2e2f362b43991ae3702cc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/registration.json": "223b783f38b037f9f55e670a3fb3c00574d80a3e345e8af0bc25aacf095267d5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/replay.json": "cb21eb7901afb1e901d6976073f7d107c3e9e15234bb76be83167b899d12f70d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/selection.json": "f7965042c19a1c2a170020841acef60c4a6f2fc7842756a6a6b785437c2450fb"
+  },
+  "script_sha256": "16ca8f7159f76d070dec3d09d3fccd37a17a89693c87a25848798b17f3e0958e",
+  "selected_inner": [
+    {
+      "fold": 0,
+      "seed": 7,
+      "selected_jev": "emer_jev-seed7-trial3.pt",
+      "mean_gain": 0.006890441826881514,
+      "delta": [
+        0.010985514387817308,
+        0.022362772782917262,
+        0.015770896469872286,
+        -0.01052598505380456,
+        -0.011684550117190523,
+        0.014434002491677311,
+        -1.5572772416039271e-06
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "selected_jev": "emer_jev-seed17-trial1.pt",
+      "mean_gain": 0.004204581226221753,
+      "delta": [
+        0.02075523856609912,
+        0.0211964232234369,
+        -0.0009405199151749088,
+        -0.026516162121233977,
+        -0.010529014657046448,
+        0.021261522261249832,
+        -4.3642586853520626e-05
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "selected_jev": "emer_jev-seed29-trial3.pt",
+      "mean_gain": 0.008089313889603142,
+      "delta": [
+        0.007860538681638829,
+        0.017299236530808615,
+        0.0227721426942446,
+        0.004780137842481241,
+        0.010560568560300576,
+        -0.014736740971855011,
+        2.3065821083578797e-05
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "selected_jev": "emer_jev-seed7-trial1.pt",
+      "mean_gain": 0.007615401715347941,
+      "delta": [
+        0.011513226780650698,
+        0.024374389729762413,
+        -0.019439567983255024,
+        -0.025096168454580098,
+        0.005541661276487697,
+        0.04879886894302196,
+        1.4758788286162172e-05
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "selected_jev": "emer_jev-seed17-trial0.pt",
+      "mean_gain": 0.00293110654105277,
+      "delta": [
+        0.0025800283449805006,
+        0.004614635797881239,
+        -0.008000809596995895,
+        0.008262384828371105,
+        -0.0029904108114114925,
+        0.013120810683491163,
+        -8.477203774504005e-07
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "selected_jev": "emer_jev-seed29-trial1.pt",
+      "mean_gain": 0.0024000118847535925,
+      "delta": [
+        0.00852246548852259,
+        0.008106009305750117,
+        -0.0033161877082604208,
+        0.0001858818274730334,
+        -0.016727342998925726,
+        0.017629245393961962,
+        -3.885659025848476e-05
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "selected_jev": "emer_jev-seed7-trial2.pt",
+      "mean_gain": 0.00040520654585226207,
+      "delta": [
+        0.001409283100028913,
+        0.0018463202343267926,
+        0.010299833115379686,
+        -0.0004516624119298429,
+        -0.016983237753333102,
+        0.006310702990641126,
+        -3.9294888756202795e-06
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "selected_jev": "emer_jev-seed17-trial1.pt",
+      "mean_gain": 0.00010452137624081259,
+      "delta": [
+        0.004324719819211176,
+        0.028189599254707542,
+        0.005350246362326061,
+        -0.015605131794276056,
+        -0.035667683626127156,
+        0.014035378241603308,
+        2.882078403854127e-05
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "selected_jev": "emer_jev-seed29-trial1.pt",
+      "mean_gain": 0.0012099386419337083,
+      "delta": [
+        0.01569608407720685,
+        0.03090417598794909,
+        -0.0036436656973497517,
+        -0.013018556286674615,
+        -0.022847991905803278,
+        0.00016958567627395338,
+        2.5870268169359e-05
+      ]
+    }
+  ],
+  "all_existing_jev_candidates": [
+    {
+      "fold": 0,
+      "seed": 7,
+      "trial": 0,
+      "mean_gain": 0.003095368319138911,
+      "delta": [
+        0.0086569626337204,
+        0.00838593102321028,
+        0.022965578339363246,
+        -0.0006459273712550173,
+        -0.013967251702146716,
+        -0.006823083008058728,
+        -3.893193104342885e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 7,
+      "trial": 1,
+      "mean_gain": 0.003728411864437046,
+      "delta": [
+        0.011519499252250098,
+        0.020224579813849786,
+        0.0105588698939309,
+        -0.008036305665710008,
+        -0.009402336157880553,
+        -0.0024938359498179463,
+        -1.4807075157774463e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 7,
+      "trial": 2,
+      "mean_gain": 0.0012634508169779614,
+      "delta": [
+        0.005899323357240416,
+        0.00478766695816174,
+        0.004305480952483842,
+        -0.0039854059442493706,
+        -0.01299538325608074,
+        0.00956902283431188,
+        -3.89319310412084e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 7,
+      "trial": 3,
+      "mean_gain": 0.006890441826881514,
+      "delta": [
+        0.010985514387817308,
+        0.022362772782917262,
+        0.015770896469872286,
+        -0.01052598505380456,
+        -0.011684550117190523,
+        0.014434002491677311,
+        -1.5572772416039271e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "trial": 0,
+      "mean_gain": -0.0014752143640373444,
+      "delta": [
+        0.012593468631757143,
+        0.004443683246968033,
+        0.0004125053293854708,
+        -0.02176238454631929,
+        -0.010724643690730423,
+        0.006186084844715001,
+        -1.6364352400155546e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "trial": 1,
+      "mean_gain": 0.004204581226221753,
+      "delta": [
+        0.02075523856609912,
+        0.0211964232234369,
+        -0.0009405199151749088,
+        -0.026516162121233977,
+        -0.010529014657046448,
+        0.021261522261249832,
+        -4.3642586853520626e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "trial": 2,
+      "mean_gain": -0.000581530298972649,
+      "delta": [
+        0.011935608237206241,
+        0.0008844474473793107,
+        -0.00668959290996618,
+        -0.010994575763653647,
+        0.00011274524916915496,
+        0.0012621859460292262,
+        -1.1067021506105945e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "trial": 3,
+      "mean_gain": 0.00048302208417027687,
+      "delta": [
+        0.01300666788804461,
+        0.020804820433005744,
+        -0.011363488365958019,
+        -0.016336826563119355,
+        -0.015956404373631355,
+        0.012743363486680037,
+        1.7104166931680709e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "trial": 0,
+      "mean_gain": -0.00012302623199309895,
+      "delta": [
+        0.004691865508935356,
+        0.00019004771693248435,
+        0.012519224790943473,
+        0.0001490591887338133,
+        -0.007444270093680483,
+        -0.010844084503823237,
+        1.995126659981583e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "trial": 1,
+      "mean_gain": 0.005885786588527671,
+      "delta": [
+        0.008407616713461352,
+        0.01324815773968635,
+        0.018402279489291795,
+        0.007997630181571486,
+        -0.0012648374080828917,
+        -0.01147612718476207,
+        1.5585713778576427e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "trial": 2,
+      "mean_gain": -5.7953591806695716e-05,
+      "delta": [
+        0.0024675499273157375,
+        -0.009640882988833366,
+        0.019370549731763664,
+        0.005051026300041395,
+        0.0037746084746618225,
+        -0.021370572995789427,
+        5.190133277876985e-05
+      ],
+      "failed_inner_point_guards": [
+        "long_view",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "trial": 3,
+      "mean_gain": 0.008089313889603142,
+      "delta": [
+        0.007860538681638829,
+        0.017299236530808615,
+        0.0227721426942446,
+        0.004780137842481241,
+        0.010560568560300576,
+        -0.014736740971855011,
+        2.3065821083578797e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "trial": 0,
+      "mean_gain": -0.00039546830654554427,
+      "delta": [
+        0.003517582140319442,
+        0.005500269141629599,
+        -0.0034824572011437627,
+        -0.009373955300057968,
+        -0.006289130359118822,
+        0.007754881739098246,
+        1.0520186399687326e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "trial": 1,
+      "mean_gain": 0.007615401715347941,
+      "delta": [
+        0.011513226780650698,
+        0.024374389729762413,
+        -0.019439567983255024,
+        -0.025096168454580098,
+        0.005541661276487697,
+        0.04879886894302196,
+        1.4758788286162172e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "trial": 2,
+      "mean_gain": 0.0013754004512305656,
+      "delta": [
+        0.004259732345436973,
+        0.003985419656986899,
+        -0.003916218572100005,
+        -0.005073900635639839,
+        0.0004215843529741803,
+        0.008575785559725185,
+        6.448310681528291e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_follow"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "trial": 3,
+      "mean_gain": 0.007546347929545898,
+      "delta": [
+        0.015399732488154072,
+        0.03615823349740027,
+        -0.009570050670128394,
+        -0.006834635295132396,
+        -0.018146039641718403,
+        0.02827084719870024,
+        4.869578244892647e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "trial": 0,
+      "mean_gain": 0.00293110654105277,
+      "delta": [
+        0.0025800283449805006,
+        0.004614635797881239,
+        -0.008000809596995895,
+        0.008262384828371105,
+        -0.0029904108114114925,
+        0.013120810683491163,
+        -8.477203774504005e-07
+      ],
+      "failed_inner_point_guards": [
+        "is_like"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "trial": 1,
+      "mean_gain": 0.0008449724994569566,
+      "delta": [
+        0.00646624943427232,
+        0.028788867690417996,
+        -0.0218997926977208,
+        -0.011976667166824495,
+        -0.005985103526816998,
+        0.009676281263413716,
+        1.2215627154366082e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "trial": 2,
+      "mean_gain": -2.6381224073085408e-05,
+      "delta": [
+        0.0026591436821558623,
+        0.006230904262542913,
+        -0.014745872865688514,
+        0.0029164577731723706,
+        -0.004339015712459066,
+        0.007120095515837921,
+        9.67246602245897e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_like"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "trial": 3,
+      "mean_gain": -0.00044445710019688317,
+      "delta": [
+        0.010657384342646348,
+        0.03430959060703648,
+        -0.03166309502320841,
+        -0.01146087627116979,
+        -0.008995045156111464,
+        0.004485298899625539,
+        1.1367906776915682e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "trial": 0,
+      "mean_gain": 0.00011654813531908337,
+      "delta": [
+        -0.003064054074055189,
+        -0.006027139489681643,
+        0.01926375198055491,
+        0.0009699948174576034,
+        0.0018929578284972992,
+        -0.01233622225085848,
+        -3.4103720331302156e-05
+      ],
+      "failed_inner_point_guards": [
+        "long_view",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "trial": 1,
+      "mean_gain": 0.0024000118847535925,
+      "delta": [
+        0.00852246548852259,
+        0.008106009305750117,
+        -0.0033161877082604208,
+        0.0001858818274730334,
+        -0.016727342998925726,
+        0.017629245393961962,
+        -3.885659025848476e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "trial": 2,
+      "mean_gain": -0.001493113192422818,
+      "delta": [
+        0.003461258118872823,
+        -0.011335938773572973,
+        0.016481147792887285,
+        -0.0053269086312408565,
+        -0.0034927410317024954,
+        -0.008745496629780691,
+        -2.6807689272434487e-05
+      ],
+      "failed_inner_point_guards": [
+        "long_view",
+        "is_follow",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "trial": 3,
+      "mean_gain": 0.0009456661987229988,
+      "delta": [
+        -0.0010121425681973162,
+        0.012982639928262485,
+        0.012947143578946413,
+        -0.010982036692261443,
+        -0.0073509449016234685,
+        -0.0009106621527886771,
+        -4.055203101294147e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "trial": 0,
+      "mean_gain": -0.0018156900864941632,
+      "delta": [
+        0.0011542021100748312,
+        0.002937929592147337,
+        -0.004053780653305472,
+        0.0019287677308413853,
+        -0.006913367333216569,
+        -0.005947891965506491,
+        3.9294888756202795e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "trial": 1,
+      "mean_gain": -0.0015977132891121376,
+      "delta": [
+        0.014014298399531444,
+        0.027795187688475553,
+        -0.009508938958533386,
+        -0.007016538991513388,
+        -0.028996464512713205,
+        -0.005873823359919844,
+        1.8011290417896397e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_like",
+        "is_follow",
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "trial": 2,
+      "mean_gain": 0.00040520654585226207,
+      "delta": [
+        0.001409283100028913,
+        0.0018463202343267926,
+        0.010299833115379686,
+        -0.0004516624119298429,
+        -0.016983237753333102,
+        0.006310702990641126,
+        -3.9294888756202795e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "trial": 3,
+      "mean_gain": -0.0012215012489883437,
+      "delta": [
+        0.010724892929319385,
+        0.021894997289993723,
+        0.0023569383837453994,
+        -0.009356127333569275,
+        -0.013460541919202818,
+        -0.019489166844216477,
+        2.2758856274007755e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "trial": 0,
+      "mean_gain": -0.0009983278223669872,
+      "delta": [
+        -0.0008671755918027158,
+        -0.003392769777761151,
+        0.00018450289576116274,
+        0.008023752860021383,
+        -0.013512170439152149,
+        0.003573893118731547,
+        1.4899878522656174e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "trial": 1,
+      "mean_gain": 0.00010452137624081259,
+      "delta": [
+        0.004324719819211176,
+        0.028189599254707542,
+        0.005350246362326061,
+        -0.015605131794276056,
+        -0.035667683626127156,
+        0.014035378241603308,
+        2.882078403854127e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "trial": 2,
+      "mean_gain": -0.0025296109259009916,
+      "delta": [
+        -0.00336045806068469,
+        0.0058662466408448966,
+        0.0009724422041087477,
+        -0.006337286351496441,
+        -0.01620583356600719,
+        0.0038872235778287245,
+        1.0152312666433794e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "trial": 3,
+      "mean_gain": -0.004271872273584124,
+      "delta": [
+        0.004417545410901613,
+        0.030273544068393887,
+        0.011122177111823894,
+        -0.016199105091354832,
+        -0.03288945893268222,
+        -0.022355936208587085,
+        7.024811168410139e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment",
+        "is_forward"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "trial": 0,
+      "mean_gain": -0.00042910495219197764,
+      "delta": [
+        -0.002295075088318388,
+        0.00713689340952306,
+        -0.0017048834086154097,
+        0.0027707412678051324,
+        -0.007760729713695069,
+        -0.000721576179851191,
+        3.9294888756202795e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "trial": 1,
+      "mean_gain": 0.0012099386419337083,
+      "delta": [
+        0.01569608407720685,
+        0.03090417598794909,
+        -0.0036436656973497517,
+        -0.013018556286674615,
+        -0.022847991905803278,
+        0.00016958567627395338,
+        2.5870268169359e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "trial": 2,
+      "mean_gain": -2.7747065800827014e-05,
+      "delta": [
+        -0.0020500207839081463,
+        0.003980786490006494,
+        -0.003757235576839879,
+        0.0048460586915433645,
+        -0.010526563641635955,
+        0.00734049242602916,
+        -9.334235685942716e-06
+      ],
+      "failed_inner_point_guards": [
+        "is_comment"
+      ]
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "trial": 3,
+      "mean_gain": 1.5590015840329558e-05,
+      "delta": [
+        0.010490676513114805,
+        0.0374057981550201,
+        0.01611493807545933,
+        -0.01985369834220871,
+        -0.03615895158106297,
+        -0.007905222725280575,
+        5.2397717292707036e-05
+      ],
+      "failed_inner_point_guards": [
+        "is_follow",
+        "is_comment",
+        "is_forward"
+      ]
+    }
+  ],
+  "support": {
+    "0/train": {
+      "slates": 18795,
+      "users": 6634,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 72337,
+          "positive_slates": 16484,
+          "positive_users": 6382,
+          "weighted_prevalence": 0.3238070533310563,
+          "weighted_positive_slate_fraction": 0.8110017129598209,
+          "weighted_pair_supervision_fraction": 0.7993593954866429,
+          "positive_support_user_weight_ess": 2917.640141807693
+        },
+        "long_view": {
+          "positive_exposures": 48245,
+          "positive_slates": 14414,
+          "positive_users": 6051,
+          "weighted_prevalence": 0.21019492764393066,
+          "weighted_positive_slate_fraction": 0.6857638732344246,
+          "weighted_pair_supervision_fraction": 0.6836340503942266,
+          "positive_support_user_weight_ess": 2818.172210615553
+        },
+        "is_like": {
+          "positive_exposures": 8999,
+          "positive_slates": 5190,
+          "positive_users": 2369,
+          "weighted_prevalence": 0.010627935927569639,
+          "weighted_positive_slate_fraction": 0.06435279486607251,
+          "weighted_pair_supervision_fraction": 0.06426484112152701,
+          "positive_support_user_weight_ess": 948.312556914122
+        },
+        "is_follow": {
+          "positive_exposures": 1549,
+          "positive_slates": 1306,
+          "positive_users": 862,
+          "weighted_prevalence": 0.0005808244080415852,
+          "weighted_positive_slate_fraction": 0.0049402579305647815,
+          "weighted_pair_supervision_fraction": 0.004937165017538122,
+          "positive_support_user_weight_ess": 401.7712625208352
+        },
+        "is_comment": {
+          "positive_exposures": 2078,
+          "positive_slates": 1799,
+          "positive_users": 1104,
+          "weighted_prevalence": 0.0016610159750301524,
+          "weighted_positive_slate_fraction": 0.014373090123819153,
+          "weighted_pair_supervision_fraction": 0.014373090123819153,
+          "positive_support_user_weight_ess": 575.1033264224034
+        },
+        "is_forward": {
+          "positive_exposures": 1674,
+          "positive_slates": 1416,
+          "positive_users": 836,
+          "weighted_prevalence": 0.0006415592178629436,
+          "weighted_positive_slate_fraction": 0.005392003078177378,
+          "weighted_pair_supervision_fraction": 0.005392003078177378,
+          "positive_support_user_weight_ess": 201.84049304177753
+        },
+        "is_hate": {
+          "positive_exposures": 1576,
+          "positive_slates": 947,
+          "positive_users": 383,
+          "weighted_prevalence": 0.00040062449997372825,
+          "weighted_positive_slate_fraction": 0.0024228486088130686,
+          "weighted_pair_supervision_fraction": 0.002399551004173415,
+          "positive_support_user_weight_ess": 138.22602386203403
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5392795833332585,
+        "jev": 0.5173781682467848
+      }
+    },
+    "0/validation": {
+      "slates": 5038,
+      "users": 1734,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 19079,
+          "positive_slates": 4383,
+          "positive_users": 1666,
+          "weighted_prevalence": 0.3202772456837717,
+          "weighted_positive_slate_fraction": 0.8220394730341559,
+          "weighted_pair_supervision_fraction": 0.8123473325317813,
+          "positive_support_user_weight_ess": 736.5635977816952
+        },
+        "long_view": {
+          "positive_exposures": 12825,
+          "positive_slates": 3815,
+          "positive_users": 1592,
+          "weighted_prevalence": 0.2088766492795899,
+          "weighted_positive_slate_fraction": 0.6852953832431069,
+          "weighted_pair_supervision_fraction": 0.6813776673361568,
+          "positive_support_user_weight_ess": 727.1948999505927
+        },
+        "is_like": {
+          "positive_exposures": 2383,
+          "positive_slates": 1281,
+          "positive_users": 612,
+          "weighted_prevalence": 0.009839301943973928,
+          "weighted_positive_slate_fraction": 0.058582757611676264,
+          "weighted_pair_supervision_fraction": 0.058480143933763176,
+          "positive_support_user_weight_ess": 260.68673951711094
+        },
+        "is_follow": {
+          "positive_exposures": 423,
+          "positive_slates": 348,
+          "positive_users": 229,
+          "weighted_prevalence": 0.000565908941700195,
+          "weighted_positive_slate_fraction": 0.004681186712159335,
+          "weighted_pair_supervision_fraction": 0.004681186712159335,
+          "positive_support_user_weight_ess": 105.7855336498396
+        },
+        "is_comment": {
+          "positive_exposures": 532,
+          "positive_slates": 462,
+          "positive_users": 285,
+          "weighted_prevalence": 0.0015439947344633906,
+          "weighted_positive_slate_fraction": 0.013447898679731805,
+          "weighted_pair_supervision_fraction": 0.013447898679731805,
+          "positive_support_user_weight_ess": 153.38469363598008
+        },
+        "is_forward": {
+          "positive_exposures": 482,
+          "positive_slates": 405,
+          "positive_users": 214,
+          "weighted_prevalence": 0.0006880405393108747,
+          "weighted_positive_slate_fraction": 0.005787058458647017,
+          "weighted_pair_supervision_fraction": 0.005787058458647017,
+          "positive_support_user_weight_ess": 54.38345181596696
+        },
+        "is_hate": {
+          "positive_exposures": 669,
+          "positive_slates": 341,
+          "positive_users": 101,
+          "weighted_prevalence": 0.0006207518460887792,
+          "weighted_positive_slate_fraction": 0.003211729014604064,
+          "weighted_pair_supervision_fraction": 0.0031673077891300407,
+          "positive_support_user_weight_ess": 10.445367023731427
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5320124690175291,
+        "jev": 0.4990075252129594
+      }
+    },
+    "0/test": {
+      "slates": 12167,
+      "users": 4238,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 47013,
+          "positive_slates": 10595,
+          "positive_users": 4084,
+          "weighted_prevalence": 0.32994905833405813,
+          "weighted_positive_slate_fraction": 0.8219359235441543,
+          "weighted_pair_supervision_fraction": 0.8103643367608858,
+          "positive_support_user_weight_ess": 1837.5625554294897
+        },
+        "long_view": {
+          "positive_exposures": 31952,
+          "positive_slates": 9286,
+          "positive_users": 3919,
+          "weighted_prevalence": 0.21707916563992916,
+          "weighted_positive_slate_fraction": 0.6957735965979397,
+          "weighted_pair_supervision_fraction": 0.6935485899401763,
+          "positive_support_user_weight_ess": 1783.6954088264522
+        },
+        "is_like": {
+          "positive_exposures": 5857,
+          "positive_slates": 3225,
+          "positive_users": 1502,
+          "weighted_prevalence": 0.010848091225042947,
+          "weighted_positive_slate_fraction": 0.06278239370703743,
+          "weighted_pair_supervision_fraction": 0.0626177872261433,
+          "positive_support_user_weight_ess": 627.0600920868977
+        },
+        "is_follow": {
+          "positive_exposures": 1100,
+          "positive_slates": 885,
+          "positive_users": 584,
+          "weighted_prevalence": 0.000625637964283669,
+          "weighted_positive_slate_fraction": 0.005033846821730839,
+          "weighted_pair_supervision_fraction": 0.00502404780977773,
+          "positive_support_user_weight_ess": 279.38942544412924
+        },
+        "is_comment": {
+          "positive_exposures": 1256,
+          "positive_slates": 1116,
+          "positive_users": 706,
+          "weighted_prevalence": 0.0015049880386136716,
+          "weighted_positive_slate_fraction": 0.01340978546627314,
+          "weighted_pair_supervision_fraction": 0.01340978546627314,
+          "positive_support_user_weight_ess": 381.0387594067078
+        },
+        "is_forward": {
+          "positive_exposures": 966,
+          "positive_slates": 760,
+          "positive_users": 484,
+          "weighted_prevalence": 0.0005640986358505591,
+          "weighted_positive_slate_fraction": 0.004445659576049805,
+          "weighted_pair_supervision_fraction": 0.004445659576049805,
+          "positive_support_user_weight_ess": 106.11989389793402
+        },
+        "is_hate": {
+          "positive_exposures": 1666,
+          "positive_slates": 712,
+          "positive_users": 211,
+          "weighted_prevalence": 0.0006368006819809347,
+          "weighted_positive_slate_fraction": 0.0027295211906015076,
+          "weighted_pair_supervision_fraction": 0.0026995279920022813,
+          "positive_support_user_weight_ess": 15.852267115017732
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5415420054940184,
+        "jev": 0.5096070821161938
+      }
+    },
+    "1/train": {
+      "slates": 19302,
+      "users": 6705,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 73897,
+          "positive_slates": 16777,
+          "positive_users": 6458,
+          "weighted_prevalence": 0.32594209476780045,
+          "weighted_positive_slate_fraction": 0.8152207146471081,
+          "weighted_pair_supervision_fraction": 0.8035953428226468,
+          "positive_support_user_weight_ess": 2935.072871644425
+        },
+        "long_view": {
+          "positive_exposures": 49748,
+          "positive_slates": 14679,
+          "positive_users": 6160,
+          "weighted_prevalence": 0.21242552973599987,
+          "weighted_positive_slate_fraction": 0.6894341066684367,
+          "weighted_pair_supervision_fraction": 0.6868405942139334,
+          "positive_support_user_weight_ess": 2836.3534327859084
+        },
+        "is_like": {
+          "positive_exposures": 8720,
+          "positive_slates": 4922,
+          "positive_users": 2321,
+          "weighted_prevalence": 0.010238169417002415,
+          "weighted_positive_slate_fraction": 0.060398117586732684,
+          "weighted_pair_supervision_fraction": 0.06028268993452346,
+          "positive_support_user_weight_ess": 977.5900976029585
+        },
+        "is_follow": {
+          "positive_exposures": 1530,
+          "positive_slates": 1318,
+          "positive_users": 876,
+          "weighted_prevalence": 0.0005502233284255488,
+          "weighted_positive_slate_fraction": 0.004738495176684772,
+          "weighted_pair_supervision_fraction": 0.004738495176684772,
+          "positive_support_user_weight_ess": 428.234165821218
+        },
+        "is_comment": {
+          "positive_exposures": 2003,
+          "positive_slates": 1790,
+          "positive_users": 1117,
+          "weighted_prevalence": 0.0015451415923709816,
+          "weighted_positive_slate_fraction": 0.013799928564935265,
+          "weighted_pair_supervision_fraction": 0.013799928564935265,
+          "positive_support_user_weight_ess": 598.518982918399
+        },
+        "is_forward": {
+          "positive_exposures": 1635,
+          "positive_slates": 1327,
+          "positive_users": 814,
+          "weighted_prevalence": 0.0006012702644789054,
+          "weighted_positive_slate_fraction": 0.004878337357885323,
+          "weighted_pair_supervision_fraction": 0.004878337357885323,
+          "positive_support_user_weight_ess": 203.34664282464195
+        },
+        "is_hate": {
+          "positive_exposures": 2906,
+          "positive_slates": 1380,
+          "positive_users": 384,
+          "weighted_prevalence": 0.0007043235069678157,
+          "weighted_positive_slate_fraction": 0.0033731244503998462,
+          "weighted_pair_supervision_fraction": 0.003337355498170198,
+          "positive_support_user_weight_ess": 41.04105963187069
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5374712512854343,
+        "jev": 0.5138440307642668
+      }
+    },
+    "1/validation": {
+      "slates": 4816,
+      "users": 1692,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 19241,
+          "positive_slates": 4273,
+          "positive_users": 1625,
+          "weighted_prevalence": 0.32886782986946994,
+          "weighted_positive_slate_fraction": 0.8226701034248771,
+          "weighted_pair_supervision_fraction": 0.8104663898092342,
+          "positive_support_user_weight_ess": 752.8437393478044
+        },
+        "long_view": {
+          "positive_exposures": 13072,
+          "positive_slates": 3780,
+          "positive_users": 1557,
+          "weighted_prevalence": 0.21946952964765865,
+          "weighted_positive_slate_fraction": 0.7012201127481428,
+          "weighted_pair_supervision_fraction": 0.6993849671690181,
+          "positive_support_user_weight_ess": 737.188880964516
+        },
+        "is_like": {
+          "positive_exposures": 2739,
+          "positive_slates": 1474,
+          "positive_users": 644,
+          "weighted_prevalence": 0.01294119206438869,
+          "weighted_positive_slate_fraction": 0.07578255465451186,
+          "weighted_pair_supervision_fraction": 0.07553156437614245,
+          "positive_support_user_weight_ess": 254.72986091320968
+        },
+        "is_follow": {
+          "positive_exposures": 543,
+          "positive_slates": 400,
+          "positive_users": 249,
+          "weighted_prevalence": 0.0008068256183409878,
+          "weighted_positive_slate_fraction": 0.005918712639577134,
+          "weighted_pair_supervision_fraction": 0.005892601208177128,
+          "positive_support_user_weight_ess": 98.48507677798108
+        },
+        "is_comment": {
+          "positive_exposures": 511,
+          "positive_slates": 464,
+          "positive_users": 288,
+          "weighted_prevalence": 0.0016116902023152573,
+          "weighted_positive_slate_fraction": 0.014773496880573792,
+          "weighted_pair_supervision_fraction": 0.014773496880573792,
+          "positive_support_user_weight_ess": 165.48183046810135
+        },
+        "is_forward": {
+          "positive_exposures": 370,
+          "positive_slates": 343,
+          "positive_users": 205,
+          "weighted_prevalence": 0.000574212849295025,
+          "weighted_positive_slate_fraction": 0.005327901437035829,
+          "weighted_pair_supervision_fraction": 0.005327901437035829,
+          "positive_support_user_weight_ess": 81.30818879450854
+        },
+        "is_hate": {
+          "positive_exposures": 190,
+          "positive_slates": 138,
+          "positive_users": 74,
+          "weighted_prevalence": 0.00019522107952010383,
+          "weighted_positive_slate_fraction": 0.0014161814673189252,
+          "weighted_pair_supervision_fraction": 0.0014161814673189252,
+          "positive_support_user_weight_ess": 30.98170816770676
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5576790742440177,
+        "jev": 0.5164483525840089
+      }
+    },
+    "1/test": {
+      "slates": 11882,
+      "users": 4209,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 45291,
+          "positive_slates": 10412,
+          "positive_users": 4049,
+          "weighted_prevalence": 0.3232339485732972,
+          "weighted_positive_slate_fraction": 0.8154965052583104,
+          "weighted_pair_supervision_fraction": 0.8049240318195776,
+          "positive_support_user_weight_ess": 1802.255693146588
+        },
+        "long_view": {
+          "positive_exposures": 30202,
+          "positive_slates": 9056,
+          "positive_users": 3845,
+          "weighted_prevalence": 0.20953420850858906,
+          "weighted_positive_slate_fraction": 0.6839683110619394,
+          "weighted_pair_supervision_fraction": 0.681629223964073,
+          "positive_support_user_weight_ess": 1755.5855566480836
+        },
+        "is_like": {
+          "positive_exposures": 5780,
+          "positive_slates": 3300,
+          "positive_users": 1518,
+          "weighted_prevalence": 0.010265659036849674,
+          "weighted_positive_slate_fraction": 0.062331817355943564,
+          "weighted_pair_supervision_fraction": 0.06226607302540092,
+          "positive_support_user_weight_ess": 605.0727919063245
+        },
+        "is_follow": {
+          "positive_exposures": 999,
+          "positive_slates": 821,
+          "positive_users": 550,
+          "weighted_prevalence": 0.0005829821317617768,
+          "weighted_positive_slate_fraction": 0.004877623972189927,
+          "weighted_pair_supervision_fraction": 0.004872824580918085,
+          "positive_support_user_weight_ess": 266.24620034087496
+        },
+        "is_comment": {
+          "positive_exposures": 1352,
+          "positive_slates": 1123,
+          "positive_users": 690,
+          "weighted_prevalence": 0.001658207511499947,
+          "weighted_positive_slate_fraction": 0.013774303788627675,
+          "weighted_pair_supervision_fraction": 0.013774303788627675,
+          "positive_support_user_weight_ess": 346.67860087122995
+        },
+        "is_forward": {
+          "positive_exposures": 1117,
+          "positive_slates": 911,
+          "positive_users": 515,
+          "weighted_prevalence": 0.000672369600572305,
+          "weighted_positive_slate_fraction": 0.005441286150015879,
+          "weighted_pair_supervision_fraction": 0.005441286150015879,
+          "positive_support_user_weight_ess": 100.56804533308735
+        },
+        "is_hate": {
+          "positive_exposures": 815,
+          "positive_slates": 482,
+          "positive_users": 237,
+          "weighted_prevalence": 0.00032400820262173507,
+          "weighted_positive_slate_fraction": 0.0019238289640455678,
+          "weighted_pair_supervision_fraction": 0.0018960345910530327,
+          "positive_support_user_weight_ess": 98.53177630760345
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5330741017541543,
+        "jev": 0.5078283558037865
+      }
+    },
+    "2/train": {
+      "slates": 19301,
+      "users": 6788,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 74533,
+          "positive_slates": 16888,
+          "positive_users": 6526,
+          "weighted_prevalence": 0.3295870821288742,
+          "weighted_positive_slate_fraction": 0.8206984098136867,
+          "weighted_pair_supervision_fraction": 0.809586442253274,
+          "positive_support_user_weight_ess": 2956.282565897714
+        },
+        "long_view": {
+          "positive_exposures": 50408,
+          "positive_slates": 14805,
+          "positive_users": 6237,
+          "weighted_prevalence": 0.21593027829768172,
+          "weighted_positive_slate_fraction": 0.6950526615321344,
+          "weighted_pair_supervision_fraction": 0.692706071127594,
+          "positive_support_user_weight_ess": 2857.777785796534
+        },
+        "is_like": {
+          "positive_exposures": 9623,
+          "positive_slates": 5298,
+          "positive_users": 2419,
+          "weighted_prevalence": 0.010917005704328913,
+          "weighted_positive_slate_fraction": 0.06329894237118257,
+          "weighted_pair_supervision_fraction": 0.06316105499657977,
+          "positive_support_user_weight_ess": 977.8473871951969
+        },
+        "is_follow": {
+          "positive_exposures": 1672,
+          "positive_slates": 1388,
+          "positive_users": 933,
+          "weighted_prevalence": 0.0005988176598903382,
+          "weighted_positive_slate_fraction": 0.005001071886630857,
+          "weighted_pair_supervision_fraction": 0.004994924359885877,
+          "positive_support_user_weight_ess": 465.14680886026184
+        },
+        "is_comment": {
+          "positive_exposures": 2150,
+          "positive_slates": 1854,
+          "positive_users": 1148,
+          "weighted_prevalence": 0.0016316693048044272,
+          "weighted_positive_slate_fraction": 0.014058592696025643,
+          "weighted_pair_supervision_fraction": 0.014058592696025643,
+          "positive_support_user_weight_ess": 590.615789965136
+        },
+        "is_forward": {
+          "positive_exposures": 1717,
+          "positive_slates": 1354,
+          "positive_users": 803,
+          "weighted_prevalence": 0.0006370221378158477,
+          "weighted_positive_slate_fraction": 0.00499687920373042,
+          "weighted_pair_supervision_fraction": 0.00499687920373042,
+          "positive_support_user_weight_ess": 173.14227807197847
+        },
+        "is_hate": {
+          "positive_exposures": 1578,
+          "positive_slates": 830,
+          "positive_users": 333,
+          "weighted_prevalence": 0.0003774889917296362,
+          "weighted_positive_slate_fraction": 0.002001468186734112,
+          "weighted_pair_supervision_fraction": 0.0019843300796638635,
+          "positive_support_user_weight_ess": 26.23889177593978
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5352333376554257,
+        "jev": 0.5025660416704393
+      }
+    },
+    "2/validation": {
+      "slates": 4748,
+      "users": 1659,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 17771,
+          "positive_slates": 4119,
+          "positive_users": 1607,
+          "weighted_prevalence": 0.31446086130388956,
+          "weighted_positive_slate_fraction": 0.8107332930126432,
+          "weighted_pair_supervision_fraction": 0.7998029346797184,
+          "positive_support_user_weight_ess": 684.4244208443483
+        },
+        "long_view": {
+          "positive_exposures": 11746,
+          "positive_slates": 3537,
+          "positive_users": 1527,
+          "weighted_prevalence": 0.20271909738277105,
+          "weighted_positive_slate_fraction": 0.6688917286313841,
+          "weighted_pair_supervision_fraction": 0.6668767573120372,
+          "positive_support_user_weight_ess": 681.3278405111394
+        },
+        "is_like": {
+          "positive_exposures": 2014,
+          "positive_slates": 1227,
+          "positive_users": 601,
+          "weighted_prevalence": 0.009093562786248757,
+          "weighted_positive_slate_fraction": 0.059526293934137255,
+          "weighted_pair_supervision_fraction": 0.05950203375930489,
+          "positive_support_user_weight_ess": 257.88351322662993
+        },
+        "is_follow": {
+          "positive_exposures": 427,
+          "positive_slates": 318,
+          "positive_users": 201,
+          "weighted_prevalence": 0.0006277635514768032,
+          "weighted_positive_slate_fraction": 0.004773348311418089,
+          "weighted_pair_supervision_fraction": 0.004761218224001915,
+          "positive_support_user_weight_ess": 85.28653632537038
+        },
+        "is_comment": {
+          "positive_exposures": 458,
+          "positive_slates": 385,
+          "positive_users": 248,
+          "weighted_prevalence": 0.001372979117544228,
+          "weighted_positive_slate_fraction": 0.01167165373245501,
+          "weighted_pair_supervision_fraction": 0.01167165373245501,
+          "positive_support_user_weight_ess": 137.01100471760603
+        },
+        "is_forward": {
+          "positive_exposures": 366,
+          "positive_slates": 317,
+          "positive_users": 196,
+          "weighted_prevalence": 0.0005388358360029053,
+          "weighted_positive_slate_fraction": 0.004702610713231005,
+          "weighted_pair_supervision_fraction": 0.004702610713231005,
+          "positive_support_user_weight_ess": 32.08473794806865
+        },
+        "is_hate": {
+          "positive_exposures": 903,
+          "positive_slates": 364,
+          "positive_users": 115,
+          "weighted_prevalence": 0.0009091457178472639,
+          "weighted_positive_slate_fraction": 0.003677444116957883,
+          "weighted_pair_supervision_fraction": 0.0036003160005299664,
+          "positive_support_user_weight_ess": 17.276871076107742
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5467665185059546,
+        "jev": 0.5352835722864862
+      }
+    },
+    "2/test": {
+      "slates": 11951,
+      "users": 4159,
+      "objectives": {
+        "is_click": {
+          "positive_exposures": 46125,
+          "positive_slates": 10455,
+          "positive_users": 3999,
+          "weighted_prevalence": 0.32288271793830325,
+          "weighted_positive_slate_fraction": 0.811098472737189,
+          "weighted_pair_supervision_fraction": 0.7991882781539814,
+          "positive_support_user_weight_ess": 1852.677528540289
+        },
+        "long_view": {
+          "positive_exposures": 30868,
+          "positive_slates": 9173,
+          "positive_users": 3798,
+          "weighted_prevalence": 0.21031143144203773,
+          "weighted_positive_slate_fraction": 0.6874185629224071,
+          "weighted_pair_supervision_fraction": 0.6847368046647835,
+          "positive_support_user_weight_ess": 1791.0285509894386
+        },
+        "is_like": {
+          "positive_exposures": 5602,
+          "positive_slates": 3171,
+          "positive_users": 1463,
+          "weighted_prevalence": 0.010663536549891118,
+          "weighted_positive_slate_fraction": 0.06396245550240381,
+          "weighted_pair_supervision_fraction": 0.06384524558165497,
+          "positive_support_user_weight_ess": 601.1973434601214
+        },
+        "is_follow": {
+          "positive_exposures": 973,
+          "positive_slates": 833,
+          "positive_users": 541,
+          "weighted_prevalence": 0.0005721850078805755,
+          "weighted_positive_slate_fraction": 0.0048936792079122314,
+          "weighted_pair_supervision_fraction": 0.0048936792079122314,
+          "positive_support_user_weight_ess": 241.76451410827207
+        },
+        "is_comment": {
+          "positive_exposures": 1258,
+          "positive_slates": 1138,
+          "positive_users": 699,
+          "weighted_prevalence": 0.001613635899083126,
+          "weighted_positive_slate_fraction": 0.01459448284701833,
+          "weighted_pair_supervision_fraction": 0.01459448284701833,
+          "positive_support_user_weight_ess": 382.33383756942476
+        },
+        "is_forward": {
+          "positive_exposures": 1039,
+          "positive_slates": 910,
+          "positive_users": 535,
+          "weighted_prevalence": 0.0006296844818334474,
+          "weighted_positive_slate_fraction": 0.005510813318716776,
+          "weighted_pair_supervision_fraction": 0.005510813318716776,
+          "positive_support_user_weight_ess": 178.93000079769948
+        },
+        "is_hate": {
+          "positive_exposures": 1430,
+          "positive_slates": 806,
+          "positive_users": 247,
+          "weighted_prevalence": 0.0005744064072178504,
+          "weighted_positive_slate_fraction": 0.0032776393415789645,
+          "weighted_pair_supervision_fraction": 0.0032499132082898907,
+          "positive_support_user_weight_ess": 42.72246106614661
+        }
+      },
+      "follow_within_slate_auc": {
+        "behavior": 0.5426795603728136,
+        "jev": 0.5196563803478935
+      }
+    }
+  },
+  "selected_inner_follow_guard_failures": 5,
+  "existing_candidates_passing_all_inner_guards": 0,
+  "original_outer_follow": {
+    "0": {
+      "emer": 0.23241621945379085,
+      "emer_jev": 0.23820025743422635,
+      "absolute_gain": 0.0057840379804355024,
+      "relative_gain": 0.024886550491307207,
+      "confidence_interval": [
+        -0.010116001587602728,
+        0.02092168844568248
+      ],
+      "valid_bootstrap_replicates": 2000
+    },
+    "1": {
+      "emer": 0.2246705565938263,
+      "emer_jev": 0.21713862277686916,
+      "absolute_gain": -0.0075319338169571315,
+      "relative_gain": -0.03352434752086292,
+      "confidence_interval": [
+        -0.021850244847638704,
+        0.007093900285997019
+      ],
+      "valid_bootstrap_replicates": 2000
+    },
+    "2": {
+      "emer": 0.23818668553222855,
+      "emer_jev": 0.22183448285027085,
+      "absolute_gain": -0.016352202681957695,
+      "relative_gain": -0.06865288311736935,
+      "confidence_interval": [
+        -0.03232075133718917,
+        -0.0013397335238046805
+      ],
+      "valid_bootstrap_replicates": 2000
+    }
+  },
+  "notes": [
+    "Pair AUC averages per-slate positive-negative comparisons with original weights and half credit for ties.",
+    "Support ESS summarizes concentration of positive-slate weights per user, not a formal power calculation.",
+    "Positive-label frequency and pair eligibility do not measure actual gradient attribution or prove causality.",
+    "Training satisfaction sums raw feedback bits; selection maximizes six conditional NDCG means. These are different objectives.",
+    "No candidate is selected using outer outcomes; original results and guards remain unchanged."
+  ]
+}
