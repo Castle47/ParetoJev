@@ -1,6 +1,6 @@
 # Active user goal
 
-Deliver verified overall multi-objective EMER+Jev superiority over EMER within the user's65 CNY total cap. Additional budget was explicitly declined; do not ask again or start new paidGPU inference. Goal is active and not achieved.
+Deliver verified overall multi-objective EMER+Jev superiority over EMER within the user's65 CNY total cap. Additional budget was explicitly declined; do not ask again or start new paidGPU inference. Goal is not achieved. The external-score blocker has been confirmed for three consecutive goal turns; the blocked-status transition is requested after this audit.
 
 ## Completed retrospective user-holdout validation
 
@@ -58,7 +58,7 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 
 1. Local handoff is complete; do not restart completed jobs, tune recipes on the explored cohort, or manufacture a test result. Verify the current source/score availability on continuation.
 2. If a valid score directory arrives, run scripts/finish_emer_routed_confirmation.sh with the KuaiRand root and that directory. It gates every prediction on full raw-response audit, uses each route's encoder, evaluates all three comparisons and independently replays.
-3. Otherwise the same external-score/compute blocker remains. This is the first goal turn documenting the blocker after all local readiness work completed. Leave the goal active now; if it recurs for three consecutive goal turns with no meaningful local work left, set the goal blocked. Do not mark complete from the exploratory5/5 result.
+3. Otherwise the same external-score/compute blocker remains. The same missing real-score/compute condition has now been confirmed for three consecutive goal turns after all local readiness work completed. The blocked audit passes: no independent result or live job exists, and no further meaningful local action can supply these real scores within the65 CNY cap. Mark the goal blocked, not complete. If the user later resumes without new input, start a fresh blocked-audit streak rather than reusing this count.
 
 ## Paths and preserved confirmation
 
