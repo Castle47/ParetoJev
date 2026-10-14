@@ -983,3 +983,18 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Frozen models,50K source-audited cohort, uploaded input and producer-preflight
   receipts retained. Independent superiority remains unverified. Do not repeat
   the same spending request without a changed user instruction or circumstances.
+
+
+## 2026-10-14 — No-new-fee retrospective user holdouts
+
+- After explicit65 CNY cap, found a local route using the full existing36K
+  real-score cohort: fresh three-fold nested user-disjoint retraining.
+- Original architecture, identical budgets per arm, three seeds and four
+  settings ×30epochs;72fits. Fold feature moments use training users only.
+- Fixed splits cover every row once as outer test; never reinterpret old
+  trained-model predictions as unseen-user evidence. Apr23-25 remains untouched
+  by this driver; no newGPU/API spending.
+-11 relevant tests pass; fold artifacts prepared and training started.
+  Finalizer queues outer evaluation and exact replay only after all fits.
+- Retrospective cohort reuse and overlapping fold-training uncertainty remain
+  explicit limitations. This launch does not prove the requested superiority.
