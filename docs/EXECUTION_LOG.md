@@ -1028,3 +1028,17 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   recomputed seven inner-validation metrics for all six selected models. Passed.
 - No outer metrics computed. Third fold continues on the same process;
   no paidGPU/API activity.
+
+
+## 2026-10-15 — Complete retrospective CV and preserve the failed guard
+
+- All72 equal-budget fits completed; all three24-trial selection audits passed.
+- Outer evaluation covered36,000 slates and12,606 users. Independent prediction,
+  metric and bootstrap replay matched exactly. No new paidGPU/API activity.
+- Aggregate six-positive NDCG@3 improves1.22%, conditional95% interval
+  [+0.000818641,+0.006560752]; every seed and fold has a positive point gain.
+- Follow declines0.005737264 absolute, exceeding the fixed0.005 guard.
+  Screen4/5, full screen fails; goal remains unachieved. No threshold changes.
+- Full seven-goal report, source/selection manifests, all audit receipts and
+  replay evidence saved in reports/emer-user-cv-v1. Retrospective limitations
+  and untouched chronological confirmation are retained explicitly.

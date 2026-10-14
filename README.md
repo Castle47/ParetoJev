@@ -35,14 +35,19 @@ The user retained the **65 CNY total cap** and declined additional paid scoring.
 The [prepared confirmation package](reports/multiobjective-confirmation-ready-2026-10-14/README.md)
 is preserved; sample size alone is not a power guarantee.
 
-Within that budget, a [registered three-fold user-holdout experiment](docs/EMER_USER_CV.md)
-is running locally on all 36,000 existing real-score slates (12,606 users).
-Both arms train afresh with identical budgets: 72 fits in total, with inner-user
-validation for selection and training-only feature normalization. All fits and
-selections must finish before outer metrics are computed. Saved fold inputs and
-user separation have [passed an independent audit](reports/emer-user-cv-v1-start/data_audit.json).
+Within that budget, the [registered three-fold user-holdout experiment](docs/EMER_USER_CV.md)
+is complete on all 36,000 existing real-score slates (12,606 users).
+Both arms trained afresh with identical budgets: 72 fits, inner-user validation
+for selection, and training-only feature normalization. All fits and selections
+finished before outer metrics were computed. Input and all three selection audits
+passed; independent prediction/metric replay was exact.
+Aggregate NDCG@3 improved **1.22%**, with positive point gains in every fold and
+seed and a positive conditional bootstrap interval. However, follow NDCG fell
+0.005737, exceeding the registered 0.005 absolute-drop guard: **4/5 evidence
+conditions pass; the full screen fails**. See the [complete seven-goal report](reports/emer-user-cv-v1/README.md).
 This is retrospective evidence on an already explored cohort, not a replacement
-for new-date confirmation. Live execution details are in [goal progress](docs/GOAL_PROGRESS.md).
+for new-date confirmation. The goal remains unachieved; next steps are recorded
+in [goal progress](docs/GOAL_PROGRESS.md).
 
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
@@ -94,7 +99,7 @@ Verified milestones through **2026-10-15**:
 | EMER + Jev versus EMER | 24 development fits; fresh 600-slate test and 4,200 real decisions; no stable incremental advantage established | [`final report`](reports/emer-jev-2026-10-13/README.md) |
 | Expanded native EMER + Jev development | 36,000 slates, 252,000 real judgments, 24 fits; aggregate validation +1.68%, uncertainty includes zero | [`development report`](reports/emer-native-development-2026-10-14/README.md) |
 | Larger chronological confirmation | 50,000 slates source-audited and packaged; unscored under the retained 65 CNY cap | [`prepared package`](reports/multiobjective-confirmation-ready-2026-10-14/README.md) |
-| Retrospective user-disjoint validation | Saved input audit passed; 72-fit equal-budget experiment running; no outer effect result yet | [`protocol`](docs/EMER_USER_CV.md) |
+| Retrospective user-disjoint validation | 72 fits and exact replay complete; aggregate +1.22%, follow guard fails; 4/5 conditions | [`complete report`](reports/emer-user-cv-v1/README.md) |
 | Serving/student experiments | Not run | Core offline validation takes priority |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.

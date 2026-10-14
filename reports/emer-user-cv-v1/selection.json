@@ -1,0 +1,194 @@
+{
+  "config_hash": "b4ea935b1978f1790657ca4ad4b49c0c8c09737db6be0edeb95f77210dc64594",
+  "folds": {
+    "0": {
+      "7": {
+        "emer": {
+          "path": "emer-seed7-trial2.pt",
+          "checkpoint_sha256": "b60a7b5892b6c51eba576d640bfa4bd05aefb81599de7f39ac22463c6542fa22",
+          "validation": 0.2972010338214976,
+          "best_epoch": 6,
+          "lr": 0.0003,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed7-trial3.pt",
+          "checkpoint_sha256": "9c377f96598cc73d9e5e111de7dd83c049fe61cfba9a966f84536773cf1379d4",
+          "validation": 0.3040914756483791,
+          "best_epoch": 2,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      },
+      "17": {
+        "emer": {
+          "path": "emer-seed17-trial3.pt",
+          "checkpoint_sha256": "d514d10979d0fef498e54ae61c3543ecbff733d7d4d24b3a7a601ea807a32e74",
+          "validation": 0.3005838104774787,
+          "best_epoch": 30,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed17-trial1.pt",
+          "checkpoint_sha256": "05f67fd32e3d0e2d1713f52ccb16504e2731dfabf33b1b6f87819125fdde89dc",
+          "validation": 0.3047883917037004,
+          "best_epoch": 10,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      },
+      "29": {
+        "emer": {
+          "path": "emer-seed29-trial1.pt",
+          "checkpoint_sha256": "3965c1bbf139028715046402775c25ce4db19d33bef6850c1625aab189084a71",
+          "validation": 0.2990282794211419,
+          "best_epoch": 22,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed29-trial3.pt",
+          "checkpoint_sha256": "585272330a6879f92c33db285c78e0a4febb76f9c2640bf1d6cc385582d2292e",
+          "validation": 0.30711759331074506,
+          "best_epoch": 3,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      }
+    },
+    "1": {
+      "7": {
+        "emer": {
+          "path": "emer-seed7-trial2.pt",
+          "checkpoint_sha256": "679b9c8cea64872e5bf8cb7827330739add753c4432de27e5dbb701a436745d4",
+          "validation": 0.30346822081988123,
+          "best_epoch": 11,
+          "lr": 0.0003,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed7-trial1.pt",
+          "checkpoint_sha256": "be85b316523591b2c8a90ad57a3bd0a461b8afc7da28518492507c27850f886f",
+          "validation": 0.3110836225352292,
+          "best_epoch": 30,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      },
+      "17": {
+        "emer": {
+          "path": "emer-seed17-trial0.pt",
+          "checkpoint_sha256": "41a62edde302f07da9d271217aa22faaab28f24941103d91b742195cbcc6b09f",
+          "validation": 0.3035120698915916,
+          "best_epoch": 9,
+          "lr": 0.001,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed17-trial0.pt",
+          "checkpoint_sha256": "2b18307e10eee2fcde8e222e11713fc686becf8fe50557bc2055bc756b95c5d1",
+          "validation": 0.3064431764326444,
+          "best_epoch": 9,
+          "lr": 0.001,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        }
+      },
+      "29": {
+        "emer": {
+          "path": "emer-seed29-trial1.pt",
+          "checkpoint_sha256": "c5180f5463753f1dd3ab165a74c6e3c30d9525eaee99ea7cd54b108053875d92",
+          "validation": 0.30100812234598096,
+          "best_epoch": 26,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed29-trial1.pt",
+          "checkpoint_sha256": "09c31aec74e149ee27480d72e211e65d6985651fb05448770c0c76559f8331b9",
+          "validation": 0.3034081342307346,
+          "best_epoch": 22,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      }
+    },
+    "2": {
+      "7": {
+        "emer": {
+          "path": "emer-seed7-trial0.pt",
+          "checkpoint_sha256": "d12e721f47551979deed190e3fc1b3040cb3aead37266688f12eee31c144c34b",
+          "validation": 0.3036263573892855,
+          "best_epoch": 9,
+          "lr": 0.001,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed7-trial2.pt",
+          "checkpoint_sha256": "44c1eddc5d1c500f37e6ab4136f4021f1293c8fed84f1b3459d1d49bda2df3c2",
+          "validation": 0.3040315639351378,
+          "best_epoch": 16,
+          "lr": 0.0003,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        }
+      },
+      "17": {
+        "emer": {
+          "path": "emer-seed17-trial0.pt",
+          "checkpoint_sha256": "45bdb34df6bdf68ba63b83f1a8a76fb69157b9abbb6aee422a3adbc62be1a9eb",
+          "validation": 0.30456362161721456,
+          "best_epoch": 11,
+          "lr": 0.001,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed17-trial1.pt",
+          "checkpoint_sha256": "1f48844387f451a9077ea0d9bbd67e64917af04639161642df4ffa17f2e69b9a",
+          "validation": 0.3046681429934553,
+          "best_epoch": 14,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      },
+      "29": {
+        "emer": {
+          "path": "emer-seed29-trial2.pt",
+          "checkpoint_sha256": "ee62c8754ad56e17cef7aeb2201cf559b4abaabc78d5826ecf3e0d879f34a010",
+          "validation": 0.30342408879155564,
+          "best_epoch": 12,
+          "lr": 0.0003,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "emer_jev": {
+          "path": "emer_jev-seed29-trial1.pt",
+          "checkpoint_sha256": "9dde93dc51682e45ca9a852de1df33be84f6ff02d2196ab5d058369ac5a06264",
+          "validation": 0.3046340274334893,
+          "best_epoch": 11,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      }
+    }
+  },
+  "completed_fits": 72,
+  "selection": "inner user validation only",
+  "outer_metrics_computed": false
+}

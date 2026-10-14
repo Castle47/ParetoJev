@@ -1,0 +1,104 @@
+{
+  "config": {
+    "experiment_id": "emer-native-user-cv-v1",
+    "objective": "Assess overall multi-objective EMER+Jev benefit within the existing real-score cohort without new paid inference",
+    "data": "All36000 audited Apr19-21 development slates; 252000 existing native JEV-27B judgments; never read Apr23-25 confirmation data",
+    "outer_folds": 3,
+    "partition_seed": 2026101407,
+    "outer_assignment": "First8 bytes of SHA256('outer|partition_seed|user_id'), big-endian, modulo3; one fold per user",
+    "inner_assignment": "Among non-test users, first8 SHA256 bytes for 'inner-{outer_fold}|partition_seed|user_id', big-endian, modulo5 equals0 selects validation; all others train",
+    "inner_validation_modulus": 5,
+    "label_based_stratification_or_resplitting": false,
+    "model": {
+      "feature_dim": 65,
+      "objectives": 7,
+      "hidden_dim": 48,
+      "layers": 2,
+      "heads": 4,
+      "ff_dim": 96,
+      "dropout": 0.05
+    },
+    "training": {
+      "seeds": [
+        7,
+        17,
+        29
+      ],
+      "epochs": 30,
+      "batch_size": 32,
+      "learning_rates": [
+        0.001,
+        0.0003
+      ],
+      "prior_coefficients": [
+        1.0,
+        0.25
+      ],
+      "weight_decay": 0.0001,
+      "cpu_threads": 2,
+      "selection": "Each arm/outer-fold/seed independently maximizes weighted inner-validation mean of six positive NDCG@3 goals; earliest config/epoch ties; epoch0 allowed",
+      "total_complete_fits": 72,
+      "weight_initialization": "Fresh from the same seed in both arms for every fold; no reused trained reranker weights"
+    },
+    "features": "Recompute encoding moments from the fold's training candidates only. Behavior model remains frozen at its pre-Apr19 checkpoint. Native Jev inputs and outcomes unchanged.",
+    "evaluation": {
+      "primary": "Mean six positive-goal weighted NDCG@3",
+      "outer_predictions": "Each row receives predictions only from models whose train and inner-validation users exclude that row's user",
+      "evaluate_after": "All72 fits and every inner-only selection are frozen before any outer-fold performance calculation",
+      "top_k": 3,
+      "bootstrap_samples": 2000,
+      "bootstrap_seed": 2026101408,
+      "maximum_positive_goal_absolute_point_drop": 0.005,
+      "maximum_hate_risk_absolute_point_increase": 0.005,
+      "evidence_screen": "Pooled primary difference lower conditional user-bootstrap interval>0; primary point gain>0 for each fixed seed and each outer fold; all seven point guards pass",
+      "uncertainty": "Conditional paired-user summaries of the fitted out-of-fold predictions; folds have overlapping training sets and are not independent replicates; not a universal unbiased CV variance estimate"
+    },
+    "limitations": [
+      "Retrospective evaluation on an already explored cohort; not a pristine prospective confirmation or replacement of the frozen Apr23-25 test.",
+      "User-disjoint for reranker fitting and selection, not a claim these users never appeared in the earlier frozen behavior model.",
+      "Cross-user generalization within Apr19-21, not new-date generalization or online causal uplift."
+    ],
+    "budget": {
+      "paid_gpu": false,
+      "new_api_requests": 0,
+      "total_project_cap_cny": 65
+    },
+    "objectives": [
+      "is_click",
+      "long_view",
+      "is_like",
+      "is_follow",
+      "is_comment",
+      "is_forward",
+      "is_hate"
+    ],
+    "directions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1
+    ]
+  },
+  "config_hash": "b4ea935b1978f1790657ca4ad4b49c0c8c09737db6be0edeb95f77210dc64594",
+  "files": {
+    "configs/emer_user_cv_v1.json": "7199b4f479f75b86125bd6157f856cff7b91ad39af615ea95c8634b942222607",
+    "configs/emer_jev_scale.json": "5936f2a6813ee460704513750353997858ab1f38dcaafee9913caba543d21a6c",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_emer_user_cv.py": "57841fa8fbd13ed94e04a72d9c1b3b6e2041025e32dc706cf8bb44e7fc06c9d5",
+    "scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/raw_slates.npz": "7b9f98d802c053e604f551eb78ab30986282798455d64cf366b69a7c29bbf8fd",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/common_manifest.json": "f4c77e032dd4c6f6520a15ec69b5cdb0cb77a0efbf5725ad59afa4866a57db3a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/train.npz": "f368ab737fe2ddaf0971ac7b9b9d93df5bf31e952c150a5b854a3e0202d2b021",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/validation.npz": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/scores.npz": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/registration.json": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/complete.json": "81c1b6fa2bf0bd847fe39008417d3d0e1c2ec9409813e3bf174eb8a0705ce11f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/native_response_audit.json": "e222db6685d68cf46f0c9b7e2f01e2f1d9280824c5c3e340c0187b89c1bc9499"
+  },
+  "model_source_sha256": "e7ddf4f54feea2ca8e8c712198033b253ada53fc4d0e30efb7f31fce21f5e9f9",
+  "paid_gpu": false,
+  "new_api_requests": 0,
+  "scope": "Retrospective nested user holdouts; not new chronological confirmation"
+}

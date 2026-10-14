@@ -13,6 +13,7 @@ def report(a):
         if sha256_file(a.source/file)!=replay[key]:raise ValueError('Replay evidence differs')
     if not replay['exact_predictions_and_metrics']:raise ValueError('Exact replay required')
     r=result['pooled'];m=r['positive_mean'];lo,hi=m['confidence_interval']
+    config=read_json(a.source/'registration.json')['config']
     names=dict(is_click='点击',long_view='长看',is_like='点赞',is_follow='关注',is_comment='评论',is_forward='转发',is_hate='无负反馈比例')
     lines=['# EMER＋Jev：三折用户留出的回溯验证','',
         f'使用既有{result["slates"]:,}组真实分数、{result["users"]:,}名用户，未新增Jev请求或付费GPU。'
@@ -20,8 +21,10 @@ def report(a):
         '**本报告是已探索数据上的回溯性、按用户分组的样本外评价，不是新日期独立测试。**'
         '用户此前可能参与过Apr19之前的冻结行为模型；用户隔离约束针对本轮重排器训练与选模。', '',
         f'六正向目标均值：{m["emer"]:.6f} → {m["emer_jev"]:.6f}，'
-        f'相对变化{100*m["absolute_gain"]/m["emer"]:+.2f}%；固定折外预测的条件用户bootstrap区间[{lo:+.6f}, {hi:+.6f}]。','',
-        '|目标|EMER|EMER＋Jev|绝对变化|相对变化|条件区间|',
+        f'相对变化{100*m["absolute_gain"]/m["emer"]:+.2f}%；固定折外预测的条件用户bootstrap 95%区间[{lo:+.6f}, {hi:+.6f}]。','',
+        '前六项为NDCG@3，最后一项为前3候选的无负反馈比例，均越高越好。'
+        '指标按原抽样权重计算，并对三个固定种子的结果取均值。','',
+        '|目标|EMER|EMER＋Jev|绝对变化|相对变化|条件95%区间|',
         '|---|---:|---:|---:|---:|---|']
     for name,row in r['objectives'].items():
         low,high=row['confidence_interval'];relative='—' if name=='is_hate' else f'{100*row["relative_gain"]:+.2f}%'
@@ -37,6 +40,13 @@ def report(a):
         lines.append(f'|{seed}|{base:.6f}|{full:.6f}|{100*(full/base-1):+.2f}%|')
     lines+=['','|预登记回溯证据条件|满足|','|---|---|']
     for key,value in result['conditions'].items():lines.append(f'|{key}|{"是" if value else "否"}|')
+    limit=config['evaluation']['maximum_positive_goal_absolute_point_drop']
+    violations=[f'{names[name]}绝对变化{row["absolute_gain"]:+.6f}' for name,row in r['objectives'].items()
+        if name!='is_hate' and row['absolute_gain'] < -limit]
+    lines+=['',f'预登记证据条件通过{sum(result["conditions"].values())}/{len(result["conditions"])}项。']
+    if violations:
+        lines += [f'未通过的正向单项守护：{"；".join(violations)}，超过预设{limit:.6f}绝对下降上限。'
+            '这是点估计守护未通过，不等于已证明该单项显著变差；不能因均值提升而放宽原门槛。']
     lines+=['','上述条件仅为回溯证据筛查，不自动等价于完整项目成功。'
         '各折训练集相互重叠，不能把3折或9个种子-折组合当成独立实验重复。'
         '条件区间没有包含重新训练整套算法的全部不确定性，也未消除既往探索该数据的影响。', '',
@@ -51,6 +61,12 @@ def report(a):
     a.output.mkdir(parents=True,exist_ok=True)
     for name in ('evaluation.json','selection.json','preparation.json','registration.json','replay.json'):
         shutil.copy2(a.source/name,a.output/name)
+    audit_files=[(a.source/'data_audit.json','data_audit.json')]+[
+        (a.source/f'fold-{fold}'/'selection_audit.json',f'fold-{fold}-selection-audit.json')
+        for fold in range(config['outer_folds'])]
+    if all(path.exists() for path,_ in audit_files):
+        for path,name in audit_files:shutil.copy2(path,a.output/name)
+        lines += ['', '数据及全部三折选模审计记录随报告保存：data_audit.json、fold-0/1/2-selection-audit.json。']
     (a.output/'README.md').write_text('\n'.join(lines)+'\n')
 
 

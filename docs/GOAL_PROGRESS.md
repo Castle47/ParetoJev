@@ -2,40 +2,29 @@
 
 Deliver verified overall multi-objective EMER+Jev superiority over EMER within the user's65 CNY total cap. Additional budget was explicitly declined; do not ask again or start new paidGPU inference. Goal is active and not achieved.
 
-## Current goal turn: progress after resumed audit
+## Completed retrospective user-holdout validation
 
-A meaningful no-new-fee route was implemented: fresh nested user-disjoint retraining on all36K existing real-score slates. This is retrospective evidence, explicitly not prospective Apr23-25 confirmation. It does not invent scores, reuse trained reranker weights on their training users, or narrow the user's overall multi-objective goal to long view.
+All72 fresh, equal-budget fits completed successfully. Main training session1364 and finalizer22319 both exited0; do not restart them. All36K existing real-score slates (12,606 users) received exactly one outer-fold prediction per arm/seed. All data and three fold-selection audits passed. Independent prediction and metric replay was exact.
 
-- Fixed3 outer user folds; inner validation users also separate from training. All training-only feature moments recomputed per fold.
-- Same original43,345-parameter architecture, 3seeds,4settings,30epochs,2CPUthreads in both arms;72complete fits planned.
-- Tests cover user exclusion, exactly-once outer coverage, train-only encoding and real trainer compatibility on unit data. All11 relevant tests pass; no outer performance has been read.
-- Complete source/signal provenance locked. No newAPI calls or remoteGPU activation.
+Report: reports/emer-user-cv-v1/README.md. Protocol: docs/EMER_USER_CV.md.
 
-## Live execution handles (verify before waiting/restarting)
-
-- Training: exec session1364, observed PID18282; actual command scripts/run_emer_user_cv.py --stage train.
-- Finalizer: exec session22319, observed PID18492; scripts/finish_emer_user_cv.sh waits for18282, then evaluates/replays/reports.
-- caffeinate launched only while finalizer18492 lives; not an automation or remote job.
-- Data directory: /Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1.
-- Logs: sibling user-cv-v1-train.log and user-cv-v1-evaluate.log.
-- Config: configs/emer_user_cv_v1.json. Driver source/protocol must remain frozen during fits.
-- Actual repo: /Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev.
+- Mean six-positive NDCG@3:0.299540889 →0.303180590, +1.22%.
+- Absolute aggregate difference+0.003639701; conditional paired-user95% interval[+0.000818641,+0.006560752].
+- Each of three fixed seeds and each of three user folds has a positive aggregate point gain.
+- Follow falls by0.005737264 absolute (−2.48% relative), exceeding the fixed0.005 maximum point drop. Other guards pass. Screen4/5; overall screen fails.
+- Comments−0.32%, forward−1.21%, no-hate−0.000006469 absolute. Report every goal, including declines.
+- Already explored cohort and overlapping training folds limit inference. This is retrospective reranker user-generalization evidence, not new-date confirmation or online uplift. Do not remove the follow guard or mark the goal complete just because aggregate evidence is positive.
 
 ## Next actions
 
-1. Poll the same live training handle with60000ms waits; update from actual trial receipts/process evidence. Do not duplicate on timeout.
-2. Let all72fits finish and select only from inner validation. Outer evaluation must wait for full selection.json.
-3. Verify automatic outer evaluation and exact replay; inspect every goal, seed and fold, plus uncertainty limitations.
-4. Determine whether evidence actually supports the user's goal; do not mark achieved merely because a retrospective screen passes. Improve within budget if evidence is insufficient, without searching for a favorable split or hiding failures.
+1. Diagnose the follow tradeoff using the frozen inner-validation choices and all per-fold results, preserving the full original report.
+2. If changing training or selection, register it as a new exploratory experiment. Do not tune on outer outcomes and relabel them as untouched confirmation, pick a favorable fold, or loosen the registered guard to pass.
+3. Seek actual improvement within the existing real-score resources and65 CNY cap. The positive aggregate result supports continued work but does not satisfy every registered requirement.
 
-## Preserved prospective confirmation
+## Paths and preserved confirmation
 
-The50K Apr23-25 cohort, response packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. Do not start GPU under the automatic continuation message. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
+Actual repo: /Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev.
+Run data: /Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1.
+Logs: sibling user-cv-v1-train.log, user-cv-v1-evaluate.log and fold0/1/2 selection-audit logs.
 
-Method and limitations: docs/EMER_USER_CV.md.
-
-Actual saved-fold audit completed while training continued: every user role, source behavior/Jev/labels/weights, and independently recomputed training-only moments match. All36K rows occur once as outer test. Receipt: reports/emer-user-cv-v1-start/data_audit.json. No outer model performance was computed by this audit.
-
-First outer fold finished all24 fits. Independently audited all trial hashes/configurations/30-epoch budgets, reproduced epoch0 and earliest-best-epoch/config selection, and re-evaluated all six selected models on inner validation exactly. No outer metrics computed. Fold1 training continues under the same live handles. Audit receipt: reports/emer-user-cv-v1-start/fold-0-selection-audit.json.
-
-Second outer fold finished all24 fits. Its full budget, initial/earliest-best-epoch and configuration selection were audited; all six selected models reproduced their seven inner-validation metrics. Third-fold training continues under the same live handles. No outer evaluation yet. Receipt: reports/emer-user-cv-v1-start/fold-1-selection-audit.json.
+The50K Apr23-25 cohort, input packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. No new paidGPU or externalJev inference was used in this run. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
