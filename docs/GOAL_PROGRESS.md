@@ -1,6 +1,6 @@
 # Active user goal
 
-Deliver verified overall multi-objective superiority of EMER+Jev over EMER. Preserve complete original scope and report all seven indicators. Goal remains active and unproven; no fresh test inference/effect evaluation yet.
+Deliver verified overall multi-objective superiority of EMER+Jev over EMER. Preserve complete original scope and report all seven indicators. Goal is BLOCKED pending additional spending authorization; completion remains unproven and no fresh test inference/effect evaluation exists.
 
 ## Latest goal turn: progress
 
@@ -10,7 +10,7 @@ Deliver verified overall multi-objective superiority of EMER+Jev over EMER. Pres
 - Confirmation evaluator, per-goal/date reporting and exact replay pipeline implemented. Full300-test suite passed. Real confirmation still needs350K model judgments.
 - AutoDL read-only checks: existing project billed62.67 CNY (13 order-specific lines); GPU6.98 CNY/hour. Additional no-card preflight used only existing budget margin. No GPU was restarted. Instance is now confirmed OFF.
 
-## Pending spending authorization — first goal turn at this condition
+## Pending spending authorization — third consecutive goal turn; blocked audit passed
 
 An asynchronous question asked whether to raise total budget65→115 CNY (additional maximum50) for the50K independent cohort. This is NOT approved yet. Do not ask again or start paid GPU until the human replies. Expected pure inference6.08h; planned hard shutdown≤7h, collection cutoff20min earlier. Do not infer permission from account balance95.48 or general autonomy.
 
@@ -38,3 +38,13 @@ If authorization arrives, act without repeating the question. If declined, consi
 6. Require raw-response audit, one frozen paired effect evaluation, exact replay and full goal completion audit before any success claim. If effects fail, do not change thresholds or sample to significance.
 
 Current reviewable bundle and cost evidence: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
+
+
+## Budget-gate revalidation
+
+Latest continuation checked the goal, repository, staged artifacts and authorization record. No human budget approval has arrived, no new scores/evaluation exist, and the repository was clean. Previous turn made progress and first reached the budget gate; this turn is no progress at the same gate, not a verified process wait. All substantive preparation is complete. Do not create unrelated work or launch an over-budget run to avoid reporting the blocker. Goal remains active until the third consecutive unavoidable occurrence or an authorization/external resource change.
+
+
+## Blocked decision
+
+The same missing budget authorization was revalidated for a third consecutive goal turn. No human approval, fresh scores or confirmation result has arrived; all substantive local engineering, source audits and remote CPU preflight are finished. The65 CNY cap has only about2.33 CNY unsettled margin, versus about42.41 CNY pure inference required. A general automatic goal continuation is not spending consent. No equivalent free same-producer execution resource is available in this environment; the8GB local machine cannot host the registered27B FP16 producer, and changing to a different public/quantized producer would not execute this frozen confirmation. update_goal(blocked) succeeded. Resume upon explicit additional-budget authorization or provision of a suitable same-producer execution resource; retain all prepared artifacts and do not duplicate the pending question.
