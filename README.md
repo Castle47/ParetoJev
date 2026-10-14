@@ -59,6 +59,16 @@ versus the original EMER includes shared training changes; it is not all Jev
 increment. This follow-up was designed after the earlier outer results were
 opened and remains exploratory. No new paid scoring was used.
 
+The [fixed50/50 posterior follow-up](reports/emer-blended-transfer-v1/README.md)
+is complete with exact replay. Its gain versus the original EMER is +1.97%
+(5/5 reference conditions), but the matched-training Jev increment is +1.39%
+and passes only2/5 main conditions: long-view drops beyond the guard, one seed
+and one fold decline. Shared no-Jev training adds+0.58% itself. The reference
+comparison cannot substitute for the controlled result. The
+[budget-preserving evidence ledger](reports/emer-budget-summary-2026-10-15/README.md)
+keeps all three studies and their limitations together; the overall goal remains
+unachieved.
+
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
 the three reused periods. A frozen-EMER, one-coefficient bounded correction still

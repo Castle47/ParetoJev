@@ -25,28 +25,20 @@ Report: reports/emer-balanced-transfer-v1/README.md. All18 fits, guarded inner-s
 - Seed29 is identical to its original anchor in every fold and both arms; its gain is exactly0. Strict positive-every-seed fails. Both required comparisons4/5; overall screen false.13/18 fits select epoch0.
 - Post-outer-inspection exploratory design, not new independent confirmation. Do not drop seed29, change>0 to>=0, or mark achieved from only favorable averages.
 
-## Active fixed50/50 posterior experiment
+## Completed fixed50/50 posterior experiment
 
-The complete fallback diagnosis is in reports/emer-balanced-fallback-diagnosis. All45 seed29 Jev inner epochs improve the mean but fail at least one guard: long-view in folds0/1, comments in fold2. There was no missed admissible checkpoint. This motivates one fixed50/50 blend of original and fully task-balanced posterior, identical in both arms; no coefficient search or threshold changes.
+Report: reports/emer-blended-transfer-v1/README.md. All18 fits, guarded inner-selection audit and exact independent prediction/metric replay pass. Training81273/PID39954 and finalizer92872/PID39986 exited0. Do not restart them. Output: emer-jev-scale-v3/blended-transfer-v1.
 
-- Config: configs/emer_blended_transfer_v1.json; protocol: docs/EMER_BLENDED_TRANSFER.md.
-- Separate immutable driver: scripts/run_emer_blended_transfer.py. Old model and both prior driver bytes remain unchanged for exact replay.
-- Five relevant tests pass; real source/anchor hashes verified and registration saved in reports/emer-blended-transfer-v1-start.
--18 fits, three original user folds, seeds7/17/29,15epochs, same budgets, initialization, inner guards and comparisons. Results remain exploratory after earlier outer inspections.
-
-### Live handles — verify before polling/restarting
-
-- Training session81273, PID39954: run_emer_blended_transfer.py --stage train.
-- Finalizer session92872, PID39986: finish_emer_blended_transfer.sh waits for training, audits all18 fits, evaluates, replays and reports.
-- caffeinate waits only for39986; not an automation.
-- Output: external data root emer-jev-scale-v3/blended-transfer-v1. Logs: sibling blended-transfer-v1-train.log and blended-transfer-v1-evaluate.log.
-- Stages prepare/train/audit/evaluate/replay. Keep driver, config and its imported frozen drivers unchanged while this registered run lives.
+- Main matched-training Jev increment:+1.39%; absolute conditional95% interval[+0.001373,+0.007342]. Main screen2/5: seed29 negative, fold2 negative, long-view absolute−0.006784 exceeds0.005 drop guard.
+- Reference against original EMER:+1.97%,5/5 reference conditions. This includes training changes: no-Jev mixed training alone adds+0.58%. Do not promote the reference success as controlled Jev success.
+- All original criteria and both prior studies remain unchanged; all post-inspection studies remain exploratory. No paidGPU/API activity.
+- Current evidence ledger: reports/emer-budget-summary-2026-10-15/README.md.
 
 ## Next actions
 
-1. Poll the same live training session using60000ms empty waits. Do not duplicate it or read a partial outer result as completion.
-2. Verify all18 checkpoint/inner-selection audit, then exact evaluation replay and all three comparisons. Report every seed, fold, goal and epoch0 fallback.
-3. Keep the original criteria and65 CNY cap. Do not claim independent confirmation from these reused outer data. The frozen Apr23–25 queue remains unscored.
+1. Audit a concrete comparator/fallback issue before any more coefficient experiments. In both transfer recipes, rejected Jev epochs fall back to the original anchor, while the matched no-Jev arm may select an improved checkpoint. Inspect paired inner metrics to determine whether this makes the fallback worse than the actual comparator. A changed deployment/selection policy must be separately registered and evaluated; never rewrite previous reports.
+2. If justified, prepare a matched-baseline fallback policy using only frozen inner metrics and existing models, with all choices frozen before new outer calculations. Report both prior recipes, not only a favorable result. No new mixtures or seed exclusions.
+3. Keep the65 CNY cap and untouched Apr23–25 confirmation queue. Stronger new-date evidence remains unavailable without matching scores/compute. Do not claim independent confirmation from reused outer data.
 
 ## Paths and preserved confirmation
 

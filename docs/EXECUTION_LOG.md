@@ -1101,3 +1101,16 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Real ancestry/input/source hashes verified; registration preserved. Training
   session81273/PID39954 and finalizer92872/PID39986 launched locally.
 - No newGPU/API requests. Prior driver/model sources remain unchanged.
+
+
+## 2026-10-15 — Complete fixed posterior-blend experiment
+
+- All18 fixed50/50 fits, guarded selections and exact replay passed. Both
+  process handles exited0; no newAPI/GPU activity.
+- Matched-training Jev increment:+1.39%, conditional CI positive, but long-view
+  absolute−0.006784 exceeds guard, seed29 and fold2 decline. Main2/5.
+- Original-EMER reference:+1.97%,5/5; shared no-Jev training:+0.58%.
+  Did not substitute the favorable reference for the controlled comparison.
+- Preserved all reports and added a three-study evidence ledger. Next audit
+  targets the original-anchor fallback versus an improved matched comparator,
+  using inner records only; no new coefficient or seed search is launched.
