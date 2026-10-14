@@ -15,15 +15,34 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-**Expanded EMER / EMER+Jev development is running.** The new cohort contains
-30,000 training and 6,000 validation slates (360,000 source-verified candidate
-exposures), with train-only feature normalization. The fixed behavior model and
-equal 43,345-parameter rerankers are retained. Real seven-goal Jev scoring needs
-252,000 development requests and is resumable; baseline training runs alongside it.
-The independent April 23–25 test remains unopened, with 50,000 slates a planning
-budget, not a power guarantee. No new superiority result is available.
-See the [expanded experiment report](reports/emer-scale-2026-10-13/README.md) and
-[machine-readable targets](configs/emer_jev_scale_target.json).
+**As of 2026-10-15, stable overall EMER+Jev superiority remains unproven.**
+The active comparison is EMER+Jev versus EMER with the same frozen seven-goal
+tree behavior predictor and equal 43,345-parameter rerankers. It tests the
+incremental value of real Jev inputs; it does not establish superiority of the
+separate ParetoJev architecture described elsewhere in this repository.
+
+Expanded development is complete: 30,000 training and 6,000 validation slates,
+360,000 source-verified candidate exposures, and 252,000 audited native JEV-27B
+judgments. Mean six-positive-goal NDCG@3 improved from 0.305131 to 0.310259
+(+1.68%); comments changed by -0.09%. These are model-selection validation
+results, and the aggregate difference interval crosses zero. See the
+[complete seven-goal development report](reports/emer-native-development-2026-10-14/README.md)
+and [aggregate-goal clarification and follow-up results](reports/multiobjective-goal-2026-10-14/README.md).
+
+The source-audited April 23–25 confirmation cohort contains 50,000 slates, but
+its Jev judgments have **not** been collected and no effect has been evaluated.
+The user retained the **65 CNY total cap** and declined additional paid scoring.
+The [prepared confirmation package](reports/multiobjective-confirmation-ready-2026-10-14/README.md)
+is preserved; sample size alone is not a power guarantee.
+
+Within that budget, a [registered three-fold user-holdout experiment](docs/EMER_USER_CV.md)
+is running locally on all 36,000 existing real-score slates (12,606 users).
+Both arms train afresh with identical budgets: 72 fits in total, with inner-user
+validation for selection and training-only feature normalization. All fits and
+selections must finish before outer metrics are computed. Saved fold inputs and
+user separation have [passed an independent audit](reports/emer-user-cv-v1-start/data_audit.json).
+This is retrospective evidence on an already explored cohort, not a replacement
+for new-date confirmation. Live execution details are in [goal progress](docs/GOAL_PROGRESS.md).
 
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
@@ -46,7 +65,7 @@ subsequently discovered preprocessing defect documented in
 [`post-run correction`](reports/kuairand-core-2026-10-12/POST_RUN_CORRECTION_2026-10-13.md).
 Its numerical reproducibility does not establish architectural validity.
 
-Verified milestones through **2026-10-13**:
+Verified milestones through **2026-10-15**:
 
 | Milestone | Status | Evidence |
 |---|---|---|
@@ -73,6 +92,9 @@ Verified milestones through **2026-10-13**:
 | Aligned 27K behavior comparison | Same 1,699,506 train targets; tree/MMoE close, richer SASRec trades worse click/long-view for better like/follow/forward; all 6/7 gates | [`reports/kuairand-27k-aligned-2026-10-12/README.md`](reports/kuairand-27k-aligned-2026-10-12/README.md) |
 | Real KuaiRand core Jev/ParetoJev validation | Complete: 14,000 real decisions, 18 training runs, primary 1/4 gates; overall superiority not supported | [`final report`](reports/kuairand-core-2026-10-12/README.md), [`completion audit`](reports/kuairand-core-2026-10-12/completion_audit.json) |
 | EMER + Jev versus EMER | 24 development fits; fresh 600-slate test and 4,200 real decisions; no stable incremental advantage established | [`final report`](reports/emer-jev-2026-10-13/README.md) |
+| Expanded native EMER + Jev development | 36,000 slates, 252,000 real judgments, 24 fits; aggregate validation +1.68%, uncertainty includes zero | [`development report`](reports/emer-native-development-2026-10-14/README.md) |
+| Larger chronological confirmation | 50,000 slates source-audited and packaged; unscored under the retained 65 CNY cap | [`prepared package`](reports/multiobjective-confirmation-ready-2026-10-14/README.md) |
+| Retrospective user-disjoint validation | Saved input audit passed; 72-fit equal-budget experiment running; no outer effect result yet | [`protocol`](docs/EMER_USER_CV.md) |
 | Serving/student experiments | Not run | Core offline validation takes priority |
 
 Synthetic results validate engineering paths; they are **not recommendation research results**. The restored baseline and current execution evidence are recorded separately in [`docs/EXECUTION_LOG.md`](docs/EXECUTION_LOG.md). Full real MicroLens evaluation now supports an AUC increment from small-weight Jev fusion, while the complete target set remains unmet.
