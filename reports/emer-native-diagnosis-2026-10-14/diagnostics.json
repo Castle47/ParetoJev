@@ -1,0 +1,5578 @@
+{
+  "protocol": {
+    "role": "post-selection exhaustive development diagnostic, not confirmation",
+    "no_retraining": true,
+    "independent_test_opened": false,
+    "inputs": {
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer_selection.json": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/selection.json": "a26e23f1d426e6b0b46590fa91eb1f196c56645543f386bf1869d65117ad718d",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/evaluation.json": "8820464f119056edcea16909b2201c9d5cd1f7f39666e563248852456bfe360f",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/scores.npz": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/train.npz": "f368ab737fe2ddaf0971ac7b9b9d93df5bf31e952c150a5b854a3e0202d2b021",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/validation.npz": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf"
+    },
+    "checkpoints": {
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial0.pt": "e0c871bf7d545d9040e2cfbeb4bc2664a4d83ea299e675d1a0b84cfdc361ddf5",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial1.pt": "84a56b0e95717c0ea137ded0afe11bf2dbdcc7a1661b31eda8931495482891fe",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial2.pt": "fada178fe451f04286029723198d4cccc17bf4695957db8aba087c185f78258a",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial3.pt": "3fdda5e23851725eef4da53ffdc6f09f18b394bbb3cd2707ae95188de8586c7c",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial0.pt": "530ab81ed74a7e36403d6c906905194adfef797797a16f25257be5d46b30c335",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial1.pt": "7c2ba38b3d80d9465c3faf56e10e1be2cb7a02347575dcdcb0333dbbb11c0f96",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial2.pt": "946614bf53d479968f8663dda37f599f4af175eb84132b89101dc3ac9c5de655",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial3.pt": "6b9a3b5f6817e3260a0c7ad6b251c7b689d0070fdd5301e03d5891dd42e9bcbc",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial0.pt": "821825ad7666384f251027bcc23d469a8394e279b1e20dcbaa13fd00903b04be",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial1.pt": "9162ef277a7e5821311bf5bb09db99627a3e0f376c6c9229500ca7fb444c48ee",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial2.pt": "37e3e1364608f5de79f6125157a8d2826cf18412414856353f9354a14880ca3e",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial3.pt": "e3c237618d2c02e01172b9baf05bfe94c90cd9228ef48d2f0bbb768048b6e6e9",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial0.pt": "ff7330acf7840a73938078a4105d160a294c9dd0f7009c33c4b129017232dcb9",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial1.pt": "04162210de0704d281560bd986409ac59f9fd60d9bc273f868ef634896b274e1",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial2.pt": "7f1b3dc396f98f7b840661a3a6b8d8968e8257d3671b6d189001109e52a8c167",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial3.pt": "d4ddccb4e0e6625a78efab95f8b0573ff6e2895a80b7d14be8e139e7e5028052",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial0.pt": "be3f36521c16a42565e4957dc33772df8809cfc7381b1a0297a504d7aceb2d5d",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial1.pt": "91381741ad41008cd9020b8ca6ad9a9b5e1da5872bd4d70646dcfdf78618e6c3",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial2.pt": "34bc015254eedafb0deb2653c62d6a9f4087448b577da7d81af7c5653141aeea",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial3.pt": "d49547e2e566c0c1e1df1af01416a599be7fe0ef203c908398b8dc00ced02ba3",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial0.pt": "b28d351009e4447b05262ba621740c8505006de1a77765fe41e530b72ef74813",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial1.pt": "dc6dedeae07e00b4d9804f3762fb7a93984757231f9a26be4d9edd67ec893b7d",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial2.pt": "9435032fe4c4a093d191ec7d4a902b99af6faf793fa82374be27325ea7bc7812",
+      "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial3.pt": "074ea135ac36afa2ce59b35e88982e093015879eef59afa7967388afd32b2bb1"
+    },
+    "scripts": {
+      "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/diagnose_emer_native.py": "2dad8147809878876e53413fcd22bb1819efcfbf2d17d3e7fe9b38f6bfc9e224",
+      "scripts/audit_jev_increment.py": "8b3ce0b302508f8d0b36ce23a6320b697842119868d8ed7ce313ea601c07ee49",
+      "scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f"
+    },
+    "history_threshold_from_unweighted_training_median": 7218.0,
+    "groups": "Six fixed complementary masks; previous-exposure count, at least five zero-prior candidates, and long-view top3 overlap. No outcome-selected thresholds.",
+    "model_bootstrap": 2000,
+    "signal_bootstrap": 1000,
+    "multiplicity": "Intervals are descriptive, unadjusted for model selection or multiple diagnostic comparisons.",
+    "matched_settings": "Same learning rate and prior coefficient; each checkpoint keeps its original validation-selected epoch. No new checkpoint selection."
+  },
+  "predictions_sha256": "eed340445c697b1dc6ed21136c37d798f02204c50e124527e6ee49c7464cb7fd",
+  "matched": [
+    {
+      "trial": 0,
+      "learning_rate": 0.001,
+      "prior_coefficient": 1.0,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.45265232009512185,
+            "emer_jev": 0.45537945215125464,
+            "absolute_gain": 0.002727132056132786,
+            "relative_gain": 0.006024783117337601,
+            "confidence_interval": [
+              -0.0007771358502641573,
+              0.006184321967942969
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.39284569133622305,
+            "emer_jev": 0.3950585355746208,
+            "absolute_gain": 0.0022128442383977376,
+            "relative_gain": 0.0056328586190444955,
+            "confidence_interval": [
+              -0.0018744727876790588,
+              0.0064131580304424
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.25633661418713083,
+            "emer_jev": 0.25986954403934975,
+            "absolute_gain": 0.0035329298522189245,
+            "relative_gain": 0.01378238478893154,
+            "confidence_interval": [
+              -0.0028361856221474275,
+              0.00962912855893448
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.23130304274958077,
+            "emer_jev": 0.22779714884734872,
+            "absolute_gain": -0.003505893902232049,
+            "relative_gain": -0.015157145624010186,
+            "confidence_interval": [
+              -0.013200149563050741,
+              0.005283073851525384
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.24038855759165342,
+            "emer_jev": 0.2428127984579449,
+            "absolute_gain": 0.002424240866291477,
+            "relative_gain": 0.010084676619298662,
+            "confidence_interval": [
+              -0.0068151769321217765,
+              0.011527883656688321
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.24359616890476746,
+            "emer_jev": 0.23913324857223964,
+            "absolute_gain": -0.00446292033252782,
+            "relative_gain": -0.018320979154120332,
+            "confidence_interval": [
+              -0.014430993920080779,
+              0.00587804847878006
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996422117487018,
+            "emer_jev": 0.999645287292409,
+            "absolute_gain": 3.075543707153905e-06,
+            "relative_gain": 3.076644494407425e-06,
+            "confidence_interval": [
+              -1.3130806881778145e-05,
+              1.842382283385731e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.3028537324774129,
+          "emer_jev": 0.30334178794045974,
+          "absolute_gain": 0.0004880554630468427,
+          "confidence_interval": [
+            -0.002799610446805026,
+            0.003680531225560654
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.45344968315882006,
+              0.3942302082437041,
+              0.2575263705562264,
+              0.22470613589658395,
+              0.23852238943215504,
+              0.24275314048151264,
+              0.9996524635610606
+            ],
+            "emer_jev": [
+              0.4560713279891995,
+              0.3952990504464507,
+              0.2545713873000207,
+              0.22618240537643858,
+              0.24218999215174183,
+              0.23936513293379205,
+              0.9996478502454993
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4534526629910137,
+              0.38973428838081337,
+              0.25684907231603415,
+              0.23519973909257166,
+              0.2374082978309827,
+              0.2513927030202253,
+              0.99963554807067
+            ],
+            "emer_jev": [
+              0.45538446425402784,
+              0.3927420652472028,
+              0.26200785267087634,
+              0.2263505510440143,
+              0.2401251220045764,
+              0.237693092002921,
+              0.9996463124736457
+            ]
+          },
+          "29": {
+            "emer": [
+              0.45105461413561,
+              0.39457257738418583,
+              0.2546343996891146,
+              0.2340032532595865,
+              0.2452349855118182,
+              0.23664266321256558,
+              0.9996386236143769
+            ],
+            "emer_jev": [
+              0.4546825642106148,
+              0.39713449103024273,
+              0.26302939214713505,
+              0.23085849012159296,
+              0.2461232812175122,
+              0.24034152078000678,
+              0.9996416991580844
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": true,
+          "positive_mean_noninferior": false,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 4253,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      }
+    },
+    {
+      "trial": 1,
+      "learning_rate": 0.001,
+      "prior_coefficient": 0.25,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.4596864367842593,
+            "emer_jev": 0.46579652305233116,
+            "absolute_gain": 0.006110086268071857,
+            "relative_gain": 0.01329185675090834,
+            "confidence_interval": [
+              -0.001091992372705354,
+              0.013265158166447114
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.4263466227182056,
+            "emer_jev": 0.40972505228904055,
+            "absolute_gain": -0.016621570429165067,
+            "relative_gain": -0.03898604924601717,
+            "confidence_interval": [
+              -0.025503724981351346,
+              -0.007986699361864419
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.25171495727685866,
+            "emer_jev": 0.26045858688758144,
+            "absolute_gain": 0.00874362961072278,
+            "relative_gain": 0.034736233815083756,
+            "confidence_interval": [
+              -0.004070771193011267,
+              0.022358154965018896
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.2207213937394413,
+            "emer_jev": 0.2306925552984709,
+            "absolute_gain": 0.009971161559029607,
+            "relative_gain": 0.04517532890717622,
+            "confidence_interval": [
+              -0.009170365180451234,
+              0.028295895544658424
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.23692231315547477,
+            "emer_jev": 0.23319488138498357,
+            "absolute_gain": -0.003727431770491202,
+            "relative_gain": -0.01573271728123455,
+            "confidence_interval": [
+              -0.0244456025831129,
+              0.01625351156498132
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.2327918377154957,
+            "emer_jev": 0.2488477951494115,
+            "absolute_gain": 0.016055957433915802,
+            "relative_gain": 0.06897130754875708,
+            "confidence_interval": [
+              -0.008114595227630863,
+              0.04016354321490208
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996478502454985,
+            "emer_jev": 0.999644774701791,
+            "absolute_gain": -3.075543707486972e-06,
+            "relative_gain": -3.0766271409793603e-06,
+            "confidence_interval": [
+              -2.833942619933083e-05,
+              2.2252016556795197e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.3046972602316225,
+          "emer_jev": 0.30811923234363653,
+          "absolute_gain": 0.003421972112013963,
+          "confidence_interval": [
+            -0.0038418115764668965,
+            0.010136873875672392
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.45952151827786236,
+              0.4253383512048831,
+              0.24570214687973796,
+              0.2292455501835961,
+              0.23022044410012393,
+              0.2197981322231136,
+              0.9996678412795978
+            ],
+            "emer_jev": [
+              0.46497983013226235,
+              0.40075438642546074,
+              0.2595282993594203,
+              0.23090461290849978,
+              0.22657445176318788,
+              0.26007181943012053,
+              0.9996324725269631
+            ]
+          },
+          "17": {
+            "emer": [
+              0.45803956173544214,
+              0.41734466054253044,
+              0.25369575125531535,
+              0.22199665051675008,
+              0.2478489884173626,
+              0.23819428670177076,
+              0.9996340102988162
+            ],
+            "emer_jev": [
+              0.4683640690324836,
+              0.4141029393128855,
+              0.2591965822943688,
+              0.22508864585236876,
+              0.23393717170472214,
+              0.2440193835463459,
+              0.9996463124736458
+            ]
+          },
+          "29": {
+            "emer": [
+              0.46149823033955245,
+              0.4363568564072395,
+              0.25574697369550503,
+              0.2109219805179774,
+              0.23269750694893349,
+              0.24038309422160414,
+              0.9996416991580847
+            ],
+            "emer_jev": [
+              0.46404566999232894,
+              0.4143178311288081,
+              0.26265087900893724,
+              0.23608440713454376,
+              0.2390730206870364,
+              0.24245218247176942,
+              0.9996555391047683
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 4253,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      }
+    },
+    {
+      "trial": 2,
+      "learning_rate": 0.0003,
+      "prior_coefficient": 1.0,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.45186214490454146,
+            "emer_jev": 0.4532253772445325,
+            "absolute_gain": 0.0013632323399910273,
+            "relative_gain": 0.0030169208803251667,
+            "confidence_interval": [
+              -0.0020099803303687824,
+              0.00449035426328468
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.39397281162395864,
+            "emer_jev": 0.3929536370314152,
+            "absolute_gain": -0.0010191745925434148,
+            "relative_gain": -0.002586916057334947,
+            "confidence_interval": [
+              -0.004983819888168999,
+              0.0027769979158029524
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.25539310994323156,
+            "emer_jev": 0.25954604831199474,
+            "absolute_gain": 0.0041529383687631816,
+            "relative_gain": 0.01626096479143972,
+            "confidence_interval": [
+              -0.001531979659587184,
+              0.009430571092332175
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.23507841305749047,
+            "emer_jev": 0.22921317164959806,
+            "absolute_gain": -0.0058652414078924076,
+            "relative_gain": -0.024950148895458178,
+            "confidence_interval": [
+              -0.015056488994042069,
+              0.003049970782462043
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.23629455201399988,
+            "emer_jev": 0.24163574585382855,
+            "absolute_gain": 0.005341193839828673,
+            "relative_gain": 0.02260396523874245,
+            "confidence_interval": [
+              -0.004140265689417035,
+              0.014421071736642711
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.24417504978031937,
+            "emer_jev": 0.24226340695474372,
+            "absolute_gain": -0.0019116428255756546,
+            "relative_gain": -0.007828985096124813,
+            "confidence_interval": [
+              -0.012440387374552511,
+              0.008220078607058826
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996437495205553,
+            "emer_jev": 0.9996391362049941,
+            "absolute_gain": -4.613315561230458e-06,
+            "relative_gain": -4.614959642815829e-06,
+            "confidence_interval": [
+              -1.768436769016557e-05,
+              9.18185776911662e-06
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.3027960135539236,
+          "emer_jev": 0.3031395645076855,
+          "absolute_gain": 0.0003435509537619008,
+          "confidence_interval": [
+            -0.0027697199371146263,
+            0.003397879574382537
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.45242913332716755,
+              0.3960157674012775,
+              0.2519175830127664,
+              0.22861741897399762,
+              0.2297776523597119,
+              0.24637631353826717,
+              0.9996509257892069
+            ],
+            "emer_jev": [
+              0.4526699509025686,
+              0.39370191429784346,
+              0.25733818846371315,
+              0.22916725663610435,
+              0.23955871708031326,
+              0.2446745083100021,
+              0.999640161386231
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4514955105121598,
+              0.39029306092007754,
+              0.2573550269949949,
+              0.23579613630847365,
+              0.24074474203302226,
+              0.239578246080518,
+              0.9996463124736457
+            ],
+            "emer_jev": [
+              0.45434423336353613,
+              0.38937257619677196,
+              0.2602173075965688,
+              0.22694844538966427,
+              0.23891497664020214,
+              0.24331958073935664,
+              0.999640161386231
+            ]
+          },
+          "29": {
+            "emer": [
+              0.45166179087437563,
+              0.3956096065505548,
+              0.2569067198219162,
+              0.24082168388999994,
+              0.23836126164926133,
+              0.24657058972217402,
+              0.999634010298816
+            ],
+            "emer_jev": [
+              0.45266194746757066,
+              0.3957864205996635,
+              0.261082648875685,
+              0.23152381292302537,
+              0.2464335438409659,
+              0.2387961318148734,
+              0.9996370858425236
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 4253,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      }
+    },
+    {
+      "trial": 3,
+      "learning_rate": 0.0003,
+      "prior_coefficient": 0.25,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.4538830521880039,
+            "emer_jev": 0.4578118070658956,
+            "absolute_gain": 0.0039287548778916825,
+            "relative_gain": 0.00865587480949684,
+            "confidence_interval": [
+              -0.0012796194472403668,
+              0.009028622775354456
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.42145031018371865,
+            "emer_jev": 0.42080705084059905,
+            "absolute_gain": -0.0006432593431195954,
+            "relative_gain": -0.0015262993704742696,
+            "confidence_interval": [
+              -0.006467710439330173,
+              0.005656866868524755
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.2551997437328278,
+            "emer_jev": 0.2644197091155634,
+            "absolute_gain": 0.009219965382735618,
+            "relative_gain": 0.03612842727768618,
+            "confidence_interval": [
+              -0.00022353167701005537,
+              0.018846135933496613
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.22700050341007016,
+            "emer_jev": 0.2270500566258498,
+            "absolute_gain": 4.955321577962413e-05,
+            "relative_gain": 0.0002182956206493851,
+            "confidence_interval": [
+              -0.014884106448215032,
+              0.01427592756523453
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.2312519124317738,
+            "emer_jev": 0.23966063729831236,
+            "absolute_gain": 0.00840872486653857,
+            "relative_gain": 0.03636175276612856,
+            "confidence_interval": [
+              -0.006068742394807698,
+              0.022584125201776623
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.23579158981600465,
+            "emer_jev": 0.25180246103863224,
+            "absolute_gain": 0.016010871222627593,
+            "relative_gain": 0.06790263908530988,
+            "confidence_interval": [
+              -0.0009834670728203002,
+              0.034169449511077185
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996560516953851,
+            "emer_jev": 0.9996586146484745,
+            "absolute_gain": 2.5629530894244468e-06,
+            "relative_gain": 2.563834916097151e-06,
+            "confidence_interval": [
+              -1.4172162780440312e-05,
+              1.9032422929388112e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.3040961852937331,
+          "emer_jev": 0.3102586203308087,
+          "absolute_gain": 0.006162435037075582,
+          "confidence_interval": [
+            0.0010948057710327393,
+            0.01120176183685379
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.4531914478811118,
+              0.4220672089807563,
+              0.24614175554206771,
+              0.2162676833387519,
+              0.22963388376098504,
+              0.23797584584654355,
+              0.9996555391047682
+            ],
+            "emer_jev": [
+              0.4584940227008837,
+              0.4222628942830819,
+              0.26230275775758033,
+              0.2256730765769821,
+              0.24322114379576654,
+              0.25827664736129313,
+              0.9996555391047683
+            ]
+          },
+          "17": {
+            "emer": [
+              0.45542069336240565,
+              0.4162385909755889,
+              0.25615279170103084,
+              0.23176885955540083,
+              0.2308860030786049,
+              0.2339348721690205,
+              0.9996678412795977
+            ],
+            "emer_jev": [
+              0.45950553922523113,
+              0.41698174252268566,
+              0.2623046820608422,
+              0.22951524354070424,
+              0.23773169662620688,
+              0.24468222577694507,
+              0.9996647657358907
+            ]
+          },
+          "29": {
+            "emer": [
+              0.4530370153205724,
+              0.4260451305948462,
+              0.263304683955367,
+              0.23296496733605757,
+              0.2332358504557272,
+              0.235464051432451,
+              0.9996447747017921
+            ],
+            "emer_jev": [
+              0.4554358592716528,
+              0.4231765157160658,
+              0.26865168752824886,
+              0.22596184975986275,
+              0.23802907147295924,
+              0.2524485099776592,
+              0.9996555391047681
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": true,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 4253,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      }
+    }
+  ],
+  "signal": {
+    "is_click": {
+      "within_slate_auc": {
+        "values": [
+          0.5426909887269179,
+          0.5188292134566165,
+          0.5323970587987963
+        ],
+        "difference": -0.023861775270301422,
+        "difference_ci": [
+          -0.03534079518070109,
+          -0.01239429240938848
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.4676235337660249,
+          0.45143017742363,
+          0.45484208673824794
+        ],
+        "difference": -0.016193356342394882,
+        "difference_ci": [
+          -0.02964891914290752,
+          -0.0031931510102190318
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.20398115881065768,
+        "behavior_right_jev_wrong": 0.22938297168713384,
+        "behavior_tie_fraction": 0.07252369830694588,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 5150,
+      "positive_bits": 23653,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "long_view": {
+      "within_slate_auc": {
+        "values": [
+          0.5927651324991369,
+          0.5354359241255886,
+          0.565133409846699
+        ],
+        "difference": -0.05732920837354827,
+        "difference_ci": [
+          -0.07133003054616031,
+          -0.043820985570229454
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.45665041407528745,
+          0.3854282935038435,
+          0.4125399997936817
+        ],
+        "difference": -0.07122212057144395,
+        "difference_ci": [
+          -0.08625843912715403,
+          -0.05608616785812552
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.1983514400521357,
+        "behavior_right_jev_wrong": 0.25725123617134626,
+        "behavior_tie_fraction": 0.0385777624238607,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 4638,
+      "positive_bits": 15936,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "is_like": {
+      "within_slate_auc": {
+        "values": [
+          0.5810737603025199,
+          0.5151749296510169,
+          0.49644946541796
+        ],
+        "difference": -0.06589883065150304,
+        "difference_ci": [
+          -0.08949500163545233,
+          -0.0421978716806581
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.3367484703614185,
+          0.2603199580620202,
+          0.2581756019223085
+        ],
+        "difference": -0.07642851229939829,
+        "difference_ci": [
+          -0.1043616213963312,
+          -0.04905209670955483
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.20261079863399384,
+        "behavior_right_jev_wrong": 0.268243928150896,
+        "behavior_tie_fraction": 0.06907365473253707,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 1529,
+      "positive_bits": 2713,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "is_follow": {
+      "within_slate_auc": {
+        "values": [
+          0.5387766073178328,
+          0.5086166110423366,
+          0.4930581153169596
+        ],
+        "difference": -0.03015999627549626,
+        "difference_ci": [
+          -0.06821784659070795,
+          0.008795753638580157
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.25032570004785315,
+          0.21984192720063414,
+          0.22655591791646384
+        ],
+        "difference": -0.03048377284721901,
+        "difference_ci": [
+          -0.07299383452796032,
+          0.012934012372492167
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.20956868716660523,
+        "behavior_right_jev_wrong": 0.23900541233914754,
+        "behavior_tie_fraction": 0.11008111727295937,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 505,
+      "positive_bits": 603,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "is_comment": {
+      "within_slate_auc": {
+        "values": [
+          0.5085240327007834,
+          0.5287235945273309,
+          0.5076906541481565
+        ],
+        "difference": 0.020199561826547474,
+        "difference_ci": [
+          -0.015764799715338382,
+          0.059423219801802186
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.24201721429247255,
+          0.2614390708275034,
+          0.2398690761017504
+        ],
+        "difference": 0.01942185653503084,
+        "difference_ci": [
+          -0.021336104945731516,
+          0.061034928440018586
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.2466407217774446,
+        "behavior_right_jev_wrong": 0.22637397355104374,
+        "behavior_tie_fraction": 0.035751803650612646,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 586,
+      "positive_bits": 678,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "is_forward": {
+      "within_slate_auc": {
+        "values": [
+          0.5130148636252013,
+          0.5323618795365397,
+          0.5099439143866712
+        ],
+        "difference": 0.01934701591133836,
+        "difference_ci": [
+          -0.015744204852519046,
+          0.05419322568002559
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.24068216430534708,
+          0.26249415517990893,
+          0.23880382620524426
+        ],
+        "difference": 0.021811990874561843,
+        "difference_ci": [
+          -0.025145769837988337,
+          0.06230955045818938
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.2148811190560283,
+        "behavior_right_jev_wrong": 0.2025190418028365,
+        "behavior_tie_fraction": 0.17412854335736908,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 521,
+      "positive_bits": 640,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    },
+    "is_hate": {
+      "within_slate_auc": {
+        "values": [
+          0.4959473806323598,
+          0.5532238863287243,
+          0.5257541282642081
+        ],
+        "difference": 0.0572765056963645,
+        "difference_ci": [
+          0.02120875401597125,
+          0.09670961417521776
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "top3_metric": {
+        "values": [
+          0.999614019264717,
+          0.9996647657358892,
+          0.9996437495205549
+        ],
+        "difference": 5.074647117220277e-05,
+        "difference_ci": [
+          4.411187747782599e-06,
+          9.878023834694603e-05
+        ],
+        "users": 4253,
+        "valid_replicates": 1000
+      },
+      "complementarity": {
+        "behavior_wrong_jev_right": 0.28669218830005117,
+        "behavior_right_jev_wrong": 0.23041538658474142,
+        "behavior_tie_fraction": 0.0197978270609319,
+        "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+      },
+      "eligible_pair_slates": 496,
+      "positive_bits": 857,
+      "column_order": [
+        "goal-specific behavior",
+        "goal-specific Jev",
+        "frozen EMER averaged over fitted seeds"
+      ]
+    }
+  },
+  "groups": {
+    "history_below_train_median": {
+      "slates": 2724,
+      "users": 2227,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.5113044236169139,
+            "emer_jev": 0.511903757112675,
+            "absolute_gain": 0.000599333495761134,
+            "relative_gain": 0.0011721656768026996,
+            "confidence_interval": [
+              -0.007291305892110777,
+              0.008701301250153086
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.4611551721961118,
+            "emer_jev": 0.4683252383656935,
+            "absolute_gain": 0.0071700661695817125,
+            "relative_gain": 0.015548055409281098,
+            "confidence_interval": [
+              -0.0019415494554110456,
+              0.015940135866700532
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.26351200269671504,
+            "emer_jev": 0.2657949597566667,
+            "absolute_gain": 0.0022829570599516846,
+            "relative_gain": 0.008663579027097365,
+            "confidence_interval": [
+              -0.011683415675230374,
+              0.015486366012699745
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.21532708633725686,
+            "emer_jev": 0.21976668723053583,
+            "absolute_gain": 0.0044396008932789666,
+            "relative_gain": 0.020617939752946013,
+            "confidence_interval": [
+              -0.015145057250005053,
+              0.02311167203172675
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.21701597422528685,
+            "emer_jev": 0.23249199393337663,
+            "absolute_gain": 0.015476019708089789,
+            "relative_gain": 0.07131281355364168,
+            "confidence_interval": [
+              -0.00650820088049409,
+              0.038100420188714325
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.23062452106292297,
+            "emer_jev": 0.2324567456752813,
+            "absolute_gain": 0.0018322246123583241,
+            "relative_gain": 0.00794462186377148,
+            "confidence_interval": [
+              -0.024650213492705964,
+              0.028560459407193803
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996121463814628,
+            "emer_jev": 0.9996257770198141,
+            "absolute_gain": 1.363063835135847e-05,
+            "relative_gain": 1.3635927095024386e-05,
+            "confidence_interval": [
+              -1.613353800905548e-05,
+              4.2132576444744974e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.3164898633558679,
+          "emer_jev": 0.32178989701237154,
+          "absolute_gain": 0.0053000336565036015,
+          "confidence_interval": [
+            -0.002264420336352742,
+            0.01266989045150334
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.5124617594200354,
+              0.4464567289943284,
+              0.2584170509783901,
+              0.2171201371500384,
+              0.2062019702209589,
+              0.22801700662639088,
+              0.9996282553176967
+            ],
+            "emer_jev": [
+              0.5149129336416832,
+              0.4734000034137817,
+              0.2678770326492557,
+              0.22455633026745125,
+              0.23640238628507257,
+              0.23394878066379465,
+              0.9996319727645196
+            ]
+          },
+          "17": {
+            "emer": [
+              0.5138872093612169,
+              0.46501616994812295,
+              0.2619547438888639,
+              0.2061539441841569,
+              0.22407958096102623,
+              0.23911540313996826,
+              0.9996022331899356
+            ],
+            "emer_jev": [
+              0.5113052524444621,
+              0.461136164770165,
+              0.25858405986062777,
+              0.21958710115538477,
+              0.22503142975472665,
+              0.22615036302951763,
+              0.9996319727645196
+            ]
+          },
+          "29": {
+            "emer": [
+              0.5075643020694691,
+              0.47199261764589107,
+              0.2701642132228943,
+              0.22270717767757525,
+              0.2207663714938776,
+              0.22474115342240988,
+              0.9996059506367586
+            ],
+            "emer_jev": [
+              0.5094930852518581,
+              0.4704395469131406,
+              0.27092378676011974,
+              0.21515663026877124,
+              0.23604216576033324,
+              0.2372710933325318,
+              0.9996133855304045
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": false,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 2227,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5380897185625795,
+              0.51558129665093,
+              0.5358583504410737
+            ],
+            "difference": -0.02250842191164948,
+            "difference_ci": [
+              -0.039771871007721754,
+              -0.006459063989125791
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.5209100728787487,
+              0.505169737190925,
+              0.51130442361691
+            ],
+            "difference": -0.015740335687823737,
+            "difference_ci": [
+              -0.035665141886381924,
+              0.0024724894263426626
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2019250572772364,
+            "behavior_right_jev_wrong": 0.22407001226202827,
+            "behavior_tie_fraction": 0.07488926380373964,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 2446,
+          "positive_bits": 13004,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5949020239745098,
+              0.5312551435577448,
+              0.5709800947803839
+            ],
+            "difference": -0.06364688041676492,
+            "difference_ci": [
+              -0.08119799149143311,
+              -0.04692748867807169
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.5010542200635499,
+              0.4275188930139634,
+              0.46115517219611313
+            ],
+            "difference": -0.07353532704958654,
+            "difference_ci": [
+              -0.09522544592308446,
+              -0.05253649085712724
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19818839490291215,
+            "behavior_right_jev_wrong": 0.26300490543651767,
+            "behavior_tie_fraction": 0.0349323434896522,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 2322,
+          "positive_bits": 9201,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5732655595783568,
+              0.5067585742166627,
+              0.49038814466567265
+            ],
+            "difference": -0.06650698536169408,
+            "difference_ci": [
+              -0.10001628769354502,
+              -0.031325885680621515
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.3376821958882865,
+              0.25924953224482244,
+              0.2635120026967155
+            ],
+            "difference": -0.07843266364346407,
+            "difference_ci": [
+              -0.11826627723708517,
+              -0.034851222388981105
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20417604126985808,
+            "behavior_right_jev_wrong": 0.2702724094957834,
+            "behavior_tie_fraction": 0.07090772089474309,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 786,
+          "positive_bits": 1477,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.525614993774227,
+              0.5074856819959073,
+              0.4872980738864482
+            ],
+            "difference": -0.01812931177831978,
+            "difference_ci": [
+              -0.06738537288930524,
+              0.02941177762542574
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.22417110647444663,
+              0.20597937270128075,
+              0.21532708633725683
+            ],
+            "difference": -0.01819173377316588,
+            "difference_ci": [
+              -0.07351221527029939,
+              0.03914537284417533
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21626445627985852,
+            "behavior_right_jev_wrong": 0.23328285683610595,
+            "behavior_tie_fraction": 0.10918379232389262,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 318,
+          "positive_bits": 363,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.5213656857824013,
+              0.5258873879057288,
+              0.4925720985048697
+            ],
+            "difference": 0.004521702123327476,
+            "difference_ci": [
+              -0.05312110581782135,
+              0.05563230178417052
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2477033435467265,
+              0.25507467224527725,
+              0.21701597422528748
+            ],
+            "difference": 0.007371328698550755,
+            "difference_ci": [
+              -0.05562877037604302,
+              0.06362425031776572
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.23591057541374272,
+            "behavior_right_jev_wrong": 0.2320657358217265,
+            "behavior_tie_fraction": 0.03999115265633149,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 284,
+          "positive_bits": 331,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5058015125824528,
+              0.5290318488831627,
+              0.5080238920674769
+            ],
+            "difference": 0.02323033630070992,
+            "difference_ci": [
+              -0.03290603780077414,
+              0.0780834776099655
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2272058398771334,
+              0.25470404429474824,
+              0.230624521062923
+            ],
+            "difference": 0.027498204417614858,
+            "difference_ci": [
+              -0.028085170787137726,
+              0.09099656733996432
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.222762435067,
+            "behavior_right_jev_wrong": 0.2062858427598999,
+            "behavior_tie_fraction": 0.16351979232147254,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 251,
+          "positive_bits": 293,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.4882063313313304,
+              0.5474715787215777,
+              0.5253045307211962
+            ],
+            "difference": 0.0592652473902473,
+            "difference_ci": [
+              -0.0014236112851777779,
+              0.11445849433562265
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9995762110621738,
+              0.9996319727645198,
+              0.9996121463814635
+            ],
+            "difference": 5.5761702346002195e-05,
+            "difference_ci": [
+              -2.5864002876943572e-05,
+              0.00013258558540876764
+            ],
+            "users": 2227,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.28910338910338906,
+            "behavior_right_jev_wrong": 0.23081152581152578,
+            "behavior_tie_fraction": 0.021424460174460168,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 222,
+          "positive_bits": 382,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "history_at_or_above_train_median": {
+      "slates": 3276,
+      "users": 2062,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.4079690283784834,
+            "emer_jev": 0.4129065609938977,
+            "absolute_gain": 0.004937532615414297,
+            "relative_gain": 0.012102714353192568,
+            "confidence_interval": [
+              -0.003292980599091379,
+              0.013210989899535562
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.36812152370864076,
+            "emer_jev": 0.3773908626038094,
+            "absolute_gain": 0.009269338895168622,
+            "relative_gain": 0.025180105748190584,
+            "confidence_interval": [
+              -0.0007061525740384599,
+              0.01866053383902146
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.25292385257702743,
+            "emer_jev": 0.2630662741020891,
+            "absolute_gain": 0.010142421525061673,
+            "relative_gain": 0.04010069205304715,
+            "confidence_interval": [
+              -0.003145165063333302,
+              0.024063728514211714
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.24578980923127816,
+            "emer_jev": 0.23952575673471252,
+            "absolute_gain": -0.006264052496565642,
+            "relative_gain": -0.025485403630674634,
+            "confidence_interval": [
+              -0.031559519541567944,
+              0.017493629051978474
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.2610093284397659,
+            "emer_jev": 0.2462919878464875,
+            "absolute_gain": -0.014717340593278366,
+            "relative_gain": -0.05638626282537156,
+            "confidence_interval": [
+              -0.036593849249603995,
+              0.005959164149806914
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.24632555724402927,
+            "emer_jev": 0.2695928802960211,
+            "absolute_gain": 0.023267323051991806,
+            "relative_gain": 0.0944576085093005,
+            "confidence_interval": [
+              0.0017079106114940839,
+              0.045742924001455076
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996660456970359,
+            "emer_jev": 0.9996817817636675,
+            "absolute_gain": 1.5736066631633072e-05,
+            "relative_gain": 1.5741323514355042e-05,
+            "confidence_interval": [
+              -1.2254819965967778e-05,
+              4.201221035174396e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.29702318326320415,
+          "emer_jev": 0.3014623870961695,
+          "absolute_gain": 0.004439203832965398,
+          "confidence_interval": [
+            -0.0031588090730431295,
+            0.012523969381715986
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.4044599202931627,
+              0.3465121328296281,
+              0.25664981901491085,
+              0.23770021051388965,
+              0.2684203797132456,
+              0.2563045648972901,
+              0.9996695426007314
+            ],
+            "emer_jev": [
+              0.41165701503665414,
+              0.3755401872199741,
+              0.2568169076967855,
+              0.2275859538868096,
+              0.24952883258073558,
+              0.2806486785866807,
+              0.9996721652785033
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4116767969060688,
+              0.37378838590993685,
+              0.24556777118232734,
+              0.249133658457797,
+              0.2698368688490212,
+              0.23734722329198446,
+              0.9996564292118716
+            ],
+            "emer_jev": [
+              0.416503228039179,
+              0.37663894310989376,
+              0.26596628395884897,
+              0.2465211813580318,
+              0.24948007318684653,
+              0.2617242219866939,
+              0.9996879013451354
+            ]
+          },
+          "29": {
+            "emer": [
+              0.4077703679361948,
+              0.38406405238635716,
+              0.2565539675338457,
+              0.25053555872214806,
+              0.2447707367570345,
+              0.245324883542812,
+              0.9996721652785033
+            ],
+            "emer_jev": [
+              0.4105594399058364,
+              0.37999345748155844,
+              0.26641563065063417,
+              0.24447013495929623,
+              0.23986705777188383,
+              0.26640574031468744,
+              0.9996852786673632
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 2062,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5464163488633271,
+              0.5214588481796658,
+              0.5295946678406321
+            ],
+            "difference": -0.024957500683661316,
+            "difference_ci": [
+              -0.04083261392564916,
+              -0.009364894978012924
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4233869116972566,
+              0.40681747344338326,
+              0.40796902837847865
+            ],
+            "difference": -0.01656943825387336,
+            "difference_ci": [
+              -0.03700060530145666,
+              0.0018146905795116723
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20564585538691707,
+            "behavior_right_jev_wrong": 0.23368454202352734,
+            "behavior_tie_fraction": 0.07060844815056022,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 2704,
+          "positive_bits": 10649,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5908280064773392,
+              0.5392258680337133,
+              0.55983329720325
+            ],
+            "difference": -0.05160213844362593,
+            "difference_ci": [
+              -0.07130210934230657,
+              -0.03329768449261223
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4160797589298638,
+              0.3469711576889422,
+              0.36812152370864115
+            ],
+            "difference": -0.06910860124092161,
+            "difference_ci": [
+              -0.09110977556753236,
+              -0.04758770555160474
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19849924306643432,
+            "behavior_right_jev_wrong": 0.2520354437069911,
+            "behavior_tie_fraction": 0.041882392518182966,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 2316,
+          "positive_bits": 6735,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.588746768597091,
+              0.5234455629683711,
+              0.5024058394984092
+            ],
+            "difference": -0.06530120562871988,
+            "difference_ci": [
+              -0.09906920124282245,
+              -0.03159327658886296
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.3358295565407194,
+              0.2613734036936927,
+              0.2529238525770276
+            ],
+            "difference": -0.07445615284702667,
+            "difference_ci": [
+              -0.11017632909147325,
+              -0.036202537996720595
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20107265685815182,
+            "behavior_right_jev_wrong": 0.26625056825473853,
+            "behavior_tie_fraction": 0.06727134388365724,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 743,
+          "positive_bits": 1236,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5614434646428466,
+              0.5105642907288124,
+              0.5029780264934277
+            ],
+            "difference": -0.05087917391403418,
+            "difference_ci": [
+              -0.11408289557875363,
+              0.015835135336208745
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.29512596324759466,
+              0.24358712853395773,
+              0.24578980923127827
+            ],
+            "difference": -0.05153883471363693,
+            "difference_ci": [
+              -0.1275986492502082,
+              0.029058814198678
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19803727100182442,
+            "behavior_right_jev_wrong": 0.24886076546072003,
+            "behavior_tie_fraction": 0.11162648528785231,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 187,
+          "positive_bits": 240,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.49664486688556303,
+              0.5313472262770851,
+              0.5216760677262854
+            ],
+            "difference": 0.03470235939152205,
+            "difference_ci": [
+              -0.01854951894812243,
+              0.08829670115939428
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2367572628026795,
+              0.2673264550756155,
+              0.2610093284397667
+            ],
+            "difference": 0.030569192272935974,
+            "difference_ci": [
+              -0.02939785390352042,
+              0.094172842120019
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2565666391858875,
+            "behavior_right_jev_wrong": 0.22110881124175746,
+            "behavior_tie_fraction": 0.03183019562495916,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 302,
+          "positive_bits": 347,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5196482983103995,
+              0.5354241928369712,
+              0.5117095767775666
+            ],
+            "difference": 0.015775894526571688,
+            "difference_ci": [
+              -0.03335679706111968,
+              0.06693304720586409
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2530750614985264,
+              0.26965798117990836,
+              0.24632555724402905
+            ],
+            "difference": 0.01658291968138198,
+            "difference_ci": [
+              -0.03972508793250235,
+              0.07932172555957963
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20763342035366966,
+            "behavior_right_jev_wrong": 0.19905507228676256,
+            "behavior_tie_fraction": 0.18388440532375575,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 270,
+          "positive_bits": 347,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5022193256864784,
+              0.5578845151199155,
+              0.5261184007260641
+            ],
+            "difference": 0.05566518943343712,
+            "difference_ci": [
+              0.0030621761344798402,
+              0.1085589758866485
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9996406931452405,
+              0.9996879013451355,
+              0.9996660456970361
+            ],
+            "difference": 4.720819989501024e-05,
+            "difference_ci": [
+              -1.0516751245576161e-05,
+              0.0001055703961616694
+            ],
+            "users": 2062,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.28473858764917154,
+            "behavior_right_jev_wrong": 0.2300944270652299,
+            "behavior_tie_fraction": 0.018479898041941833,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 274,
+          "positive_bits": 475,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "majority_zero_prior_count": {
+      "slates": 4612,
+      "users": 3449,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.44741607170499487,
+            "emer_jev": 0.45241790320479525,
+            "absolute_gain": 0.00500183149980038,
+            "relative_gain": 0.011179373777834142,
+            "confidence_interval": [
+              -0.0013386144542127845,
+              0.011890128639753594
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.40819219858002836,
+            "emer_jev": 0.4169890241345999,
+            "absolute_gain": 0.008796825554571508,
+            "relative_gain": 0.02155069495490821,
+            "confidence_interval": [
+              0.0009196125074300732,
+              0.017066124054118094
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.2532177976898233,
+            "emer_jev": 0.2583666031103955,
+            "absolute_gain": 0.005148805420572222,
+            "relative_gain": 0.020333505257316874,
+            "confidence_interval": [
+              -0.006058562025942793,
+              0.016672912621969477
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.23239473679432954,
+            "emer_jev": 0.2321642619311998,
+            "absolute_gain": -0.00023047486312974264,
+            "relative_gain": -0.0009917387386174498,
+            "confidence_interval": [
+              -0.017874167149109214,
+              0.018096966022242023
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.24539156544661933,
+            "emer_jev": 0.2466045391227438,
+            "absolute_gain": 0.001212973676124468,
+            "relative_gain": 0.004943012910475643,
+            "confidence_interval": [
+              -0.015943610434982925,
+              0.018444478940851303
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.2420698531948029,
+            "emer_jev": 0.2608280908708452,
+            "absolute_gain": 0.01875823767604229,
+            "relative_gain": 0.07749101107995804,
+            "confidence_interval": [
+              -0.0006161124167079617,
+              0.03887031803591946
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9997424858800343,
+            "emer_jev": 0.9997570123175707,
+            "absolute_gain": 1.4526437536410697e-05,
+            "relative_gain": 1.4530179262736484e-05,
+            "confidence_interval": [
+              -6.4914769313334505e-06,
+              3.563525051078764e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.30478037056843305,
+          "emer_jev": 0.3112284037290966,
+          "absolute_gain": 0.00644803316066352,
+          "confidence_interval": [
+            0.0002594829513931034,
+            0.012674057324540654
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.4464763945877307,
+              0.3884432191481861,
+              0.25299859660963403,
+              0.2361010027540612,
+              0.2430765224523032,
+              0.24289226865933003,
+              0.9997444667578791
+            ],
+            "emer_jev": [
+              0.45347575015335845,
+              0.41988212760918026,
+              0.25710391730195037,
+              0.23107248730896163,
+              0.24762308891659668,
+              0.2667671534524458,
+              0.9997484285135712
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4514435369406013,
+              0.4148477541243939,
+              0.24791129168205558,
+              0.2257688366432573,
+              0.2577583635170453,
+              0.24225409482804952,
+              0.9997325814908037
+            ],
+            "emer_jev": [
+              0.45362875527848434,
+              0.41321060019712647,
+              0.2565564223099229,
+              0.23738929256718547,
+              0.2440975590064531,
+              0.24833628497091698,
+              0.9997583329028
+            ]
+          },
+          "29": {
+            "emer": [
+              0.4443282835866594,
+              0.4212856224674833,
+              0.2587435047777699,
+              0.23531437098567004,
+              0.2353398103705085,
+              0.24106319609702448,
+              0.9997504093914166
+            ],
+            "emer_jev": [
+              0.4501492041825502,
+              0.4178743445974693,
+              0.2614394697193025,
+              0.22803100591745223,
+              0.24809296944518103,
+              0.2673808341891678,
+              0.9997642755363381
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": true,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": true,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 3449,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5476793767274155,
+              0.5237469219175599,
+              0.5337347316152752
+            ],
+            "difference": -0.02393245480985562,
+            "difference_ci": [
+              -0.03646691318146142,
+              -0.010187191400164344
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.46452905610296163,
+              0.447353871526772,
+              0.4474160717049881
+            ],
+            "difference": -0.01717518457618966,
+            "difference_ci": [
+              -0.03190364402604751,
+              -0.0014711173549811544
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2043947612384687,
+            "behavior_right_jev_wrong": 0.23089374763034037,
+            "behavior_tie_fraction": 0.06856208544534993,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 3961,
+          "positive_bits": 17699,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5971894525186144,
+              0.5389034116974072,
+              0.568598913700985
+            ],
+            "difference": -0.05828604082120725,
+            "difference_ci": [
+              -0.07286120710116482,
+              -0.04242592392093428
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4532419589178277,
+              0.3796806920163935,
+              0.40819219858002564
+            ],
+            "difference": -0.07356126690143422,
+            "difference_ci": [
+              -0.09025603858374594,
+              -0.05587483774818941
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.19476435522749957,
+            "behavior_right_jev_wrong": 0.25484099006858835,
+            "behavior_tie_fraction": 0.039905264988899465,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 3554,
+          "positive_bits": 11858,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5805183881316339,
+              0.5125060420801036,
+              0.4933083636678373
+            ],
+            "difference": -0.06801234605153028,
+            "difference_ci": [
+              -0.09448454248630596,
+              -0.04303011745734499
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.33456014486257607,
+              0.2543226786894811,
+              0.25321779768982233
+            ],
+            "difference": -0.08023746617309496,
+            "difference_ci": [
+              -0.11021769623092205,
+              -0.052423896927361456
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20338894475537583,
+            "behavior_right_jev_wrong": 0.27231809073012314,
+            "behavior_tie_fraction": 0.0665851986376521,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1163,
+          "positive_bits": 2062,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.557979714649219,
+              0.5143494947264278,
+              0.5003111228105156
+            ],
+            "difference": -0.04363021992279126,
+            "difference_ci": [
+              -0.0900385073747343,
+              -0.0024462730920808487
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2607052975446972,
+              0.2351456875005583,
+              0.23239473679432954
+            ],
+            "difference": -0.02555961004413887,
+            "difference_ci": [
+              -0.07818380706933639,
+              0.026363812627053857
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20174587718112422,
+            "behavior_right_jev_wrong": 0.24617022564749236,
+            "behavior_tie_fraction": 0.10508141959455615,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 382,
+          "positive_bits": 464,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.519510755481877,
+              0.5378802619134138,
+              0.5110684828140889
+            ],
+            "difference": 0.018369506431536786,
+            "difference_ci": [
+              -0.023932638271392307,
+              0.05851250592541172
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.24729259051805474,
+              0.2656133069422611,
+              0.24539156544662005
+            ],
+            "difference": 0.01832071642420635,
+            "difference_ci": [
+              -0.030543147174135987,
+              0.06462270231243716
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.24513364789585673,
+            "behavior_right_jev_wrong": 0.22597970028437114,
+            "behavior_tie_fraction": 0.037416831418619664,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 457,
+          "positive_bits": 534,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5140871931416298,
+              0.5326874538384743,
+              0.5092356848388024
+            ],
+            "difference": 0.018600260696844506,
+            "difference_ci": [
+              -0.020068453503163358,
+              0.05376821785287448
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.24125968938339973,
+              0.2670981191131828,
+              0.2420698531948024
+            ],
+            "difference": 0.02583842972978309,
+            "difference_ci": [
+              -0.023903568153725588,
+              0.06949057657556323
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2111028600405629,
+            "behavior_right_jev_wrong": 0.19989593254046215,
+            "behavior_tie_fraction": 0.19146579581440562,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 412,
+          "positive_bits": 511,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5043516655488479,
+              0.5593451822043363,
+              0.539305015276845
+            ],
+            "difference": 0.05499351665548835,
+            "difference_ci": [
+              0.00905296938219737,
+              0.10394806208538832
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9997286197351131,
+              0.9997583329028012,
+              0.9997424858800339
+            ],
+            "difference": 2.971316768818344e-05,
+            "difference_ci": [
+              -1.7455979533434475e-05,
+              8.180533922572397e-05
+            ],
+            "users": 3449,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2806504583053879,
+            "behavior_right_jev_wrong": 0.2266210596914822,
+            "behavior_tie_fraction": 0.020059244355019,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 355,
+          "positive_bits": 500,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "minority_zero_prior_count": {
+      "slates": 1388,
+      "users": 1167,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.4802861049334306,
+            "emer_jev": 0.47629313081359176,
+            "absolute_gain": -0.0039929741198388435,
+            "relative_gain": -0.008313740661708887,
+            "confidence_interval": [
+              -0.015846189612717516,
+              0.006819860107102896
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.4274982771852687,
+            "emer_jev": 0.43394267957575744,
+            "absolute_gain": 0.006444402390488713,
+            "relative_gain": 0.015074686225450787,
+            "confidence_interval": [
+              -0.006410938413405817,
+              0.018642702741170296
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.2736548394784409,
+            "emer_jev": 0.283318693708883,
+            "absolute_gain": 0.009663854230442137,
+            "relative_gain": 0.03531402641685596,
+            "confidence_interval": [
+              -0.010407547834198528,
+              0.02921810906399535
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.20842273654536925,
+            "emer_jev": 0.21116725321804367,
+            "absolute_gain": 0.0027445166726744186,
+            "relative_gain": 0.013168029161141903,
+            "confidence_interval": [
+              -0.024022260671867517,
+              0.029944832508973427
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.22000911866711573,
+            "emer_jev": 0.21468900112999592,
+            "absolute_gain": -0.005320117537119806,
+            "relative_gain": -0.02418135016107854,
+            "confidence_interval": [
+              -0.04013472231025392,
+              0.02990237067512913
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.22645888350739876,
+            "emer_jev": 0.2176873470341093,
+            "absolute_gain": -0.00877153647328946,
+            "relative_gain": -0.038733461621976426,
+            "confidence_interval": [
+              -0.047417211027868375,
+              0.027806638184836602
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9993010911109946,
+            "emer_jev": 0.9993171316428735,
+            "absolute_gain": 1.6040531878869224e-05,
+            "relative_gain": 1.6051750590040702e-05,
+            "confidence_interval": [
+              -2.6498181865244885e-05,
+              6.039263860560805e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.30605499338617065,
+          "emer_jev": 0.30618301758006355,
+          "absolute_gain": 0.00012802419389285982,
+          "confidence_interval": [
+            -0.010973549207490059,
+            0.011101799181279081
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.477342508649698,
+              0.4141399014193474,
+              0.2716629691860394,
+              0.18931795350075645,
+              0.22214483172517682,
+              0.2422272632036068,
+              0.9993331721747539
+            ],
+            "emer_jev": [
+              0.4756883075811283,
+              0.43045373985363644,
+              0.2785345576947179,
+              0.2089045320908399,
+              0.22739088369567842,
+              0.22618419634784165,
+              0.9993331721747539
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4806397549943285,
+              0.4259350760163753,
+              0.2717559689786583,
+              0.21028165530482693,
+              0.21221292732358843,
+              0.2228490066892616,
+              0.9992919250927798
+            ],
+            "emer_jev": [
+              0.4796413721046002,
+              0.4299560691343464,
+              0.2802518768362788,
+              0.2050614007158573,
+              0.214838803944785,
+              0.23087059730346454,
+              0.9993400466884168
+            ]
+          },
+          "29": {
+            "emer": [
+              0.48287605115627397,
+              0.44241985412008183,
+              0.2775455802706259,
+              0.22566860083052423,
+              0.22566959695258187,
+              0.21430038062932755,
+              0.9992781760654552
+            ],
+            "emer_jev": [
+              0.4735497127550548,
+              0.44141822973928757,
+              0.2911696465956534,
+              0.2195358268474339,
+              0.2018373157495244,
+              0.19600724745102152,
+              0.9992781760654552
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": false,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 1167,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5254020385257673,
+              0.5017852271675451,
+              0.5277609000422493
+            ],
+            "difference": -0.023616811358222134,
+            "difference_ci": [
+              -0.050800035038163896,
+              0.0025031313201568555
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4782262521298969,
+              0.4653969686224416,
+              0.480286104933432
+            ],
+            "difference": -0.012829283507455269,
+            "difference_ci": [
+              -0.04341587240938224,
+              0.016470275666134893
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2025476793425842,
+            "behavior_right_jev_wrong": 0.22414686534484835,
+            "behavior_tie_fraction": 0.08625401108003429,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1189,
+          "positive_bits": 5954,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5774971115222062,
+              0.523469865442964,
+              0.55317419683545
+            ],
+            "difference": -0.05402724607924214,
+            "difference_ci": [
+              -0.07994525702116069,
+              -0.027865379047917145
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4683769432371843,
+              0.405202476627848,
+              0.42749827718526945
+            ],
+            "difference": -0.06317446660933634,
+            "difference_ci": [
+              -0.09558697032382436,
+              -0.030455965988528736
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21073022054437313,
+            "behavior_right_jev_wrong": 0.2655688280034094,
+            "behavior_tie_fraction": 0.033996643309354126,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1084,
+          "positive_bits": 4078,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5828129930147504,
+              0.5235329583963041,
+              0.506286304933238
+            ],
+            "difference": -0.05928003461844633,
+            "difference_ci": [
+              -0.10725262230586845,
+              -0.011821238986673316
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.34358085192758886,
+              0.2790446409548491,
+              0.27365483947844105
+            ],
+            "difference": -0.06453621097273976,
+            "difference_ci": [
+              -0.12388270163561216,
+              -0.0031232901308272157
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2001739152967465,
+            "behavior_right_jev_wrong": 0.2554850662485546,
+            "behavior_tie_fraction": 0.0768666347737753,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 366,
+          "positive_bits": 651,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.47929576001941526,
+              0.49085923599315856,
+              0.4705922183278116
+            ],
+            "difference": 0.011563475973743298,
+            "difference_ci": [
+              -0.06408079630942037,
+              0.08325954125222249
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2180905634720744,
+              0.1723141879466767,
+              0.20842273654536925
+            ],
+            "difference": -0.045776375525397706,
+            "difference_ci": [
+              -0.1310716849282915,
+              0.0370000463758085
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2337995242994285,
+            "behavior_right_jev_wrong": 0.21681269326712596,
+            "behavior_tie_fraction": 0.12556747836105805,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 123,
+          "positive_bits": 139,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.46901361753242404,
+              0.4957944183579552,
+              0.49554331816656244
+            ],
+            "difference": 0.026780800825531137,
+            "difference_ci": [
+              -0.05875269328517004,
+              0.11999361855934759
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.22304592421853625,
+              0.24642769708203635,
+              0.22000911866711576
+            ],
+            "difference": 0.0233817728635001,
+            "difference_ci": [
+              -0.06215450256025659,
+              0.11990970078022993
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.25206045575429503,
+            "behavior_right_jev_wrong": 0.2277918577341989,
+            "behavior_tie_fraction": 0.02976403644363333,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 129,
+          "positive_bits": 144,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.508961667960912,
+              0.5311312724061862,
+              0.5126208834421337
+            ],
+            "difference": 0.02216960444527416,
+            "difference_ci": [
+              -0.06078002434142605,
+              0.09654245776533152
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.23849923256046998,
+              0.2450920727351149,
+              0.22645888350739876
+            ],
+            "difference": 0.006592840174644926,
+            "difference_ci": [
+              -0.08796706634275263,
+              0.09102744868032724
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.22916219854271233,
+            "behavior_right_jev_wrong": 0.21243388134265848,
+            "behavior_tie_fraction": 0.10859712282580276,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 109,
+          "positive_bits": 129,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.47478765619722996,
+              0.5378121130248782,
+              0.49163664677848995
+            ],
+            "difference": 0.06302445682764823,
+            "difference_ci": [
+              -0.0067618023725422435,
+              0.12481735811399533
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9992163054424926,
+              0.999340046688415,
+              0.9993010911109949
+            ],
+            "difference": 0.0001237412459224041,
+            "difference_ci": [
+              6.6805444756790065e-06,
+              0.00024206144945916326
+            ],
+            "users": 1167,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.3019036361589553,
+            "behavior_right_jev_wrong": 0.23996847911741528,
+            "behavior_tie_fraction": 0.01913964876730834,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 141,
+          "positive_bits": 357,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "longview_top3_overlap_0_or_1": {
+      "slates": 4429,
+      "users": 3375,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.456333385827788,
+            "emer_jev": 0.46146107268125713,
+            "absolute_gain": 0.005127686853469149,
+            "relative_gain": 0.011236712045881836,
+            "confidence_interval": [
+              -0.001179637334250416,
+              0.011503582744636755
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.4113745501806539,
+            "emer_jev": 0.42062294175023923,
+            "absolute_gain": 0.009248391569585346,
+            "relative_gain": 0.022481681391140852,
+            "confidence_interval": [
+              0.001450358988378815,
+              0.016549476075958542
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.25341163497502817,
+            "emer_jev": 0.2591951540116349,
+            "absolute_gain": 0.005783519036606732,
+            "relative_gain": 0.022822626266456373,
+            "confidence_interval": [
+              -0.00632817814287047,
+              0.017169672465453426
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.2371336360020652,
+            "emer_jev": 0.23215338520833842,
+            "absolute_gain": -0.00498025079372677,
+            "relative_gain": -0.021001874207686833,
+            "confidence_interval": [
+              -0.022890943329104983,
+              0.013948061667865158
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.24036333191528744,
+            "emer_jev": 0.2397185263184081,
+            "absolute_gain": -0.0006448055968793498,
+            "relative_gain": -0.0026826288009129534,
+            "confidence_interval": [
+              -0.019845978706800105,
+              0.019076596722428323
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.24669471015678404,
+            "emer_jev": 0.2630448928454094,
+            "absolute_gain": 0.016350182688625342,
+            "relative_gain": 0.0662769893940335,
+            "confidence_interval": [
+              -0.0037852195039802367,
+              0.03700515214728411
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996451929895773,
+            "emer_jev": 0.9996577896881723,
+            "absolute_gain": 1.2596698594991018e-05,
+            "relative_gain": 1.2601169578296922e-05,
+            "confidence_interval": [
+              -1.3012083975408318e-05,
+              3.609819731103247e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.30755187484293445,
+          "emer_jev": 0.31269932880254786,
+          "absolute_gain": 0.0051474539596134085,
+          "confidence_interval": [
+            -0.0012180564368631294,
+            0.011541747134489235
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.45536469593307743,
+              0.39255398621046234,
+              0.25196302519006586,
+              0.23384569254779863,
+              0.2366702984950489,
+              0.24762737584303426,
+              0.9996514913388741
+            ],
+            "emer_jev": [
+              0.4620089848124354,
+              0.419769978317763,
+              0.2583338100871799,
+              0.23409159442340913,
+              0.2384512033102327,
+              0.2754600355291578,
+              0.9996556902384053
+            ]
+          },
+          "17": {
+            "emer": [
+              0.4596565494158763,
+              0.4166192477490036,
+              0.24901113824037058,
+              0.23707649186505592,
+              0.24774282762366318,
+              0.24885941041589404,
+              0.9996367951905134
+            ],
+            "emer_jev": [
+              0.4658218011499847,
+              0.4204290939968316,
+              0.2559746486904247,
+              0.23496770374826462,
+              0.24243164801793493,
+              0.2550814079238533,
+              0.9996577896881713
+            ]
+          },
+          "29": {
+            "emer": [
+              0.4539789121344039,
+              0.42495041658247173,
+              0.25926074149463824,
+              0.24047872359334072,
+              0.23667686962714996,
+              0.24359734421141968,
+              0.9996472924393421
+            ],
+            "emer_jev": [
+              0.4565524320813444,
+              0.42166975293609765,
+              0.26327700325728925,
+              0.227400857453341,
+              0.23827272762705629,
+              0.25859323508321275,
+              0.999659889137937
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": true,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": true,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 3375,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5430608723557363,
+              0.5205125286925492,
+              0.5338214584584239
+            ],
+            "difference": -0.022548343663187143,
+            "difference_ci": [
+              -0.03660866734225167,
+              -0.009120904278080924
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.47144640159740075,
+              0.45798474477260837,
+              0.4563333858277814
+            ],
+            "difference": -0.01346165682479239,
+            "difference_ci": [
+              -0.030224890876655825,
+              0.0025309220274894106
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20338603123922938,
+            "behavior_right_jev_wrong": 0.22732842763291194,
+            "behavior_tie_fraction": 0.0723628004826991,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 3824,
+          "positive_bits": 17815,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.5899182141133689,
+              0.5247342019628931,
+              0.563617589816074
+            ],
+            "difference": -0.06518401215047576,
+            "difference_ci": [
+              -0.08183782451585121,
+              -0.049485526228903925
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4555742679612635,
+              0.3747817926851094,
+              0.41137455018065194
+            ],
+            "difference": -0.08079247527615407,
+            "difference_ci": [
+              -0.10236504427376078,
+              -0.06198127848437202
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.21622921325269334,
+            "behavior_right_jev_wrong": 0.2829654372123668,
+            "behavior_tie_fraction": 0.039460540546013924,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 3474,
+          "positive_bits": 12050,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5820101050822769,
+              0.5221870195839585,
+              0.4922428681468208
+            ],
+            "difference": -0.059823085498318385,
+            "difference_ci": [
+              -0.0877443643708072,
+              -0.03148571676329738
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.3401971232543536,
+              0.2669693345365116,
+              0.25341163497502744
+            ],
+            "difference": -0.07322778871784197,
+            "difference_ci": [
+              -0.10484658291751273,
+              -0.04143638131941605
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20323487727928521,
+            "behavior_right_jev_wrong": 0.26335918686174353,
+            "behavior_tie_fraction": 0.069989362553477,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1138,
+          "positive_bits": 1987,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5387430298899694,
+              0.5038588842760356,
+              0.5050492154705076
+            ],
+            "difference": -0.034884145613933715,
+            "difference_ci": [
+              -0.07912843740542888,
+              0.008931453855739447
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.2538676356205765,
+              0.20890624929417462,
+              0.2371336360020651
+            ],
+            "difference": -0.0449613863264019,
+            "difference_ci": [
+              -0.09516300765730318,
+              0.006761658591440557
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20977077346392442,
+            "behavior_right_jev_wrong": 0.2420455728721525,
+            "behavior_tie_fraction": 0.11271914382726297,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 382,
+          "positive_bits": 453,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.5168064597853316,
+              0.5247502425027155,
+              0.5078454994214634
+            ],
+            "difference": 0.00794378271738394,
+            "difference_ci": [
+              -0.037372368497584144,
+              0.04974688643447381
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.25886800360966605,
+              0.25503870000427986,
+              0.24036333191528833
+            ],
+            "difference": -0.0038293036053861917,
+            "difference_ci": [
+              -0.05705094633442897,
+              0.0463912682339192
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.24445633916680098,
+            "behavior_right_jev_wrong": 0.23627704993981388,
+            "behavior_tie_fraction": 0.03666592630778015,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 437,
+          "positive_bits": 495,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5165696116653266,
+              0.530158794494256,
+              0.5090572883092498
+            ],
+            "difference": 0.013589182828929403,
+            "difference_ci": [
+              -0.028890377675337645,
+              0.053363558454435155
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.24478249378725073,
+              0.25656242287174846,
+              0.24669471015678363
+            ],
+            "difference": 0.011779929084497737,
+            "difference_ci": [
+              -0.03463252980216799,
+              0.057989601995284225
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20910746587338078,
+            "behavior_right_jev_wrong": 0.20131860343866714,
+            "behavior_tie_fraction": 0.171430911314128,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 389,
+          "positive_bits": 478,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.5035439601467822,
+              0.5602793778801834,
+              0.5231752787733959
+            ],
+            "difference": 0.056735417733401294,
+            "difference_ci": [
+              0.011266472230535568,
+              0.10054607775032218
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9996116017933241,
+              0.9996640880374691,
+              0.999645192989577
+            ],
+            "difference": 5.248624414500025e-05,
+            "difference_ci": [
+              -2.0487761818288595e-06,
+              0.00010592051618148746
+            ],
+            "users": 3375,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.2841361580474484,
+            "behavior_right_jev_wrong": 0.2292777137736815,
+            "behavior_tie_fraction": 0.019690966888547535,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 372,
+          "positive_bits": 641,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    },
+    "longview_top3_overlap_2_or_3": {
+      "slates": 1571,
+      "users": 1376,
+      "results": {
+        "objectives": {
+          "is_click": {
+            "emer": 0.45060186115684475,
+            "emer_jev": 0.447435813729496,
+            "absolute_gain": -0.0031660474273487726,
+            "relative_gain": -0.007026263538327331,
+            "confidence_interval": [
+              -0.01443942968407622,
+              0.008471500112448842
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "long_view": {
+            "emer": 0.41591868327763676,
+            "emer_jev": 0.4213407902111282,
+            "absolute_gain": 0.005422106933491433,
+            "relative_gain": 0.013036459172169558,
+            "confidence_interval": [
+              -0.007150413204168232,
+              0.018859462808524685
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_like": {
+            "emer": 0.27142407313115197,
+            "emer_jev": 0.27894906430198396,
+            "absolute_gain": 0.007524991170831996,
+            "relative_gain": 0.027724111144688056,
+            "confidence_interval": [
+              -0.010052885935924495,
+              0.024292355744894047
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_follow": {
+            "emer": 0.19389338980503457,
+            "emer_jev": 0.21129168492994554,
+            "absolute_gain": 0.01739829512491098,
+            "relative_gain": 0.08973124428019681,
+            "confidence_interval": [
+              -0.011267940100653273,
+              0.043902877137842654
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_comment": {
+            "emer": 0.23840481145646372,
+            "emer_jev": 0.23948913735201982,
+            "absolute_gain": 0.0010843258955560986,
+            "relative_gain": 0.004548255083157635,
+            "confidence_interval": [
+              -0.022807786497129647,
+              0.02410418405521472
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_forward": {
+            "emer": 0.21532960072859555,
+            "emer_jev": 0.21835787095735956,
+            "absolute_gain": 0.0030282702287640073,
+            "relative_gain": 0.01406341821336901,
+            "confidence_interval": [
+              -0.025886234862590524,
+              0.03317614793216825
+            ],
+            "valid_bootstrap_replicates": 2000
+          },
+          "is_hate": {
+            "emer": 0.9996397975651982,
+            "emer_jev": 0.9996608732395749,
+            "absolute_gain": 2.1075674376702658e-05,
+            "relative_gain": 2.1083268621393664e-05,
+            "confidence_interval": [
+              -1.0090749363508843e-05,
+              5.317155912348268e-05
+            ],
+            "valid_bootstrap_replicates": 2000
+          }
+        },
+        "positive_mean": {
+          "emer": 0.29759540325928785,
+          "emer_jev": 0.3028107269136555,
+          "absolute_gain": 0.0052153236543676235,
+          "confidence_interval": [
+            -0.004683922163432363,
+            0.014418110530833516
+          ]
+        },
+        "per_seed": {
+          "7": {
+            "emer": [
+              0.4480047082297427,
+              0.3990896407200437,
+              0.272997892866129,
+              0.1964844510652725,
+              0.24400932798660743,
+              0.22825300328454723,
+              0.9996551253283822
+            ],
+            "emer_jev": [
+              0.4484998958568375,
+              0.42948995404154716,
+              0.2733403005286914,
+              0.1996778596889665,
+              0.25735239935570997,
+              0.20715858114938618,
+              0.9996551253283819
+            ]
+          },
+          "17": {
+            "emer": [
+              0.45344196452931623,
+              0.41944766027504576,
+              0.2667235411917168,
+              0.17543218945161693,
+              0.24816349659850007,
+              0.2064671037474602,
+              0.9996263857724139
+            ],
+            "emer_jev": [
+              0.44154644867103593,
+              0.4069877373259095,
+              0.27990834425814726,
+              0.21267880175196766,
+              0.2238077882593838,
+              0.213746180083145,
+              0.9996838648843503
+            ]
+          },
+          "29": {
+            "emer": [
+              0.4503589107114879,
+              0.4292187488378309,
+              0.27455078533561056,
+              0.20976352889821417,
+              0.2230416097842829,
+              0.2112686951537798,
+              0.9996378815948014
+            ],
+            "emer_jev": [
+              0.4522610966606288,
+              0.4275446792659375,
+              0.2835985481191141,
+              0.22151839334890236,
+              0.2373072244409648,
+              0.234168851639548,
+              0.9996436295059948
+            ]
+          }
+        },
+        "gates": {
+          "primary_ci_positive": false,
+          "primary_positive_every_seed": false,
+          "positive_mean_noninferior": false,
+          "click_noninferior": false,
+          "hate_noninferior": true
+        },
+        "all_effect_gates": false,
+        "bootstrap_users": 1376,
+        "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+        "online_business_success": false
+      },
+      "signal": {
+        "is_click": {
+          "within_slate_auc": {
+            "values": [
+              0.5416335495331719,
+              0.514016879610985,
+              0.5283249239155583
+            ],
+            "difference": -0.02761666992218692,
+            "difference_ci": [
+              -0.04923441063408282,
+              -0.00391730171199229
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.4567539355166353,
+              0.4327935106790414,
+              0.45060186115684836
+            ],
+            "difference": -0.023960424837593863,
+            "difference_ci": [
+              -0.04818245121428326,
+              0.0024491143862701674
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20568253505517706,
+            "behavior_right_jev_wrong": 0.23525659041191002,
+            "behavior_tie_fraction": 0.07298367991275748,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1326,
+          "positive_bits": 5838,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "long_view": {
+          "within_slate_auc": {
+            "values": [
+              0.6010771122038334,
+              0.5666811111553042,
+              0.5695590601897201
+            ],
+            "difference": -0.034396001048529246,
+            "difference_ci": [
+              -0.05427920747123652,
+              -0.011173270553749332
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.45977020326319823,
+              0.41629291096658355,
+              0.4159186832776404
+            ],
+            "difference": -0.04347729229661468,
+            "difference_ci": [
+              -0.06483169880690581,
+              -0.01936737179178207
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.14615476003800987,
+            "behavior_right_jev_wrong": 0.1821749999701186,
+            "behavior_tie_fraction": 0.03600036720530715,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 1164,
+          "positive_bits": 3886,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_like": {
+          "within_slate_auc": {
+            "values": [
+              0.5784745905322408,
+              0.4957102916520493,
+              0.5081264253362167
+            ],
+            "difference": -0.08276429888019154,
+            "difference_ci": [
+              -0.129339799629361,
+              -0.03907324407141636
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.3271578541655135,
+              0.24182821079468264,
+              0.2714240731311523
+            ],
+            "difference": -0.08532964337083088,
+            "difference_ci": [
+              -0.13477372552554437,
+              -0.032098283026598035
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20087843852029702,
+            "behavior_right_jev_wrong": 0.2818033265358631,
+            "behavior_tie_fraction": 0.06653177044156597,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 391,
+          "positive_bits": 726,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_follow": {
+          "within_slate_auc": {
+            "values": [
+              0.5388800167763574,
+              0.5232691315008386,
+              0.4561287477954138
+            ],
+            "difference": -0.015610885275518793,
+            "difference_ci": [
+              -0.09335124251302686,
+              0.0614983858060773
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.23938869366550022,
+              0.2536097856505097,
+              0.19389338980503454
+            ],
+            "difference": 0.014221091985009454,
+            "difference_ci": [
+              -0.08043153777485994,
+              0.10733157811615289
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.20894631565363272,
+            "behavior_right_jev_wrong": 0.2296425345205833,
+            "behavior_tie_fraction": 0.10195670409085043,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 123,
+          "positive_bits": 150,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_comment": {
+          "within_slate_auc": {
+            "values": [
+              0.48398680961733764,
+              0.5404949055237099,
+              0.5072319150640984
+            ],
+            "difference": 0.05650809590637229,
+            "difference_ci": [
+              -0.015718484271828485,
+              0.12368937248373778
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.19209566685385904,
+              0.28040058115570293,
+              0.23840481145646336
+            ],
+            "difference": 0.0883049143018439,
+            "difference_ci": [
+              0.009782990396304349,
+              0.1715867276272265
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.25311209579255156,
+            "behavior_right_jev_wrong": 0.19703547264024243,
+            "behavior_tie_fraction": 0.03304365646916657,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 149,
+          "positive_bits": 183,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_forward": {
+          "within_slate_auc": {
+            "values": [
+              0.5024400081946748,
+              0.5389157352698644,
+              0.5125814972712602
+            ],
+            "difference": 0.036475727075189535,
+            "difference_ci": [
+              -0.03890537035207142,
+              0.11072666918518019
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.22848428389323158,
+              0.28014019110237437,
+              0.21532960072859578
+            ],
+            "difference": 0.05165590720914279,
+            "difference_ci": [
+              -0.034120169076613464,
+              0.1359599733714323
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.23205689270392155,
+            "behavior_right_jev_wrong": 0.20609017033601348,
+            "behavior_tie_fraction": 0.1821536040761644,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 132,
+          "positive_bits": 162,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        },
+        "is_hate": {
+          "within_slate_auc": {
+            "values": [
+              0.4731576420890931,
+              0.5320574116743464,
+              0.5334906767366435
+            ],
+            "difference": 0.05889976958525328,
+            "difference_ci": [
+              -0.016766886718455647,
+              0.12996607114701086
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "top3_metric": {
+            "values": [
+              0.9996206378612192,
+              0.9996666211507691,
+              0.9996397975651983
+            ],
+            "difference": 4.5983289549855755e-05,
+            "difference_ci": [
+              -5.2667923757426796e-05,
+              0.00014492633868774804
+            ],
+            "users": 1376,
+            "valid_replicates": 1000
+          },
+          "complementarity": {
+            "behavior_wrong_jev_right": 0.29436027905785966,
+            "behavior_right_jev_wrong": 0.2338284050179211,
+            "behavior_tie_fraction": 0.020118407578084994,
+            "note": "Weighted fractions of positive-negative pairs, averaged within each eligible slate; strict errors exclude ties. Not a served oracle policy."
+          },
+          "eligible_pair_slates": 124,
+          "positive_bits": 216,
+          "column_order": [
+            "goal-specific behavior",
+            "goal-specific Jev",
+            "frozen EMER averaged over fitted seeds"
+          ]
+        }
+      }
+    }
+  },
+  "epoch_receipts": [
+    {
+      "trial": 0,
+      "epoch": 1,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4513637687021736,
+            0.38556937829965654,
+            0.25501434936233563,
+            0.2299651229610941,
+            0.23533078005532151,
+            0.24486142472531194,
+            0.9996324725269627
+          ],
+          "emer_jev": [
+            0.4537501231640855,
+            0.3826178805230495,
+            0.25939883047668955,
+            0.2300363281249455,
+            0.24006774033001074,
+            0.24479436413632086,
+            0.999637085842524
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45171956841642097,
+            0.388943291023836,
+            0.2579969646518345,
+            0.22924831095508813,
+            0.236332834606964,
+            0.24648710886535766,
+            0.999640161386231
+          ],
+          "emer_jev": [
+            0.45433834928787886,
+            0.3902011919720546,
+            0.25649099881300097,
+            0.22470541978965336,
+            0.24370944080342866,
+            0.23633789477897757,
+            0.9996463124736457
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.450430523591046,
+            0.38455079509581747,
+            0.24901668399484772,
+            0.2287682691337717,
+            0.24029786798198954,
+            0.23462686325065749,
+            0.9996432369299385
+          ],
+          "emer_jev": [
+            0.4526126907217058,
+            0.38650755611805054,
+            0.2515279898244359,
+            0.22080343241419692,
+            0.2418002758402283,
+            0.23317206248509487,
+            0.9996416991580843
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.002395767488009848,
+        8.772139794821499e-05,
+        0.0017966070350361834,
+        -0.00414550757371938,
+        0.004538658109797551,
+        -0.0038903584803112643,
+        3.07554370722792e-06
+      ]
+    },
+    {
+      "trial": 0,
+      "epoch": 5,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4499025246309989,
+            0.3928892546850567,
+            0.2542739579946234,
+            0.2336043977144916,
+            0.24109142491364152,
+            0.23600080409572397,
+            0.9996447747017919
+          ],
+          "emer_jev": [
+            0.4529333562494247,
+            0.3939084046447907,
+            0.25710890963927985,
+            0.22338135702232573,
+            0.24436853519723448,
+            0.23954568501572968,
+            0.9996570768766216
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45021194237463497,
+            0.3887849629436085,
+            0.2574678160438615,
+            0.23018580801468,
+            0.24176178085792444,
+            0.2322679744667787,
+            0.999640161386231
+          ],
+          "emer_jev": [
+            0.45276998939317825,
+            0.38894119265530813,
+            0.26044951653539405,
+            0.22732811283561602,
+            0.24013599955278014,
+            0.23105733039760087,
+            0.9996447747017921
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4519096837329406,
+            0.3899366978121186,
+            0.24784909788921988,
+            0.2248990158285111,
+            0.23140833639973946,
+            0.23468017500663726,
+            0.9996524635610604
+          ],
+          "emer_jev": [
+            0.4543567865696211,
+            0.39150710619230045,
+            0.2556269469735145,
+            0.22559145092223387,
+            0.234124946509153,
+            0.23340786470109368,
+            0.9996555391047681
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.00267866049121653,
+        0.0009152626838718388,
+        0.004531500406827889,
+        -0.004129433592502359,
+        0.0014559796959540683,
+        0.0003539755150947695,
+        6.663678032851432e-06
+      ]
+    },
+    {
+      "trial": 0,
+      "epoch": 10,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45077065131287647,
+            0.3899292601981993,
+            0.2558177276076734,
+            0.22629979594776883,
+            0.23735597927317775,
+            0.23178785815774305,
+            0.9996370858425233
+          ],
+          "emer_jev": [
+            0.4530546069980389,
+            0.3914164813384847,
+            0.25700306398204165,
+            0.22320949756407552,
+            0.24271776211894613,
+            0.22795428756842315,
+            0.9996509257892068
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4520194984160633,
+            0.3924618976019135,
+            0.2524164767742507,
+            0.22751586317049363,
+            0.235062945273958,
+            0.2349083288705867,
+            0.9996447747017921
+          ],
+          "emer_jev": [
+            0.45581299177973683,
+            0.3957300995471732,
+            0.258229320480059,
+            0.2193291821785507,
+            0.24050355756299432,
+            0.2419733707730008,
+            0.9996478502454993
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4507800555585043,
+            0.38946734198830907,
+            0.24931971448746398,
+            0.2224603664779768,
+            0.23100202258615674,
+            0.23342491115012481,
+            0.9996447747017921
+          ],
+          "emer_jev": [
+            0.45360396088357163,
+            0.39188439562936633,
+            0.2533238594814653,
+            0.220678366933787,
+            0.23511679950978454,
+            0.23271358731202527,
+            0.9996601524203289
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0029671181246344234,
+        0.0023908255755341243,
+        0.0036674416913926033,
+        -0.00435299297327534,
+        0.004972390686144172,
+        0.0008400491583315425,
+        1.0764402975797319e-05
+      ]
+    },
+    {
+      "trial": 0,
+      "epoch": 20,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4522469971129899,
+            0.38866268835419376,
+            0.2483591165147173,
+            0.22644161851654793,
+            0.22554464283458922,
+            0.23312362790834115,
+            0.9996524635610604
+          ],
+          "emer_jev": [
+            0.45695316806460695,
+            0.39012760536526253,
+            0.25798449271502627,
+            0.22101826738912578,
+            0.22291372225870357,
+            0.23899123012621193,
+            0.999670916823305
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45144773497636415,
+            0.38841730868184304,
+            0.25014128593848695,
+            0.22150727655723243,
+            0.23728208110371657,
+            0.234849211695094,
+            0.9996401613862308
+          ],
+          "emer_jev": [
+            0.4571042370140965,
+            0.3954008351447557,
+            0.253024302719711,
+            0.21061091484197597,
+            0.23702024892327103,
+            0.23255337025508385,
+            0.9996509257892067
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.44982069076226366,
+            0.3961022957282677,
+            0.2524638230675762,
+            0.22891893665237872,
+            0.23657034193668275,
+            0.24240033863199864,
+            0.9996386236143772
+          ],
+          "emer_jev": [
+            0.45687982103449204,
+            0.3990961590238497,
+            0.26177280979375245,
+            0.2242050603274783,
+            0.22934584007697614,
+            0.22977972123641757,
+            0.9996647657358904
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.005807267753859276,
+        0.003814102256521142,
+        0.00727245990256976,
+        -0.0070111963891930085,
+        -0.003372418205345932,
+        -0.003016285539240151,
+        1.8453262244551755e-05
+      ]
+    },
+    {
+      "trial": 0,
+      "epoch": 30,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4498049655134819,
+            0.3881962390646115,
+            0.24813244877145185,
+            0.2204844329230746,
+            0.23356588591588817,
+            0.2380793906799701,
+            0.9996540013329146
+          ],
+          "emer_jev": [
+            0.45697682776689036,
+            0.3908885121234299,
+            0.25385338074399677,
+            0.2160432257994742,
+            0.2228696920000609,
+            0.22879552123889574,
+            0.9996586146484757
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4490279941175864,
+            0.38431199491187334,
+            0.255194049319185,
+            0.22847180412941753,
+            0.24231801467872327,
+            0.22898001498454643,
+            0.999646312473646
+          ],
+          "emer_jev": [
+            0.4545501652886777,
+            0.3852537270100402,
+            0.2604903346955517,
+            0.23162207487544262,
+            0.23815066164855966,
+            0.2232846683126887,
+            0.9996524635610607
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4512973039767441,
+            0.3922900595803905,
+            0.24032528525647803,
+            0.22527204814341298,
+            0.234833799979663,
+            0.2339378686449268,
+            0.9996309347551087
+          ],
+          "emer_jev": [
+            0.45490375780302594,
+            0.3892413588248609,
+            0.24869549199602115,
+            0.22847058466643042,
+            0.23114895710885483,
+            0.2325839094670855,
+            0.9996586146484756
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0054334957502605126,
+        0.00019510146715188506,
+        0.006462474696151586,
+        0.0006358667151473707,
+        -0.0061827966055996815,
+        -0.005444391763591137,
+        1.281476544760333e-05
+      ]
+    },
+    {
+      "trial": 1,
+      "epoch": 1,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45946236117848727,
+            0.4013861227449255,
+            0.25771150097911666,
+            0.21514944207081657,
+            0.21590383844741728,
+            0.2401276134635022,
+            0.9996524635610612
+          ],
+          "emer_jev": [
+            0.46497983013226235,
+            0.40075438642546074,
+            0.2595282993594203,
+            0.23090461290849978,
+            0.22657445176318788,
+            0.26007181943012053,
+            0.9996324725269631
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4550686510313612,
+            0.41742976569106155,
+            0.25081664395997766,
+            0.2207967247437789,
+            0.22212572264785987,
+            0.23121333347283649,
+            0.9996586146484754
+          ],
+          "emer_jev": [
+            0.45641545649799153,
+            0.41184562961221366,
+            0.2549002205656567,
+            0.22200294987962543,
+            0.23374538651791846,
+            0.24292399044113966,
+            0.9996770679107203
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4534689450522003,
+            0.40807116243261127,
+            0.2470654383171402,
+            0.21755460898985587,
+            0.2270436042233386,
+            0.24867563114787034,
+            0.9996586146484757
+          ],
+          "emer_jev": [
+            0.4562573781529344,
+            0.40828348247517376,
+            0.25643838656084483,
+            0.22346323299454204,
+            0.23564736525030117,
+            0.24303612008801523,
+            0.9996632279640371
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0032175691737131675,
+        -0.0020011841185833914,
+        0.005091107743229101,
+        0.0076233399927386385,
+        0.010298012737597248,
+        0.008671783958355467,
+        1.0251812360510353e-06
+      ]
+    },
+    {
+      "trial": 1,
+      "epoch": 5,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4552351085070961,
+            0.42362271069310475,
+            0.25373627470789545,
+            0.2143529924818956,
+            0.21451597599999667,
+            0.23511902047462838,
+            0.9996555391047681
+          ],
+          "emer_jev": [
+            0.4614057795704337,
+            0.4213743656132481,
+            0.2610484032373886,
+            0.20929698883043876,
+            0.23276933728615323,
+            0.2566059567398219,
+            0.9996586146484758
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45545959022802224,
+            0.4205821022143149,
+            0.2464562971264518,
+            0.21548615246233357,
+            0.22465740184883695,
+            0.23792818124207551,
+            0.9996586146484757
+          ],
+          "emer_jev": [
+            0.46087101807948294,
+            0.4161758124281468,
+            0.2548892121261448,
+            0.21745050369757166,
+            0.22834898587802954,
+            0.2375641721163635,
+            0.9996586146484757
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4555661421333683,
+            0.41639668836912175,
+            0.2407434564973959,
+            0.21516064513438055,
+            0.2184934418815005,
+            0.23467205655025056,
+            0.9996601524203289
+          ],
+          "emer_jev": [
+            0.4656351559228796,
+            0.4224352839382967,
+            0.2542378226767173,
+            0.22165338718808456,
+            0.22641118078359074,
+            0.23932673441256705,
+            0.9996616901921831
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.007217037568103195,
+        -0.0002053464322832784,
+        0.009746469902835841,
+        0.0011336965458284183,
+        0.0099542280724798,
+        0.00859253500059933,
+        1.5377718539655305e-06
+      ]
+    },
+    {
+      "trial": 1,
+      "epoch": 10,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45946558623798656,
+            0.4276835753866546,
+            0.24430286109382554,
+            0.22378249180032592,
+            0.22980763858314707,
+            0.22042438111479637,
+            0.9996555391047679
+          ],
+          "emer_jev": [
+            0.46963127371894803,
+            0.4276769981612418,
+            0.24065762014483028,
+            0.2121906062427864,
+            0.2329572615941218,
+            0.23733515261535368,
+            0.9996570768766219
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4551890004440993,
+            0.4142560301580264,
+            0.24237301486776303,
+            0.2070003841896374,
+            0.2188469897490175,
+            0.23796904039532352,
+            0.9996616901921828
+          ],
+          "emer_jev": [
+            0.46024843600053345,
+            0.4138184981029773,
+            0.25715270403438667,
+            0.20788723691456118,
+            0.23099528501044755,
+            0.24412221139743082,
+            0.9996601524203296
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.45852623973676226,
+            0.41568189770753905,
+            0.23641522046202174,
+            0.2135768373171602,
+            0.21904127230682938,
+            0.2358882597209407,
+            0.9996601524203291
+          ],
+          "emer_jev": [
+            0.4666777336210749,
+            0.42243244049540546,
+            0.2494485959906419,
+            0.21072444024405815,
+            0.21945639442827858,
+            0.2264880329422527,
+            0.9996647657358906
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.007792205640569409,
+        0.0021021445024681507,
+        0.008055941248749513,
+        -0.00451914330190593,
+        0.005237680131284663,
+        0.004554571907992198,
+        1.5377718540765528e-06
+      ]
+    },
+    {
+      "trial": 1,
+      "epoch": 20,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.46203571007567,
+            0.4181020871587875,
+            0.23297501285309308,
+            0.22130305831882996,
+            0.23410382116052084,
+            0.22863441655026434,
+            0.9996647657358906
+          ],
+          "emer_jev": [
+            0.47268943234152266,
+            0.4149210254272301,
+            0.23317460211390906,
+            0.21700794813700117,
+            0.20984878393947384,
+            0.23491620756645443,
+            0.9996386236143777
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45905875511270355,
+            0.41124491640753214,
+            0.2411565863120419,
+            0.2320618023017738,
+            0.23381988706718004,
+            0.21775657562428985,
+            0.9996478502454993
+          ],
+          "emer_jev": [
+            0.46441457171554534,
+            0.41172579610366256,
+            0.24533691975178884,
+            0.2005389297655964,
+            0.23930478055910456,
+            0.24743593890309257,
+            0.9996432369299387
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.46256152529982275,
+            0.4332708622623975,
+            0.24645173055784922,
+            0.22113600490911725,
+            0.2196805786334955,
+            0.2310740752124564,
+            0.9996432369299383
+          ],
+          "emer_jev": [
+            0.46999290604862687,
+            0.42519391133676854,
+            0.26011929352750895,
+            0.21526380281521174,
+            0.2242640690024504,
+            0.23526207583656206,
+            0.9996524635610606
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.00781363987249952,
+        -0.0035923776536853267,
+        0.006015828556740886,
+        -0.01389672827063724,
+        -0.004728884453389186,
+        0.013383051639699486,
+        -7.176268650358845e-06
+      ]
+    },
+    {
+      "trial": 1,
+      "epoch": 30,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45884977711759406,
+            0.4153545289373502,
+            0.2410308193046512,
+            0.21048531390344058,
+            0.22408976949085152,
+            0.23815952320238482,
+            0.9996447747017926
+          ],
+          "emer_jev": [
+            0.46548942013126793,
+            0.4114275901784477,
+            0.23074345999058554,
+            0.2174748314430921,
+            0.21691171928086536,
+            0.22634059606936138,
+            0.9996493880173537
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4523832017363617,
+            0.4018639279011143,
+            0.23518491471687603,
+            0.21373435125759885,
+            0.22312596941363044,
+            0.21627523468947943,
+            0.999615557036572
+          ],
+          "emer_jev": [
+            0.46012682112421477,
+            0.4037991286977075,
+            0.2501674420982055,
+            0.21520631074225618,
+            0.22391896362588426,
+            0.2361549644061087,
+            0.9996324725269625
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4560322386970209,
+            0.40845882670630584,
+            0.23490158439796607,
+            0.2093784197003123,
+            0.21381937656585456,
+            0.23795094961762867,
+            0.9996540013329143
+          ],
+          "emer_jev": [
+            0.4709325549623013,
+            0.422467284288664,
+            0.23954156736241108,
+            0.2092260587217097,
+            0.21493063510298988,
+            0.23636726101647723,
+            0.9996447747017922
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.009761192888935769,
+        0.004005573206682951,
+        0.0031117170105696146,
+        0.0027697053485687593,
+        -0.0017579324868656765,
+        0.0021590379941514672,
+        4.10072494320494e-06
+      ]
+    },
+    {
+      "trial": 2,
+      "epoch": 1,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.44905795707253693,
+            0.3821260986763269,
+            0.24739183595993622,
+            0.21807654011728406,
+            0.23274496276051077,
+            0.24707996541435148,
+            0.9996340102988165
+          ],
+          "emer_jev": [
+            0.45115826166120376,
+            0.38317271251690155,
+            0.2484169348329082,
+            0.2198904234347705,
+            0.2381841880749288,
+            0.24481142936740394,
+            0.9996340102988163
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4512591010505538,
+            0.3902845296648889,
+            0.2603697259892446,
+            0.22879555507616578,
+            0.23472064607893434,
+            0.24824926831026548,
+            0.9996386236143772
+          ],
+          "emer_jev": [
+            0.45434423336353613,
+            0.38937257619677196,
+            0.2602173075965688,
+            0.22694844538966427,
+            0.23891497664020214,
+            0.24331958073935664,
+            0.999640161386231
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.45221764514201646,
+            0.38720678363241756,
+            0.2501643567497265,
+            0.23081583615427212,
+            0.23354175365480956,
+            0.2427667091836555,
+            0.9996370858425235
+          ],
+          "emer_jev": [
+            0.4524364572107613,
+            0.38739803169907444,
+            0.252928043775776,
+            0.22618115548466405,
+            0.23726044167240515,
+            0.2294105069616547,
+            0.9996401613862308
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0018014163234646812,
+        0.0001086361463715213,
+        0.0012121225021152204,
+        -0.001555969012874377,
+        0.004450747964427145,
+        -0.0068514752799524,
+        1.5377718536324636e-06
+      ]
+    },
+    {
+      "trial": 2,
+      "epoch": 5,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4495868410856616,
+            0.39218489852496397,
+            0.25063097550976005,
+            0.22034698848150072,
+            0.23622112716762525,
+            0.24541055266762185,
+            0.9996555391047681
+          ],
+          "emer_jev": [
+            0.4511881749155815,
+            0.3931114582565785,
+            0.25393663057314025,
+            0.22481939413835658,
+            0.24517545596932636,
+            0.2479530178737361,
+            0.9996416991580847
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.451806950947129,
+            0.3902185572041119,
+            0.2577118270011719,
+            0.22657656109267077,
+            0.24091394042100958,
+            0.24011835383482275,
+            0.9996478502454994
+          ],
+          "emer_jev": [
+            0.45298886230688157,
+            0.38899988400063046,
+            0.2597214985606358,
+            0.22029552255448936,
+            0.2419189127626273,
+            0.23686187121583727,
+            0.9996493880173533
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4513526153265842,
+            0.39033627811675137,
+            0.2557388010946156,
+            0.22980340140151698,
+            0.2339175534723233,
+            0.2403436917795962,
+            0.9996493880173535
+          ],
+          "emer_jev": [
+            0.4526555303095247,
+            0.3908965456255299,
+            0.2547409439604429,
+            0.22783474524040506,
+            0.2357856464134278,
+            0.23687906272618559,
+            0.9996509257892069
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0013620533908709764,
+        8.93846789705351e-05,
+        0.0014391564962237997,
+        -0.0012590963474791532,
+        0.003942464694807783,
+        -0.0013928821554272757,
+        -3.5881343254014673e-06
+      ]
+    },
+    {
+      "trial": 2,
+      "epoch": 10,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4498814838429194,
+            0.3928055052738472,
+            0.2515501706518419,
+            0.22400533397371952,
+            0.2344870578936067,
+            0.23868926688485315,
+            0.9996463124736454
+          ],
+          "emer_jev": [
+            0.4528121546828155,
+            0.39588042861386447,
+            0.25381965186130906,
+            0.2208054464367821,
+            0.2337912009440489,
+            0.24143346953798575,
+            0.9996447747017918
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4536789136354791,
+            0.3951035854123167,
+            0.25316544368861515,
+            0.22579504176254217,
+            0.233353434829304,
+            0.23669530681031856,
+            0.9996447747017919
+          ],
+          "emer_jev": [
+            0.45370921518571955,
+            0.39299054089762053,
+            0.25637730641553014,
+            0.2136065018172299,
+            0.2389205551028439,
+            0.23882715199518806,
+            0.9996509257892069
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.44837490827279175,
+            0.38953208600464795,
+            0.24878539436483948,
+            0.2327754210410319,
+            0.2339240276792666,
+            0.2419370540323794,
+            0.9996555391047679
+          ],
+          "emer_jev": [
+            0.4512025781807173,
+            0.39051835247807504,
+            0.2520174811308576,
+            0.225799885219026,
+            0.23154981938079572,
+            0.23907586057267352,
+            0.9996524635610603
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0019295474326873618,
+        0.0006493817662493832,
+        0.0029044769008000904,
+        -0.007454654434751869,
+        0.00083235167517041,
+        0.000671618126098746,
+        5.125906179144953e-07
+      ]
+    },
+    {
+      "trial": 2,
+      "epoch": 20,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4525921351160608,
+            0.39383915235950867,
+            0.24910472600284755,
+            0.22273174910538632,
+            0.226420254047845,
+            0.238666507998102,
+            0.9996463124736453
+          ],
+          "emer_jev": [
+            0.45890845826910637,
+            0.39631534999594115,
+            0.25401719938304007,
+            0.21907060789372995,
+            0.22983075226237848,
+            0.23628222080722414,
+            0.9996570768766214
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.44918131680205925,
+            0.39208060907666975,
+            0.24795567330684817,
+            0.23248450026593614,
+            0.22672612052702557,
+            0.22773976967058385,
+            0.9996524635610604
+          ],
+          "emer_jev": [
+            0.45503829822917846,
+            0.39240165768437546,
+            0.24527714213692625,
+            0.21172790572042108,
+            0.21780333471312444,
+            0.23607154191711993,
+            0.9996586146484753
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.44952071050442133,
+            0.40004236252976816,
+            0.26214026420581005,
+            0.2347192091339241,
+            0.2390307742273404,
+            0.23316766491349833,
+            0.999646312473646
+          ],
+          "emer_jev": [
+            0.45377062076287983,
+            0.3945189461312814,
+            0.25653888819158577,
+            0.22904375949694475,
+            0.23647274981259606,
+            0.2379384704692233,
+            0.999647850245499
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.005474404946207767,
+        -0.0009087233847828539,
+        -0.0011224779346512281,
+        -0.010031061798050264,
+        -0.002690104004703995,
+        0.0035727635371277378,
+        6.151087414640877e-06
+      ]
+    },
+    {
+      "trial": 2,
+      "epoch": 30,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45289465097025305,
+            0.3907905036040567,
+            0.25054968151116297,
+            0.22959758368999095,
+            0.22737953578863537,
+            0.2407632926376296,
+            0.9996463124736458
+          ],
+          "emer_jev": [
+            0.4574966271974463,
+            0.3976151791385261,
+            0.25800483924147743,
+            0.224375582645872,
+            0.2207912675908739,
+            0.23570742181450052,
+            0.9996647657358904
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.44940430757502736,
+            0.38668060555803185,
+            0.2539006275669926,
+            0.2297174729354796,
+            0.22456671205994413,
+            0.22774353929155225,
+            0.9996416991580844
+          ],
+          "emer_jev": [
+            0.4557764560471299,
+            0.39208587758932456,
+            0.25253207468777755,
+            0.21894958863767827,
+            0.22604180175419866,
+            0.24234318373446864,
+            0.999670916823305
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.45269056401144064,
+            0.39425681192743617,
+            0.2490971681975381,
+            0.22180529454047498,
+            0.23278693757300253,
+            0.23874279691299793,
+            0.9996416991580847
+          ],
+          "emer_jev": [
+            0.4582120826407363,
+            0.3928879325338516,
+            0.24109017950642733,
+            0.21516135057017385,
+            0.23307482243203606,
+            0.22866075859221563,
+            0.9996493880173533
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.005498547776197164,
+        0.0036203560573925264,
+        -0.0006401279466704546,
+        -0.007544609770740461,
+        -0.0016084312148244757,
+        -0.0001794215669983316,
+        1.8453262244588764e-05
+      ]
+    },
+    {
+      "trial": 3,
+      "epoch": 1,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.45884473334927256,
+            0.40482230730851754,
+            0.25012351847179803,
+            0.2226995599318131,
+            0.22743321383650952,
+            0.240574730648174,
+            0.9996447747017922
+          ],
+          "emer_jev": [
+            0.46530831297124553,
+            0.40149091160161693,
+            0.25673842099316024,
+            0.2334780363175815,
+            0.23180274695004968,
+            0.25823652788429974,
+            0.9996278592114018
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.4547310339972638,
+            0.41891153929850106,
+            0.25325916213556604,
+            0.22535686327770502,
+            0.22639229465715466,
+            0.23549432674962442,
+            0.9996632279640367
+          ],
+          "emer_jev": [
+            0.45950553922523113,
+            0.41698174252268566,
+            0.2623046820608422,
+            0.22951524354070424,
+            0.23773169662620688,
+            0.24468222577694507,
+            0.9996647657358907
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4571101802624072,
+            0.408315676978161,
+            0.24765621367762292,
+            0.2213171821431151,
+            0.2159858157066339,
+            0.24178959954971768,
+            0.9996509257892069
+          ],
+          "emer_jev": [
+            0.4565097902537878,
+            0.4087006345384741,
+            0.25291560215983744,
+            0.22033225470973292,
+            0.23476500480267556,
+            0.2480615768885112,
+            0.9996524635610609
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.0035458982804403107,
+        -0.0016254116408009704,
+        0.0069732703096176225,
+        0.004650643071795145,
+        0.01149604139287802,
+        0.011040557867413295,
+        -4.613315560823376e-06
+      ]
+    },
+    {
+      "trial": 3,
+      "epoch": 5,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4531914478811118,
+            0.4220672089807563,
+            0.24614175554206771,
+            0.2162676833387519,
+            0.22963388376098504,
+            0.23797584584654355,
+            0.9996555391047682
+          ],
+          "emer_jev": [
+            0.4584940227008837,
+            0.4222628942830819,
+            0.26230275775758033,
+            0.2256730765769821,
+            0.24322114379576654,
+            0.25827664736129313,
+            0.9996555391047683
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45586878475853787,
+            0.4202971547986654,
+            0.24875077382656913,
+            0.21801640119518484,
+            0.22578189990053002,
+            0.2421333612461315,
+            0.9996570768766218
+          ],
+          "emer_jev": [
+            0.4602369708912114,
+            0.418115610921727,
+            0.25798773390599544,
+            0.21868015981685499,
+            0.22737890412260414,
+            0.24115604100049387,
+            0.9996616901921831
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4558571500592545,
+            0.418846788725897,
+            0.2476784385345904,
+            0.21545462709489244,
+            0.22565970166199714,
+            0.2323245793400278,
+            0.9996416991580844
+          ],
+          "emer_jev": [
+            0.4610715858341304,
+            0.4200945707608673,
+            0.2572949440222128,
+            0.206920908269895,
+            0.22503386966351208,
+            0.24404272671525398,
+            0.9996586146484757
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.004961732242440435,
+        -0.00024602551321415794,
+        0.011671489260853781,
+        0.0005118110116343055,
+        0.004852810752790186,
+        0.010347209548112718,
+        7.176268650913957e-06
+      ]
+    },
+    {
+      "trial": 3,
+      "epoch": 10,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4596478597812895,
+            0.424685480111572,
+            0.23865990847515234,
+            0.22108489849735222,
+            0.21847898750331585,
+            0.24025644746027933,
+            0.9996540013329143
+          ],
+          "emer_jev": [
+            0.4617221589244294,
+            0.43036228427650747,
+            0.2511055803851761,
+            0.21636217538890953,
+            0.2333978664499572,
+            0.2483301854752358,
+            0.9996540013329139
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45575153536310464,
+            0.414370444265212,
+            0.24813853186376358,
+            0.22004973879055678,
+            0.22306188225200155,
+            0.24224815722967186,
+            0.9996616901921828
+          ],
+          "emer_jev": [
+            0.4574209309100753,
+            0.41718605342473103,
+            0.254568510850742,
+            0.21725079053517785,
+            0.2288906118925916,
+            0.24790037688813693,
+            0.9996739923670125
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4580225041400998,
+            0.4187703971500277,
+            0.24237109168136925,
+            0.21424906796885818,
+            0.22654196802178206,
+            0.23387623524411252,
+            0.9996447747017918
+          ],
+          "emer_jev": [
+            0.4632619393737663,
+            0.4204490941949637,
+            0.25018721950912837,
+            0.2147248264685816,
+            0.23650459708395263,
+            0.23994916211002923,
+            0.9996663035077439
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.002994376641259011,
+        0.0033903701231301673,
+        0.008897259574920435,
+        -0.0023486376213660656,
+        0.010236745883133993,
+        0.006599628179779419,
+        1.1276993593822837e-05
+      ]
+    },
+    {
+      "trial": 3,
+      "epoch": 20,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.46089669347191964,
+            0.40564631004040275,
+            0.23539233711751775,
+            0.2194461110234858,
+            0.2118229210164721,
+            0.2418982484625738,
+            0.9996355480706698
+          ],
+          "emer_jev": [
+            0.4679022291025582,
+            0.40943037187498166,
+            0.25366590880091877,
+            0.21699278914463463,
+            0.24022065948036497,
+            0.25619644114886847,
+            0.9996370858425236
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45127313841837025,
+            0.40502271842903287,
+            0.2524895024885207,
+            0.22475323844560585,
+            0.21139795528619088,
+            0.2413869140357818,
+            0.9996432369299382
+          ],
+          "emer_jev": [
+            0.45606720453208055,
+            0.41206376732924793,
+            0.25263271049934877,
+            0.21836112036935273,
+            0.2274859263201951,
+            0.23609820305543996,
+            0.999646312473646
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.4551020718346195,
+            0.4252099987767635,
+            0.25609055742681663,
+            0.21193265826771845,
+            0.23119669226850711,
+            0.2273206607848946,
+            0.9996616901921828
+          ],
+          "emer_jev": [
+            0.4611663735930314,
+            0.41974424495511603,
+            0.2600180860642451,
+            0.21639039105084168,
+            0.24812751868482458,
+            0.22991963373380003,
+            0.9996709168233058
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.005954634500920264,
+        0.0017864523043821616,
+        0.00744810277721918,
+        -0.0014625690573270196,
+        0.02047217863807152,
+        0.0038694848849527563,
+        4.613315561563525e-06
+      ]
+    },
+    {
+      "trial": 3,
+      "epoch": 30,
+      "per_seed": [
+        {
+          "seed": 7,
+          "emer": [
+            0.4570763796137736,
+            0.4082172548257173,
+            0.24419525072620565,
+            0.2218868805560531,
+            0.19302674716882487,
+            0.24621415838959254,
+            0.9996386236143772
+          ],
+          "emer_jev": [
+            0.46096102831260427,
+            0.4098001016795044,
+            0.25846189629865945,
+            0.2212110628000397,
+            0.24322776621877704,
+            0.254255680332012,
+            0.9996493880173535
+          ]
+        },
+        {
+          "seed": 17,
+          "emer": [
+            0.45319261694792773,
+            0.4094537520347136,
+            0.2541610811044338,
+            0.22583988457430282,
+            0.2254345830655115,
+            0.22239799522830944,
+            0.9996355480706693
+          ],
+          "emer_jev": [
+            0.45453120761296595,
+            0.4137590383995353,
+            0.2560402460490416,
+            0.2153022041661207,
+            0.2273018564965332,
+            0.23531084844935324,
+            0.9996401613862312
+          ]
+        },
+        {
+          "seed": 29,
+          "emer": [
+            0.46457386970221737,
+            0.4166144995880661,
+            0.23568933591694233,
+            0.19799860214563697,
+            0.2242842457238074,
+            0.21723585242160487,
+            0.9996186325802792
+          ],
+          "emer_jev": [
+            0.4636165909435837,
+            0.40919915823019026,
+            0.24723463562201567,
+            0.20332233364454913,
+            0.2519390650903097,
+            0.23243022924962708,
+            0.9996493880173535
+          ]
+        }
+      ],
+      "mean_delta": [
+        0.001421986868411736,
+        -0.0005090693797556815,
+        0.009230370074044971,
+        -0.0019632555550944584,
+        0.026574370615825394,
+        0.012049583997161828,
+        1.5377718537508873e-05
+      ]
+    }
+  ],
+  "original_main_results": {
+    "objectives": {
+      "is_click": {
+        "emer": 0.4548420867382518,
+        "emer_jev": 0.4578118070658956,
+        "absolute_gain": 0.0029697203276437545,
+        "relative_gain": 0.006529123874486006,
+        "confidence_interval": [
+          -0.002723648928637859,
+          0.008621081382613157
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "long_view": {
+        "emer": 0.412539999793682,
+        "emer_jev": 0.42080705084059905,
+        "absolute_gain": 0.008267051046917051,
+        "relative_gain": 0.02003939266750264,
+        "confidence_interval": [
+          0.001818947432186352,
+          0.014960374752503303
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_like": {
+        "emer": 0.2581756019223089,
+        "emer_jev": 0.2644197091155634,
+        "absolute_gain": 0.006244107193254522,
+        "relative_gain": 0.024185504543274082,
+        "confidence_interval": [
+          -0.003354763384719367,
+          0.01581010801998895
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_follow": {
+        "emer": 0.22655591791646393,
+        "emer_jev": 0.2270500566258498,
+        "absolute_gain": 0.0004941387093858607,
+        "relative_gain": 0.0021810893925448475,
+        "confidence_interval": [
+          -0.015286683084585077,
+          0.015172652691570431
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_comment": {
+        "emer": 0.23986907610174982,
+        "emer_jev": 0.23966063729831236,
+        "absolute_gain": -0.00020843880343746068,
+        "relative_gain": -0.0008689690510545146,
+        "confidence_interval": [
+          -0.01600862837048411,
+          0.015724534692015447
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_forward": {
+        "emer": 0.23880382620524443,
+        "emer_jev": 0.25180246103863224,
+        "absolute_gain": 0.012998634833387812,
+        "relative_gain": 0.054432272044987635,
+        "confidence_interval": [
+          -0.00503282419813182,
+          0.03125425777734853
+        ],
+        "valid_bootstrap_replicates": 2000
+      },
+      "is_hate": {
+        "emer": 0.9996437495205553,
+        "emer_jev": 0.9996586146484745,
+        "absolute_gain": 1.486512791915029e-05,
+        "relative_gain": 1.4870425515369686e-05,
+        "confidence_interval": [
+          -4.613385553431381e-06,
+          3.340094368575741e-05
+        ],
+        "valid_bootstrap_replicates": 2000
+      }
+    },
+    "positive_mean": {
+      "emer": 0.30513108477961687,
+      "emer_jev": 0.3102586203308087,
+      "absolute_gain": 0.005127535551191924,
+      "confidence_interval": [
+        -0.00026825585841881066,
+        0.01051649874113947
+      ]
+    },
+    "per_seed": {
+      "7": {
+        "emer": [
+          0.45344968315882006,
+          0.3942302082437041,
+          0.2575263705562264,
+          0.22470613589658395,
+          0.23852238943215504,
+          0.24275314048151264,
+          0.9996524635610606
+        ],
+        "emer_jev": [
+          0.4584940227008837,
+          0.4222628942830819,
+          0.26230275775758033,
+          0.2256730765769821,
+          0.24322114379576654,
+          0.25827664736129313,
+          0.9996555391047683
+        ]
+      },
+      "17": {
+        "emer": [
+          0.45803956173544214,
+          0.41734466054253044,
+          0.25369575125531535,
+          0.22199665051675008,
+          0.2478489884173626,
+          0.23819428670177076,
+          0.9996340102988162
+        ],
+        "emer_jev": [
+          0.45950553922523113,
+          0.41698174252268566,
+          0.2623046820608422,
+          0.22951524354070424,
+          0.23773169662620688,
+          0.24468222577694507,
+          0.9996647657358907
+        ]
+      },
+      "29": {
+        "emer": [
+          0.4530370153205724,
+          0.4260451305948462,
+          0.263304683955367,
+          0.23296496733605757,
+          0.2332358504557272,
+          0.235464051432451,
+          0.9996447747017921
+        ],
+        "emer_jev": [
+          0.4554358592716528,
+          0.4231765157160658,
+          0.26865168752824886,
+          0.22596184975986275,
+          0.23802907147295924,
+          0.2524485099776592,
+          0.9996555391047681
+        ]
+      }
+    },
+    "gates": {
+      "primary_ci_positive": true,
+      "primary_positive_every_seed": false,
+      "positive_mean_noninferior": false,
+      "click_noninferior": true,
+      "hate_noninferior": true
+    },
+    "all_effect_gates": false,
+    "bootstrap_users": 4253,
+    "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+    "online_business_success": false
+  },
+  "interpretation": "Strict rescue/harm pairs are hindsight diagnostics, not an implementable oracle or proof of causal incremental value. No favorable config or subgroup is promoted to a new main result."
+}

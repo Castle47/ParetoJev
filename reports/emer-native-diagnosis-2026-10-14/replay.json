@@ -1,0 +1,7 @@
+{
+  "exact_cached_prediction_statistics": true,
+  "diagnostic_sha256": "c3235421e6c3b2d798a58313dbc891ab66d89b27fa434f0a655aab63b0b7910f",
+  "predictions_sha256": "eed340445c697b1dc6ed21136c37d798f02204c50e124527e6ee49c7464cb7fd",
+  "model_predictions_checked_against_all_24_original_training_receipts": true,
+  "note": "Recomputes all diagnostics from hashed cached predictions; does not claim a second model inference pass."
+}

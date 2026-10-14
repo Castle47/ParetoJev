@@ -1,0 +1,50 @@
+{
+  "role": "post-selection exhaustive development diagnostic, not confirmation",
+  "no_retraining": true,
+  "independent_test_opened": false,
+  "inputs": {
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer_selection.json": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/selection.json": "a26e23f1d426e6b0b46590fa91eb1f196c56645543f386bf1869d65117ad718d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/evaluation.json": "8820464f119056edcea16909b2201c9d5cd1f7f39666e563248852456bfe360f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/scores.npz": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/train.npz": "f368ab737fe2ddaf0971ac7b9b9d93df5bf31e952c150a5b854a3e0202d2b021",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/validation.npz": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf"
+  },
+  "checkpoints": {
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial0.pt": "e0c871bf7d545d9040e2cfbeb4bc2664a4d83ea299e675d1a0b84cfdc361ddf5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial1.pt": "84a56b0e95717c0ea137ded0afe11bf2dbdcc7a1661b31eda8931495482891fe",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial2.pt": "fada178fe451f04286029723198d4cccc17bf4695957db8aba087c185f78258a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial3.pt": "3fdda5e23851725eef4da53ffdc6f09f18b394bbb3cd2707ae95188de8586c7c",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial0.pt": "530ab81ed74a7e36403d6c906905194adfef797797a16f25257be5d46b30c335",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial1.pt": "7c2ba38b3d80d9465c3faf56e10e1be2cb7a02347575dcdcb0333dbbb11c0f96",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial2.pt": "946614bf53d479968f8663dda37f599f4af175eb84132b89101dc3ac9c5de655",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial3.pt": "6b9a3b5f6817e3260a0c7ad6b251c7b689d0070fdd5301e03d5891dd42e9bcbc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial0.pt": "821825ad7666384f251027bcc23d469a8394e279b1e20dcbaa13fd00903b04be",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial1.pt": "9162ef277a7e5821311bf5bb09db99627a3e0f376c6c9229500ca7fb444c48ee",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial2.pt": "37e3e1364608f5de79f6125157a8d2826cf18412414856353f9354a14880ca3e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial3.pt": "e3c237618d2c02e01172b9baf05bfe94c90cd9228ef48d2f0bbb768048b6e6e9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial0.pt": "ff7330acf7840a73938078a4105d160a294c9dd0f7009c33c4b129017232dcb9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial1.pt": "04162210de0704d281560bd986409ac59f9fd60d9bc273f868ef634896b274e1",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial2.pt": "7f1b3dc396f98f7b840661a3a6b8d8968e8257d3671b6d189001109e52a8c167",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial3.pt": "d4ddccb4e0e6625a78efab95f8b0573ff6e2895a80b7d14be8e139e7e5028052",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial0.pt": "be3f36521c16a42565e4957dc33772df8809cfc7381b1a0297a504d7aceb2d5d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial1.pt": "91381741ad41008cd9020b8ca6ad9a9b5e1da5872bd4d70646dcfdf78618e6c3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial2.pt": "34bc015254eedafb0deb2653c62d6a9f4087448b577da7d81af7c5653141aeea",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial3.pt": "d49547e2e566c0c1e1df1af01416a599be7fe0ef203c908398b8dc00ced02ba3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial0.pt": "b28d351009e4447b05262ba621740c8505006de1a77765fe41e530b72ef74813",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial1.pt": "dc6dedeae07e00b4d9804f3762fb7a93984757231f9a26be4d9edd67ec893b7d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial2.pt": "9435032fe4c4a093d191ec7d4a902b99af6faf793fa82374be27325ea7bc7812",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial3.pt": "074ea135ac36afa2ce59b35e88982e093015879eef59afa7967388afd32b2bb1"
+  },
+  "scripts": {
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/diagnose_emer_native.py": "2dad8147809878876e53413fcd22bb1819efcfbf2d17d3e7fe9b38f6bfc9e224",
+    "scripts/audit_jev_increment.py": "8b3ce0b302508f8d0b36ce23a6320b697842119868d8ed7ce313ea601c07ee49",
+    "scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f"
+  },
+  "history_threshold_from_unweighted_training_median": 7218.0,
+  "groups": "Six fixed complementary masks; previous-exposure count, at least five zero-prior candidates, and long-view top3 overlap. No outcome-selected thresholds.",
+  "model_bootstrap": 2000,
+  "signal_bootstrap": 1000,
+  "multiplicity": "Intervals are descriptive, unadjusted for model selection or multiple diagnostic comparisons.",
+  "matched_settings": "Same learning rate and prior coefficient; each checkpoint keeps its original validation-selected epoch. No new checkpoint selection."
+}

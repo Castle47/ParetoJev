@@ -893,3 +893,25 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   these intervals do not establish confirmatory superiority. Independent test
   remains unopened and no extra paid compute was started.
 - Final evidence: reports/emer-native-development-2026-10-14/README.md.
+
+
+## 2026-10-14 — Exhaustive native-Jev development diagnosis
+
+- Replayed all24 existing checkpoints against original seven-goal validation
+  receipts; evaluated all four matched learning-rate/prior settings, retaining
+  each original selected epoch. Long-view changes: +0.56%, -3.90%, -0.26%,
+  -0.15%; the sole positive interval crosses zero. Original main comparison
+  remains unchanged; this is post-selection diagnosis, not a new winner.
+- Goal-specific within-slate AUC: behavior/Jev long-view0.5928/0.5354. Strict
+  behavior-error rescue19.84% versus newly incorrect pair ordering25.73%, both
+  weighted within-slate pair fractions, not an implementable oracle policy.
+  No-hate AUC0.4959/0.5532 gives a positive exploratory signal, not fusion proof.
+- Fixed six complementary groups from historical counts and pre-label ranking
+  disagreement. None improves long view in all three seeds; no post hoc
+  subgroup gate was promoted. Inspected five fixed epochs in all four settings.
+- All diagnostic statistics replay exactly from hashed cached predictions; six
+  signal/statistics tests pass. All24 checkpoint hashes unchanged; no training,
+  remote GPU, fresh test data or extra API calls. Decision: keep independent
+  test sealed; first reconcile primary long-view guard with aggregate selection
+  and test a bounded, baseline-preserving fusion hypothesis in development.
+- Evidence: reports/emer-native-diagnosis-2026-10-14/README.md.
