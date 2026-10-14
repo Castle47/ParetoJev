@@ -864,3 +864,17 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   still active toward36,000 slates /252,000 decisions, validation first. Source
   hashes match deployment. 283 local tests pass; independent test remains closed.
 - Evidence and exact producer registration: reports/autodl-jev-2026-10-13/README.md.
+
+
+## 2026-10-14 — Expanded native-Jev development training started
+
+- Recovered all36,000 groups /252,000 decisions, verified score hashes and SQLite
+  integrity, then audited every original HTTP envelope and child response against
+  original prompts, objectives, candidates and materialized score tensors.
+- Started equal-budget native-Jev arm: seeds7/17/29 ×four shared settings ×30epochs.
+  Reuses12 previously completed baseline fits; no independent test or paid GPU.
+- Added validation-only seven-goal evaluator with selected-checkpoint score replay,
+  paired-user intervals, support counts and explicit selection-bias caveat. The
+  sequential local finalizer will evaluate and replay after training finishes.
+-12 relevant tests pass. Launch evidence: reports/emer-native-development-2026-10-14.
+  This entry records running work and does not claim training or effect success.

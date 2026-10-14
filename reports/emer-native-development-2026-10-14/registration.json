@@ -1,0 +1,46 @@
+{
+  "dataset_config_sha256": "5936f2a6813ee460704513750353997858ab1f38dcaafee9913caba543d21a6c",
+  "common_manifest_sha256": "f4c77e032dd4c6f6520a15ec69b5cdb0cb77a0efbf5725ad59afa4866a57db3a",
+  "baseline_selection_sha256": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+  "native_complete_sha256": "81c1b6fa2bf0bd847fe39008417d3d0e1c2ec9409813e3bf174eb8a0705ce11f",
+  "native_registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+  "package_sha256": "e7ddf4f54feea2ca8e8c712198033b253ada53fc4d0e30efb7f31fce21f5e9f9",
+  "script_sha256": "a146e72b3f48be0b1e95a3343c30913c6c0c65ff5c4c7b652a6a979e69326eb1",
+  "fit_script_sha256": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+  "model": {
+    "feature_dim": 65,
+    "objectives": 7,
+    "hidden_dim": 48,
+    "layers": 2,
+    "heads": 4,
+    "ff_dim": 96,
+    "dropout": 0.05
+  },
+  "training": {
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rates": [
+      0.001,
+      0.0003
+    ],
+    "prior_coefficients": [
+      1.0,
+      0.25
+    ],
+    "weight_decay": 0.0001,
+    "cpu_threads": 4,
+    "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+    "posterior": "number of six positive feedback bits minus explicit hate bit",
+    "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+    "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+    "sample_weights": "inverse inclusion weights normalized to training mean one"
+  },
+  "public_scores_used": false,
+  "independent_test_opened": false,
+  "baseline_reuse": "Identical common inputs, architecture, fixed seeds, 4 trials per seed and 30 epochs; no extra baseline search."
+}

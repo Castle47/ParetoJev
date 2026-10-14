@@ -1,0 +1,14 @@
+{
+  "status": "training_active",
+  "progress_at_snapshot": {
+    "completed_trials": 1,
+    "planned_trials": 12,
+    "test_opened": false
+  },
+  "training_directory": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native",
+  "evaluation_directory": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native",
+  "training_log": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/train-native.log",
+  "evaluation_log": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluate-native.log",
+  "paid_gpu_started": false,
+  "independent_test_opened": false
+}
