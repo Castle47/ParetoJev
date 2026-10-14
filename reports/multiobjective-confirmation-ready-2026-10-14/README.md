@@ -41,3 +41,5 @@ bash scripts/finish_multiobjective_confirmation.sh \
 无卡上传/预检仅0.10元/小时，可在现有预算余量内完成。
 
 证据：[数据准备](preparation.json)、[逐项源审计](cohort_audit.json)、[抽样重放](sampling_replay.json)、[请求包](transfer.json)、[费用核对](budget.json)。
+
+远端预检通过：已上传完整请求包，27个模型/服务文件及全部已登记依赖版本匹配开发阶段；尚未启动GPU推理。证据：[远端预检](remote-preflight.json)。

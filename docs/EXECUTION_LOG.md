@@ -955,3 +955,22 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   equality guard and label-free package generation; 11+9 focused tests pass.
 - Existing65 CNY cap remains; no new GPU spend. Confirmation acquisition and
   evaluation remain incomplete. Goal active; next live handles in GOAL_PROGRESS.md.
+
+
+## 2026-10-14 — Confirmation fully staged; additional budget requested
+
+- Recovered from a host reboot after preparation. Replaced source audit random
+  USB access/repeated tensor decompression with small user partitions and one
+  raw-tensor load. Final50K histories/prompts and500K source occurrences match.
+- Recomputed eligible populations across26,520 source users and exactly replayed
+  all strata, random priorities, selected records and candidate permutations.
+  Frozen test cohort has15,115 users and50,000 slates across Apr23-25.
+- Input package54,981,316 bytes, no labels, uploaded to original instance in CPU
+  mode; all27 producer files and recorded package versions verified. Instance
+  then confirmed OFF. No newGPU spend or held-out effect computation.
+- Completed real-score validator, common-tensor materializer, frozen paired
+  evaluator, report and independent replay pipeline. Full300 tests pass.
+- Verified current6.98 CNY/h and62.67 CNY existing settled project bills. Asked
+  once to increase total cap65→115 CNY for this independent run. Pending human
+  authorization; account balance is not permission. Goal still active.
+- Evidence: reports/multiobjective-confirmation-ready-2026-10-14/README.md.

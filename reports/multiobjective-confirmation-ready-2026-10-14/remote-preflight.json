@@ -1,0 +1,8 @@
+{
+  "input_and_model_hashes_verified": true,
+  "producer_files": 27,
+  "compressed_sha256": "5250cbf1638d318e4accbcc1c8062f2233cdace77c5f272468a14d4037b67ad9",
+  "development_registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+  "packages_match": true,
+  "gpu_inference_started": false
+}

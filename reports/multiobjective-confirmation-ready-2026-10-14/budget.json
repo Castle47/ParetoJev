@@ -16,5 +16,10 @@
   "estimated_inference_cost_cny": 42.41319444444445,
   "proposed_hard_runtime_hours": 7,
   "proposed_seven_hour_gpu_cost_cny": 48.86,
-  "note": "Live price and project-specific paid bills checked in AutoDL on2026-10-14. Availability and price must be rechecked at activation; no GPU restarted."
+  "note": "Live price and project-specific paid bills checked in AutoDL on2026-10-14. Availability and price must be rechecked at activation; no GPU restarted.",
+  "remote_preflight_passed": true,
+  "instance_status_after_preflight": "powered off, verified",
+  "authorization_question_sent": true,
+  "authorization_received": false,
+  "additional_cpu_preflight_cost": "within original remaining margin; final small settlement not yet reread"
 }
