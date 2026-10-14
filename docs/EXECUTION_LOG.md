@@ -1009,3 +1009,13 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   fit_feature_spec and checked all encoded candidate features. Passed.
 - Training remains live; this audit computes no outer performance and makes
   no superiority claim. Receipt: reports/emer-user-cv-v1-start/data_audit.json.
+
+
+## 2026-10-15 — First CV fold completed and inner selection audited
+
+- All24 original-budget fits for outer fold0 complete; fold1 continues.
+- Verified all checkpoint hashes and training budgets, reproduced initial
+  checkpoint/earliest-best-epoch selection and max-inner-mean configuration
+  selection, and recomputed seven metrics for all six selected models. Passed.
+- No outer evaluation was performed. Completion of one fold is not evidence
+  that the user's superiority objective has been achieved.

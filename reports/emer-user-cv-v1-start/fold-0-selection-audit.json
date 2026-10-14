@@ -1,0 +1,49 @@
+{
+  "fold": 0,
+  "complete_fits": 24,
+  "selected_models": [
+    {
+      "seed": 7,
+      "arm": "emer",
+      "checkpoint_sha256": "b60a7b5892b6c51eba576d640bfa4bd05aefb81599de7f39ac22463c6542fa22",
+      "inner_validation_replayed": true
+    },
+    {
+      "seed": 7,
+      "arm": "emer_jev",
+      "checkpoint_sha256": "9c377f96598cc73d9e5e111de7dd83c049fe61cfba9a966f84536773cf1379d4",
+      "inner_validation_replayed": true
+    },
+    {
+      "seed": 17,
+      "arm": "emer",
+      "checkpoint_sha256": "d514d10979d0fef498e54ae61c3543ecbff733d7d4d24b3a7a601ea807a32e74",
+      "inner_validation_replayed": true
+    },
+    {
+      "seed": 17,
+      "arm": "emer_jev",
+      "checkpoint_sha256": "05f67fd32e3d0e2d1713f52ccb16504e2731dfabf33b1b6f87819125fdde89dc",
+      "inner_validation_replayed": true
+    },
+    {
+      "seed": 29,
+      "arm": "emer",
+      "checkpoint_sha256": "3965c1bbf139028715046402775c25ce4db19d33bef6850c1625aab189084a71",
+      "inner_validation_replayed": true
+    },
+    {
+      "seed": 29,
+      "arm": "emer_jev",
+      "checkpoint_sha256": "585272330a6879f92c33db285c78e0a4febb76f9c2640bf1d6cc385582d2292e",
+      "inner_validation_replayed": true
+    }
+  ],
+  "all_trial_hashes_match": true,
+  "initial_epoch_and_first_best_selection_replayed": true,
+  "config_selection_replayed": true,
+  "outer_performance_computed": false,
+  "validation_sha256": "db0841d080d7d47fc3a136f26c7dee23f9cb41fecc451591237b9ecb506e5b49",
+  "selection_sha256": "3aa80c6f388c8f34c17574ec5ef01e89c30510bd115f1c69a757673810a9a57d",
+  "script_sha256": "df328f9da4dfdbb697274f512d8300b8691c2dd8919482632359600f2a990dbf"
+}
