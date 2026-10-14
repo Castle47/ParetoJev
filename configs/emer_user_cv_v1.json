@@ -5,7 +5,7 @@
   "outer_folds": 3,
   "partition_seed": 2026101407,
   "outer_assignment": "First8 bytes of SHA256('outer|partition_seed|user_id'), big-endian, modulo3; one fold per user",
-  "inner_assignment": "Among non-test users, SHA256('inner-fold|partition_seed|user_id') modulo5 equals0 selects validation; remaining users train",
+  "inner_assignment": "Among non-test users, first8 SHA256 bytes for 'inner-{outer_fold}|partition_seed|user_id', big-endian, modulo5 equals0 selects validation; all others train",
   "inner_validation_modulus": 5,
   "label_based_stratification_or_resplitting": false,
   "model": {

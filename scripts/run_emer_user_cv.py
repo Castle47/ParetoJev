@@ -58,6 +58,11 @@ def source_identity(a,c):
         raise ValueError('Incomplete native scores')
     if sha256_file(a.data/'jev-native-v9-fp16/scores.npz')!=complete['scores_sha256']:
         raise ValueError('Native tensor changed')
+    native_reg=read_json(a.data/'jev-native-v9-fp16/registration.json')
+    if complete['registration_sha256']!=sha256_file(a.data/'jev-native-v9-fp16/registration.json') or audit['input_sha256']!=native_reg['input_sha256']:
+        raise ValueError('Native response provenance changed')
+    if native_reg['source']['model']!='autotrust/JEV-27B' or native_reg['source']['huggingface_revision']!='14b425269ed24452e0a5ad5a8f3e51d139647a88':
+        raise ValueError('Unexpected native producer')
     if not audit['all_raw_responses_match'] or audit['decisions']!=252000:
         raise ValueError('Real response audit required')
     files=[a.config,Path('configs/emer_jev_scale.json'),Path(__file__),Path('scripts/run_emer_jev.py'),a.data/'raw_slates.npz',
