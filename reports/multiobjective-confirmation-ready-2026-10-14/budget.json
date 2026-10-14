@@ -1,0 +1,20 @@
+{
+  "instance_id": "td89w6tsnx-ba43120e",
+  "status_observed": "powered off",
+  "gpu": "RTX PRO6000 96GB",
+  "live_gpu_cny_per_hour": 6.98,
+  "billed_project_cny": 62.67,
+  "billed_rows": 13,
+  "billing_order": "7918905211700288866",
+  "existing_authorized_total_cny": 65,
+  "remaining_before_unbilled_disk_cny": 2.33,
+  "proposed_extra_cny": 50,
+  "proposed_total_cap_cny": 115,
+  "extra_budget_authorized": false,
+  "planned_decisions": 350000,
+  "estimated_inference_hours_at16_per_second": 6.076388888888889,
+  "estimated_inference_cost_cny": 42.41319444444445,
+  "proposed_hard_runtime_hours": 7,
+  "proposed_seven_hour_gpu_cost_cny": 48.86,
+  "note": "Live price and project-specific paid bills checked in AutoDL on2026-10-14. Availability and price must be rechecked at activation; no GPU restarted."
+}

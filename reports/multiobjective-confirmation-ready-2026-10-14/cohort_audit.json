@@ -1,0 +1,13 @@
+{
+  "source_candidates": 500000,
+  "histories_checked": 50000,
+  "prompts_checked": 50000,
+  "source_labels_features_and_histories_match": true,
+  "weights_verified": true,
+  "fresh_time_window_verified": true,
+  "exact_prompt_alignment": true,
+  "raw_sha256": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+  "input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d",
+  "script_sha256": "7f50c08086f7a97ebf16dd07d31eeecebc88cee2cefce2fc7d3794adac9b2718",
+  "preparation_config_hash": "e18af6b40bdc8f20efe5bcc52eb536b858d4a6c6457876d37715ea233cf7bc6f"
+}

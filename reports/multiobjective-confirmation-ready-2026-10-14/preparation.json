@@ -1,0 +1,44 @@
+{
+  "config_hash": "e18af6b40bdc8f20efe5bcc52eb536b858d4a6c6457876d37715ea233cf7bc6f",
+  "populations": [
+    4358,
+    8821,
+    8972,
+    24011,
+    105320,
+    1598936
+  ],
+  "slates": 50000,
+  "users": 15115,
+  "raw_slates_sha256": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+  "prompts": {
+    "input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d",
+    "max_state_characters": 2918,
+    "missing_text_occurrences": 104002,
+    "truncated_text_occurrences": 9893,
+    "outcome_fields_sent": false,
+    "score_semantics": "per-objective relative Choice distribution, not event probability"
+  },
+  "sources": {
+    "config_hash": "e18af6b40bdc8f20efe5bcc52eb536b858d4a6c6457876d37715ea233cf7bc6f",
+    "sha256": "d6e6c9a731e3e9fc96a57e164ef40a244d28e366f1376e4651851d22a115118d",
+    "sources": [
+      {
+        "file": "log_standard_4_22_to_5_08_27k_part1.csv",
+        "sha256": "6057df35a8918825bd7ec72c46f0aac54ec6d04b2ad432418aa7c2c79bf85274",
+        "rows": 93062020,
+        "retained": 27326093
+      },
+      {
+        "file": "log_standard_4_22_to_5_08_27k_part2.csv",
+        "sha256": "ee82474e37f7b8b3fcbeffb0e15c3913ed8be436af5d5f94d672168cf663645d",
+        "rows": 92919789,
+        "retained": 14288352
+      }
+    ]
+  },
+  "development_raw_sha256": "7b9f98d802c053e604f551eb78ab30986282798455d64cf366b69a7c29bbf8fd",
+  "feature_spec_sha256": "b2ecbbeb4c03d52488075ebf1503b40afc8e5f3dfa94dd2b00db05c2688b2766",
+  "source_record_semantics": "(shard-1)*2^48 + zero-based source CSV row; no outcomes sent to Jev",
+  "old_test_excluded": true
+}

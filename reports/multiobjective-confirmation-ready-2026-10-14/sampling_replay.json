@@ -1,0 +1,20 @@
+{
+  "identity": {
+    "config_hash": "e18af6b40bdc8f20efe5bcc52eb536b858d4a6c6457876d37715ea233cf7bc6f",
+    "raw_sha256": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+    "partition_manifest_sha256": "4183315959b219fac47296c3342f475246b36c4b81a447e8a2a607e3bfe27756",
+    "script_sha256": "33b71d2aa424a3d48bcf6d3c4096af158f85f4d818b57e1fc5980c439632045d"
+  },
+  "exact_selection_replayed": true,
+  "populations": [
+    4358,
+    8821,
+    8972,
+    24011,
+    105320,
+    1598936
+  ],
+  "slates": 50000,
+  "all_source_users_checked": 26520,
+  "performance_evaluated": false
+}

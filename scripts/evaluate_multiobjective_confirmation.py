@@ -60,6 +60,8 @@ def audit_scores(a,c):
         raise ValueError('Confirmation producer differs from frozen development')
     if reg['slates']!=50000 or reg['goals']!=c['objectives'] or reg['confirmation_config_sha256']!=sha256_file(a.config):
         raise ValueError('Scoring registration differs')
+    if reg['script_sha256']!=sha256_file(Path(__file__).resolve().parents[1]/'deployment/autodl/score_confirmation.py'):
+        raise ValueError('Deployed collector differs from registered local implementation')
     if reg['transfer_manifest_sha256']!=sha256_file(a.data/'transfer/transfer.json'):
         raise ValueError('Transferred manifest differs')
     if packet['confirmation_config_sha256']!=sha256_file(a.config) or packet['development_registration_sha256']!=expected_dev:

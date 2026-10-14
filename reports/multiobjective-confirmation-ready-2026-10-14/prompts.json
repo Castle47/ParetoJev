@@ -1,0 +1,8 @@
+{
+  "input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d",
+  "max_state_characters": 2918,
+  "missing_text_occurrences": 104002,
+  "truncated_text_occurrences": 9893,
+  "outcome_fields_sent": false,
+  "score_semantics": "per-objective relative Choice distribution, not event probability"
+}

@@ -1,0 +1,39 @@
+{
+  "role": "source-only sample support, no model outputs",
+  "slates": 50000,
+  "users": 15115,
+  "exposures": 500000,
+  "positive_labels": [
+    190613,
+    126933,
+    23160,
+    5048,
+    5596,
+    5328,
+    7078
+  ],
+  "positive_slates": [
+    43669,
+    38155,
+    12856,
+    4209,
+    4892,
+    4362,
+    4167
+  ],
+  "kish_effective_slates": 29524.79894083572,
+  "by_day": {
+    "2022-04-23": {
+      "slates": 18730,
+      "users": 9101
+    },
+    "2022-04-24": {
+      "slates": 15800,
+      "users": 7944
+    },
+    "2022-04-25": {
+      "slates": 15470,
+      "users": 7765
+    }
+  }
+}

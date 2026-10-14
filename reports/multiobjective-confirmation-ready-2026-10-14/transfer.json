@@ -1,0 +1,14 @@
+{
+  "slates": 50000,
+  "planned_decisions": 350000,
+  "independent_test_included": true,
+  "labels_included": false,
+  "source_input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d",
+  "compressed_sha256": "5250cbf1638d318e4accbcc1c8062f2233cdace77c5f272468a14d4037b67ad9",
+  "confirmation_config_sha256": "89c49436c66b0989683579f81a1e95d444b5ae2cb16cdcd683132c77e1847d80",
+  "development_registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+  "frozen_popularity_verified": true,
+  "popularity_sha256": "89f64d66d5d000c17a905c234a9fcc26824419c5cc44dc5f00357c5c1ab17f14",
+  "sampling_replay_sha256": "978879df960ff944efa2c1d1cf8a3a848030ff0c9c1767c3874189fadaa52f65",
+  "note": "Input packaging only; no model outputs or feedback statistics used for tuning."
+}
