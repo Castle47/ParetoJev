@@ -998,3 +998,14 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   Finalizer queues outer evaluation and exact replay only after all fits.
 - Retrospective cohort reuse and overlapping fold-training uncertainty remain
   explicit limitations. This launch does not prove the requested superiority.
+
+
+## 2026-10-14 — Saved CV tensor audit
+
+- Read actual saved train/inner-validation/outer-test files across all three
+  folds. Verified user exclusion, exactly-once outer coverage, original labels,
+  behavior/Jev signals, sample weights and identities for all36K rows.
+- Recomputed training-only weighted moments column by column independently of
+  fit_feature_spec and checked all encoded candidate features. Passed.
+- Training remains live; this audit computes no outer performance and makes
+  no superiority claim. Receipt: reports/emer-user-cv-v1-start/data_audit.json.

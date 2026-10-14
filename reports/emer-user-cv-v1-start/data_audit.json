@@ -1,0 +1,42 @@
+{
+  "folds": [
+    {
+      "fold": 0,
+      "users": {
+        "train": 6634,
+        "validation": 1734,
+        "test": 4238
+      },
+      "disjoint_users": true,
+      "all_saved_inputs_match": true,
+      "training_only_moments_recomputed": true
+    },
+    {
+      "fold": 1,
+      "users": {
+        "train": 6705,
+        "validation": 1692,
+        "test": 4209
+      },
+      "disjoint_users": true,
+      "all_saved_inputs_match": true,
+      "training_only_moments_recomputed": true
+    },
+    {
+      "fold": 2,
+      "users": {
+        "train": 6788,
+        "validation": 1659,
+        "test": 4159
+      },
+      "disjoint_users": true,
+      "all_saved_inputs_match": true,
+      "training_only_moments_recomputed": true
+    }
+  ],
+  "outer_rows": 36000,
+  "every_row_tested_once": true,
+  "model_performance_computed": false,
+  "registration_sha256": "223b783f38b037f9f55e670a3fb3c00574d80a3e345e8af0bc25aacf095267d5",
+  "script_sha256": "b829dc89a0c32d815890c3e168d7a0f87c394746eb984cc4354b087ac46100df"
+}

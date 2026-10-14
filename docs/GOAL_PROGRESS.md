@@ -33,3 +33,5 @@ A meaningful no-new-fee route was implemented: fresh nested user-disjoint retrai
 The50K Apr23-25 cohort, response packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. Do not start GPU under the automatic continuation message. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
 
 Method and limitations: docs/EMER_USER_CV.md.
+
+Actual saved-fold audit completed while training continued: every user role, source behavior/Jev/labels/weights, and independently recomputed training-only moments match. All36K rows occur once as outer test. Receipt: reports/emer-user-cv-v1-start/data_audit.json. No outer model performance was computed by this audit.
