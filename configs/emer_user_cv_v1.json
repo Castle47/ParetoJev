@@ -1,0 +1,37 @@
+{
+  "experiment_id": "emer-native-user-cv-v1",
+  "objective": "Assess overall multi-objective EMER+Jev benefit within the existing real-score cohort without new paid inference",
+  "data": "All36000 audited Apr19-21 development slates; 252000 existing native JEV-27B judgments; never read Apr23-25 confirmation data",
+  "outer_folds": 3,
+  "partition_seed": 2026101407,
+  "outer_assignment": "First8 bytes of SHA256('outer|partition_seed|user_id'), big-endian, modulo3; one fold per user",
+  "inner_assignment": "Among non-test users, SHA256('inner-fold|partition_seed|user_id') modulo5 equals0 selects validation; remaining users train",
+  "inner_validation_modulus": 5,
+  "label_based_stratification_or_resplitting": false,
+  "model": {"feature_dim":65,"objectives":7,"hidden_dim":48,"layers":2,"heads":4,"ff_dim":96,"dropout":0.05},
+  "training": {
+    "seeds":[7,17,29],"epochs":30,"batch_size":32,
+    "learning_rates":[0.001,0.0003],"prior_coefficients":[1.0,0.25],
+    "weight_decay":0.0001,"cpu_threads":2,
+    "selection":"Each arm/outer-fold/seed independently maximizes weighted inner-validation mean of six positive NDCG@3 goals; earliest config/epoch ties; epoch0 allowed",
+    "total_complete_fits":72,
+    "weight_initialization":"Fresh from the same seed in both arms for every fold; no reused trained reranker weights"
+  },
+  "features":"Recompute encoding moments from the fold's training candidates only. Behavior model remains frozen at its pre-Apr19 checkpoint. Native Jev inputs and outcomes unchanged.",
+  "evaluation": {
+    "primary":"Mean six positive-goal weighted NDCG@3",
+    "outer_predictions":"Each row receives predictions only from models whose train and inner-validation users exclude that row's user",
+    "evaluate_after":"All72 fits and every inner-only selection are frozen before any outer-fold performance calculation",
+    "top_k":3,"bootstrap_samples":2000,"bootstrap_seed":2026101408,
+    "maximum_positive_goal_absolute_point_drop":0.005,
+    "maximum_hate_risk_absolute_point_increase":0.005,
+    "evidence_screen":"Pooled primary difference lower conditional user-bootstrap interval>0; primary point gain>0 for each fixed seed and each outer fold; all seven point guards pass",
+    "uncertainty":"Conditional paired-user summaries of the fitted out-of-fold predictions; folds have overlapping training sets and are not independent replicates; not a universal unbiased CV variance estimate"
+  },
+  "limitations":[
+    "Retrospective evaluation on an already explored cohort; not a pristine prospective confirmation or replacement of the frozen Apr23-25 test.",
+    "User-disjoint for reranker fitting and selection, not a claim these users never appeared in the earlier frozen behavior model.",
+    "Cross-user generalization within Apr19-21, not new-date generalization or online causal uplift."
+  ],
+  "budget":{"paid_gpu":false,"new_api_requests":0,"total_project_cap_cny":65}
+}
