@@ -1,0 +1,22 @@
+{
+  "experiment_id": "emer-native-multiobjective-v1",
+  "reason": "User clarified the actual goal: EMER+Jev improves overall multi-objective recommendation, rather than requiring long-view gain in every seed",
+  "old_results_preserved": true,
+  "primary_metric": "Equal-weight mean of six positive-goal weighted NDCG@3 values",
+  "negative_feedback_metric": "Weighted top3 no-hate utility, reported separately because it is close to one",
+  "candidate_recipes": ["equal_weight_three_seed_zscore", "equal_weight_three_seed_rank"],
+  "same_budget": "Both arms use exactly the original three separately selected models; both evaluate the same two equal-weight aggregation rules; no learned ensemble weights",
+  "selection": "Each arm independently maximizes six-goal mean on development validation; first recipe wins ties",
+  "development_gate": {
+    "mean_gain_lower_95_ci_positive": true,
+    "all_seven_point_gains_nonnegative": true,
+    "numerical_tolerance": 1e-12
+  },
+  "confirmation_requirement": "Freeze one final model and input protocol before evaluating fresh chronological data; positive six-goal mean difference lower95%CI and all seven point estimates nonnegative on that fresh set; report all individual intervals and sample support",
+  "interval_scope": "Not a claim that all seven population effects are independently established as positive; development selection intervals are exploratory",
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 20261014,
+  "test_data_opened": false,
+  "spending_limit_cny_total": 65,
+  "paid_compute_extension_authorized": false
+}
