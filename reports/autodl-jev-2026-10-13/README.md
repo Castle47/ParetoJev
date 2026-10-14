@@ -82,3 +82,12 @@
 证据：[验收](v9-probe.json)、[注册](v9-registration.json)、[快照](snapshot-2326.json)。
 完成后必须检查complete.json、全部HTTP原始响应及候选映射，再训练EMER＋Jev。
 已有EMER的12次训练可复用；独立测试仍未开放。
+
+## 2026-10-14 结果回收
+
+远端文件时间显示03:11完成全部36,000组、252,000项判断，共36,016次HTTP尝试。
+10月14日以无卡模式（0.10元/时）取回68.6MB完整归档，随后确认实例已关机。
+外接盘完整scores.npz及原注册SHA-256与complete.json一致；SQLite integrity_check=ok，
+36,000条groups及252,000条results计数匹配。该检查尚不替代训练前逐请求协议审计。
+EMER基线12次训练已完成；EMER＋Jev尚未训练，独立测试未开放，无新增效果结论。
+证据：[完成标记](v9-complete.json)。

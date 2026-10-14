@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "valid_decisions": 252000,
+  "scores_sha256": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+  "http_groups": 36000,
+  "http_attempts": 36016,
+  "registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+  "public_cache_mixed": false
+}
