@@ -37,3 +37,5 @@ Method and limitations: docs/EMER_USER_CV.md.
 Actual saved-fold audit completed while training continued: every user role, source behavior/Jev/labels/weights, and independently recomputed training-only moments match. All36K rows occur once as outer test. Receipt: reports/emer-user-cv-v1-start/data_audit.json. No outer model performance was computed by this audit.
 
 First outer fold finished all24 fits. Independently audited all trial hashes/configurations/30-epoch budgets, reproduced epoch0 and earliest-best-epoch/config selection, and re-evaluated all six selected models on inner validation exactly. No outer metrics computed. Fold1 training continues under the same live handles. Audit receipt: reports/emer-user-cv-v1-start/fold-0-selection-audit.json.
+
+Second outer fold finished all24 fits. Its full budget, initial/earliest-best-epoch and configuration selection were audited; all six selected models reproduced their seven inner-validation metrics. Third-fold training continues under the same live handles. No outer evaluation yet. Receipt: reports/emer-user-cv-v1-start/fold-1-selection-audit.json.

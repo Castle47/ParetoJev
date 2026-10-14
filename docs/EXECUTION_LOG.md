@@ -1019,3 +1019,12 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   selection, and recomputed seven metrics for all six selected models. Passed.
 - No outer evaluation was performed. Completion of one fold is not evidence
   that the user's superiority objective has been achieved.
+
+
+## 2026-10-15 — Second CV fold completed and inner selection audited
+
+- All24 fits for outer fold1 complete; total48/72 complete before fold2 starts.
+- Verified all trial hashes/budgets and earliest-best epoch/config rules;
+  recomputed seven inner-validation metrics for all six selected models. Passed.
+- No outer metrics computed. Third fold continues on the same process;
+  no paidGPU/API activity.
