@@ -20,6 +20,7 @@
   "remote_preflight_passed": true,
   "instance_status_after_preflight": "powered off, verified",
   "authorization_question_sent": true,
-  "authorization_received": false,
-  "additional_cpu_preflight_cost": "within original remaining margin; final small settlement not yet reread"
+  "authorization_received": true,
+  "additional_cpu_preflight_cost": "within original remaining margin; final small settlement not yet reread",
+  "human_budget_decision": "Maintain total project budget65 CNY; proposed115 CNY increase declined"
 }

@@ -974,3 +974,12 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   once to increase total cap65→115 CNY for this independent run. Pending human
   authorization; account balance is not permission. Goal still active.
 - Evidence: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
+
+
+## 2026-10-14 — User maintains65 CNY total budget
+
+- Explicitly declined the proposed115 CNY cap. Recorded65 as the continuing
+  hard spending limit; no GPU restart or independent score acquisition initiated.
+- Frozen models,50K source-audited cohort, uploaded input and producer-preflight
+  receipts retained. Independent superiority remains unverified. Do not repeat
+  the same spending request without a changed user instruction or circumstances.

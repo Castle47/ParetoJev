@@ -48,3 +48,8 @@ Latest continuation checked the goal, repository, staged artifacts and authoriza
 ## Blocked decision
 
 The same missing budget authorization was revalidated for a third consecutive goal turn. No human approval, fresh scores or confirmation result has arrived; all substantive local engineering, source audits and remote CPU preflight are finished. The65 CNY cap has only about2.33 CNY unsettled margin, versus about42.41 CNY pure inference required. A general automatic goal continuation is not spending consent. No equivalent free same-producer execution resource is available in this environment; the8GB local machine cannot host the registered27B FP16 producer, and changing to a different public/quantized producer would not execute this frozen confirmation. update_goal(blocked) succeeded. Resume upon explicit additional-budget authorization or provision of a suitable same-producer execution resource; retain all prepared artifacts and do not duplicate the pending question.
+
+
+## Explicit human budget decision
+
+User answered the pending spending question: maintain total65 CNY. The proposed increase to115 CNY is declined. Do not repeat the same request, restart paid GPU, or treat general autonomy as authorization to exceed65. Prepared50K confirmation and all models remain preserved. The current self-hosted confirmation needs about42.41 CNY pure inference, exceeding remaining authorized margin. Goal remains unachieved/blocked under this execution plan; it is not marked complete or user-paused. Any alternative must use available resources within65, retain fair comparison, and avoid relabeling reused validation as independent evidence.
