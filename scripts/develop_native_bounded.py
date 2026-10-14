@@ -52,7 +52,12 @@ def main(a):
         raise ValueError('Original fit implementation changed')
     if design['seeds']!=c['training']['seeds'] or design['coefficient_bounds']!=[-4.,4.]:
         raise ValueError('Unsupported fitting protocol')
-    files=[a.config,a.root/'training/emer_selection.json',a.root/'training/common_manifest.json',
+    if base['registration']['common_manifest_sha256']!=sha256_file(a.root/'training/common_manifest.json'):
+        raise ValueError('Baseline was trained on different common inputs')
+    if (design['bootstrap_samples'],design['bootstrap_seed'])!=(c['evaluation']['bootstrap_samples'],c['evaluation']['bootstrap_seed']):
+        raise ValueError('Bootstrap protocol differs')
+    files=[a.config,Path('configs/emer_jev_scale.json'),Path('configs/emer_jev_scale_target.json'),
+        a.root/'training/emer_selection.json',a.root/'training/common_manifest.json',
         a.root/'evaluation-native/evaluation.json',a.root/'evaluation-native/predictions.npz',
         a.root/'training-native/native_response_audit.json',native/'scores.npz',native/'registration.json',
         Path('scripts/jev_residual.py'),Path('scripts/run_emer_jev.py'),Path(__file__)]
@@ -112,6 +117,9 @@ def main(a):
                 if not np.array_equal(metrics(output,val),candidate['validation']):raise ValueError('Candidate validation differs')
             if choose(record['candidates'],design['guards'])!=record['selected_index']:
                 raise ValueError('Guarded selection differs')
+            chosen=record['candidates'][record['selected_index']]
+            if record['beta']!=chosen['beta'] or record['ridge']!=chosen['ridge']:
+                raise ValueError('Selected coefficients differ from chosen candidate')
             output=corrected_scores(pred['validation'],basis['validation'][arm],np.array(record['beta']),mask,cap)
             bound=cap*score_scale(pred['validation'],mask)[:,None]
             if np.any(np.abs(output-pred['validation'])[mask]>(np.broadcast_to(bound,mask.shape)+1e-12)[mask]):
