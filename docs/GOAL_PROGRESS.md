@@ -46,11 +46,19 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 - Row-level delivery audit proves matched comparator predictions unchanged and every routed output exactly matches the frozen chosen source model. Both recipes, all seeds/folds and prior failures remain published.
 - This is still post-inspection exploratory evidence. A5/5 screen does not prove new-date generalization or automatically complete the overall goal. All processes have exited successfully; there is no live training/evaluation session to poll.
 
-## Next actions
+## Independent-date entry point complete; external input remains
 
-1. Export complete: reports/emer-candidate-export-v1. Bundle at external development/exports/emer-matched-blended-v1, ZIP beside it. All9 branch/seed outputs on36K rows exactly match source scores/ranks/routes; standalone CLI outside repo and ZIP bytes verified. Manifest60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71. No live export/verification process remains.
-2. Adapt independent-date evaluation readiness to these fold-specific encoders and models. The existing50K request packet is still unscored; do not feed full-development normalization into fold-specific models. User routing must use the original fixed hash, never outcomes.
-3. Stop recipe/coefficient tuning against the explored outer cohort. Keep the65 CNY cap; no paidGPU or newJev requests. Stronger confirmation requires the matching real-score input/compute, which has not been provided. List the minimum missing input once the local handoff is complete; do not repeat the rejected budget request.
+- reports/emer-routed-confirmation-ready-v1/README.md and docs/EMER_ROUTED_CONFIRMATION.md contain the fixed protocol, command and exact missing input.
+- New evaluator/finisher/reporter implemented, source/config/model hashes frozen. All319 repository tests pass. Actual50K source/request/sampling checks and per-route encoder preflight pass; route sizes17149/16495/16356,15115 users total.
+- No independent predictions, metrics, or materialized test tensor exist. No newGPU/API requests. Nothing is currently training or evaluating.
+- The only remaining execution input is the complete real scoring directory for the fixed50K packet: complete.json, registration.json, scores.npz, native.sqlite3 containing350K matching native JEV-27B decisions. The old development cache cannot substitute.
+- User explicitly maintains65 CNY and declined more funding. Do not ask for the rejected increase again or start paid inference. Await matching scores or compatible compute usable within that constraint.
+
+## Next actions and blocker audit
+
+1. Local handoff is complete; do not restart completed jobs, tune recipes on the explored cohort, or manufacture a test result. Verify the current source/score availability on continuation.
+2. If a valid score directory arrives, run scripts/finish_emer_routed_confirmation.sh with the KuaiRand root and that directory. It gates every prediction on full raw-response audit, uses each route's encoder, evaluates all three comparisons and independently replays.
+3. Otherwise the same external-score/compute blocker remains. This is the first goal turn documenting the blocker after all local readiness work completed. Leave the goal active now; if it recurs for three consecutive goal turns with no meaningful local work left, set the goal blocked. Do not mark complete from the exploratory5/5 result.
 
 ## Paths and preserved confirmation
 
@@ -59,10 +67,3 @@ Run data: /Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v
 Logs: sibling user-cv-v1-train.log, user-cv-v1-evaluate.log and fold0/1/2 selection-audit logs.
 
 The50K Apr23-25 cohort, input packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. No new paidGPU or externalJev inference was used in this run. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
-
-## Candidate runtime files and remaining integration
-
-- deployment/emer_candidate/candidate_runtime.py and infer.py: strict label-free numeric schema, original SHA256 user routing, per-fold encoding, immutable model/source hash checks, CPU2threads and batch32.
-- scripts/export_emer_candidate.py requires a fresh export directory. scripts/verify_emer_candidate_export.py replays every existing36K prediction and standalone CLI.
-- Do not modify the published bundle. Inference requires existing numeric behavior/Jev inputs; the upstream models are not embedded.
-- Next integration can reuse audit_scores/materialize from scripts/evaluate_multiobjective_confirmation.py with its original scoring config unchanged. That helper produces old global features, which the new candidate must ignore: feed the audited raw26features to Candidate so its own per-fold specs are applied. Preserve the original50K request packet and producer schema. No test performance may be computed before every real score is present and audited.

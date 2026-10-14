@@ -1141,3 +1141,16 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - No source package modules or original experiments were modified. No new
   training, API or GPU spend. Independent50K scoring/evaluation remains pending.
 - Evidence and download path: reports/emer-candidate-export-v1/README.md.
+
+
+## 2026-10-15 — Finish independent-date evaluation readiness
+
+- Added fixed routed-candidate configuration, score-gated evaluator, independent
+  replay, complete reporting and a local one-command finisher. Old request/producer
+  configuration unchanged; all three route encoders are used correctly.
+- Full319-test suite passed. Actual50K data/request/source audits and encoder
+  preflight passed:17149/16495/16356 rows across routes;15115 users.
+- Verified no independent predictions/evaluation/common test tensor exist.
+  Four required score artifacts are absent;350K genuine decisions are still needed.
+- All available local handoff work complete.65 CNY cap retained; no newGPU/API
+  inference. External-input blocker audit begins; goal is not marked complete.

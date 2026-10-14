@@ -1,0 +1,14 @@
+{
+  "local_preflight_passed": true,
+  "score_artifacts_missing": [
+    "complete.json",
+    "registration.json",
+    "scores.npz",
+    "native.sqlite3"
+  ],
+  "model_performance_computed": false,
+  "required_real_groups": 50000,
+  "required_real_decisions": 350000,
+  "budget_cap_cny": 65,
+  "new_paid_inference_started": false
+}

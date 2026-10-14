@@ -1,0 +1,12 @@
+{
+  "full_suite_passed": 319,
+  "exit_code": 0,
+  "log_sha256": "974a08f46006f23881c110a14c89fb6bb2516b71990dab5e96d876c4cf5c3f67",
+  "registration_sha256": "7afe2ae49e7dab1c98136c6841b9dcbd92648f47b4aad43c623f792570027a50",
+  "candidate_manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "real_cohort_preflight_passed": true,
+  "no_test_prediction_or_evaluation_artifacts": true,
+  "missing_real_scores": true,
+  "new_api_requests": 0,
+  "new_paid_gpu_started": false
+}

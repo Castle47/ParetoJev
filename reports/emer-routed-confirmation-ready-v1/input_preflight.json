@@ -1,0 +1,41 @@
+{
+  "slates": 50000,
+  "users": 15115,
+  "route_encoders": [
+    {
+      "fold": 0,
+      "slates": 17149,
+      "users": 5093,
+      "feature_shape": [
+        17149,
+        10,
+        65
+      ],
+      "feature_spec_sha256": "9ab128c79ac20d888be17e243eca42c413b2d1ef8d598ed532b33e092ada1357"
+    },
+    {
+      "fold": 1,
+      "slates": 16495,
+      "users": 5032,
+      "feature_shape": [
+        16495,
+        10,
+        65
+      ],
+      "feature_spec_sha256": "60ad249df835e9523890ed7518662166573b8924dcfa66b55e9e7ef5480116cf"
+    },
+    {
+      "fold": 2,
+      "slates": 16356,
+      "users": 4990,
+      "feature_shape": [
+        16356,
+        10,
+        65
+      ],
+      "feature_spec_sha256": "b578a3b810d31db268fbbcfd047e91b16c165d92d2c93c58d9a868651ef2d96f"
+    }
+  ],
+  "feedback_labels_read": false,
+  "model_performance_computed": false
+}

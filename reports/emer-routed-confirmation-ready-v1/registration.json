@@ -1,0 +1,115 @@
+{
+  "config": {
+    "experiment_id": "emer-routed-independent-v1",
+    "role": "One fixed new-date confirmation of the exported matched-fallback policy; no test-based selection",
+    "candidate_manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+    "score_protocol": {
+      "path": "configs/emer_multiobjective_confirmation.json",
+      "sha256": "89c49436c66b0989683579f81a1e95d444b5ae2cb16cdcd683132c77e1847d80",
+      "note": "Reuse the exact existing50K packet and native producer; old candidate selection is not used for prediction"
+    },
+    "cohort": {
+      "slates": 50000,
+      "users": 15115,
+      "candidate_exposures": 500000,
+      "start_ms": 1650643200000,
+      "end_ms": 1650902400000,
+      "raw_sha256": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+      "preparation_sha256": "82423a641b53ee07c9ba966f2abee3fc40e2713f79476aba8f6a94011571cf51",
+      "cohort_audit_sha256": "ca36baf9f0172c250d47c3419bed6f929b9c44b8a3290d06df789fc0b2e7d674",
+      "sampling_replay_sha256": "978879df960ff944efa2c1d1cf8a3a848030ff0c9c1767c3874189fadaa52f65",
+      "transfer_sha256": "c2d72661c51ec1a5fc8d69ea4f475ef5377d4518708c998ec6ab43b5ef00e529",
+      "compressed_input_sha256": "5250cbf1638d318e4accbcc1c8062f2233cdace77c5f272468a14d4037b67ad9",
+      "source_input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d"
+    },
+    "routing": {
+      "partition_seed": 2026101407,
+      "folds": 3,
+      "namespace": "outer",
+      "rule": "SHA256 first8bytes big-endian modulo3; corresponding frozen encoder per route"
+    },
+    "objectives": [
+      "is_click",
+      "long_view",
+      "is_like",
+      "is_follow",
+      "is_comment",
+      "is_forward",
+      "is_hate"
+    ],
+    "directions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -1
+    ],
+    "training": {
+      "seeds": [
+        7,
+        17,
+        29
+      ],
+      "batch_size": 32,
+      "cpu_threads": 2,
+      "fit_allowed": false
+    },
+    "evaluation": {
+      "top_k": 3,
+      "bootstrap_samples": 2000,
+      "bootstrap_seed": 2026101503,
+      "maximum_positive_goal_absolute_point_drop": 0.005,
+      "maximum_hate_risk_absolute_point_increase": 0.005,
+      "required_comparisons": [
+        "signal",
+        "original_reference"
+      ],
+      "conditions": "For both: positive aggregate conditional CI; aggregate point gain>0 in each seed and each routing group; all seven point guards pass",
+      "decisions": "One full50000-slate test after all350000 real decisions pass source/response audits; no early baseline metrics, adaptive sample extension, checkpoint or threshold changes"
+    },
+    "budget": {
+      "total_cap_cny": 65,
+      "new_paid_gpu_authorized": false,
+      "new_api_requests_by_this_tool": 0
+    },
+    "limitations": [
+      "Logged-exposure pseudo-slates are not unexposed retrieval candidates or an online randomized experiment.",
+      "Routing groups use overlapping training cohorts; conditional bootstrap does not capture all training uncertainty.",
+      "Point guards do not prove every objective improves or simultaneous population noninferiority.",
+      "This is a new prospective evaluator for models fixed before any performance on the reserved dates; earlier36K results remain exploratory."
+    ]
+  },
+  "inputs": {
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/configs/emer_routed_independent_v1.json": "d4d14ca21e7ed3b9c6884fa10dcf1318c4af3a3534d4401b32b0646a5a7615d5",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/configs/emer_multiobjective_confirmation.json": "89c49436c66b0989683579f81a1e95d444b5ae2cb16cdcd683132c77e1847d80",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/exports/emer-matched-blended-v1/manifest.json": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/preparation.json": "82423a641b53ee07c9ba966f2abee3fc40e2713f79476aba8f6a94011571cf51",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/cohort_audit.json": "ca36baf9f0172c250d47c3419bed6f929b9c44b8a3290d06df789fc0b2e7d674",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/sampling_replay.json": "978879df960ff944efa2c1d1cf8a3a848030ff0c9c1767c3874189fadaa52f65",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/transfer/transfer.json": "c2d72661c51ec1a5fc8d69ea4f475ef5377d4518708c998ec6ab43b5ef00e529",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/raw_slates.npz": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/transfer/jev_input.jsonl.gz": "5250cbf1638d318e4accbcc1c8062f2233cdace77c5f272468a14d4037b67ad9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/jev_input.jsonl": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/behavior-v2/run-v2/upload_metadata_assumed_static.joblib": "4446842cd6c37ed0fd0bc1df1d7bbd4b9b246233165aba43de95da21e02ff159",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-multiobjective-confirmation-v1/feature_spec.json": "b2ecbbeb4c03d52488075ebf1503b40afc8e5f3dfa94dd2b00db05c2688b2766",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/feature_spec.json": "b2ecbbeb4c03d52488075ebf1503b40afc8e5f3dfa94dd2b00db05c2688b2766",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/common_manifest.json": "f4c77e032dd4c6f6520a15ec69b5cdb0cb77a0efbf5725ad59afa4866a57db3a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer_selection.json": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/prior-popularity.npy": "89f64d66d5d000c17a905c234a9fcc26824419c5cc44dc5f00357c5c1ab17f14",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/registration.json": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/evaluate_multiobjective_confirmation.py": "fddc359d4e6f69a5b95ef622c092e6bf503943fdf3e9cea4b4e5585561fa8734",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_emer_balanced_transfer.py": "56aeb456c01623b732970b7c4ae7792eb5ac7e573fecc7fbe66fdd105dbeba91",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/deployment/emer_candidate/candidate_runtime.py": "495c036ee04e9e696c2947eb9966c4106824d5aa2b7bb90f219ab3900f672909",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/deployment/autodl/score_confirmation.py": "881d871e33b863cac5316e28017b66d4fd1f11abf610bb394d3b4f44f11ed5f0",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/evaluate_emer_routed_confirmation.py": "a600c32e9a37ec37ecf39433686711f32df17e1c1232294c02cf4c99579f93a7",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-routed-confirmation-v1/input_preflight.json": "430d34201bb337674ddc4b10fb4f10b71e4147fb9cccb99da3a58122fd74d4fe"
+  },
+  "data_root": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k",
+  "candidate_manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "scoring_protocol_unchanged": true,
+  "new_training": false,
+  "source_test_performance_not_opened": true
+}

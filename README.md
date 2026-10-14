@@ -79,6 +79,14 @@ comparison cannot substitute for the controlled result. The
 keeps all three studies and their limitations together; the overall goal remains
 unachieved.
 
+The [frozen candidate export](reports/emer-candidate-export-v1/README.md)
+contains portable reranker weights, per-fold encoders and a label-free CLI. All
+nine branch/seed outputs on36K slates replay exactly. The
+[new-date evaluation entry point](reports/emer-routed-confirmation-ready-v1/README.md)
+has passed real50K input preflight and the full319-test suite, but has produced
+no test metrics: the350K matching real Jev judgments are still missing. The65 CNY
+cap remains in effect; these tools do not launch paid inference.
+
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across
 the three reused periods. A frozen-EMER, one-coefficient bounded correction still

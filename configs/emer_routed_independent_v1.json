@@ -1,0 +1,82 @@
+{
+  "experiment_id": "emer-routed-independent-v1",
+  "role": "One fixed new-date confirmation of the exported matched-fallback policy; no test-based selection",
+  "candidate_manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "score_protocol": {
+    "path": "configs/emer_multiobjective_confirmation.json",
+    "sha256": "89c49436c66b0989683579f81a1e95d444b5ae2cb16cdcd683132c77e1847d80",
+    "note": "Reuse the exact existing50K packet and native producer; old candidate selection is not used for prediction"
+  },
+  "cohort": {
+    "slates": 50000,
+    "users": 15115,
+    "candidate_exposures": 500000,
+    "start_ms": 1650643200000,
+    "end_ms": 1650902400000,
+    "raw_sha256": "371ad734cc47bcc964c0d1f57201887aa7c7624530a01e1ed1b70eb8f543cd99",
+    "preparation_sha256": "82423a641b53ee07c9ba966f2abee3fc40e2713f79476aba8f6a94011571cf51",
+    "cohort_audit_sha256": "ca36baf9f0172c250d47c3419bed6f929b9c44b8a3290d06df789fc0b2e7d674",
+    "sampling_replay_sha256": "978879df960ff944efa2c1d1cf8a3a848030ff0c9c1767c3874189fadaa52f65",
+    "transfer_sha256": "c2d72661c51ec1a5fc8d69ea4f475ef5377d4518708c998ec6ab43b5ef00e529",
+    "compressed_input_sha256": "5250cbf1638d318e4accbcc1c8062f2233cdace77c5f272468a14d4037b67ad9",
+    "source_input_sha256": "54b640a11e94ce8aea96e133909cde71f6553e9f7831f3f6278cff61017f5e2d"
+  },
+  "routing": {
+    "partition_seed": 2026101407,
+    "folds": 3,
+    "namespace": "outer",
+    "rule": "SHA256 first8bytes big-endian modulo3; corresponding frozen encoder per route"
+  },
+  "objectives": [
+    "is_click",
+    "long_view",
+    "is_like",
+    "is_follow",
+    "is_comment",
+    "is_forward",
+    "is_hate"
+  ],
+  "directions": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "training": {
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "batch_size": 32,
+    "cpu_threads": 2,
+    "fit_allowed": false
+  },
+  "evaluation": {
+    "top_k": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 2026101503,
+    "maximum_positive_goal_absolute_point_drop": 0.005,
+    "maximum_hate_risk_absolute_point_increase": 0.005,
+    "required_comparisons": [
+      "signal",
+      "original_reference"
+    ],
+    "conditions": "For both: positive aggregate conditional CI; aggregate point gain>0 in each seed and each routing group; all seven point guards pass",
+    "decisions": "One full50000-slate test after all350000 real decisions pass source/response audits; no early baseline metrics, adaptive sample extension, checkpoint or threshold changes"
+  },
+  "budget": {
+    "total_cap_cny": 65,
+    "new_paid_gpu_authorized": false,
+    "new_api_requests_by_this_tool": 0
+  },
+  "limitations": [
+    "Logged-exposure pseudo-slates are not unexposed retrieval candidates or an online randomized experiment.",
+    "Routing groups use overlapping training cohorts; conditional bootstrap does not capture all training uncertainty.",
+    "Point guards do not prove every objective improves or simultaneous population noninferiority.",
+    "This is a new prospective evaluator for models fixed before any performance on the reserved dates; earlier36K results remain exploratory."
+  ]
+}
