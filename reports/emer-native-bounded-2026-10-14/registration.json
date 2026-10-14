@@ -1,0 +1,74 @@
+{
+  "design": {
+    "experiment_id": "emer-native-bounded-v1-development",
+    "role": "Exploratory development after native signal diagnosis; no independent test or new confirmation",
+    "baseline": "Original selected expanded EMER checkpoints; frozen, never reselected",
+    "arms": [
+      "frozen_emer",
+      "behavior_correction",
+      "jev_correction"
+    ],
+    "correction_features": "Seven candidate-centered within-slate ranks; hate oriented to no-hate; identical construction in both learned arms",
+    "additional_parameters_per_learned_arm": 7,
+    "cap_standard_deviations": 0.25,
+    "coefficient_bounds": [
+      -4.0,
+      4.0
+    ],
+    "ridge_grid": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "fit": "Weighted long-view positive-negative pair logistic loss on the 30000 training slates only; fixed frozen baseline score divided by its per-slate standard deviation, plus bounded tanh correction",
+    "selection": "Each learned arm independently maximizes validation long-view NDCG@3 subject to guards against original frozen EMER; zero candidate first, strict improvements only, earlier ridge wins ties",
+    "guards": {
+      "long_view_max_absolute_drop": 0.0,
+      "positive_mean_max_absolute_drop": 0.0,
+      "click_max_absolute_drop": 0.005,
+      "no_hate_max_absolute_drop": 0.005,
+      "numerical_tolerance": 1e-12
+    },
+    "validation_slates": 6000,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20261013,
+    "comparisons": [
+      "jev_correction vs frozen_emer",
+      "behavior_correction vs frozen_emer",
+      "jev_correction vs behavior_correction"
+    ],
+    "acceptance_for_new_test_planning": "Jev beats both original frozen EMER and equal-capacity behavior correction on all five original descriptive development gates; this permits planning only and is not confirmatory success",
+    "independent_test_opened": false,
+    "online_business_success": false,
+    "no_extra_cap_or_feature_search": true
+  },
+  "input_sha256": {
+    "configs/emer_native_bounded.json": "0701542fe0855daddf4f369656430114f15c20011c830d3310dc596a1ae2f9ab",
+    "configs/emer_jev_scale.json": "5936f2a6813ee460704513750353997858ab1f38dcaafee9913caba543d21a6c",
+    "configs/emer_jev_scale_target.json": "17dc8a2b22fc7ee20a6bede600ee85283eeead322980f45a33e7e372e422d747",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer_selection.json": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/common_manifest.json": "f4c77e032dd4c6f6520a15ec69b5cdb0cb77a0efbf5725ad59afa4866a57db3a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/evaluation.json": "8820464f119056edcea16909b2201c9d5cd1f7f39666e563248852456bfe360f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/predictions.npz": "85d9dc260f31c9fdfd7513d38946bd1e5a36cb15e08589f9d8c6e72534d7bce9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/native_response_audit.json": "e222db6685d68cf46f0c9b7e2f01e2f1d9280824c5c3e340c0187b89c1bc9499",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/scores.npz": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/jev-native-v9-fp16/registration.json": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+    "scripts/jev_residual.py": "859c3c716ca2d25aaf5767332cea39474ae5b78beda03def20d5809152f72bfe",
+    "scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/develop_native_bounded.py": "731319eda34015c8d72d303b964f9b43d7419250b07e8a3b27e4d9d28b649fa3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/train.npz": "f368ab737fe2ddaf0971ac7b9b9d93df5bf31e952c150a5b854a3e0202d2b021",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/validation.npz": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial0.pt": "e0c871bf7d545d9040e2cfbeb4bc2664a4d83ea299e675d1a0b84cfdc361ddf5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial1.pt": "7c2ba38b3d80d9465c3faf56e10e1be2cb7a02347575dcdcb0333dbbb11c0f96",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial3.pt": "e3c237618d2c02e01172b9baf05bfe94c90cd9228ef48d2f0bbb768048b6e6e9"
+  },
+  "model_package_sha256": "e7ddf4f54feea2ca8e8c712198033b253ada53fc4d0e30efb7f31fce21f5e9f9",
+  "baseline_parameters": 43345,
+  "additional_parameters": 7,
+  "independent_test_opened": false
+}

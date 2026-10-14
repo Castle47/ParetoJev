@@ -915,3 +915,28 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   test sealed; first reconcile primary long-view guard with aggregate selection
   and test a bounded, baseline-preserving fusion hypothesis in development.
 - Evidence: reports/emer-native-diagnosis-2026-10-14/README.md.
+
+
+## 2026-10-14 — Equal-capacity bounded correction experiment complete
+
+- Froze the original three EMER baselines. Registered two residual arms before
+  fitting: seven behavior-rank coefficients versus seven Jev-rank coefficients,
+  identical three ridge settings, train-only weighted long-view pair loss and
+  0.25 within-slate baseline-standard-deviation score cap.18 small fits complete.
+- Validation selects long view subject to long-view/positive-mean point
+  noninferiority and original click/hate guards; zero correction wins ties and
+  remains fallback. This is a new explicitly labeled development protocol, not
+  a post-hoc rewrite of prior success criteria.
+- Jev fallback for seeds7/17; seed29 accepts ridge0.001. Mean long-view +0.15%
+  versus frozen EMER, absolute95%CI[-0.000542,+0.001833]. Behavior-only correction
+  gives+1.23%, CI[+0.002786,+0.007348]. Jev versus behavior-only correction -1.07%,
+  CI[-0.006990,-0.002066]. Validation reuse limits all these intervals.
+- Jev/original gates2/5, behavior/original4/5, Jev/behavior2/5. New-test planning
+  gate fails. Independent test remains sealed; no added GPU or API expenditure.
+- Nine focused tests pass. Independent-process model/coefficients/predictions,
+  every candidate's guarded selection and all comparison intervals replay
+  exactly; optimizer refitting/cross-hardware equivalence not claimed. All
+  registered inputs, source scripts and baseline hashes unchanged.
+- Evidence: reports/emer-native-bounded-2026-10-14/README.md. Stop expanding this
+  fusion grid; a future development proposal should first address signal input
+  adequacy and relevance rather than spend on a larger confirmation set.

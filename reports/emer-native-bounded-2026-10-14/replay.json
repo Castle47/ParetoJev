@@ -1,0 +1,9 @@
+{
+  "exact_model_predictions": true,
+  "exact_coefficients_and_selection": true,
+  "exact_metrics_and_intervals": true,
+  "optimizer_refit": false,
+  "selection_sha256": "24d7c60f4dbff6a3555a7f29992a104f400d6187a3343fed7d2bb35e3d4c39e2",
+  "predictions_sha256": "5fb8580a1244561961f7a0b901c227c003a247160a57cebfb6f6fd284c3f3787",
+  "evaluation_sha256": "95c8c8e871b8d29d3c3c5b908f1e0b71c524cca8952c7ff46112ced0850a16e2"
+}
