@@ -1087,3 +1087,17 @@ Reason: the execution container did not have the datasets, API credentials, a ru
  13/18 models retain epoch0. No threshold or seed exclusions were changed.
 - All evidence published in reports/emer-balanced-transfer-v1; exploratory
   limitations retained. Goal remains unachieved; no paidGPU/API activity.
+
+
+## 2026-10-15 — Diagnose fallback and launch one fixed midpoint test
+
+- Inspected all18 inner histories. Seed29 Jev improves mean in45/45 epochs,
+  but long-view guards fail throughout folds0/1 and comment guard throughout
+  fold2. No admissible improving epoch was overlooked; original results stand.
+- Registered a fixed50/50 original/conditional-balanced posterior in both arms.
+  Same18 fits,15epochs, learning rate, initialization and guards; no mixture search.
+- Five tests pass, including exact endpoints/midpoint, finite gradients, both
+  training arms, exact initialization and guarded selection without outer input.
+- Real ancestry/input/source hashes verified; registration preserved. Training
+  session81273/PID39954 and finalizer92872/PID39986 launched locally.
+- No newGPU/API requests. Prior driver/model sources remain unchanged.

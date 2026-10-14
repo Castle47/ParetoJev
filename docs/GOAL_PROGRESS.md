@@ -25,11 +25,28 @@ Report: reports/emer-balanced-transfer-v1/README.md. All18 fits, guarded inner-s
 - Seed29 is identical to its original anchor in every fold and both arms; its gain is exactly0. Strict positive-every-seed fails. Both required comparisons4/5; overall screen false.13/18 fits select epoch0.
 - Post-outer-inspection exploratory design, not new independent confirmation. Do not drop seed29, change>0 to>=0, or mark achieved from only favorable averages.
 
+## Active fixed50/50 posterior experiment
+
+The complete fallback diagnosis is in reports/emer-balanced-fallback-diagnosis. All45 seed29 Jev inner epochs improve the mean but fail at least one guard: long-view in folds0/1, comments in fold2. There was no missed admissible checkpoint. This motivates one fixed50/50 blend of original and fully task-balanced posterior, identical in both arms; no coefficient search or threshold changes.
+
+- Config: configs/emer_blended_transfer_v1.json; protocol: docs/EMER_BLENDED_TRANSFER.md.
+- Separate immutable driver: scripts/run_emer_blended_transfer.py. Old model and both prior driver bytes remain unchanged for exact replay.
+- Five relevant tests pass; real source/anchor hashes verified and registration saved in reports/emer-blended-transfer-v1-start.
+-18 fits, three original user folds, seeds7/17/29,15epochs, same budgets, initialization, inner guards and comparisons. Results remain exploratory after earlier outer inspections.
+
+### Live handles — verify before polling/restarting
+
+- Training session81273, PID39954: run_emer_blended_transfer.py --stage train.
+- Finalizer session92872, PID39986: finish_emer_blended_transfer.sh waits for training, audits all18 fits, evaluates, replays and reports.
+- caffeinate waits only for39986; not an automation.
+- Output: external data root emer-jev-scale-v3/blended-transfer-v1. Logs: sibling blended-transfer-v1-train.log and blended-transfer-v1-evaluate.log.
+- Stages prepare/train/audit/evaluate/replay. Keep driver, config and its imported frozen drivers unchanged while this registered run lives.
+
 ## Next actions
 
-1. Inspect seed29 inner histories to determine why no admissible improving epoch was found: guard violations, no aggregate gain, or a training issue. Do not select from outer performance or rewrite past outcomes.
-2. Decide whether evidence supports a concrete local improvement hypothesis. Any changed recipe must have a new exploratory registration and matched no-Jev control; do not keep trying settings simply to make known outer metrics pass.
-3. Preserve the65 CNY cap and the unscored independent confirmation. Even a favorable exploratory result does not remove the need for stronger confirmation before broad claims.
+1. Poll the same live training session using60000ms empty waits. Do not duplicate it or read a partial outer result as completion.
+2. Verify all18 checkpoint/inner-selection audit, then exact evaluation replay and all three comparisons. Report every seed, fold, goal and epoch0 fallback.
+3. Keep the original criteria and65 CNY cap. Do not claim independent confirmation from these reused outer data. The frozen Apr23–25 queue remains unscored.
 
 ## Paths and preserved confirmation
 
