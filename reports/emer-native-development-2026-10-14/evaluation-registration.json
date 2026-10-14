@@ -1,0 +1,13 @@
+{
+  "role": "development validation, reused for model selection",
+  "independent_test_opened": false,
+  "confirmatory_success": false,
+  "baseline_selection_sha256": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+  "native_selection_sha256": "a26e23f1d426e6b0b46590fa91eb1f196c56645543f386bf1869d65117ad718d",
+  "validation_sha256": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf",
+  "scores_sha256": "ccdbc61297b12bf9bfdd0a5935a7a8b0d9f2e28d8bc4f9eaae8a1eef2b90d78e",
+  "target_sha256": "17dc8a2b22fc7ee20a6bede600ee85283eeead322980f45a33e7e372e422d747",
+  "evaluator_sha256": "a551458bc9221974af90c76b63444cda3ebd918ecc1b999c0d8d5000cc73cc48",
+  "metric_script_sha256": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+  "interval_caveat": "Paired users, conditional on selected fits; does not correct validation selection bias."
+}

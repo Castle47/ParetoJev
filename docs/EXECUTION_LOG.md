@@ -878,3 +878,18 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   sequential local finalizer will evaluate and replay after training finishes.
 -12 relevant tests pass. Launch evidence: reports/emer-native-development-2026-10-14.
   This entry records running work and does not claim training or effect success.
+
+
+## 2026-10-14 — Expanded native-Jev development comparison complete
+
+- All12 native-Jev fits complete (matching12 baseline fits), selected by the
+  original validation-only rule. Evaluation and independent-process exact replay
+  complete; prediction/evaluation file hashes rechecked against replay receipt.
+- On6,000 validation slates /4,253 users, seed-mean long-view NDCG@3 rises
+  0.412540 to0.420807 (+2.00%); conditional paired-user absolute CI
+  [+0.001819,+0.014960]. Only seed7 improves; seeds17/29 decrease.
+- Three of five development diagnostics pass. The every-seed long-view gain and
+  positive-mean lower-CI gates fail. Validation was reused for model selection;
+  these intervals do not establish confirmatory superiority. Independent test
+  remains unopened and no extra paid compute was started.
+- Final evidence: reports/emer-native-development-2026-10-14/README.md.
