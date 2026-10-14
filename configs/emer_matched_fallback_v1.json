@@ -1,0 +1,22 @@
+{
+  "experiment_id": "emer-matched-fallback-v1",
+  "role": "Exploratory matched-comparator fallback after both previous outer reports were inspected; not independent confirmation",
+  "recipes": {"balanced": "balanced-transfer-v1", "blended": "blended-transfer-v1"},
+  "decision_data": "Frozen inner-validation metrics only; no candidate search or outer outcomes enter model choice",
+  "decision": "Retain the previously selected Jev checkpoint only if its six-positive mean strictly exceeds the selected same-recipe no-Jev checkpoint and every goal is at least -0.005 versus both matched comparator and original anchor; otherwise use the exact matched no-Jev checkpoint",
+  "freeze": "Freeze all18 pair decisions across both recipes before computing either policy's outer metrics",
+  "maximum_positive_goal_absolute_point_drop": 0.005,
+  "maximum_hate_risk_absolute_point_increase": 0.005,
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 2026101502,
+  "new_training": false,
+  "new_jev_calls": 0,
+  "paid_gpu": false,
+  "total_project_cap_cny": 65,
+  "limitations": [
+    "This is a new deployment/selection policy, not a correction that changes earlier registered results.",
+    "All previous outer data and results were already explored; these estimates are exploratory and need independent confirmation.",
+    "Reported benefits are conditional offline ranking estimates, not online causal uplift or universal training uncertainty.",
+    "A fallback has exactly zero Jev increment for that model slot; no zero is counted as a strict positive gain."
+  ]
+}
