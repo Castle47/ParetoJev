@@ -1,0 +1,10 @@
+{
+  "bundle": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/exports/emer-matched-blended-v1",
+  "archive": "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/exports/emer-matched-blended-v1.zip",
+  "archive_bytes": 3951918,
+  "archive_sha256": "152194673ce3c86ca2c1ce253a6d4825c386bab4e88e69094b4103603939d177",
+  "manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "model_files": 23,
+  "files": 106,
+  "archive_contents_match_directory": true
+}

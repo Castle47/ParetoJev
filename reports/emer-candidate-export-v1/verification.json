@@ -1,0 +1,83 @@
+{
+  "manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "archive_sha256": "152194673ce3c86ca2c1ce253a6d4825c386bab4e88e69094b4103603939d177",
+  "source_predictions_sha256": "a10006bc4ed22f9a47b603458663d5725583e004577cb69f6697f2fb1ae95f33",
+  "checks": [
+    {
+      "arm": "emer",
+      "seed": 7,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "emer_jev",
+      "seed": 7,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "anchor",
+      "seed": 7,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "emer",
+      "seed": 17,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "emer_jev",
+      "seed": 17,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "anchor",
+      "seed": 17,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "emer",
+      "seed": 29,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "emer_jev",
+      "seed": 29,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    },
+    {
+      "arm": "anchor",
+      "seed": 29,
+      "slates": 36000,
+      "predictions_exact": true,
+      "ranking_exact": true,
+      "routing_exact": true
+    }
+  ],
+  "standalone_cli_exact": true,
+  "label_free_input": true,
+  "independent_test_read": false,
+  "benchmark_scope": "Exact inference replay on the already-explored development cohort only"
+}

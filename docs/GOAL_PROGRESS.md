@@ -48,7 +48,7 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 
 ## Next actions
 
-1. Freeze a reviewable candidate/export package for the blended matched-fallback policy: model/feature-spec hashes, explicit user-to-fold routing, input/output schema and reproducible inference commands. Preserve all three seeds and both matched/reference comparators.
+1. Export complete: reports/emer-candidate-export-v1. Bundle at external development/exports/emer-matched-blended-v1, ZIP beside it. All9 branch/seed outputs on36K rows exactly match source scores/ranks/routes; standalone CLI outside repo and ZIP bytes verified. Manifest60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71. No live export/verification process remains.
 2. Adapt independent-date evaluation readiness to these fold-specific encoders and models. The existing50K request packet is still unscored; do not feed full-development normalization into fold-specific models. User routing must use the original fixed hash, never outcomes.
 3. Stop recipe/coefficient tuning against the explored outer cohort. Keep the65 CNY cap; no paidGPU or newJev requests. Stronger confirmation requires the matching real-score input/compute, which has not been provided. List the minimum missing input once the local handoff is complete; do not repeat the rejected budget request.
 
@@ -59,3 +59,10 @@ Run data: /Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v
 Logs: sibling user-cv-v1-train.log, user-cv-v1-evaluate.log and fold0/1/2 selection-audit logs.
 
 The50K Apr23-25 cohort, input packet, original paired models and native producer preflight remain prepared but unscored due declined additional budget. Instance td89w6tsnx-ba43120e was confirmed OFF. No new paidGPU or externalJev inference was used in this run. Reviewable package: reports/multiobjective-confirmation-ready-2026-10-14/README.md.
+
+## Candidate runtime files and remaining integration
+
+- deployment/emer_candidate/candidate_runtime.py and infer.py: strict label-free numeric schema, original SHA256 user routing, per-fold encoding, immutable model/source hash checks, CPU2threads and batch32.
+- scripts/export_emer_candidate.py requires a fresh export directory. scripts/verify_emer_candidate_export.py replays every existing36K prediction and standalone CLI.
+- Do not modify the published bundle. Inference requires existing numeric behavior/Jev inputs; the upstream models are not embedded.
+- Next integration can reuse audit_scores/materialize from scripts/evaluate_multiobjective_confirmation.py with its original scoring config unchanged. That helper produces old global features, which the new candidate must ignore: feed the audited raw26features to Candidate so its own per-fold specs are applied. Preserve the original50K request packet and producer schema. No test performance may be computed before every real score is present and audited.

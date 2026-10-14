@@ -1129,3 +1129,15 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   exploratory after prior outer inspection; independent-date evidence missing.
 - All source/runtime checks exited0. Next work is fixed-candidate packaging and
   independent-evaluator readiness with per-fold feature specs, not more tuning.
+
+
+## 2026-10-15 — Export and verify the fixed candidate runtime
+
+- Exported deduplicated weights, all three encoders/seeds/branches, original
+  user routing, frozen source, pinned dependencies and label-free schema.
+- Five relevant input/guard tests passed. Exact scores, ranks and routes for
+  all9 branch/seed combinations ×36K rows matched audited source predictions.
+- Standalone CLI from outside repository passed; ZIP files match export bytes.
+- No source package modules or original experiments were modified. No new
+  training, API or GPU spend. Independent50K scoring/evaluation remains pending.
+- Evidence and download path: reports/emer-candidate-export-v1/README.md.
