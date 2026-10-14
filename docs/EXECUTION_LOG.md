@@ -940,3 +940,18 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Evidence: reports/emer-native-bounded-2026-10-14/README.md. Stop expanding this
   fusion grid; a future development proposal should first address signal input
   adequacy and relevance rather than spend on a larger confirmation set.
+
+
+## 2026-10-14 — Active overall multi-objective goal
+
+- User clarified overall multi-objective superiority, not long-view-only success.
+  Preserved old reports and recorded prospective aggregate-primary protocol.
+- Equal-budget three-model ensembles and18 seven-goal bounded correction fits
+  completed and replayed; both fail stronger development screens. Original
+  full model remains the confirmation candidate. All three original seeds
+  improve six-goal mean, though only one improved long view.
+- Froze original paired models and50,000-slate Apr23-25 confirmation sampling
+  before new performance; source preparation running. Implemented producer-
+  equality guard and label-free package generation; 11+9 focused tests pass.
+- Existing65 CNY cap remains; no new GPU spend. Confirmation acquisition and
+  evaluation remain incomplete. Goal active; next live handles in GOAL_PROGRESS.md.

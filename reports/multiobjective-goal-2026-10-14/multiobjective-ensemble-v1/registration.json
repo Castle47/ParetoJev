@@ -1,0 +1,49 @@
+{
+  "design": {
+    "experiment_id": "emer-native-multiobjective-v1",
+    "reason": "User clarified the actual goal: EMER+Jev improves overall multi-objective recommendation, rather than requiring long-view gain in every seed",
+    "old_results_preserved": true,
+    "primary_metric": "Equal-weight mean of six positive-goal weighted NDCG@3 values",
+    "negative_feedback_metric": "Weighted top3 no-hate utility, reported separately because it is close to one",
+    "candidate_recipes": [
+      "equal_weight_three_seed_zscore",
+      "equal_weight_three_seed_rank"
+    ],
+    "same_budget": "Both arms use exactly the original three separately selected models; both evaluate the same two equal-weight aggregation rules; no learned ensemble weights",
+    "selection": "Each arm independently maximizes six-goal mean on development validation; first recipe wins ties",
+    "development_gate": {
+      "mean_gain_lower_95_ci_positive": true,
+      "all_seven_point_gains_nonnegative": true,
+      "numerical_tolerance": 1e-12
+    },
+    "confirmation_requirement": "Freeze one final model and input protocol before evaluating fresh chronological data; positive six-goal mean difference lower95%CI and all seven point estimates nonnegative on that fresh set; report all individual intervals and sample support",
+    "interval_scope": "Not a claim that all seven population effects are independently established as positive; development selection intervals are exploratory",
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20261014,
+    "test_data_opened": false,
+    "spending_limit_cny_total": 65,
+    "paid_compute_extension_authorized": false
+  },
+  "inputs": {
+    "configs/emer_multiobjective_v1.json": "b94c8eed7fb4c73fb06ff8162b3947be8bfa789de137018f8e413bc9017ee6fb",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/develop_multiobjective_ensemble.py": "280684850ab833a4afdbfee78441e551b257e89678bcea29820050503a859c50",
+    "scripts/jev_residual.py": "859c3c716ca2d25aaf5767332cea39474ae5b78beda03def20d5809152f72bfe",
+    "scripts/run_emer_jev.py": "7e3bffac4b968f4394f0b1c467f49a82673fd5b6263a4ed1ab0b56dc7015c03f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/predictions.npz": "85d9dc260f31c9fdfd7513d38946bd1e5a36cb15e08589f9d8c6e72534d7bce9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/evaluation-native/evaluation.json": "8820464f119056edcea16909b2201c9d5cd1f7f39666e563248852456bfe360f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/validation.npz": "71d7701966fec96ded2d312d9f6ea05c1fba48105ea0a71a06e57ef90b0c9faf"
+  },
+  "checkpoints": {
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed7-trial0.pt": "e0c871bf7d545d9040e2cfbeb4bc2664a4d83ea299e675d1a0b84cfdc361ddf5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed17-trial1.pt": "7c2ba38b3d80d9465c3faf56e10e1be2cb7a02347575dcdcb0333dbbb11c0f96",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training/emer-seed29-trial3.pt": "e3c237618d2c02e01172b9baf05bfe94c90cd9228ef48d2f0bbb768048b6e6e9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed7-trial3.pt": "d4ddccb4e0e6625a78efab95f8b0573ff6e2895a80b7d14be8e139e7e5028052",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed17-trial3.pt": "d49547e2e566c0c1e1df1af01416a599be7fe0ef203c908398b8dc00ced02ba3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/training-native/emer_native-seed29-trial3.pt": "074ea135ac36afa2ce59b35e88982e093015879eef59afa7967388afd32b2bb1"
+  },
+  "parameters_per_arm": 130035,
+  "deployed_models_per_arm": 3,
+  "new_learned_parameters": 0,
+  "independent_test_opened": false,
+  "role": "development selection only"
+}

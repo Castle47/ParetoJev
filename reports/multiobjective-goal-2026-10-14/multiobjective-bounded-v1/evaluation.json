@@ -1,0 +1,542 @@
+{
+  "role": "selected-on-validation development only; not confirmation",
+  "comparisons": {
+    "jev_correction_vs_frozen_emer": {
+      "objectives": {
+        "is_click": {
+          "emer": 0.4548420867382518,
+          "emer_jev": 0.45528194048919907,
+          "absolute_gain": 0.0004398537509472389,
+          "relative_gain": 0.0009670471659768849,
+          "confidence_interval": [
+            -0.00016990299077311865,
+            0.0010111994870272852
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "long_view": {
+          "emer": 0.412539999793682,
+          "emer_jev": 0.41303920160739965,
+          "absolute_gain": 0.0004992018137176535,
+          "relative_gain": 0.0012100688756661476,
+          "confidence_interval": [
+            -0.00018073203829368638,
+            0.001161370487453829
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_like": {
+          "emer": 0.2581756019223089,
+          "emer_jev": 0.25771852167912485,
+          "absolute_gain": -0.00045708024318402707,
+          "relative_gain": -0.0017704238502039913,
+          "confidence_interval": [
+            -0.001933800792808782,
+            0.0009686053583525639
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_follow": {
+          "emer": 0.22655591791646393,
+          "emer_jev": 0.22675522379086796,
+          "absolute_gain": 0.00019930587440403214,
+          "relative_gain": 0.0008797204515201432,
+          "confidence_interval": [
+            -0.0010428926804873298,
+            0.001690582165379889
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_comment": {
+          "emer": 0.23986907610174982,
+          "emer_jev": 0.24051067127434309,
+          "absolute_gain": 0.0006415951725932678,
+          "relative_gain": 0.002674772350901582,
+          "confidence_interval": [
+            -0.0008598110762869704,
+            0.0023552451114439424
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_forward": {
+          "emer": 0.23880382620524443,
+          "emer_jev": 0.24071748832056009,
+          "absolute_gain": 0.0019136621153156563,
+          "relative_gain": 0.008013532051496209,
+          "confidence_interval": [
+            -0.00027376975981473065,
+            0.004452935532093992
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_hate": {
+          "emer": 0.9996437495205553,
+          "emer_jev": 0.9996437495205553,
+          "absolute_gain": 0.0,
+          "relative_gain": 0.0,
+          "confidence_interval": [
+            -1.5300902340170674e-06,
+            1.5334218578300084e-06
+          ],
+          "valid_bootstrap_replicates": 2000
+        }
+      },
+      "positive_mean": {
+        "emer": 0.30513108477961687,
+        "emer_jev": 0.3056705078602491,
+        "absolute_gain": 0.0005394230806323036,
+        "confidence_interval": [
+          -0.00010076769837485491,
+          0.0011940106128348147
+        ]
+      },
+      "per_seed": {
+        "7": {
+          "emer": [
+            0.45344968315882006,
+            0.3942302082437041,
+            0.2575263705562264,
+            0.22470613589658395,
+            0.23852238943215504,
+            0.24275314048151264,
+            0.9996524635610606
+          ],
+          "emer_jev": [
+            0.45344968315882006,
+            0.3942302082437041,
+            0.2575263705562264,
+            0.22470613589658395,
+            0.23852238943215504,
+            0.24275314048151264,
+            0.9996524635610606
+          ]
+        },
+        "17": {
+          "emer": [
+            0.45803956173544214,
+            0.41734466054253044,
+            0.25369575125531535,
+            0.22199665051675008,
+            0.2478489884173626,
+            0.23819428670177076,
+            0.9996340102988162
+          ],
+          "emer_jev": [
+            0.45935912298828385,
+            0.4188422659836834,
+            0.25232451052576316,
+            0.22259456813996215,
+            0.24977377393514244,
+            0.24393527304771778,
+            0.9996340102988162
+          ]
+        },
+        "29": {
+          "emer": [
+            0.4530370153205724,
+            0.4260451305948462,
+            0.263304683955367,
+            0.23296496733605757,
+            0.2332358504557272,
+            0.235464051432451,
+            0.9996447747017921
+          ],
+          "emer_jev": [
+            0.4530370153205724,
+            0.4260451305948462,
+            0.263304683955367,
+            0.23296496733605757,
+            0.2332358504557272,
+            0.235464051432451,
+            0.9996447747017921
+          ]
+        }
+      },
+      "bootstrap_users": 4253,
+      "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+      "online_business_success": false,
+      "legacy_longview_gates_not_used": {
+        "primary_ci_positive": false,
+        "primary_positive_every_seed": false,
+        "positive_mean_noninferior": false,
+        "click_noninferior": true,
+        "hate_noninferior": true
+      },
+      "multiobjective_gates": {
+        "mean_gain_lower_95_ci_positive": false,
+        "all_seven_point_gains_nonnegative": false
+      },
+      "development_gate_passed": false
+    },
+    "behavior_correction_vs_frozen_emer": {
+      "objectives": {
+        "is_click": {
+          "emer": 0.4548420867382518,
+          "emer_jev": 0.4552838559525547,
+          "absolute_gain": 0.0004417692143028895,
+          "relative_gain": 0.0009712584371224087,
+          "confidence_interval": [
+            -0.00102772023064973,
+            0.001878849687351796
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "long_view": {
+          "emer": 0.412539999793682,
+          "emer_jev": 0.4132538488330253,
+          "absolute_gain": 0.000713849039343295,
+          "relative_gain": 0.0017303753325745444,
+          "confidence_interval": [
+            -0.0009794851828397414,
+            0.0023998578868831616
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_like": {
+          "emer": 0.2581756019223089,
+          "emer_jev": 0.25855732686590227,
+          "absolute_gain": 0.0003817249435933978,
+          "relative_gain": 0.001478547704551369,
+          "confidence_interval": [
+            -0.0028342228536258436,
+            0.0036561426293422747
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_follow": {
+          "emer": 0.22655591791646393,
+          "emer_jev": 0.22765584414994197,
+          "absolute_gain": 0.0010999262334780435,
+          "relative_gain": 0.004854987870515967,
+          "confidence_interval": [
+            -0.002960832635935122,
+            0.005136214249533147
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_comment": {
+          "emer": 0.23986907610174982,
+          "emer_jev": 0.23997295629593007,
+          "absolute_gain": 0.00010388019418025585,
+          "relative_gain": 0.00043307038934935915,
+          "confidence_interval": [
+            -0.004313900485547769,
+            0.0043462673835979754
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_forward": {
+          "emer": 0.23880382620524443,
+          "emer_jev": 0.24246650208762477,
+          "absolute_gain": 0.0036626758823803396,
+          "relative_gain": 0.015337592954781152,
+          "confidence_interval": [
+            -0.0011447258280341149,
+            0.008601159564103506
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_hate": {
+          "emer": 0.9996437495205553,
+          "emer_jev": 0.9996427243393194,
+          "absolute_gain": -1.0251812359030055e-06,
+          "relative_gain": -1.0255465873664475e-06,
+          "confidence_interval": [
+            -7.700248250400165e-06,
+            5.176560000860752e-06
+          ],
+          "valid_bootstrap_replicates": 2000
+        }
+      },
+      "positive_mean": {
+        "emer": 0.30513108477961687,
+        "emer_jev": 0.3061983890308298,
+        "absolute_gain": 0.001067304251213037,
+        "confidence_interval": [
+          -0.00039454733210170337,
+          0.0026324713483313095
+        ]
+      },
+      "per_seed": {
+        "7": {
+          "emer": [
+            0.45344968315882006,
+            0.3942302082437041,
+            0.2575263705562264,
+            0.22470613589658395,
+            0.23852238943215504,
+            0.24275314048151264,
+            0.9996524635610606
+          ],
+          "emer_jev": [
+            0.45414581133359055,
+            0.39568180719868423,
+            0.25732921715730445,
+            0.22649015327943114,
+            0.24234351149310415,
+            0.2442684328618108,
+            0.9996524635610604
+          ]
+        },
+        "17": {
+          "emer": [
+            0.45803956173544214,
+            0.41734466054253044,
+            0.25369575125531535,
+            0.22199665051675008,
+            0.2478489884173626,
+            0.23819428670177076,
+            0.9996340102988162
+          ],
+          "emer_jev": [
+            0.4600522277558286,
+            0.41769598684662196,
+            0.25182661893768354,
+            0.22452470081668005,
+            0.24716868644007056,
+            0.24196735196838395,
+            0.9996324725269625
+          ]
+        },
+        "29": {
+          "emer": [
+            0.4530370153205724,
+            0.4260451305948462,
+            0.263304683955367,
+            0.23296496733605757,
+            0.2332358504557272,
+            0.235464051432451,
+            0.9996447747017921
+          ],
+          "emer_jev": [
+            0.4516535287683241,
+            0.4263837524538057,
+            0.2665161445027007,
+            0.23195267835371444,
+            0.23040667095461084,
+            0.24116372143268078,
+            0.9996432369299387
+          ]
+        }
+      },
+      "bootstrap_users": 4253,
+      "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+      "online_business_success": false,
+      "legacy_longview_gates_not_used": {
+        "primary_ci_positive": false,
+        "primary_positive_every_seed": true,
+        "positive_mean_noninferior": false,
+        "click_noninferior": true,
+        "hate_noninferior": true
+      },
+      "multiobjective_gates": {
+        "mean_gain_lower_95_ci_positive": false,
+        "all_seven_point_gains_nonnegative": false
+      },
+      "development_gate_passed": false
+    },
+    "jev_correction_vs_behavior_correction": {
+      "objectives": {
+        "is_click": {
+          "emer": 0.4552838559525547,
+          "emer_jev": 0.45528194048919907,
+          "absolute_gain": -1.915463355650626e-06,
+          "relative_gain": -4.207184881710888e-06,
+          "confidence_interval": [
+            -0.001516139128885073,
+            0.0016112619025775566
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "long_view": {
+          "emer": 0.4132538488330253,
+          "emer_jev": 0.41303920160739965,
+          "absolute_gain": -0.00021464722562564154,
+          "relative_gain": -0.0005194076866598512,
+          "confidence_interval": [
+            -0.001988241283395917,
+            0.0016378247797496455
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_like": {
+          "emer": 0.25855732686590227,
+          "emer_jev": 0.25771852167912485,
+          "absolute_gain": -0.0008388051867774249,
+          "relative_gain": -0.003244174887422399,
+          "confidence_interval": [
+            -0.0041628536231149895,
+            0.0023121586972275196
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_follow": {
+          "emer": 0.22765584414994197,
+          "emer_jev": 0.22675522379086796,
+          "absolute_gain": -0.0009006203590740114,
+          "relative_gain": -0.003956060791836435,
+          "confidence_interval": [
+            -0.005083118639836543,
+            0.0031945965208206506
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_comment": {
+          "emer": 0.23997295629593007,
+          "emer_jev": 0.24051067127434309,
+          "absolute_gain": 0.000537714978413012,
+          "relative_gain": 0.002240731567060049,
+          "confidence_interval": [
+            -0.0038785222039243684,
+            0.004793211367866157
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_forward": {
+          "emer": 0.24246650208762477,
+          "emer_jev": 0.24071748832056009,
+          "absolute_gain": -0.0017490137670646833,
+          "relative_gain": -0.007213424336994017,
+          "confidence_interval": [
+            -0.006694463825017272,
+            0.002958626902412751
+          ],
+          "valid_bootstrap_replicates": 2000
+        },
+        "is_hate": {
+          "emer": 0.9996427243393194,
+          "emer_jev": 0.9996437495205553,
+          "absolute_gain": 1.0251812359030055e-06,
+          "relative_gain": 1.025547639113329e-06,
+          "confidence_interval": [
+            -5.102440167636946e-06,
+            7.63899390253675e-06
+          ],
+          "valid_bootstrap_replicates": 2000
+        }
+      },
+      "positive_mean": {
+        "emer": 0.3061983890308298,
+        "emer_jev": 0.3056705078602491,
+        "absolute_gain": -0.0005278811705807333,
+        "confidence_interval": [
+          -0.0021087381368579813,
+          0.000989138198765995
+        ]
+      },
+      "per_seed": {
+        "7": {
+          "emer": [
+            0.45414581133359055,
+            0.39568180719868423,
+            0.25732921715730445,
+            0.22649015327943114,
+            0.24234351149310415,
+            0.2442684328618108,
+            0.9996524635610604
+          ],
+          "emer_jev": [
+            0.45344968315882006,
+            0.3942302082437041,
+            0.2575263705562264,
+            0.22470613589658395,
+            0.23852238943215504,
+            0.24275314048151264,
+            0.9996524635610606
+          ]
+        },
+        "17": {
+          "emer": [
+            0.4600522277558286,
+            0.41769598684662196,
+            0.25182661893768354,
+            0.22452470081668005,
+            0.24716868644007056,
+            0.24196735196838395,
+            0.9996324725269625
+          ],
+          "emer_jev": [
+            0.45935912298828385,
+            0.4188422659836834,
+            0.25232451052576316,
+            0.22259456813996215,
+            0.24977377393514244,
+            0.24393527304771778,
+            0.9996340102988162
+          ]
+        },
+        "29": {
+          "emer": [
+            0.4516535287683241,
+            0.4263837524538057,
+            0.2665161445027007,
+            0.23195267835371444,
+            0.23040667095461084,
+            0.24116372143268078,
+            0.9996432369299387
+          ],
+          "emer_jev": [
+            0.4530370153205724,
+            0.4260451305948462,
+            0.263304683955367,
+            0.23296496733605757,
+            0.2332358504557272,
+            0.235464051432451,
+            0.9996447747017921
+          ]
+        }
+      },
+      "bootstrap_users": 4253,
+      "note": "Paired user bootstrap conditional on fitted seeds; seed average is not a training-population CI. Hate is no-hate utility.",
+      "online_business_success": false,
+      "legacy_longview_gates_not_used": {
+        "primary_ci_positive": false,
+        "primary_positive_every_seed": false,
+        "positive_mean_noninferior": false,
+        "click_noninferior": true,
+        "hate_noninferior": true
+      },
+      "multiobjective_gates": {
+        "mean_gain_lower_95_ci_positive": false,
+        "all_seven_point_gains_nonnegative": false
+      },
+      "development_gate_passed": false
+    }
+  },
+  "changes": {
+    "behavior_correction/7": {
+      "top3_membership_changed_slates": 203,
+      "weighted_fraction": 0.032529745110324484,
+      "zero_fallback": false
+    },
+    "jev_correction/7": {
+      "top3_membership_changed_slates": 0,
+      "weighted_fraction": 0.0,
+      "zero_fallback": true
+    },
+    "behavior_correction/17": {
+      "top3_membership_changed_slates": 820,
+      "weighted_fraction": 0.12970381396685277,
+      "zero_fallback": false
+    },
+    "jev_correction/17": {
+      "top3_membership_changed_slates": 354,
+      "weighted_fraction": 0.05504892269503829,
+      "zero_fallback": false
+    },
+    "behavior_correction/29": {
+      "top3_membership_changed_slates": 975,
+      "weighted_fraction": 0.1610207499431317,
+      "zero_fallback": false
+    },
+    "jev_correction/29": {
+      "top3_membership_changed_slates": 0,
+      "weighted_fraction": 0.0,
+      "zero_fallback": true
+    }
+  },
+  "test_planning_gate_passed": false,
+  "independent_test_opened": false,
+  "online_business_success": false,
+  "interpretation": "Equal-capacity behavior correction controls for generic score adjustment; observed guards are validation-only, not a deployment guarantee."
+}
