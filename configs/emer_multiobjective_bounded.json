@@ -1,0 +1,49 @@
+{
+  "experiment_id": "emer-multiobjective-bounded-v1-development",
+  "role": "Exploratory development after native signal diagnosis; no independent test or new confirmation",
+  "baseline": "Original selected expanded EMER checkpoints; frozen, never reselected",
+  "arms": [
+    "frozen_emer",
+    "behavior_correction",
+    "jev_correction"
+  ],
+  "correction_features": "Seven candidate-centered within-slate ranks; hate oriented to no-hate; identical construction in both learned arms",
+  "additional_parameters_per_learned_arm": 7,
+  "cap_standard_deviations": 0.25,
+  "coefficient_bounds": [
+    -4.0,
+    4.0
+  ],
+  "ridge_grid": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "seeds": [
+    7,
+    17,
+    29
+  ],
+  "fit": "Train-only seven-goal swap-weighted pair logistic loss, equal-weight six conditional NDCG@3 and top3 no-hate utility; swap weights fixed from baseline ranking",
+  "selection": "Each arm independently maximizes validation six-positive-goal mean subject to original frozen EMER long-view/mean/click/hate point guards; zero first, strict improvements only",
+  "guards": {
+    "long_view_max_absolute_drop": 0.0,
+    "positive_mean_max_absolute_drop": 0.0,
+    "click_max_absolute_drop": 0.005,
+    "no_hate_max_absolute_drop": 0.005,
+    "numerical_tolerance": 1e-12
+  },
+  "validation_slates": 6000,
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 20261013,
+  "comparisons": [
+    "jev_correction vs frozen_emer",
+    "behavior_correction vs frozen_emer",
+    "jev_correction vs behavior_correction"
+  ],
+  "acceptance_for_new_test_planning": "Six-goal mean difference lower95%CI positive and all seven point gains nonnegative vs both frozen EMER and capacity-matched behavior correction; development only",
+  "independent_test_opened": false,
+  "online_business_success": false,
+  "no_extra_cap_or_feature_search": true,
+  "user_goal": "Overall multi-objective superiority, not a single long-view optimization"
+}
