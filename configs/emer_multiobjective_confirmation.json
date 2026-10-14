@@ -1,0 +1,208 @@
+{
+  "experiment_id": "emer-native-multiobjective-confirmation-v1",
+  "dataset": "KuaiRand-27K",
+  "implementation": "independent paper-aligned public-data adaptation",
+  "development_source": "expanded Apr19-21 train/validation; all previous opened dates remain development",
+  "fresh_test_start_ms": 1650643200000,
+  "fresh_test_end_ms": 1650902400000,
+  "sample_seed": 2026101401,
+  "slate_size": 10,
+  "maximum_slate_span_ms": 300000,
+  "test_stratum_budgets": [
+    4167,
+    4167,
+    4167,
+    4166,
+    8333,
+    25000
+  ],
+  "stratum_priority_bits": [
+    64,
+    8,
+    32,
+    16,
+    4
+  ],
+  "objectives": [
+    "is_click",
+    "long_view",
+    "is_like",
+    "is_follow",
+    "is_comment",
+    "is_forward",
+    "is_hate"
+  ],
+  "directions": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    -1
+  ],
+  "model": {
+    "feature_dim": 65,
+    "objectives": 7,
+    "hidden_dim": 48,
+    "layers": 2,
+    "heads": 4,
+    "ff_dim": 96,
+    "dropout": 0.05
+  },
+  "training": {
+    "seeds": [
+      7,
+      17,
+      29
+    ],
+    "epochs": 30,
+    "batch_size": 32,
+    "learning_rates": [
+      0.001,
+      0.0003
+    ],
+    "prior_coefficients": [
+      1.0,
+      0.25
+    ],
+    "weight_decay": 0.0001,
+    "cpu_threads": 4,
+    "selection": "same search budget; each arm selects maximum weighted validation mean NDCG@3 across six positive goals; earliest ties",
+    "posterior": "number of six positive feedback bits minus explicit hate bit",
+    "prior": "seven frozen behavior probabilities oriented to utility; Jev adds inputs only",
+    "advantage": "per-slate previous-epoch/current Mean@3 ratios on frozen behavior utilities; epsilon 1e-6",
+    "sample_weights": "inverse inclusion weights normalized to training mean one"
+  },
+  "evaluation": {
+    "top_k": 3,
+    "primary": "mean six positive-goal NDCG@3",
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 20261014,
+    "bootstrap_unit": "paired user clusters; mean over frozen trained seeds",
+    "success": "primary difference lower95%CI>0; primary point gain>0 for every fixed seed; each positive-goal point difference>=-0.005; hate-risk point increase<=0.005",
+    "maximum_positive_goal_absolute_point_drop": 0.005,
+    "maximum_hate_risk_absolute_point_increase": 0.005,
+    "individual_intervals": "Report every goal interval and support; point guards do not prove population noninferiority. Do not claim strict Pareto dominance.",
+    "decision": "One frozen 50000-slate test; no outcome-dependent sample extension, checkpoint reselection or threshold revision",
+    "online_business_success": false
+  },
+  "jev": {
+    "endpoint": "self-hosted-native-source-must-match-development",
+    "model": "autotrust/JEV-27B",
+    "revision": "14b425269ed24452e0a5ad5a8f3e51d139647a88",
+    "kind": "choice",
+    "history_length": 10,
+    "history_characters": 160,
+    "candidate_characters": 220,
+    "max_http_calls": 55000,
+    "minimum_interval_seconds": 1.0,
+    "planned_calls": 350000,
+    "concurrency": 16,
+    "inference": "pytorch-peft-group-v3; FP16 weights/matmuls + FP32 residual/head; fixed development producer"
+  },
+  "latency": {
+    "device": "local CPU, four threads",
+    "slate_size": 10,
+    "batch_size": 1,
+    "warmup": 50,
+    "iterations": 500,
+    "scope": "ready numeric tensors through scores and sorting; feature lookup and Jev production excluded and reported separately",
+    "production_rt_budget": null
+  },
+  "history_start_ms": 1650556800000,
+  "questions": [
+    "Which candidate is this user most likely to click or validly play in this feed?",
+    "Which candidate is this user most likely to achieve a long_view on? Here long_view means watching the entire video when its duration is at most 18 seconds, or watching at least 18 seconds when its duration exceeds 18 seconds. Compare the likelihood of meeting each video's own threshold, not the total seconds watched. A zero or unavailable duration is unknown, not a zero-second completion target.",
+    "Which candidate is this user most likely to explicitly like?",
+    "Which candidate is this user most likely to follow the creator after viewing?",
+    "Which candidate is this user most likely to comment on?",
+    "Which candidate is this user most likely to forward or share?",
+    "Which candidate is this user most likely to give explicit negative feedback such as dislike or not interested?"
+  ],
+  "history_length": 50,
+  "metadata_in_memory": true,
+  "goal_alignment": {
+    "user_intent": "Overall multi-objective superiority; a small individual tradeoff does not by itself establish overall failure",
+    "protocol_change": "Prospective confirmation supersedes assistant-imposed long-view-primary condition. Does not revise historical results or certify the old validation.",
+    "ideal_development_screen": "All-seven nonnegative point gains in new development candidate searches was a stronger screen; not a user-stated requirement for strict Pareto dominance."
+  },
+  "candidate_selection": {
+    "chosen": "original full EMER/EMER+Jev expanded models; no ensemble or bounded residual",
+    "rationale": "Both original arms used same mean-six selection rule; all three seed-level six-goal means improve with Jev; newer variants do not provide stronger overall development evidence",
+    "baseline_selection_sha256": "67d89a746b12fbef846b5c1179d09808eea12717fe35ad88983f88f6bb842984",
+    "jev_selection_sha256": "a26e23f1d426e6b0b46590fa91eb1f196c56645543f386bf1869d65117ad718d",
+    "common_feature_spec_sha256": "b2ecbbeb4c03d52488075ebf1503b40afc8e5f3dfa94dd2b00db05c2688b2766",
+    "source_registration_sha256": "5febd65eee346b43fc4ee6e5b38f7ec2e7d7f3026f765c9386acfa5d55cd0131",
+    "checkpoints": {
+      "emer": {
+        "7": {
+          "path": "emer-seed7-trial0.pt",
+          "checkpoint_sha256": "e0c871bf7d545d9040e2cfbeb4bc2664a4d83ea299e675d1a0b84cfdc361ddf5",
+          "validation": 0.3018646546281671,
+          "best_epoch": 28,
+          "lr": 0.001,
+          "prior_coefficient": 1.0,
+          "parameters": 43345
+        },
+        "17": {
+          "path": "emer-seed17-trial1.pt",
+          "checkpoint_sha256": "7c2ba38b3d80d9465c3faf56e10e1be2cb7a02347575dcdcb0333dbbb11c0f96",
+          "validation": 0.3061866498615286,
+          "best_epoch": 17,
+          "lr": 0.001,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "29": {
+          "path": "emer-seed29-trial3.pt",
+          "checkpoint_sha256": "e3c237618d2c02e01172b9baf05bfe94c90cd9228ef48d2f0bbb768048b6e6e9",
+          "validation": 0.30734194984917024,
+          "best_epoch": 4,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      },
+      "emer_jev": {
+        "7": {
+          "path": "emer_native-seed7-trial3.pt",
+          "checkpoint_sha256": "d4ddccb4e0e6625a78efab95f8b0573ff6e2895a80b7d14be8e139e7e5028052",
+          "validation": 0.3117050904125979,
+          "best_epoch": 5,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "17": {
+          "path": "emer_native-seed17-trial3.pt",
+          "checkpoint_sha256": "d49547e2e566c0c1e1df1af01416a599be7fe0ef203c908398b8dc00ced02ba3",
+          "validation": 0.3084535216254358,
+          "best_epoch": 1,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        },
+        "29": {
+          "path": "emer_native-seed29-trial3.pt",
+          "checkpoint_sha256": "074ea135ac36afa2ce59b35e88982e093015879eef59afa7967388afd32b2bb1",
+          "validation": 0.31061724895440807,
+          "best_epoch": 4,
+          "lr": 0.0003,
+          "prior_coefficient": 0.25,
+          "parameters": 43345
+        }
+      }
+    }
+  },
+  "resource_budget": {
+    "existing_total_cny": 65,
+    "new_paid_gpu_authorized": false,
+    "test_decisions": 350000,
+    "inference_seconds_at16_per_second": 21875.0,
+    "inference_hours_at16_per_second": 6.076388888888889,
+    "last_observed_gpu_cny_per_hour": 6.98,
+    "estimated_inference_cny": 42.41319444444445,
+    "note": "Planning estimate, excludes startup and transfer; verify live price and obtain additional spending authorization before GPU restart beyond remaining budget."
+  }
+}
