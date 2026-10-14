@@ -1,0 +1,758 @@
+{
+  "role": "Post-run diagnostic using inner histories only; not new confirmation",
+  "rows": [
+    {
+      "fold": 0,
+      "seed": 7,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 14,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 15,
+        "like": 0,
+        "follow": 0,
+        "comment": 15,
+        "forward": 1,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 9,
+      "highest_mean_gain": 0.007994953083919648,
+      "highest_mean_delta": [
+        -0.01085384724983135,
+        -0.019101439591190206,
+        0.05398622766386796,
+        0.03558081288179624,
+        -0.00973780647970221,
+        -0.0019042287214225406,
+        -1.1220160957114977e-05
+      ],
+      "least_worst_guard_epoch": 7,
+      "least_worst_guard_delta": [
+        -0.006291231947523679,
+        -0.00970056746603759,
+        0.03696092409898155,
+        0.01003414625315785,
+        -0.00900138787054175,
+        0.0017395950401637161,
+        -1.4181575988980732e-05
+      ],
+      "first_loss": 0.8594862899812711,
+      "last_loss": 0.8301907711896767
+    },
+    {
+      "fold": 0,
+      "seed": 7,
+      "arm": "emer_jev",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 7,
+        "long_view": 15,
+        "like": 0,
+        "follow": 0,
+        "comment": 12,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 2,
+      "highest_mean_gain": 0.01599538603736504,
+      "highest_mean_delta": [
+        -0.002906977852500048,
+        -0.011247487898168373,
+        0.06702211511979733,
+        0.0359736435988611,
+        -0.009032547035332378,
+        0.016163570291532592,
+        3.0392788936906e-05
+      ],
+      "least_worst_guard_epoch": 5,
+      "least_worst_guard_delta": [
+        0.0022013822079802736,
+        -0.006407474000339031,
+        0.05893843573447011,
+        0.032824411744634324,
+        -0.004123919113165092,
+        0.000356579002370766,
+        9.662883715733095e-06
+      ],
+      "first_loss": 0.8587955316516007,
+      "last_loss": 0.8258350736835376
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 8,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 10,
+        "long_view": 15,
+        "like": 0,
+        "follow": 1,
+        "comment": 7,
+        "forward": 13,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 7,
+      "highest_mean_gain": 0.0068714749706098545,
+      "highest_mean_delta": [
+        -0.009102403483061072,
+        -0.018806842454836104,
+        0.05378920145904209,
+        0.025816629235678706,
+        -0.005619263072875358,
+        -0.004848471860289139,
+        5.76969061139021e-06
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        -0.004514882034290346,
+        -0.00901615696579311,
+        0.028190680219580933,
+        -0.0037932418672718127,
+        -0.009454658896884016,
+        0.0005270644189716844,
+        -5.144191442485457e-06
+      ],
+      "first_loss": 0.8522171636625212,
+      "last_loss": 0.7687662809478993
+    },
+    {
+      "fold": 0,
+      "seed": 17,
+      "arm": "emer_jev",
+      "selected_epoch": 12,
+      "improving_epochs": 15,
+      "admissible_epochs": [
+        12
+      ],
+      "violation_counts": {
+        "click": 0,
+        "long_view": 13,
+        "like": 0,
+        "follow": 0,
+        "comment": 3,
+        "forward": 11,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 8,
+      "highest_mean_gain": 0.012891665376715397,
+      "highest_mean_delta": [
+        -0.001318160016655856,
+        -0.009853426508309449,
+        0.06382181972631523,
+        0.023267949961921913,
+        0.0018788214378638868,
+        -0.0004470123408433502,
+        -4.768891940931663e-05
+      ],
+      "least_worst_guard_epoch": 12,
+      "least_worst_guard_delta": [
+        0.0024623079086159017,
+        -0.004980460921164109,
+        0.0358682042250838,
+        0.01468297195235932,
+        0.008517158713626738,
+        0.00015206951880697428,
+        6.701468683423251e-06
+      ],
+      "first_loss": 0.85257578818571,
+      "last_loss": 0.7677747108498398
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 15,
+        "like": 0,
+        "follow": 0,
+        "comment": 14,
+        "forward": 6,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 10,
+      "highest_mean_gain": 0.011376514773365404,
+      "highest_mean_delta": [
+        -0.008364940537326504,
+        -0.023035729563997964,
+        0.05735467691930646,
+        0.04410354409379311,
+        -0.007877004820105088,
+        0.006078542548522414,
+        3.740053652112607e-06
+      ],
+      "least_worst_guard_epoch": 6,
+      "least_worst_guard_delta": [
+        -0.01000963395050114,
+        -0.015202491244244387,
+        0.058192898229947665,
+        0.018084375804010705,
+        -0.014319634128584668,
+        -0.0013731562227304872,
+        -1.5313945178618837e-07
+      ],
+      "first_loss": 0.8547570265474773,
+      "last_loss": 0.7945723935049407
+    },
+    {
+      "fold": 0,
+      "seed": 29,
+      "arm": "emer_jev",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 6,
+        "long_view": 15,
+        "like": 0,
+        "follow": 0,
+        "comment": 14,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 13,
+      "highest_mean_gain": 0.01764762463693412,
+      "highest_mean_delta": [
+        -0.006098907005572418,
+        -0.022174152116012813,
+        0.07887225984246693,
+        0.049647933794535054,
+        -0.01687119413748056,
+        0.02250980744366854,
+        1.7921629640871295e-05
+      ],
+      "least_worst_guard_epoch": 6,
+      "least_worst_guard_delta": [
+        0.003704642955570936,
+        -0.008229322744159218,
+        0.07098631452983772,
+        0.03442951852125889,
+        -0.0023475325091780463,
+        0.0018780042233565997,
+        2.18277641050868e-06
+      ],
+      "first_loss": 0.8546158916690723,
+      "last_loss": 0.7921030878209744
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 14,
+        "like": 0,
+        "follow": 0,
+        "comment": 9,
+        "forward": 4,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 14,
+      "highest_mean_gain": 0.012295207950910237,
+      "highest_mean_delta": [
+        -0.024377074334012372,
+        -0.025752598991788334,
+        0.061431846210661833,
+        0.028840306323402704,
+        -0.010722031096267737,
+        0.04435079959346533,
+        -2.3764349634802784e-06
+      ],
+      "least_worst_guard_epoch": 5,
+      "least_worst_guard_delta": [
+        -0.011572942702253786,
+        -0.011745294621265057,
+        0.06649981814370992,
+        0.03170575512018595,
+        0.0007263131765526953,
+        -0.009231024811030913,
+        -6.448310681639313e-06
+      ],
+      "first_loss": 0.8571251766965878,
+      "last_loss": 0.8199860536499529
+    },
+    {
+      "fold": 1,
+      "seed": 7,
+      "arm": "emer_jev",
+      "selected_epoch": 4,
+      "improving_epochs": 15,
+      "admissible_epochs": [
+        4
+      ],
+      "violation_counts": {
+        "click": 14,
+        "long_view": 13,
+        "like": 0,
+        "follow": 0,
+        "comment": 6,
+        "forward": 1,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 3,
+      "highest_mean_gain": 0.017959446715137675,
+      "highest_mean_delta": [
+        -0.007614024697139787,
+        -0.011296433740415224,
+        0.07183352014810857,
+        0.03980177040950758,
+        0.00738227191028118,
+        0.007649576260483737,
+        1.9344932044806917e-05
+      ],
+      "least_worst_guard_epoch": 4,
+      "least_worst_guard_delta": [
+        -0.004627693422344592,
+        0.005350874218268964,
+        0.041091698813629174,
+        0.006857194086078405,
+        0.014719845883550464,
+        0.0031922618105215683,
+        1.289662136294556e-05
+      ],
+      "first_loss": 0.8566378770482461,
+      "last_loss": 0.8157333059618804
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 14,
+        "like": 0,
+        "follow": 1,
+        "comment": 9,
+        "forward": 3,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 15,
+      "highest_mean_gain": 0.012460389809438402,
+      "highest_mean_delta": [
+        -0.007029415445831799,
+        -0.015243546562343724,
+        0.055917174067826925,
+        0.009077482401682435,
+        -0.0005113178328680079,
+        0.03255196222816459,
+        -2.8336403858575387e-05
+      ],
+      "least_worst_guard_epoch": 6,
+      "least_worst_guard_delta": [
+        -0.009878932915257876,
+        -0.010400456686553705,
+        0.05881794308858157,
+        0.020218934992175308,
+        -0.006861711970133466,
+        -0.005542363074698992,
+        -1.6968497081659706e-05
+      ],
+      "first_loss": 0.8573992682608548,
+      "last_loss": 0.829752116901985
+    },
+    {
+      "fold": 1,
+      "seed": 17,
+      "arm": "emer_jev",
+      "selected_epoch": 4,
+      "improving_epochs": 15,
+      "admissible_epochs": [
+        4
+      ],
+      "violation_counts": {
+        "click": 12,
+        "long_view": 13,
+        "like": 0,
+        "follow": 0,
+        "comment": 8,
+        "forward": 1,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 5,
+      "highest_mean_gain": 0.01667757316260395,
+      "highest_mean_delta": [
+        -0.006971793527391135,
+        -0.007322417212066945,
+        0.05105673046495435,
+        0.04295430892058216,
+        0.0056556279005622045,
+        0.014692982428983065,
+        -6.448310681861358e-06
+      ],
+      "least_worst_guard_epoch": 4,
+      "least_worst_guard_delta": [
+        -0.0017023000786508535,
+        0.003405152485024765,
+        0.04339216393818163,
+        0.028256322866066164,
+        0.003749040610473292,
+        0.009557441322895543,
+        -3.2241553411527235e-06
+      ],
+      "first_loss": 0.8568429054803406,
+      "last_loss": 0.8252724862059221
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 14,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 15,
+        "like": 0,
+        "follow": 1,
+        "comment": 2,
+        "forward": 6,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 6,
+      "highest_mean_gain": 0.010588430701672322,
+      "highest_mean_delta": [
+        -0.02189987083758188,
+        -0.0355647678651726,
+        0.08196708718115375,
+        0.024552683173823864,
+        0.006975646367619687,
+        0.007499806190191111,
+        -4.869578244914852e-05
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        -0.011765943367183562,
+        -0.018253050465792342,
+        0.03931837538762628,
+        -0.005452563406329269,
+        -0.020981577937496138,
+        -0.014436034617338417,
+        -5.683953388524454e-05
+      ],
+      "first_loss": 0.8521939842708853,
+      "last_loss": 0.7969829802284177
+    },
+    {
+      "fold": 1,
+      "seed": 29,
+      "arm": "emer_jev",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 15,
+        "long_view": 15,
+        "like": 0,
+        "follow": 0,
+        "comment": 0,
+        "forward": 1,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 3,
+      "highest_mean_gain": 0.01321796318840969,
+      "highest_mean_delta": [
+        -0.014294718626157,
+        -0.028602462185723765,
+        0.07946109491336834,
+        0.021513817131591062,
+        0.02339664900048946,
+        -0.0021666011031099552,
+        -3.579916108598091e-05
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        -0.006570906030403834,
+        -0.016211427347952,
+        0.04734153146790915,
+        0.0036181579999878533,
+        -0.002956071182187936,
+        -0.01643619644623634,
+        -3.6646881462987224e-05
+      ],
+      "first_loss": 0.8520237036690806,
+      "last_loss": 0.7950079577253354
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "arm": "emer",
+      "selected_epoch": 1,
+      "improving_epochs": 15,
+      "admissible_epochs": [
+        1
+      ],
+      "violation_counts": {
+        "click": 9,
+        "long_view": 13,
+        "like": 0,
+        "follow": 1,
+        "comment": 12,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 2,
+      "highest_mean_gain": 0.015948399599409926,
+      "highest_mean_delta": [
+        -0.003653098754694273,
+        -0.004306202372611978,
+        0.05560817299423637,
+        0.011342846905709303,
+        -0.014125275563701356,
+        0.05082395438752149,
+        1.2445647581293962e-05
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        -0.0005371326875173166,
+        -0.002248776049460499,
+        0.04689174460411516,
+        0.009706993538433573,
+        -0.002554993884541057,
+        0.018516887955998013,
+        3.815501972381785e-05
+      ],
+      "first_loss": 0.8584765700117641,
+      "last_loss": 0.8208042884504558
+    },
+    {
+      "fold": 2,
+      "seed": 7,
+      "arm": "emer_jev",
+      "selected_epoch": 1,
+      "improving_epochs": 15,
+      "admissible_epochs": [
+        1
+      ],
+      "violation_counts": {
+        "click": 9,
+        "long_view": 12,
+        "like": 0,
+        "follow": 3,
+        "comment": 14,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 2,
+      "highest_mean_gain": 0.018977610200956677,
+      "highest_mean_delta": [
+        -0.0009591365905795013,
+        0.004690551340872984,
+        0.06201838668747406,
+        0.020196195904025105,
+        -0.01760511168239448,
+        0.045524775546341906,
+        1.5717955503147252e-05
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        0.0021621163568680823,
+        -0.0007872997311241248,
+        0.050978040833935145,
+        0.016620567018317767,
+        -0.0045690722740761025,
+        0.03140053926918068,
+        2.5052191189089967e-05
+      ],
+      "first_loss": 0.85817194221825,
+      "last_loss": 0.8182717241001445
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 14,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 12,
+        "long_view": 11,
+        "like": 0,
+        "follow": 1,
+        "comment": 15,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 3,
+      "highest_mean_gain": 0.0217050684333211,
+      "highest_mean_delta": [
+        -0.0047959891826863665,
+        -0.004545496856059872,
+        0.06408338035213923,
+        0.017479545789757245,
+        -0.007423569822413434,
+        0.0654325403191898,
+        2.489129516236588e-05
+      ],
+      "least_worst_guard_epoch": 4,
+      "least_worst_guard_delta": [
+        -0.00511170250830828,
+        -0.002043684835990822,
+        0.04752392573880637,
+        0.016757868022979017,
+        -0.005042112849718061,
+        0.057382234710166985,
+        2.9799757045090303e-05
+      ],
+      "first_loss": 0.8582163178762853,
+      "last_loss": 0.8247878632403367
+    },
+    {
+      "fold": 2,
+      "seed": 17,
+      "arm": "emer_jev",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 11,
+        "long_view": 8,
+        "like": 0,
+        "follow": 4,
+        "comment": 15,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 3,
+      "highest_mean_gain": 0.02297134703483836,
+      "highest_mean_delta": [
+        -0.004282099224114599,
+        -0.0016872715564150154,
+        0.06894512794830954,
+        0.017100997617896574,
+        -0.021383928659140572,
+        0.07913525608249425,
+        2.1122702313358666e-05
+      ],
+      "least_worst_guard_epoch": 11,
+      "least_worst_guard_delta": [
+        -0.011443451499789203,
+        -0.009163941648607343,
+        0.061274691955039595,
+        0.002923543581927479,
+        -0.008885387815082468,
+        0.08095483111051685,
+        -1.7032317410459186e-05
+      ],
+      "first_loss": 0.8578243784557115,
+      "last_loss": 0.8206037847411554
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "arm": "emer",
+      "selected_epoch": 0,
+      "improving_epochs": 14,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 10,
+        "long_view": 10,
+        "like": 0,
+        "follow": 6,
+        "comment": 15,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 2,
+      "highest_mean_gain": 0.015853795928362117,
+      "highest_mean_delta": [
+        3.063464466029897e-05,
+        0.0012698263638294405,
+        0.05159949876198111,
+        -0.0068793910402029645,
+        -0.019347957735598498,
+        0.06845016457550332,
+        3.815501972381785e-05
+      ],
+      "least_worst_guard_epoch": 1,
+      "least_worst_guard_delta": [
+        0.0004055711877152257,
+        0.007215176784764854,
+        0.042018383404162196,
+        -0.0047833946847954945,
+        -0.007164538773687279,
+        0.03742819311136569,
+        3.5043607828466605e-05
+      ],
+      "first_loss": 0.8593944497653191,
+      "last_loss": 0.8148548048458352
+    },
+    {
+      "fold": 2,
+      "seed": 29,
+      "arm": "emer_jev",
+      "selected_epoch": 0,
+      "improving_epochs": 15,
+      "admissible_epochs": [],
+      "violation_counts": {
+        "click": 3,
+        "long_view": 2,
+        "like": 0,
+        "follow": 9,
+        "comment": 15,
+        "forward": 0,
+        "no_hate": 0
+      },
+      "highest_mean_epoch": 4,
+      "highest_mean_gain": 0.024481379589998294,
+      "highest_mean_delta": [
+        -0.008692423812570238,
+        -0.0020273584773502495,
+        0.06868784373543824,
+        0.03157673999689292,
+        -0.019608634808211733,
+        0.07695211090579082,
+        -3.2723079215202233e-06
+      ],
+      "least_worst_guard_epoch": 7,
+      "least_worst_guard_delta": [
+        -0.007971283738559765,
+        -0.0045924091563621094,
+        0.06375906733087239,
+        -0.0003356388905619845,
+        -0.017501143781049888,
+        0.10089337836776599,
+        2.194077929373872e-05
+      ],
+      "first_loss": 0.8590923098736252,
+      "last_loss": 0.8090445818687906
+    }
+  ],
+  "inputs": {
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer-seed7.json": "9305ce0748a2c4b6fc06d15f386f1abc34bd8c4cb436fb46b5a982d87848c785",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer_jev-seed7.json": "413d33dfabd0b4aa2cc28d2a4ae479fe9733ec443ad53c0d3594b942083985b2",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer-seed17.json": "4218ee1a11c3afd518561a7b5b9e55538f072b4ef99b70691197fcc21a501101",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer_jev-seed17.json": "fd57852b2428bc57481dd15450234180bdb99055a3096ca5b0adf114ca77e8c4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer-seed29.json": "9e1f3d626d6861c057c052808e94f0d5a1c600918b2d561eafb7390be181f381",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-0/emer_jev-seed29.json": "938105eded7fdfa61807c90cf42ff192461ac663587533028af209b0c5da383b",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer-seed7.json": "f5bafa51b3d7e5a91ed16e2b774590f22a80190fdfe9373642c1c280a5c4bceb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer_jev-seed7.json": "578bf10eebcf0a7b0195ca351c3c65c2c6b72549414f541f3f259406be7ad402",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer-seed17.json": "a14b3627f4a846813a767948cf12e6939ae5a1a681a8505a6c317cbbce59c9f2",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer_jev-seed17.json": "a4ed37fa638330a79b80edafbf79891d28323d3758e419e19706577f1a3d2729",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer-seed29.json": "75e7e107c5e791bb26227f3b999d5d46423f4da9b4ddec9ae231596aad08f7eb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-1/emer_jev-seed29.json": "cfbed93ba0374e6a008a349dde4a15cc725555dc69cc9a7c82af12073b6f8c0a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer-seed7.json": "56a025619fc59100b663c0f900168f91b540395adf019163a18d170963c8c2e9",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer_jev-seed7.json": "8db453436c1d6b3af54d1365901173966626664c33a532f7822953657737d723",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer-seed17.json": "879a885f70ada1418da755a3e13235f91b0e994e19b856086f5bd3a5ec735463",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer_jev-seed17.json": "27ba5f8a25f1d9352f274de8c1d9f893ac2a37b6a4d6d21479696289a688a447",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer-seed29.json": "0f63165001470ace942b7c5c0df7732c3be0eb3a45f593560ea1d8a9900a0661",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/fold-2/emer_jev-seed29.json": "63dd4f1a4ae6a95f737e873d27a90d26446f038e39aea5f3ecd73bb3586b9e81"
+  },
+  "script_sha256": "57d477c209be386404820165944ab96c8afea9c1a97b73786889ffac571b94e0",
+  "new_model_predictions": false,
+  "new_training": false
+}

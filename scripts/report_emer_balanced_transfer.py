@@ -9,17 +9,22 @@ from paretojev.utils.provenance import sha256_file
 
 def report(source,output):
     result=read_json(source/'evaluation.json');replay=read_json(source/'replay.json')
+    config=read_json(source/'registration.json')['config']
+    recipe='混合后验' if 'posterior_mix' in config['training'] else '任务平衡'
     if not replay['exact_predictions_and_metrics']:raise ValueError('Exact replay required')
     for file,key in [('evaluation.json','evaluation_sha256'),('predictions.npz','predictions_sha256')]:
         if sha256_file(source/file)!=replay[key]:raise ValueError('Replay hashes differ')
     if result['selection_sha256']!=sha256_file(source/'selection.json'):raise ValueError('Selection changed')
     labels=dict(is_click='点击',long_view='长看',is_like='点赞',is_follow='关注',is_comment='评论',is_forward='转发',is_hate='无负反馈比例')
-    titles=dict(signal='主比较：任务平衡EMER＋Jev vs 任务平衡EMER',original_reference='参考比较：任务平衡EMER＋Jev vs 原EMER',training_control='训练方法对照：任务平衡EMER vs 原EMER')
-    lines=['# 相同任务平衡训练下的Jev增量实验','',
+    titles=dict(signal=f'主比较：{recipe}EMER＋Jev vs {recipe}EMER',original_reference=f'参考比较：{recipe}EMER＋Jev vs 原EMER',training_control=f'训练方法对照：{recipe}EMER vs 原EMER')
+    lines=[f'# 相同{recipe}训练下的Jev增量实验','',
         f'使用既有{result["slates"]:,}组、{result["users"]:,}名用户，两组共18次训练。没有新增Jev请求或付费GPU。',
         '**本轮在原外层结果已被检查后设计，只能视为探索性改进，不能称为新的独立确认。**',
         '两组共享训练损失和预算。主比较用于识别Jev增量；原EMER参考和训练方法对照用于区分共享训练修改的收益。',
         '前六项是按原样本权重计算的NDCG@3，最后一项为top3无负反馈比例。表中为三种子均值；区间是固定预测的条件用户bootstrap95%区间。']
+    if 'posterior_mix' in config['training']:
+        mix=config['training']['posterior_mix']
+        lines+=['',f'两组共同使用{100*(1-mix):g}%原EMER后验＋{100*mix:g}%条件任务平衡后验；该系数固定，没有进行系数搜索。']
     for name,title in titles.items():
         r=result['pooled'][name];m=r['positive_mean'];lo,hi=m['confidence_interval']
         lines+=['',f'## {title}','',f'六目标均值：{m["emer"]:.6f} → {m["emer_jev"]:.6f}，相对{100*m["absolute_gain"]/m["emer"]:+.2f}%；绝对变化区间[{lo:+.6f}, {hi:+.6f}]。','',

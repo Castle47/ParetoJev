@@ -1,0 +1,127 @@
+{
+  "config": {
+    "experiment_id": "emer-blended-transfer-v1",
+    "role": "Exploratory follow-up after user-CV outer results were opened; not independent confirmation",
+    "hypothesis": "A fixed midpoint between original summed-feedback and conditional task-balanced posterior retains frequent-goal quality while preserving sparse-goal gains; test identically in both arms",
+    "data": {
+      "source_run": "emer-jev-scale-v3/user-cv-v1",
+      "folds": [
+        0,
+        1,
+        2
+      ],
+      "reuse_exact_saved_user_roles_and_train_only_encoding": true,
+      "new_jev_calls": 0,
+      "prospective_april23_25_used": false
+    },
+    "initialization": {
+      "anchor": "Original selected EMER for the same fold and seed, already trained without those outer users",
+      "both_arms": "Copy the identical anchor and zero the28 Jev projection columns; only use_jev differs",
+      "require_exact_anchor_predictions_before_training": true,
+      "parameters_per_arm": 43345
+    },
+    "training": {
+      "seeds": [
+        7,
+        17,
+        29
+      ],
+      "epochs": 15,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "prior_coefficient": 0.25,
+      "weight_decay": 0.0001,
+      "gradient_clip_norm": 5.0,
+      "cpu_threads": 2,
+      "total_fits": 18,
+      "grid_search": false,
+      "posterior": "0.5 times the original EMER summed-feedback pair loss plus0.5 times the conditional task-balanced pair loss. Original sample weights in both terms. No coefficient search.",
+      "prior": "Keep original EMER behavior-prior pair loss and epoch-snapshot advantage weights; same fixed coefficient in both arms",
+      "posterior_mix": 0.5
+    },
+    "selection": {
+      "data": "Inner validation only, never outer rows",
+      "anchor": "Same fixed original EMER per fold and seed for both arms",
+      "admissible": "All six positive and no-hate point changes versus anchor at least -0.005",
+      "criterion": "Maximize six-positive mean among admissible epochs; epoch0 anchor is included; earliest tie wins",
+      "failed_guard_epoch_cannot_replace_best": true,
+      "all_18_selected_before_outer_evaluation": true
+    },
+    "evaluation": {
+      "primary_comparison": "Balanced EMER+Jev versus identically balanced EMER",
+      "reference_comparison": "Balanced EMER+Jev versus original frozen EMER",
+      "top_k": 3,
+      "bootstrap_samples": 2000,
+      "bootstrap_seed": 2026101501,
+      "maximum_positive_goal_absolute_point_drop": 0.005,
+      "maximum_hate_risk_absolute_point_increase": 0.005,
+      "screen": "For both comparisons: positive pooled primary conditional CI, positive primary point change in every seed and fold, and all seven original point guards",
+      "report": "All seven objectives, every fold/seed, support, selected epochs and all fallback-to-anchor cases"
+    },
+    "limitations": [
+      "This training recipe is an EMER adaptation; changes shared by both arms cannot be attributed to Jev.",
+      "The cohort and its outer results were already explored. New results remain exploratory even if all conditions pass.",
+      "Conditional bootstrap does not capture all training variation; folds overlap in their training users.",
+      "No claim of new-date confirmation, strict all-objective dominance, or online business uplift.",
+      "The blend was proposed from already-observed inner guard failures after both earlier outer reports were opened; this is another exploratory test."
+    ],
+    "budget": {
+      "total_project_cap_cny": 65,
+      "paid_gpu": false,
+      "new_api_requests": 0
+    }
+  },
+  "config_hash": "906045903b265a12361b3bd8794895c6c495f27f1f6db38566fa4c8d943a4081",
+  "inputs": {
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_emer_balanced_transfer.py": "56aeb456c01623b732970b7c4ae7792eb5ac7e573fecc7fbe66fdd105dbeba91",
+    "configs/emer_balanced_transfer_v1.json": "f58b7478814733b17c418fe95b1f4227bf01a5e1653f3b472f95e9cac43e4f4e",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/registration.json": "223b783f38b037f9f55e670a3fb3c00574d80a3e345e8af0bc25aacf095267d5",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/selection.json": "f7965042c19a1c2a170020841acef60c4a6f2fc7842756a6a6b785437c2450fb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/evaluation.json": "a999b363ba72fe6adb8f1777a1b91478112a9b7f1a1ccc3d512220bd324e5869",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/replay.json": "cb21eb7901afb1e901d6976073f7d107c3e9e15234bb76be83167b899d12f70d",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/predictions.npz": "6c6656467003d3a560696233404064012ffa46652795b0b9b98a8b0a226609b0",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/preparation.json": "082e777c5afda4cf4639c8d97fad2d9df0c15a4456049505869c6a7f3d989f79",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/data_audit.json": "e07b73885d848fed48b82c395615bbeea7b46c82dfb276e8b0e9cb85268e688a",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/data_manifest.json": "67cba5c0f206db486fd9a1ff949f083637fb0dae95a8a74bfd79e31959614d5b",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/selection_audit.json": "3b9f2b812bfc28dd4f800011870805c9933c541619aa4a6efe0e9b39e88a9147",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/feature_spec.json": "9ab128c79ac20d888be17e243eca42c413b2d1ef8d598ed532b33e092ada1357",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/train.npz": "a1002f69a8645434c93de0b3fd4c23d8f7e238db00e3e8f89960275832ec4247",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/validation.npz": "db0841d080d7d47fc3a136f26c7dee23f9cb41fecc451591237b9ecb506e5b49",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/test.npz": "edd32d0ae8ae0fef67158570bd177eff52af6a702fe20a0d85fa51503cf661fc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed7-trial2.pt": "b60a7b5892b6c51eba576d640bfa4bd05aefb81599de7f39ac22463c6542fa22",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed17-trial3.pt": "d514d10979d0fef498e54ae61c3543ecbff733d7d4d24b3a7a601ea807a32e74",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-0/emer-seed29-trial1.pt": "3965c1bbf139028715046402775c25ce4db19d33bef6850c1625aab189084a71",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/data_manifest.json": "fbc7b31e54ebf849ab0b0584c881666311018702348070ff76bfd8474aad47c4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/selection_audit.json": "5c8af1c98a67b9232ea66fe8c2da8d48cf5c84d51b730dabe362c2c9d03e996f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/feature_spec.json": "60ad249df835e9523890ed7518662166573b8924dcfa66b55e9e7ef5480116cf",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/train.npz": "a20713f36c32ea39c4b2e8b54bc9c4254e6fbfa0af1b03828d1433621f7ff427",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/validation.npz": "20ff74f3bf957d2c87d77bddd25f894da1f948804b2c01dbb7de13afac1c4c52",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/test.npz": "24bf887574a1c8dd182aeee45528d1900beed741cdb028b60f5825c17e9234ab",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed7-trial2.pt": "679b9c8cea64872e5bf8cb7827330739add753c4432de27e5dbb701a436745d4",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed17-trial0.pt": "41a62edde302f07da9d271217aa22faaab28f24941103d91b742195cbcc6b09f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-1/emer-seed29-trial1.pt": "c5180f5463753f1dd3ab165a74c6e3c30d9525eaee99ea7cd54b108053875d92",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/data_manifest.json": "8a4528700ecedf4c372fd90e26f530874ea2684cfedd939b8a9ec7b029a2ac40",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/selection_audit.json": "b245a9a620123869840e7e84efcff210a413ea79d46f993742d7dfcc681d60ce",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/feature_spec.json": "b578a3b810d31db268fbbcfd047e91b16c165d92d2c93c58d9a868651ef2d96f",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/train.npz": "ceb24200fad0b9cae2614161732afe6a5572077a30aec1dcde3dab4592814581",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/validation.npz": "6582b040b91d55f57001e47804f32270fde0660554e2e2f362b43991ae3702cc",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/test.npz": "fd6e19502981b8e881f37c03e063a5623c17102d671000ddfd9638d670843114",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed7-trial0.pt": "d12e721f47551979deed190e3fc1b3040cb3aead37266688f12eee31c144c34b",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed17-trial0.pt": "45bdb34df6bdf68ba63b83f1a8a76fb69157b9abbb6aee422a3adbc62be1a9eb",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/user-cv-v1/fold-2/emer-seed29-trial2.pt": "ee62c8754ad56e17cef7aeb2201cf559b4abaabc78d5826ecf3e0d879f34a010",
+    "/Users/hujiaoyuan/Documents/Codex/2026-10-08/referenced-chatgpt-conversation-this-is-an/outputs/ParetoJev/scripts/run_emer_blended_transfer.py": "3eb942d8e034d2fa7010373c720f0ea0c361060662ed0fd8961d086db8094d11",
+    "configs/emer_blended_transfer_v1.json": "20e36d3a7288b8a9b6fa9b896ed3acdd0e24f8d3887b73edfb50da51229aae6f",
+    "scripts/run_emer_balanced_transfer.py": "56aeb456c01623b732970b7c4ae7792eb5ac7e573fecc7fbe66fdd105dbeba91",
+    "reports/emer-balanced-fallback-diagnosis/diagnosis.json": "105cc31ade48d2fa0d71106fba7cf561f1e7ce1f92b11d6e3cb017e49d5094b7",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/registration.json": "12ff6e4d8a4e8f3f9da01f9c18418dfafbf49ae8947946ccd3cdf88bc2c88544",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/selection.json": "f6b33f9d6cb0dc1b5a48d0e1f7f661e2bb86f35f7f4d4734899f73f1b886edf3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/audit.json": "40698f588cb7cb9c2dbea4acaf8adeb9ff21fc018811a95d365fed457e214948",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/evaluation.json": "67a18b809a4b97c94e89ffe3bebb28513e56de0406a2ac6a5a7f1be0dcaa73d3",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/replay.json": "4649008c18d99a4d1dae937993b3df6c57ffef746c42dcbdeed7f7e5d53a0662",
+    "/Volumes/曾诚的移动硬盘/ParetoJev/kuairand-27k/emer-jev-scale-v3/balanced-transfer-v1/predictions.npz": "e1c80fb340999081cf630f3ffae92b120b4ff1371d6df3712850239ceab06d82"
+  },
+  "model_source_sha256": "e7ddf4f54feea2ca8e8c712198033b253ada53fc4d0e30efb7f31fce21f5e9f9",
+  "previous_outer_results_already_opened": true,
+  "new_api_requests": 0,
+  "paid_gpu": false
+}
