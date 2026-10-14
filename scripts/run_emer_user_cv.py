@@ -48,6 +48,8 @@ def source_identity(a,c):
         raise ValueError('Original model implementation changed')
     if original['registration']['fit_script_sha256']!=sha256_file(Path('scripts/run_emer_jev.py')):
         raise ValueError('Original fit implementation changed')
+    if common['identity']['config_hash']!=canonical_hash(read_json('configs/emer_jev_scale.json')):
+        raise ValueError('Original cohort configuration changed')
     if common['identity']['raw_sha256']!=sha256_file(a.data/'raw_slates.npz'):
         raise ValueError('Raw development cohort changed')
     for name,h in common['files'].items():
@@ -58,7 +60,7 @@ def source_identity(a,c):
         raise ValueError('Native tensor changed')
     if not audit['all_raw_responses_match'] or audit['decisions']!=252000:
         raise ValueError('Real response audit required')
-    files=[a.config,Path(__file__),Path('scripts/run_emer_jev.py'),a.data/'raw_slates.npz',
+    files=[a.config,Path('configs/emer_jev_scale.json'),Path(__file__),Path('scripts/run_emer_jev.py'),a.data/'raw_slates.npz',
         a.data/'training/common_manifest.json',a.data/'training/train.npz',a.data/'training/validation.npz',
         a.data/'jev-native-v9-fp16/scores.npz',a.data/'jev-native-v9-fp16/registration.json',
         a.data/'jev-native-v9-fp16/complete.json',a.data/'training-native/native_response_audit.json']
