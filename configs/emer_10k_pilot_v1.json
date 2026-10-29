@@ -1,0 +1,63 @@
+{
+  "experiment_id": "emer-routed-independent-pilot-10k-v1",
+  "role": "Exploratory new-date pilot selected before any new-date Jev response or model metric",
+  "parent_confirmation_config": "configs/emer_multiobjective_confirmation.json",
+  "source_cohort": "Frozen 50000-slate Apr23-25 cohort",
+  "selection": {
+    "namespace": "emer-10k-pilot-v1",
+    "seed": 2026102901,
+    "rule": "Within each frozen source stratum, take the smallest SHA256(namespace|seed|original_slate_id) priorities; then restore original chronological order",
+    "stratum_quotas": [834, 833, 833, 833, 1667, 5000],
+    "slates": 10000,
+    "heldout_remaining_slates": 40000,
+    "labels_or_model_outputs_used_for_selection": false
+  },
+  "candidate_manifest_sha256": "60a4b4b9fd9224c672e5b9bfc228ddce2e13afc4a250a6e3de1e793d9932de71",
+  "objectives": [
+    "is_click",
+    "long_view",
+    "is_like",
+    "is_follow",
+    "is_comment",
+    "is_forward",
+    "is_hate"
+  ],
+  "directions": [1, 1, 1, 1, 1, 1, -1],
+  "training": {
+    "seeds": [7, 17, 29],
+    "batch_size": 32,
+    "cpu_threads": 2,
+    "fit_allowed": false
+  },
+  "evaluation": {
+    "top_k": 3,
+    "bootstrap_samples": 2000,
+    "bootstrap_seed": 2026102902,
+    "maximum_positive_goal_absolute_point_drop": 0.005,
+    "maximum_hate_risk_absolute_point_increase": 0.005,
+    "required_comparisons": ["signal", "original_reference"],
+    "conditions": "For both comparisons: pooled primary conditional CI lower bound > 0; primary point gain > 0 in every fixed seed and every user route; all seven point guards pass",
+    "adaptive_extension_or_reselection": false
+  },
+  "jev": {
+    "model": "autotrust/JEV-27B",
+    "revision": "14b425269ed24452e0a5ad5a8f3e51d139647a88",
+    "implementation": "pytorch-peft-group-v3",
+    "groups": 10000,
+    "decisions": 70000,
+    "workers": 16,
+    "maximum_attempts": 11000
+  },
+  "budget": {
+    "previous_project_spend_cny": 62.67,
+    "previous_total_cap_cny": 65,
+    "new_paid_run_authorization": "Must be confirmed at the final AutoDL create/start action because this pilot exceeds the previous cap"
+  },
+  "limitations": [
+    "This 10000-slate pilot opens part of the previously untouched 50000-slate cohort; it is exploratory and does not replace a full heldout confirmation.",
+    "The remaining 40000 slates stay unevaluated and must exclude these pilot IDs in any later formal confirmation.",
+    "Logged-exposure pseudo-slates are not an online randomized experiment.",
+    "Point guards do not prove simultaneous population improvement on every goal.",
+    "No result-dependent sample extension, model change, threshold change, or pilot-ID replacement is allowed."
+  ]
+}
