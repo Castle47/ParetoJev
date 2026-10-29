@@ -1,6 +1,6 @@
 # Active user goal
 
-Deliver verified overall multi-objective EMER+Jev superiority over EMER within the user's65 CNY total cap. Additional budget was explicitly declined; do not ask again or start new paidGPU inference. Goal is not achieved. The external-score blocker has been confirmed for three consecutive goal turns; the blocked-status transition is requested after this audit.
+Deliver verified overall multi-objective EMER+Jev superiority over EMER. The user later authorized a fixed 10K pilot and raised the project cap from65 to83 CNY. Goal is not achieved.
 
 ## Completed retrospective user-holdout validation
 
@@ -46,19 +46,27 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 - Row-level delivery audit proves matched comparator predictions unchanged and every routed output exactly matches the frozen chosen source model. Both recipes, all seeds/folds and prior failures remain published.
 - This is still post-inspection exploratory evidence. A5/5 screen does not prove new-date generalization or automatically complete the overall goal. All processes have exited successfully; there is no live training/evaluation session to poll.
 
-## Independent-date entry point complete; external input remains
+## Independent-date entry point complete; 10K pilot prepared
 
 - reports/emer-routed-confirmation-ready-v1/README.md and docs/EMER_ROUTED_CONFIRMATION.md contain the fixed protocol, command and exact missing input.
 - New evaluator/finisher/reporter implemented, source/config/model hashes frozen. All319 repository tests pass. Actual50K source/request/sampling checks and per-route encoder preflight pass; route sizes17149/16495/16356,15115 users total.
 - No independent predictions, metrics, or materialized test tensor exist. No newGPU/API requests. Nothing is currently training or evaluating.
 - The only remaining execution input is the complete real scoring directory for the fixed50K packet: complete.json, registration.json, scores.npz, native.sqlite3 containing350K matching native JEV-27B decisions. The old development cache cannot substitute.
-- User explicitly maintains65 CNY and declined more funding. Do not ask for the rejected increase again or start paid inference. Await matching scores or compatible compute usable within that constraint.
+- The earlier65 CNY cap was superseded on2026-10-29 when the user authorized a fixed10K AutoDL pilot with an83 CNY total cap.
 
-## Next actions and blocker audit
+## 10K AutoDL pilot execution
 
-1. Local handoff is complete; do not restart completed jobs, tune recipes on the explored cohort, or manufacture a test result. Verify the current source/score availability on continuation.
-2. If a valid score directory arrives, run scripts/finish_emer_routed_confirmation.sh with the KuaiRand root and that directory. It gates every prediction on full raw-response audit, uses each route's encoder, evaluates all three comparisons and independently replays.
-3. Otherwise the same external-score/compute blocker remains. The same missing real-score/compute condition has now been confirmed for three consecutive goal turns after all local readiness work completed. The blocked audit passes: no independent result or live job exists, and no further meaningful local action can supply these real scores within the65 CNY cap. Mark the goal blocked, not complete. If the user later resumes without new input, start a fresh blocked-audit streak rather than reusing this count.
+- Frozen fixed-hash stratified subset:10,000 slates,6,443 users,100,000 candidate exposures; remaining40K not evaluated. Report: reports/emer-10k-pilot-ready-v1/README.md.
+- AutoDL instance2urata8cw5-ce85347d, RTX6000D84GB, ran22:02–01:02 at6.46 CNY/hour with20GB paid disk. Automatic shutdown verified; instance retained.
+- Account balance94.42→74.81, observed cost19.61 CNY. Estimated project total82.28 CNY, within the authorized83 cap.
+- No score groups or decisions were produced. No model performance was computed.12/13 large model shards plus resumable final-shard data remain on the stopped instance.
+- Continuing requires a fresh authorization because the83 cap is essentially exhausted. Estimated additional1.5GPU hours≈9.69 CNY, bringing the project total near92 CNY, plus0.13 CNY/day stopped-disk charge.
+
+## Next actions
+
+1. Keep the instance stopped until the user authorizes a new total cap. Do not claim partial test results: none exist.
+2. If authorized, start the retained instance, finish the final shard, validate all producer hashes/packages, run the registered probe, then score until all10K groups/70K decisions complete and export the database.
+3. Only after complete raw-response audit run scripts/finish_emer_10k_pilot.sh; report all goals, seeds and routes. Do not alter the fixed sample, models or thresholds.
 
 ## Paths and preserved confirmation
 

@@ -1165,3 +1165,22 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   remain ready.65 CNY cap unchanged; no additional spending requested or started.
 - Blocked-status transition requested. Goal is not complete; matching real
   scores or compatible compute within the existing constraint are required.
+
+
+## 2026-10-29/30 — Fixed10K pilot prepared; first rental exhausted by setup
+
+- User authorized a deterministic10K new-date pilot and raised the total cap
+  to83 CNY. Before any response, froze a hash-within-stratum selection:10K
+  slates/6,443 users;40K remainder excluded from this exploratory pilot.
+- Added variable-size exact producer collector, upload/model preflight, score
+  audit, routed evaluation, replay, report and remote setup scripts. Ten focused
+  tests pass; local preflight refuses partial/mixed score artifacts.
+- Created AutoDL2urata8cw5-ce85347d: RTX6000D84GB,20GB paid disk,6.46 CNY/hour,
+  with01:02 hard shutdown. Uploaded the10.5MiB label-free packet.
+- Three-hour window was consumed by pinned dependency build and54GB model
+  download with repeated network interruptions. At shutdown12/13 large shards
+  were complete and final-shard resumable data persisted. Scoring never started:
+  zero groups/decisions, no test predictions or metrics.
+- Automatic shutdown verified. Balance94.42→74.81, observed cost19.61 CNY;
+  estimated cumulative82.28 CNY, within83 cap. Instance remains stopped; disk
+  costs~0.13/day. Resume estimate1.5hours/~9.69 CNY requires new authorization.
