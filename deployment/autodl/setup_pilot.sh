@@ -30,13 +30,20 @@ snapshot_download(
     local_dir='/root/autodl-tmp/JEV-27B',
     max_workers=4,
     allow_patterns=[
-        'model*.safetensors','model.safetensors.index.json','config.json','tokenizer*',
+        'model.safetensors.index.json','config.json','tokenizer*',
         'chat_template.jinja','adapter/*','adapter_vllm/*','head.safetensors',
         'judge_config.json','calibration.json','serve_decide.py'
     ]
 )
-print('PINNED_PILOT_MODEL_DOWNLOAD_COMPLETE', flush=True)
+print('PINNED_PILOT_SMALL_FILES_COMPLETE', flush=True)
 PY
+model_url='https://hf-mirror.com/autotrust/JEV-27B/resolve/14b425269ed24452e0a5ad5a8f3e51d139647a88'
+export model_url
+seq -f '%05g' 1 13 | xargs -P 13 -I{} bash -c \
+  'curl -L --fail --retry 20 --retry-all-errors --connect-timeout 10 -C - \
+    -o "/root/autodl-tmp/JEV-27B/model-{}-of-00013.safetensors" \
+    "$model_url/model-{}-of-00013.safetensors"'
+echo PINNED_PILOT_MODEL_SHARDS_COMPLETE
 cp "$input_dir/torch_head_server.py" /root/torch_head_server.py
 /root/jev-torch-env/bin/python -m pip freeze >/root/autodl-tmp/jev-service/pilot-requirements.lock.txt
 /root/jev-torch-env/bin/python "$input_dir/verify_pilot_bundle.py" --input-dir "$input_dir"
