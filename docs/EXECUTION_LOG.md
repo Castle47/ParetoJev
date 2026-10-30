@@ -1184,3 +1184,14 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Automatic shutdown verified. Balance94.42→74.81, observed cost19.61 CNY;
   estimated cumulative82.28 CNY, within83 cap. Instance remains stopped; disk
   costs~0.13/day. Resume estimate1.5hours/~9.69 CNY requires new authorization.
+
+
+## 2026-10-30 — Resume authorized; GPU availability monitor created
+
+- User raised the cumulative cap to110 CNY and requested continuation. The
+  retained E72 host had zero free GPUs, so no new charge or scoring started.
+- Created thread heartbeat `jev-10k-pilot-gpu-monitor` at30-minute intervals.
+  It stays quiet without state changes; when the existing GPU is available it
+  can resume only that retained instance within110 CNY, enforce a four-hour
+  shutdown, complete scoring/evaluation, and then stop the GPU. It cannot create
+  another paid instance or change the frozen pilot without fresh authorization.

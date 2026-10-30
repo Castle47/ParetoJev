@@ -64,8 +64,8 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 
 ## Next actions
 
-1. Keep the instance stopped until the user authorizes a new total cap. Do not claim partial test results: none exist.
-2. If authorized, start the retained instance, finish the final shard, validate all producer hashes/packages, run the registered probe, then score until all10K groups/70K decisions complete and export the database.
+1. The user raised the cumulative cap to110 CNY and authorized continuation. The original host currently has no free GPU, so instance2urata8cw5-ce85347d remains stopped with all disks retained.
+2. Heartbeat automation `jev-10k-pilot-gpu-monitor` checks availability every30 minutes. It stays quiet when unchanged; when the GPU is available it may resume the existing instance within the110 CNY cap, set a four-hour hard shutdown, finish the final shard, validate all producer hashes/packages, run the registered probe, then score all10K groups/70K decisions and export the database. It must not create a new paid instance without fresh authorization.
 3. Only after complete raw-response audit run scripts/finish_emer_10k_pilot.sh; report all goals, seeds and routes. Do not alter the fixed sample, models or thresholds.
 
 ## Paths and preserved confirmation
