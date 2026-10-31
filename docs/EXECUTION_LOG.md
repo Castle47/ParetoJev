@@ -1218,3 +1218,12 @@ Reason: the execution container did not have the datasets, API credentials, a ru
 - Six focused recovery/pilot tests pass in the repository Python environment,
   including retained-range continuation, prefix mismatch rejection and refusal
   of an HTTP server that ignores the requested range.
+- By approximately10:02, all final-shard ranges completed and the assembled
+ 4,167,219,824-byte file matched the pinned SHA256. Full producer preflight
+  then started. There are still no recommendation metrics from the pilot.
+- Fixed snapshot completeness metadata to use the registered group/objective
+  count rather than the old hardcoded50K count, and require the completion
+  marker. Both complete and unmarked export cases pass, bringing focused checks
+  to8. Uploaded the corrected exporter separately at
+  `/root/export_confirmation.py`; the frozen input packet remains unchanged.
+  Use this separate exporter for the final downloadable snapshot.
