@@ -2,6 +2,14 @@
 
 Deliver verified overall multi-objective EMER+Jev superiority over EMER. The user later authorized a fixed 10K pilot and raised the cumulative cap to110 CNY. Goal is not achieved.
 
+## Latest: completed10K new-date pilot on2026-10-31
+
+- All10,000 groups/70,000 decisions completed with10,000 HTTP attempts. Complete snapshot downloaded and SHA256 verified. Raw-response audit and independent prediction/metric replay pass exactly.
+- Main matched-training comparison: six-positive NDCG@3 mean0.298391→0.302943 (+1.53%); conditional absolute95% interval[+0.001147,+0.008248]. Both main and original-reference comparisons pass all5 registered conditions. Original-reference gain+1.73%; shared no-Jev training contributes+0.20% versus original EMER.
+- Main seven-goal relative changes: click+0.07%, long-view−0.29%, like+2.36%, follow+1.84%, comment+1.66%, forward+5.69%; no-hate utility absolute+0.000005643. All point guards pass, but individual confidence intervals do not establish all-goal population improvement.
+- This fixed10K exploratory pilot covers100,000 candidate exposures and6,443 users. No new model training or outcome-driven sample/model/threshold change. Remaining40K untouched; no online-causal claim. Full report: reports/emer-10k-pilot-v1/README.md.
+- Original instance confirmedOFF around12:07 Asia/Taipei. Balance74.81→60.46, observed period cost14.35 CNY; estimated cumulative96.63 CNY.30-minute monitor removed after completion; no automatic paid restart. Retained20GB disk still incurs approximately0.13 CNY/day.
+
 ## Completed retrospective user-holdout validation
 
 All72 fresh, equal-budget fits completed successfully. Main training session1364 and finalizer22319 both exited0; do not restart them. All36K existing real-score slates (12,606 users) received exactly one outer-fold prediction per arm/seed. All data and three fold-selection audits passed. Independent prediction and metric replay was exact.
@@ -64,11 +72,11 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 
 ## Next actions
 
-1. On2026-10-31 about09:55 Asia/Taipei, the retained E72 host explicitly showed GPU availability and instance2urata8cw5-ce85347d was resumed under the110 CNY authorization. Platform hard shutdown is verified for13:50 that day; score cutoff13:45. At6.46/hour, reserve up to25.84 CNY for this window, in addition to prior82.28 and approximately0.13/day stopped-disk charges. Do not assume another paid window fits the cap.
-2. Heartbeat automation `jev-10k-pilot-gpu-monitor` checks availability every30 minutes. It stays quiet when unchanged; when the GPU is available it may resume the existing instance within the110 CNY cap, set a four-hour hard shutdown, finish the final shard, validate all producer hashes/packages, run the registered probe, then score all10K groups/70K decisions and export the database. It must not create a new paid instance without fresh authorization.
-3. Only after complete raw-response audit run scripts/finish_emer_10k_pilot.sh; report all goals, seeds and routes. Do not alter the fixed sample, models or thresholds.
+1. Pilot execution, full raw-response audit, evaluation, exact replay and reporting are complete. Do not restart scoring or train/tune on this pilot.
+2. The30-minute automation was deleted after the GPU was verifiedOFF. No paid continuation is scheduled. Estimated project spending is96.63 CNY; reconcile actual charges and remaining budget before any later paid action.
+3. A later formal confirmation must exclude these10K IDs, retain the frozen candidate and explicitly register its remaining40K scope before producing or viewing new outcomes. The current pilot result does not authorize automatic expansion.
 
-### Live recovery on2026-10-31
+### Completed recovery on2026-10-31
 
 - Remote launcher initial PID1581, log `/root/pilot-resume-20261031.log`. It resumes eight retained ranges from `/root/parts4`, checks exact HTTP Content-Range and retained prefixes, verifies the complete pinned shard SHA256, then verifies all input/producer files and packages before starting the original scoring worker. Download cutoff11:15+08:00.
 - Original10K label-free packet and12 complete model shards persisted. Initial log confirms seven partial ranges resuming and range2 already complete. No test outcome has been evaluated.

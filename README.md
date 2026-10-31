@@ -15,15 +15,30 @@ The repository is organized around **target mode**: every experiment is tied to 
 
 ## Current execution status
 
-**As of 2026-10-15, a candidate passes all registered retrospective offline
-conditions; independent confirmation remains unverified.** The
+**2026-10-31: the frozen 10K new-date pilot passed both registered comparison
+screens (5/5 each).** All10,000 groups/70,000 real JEV-27B decisions were
+collected, audited and exactly replayed. Against identically trained EMER,
+EMER+Jev improved mean six-positive-goal NDCG@3 from0.298391 to0.302943
+(+1.53%; conditional absolute95% interval[+0.001147,+0.008248]). Long view
+declined0.29% relative, within its fixed point guard. This is a fixed-model
+exploratory offline pilot, not all-goal statistical dominance or online uplift.
+The remaining40K groups are still unevaluated. See the
+[complete seven-goal pilot report](reports/emer-10k-pilot-v1/README.md).
+
+The result snapshot was downloaded and hash-verified; the GPU was shut down
+immediately afterward. Observed account balance fell74.81→60.46 CNY;
+estimated cumulative project spending96.63 CNY remains below the authorized110
+CNY cap. The30-minute GPU monitor has been removed because the pilot is complete.
+
+On2026-10-15 the earlier retrospective screen also passed. The
 [matched-comparator fallback report](reports/emer-matched-fallback-v1/README.md)
 shows +1.97% mean six-goal NDCG@3 versus identically trained EMER for the50/50
 recipe, with positive point gains in every seed/fold and all point guards passing.
 Long view still declines0.66%; this is not all-goal dominance. Choices used frozen
 inner metrics, both earlier recipes were reported, and exact prediction replay
 passed. Earlier outer results had already been inspected, so this is exploratory
-rather than pristine confirmation. The independent50K cohort remains unscored.
+rather than pristine confirmation. At that time the independent50K cohort was
+unscored; the completed pilot above has now opened its fixed10K subset.
 
 
 The active comparison is EMER+Jev versus EMER with the same frozen seven-goal
@@ -39,9 +54,9 @@ results, and the aggregate difference interval crosses zero. See the
 [complete seven-goal development report](reports/emer-native-development-2026-10-14/README.md)
 and [aggregate-goal clarification and follow-up results](reports/multiobjective-goal-2026-10-14/README.md).
 
-The source-audited April 23–25 confirmation cohort contains 50,000 slates, but
-its Jev judgments have **not** been collected and no effect has been evaluated.
-The user retained the **65 CNY total cap** and declined additional paid scoring.
+At the2026-10-15 handoff, the source-audited April23–25 confirmation cohort
+contained50,000 unscored slates. The then-current65 CNY cap prevented additional
+paid scoring; the later110 CNY authorization funded the completed10K pilot above.
 The [prepared confirmation package](reports/multiobjective-confirmation-ready-2026-10-14/README.md)
 is preserved; sample size alone is not a power guarantee.
 
@@ -83,9 +98,10 @@ The [frozen candidate export](reports/emer-candidate-export-v1/README.md)
 contains portable reranker weights, per-fold encoders and a label-free CLI. All
 nine branch/seed outputs on36K slates replay exactly. The
 [new-date evaluation entry point](reports/emer-routed-confirmation-ready-v1/README.md)
-has passed real50K input preflight and the full319-test suite, but has produced
-no test metrics: the350K matching real Jev judgments are still missing. The65 CNY
-cap remains in effect; these tools do not launch paid inference.
+passed real50K input preflight and the then-current full319-test suite before
+any new-date metrics. The completed10K pilot uses this frozen runtime; the
+remaining40K would require280K additional real judgments and a separate decision
+on formal confirmation. These evaluator tools do not launch paid inference.
 
 The subsequent **signal diagnosis and task-definition repair** is complete.
 Explicitly defining the long-view event improves real Jev signal ranking across

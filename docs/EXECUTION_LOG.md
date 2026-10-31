@@ -1232,3 +1232,27 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   `JEV_TORCH_READY` with the registered revision andpytorch-peft-group-v3.
   The worker retains the original numerical probe gate before any collection.
   No pilot recommendation metric has been computed.
+
+
+## 2026-10-31 — Complete10K pilot, verify replay and shut down GPU
+
+- Collector finished all10,000 HTTP groups/70,000 native decisions with10,000
+  attempts; no public cache mixed. The corrected exporter produced a consistent
+  complete snapshot at04:06:31Z. Downloaded it locally and verified SHA256
+  87ff2f31d2330b0406dda60680b5602fbe9eb1b5214e561942b1475c570620e7.
+- Original AutoDL instance confirmedOFF around12:07 Asia/Taipei, before local
+  evaluation. Retained disks unchanged. Account balance74.81→60.46, period
+  cost14.35 CNY; estimated cumulative96.63 CNY within110 cap. Ongoing stopped
+  disk charge remains approximately0.13/day; no paid restart scheduled.
+- Ran scripts/finish_emer_10k_pilot.sh on the complete snapshot. Local process
+ 17911 exited0. Full raw HTTP alignment audit passed, all frozen models/seeds
+  replayed exactly, and both required comparisons passed5/5 conditions.
+- Matched-training six-goal mean0.298391→0.302943 (+1.53%); absolute conditional
+ 95% interval[+0.001147,+0.008248]. Original-EMER reference+1.73%; shared
+  no-Jev training change+0.20%. Long-view−0.29% relative stays within the fixed
+  point guard. All seven goals, including declines and individual intervals,
+  are in reports/emer-10k-pilot-v1/README.md.
+- No new training, changed model/threshold or outcome-dependent sampling.
+  Remaining40K not scored/evaluated. Evidence is a fixed-model exploratory
+  new-date offline pilot, not online causal uplift or all-goal significance.
+- Deleted heartbeat jev-10k-pilot-gpu-monitor after completion andOFF verification.

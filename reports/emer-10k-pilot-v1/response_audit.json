@@ -1,0 +1,8 @@
+{
+  "groups": 10000,
+  "decisions": 70000,
+  "exact_http_response_alignment": true,
+  "scores_sha256": "a6ab3d5e30f8c652d1f9811d95293b1331be1ea2a99046ff9bba75d59c1ca60b",
+  "database_sha256": "5f3772c0cec1e1c398f720896c2a0ef18b5ae6ebbd2925c74d9e0a791437e604",
+  "producer_id": "1194ceb3331f213ed704232ea30c2114ccab61f04e5c64d53edfbf50ac0b3413"
+}

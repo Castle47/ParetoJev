@@ -1,0 +1,13 @@
+{
+  "slates": 10000,
+  "users": 6443,
+  "raw_feature_shape": [
+    10000,
+    10,
+    26
+  ],
+  "pilot_original_id_sha256": "00a40e04be9b4e2c1cfce9ef4f62c6028b0fd99ea9b695891858eb66a467b716",
+  "heldout_original_id_sha256": "5870bad1408d6fad409dbf7a15228191f3f3610addd55be6d8579ad4dcce96ad",
+  "labels_or_model_outputs_used_for_selection": false,
+  "model_performance_computed": false
+}
