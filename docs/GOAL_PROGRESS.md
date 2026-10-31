@@ -74,6 +74,7 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 - Original10K label-free packet and12 complete model shards persisted. Initial log confirms seven partial ranges resuming and range2 already complete. No test outcome has been evaluated.
 - Worker and server logs: `/root/autodl-tmp/jev-pilot-10k-v1/worker.log` and `server.log`. The existing30-minute monitor now follows this active run. Never start a duplicate pipeline or restart a stopped instance without reconciling actual spending.
 - At approximately10:02, the entire final shard passed the pinned SHA256; full producer/input preflight then started. The separate corrected `/root/export_confirmation.py` derives snapshot completeness from the registration instead of assuming50K groups. Run it for the final download; leave the original uploaded packet unchanged. Eight focused tests pass.
+- Full input/model verification passed:27 producer files and all registered dependency versions match. Service log now reports `JEV_TORCH_READY`, pinned revision14b425269ed24452e0a5ad5a8f3e51d139647a88 and implementationpytorch-peft-group-v3. The original worker will require its registered numerical probe before collecting. No pilot recommendation metrics exist yet.
 
 ## Paths and preserved confirmation
 

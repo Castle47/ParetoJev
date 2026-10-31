@@ -1227,3 +1227,8 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   to8. Uploaded the corrected exporter separately at
   `/root/export_confirmation.py`; the frozen input packet remains unchanged.
   Use this separate exporter for the final downloadable snapshot.
+- Both original full preflight invocations passed:27 producer files, fixed
+  input and exact package versions match. Service loaded100% and emitted
+  `JEV_TORCH_READY` with the registered revision andpytorch-peft-group-v3.
+  The worker retains the original numerical probe gate before any collection.
+  No pilot recommendation metric has been computed.
