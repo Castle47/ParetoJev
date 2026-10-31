@@ -1,6 +1,6 @@
 # Active user goal
 
-Deliver verified overall multi-objective EMER+Jev superiority over EMER. The user later authorized a fixed 10K pilot and raised the project cap from65 to83 CNY. Goal is not achieved.
+Deliver verified overall multi-objective EMER+Jev superiority over EMER. The user later authorized a fixed 10K pilot and raised the cumulative cap to110 CNY. Goal is not achieved.
 
 ## Completed retrospective user-holdout validation
 
@@ -64,9 +64,15 @@ Report: reports/emer-matched-fallback-v1/README.md. Root protocol: configs/emer_
 
 ## Next actions
 
-1. The user raised the cumulative cap to110 CNY and authorized continuation. The original host currently has no free GPU, so instance2urata8cw5-ce85347d remains stopped with all disks retained.
+1. On2026-10-31 about09:55 Asia/Taipei, the retained E72 host explicitly showed GPU availability and instance2urata8cw5-ce85347d was resumed under the110 CNY authorization. Platform hard shutdown is verified for13:50 that day; score cutoff13:45. At6.46/hour, reserve up to25.84 CNY for this window, in addition to prior82.28 and approximately0.13/day stopped-disk charges. Do not assume another paid window fits the cap.
 2. Heartbeat automation `jev-10k-pilot-gpu-monitor` checks availability every30 minutes. It stays quiet when unchanged; when the GPU is available it may resume the existing instance within the110 CNY cap, set a four-hour hard shutdown, finish the final shard, validate all producer hashes/packages, run the registered probe, then score all10K groups/70K decisions and export the database. It must not create a new paid instance without fresh authorization.
 3. Only after complete raw-response audit run scripts/finish_emer_10k_pilot.sh; report all goals, seeds and routes. Do not alter the fixed sample, models or thresholds.
+
+### Live recovery on2026-10-31
+
+- Remote launcher initial PID1581, log `/root/pilot-resume-20261031.log`. It resumes eight retained ranges from `/root/parts4`, checks exact HTTP Content-Range and retained prefixes, verifies the complete pinned shard SHA256, then verifies all input/producer files and packages before starting the original scoring worker. Download cutoff11:15+08:00.
+- Original10K label-free packet and12 complete model shards persisted. Initial log confirms seven partial ranges resuming and range2 already complete. No test outcome has been evaluated.
+- Worker and server logs: `/root/autodl-tmp/jev-pilot-10k-v1/worker.log` and `server.log`. The existing30-minute monitor now follows this active run. Never start a duplicate pipeline or restart a stopped instance without reconciling actual spending.
 
 ## Paths and preserved confirmation
 

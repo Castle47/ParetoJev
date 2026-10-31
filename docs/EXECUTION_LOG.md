@@ -1195,3 +1195,26 @@ Reason: the execution container did not have the datasets, API credentials, a ru
   can resume only that retained instance within110 CNY, enforce a four-hour
   shutdown, complete scoring/evaluation, and then stop the GPU. It cannot create
   another paid instance or change the frozen pilot without fresh authorization.
+
+
+## 2026-10-31 — Original instance resumed; retained shard recovery launched
+
+- Browser connection restored. The original E72 instance explicitly showed
+  `GPU充足`; resumed at approximately09:55 Asia/Taipei at6.46 CNY/hour.
+- Verified platform hard shutdown2026-10-31 13:50; original score worker gets
+  cutoff13:45+08:00. Prior estimated82.28 CNY plus at most25.84 GPU CNY and
+  approximately0.13/day storage remains below the authorized110 CNY cap.
+- Twelve complete shards and eight final-shard fragments persisted. Uploaded
+  the recovery helper, retaining all fragments. It validates HTTP ranges and
+  existing prefixes, resumes missing bytes, then requires the pinned whole-file
+  SHA256 before publishing the final shard. No producer implementation changed.
+- Launched one durable chain (initial PID1581), recovery log
+  `/root/pilot-resume-20261031.log`; recovery cutoff11:15+08:00. It runs the
+  existing full file/package/input verifier, probe and fixed10K scorer only
+  after recovery succeeds. Initial log confirms range2 complete and seven ranges
+  resuming. No test evaluation performed.
+- Updated the existing30-minute monitor with live paths, cutoff and cumulative
+  budget reservation so it follows this chain rather than starts duplicates.
+- Six focused recovery/pilot tests pass in the repository Python environment,
+  including retained-range continuation, prefix mismatch rejection and refusal
+  of an HTTP server that ignores the requested range.
